@@ -1,0 +1,35 @@
+---
+description: Commit y push automáticos tras cambios en el proyecto
+alwaysApply: true
+---
+
+# Commit y push automáticos
+
+Tras completar cambios en este repositorio, **commit y push sin preguntar al usuario**.
+
+## Flujo obligatorio
+
+1. Ejecutar `git status` y `git diff` para revisar qué cambió.
+2. Añadir al staging los archivos relevantes (nunca `.env`, credenciales ni secretos).
+3. Crear un commit con mensaje claro (1-2 frases, enfoque en el "por qué").
+4. Hacer `git push` al remoto de la rama actual (con `-u origin HEAD` si la rama no tiene upstream).
+5. Confirmar con `git status` que el working tree quedó limpio.
+
+## Mensajes de commit
+
+Usar HEREDOC:
+
+```bash
+git commit -m "$(cat <<'EOF'
+Mensaje aquí.
+
+EOF
+)"
+```
+
+## Seguridad
+
+- No usar `--no-verify`, `--force` ni `git config` salvo petición explícita.
+- No hacer force push a `main`/`master`.
+- No commitear archivos con secretos; avisar si el usuario los pidió.
+- Si el push falla (sin remoto, auth, etc.), informar del error y dejar el commit hecho.
