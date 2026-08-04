@@ -342,6 +342,14 @@ h5 {
   color: #fff;
 }
 
+.bd-hero.is-tracking {
+  cursor: none;
+}
+
+.bd-hero.is-tracking * {
+  cursor: none !important;
+}
+
 .bd-hero-media {
   position: absolute;
   inset: 0;
@@ -386,19 +394,20 @@ h5 {
 }
 
 .bd-reel-btn {
-  width: clamp(110px, 14vw, 148px);
-  height: clamp(110px, 14vw, 148px);
+  width: clamp(88px, 9vw, 112px);
+  height: clamp(88px, 9vw, 112px);
   border-radius: 50%;
   border: none;
   background: #fff;
   color: #151515;
-  font-size: 0.68rem;
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  cursor: pointer;
+  cursor: none;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16);
+  line-height: 1.25;
 }
 
 .bd-reel-btn:hover {
@@ -406,11 +415,11 @@ h5 {
 }
 
 .bd-hero-meta {
-  font-size: 0.7rem;
+  font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .bd-hero-meta span {

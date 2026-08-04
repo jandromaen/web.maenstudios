@@ -48,6 +48,7 @@ export default function HomeHero() {
       const rect = hero.getBoundingClientRect();
       target.current.x = e.clientX - rect.left - rect.width / 2;
       target.current.y = e.clientY - rect.top - rect.height / 2;
+      hero.classList.add("is-tracking");
       if (!activeRef.current) {
         activeRef.current = true;
         cursor.classList.add("is-active");
@@ -58,6 +59,7 @@ export default function HomeHero() {
     const onLeave = () => {
       target.current.x = 0;
       target.current.y = 0;
+      hero.classList.remove("is-tracking");
     };
 
     hero.addEventListener("pointermove", onMove);
