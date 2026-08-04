@@ -21,11 +21,33 @@ const TOTAL_PAGES = 20;
 /* Página del PDF que contiene la dirección de sonido (Midnight in Paris). */
 const SOUNDTRACK_PAGE = 17;
 
+/* Páginas con guión (voz en off) → número de acto de locución.
+   Cada acto reproduce su propio fragmento troceado de la locución. */
+const ACT_AUDIO_BY_PAGE: Record<number, number> = {
+  6: 1,
+  7: 2,
+  8: 3,
+  9: 4,
+  10: 5,
+  11: 6,
+  13: 7,
+};
+
 /* ------------------------------------------------------------------ */
-/* Diapositiva del soundtrack con reproductor de audio superpuesto     */
+/* Diapositiva con reproductor de audio superpuesto (reutilizable)     */
 /* ------------------------------------------------------------------ */
 
-function SoundtrackSlide({ src, page }: { src: string; page: number }) {
+function AudioSlide({
+  page,
+  src,
+  label,
+  title,
+}: {
+  page: number;
+  src: string;
+  label: string;
+  title: string;
+}) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
 
@@ -67,7 +89,7 @@ function SoundtrackSlide({ src, page }: { src: string; page: number }) {
           type="button"
           className={`pt-audio-btn ${playing ? "pt-audio-playing" : ""}`}
           onClick={toggle}
-          aria-label={playing ? "Pausar banda sonora" : "Reproducir banda sonora"}
+          aria-label={playing ? `Pausar ${title}` : `Reproducir ${title}`}
           title={playing ? "Pausar" : "Reproducir"}
         >
           {playing ? (
@@ -80,10 +102,8 @@ function SoundtrackSlide({ src, page }: { src: string; page: number }) {
           )}
         </button>
         <span className="pt-audio-meta">
-          <span className="pt-audio-k">Banda sonora</span>
-          <span className="pt-audio-title">
-            Si Tu Vois Ma Mère — Midnight in Paris (2011)
-          </span>
+          <span className="pt-audio-k">{label}</span>
+          <span className="pt-audio-title">{title}</span>
         </span>
         <audio
           ref={audioRef}
@@ -130,7 +150,30 @@ export default function PitchDeck() {
       if (n === SOUNDTRACK_PAGE) {
         pages.push({
           id: `page-${n}`,
-          render: () => <SoundtrackSlide src="/pitch/soundtrack.mp3" page={n} />,
+          render: () => (
+            <AudioSlide
+              page={n}
+              src="/pitch/soundtrack.mp3"
+              label="Banda sonora"
+              title="Si Tu Vois Ma Mère — Midnight in Paris (2011)"
+            />
+          ),
+        });
+        continue;
+      }
+
+      const act = ACT_AUDIO_BY_PAGE[n];
+      if (act) {
+        pages.push({
+          id: `page-${n}`,
+          render: () => (
+            <AudioSlide
+              page={n}
+              src={`/pitch/audio/acto-${act}.mp3`}
+              label="Locución"
+              title={`Acto ${act}`}
+            />
+          ),
         });
         continue;
       }
