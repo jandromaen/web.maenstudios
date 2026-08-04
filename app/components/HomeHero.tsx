@@ -95,7 +95,12 @@ export default function HomeHero() {
             Watch Reel
           </button>
           <div className="bd-hero-meta">
-            Maen Studios®
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="bd-hero-logo"
+              src="/maen-logo.png"
+              alt="Maen Studios"
+            />
             <span>2020 — ∞</span>
           </div>
         </div>

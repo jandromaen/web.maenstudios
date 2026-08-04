@@ -9,7 +9,12 @@ export default function SiteFooter() {
         <div className="footer-grid">
           <div className="footer-brand">
             <Link className="brand" href="/">
-              Maen Studios®
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="brand-logo brand-logo-footer"
+                src="/maen-logo.png"
+                alt="Maen Studios"
+              />
             </Link>
             <p>
               Agencia de creación de contenido para redes sociales. Reels,
@@ -50,7 +55,7 @@ export default function SiteFooter() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Maen Studios®</span>
+          <span>© {new Date().getFullYear()} Maen Studios</span>
           <span>Barcelona — contenido con intención</span>
         </div>
       </div>

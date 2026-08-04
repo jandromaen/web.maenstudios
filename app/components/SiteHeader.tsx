@@ -19,7 +19,12 @@ export default function SiteHeader() {
       <header className="header">
         <div className="container header-inner">
           <Link className="brand" href="/">
-            <span className="brand-wordmark">Maen Studios®</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="brand-logo"
+              src="/maen-logo.png"
+              alt="Maen Studios"
+            />
           </Link>
           <nav className="nav" aria-label="Principal">
             <div className="nav-links">
@@ -47,7 +52,12 @@ export default function SiteHeader() {
       <div className={`nav-drawer${open ? " open" : ""}`} aria-hidden={!open}>
         <div className="nav-drawer-top">
           <Link className="brand" href="/" onClick={() => setOpen(false)}>
-            Maen Studios®
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="brand-logo brand-logo-drawer"
+              src="/maen-logo.png"
+              alt="Maen Studios"
+            />
           </Link>
           <button
             type="button"
