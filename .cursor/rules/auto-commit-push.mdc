@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Commit y push automáticos
 
-Tras completar cambios en este repositorio, **commit y push sin preguntar al usuario**.
+Tras completar cambios: **build si aplica → commit → push** sin preguntar. Cierra la tarea de punta a punta; no pidas al usuario desplegar, mergear ni ejecutar SQL manual.
 
 ## Flujo obligatorio
 

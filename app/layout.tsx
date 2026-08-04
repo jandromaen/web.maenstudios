@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import { GlobalJsonLd } from "./components/JsonLd";
 import ThemeSchedule from "./components/ThemeSchedule";
 import { themeBootScript } from "./lib/theme-schedule";
@@ -30,9 +30,10 @@ const display = localFont({
   display: "swap",
 });
 
-const body = Inter({
+const body = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-body",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {

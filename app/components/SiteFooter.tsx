@@ -9,14 +9,7 @@ export default function SiteFooter() {
         <div className="footer-grid">
           <div className="footer-brand">
             <Link className="brand" href="/">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className="brand-logo"
-                src="/maen-logo.png"
-                alt="Maen Studios — Agencia de contenido para redes sociales"
-                loading="lazy"
-                decoding="async"
-              />
+              Maen Studios®
             </Link>
             <p>
               Agencia de creación de contenido para redes sociales. Reels,
@@ -41,40 +34,24 @@ export default function SiteFooter() {
           </div>
           <div className="footer-col">
             <h4>Síguenos</h4>
-            <a
-              href={SOCIAL_LINKS.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer">
               Instagram
             </a>
-            <a
-              href={SOCIAL_LINKS.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer">
               TikTok
             </a>
-            <a
-              href={SOCIAL_LINKS.youtube}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer">
               YouTube
             </a>
-            <a
-              href={SOCIAL_LINKS.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
             <a href={`mailto:${EMAIL}`}>Email</a>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Maen Studios</span>
-          <span>Agencia de contenido para redes sociales.</span>
+          <span>© {new Date().getFullYear()} Maen Studios®</span>
+          <span>Barcelona — contenido con intención</span>
         </div>
       </div>
     </footer>

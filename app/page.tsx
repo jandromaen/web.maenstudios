@@ -1,13 +1,12 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import ContactForm from "./components/ContactForm";
-import ContactEmails from "./components/ContactEmails";
+import Link from "next/link";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
-import ReelDeck from "./components/ReelDeck";
+import HomeHero from "./components/HomeHero";
 import { FaqJsonLd } from "./components/JsonLd";
 import { clients } from "./clients";
-import { EMAIL, steps, services, perks, marqueeWords, faqs } from "./site-data";
+import { posts } from "./blog-data";
+import { EMAIL, faqs, marqueeWords } from "./site-data";
 import { createPageMetadata } from "./seo-config";
 
 export const metadata: Metadata = createPageMetadata({
@@ -22,215 +21,174 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
+const featuredClients = clients.filter((c) => c.logo).slice(0, 3);
+const engagementClients = clients.slice(0, 5);
+const awards = [
+  "Agencia de contenido para marcas",
+  "Reels & TikToks con intención",
+  "Producción, edición y estrategia",
+  "Barcelona · España",
+  ...marqueeWords,
+];
+
 export default function Home() {
   return (
     <>
       <SiteHeader />
-
       <FaqJsonLd items={faqs.map((f) => ({ q: f.q, a: f.a }))} />
 
       <main id="top">
-        {/* HERO */}
-        <section className="hero">
-          <div className="container hero-grid">
-            <div>
-              <span className="eyebrow">
-                Agencia de creación de contenido para redes sociales
-              </span>
-              <h1>
-                Hacemos que <span className="grad">paren el scroll</span>
-              </h1>
-              <p className="lead">
-                Producimos Reels, TikToks, estrategia y edición para marcas que
-                quieren crecer en Instagram, TikTok y YouTube. Somos tu equipo
-                externo de contenido: de la idea al post publicado.
-              </p>
-              <div className="hero-actions">
-                <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                  Agenda una llamada 🤙
-                </a>
-                <a className="btn btn-ghost" href="#clientes">
-                  Ver clientes 🔥
-                </a>
-              </div>
-            </div>
-            <div className="hero-visual">
-              <ReelDeck />
-            </div>
-          </div>
+        <HomeHero />
 
-          <div className="container clients">
-            <div className="label">Han confiado en nosotros</div>
-            <div className="logos">
-              {clients
-                .filter((c) => c.logo)
-                .map((c) => (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    key={c.slug}
-                    src={c.logo}
-                    alt={`Logo de ${c.name}, cliente de Maen Studios`}
-                    title={c.name}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                ))}
-            </div>
-          </div>
-        </section>
-
-        {/* MARQUESINA */}
-        <div className="marquee" aria-hidden="true">
-          <div className="marquee-track">
-            {[...marqueeWords, ...marqueeWords].map((w, i) => (
-              <span key={i}>
-                {w}
-                <span className="dot"> ✦ </span>
-              </span>
+        <div className="bd-awards" aria-hidden="true">
+          <div className="bd-awards-track">
+            {[...awards, ...awards].map((item, i) => (
+              <span key={`${item}-${i}`}>{item}</span>
             ))}
           </div>
         </div>
 
-        {/* CÓMO FUNCIONA */}
-        <section id="como">
+        <section className="bd-overview">
           <div className="container">
-            <div className="section-head center">
-              <span className="eyebrow">Cómo funciona</span>
-              <h2>De la idea a publicar, sin complicarte</h2>
-              <p>
-                Un método claro de principio a fin para que solo te preocupes de
-                tu negocio.
-              </p>
-            </div>
-            <div className="grid steps">
-              {steps.map((s) => (
-                <div className="step" key={s.n}>
-                  <div className="step-num">{s.n}</div>
-                  <h3>{s.title}</h3>
-                  <p>{s.desc}</p>
-                </div>
-              ))}
-            </div>
+            <p className="bd-overview-text">
+              Maen Studios® es una agencia de contenido para redes sociales que
+              convierte cultura, producto y marca en piezas que paran el scroll.{" "}
+              <span className="muted">
+                Producimos Reels, TikToks, estrategia y edición para marcas que
+                quieren crecer de verdad.
+              </span>
+            </p>
           </div>
         </section>
 
-        {/* SERVICIOS (resumen) */}
-        <section id="servicios">
+        <section className="bd-cases" id="clientes">
           <div className="container">
-            <div className="section-head">
-              <span className="eyebrow">Servicios</span>
-              <h2>Todo tu contenido en un mismo sitio</h2>
-              <p>
-                Del concepto a la publicación. Nos encargamos de la idea, la
-                grabación, el montaje y la estrategia.
-              </p>
-            </div>
-            <div className="grid grid-3">
-              {services.map((s) => (
-                <div className="card" key={s.title}>
-                  <div className="icon">{s.icon}</div>
-                  <h3>{s.title}</h3>
-                  <div className="sub">{s.sub}</div>
-                  <p>{s.desc}</p>
-                </div>
-              ))}
-            </div>
-            <div className="section-cta">
-              <Link className="btn btn-ghost" href="/servicios">
-                Ver todos los servicios →
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* VENTAJAS */}
-        <section id="ventajas">
-          <div className="container">
-            <div className="section-head center">
-              <span className="eyebrow">Sin complicaciones</span>
-              <h2>Tu departamento de contenido externo</h2>
-            </div>
-            <div className="grid perks">
-              {perks.map((p) => (
-                <div className="perk" key={p.title}>
-                  <div className="big">{p.big}</div>
-                  <h3>{p.title}</h3>
-                  <p>{p.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CLIENTES */}
-        <section id="clientes">
-          <div className="container">
-            <div className="section-head">
-              <span className="eyebrow">Clientes</span>
-              <h2>Marcas para las que creamos contenido</h2>
-              <p>
-                Todo lo que ves en sus redes lo creamos y gestionamos nosotros.
-                Entra en cada una para ver su trabajo.
-              </p>
-            </div>
-            <div className="grid client-grid">
-              {clients.map((c) => (
-                <Link
-                  className="client-card"
-                  key={c.slug}
-                  href={`/clientes/${c.slug}`}
-                >
-                  {c.logo ? (
-                    <>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={c.logo}
-                        alt={`Logo de ${c.name}`}
-                        loading="lazy"
-                        decoding="async"
+            <div className="bd-cases-grid">
+              {featuredClients.map((c, i) => (
+                <Link className="bd-case" key={c.slug} href={`/clientes/${c.slug}`}>
+                  <div className="bd-case-media">
+                    {i === 0 ? (
+                      <video
+                        src="/reel-hero.mp4"
+                        muted
+                        loop
+                        autoPlay
+                        playsInline
+                        preload="metadata"
                       />
-                      <span className="client-name">{c.name}</span>
-                    </>
-                  ) : (
-                    <span className="client-wordmark">{c.name}</span>
-                  )}
-                  <span className="client-arrow">Ver trabajo →</span>
+                    ) : i === 1 ? (
+                      <video
+                        src="/reel-focacha.mp4"
+                        muted
+                        loop
+                        autoPlay
+                        playsInline
+                        preload="metadata"
+                      />
+                    ) : (
+                      <video
+                        src="/reel-cocina.mp4"
+                        muted
+                        loop
+                        autoPlay
+                        playsInline
+                        preload="metadata"
+                      />
+                    )}
+                  </div>
+                  <h3>{c.name}</h3>
+                  <p>{c.tagline}</p>
                 </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* MANIFIESTO */}
-        <section className="manifesto">
+        <section className="bd-featured">
           <div className="container">
-            <span className="eyebrow">El estudio</span>
-            <h2>
-              Dejamos de ser <span className="grad">los del vídeo</span> para ser
-              tu equipo de contenido
-            </h2>
-            <p>
-              Somos una agencia de creación de contenido para redes sociales.
-              Producimos Reels, TikToks y campañas con estrategia, edición y
-              creatividad para marcas que quieren dejar de publicar por publicar
-              y empezar a conectar de verdad.
-            </p>
-            <div className="slogan">
-              Contenido con intención. <span className="grad">Impacto real.</span>
+            <div className="bd-featured-head">
+              <h2>Featured Engagements</h2>
+              <Link href="/clientes">Ver todos →</Link>
+            </div>
+            {engagementClients.map((c) => (
+              <article className="bd-engagement" key={c.slug}>
+                <h3>{c.name}</h3>
+                <div>
+                  <p>{c.description}</p>
+                  <Link href={`/clientes/${c.slug}`}>Ver trabajo</Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <div className="bd-spotlight" aria-hidden="true">
+          <div className="bd-spotlight-track">
+            {[0, 1].flatMap((n) => [
+              <span key={`a-${n}`}>
+                Maen Studios® ayuda a marcas <span className="dot">●</span> a
+                conectar con cultura
+              </span>,
+              <span key={`b-${n}`}>Contenido con intención</span>,
+              <span key={`c-${n}`}>Impacto real en redes</span>,
+            ])}
+          </div>
+        </div>
+
+        <section className="bd-news" id="blog">
+          <div className="container">
+            <div className="bd-news-head">
+              <h2>Featured News</h2>
+            </div>
+            <div className="bd-news-list">
+              {posts.slice(0, 6).map((post) => (
+                <Link
+                  className="bd-news-item"
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                >
+                  <span className="cat">{post.category}</span>
+                  <h3>{post.title}</h3>
+                  <span className="meta">
+                    {new Date(post.date).toLocaleDateString("es-ES", {
+                      year: "numeric",
+                      month: "short",
+                    })}
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <div className="section-cta">
+              <Link className="btn btn-ghost" href="/blog">
+                Ver blog
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* FAQ */}
-        <section id="faq">
+        <section className="bd-contact" id="contacto">
           <div className="container">
-            <div className="section-head center">
-              <span className="eyebrow">Preguntas frecuentes</span>
-              <h2>Todo lo que sueles preguntarnos</h2>
-              <p>
-                Resolvemos las dudas más habituales sobre trabajar con una
-                agencia de creación de contenido para redes sociales.
-              </p>
+            <h2>Cuéntanos tu proyecto</h2>
+            <p>
+              Te respondemos en menos de 24h con ideas para tu marca. Sin
+              compromiso.
+            </p>
+            <div className="bd-contact-actions">
+              <Link className="btn btn-invert" href="/contacto">
+                Contactar
+              </Link>
+              <a className="btn btn-invert" href={`mailto:${EMAIL}`}>
+                {EMAIL}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" style={{ padding: "clamp(64px, 10vw, 120px) 0" }}>
+          <div className="container">
+            <div className="section-head">
+              <span className="eyebrow">FAQ</span>
+              <h2>Preguntas frecuentes</h2>
             </div>
             <div className="faq-list">
               {faqs.map((f) => (
@@ -245,23 +203,6 @@ export default function Home() {
                 </details>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* CONTACTO */}
-        <section id="contacto">
-          <div className="container contact-grid">
-            <div className="contact-info">
-              <span className="eyebrow">Contacto</span>
-              <h2>Cuéntanos tu proyecto</h2>
-              <p>
-                Te respondemos en menos de 24h con ideas para tu marca. Sin
-                compromiso.
-              </p>
-              <div className="mail-line">o escríbenos directamente:</div>
-              <ContactEmails />
-            </div>
-            <ContactForm />
           </div>
         </section>
       </main>

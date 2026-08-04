@@ -5,13 +5,12 @@ export const EMAIL_ADMIN = "info@maenstudios.com";
 export const EMAIL = EMAIL_PROJECTS;
 
 export const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Servicios", href: "/servicios" },
-  { label: "Clientes", href: "/clientes" },
+  { label: "Work", href: "/clientes" },
+  { label: "Services", href: "/servicios" },
+  { label: "News", href: "/blog" },
   { label: "Podcast", href: "/podcast" },
   { label: "Talents", href: "/talents" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contacto", href: "/contacto" },
+  { label: "Contact", href: "/contacto" },
 ];
 
 export const steps = [
