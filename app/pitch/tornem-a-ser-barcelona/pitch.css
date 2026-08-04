@@ -29,6 +29,11 @@
   isolation: isolate;
 }
 
+/* ---------- Visor de páginas del PDF (fondo negro puro) ---------- */
+.pt-root-viewer {
+  background: #000;
+}
+
 .pt-root h1,
 .pt-root h2,
 .pt-root h3 {
@@ -84,6 +89,11 @@
   padding: 84px 6vw 96px;
 }
 
+/* En modo visor la página ocupa todo el viewport, sin margen. */
+.pt-root-viewer .pt-stage {
+  padding: 0;
+}
+
 .pt-anim {
   width: 100%;
   max-width: 1180px;
@@ -92,8 +102,44 @@
   scrollbar-width: none;
 }
 
+.pt-root-viewer .pt-anim {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
 .pt-anim::-webkit-scrollbar {
   display: none;
+}
+
+/* ---------- Media (imagen / vídeo) a pantalla completa ---------- */
+.pt-media {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: #000;
+}
+
+.pt-fullimg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.pt-media-video .pt-fullvideo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
 }
 
 .pt-slide {
