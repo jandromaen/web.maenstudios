@@ -25,16 +25,13 @@ export default function PodcastPage() {
   return (
     <>
       <SiteHeader />
-
       <PodcastJsonLd />
 
       <main>
-        <section className="page-hero podcast-hero">
+        <section className="page-hero">
           <div className="container">
-            <span className="eyebrow">Valor añadido Maen</span>
-            <h1>
-              <span className="grad">The After</span> Podcast
-            </h1>
+            <span className="eyebrow">Podcast</span>
+            <h1>The After Podcast</h1>
             <p className="lead">
               Un espacio donde invitamos a nuestros clientes y colaboradores a
               sentarse frente al micrófono. Historias de emprendimiento,
@@ -48,10 +45,10 @@ export default function PodcastPage() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Ver en YouTube 🎧
+                Ver en YouTube
               </a>
               <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>
-                Quiero ser invitado ✦
+                Quiero ser invitado
               </a>
             </div>
           </div>
@@ -73,12 +70,12 @@ export default function PodcastPage() {
               <h2>
                 #{featured.number} · {featured.guest}
               </h2>
-              {featured.role && (
+              {featured.role ? (
                 <p className="podcast-guest-role">{featured.role}</p>
-              )}
+              ) : null}
               <p>{featured.description}</p>
               <a
-                className="btn btn-ghost podcast-watch-btn"
+                className="btn btn-ghost"
                 href={`https://www.youtube.com/watch?v=${featured.id}&list=${podcastInfo.playlistId}`}
                 target="_blank"
                 rel="noreferrer"
@@ -89,9 +86,9 @@ export default function PodcastPage() {
           </div>
         </section>
 
-        <section>
+        <section className="page-section">
           <div className="container">
-            <div className="section-head center">
+            <div className="section-head">
               <span className="eyebrow">Por qué existe</span>
               <h2>Más que un podcast</h2>
               <p>
@@ -100,10 +97,10 @@ export default function PodcastPage() {
                 trabajamos.
               </p>
             </div>
-            <div className="grid grid-3 podcast-values">
-              {podcastValues.map((v) => (
-                <div className="card podcast-value-card" key={v.title}>
-                  <div className="icon">{v.icon}</div>
+            <div className="grid grid-3">
+              {podcastValues.map((v, i) => (
+                <div className="card" key={v.title}>
+                  <div className="icon">0{i + 1}</div>
                   <h3>{v.title}</h3>
                   <p>{v.desc}</p>
                 </div>
@@ -112,7 +109,7 @@ export default function PodcastPage() {
           </div>
         </section>
 
-        <section>
+        <section className="page-section">
           <div className="container">
             <div className="section-head">
               <span className="eyebrow">Episodios</span>
@@ -135,7 +132,7 @@ export default function PodcastPage() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg`}
-                      alt={ep.guest}
+                      alt=""
                       loading="lazy"
                     />
                     <span className="episode-play">▶</span>
@@ -143,7 +140,7 @@ export default function PodcastPage() {
                   </div>
                   <div className="episode-body">
                     <h3>{ep.guest}</h3>
-                    {ep.role && <p className="episode-role">{ep.role}</p>}
+                    {ep.role ? <p className="episode-role">{ep.role}</p> : null}
                     <p className="episode-desc">{ep.description}</p>
                   </div>
                 </a>
@@ -156,26 +153,26 @@ export default function PodcastPage() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Ver playlist completa en YouTube →
+                Ver playlist completa →
               </a>
             </div>
           </div>
         </section>
 
         <section className="podcast-cta">
-          <div className="container podcast-cta-inner">
+          <div className="container">
             <span className="eyebrow">¿Trabajas con nosotros?</span>
             <h2>Tu historia también merece un episodio</h2>
             <p>
               Si eres cliente, colaborador o tienes un proyecto que encaja con
               Maen, escríbenos. Nos encantaría invitarte a The After Podcast.
             </p>
-            <div className="hero-actions podcast-cta-actions">
+            <div className="hero-actions">
               <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                Proponer un invitado 🤙
+                Proponer un invitado
               </a>
               <Link className="btn btn-ghost" href="/clientes">
-                Ver clientes 🔥
+                Ver clientes
               </Link>
             </div>
           </div>

@@ -23,17 +23,13 @@ export default function ServiciosPage() {
   return (
     <>
       <SiteHeader />
-
       <ServiceJsonLd />
 
       <main>
-        {/* HERO SERVICIOS */}
         <section className="page-hero">
           <div className="container">
-            <span className="eyebrow">Servicios</span>
-            <h1>
-              Todo tu contenido, <span className="grad">en un mismo sitio</span>
-            </h1>
+            <span className="eyebrow">Services</span>
+            <h1>Todo tu contenido, en un mismo sitio</h1>
             <p className="lead">
               Del concepto a la publicación. Nos encargamos de la idea, la
               grabación, el montaje y la estrategia para que tu marca no pare de
@@ -41,39 +37,39 @@ export default function ServiciosPage() {
             </p>
             <div className="hero-actions">
               <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                Agenda una llamada 🤙
+                Agenda una llamada
               </a>
-              <Link className="btn btn-ghost" href="/#clientes">
-                Ver clientes 🔥
+              <Link className="btn btn-ghost" href="/clientes">
+                Ver clientes
               </Link>
             </div>
           </div>
         </section>
 
-        {/* LISTA DE SERVICIOS */}
-        <section>
+        <section className="page-section">
           <div className="container">
-            <div className="grid grid-3">
-              {services.map((s) => (
-                <div className="card" key={s.title}>
-                  <div className="icon">{s.icon}</div>
-                  <h3>{s.title}</h3>
-                  <div className="sub">{s.sub}</div>
+            <div className="service-index">
+              {services.map((s, i) => (
+                <article className="service-row" key={s.title}>
+                  <div>
+                    <div className="idx">0{i + 1}</div>
+                    <h3>{s.title}</h3>
+                    <div className="sub">{s.sub}</div>
+                  </div>
                   <p>{s.desc}</p>
-                </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CÓMO TRABAJAMOS */}
-        <section>
+        <section className="page-section">
           <div className="container">
-            <div className="section-head center">
-              <span className="eyebrow">Cómo trabajamos</span>
-              <h2>De la idea a publicar, sin complicarte</h2>
+            <div className="section-head">
+              <span className="eyebrow">Método</span>
+              <h2>De la idea a publicar</h2>
               <p>
-                Un método claro de principio a fin para que solo te preocupes de
+                Un proceso claro de principio a fin para que solo te preocupes de
                 tu negocio.
               </p>
             </div>
@@ -89,11 +85,10 @@ export default function ServiciosPage() {
           </div>
         </section>
 
-        {/* VENTAJAS */}
-        <section>
+        <section className="page-section">
           <div className="container">
-            <div className="section-head center">
-              <span className="eyebrow">Sin complicaciones</span>
+            <div className="section-head">
+              <span className="eyebrow">Por qué Maen</span>
               <h2>Tu departamento de contenido externo</h2>
             </div>
             <div className="grid perks">
@@ -108,20 +103,19 @@ export default function ServiciosPage() {
           </div>
         </section>
 
-        {/* CTA FINAL */}
-        <section className="manifesto">
+        <section className="page-band">
           <div className="container">
             <span className="eyebrow">¿Empezamos?</span>
-            <h2>
-              Cuéntanos tu proyecto y te <span className="grad">respondemos</span>{" "}
-              en menos de 24h
-            </h2>
-            <div className="hero-actions" style={{ justifyContent: "center" }}>
+            <h2>Cuéntanos tu proyecto</h2>
+            <p className="lead">
+              Te respondemos en menos de 24h con ideas para tu marca.
+            </p>
+            <div className="hero-actions">
               <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                Agenda una llamada 🤙
+                Agenda una llamada
               </a>
-              <Link className="btn btn-ghost" href="/#contacto">
-                Escríbenos
+              <Link className="btn btn-ghost" href="/contacto">
+                Contacto
               </Link>
             </div>
           </div>

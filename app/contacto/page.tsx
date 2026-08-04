@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import ContactForm from "../components/ContactForm";
@@ -10,7 +11,11 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Contacta con Maen Studios para producir Reels, TikToks y estrategia de contenido para tu marca. Respondemos en menos de 24h. Proyectos: jandro@maenstudios.com · Administración: info@maenstudios.com",
   path: "/contacto",
-  keywords: ["contacto agencia contenido", "presupuesto reels", "contratar agencia social media"],
+  keywords: [
+    "contacto agencia contenido",
+    "presupuesto reels",
+    "contratar agencia social media",
+  ],
 });
 
 export default function ContactoPage() {
@@ -22,7 +27,7 @@ export default function ContactoPage() {
         <section className="page-hero">
           <div className="container contact-grid">
             <div className="contact-info">
-              <span className="eyebrow">Contacto</span>
+              <span className="eyebrow">Contact</span>
               <h1>Cuéntanos tu proyecto</h1>
               <p>
                 Te respondemos en menos de 24h con ideas para tu marca. Sin
@@ -30,6 +35,11 @@ export default function ContactoPage() {
               </p>
               <div className="mail-line">o escríbenos directamente:</div>
               <ContactEmails />
+              <div className="hero-actions">
+                <Link className="btn btn-ghost" href="/servicios">
+                  Ver servicios
+                </Link>
+              </div>
             </div>
             <ContactForm />
           </div>

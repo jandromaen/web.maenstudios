@@ -21,9 +21,8 @@ export const metadata: Metadata = createPageMetadata({
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("es-ES", {
-    day: "numeric",
-    month: "long",
     year: "numeric",
+    month: "short",
   });
 }
 
@@ -44,10 +43,8 @@ export default function BlogPage() {
       <main>
         <section className="page-hero">
           <div className="container">
-            <span className="eyebrow">Blog</span>
-            <h1>
-              Ideas para <span className="grad">crecer en redes</span>
-            </h1>
+            <span className="eyebrow">News</span>
+            <h1>Ideas para crecer en redes</h1>
             <p className="lead">
               Todo lo que sabemos sobre Reels, TikToks, estrategia y contenido
               para redes sociales. Sin humo y aplicable a tu marca.
@@ -55,22 +52,18 @@ export default function BlogPage() {
           </div>
         </section>
 
-        <section style={{ paddingTop: 0 }}>
+        <section className="page-section">
           <div className="container">
-            <div className="blog-grid">
+            <div className="bd-news-list">
               {sorted.map((post) => (
                 <Link
-                  className="blog-card"
+                  className="bd-news-item"
                   key={post.slug}
                   href={`/blog/${post.slug}`}
                 >
-                  <span className="blog-card-cat">{post.category}</span>
-                  <h2>{post.title}</h2>
-                  <p>{post.excerpt}</p>
-                  <div className="blog-card-meta">
-                    <time dateTime={post.date}>{formatDate(post.date)}</time>
-                    <span>· {post.readingMinutes} min de lectura</span>
-                  </div>
+                  <span className="cat">{post.category}</span>
+                  <h3>{post.title}</h3>
+                  <span className="meta">{formatDate(post.date)}</span>
                 </Link>
               ))}
             </div>

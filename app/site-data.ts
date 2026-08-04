@@ -48,37 +48,37 @@ export const steps = [
 
 export const services = [
   {
-    icon: "🎬",
+    icon: "01",
     title: "Reels & Shorts",
     sub: "Vídeo vertical que retiene",
     desc: "Piezas pensadas para enganchar en los 3 primeros segundos y mantener la atención hasta el final. Ganchos, ritmo y subtítulos optimizados para cada plataforma.",
   },
   {
-    icon: "✂️",
+    icon: "02",
     title: "Edición & postproducción",
     sub: "Montaje profesional",
     desc: "Ritmo, motion graphics, sonido y color. El montaje que convierte una grabación en un vídeo que la gente termina de ver.",
   },
   {
-    icon: "🧠",
+    icon: "03",
     title: "Estrategia & crecimiento",
     sub: "Planificación con intención",
     desc: "Convertimos tu contenido en un sistema: qué decir, cómo decirlo y para qué. Líneas editoriales y planes de crecimiento orientados a resultados.",
   },
   {
-    icon: "🤝",
+    icon: "04",
     title: "UGC & creadores",
     sub: "Contenido auténtico",
     desc: "Producimos contenido con creadores reales que se adaptan a la voz de tu marca: testimoniales, reviews y piezas naturales que generan confianza.",
   },
   {
-    icon: "📲",
+    icon: "05",
     title: "Social media",
     sub: "Optimizado para redes",
     desc: "Contenido específico para cada red: Reels, TikToks, Shorts, stories y clips. Todo adaptado al algoritmo y a tus objetivos.",
   },
   {
-    icon: "🌟",
+    icon: "06",
     title: "Marca personal",
     sub: "Posicionamiento y autoridad",
     desc: "Contenido estratégico para posicionar tu marca personal y convertirte en referente de tu sector.",
@@ -87,17 +87,17 @@ export const services = [
 
 export const perks = [
   {
-    big: "🎯",
+    big: "01",
     title: "Un solo equipo",
     desc: "Todo tu contenido gestionado desde un mismo punto de contacto. Sin descoordinación.",
   },
   {
-    big: "⚡",
+    big: "02",
     title: "Entregas constantes",
     desc: "Contenido listo para publicar con la cadencia que acordemos. Nunca te quedas sin material.",
   },
   {
-    big: "📈",
+    big: "03",
     title: "Escalable y flexible",
     desc: "Empezamos a tu ritmo y crecemos según tus necesidades. Sin ataduras innecesarias.",
   },

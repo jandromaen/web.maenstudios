@@ -82,48 +82,44 @@ export default async function ClientPage({
       <main>
         <section className="client-hero">
           <div className="container">
-            <Link className="back-link" href="/#clientes">
-              ← Volver a clientes
+            <Link className="back-link" href="/clientes">
+              ← Volver a work
             </Link>
-            <div className="client-hero-grid">
-              <div>
-                <span className="eyebrow">Cliente</span>
-                {client.logo ? (
-                  <div className="client-logo-big">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={client.logo} alt={client.name} />
-                  </div>
-                ) : null}
-                <h1>{client.name}</h1>
-                {client.tagline ? (
-                  <p className="client-tagline">{client.tagline}</p>
-                ) : null}
-                <p className="client-desc">{client.description}</p>
-                <div className="client-tags">
-                  {client.services.map((s) => (
-                    <span className="tag-pill" key={s}>
-                      {s}
-                    </span>
-                  ))}
-                </div>
-                <div className="hero-actions">
-                  {client.url ? (
-                    <a
-                      className="btn btn-primary"
-                      href={client.url}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {client.url.includes("instagram.com")
-                        ? "Ver en Instagram"
-                        : "Visitar web"}
-                    </a>
-                  ) : null}
-                  <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>
-                    Quiero algo así
-                  </a>
-                </div>
+            <span className="eyebrow">Client</span>
+            {client.logo ? (
+              <div className="client-logo-big">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={client.logo} alt={client.name} />
               </div>
+            ) : null}
+            <h1>{client.name}</h1>
+            {client.tagline ? (
+              <p className="client-tagline">{client.tagline}</p>
+            ) : null}
+            <p className="client-desc">{client.description}</p>
+            <div className="client-tags">
+              {client.services.map((s) => (
+                <span className="tag-pill" key={s}>
+                  {s}
+                </span>
+              ))}
+            </div>
+            <div className="hero-actions">
+              {client.url ? (
+                <a
+                  className="btn btn-primary"
+                  href={client.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {client.url.includes("instagram.com")
+                    ? "Ver en Instagram"
+                    : "Visitar web"}
+                </a>
+              ) : null}
+              <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>
+                Quiero algo así
+              </a>
             </div>
           </div>
         </section>
@@ -131,7 +127,7 @@ export default async function ClientPage({
         <section className="client-work">
           <div className="container">
             <div className="section-head">
-              <span className="eyebrow">Su contenido</span>
+              <span className="eyebrow">Selected work</span>
               <h2>Algunos de sus mejores vídeos</h2>
             </div>
             {client.videos.length > 0 ? (
@@ -166,14 +162,13 @@ export default async function ClientPage({
         <section className="client-approach">
           <div className="container">
             <div className="section-head">
-              <span className="eyebrow">Cómo trabajamos con {client.name}</span>
+              <span className="eyebrow">Approach</span>
               <h2>Contenido con intención para {client.name}</h2>
             </div>
             <p className="client-approach-text">
               En Maen Studios somos el equipo de contenido de {client.name}:
               pensamos la idea, la grabamos, la editamos y la publicamos con una
-              línea coherente. Estos son los servicios que aplicamos en este
-              proyecto:
+              línea coherente.
             </p>
             <div className="client-tags">
               {client.services.map((s) => (
@@ -182,12 +177,12 @@ export default async function ClientPage({
                 </span>
               ))}
             </div>
-            <div className="hero-actions" style={{ marginTop: "1.5rem" }}>
+            <div className="hero-actions">
               <Link className="btn btn-primary" href="/servicios">
-                Ver todos nuestros servicios →
+                Ver servicios
               </Link>
               <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>
-                Quiero algo así 🤙
+                Quiero algo así
               </a>
             </div>
           </div>
@@ -196,26 +191,29 @@ export default async function ClientPage({
         <section className="client-related">
           <div className="container">
             <div className="section-head">
-              <span className="eyebrow">Más casos</span>
-              <h2>Otras marcas para las que creamos contenido</h2>
+              <span className="eyebrow">More work</span>
+              <h2>Otras marcas</h2>
             </div>
-            <div className="grid client-grid">
+            <div className="client-list">
               {relatedClients.map((c) => (
                 <Link
-                  className="client-card"
+                  className="client-row"
                   key={c.slug}
                   href={`/clientes/${c.slug}`}
                 >
-                  {c.logo ? (
-                    <>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={c.logo} alt={c.name} loading="lazy" />
-                      <span className="client-name">{c.name}</span>
-                    </>
-                  ) : (
-                    <span className="client-wordmark">{c.name}</span>
-                  )}
-                  <span className="client-arrow">Ver trabajo →</span>
+                  <div className="client-row-main">
+                    {c.logo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={c.logo} alt="" loading="lazy" />
+                    ) : null}
+                    <div>
+                      <h3>{c.name}</h3>
+                      {c.tagline ? (
+                        <div className="tagline">{c.tagline}</div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <span className="go">Ver →</span>
                 </Link>
               ))}
             </div>

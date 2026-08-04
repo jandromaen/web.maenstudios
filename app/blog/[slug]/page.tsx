@@ -53,7 +53,7 @@ export default async function BlogPostPage({
   const post = getPost(slug);
   if (!post) notFound();
 
-  const related = posts.filter((p) => p.slug !== post.slug).slice(0, 2);
+  const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <>
@@ -77,13 +77,13 @@ export default async function BlogPostPage({
         <article className="blog-article">
           <div className="container container-narrow">
             <Link className="back-link" href="/blog">
-              ← Volver al blog
+              ← Volver a news
             </Link>
             <span className="eyebrow">{post.category}</span>
             <h1>{post.title}</h1>
             <div className="blog-card-meta">
               <time dateTime={post.date}>{formatDate(post.date)}</time>
-              <span>· {post.readingMinutes} min de lectura</span>
+              <span>· {post.readingMinutes} min</span>
             </div>
 
             <div className="blog-body">
@@ -109,10 +109,10 @@ export default async function BlogPostPage({
               </p>
               <div className="hero-actions">
                 <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                  Agenda una llamada 🤙
+                  Agenda una llamada
                 </a>
                 <Link className="btn btn-ghost" href="/servicios">
-                  Ver servicios →
+                  Ver servicios
                 </Link>
               </div>
             </div>
@@ -123,23 +123,24 @@ export default async function BlogPostPage({
           <section className="blog-related">
             <div className="container">
               <div className="section-head">
-                <span className="eyebrow">Sigue leyendo</span>
+                <span className="eyebrow">Keep reading</span>
                 <h2>Más artículos</h2>
               </div>
-              <div className="blog-grid">
+              <div className="bd-news-list">
                 {related.map((p) => (
                   <Link
-                    className="blog-card"
+                    className="bd-news-item"
                     key={p.slug}
                     href={`/blog/${p.slug}`}
                   >
-                    <span className="blog-card-cat">{p.category}</span>
+                    <span className="cat">{p.category}</span>
                     <h3>{p.title}</h3>
-                    <p>{p.excerpt}</p>
-                    <div className="blog-card-meta">
-                      <time dateTime={p.date}>{formatDate(p.date)}</time>
-                      <span>· {p.readingMinutes} min</span>
-                    </div>
+                    <span className="meta">
+                      {new Date(p.date).toLocaleDateString("es-ES", {
+                        year: "numeric",
+                        month: "short",
+                      })}
+                    </span>
                   </Link>
                 ))}
               </div>

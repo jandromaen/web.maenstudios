@@ -26,46 +26,41 @@ export default function ClientesPage() {
       <main>
         <section className="page-hero">
           <div className="container">
-            <span className="eyebrow">Clientes</span>
-            <h1>
-              Marcas para las que <span className="grad">creamos contenido</span>
-            </h1>
+            <span className="eyebrow">Work</span>
+            <h1>Marcas para las que creamos contenido</h1>
             <p className="lead">
               Todo lo que ves en sus redes lo creamos y gestionamos nosotros.
               Entra en cada una para ver su trabajo.
             </p>
             <div className="hero-actions">
               <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                Quiero algo así 🤙
+                Quiero algo así
               </a>
             </div>
           </div>
         </section>
 
-        <section style={{ paddingTop: 0 }}>
+        <section className="page-section">
           <div className="container">
-            <div className="grid client-grid">
+            <div className="client-list">
               {clients.map((c) => (
-                <Link
-                  className="client-card"
-                  key={c.slug}
-                  href={`/clientes/${c.slug}`}
-                >
-                  {c.logo ? (
-                    <>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                <Link className="client-row" key={c.slug} href={`/clientes/${c.slug}`}>
+                  <div className="client-row-main">
+                    {c.logo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={c.logo}
-                        alt={`Logo de ${c.name}`}
+                        alt=""
                         loading="lazy"
                         decoding="async"
                       />
-                      <span className="client-name">{c.name}</span>
-                    </>
-                  ) : (
-                    <span className="client-wordmark">{c.name}</span>
-                  )}
-                  <span className="client-arrow">Ver trabajo →</span>
+                    ) : null}
+                    <div>
+                      <h3>{c.name}</h3>
+                      {c.tagline ? <div className="tagline">{c.tagline}</div> : null}
+                    </div>
+                  </div>
+                  <span className="go">Ver trabajo →</span>
                 </Link>
               ))}
             </div>
