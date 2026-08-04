@@ -666,6 +666,23 @@
   letter-spacing: 0.3em;
 }
 
+/* ---------- Vídeo a pantalla completa ---------- */
+.pt-video-slide {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  background: #000;
+}
+
+.pt-fullvideo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
 /* ================================================================
    Controles / HUD
    ================================================================ */

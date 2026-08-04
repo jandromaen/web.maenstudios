@@ -604,7 +604,26 @@ export default function PitchDeck() {
         ),
       },
 
-      /* 17 · CIERRE -------------------------------------------------- */
+      /* 17 · VÍDEO A PANTALLA COMPLETA ------------------------------- */
+      {
+        id: "video",
+        render: () => (
+          <div className="pt-video-slide">
+            <video
+              className="pt-fullvideo"
+              src="/pitch/tornem-video.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+            />
+          </div>
+        ),
+      },
+
+      /* 18 · CIERRE -------------------------------------------------- */
       {
         id: "cierre",
         render: () => (
