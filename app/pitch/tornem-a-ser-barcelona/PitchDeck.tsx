@@ -6,6 +6,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type MouseEvent,
   type ReactNode,
 } from "react";
 
@@ -16,6 +17,86 @@ import {
 type Slide = { id: string; render: () => ReactNode };
 
 const TOTAL_PAGES = 20;
+
+/* Página del PDF que contiene la dirección de sonido (Midnight in Paris). */
+const SOUNDTRACK_PAGE = 17;
+
+/* ------------------------------------------------------------------ */
+/* Diapositiva del soundtrack con reproductor de audio superpuesto     */
+/* ------------------------------------------------------------------ */
+
+function SoundtrackSlide({ src, page }: { src: string; page: number }) {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  /* Al desmontarse (cambio de diapositiva) pausa y resetea el audio
+     para que no siga sonando en otras páginas. */
+  useEffect(() => {
+    const audio = audioRef.current;
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    };
+  }, []);
+
+  const toggle = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    } else {
+      audio.pause();
+      setPlaying(false);
+    }
+  }, []);
+
+  return (
+    <div className="pt-media">
+      <img
+        className="pt-fullimg"
+        src={`/pitch/pages/page-${String(page).padStart(2, "0")}.jpg`}
+        alt={`Tornem a ser Barcelona · página ${page}`}
+        draggable={false}
+      />
+
+      <div className="pt-audio" onClick={(e) => e.stopPropagation()}>
+        <button
+          type="button"
+          className={`pt-audio-btn ${playing ? "pt-audio-playing" : ""}`}
+          onClick={toggle}
+          aria-label={playing ? "Pausar banda sonora" : "Reproducir banda sonora"}
+          title={playing ? "Pausar" : "Reproducir"}
+        >
+          {playing ? (
+            <span className="pt-audio-ico pt-audio-pause" aria-hidden>
+              <i />
+              <i />
+            </span>
+          ) : (
+            <span className="pt-audio-ico pt-audio-play" aria-hidden />
+          )}
+        </button>
+        <span className="pt-audio-meta">
+          <span className="pt-audio-k">Banda sonora</span>
+          <span className="pt-audio-title">
+            Si Tu Vois Ma Mère — Midnight in Paris (2011)
+          </span>
+        </span>
+        <audio
+          ref={audioRef}
+          src={src}
+          preload="none"
+          onEnded={() => setPlaying(false)}
+          onPause={() => setPlaying(false)}
+          onPlay={() => setPlaying(true)}
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function PitchDeck() {
   const slides: Slide[] = useMemo(() => {
@@ -44,6 +125,14 @@ export default function PitchDeck() {
             </div>
           ),
         });
+      }
+
+      if (n === SOUNDTRACK_PAGE) {
+        pages.push({
+          id: `page-${n}`,
+          render: () => <SoundtrackSlide src="/pitch/soundtrack.mp3" page={n} />,
+        });
+        continue;
       }
 
       pages.push({

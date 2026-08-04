@@ -142,6 +142,101 @@
   background: #000;
 }
 
+/* ---------- Reproductor de audio (soundtrack) ---------- */
+.pt-audio {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 20px 10px 12px;
+  border: 1px solid var(--pt-line-strong);
+  border-radius: 999px;
+  background: rgba(12, 9, 6, 0.62);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  max-width: min(92vw, 420px);
+}
+
+.pt-audio-btn {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--pt-amber);
+  background: rgba(232, 163, 77, 0.14);
+  color: var(--pt-amber);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.pt-audio-btn:hover {
+  background: rgba(232, 163, 77, 0.26);
+  box-shadow: 0 0 18px rgba(232, 163, 77, 0.45);
+}
+
+.pt-audio-btn:active {
+  transform: scale(0.94);
+}
+
+.pt-audio-playing {
+  background: var(--pt-amber);
+  color: #1a1208;
+  box-shadow: 0 0 22px rgba(232, 163, 77, 0.6);
+}
+
+/* Icono play (triángulo) */
+.pt-audio-play {
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 15px solid currentColor;
+}
+
+/* Icono pause (dos barras) */
+.pt-audio-pause {
+  display: flex;
+  gap: 5px;
+}
+
+.pt-audio-pause i {
+  display: block;
+  width: 5px;
+  height: 18px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.pt-audio-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pt-audio-k {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pt-amber);
+}
+
+.pt-audio-title {
+  font-size: 0.82rem;
+  color: var(--pt-fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .pt-slide {
   display: flex;
   flex-direction: column;
@@ -894,4 +989,14 @@
   .pt-zone { width: 28vw; }
   .pt-stage { padding: 70px 20px 84px; }
   .pt-hud-brand { display: none; }
+}
+
+@media (max-width: 620px) {
+  .pt-audio {
+    bottom: 72px;
+    gap: 10px;
+    padding: 8px 16px 8px 10px;
+  }
+  .pt-audio-btn { width: 46px; height: 46px; }
+  .pt-audio-title { font-size: 0.74rem; }
 }
