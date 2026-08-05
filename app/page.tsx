@@ -12,7 +12,7 @@ import { createPageMetadata } from "./seo-config";
 export const metadata: Metadata = createPageMetadata({
   title: "Agencia de creación de contenido para redes sociales",
   description:
-    "Maen Studios: dirección creativa, producción audiovisual y community management. Creamos piezas que paran el scroll y hacen crecer marcas en Instagram, TikTok y YouTube.",
+    "Maen Studios: dirección creativa, producción audiovisual y community management. Creamos piezas con alma propia que hacen crecer marcas en Instagram, TikTok y YouTube.",
   path: "/",
   keywords: [
     "agencia creación contenido redes sociales",
@@ -98,7 +98,7 @@ export default function Home() {
           <div className="container">
             <p className="bd-overview-text">
               Maen Studios® es una agencia de contenido para redes sociales que
-              convierte cultura, producto y marca en piezas que paran el scroll.{" "}
+              convierte cultura, producto y marca en piezas con alma propia.{" "}
               <span className="muted">
                 Social media production con intención: dirección creativa,
                 producción audiovisual y community management para marcas que
