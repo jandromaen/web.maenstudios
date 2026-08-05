@@ -414,6 +414,16 @@ button,
   color: #fff;
 }
 
+@media (pointer: fine) {
+  .bd-hero.is-tracking {
+    cursor: none;
+  }
+
+  .bd-hero.is-tracking * {
+    cursor: none !important;
+  }
+}
+
 .bd-hero-media {
   position: absolute;
   inset: 0;
@@ -438,14 +448,19 @@ button,
   );
 }
 
-.bd-hero-content {
-  position: relative;
+.bd-hero-cursor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 18px;
   text-align: center;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+  pointer-events: none;
 }
 
 /* Sustituye el círculo Watch Reel: marca abstracta pequeña al centro */
