@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Space_Grotesk } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import CookieBanner from "./components/CookieBanner";
 import { GlobalJsonLd } from "./components/JsonLd";
 import ThemeSchedule from "./components/ThemeSchedule";
@@ -14,6 +14,7 @@ import {
 } from "./seo-config";
 import "./globals.css";
 
+/* Display: Monument Extended — mismo display del portfolio Canva */
 const display = localFont({
   src: [
     {
@@ -31,10 +32,12 @@ const display = localFont({
   display: "swap",
 });
 
-const body = Space_Grotesk({
+/* Body: Plus Jakarta Sans ≈ TT Fors (Canva; comercial TypeType, no redistribuible) */
+const body = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
