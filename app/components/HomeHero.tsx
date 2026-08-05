@@ -101,7 +101,7 @@ export default function HomeHero() {
               src="/maen-logo.png"
               alt="Maen Studios"
             />
-            <span>2020 — ∞</span>
+            <span>since 2020®</span>
           </div>
         </div>
       </section>
