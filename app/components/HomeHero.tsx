@@ -46,15 +46,6 @@ export default function HomeHero() {
       target.current.x = 0;
       target.current.y = 0;
       hero.classList.remove("is-tracking");
-      cursor.classList.remove("is-active");
-      activeRef.current = false;
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      cursor.style.transform = "translate3d(-50%, -50%, 0)";
-      current.current.x = 0;
-      current.current.y = 0;
     };
 
     hero.addEventListener("pointermove", onMove);
@@ -80,20 +71,7 @@ export default function HomeHero() {
           aria-hidden="true"
         />
       </div>
-      <div className="bd-hero-brand">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="bd-hero-logo"
-          src="/maen-logo.png"
-          width={1020}
-          height={80}
-          alt="Maen Studios"
-          decoding="async"
-          fetchPriority="high"
-        />
-        <span>since 2020®</span>
-      </div>
-      <div className="bd-hero-cursor" ref={cursorRef} aria-hidden="true">
+      <div className="bd-hero-cursor" ref={cursorRef}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="bd-hero-icon"
@@ -103,7 +81,21 @@ export default function HomeHero() {
           alt=""
           decoding="async"
           fetchPriority="high"
+          aria-hidden="true"
         />
+        <div className="bd-hero-meta">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="bd-hero-logo"
+            src="/maen-logo.png"
+            width={1020}
+            height={80}
+            alt="Maen Studios"
+            decoding="async"
+            fetchPriority="high"
+          />
+          <span>since 2020®</span>
+        </div>
       </div>
     </section>
   );

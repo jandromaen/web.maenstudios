@@ -448,8 +448,7 @@ button,
   );
 }
 
-/* Wordmark + since: fijo al centro (no sigue el ratón) */
-.bd-hero-brand {
+.bd-hero-cursor {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -457,15 +456,35 @@ button,
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 18px;
   text-align: center;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
   pointer-events: none;
+}
+
+/* Sustituye el círculo Watch Reel: marca abstracta pequeña al centro */
+.bd-hero-icon {
+  position: relative;
+  z-index: 3;
+  height: clamp(40px, 7vw, 64px);
+  width: auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 16px rgba(0, 0, 0, 0.45));
+}
+
+.bd-hero-meta {
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1.35;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
 .bd-hero-logo {
@@ -476,44 +495,9 @@ button,
   filter: drop-shadow(0 1px 10px rgba(0, 0, 0, 0.4));
 }
 
-.bd-hero-brand span {
+.bd-hero-meta span {
   display: block;
   opacity: 0.85;
-}
-
-/* Cursor custom: solo el icono de tres barras */
-.bd-hero-cursor {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 3;
-  transform: translate3d(-50%, -50%, 0);
-  will-change: transform;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.bd-hero.is-tracking .bd-hero-cursor,
-.bd-hero-cursor.is-active {
-  opacity: 1;
-}
-
-.bd-hero-icon {
-  height: clamp(32px, 3.5vw, 44px);
-  width: auto;
-  display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
-}
-
-@media (pointer: coarse), (prefers-reduced-motion: reduce) {
-  .bd-hero-cursor {
-    /* En touch / reduced-motion: icono estático encima de la marca */
-    top: calc(50% - 36px);
-    opacity: 1;
-    transition: none;
-  }
 }
 
 /* ─── Awards strip ────────────────────────────────────── */
