@@ -219,7 +219,7 @@ h5 {
 
 .brand-logo {
   display: block;
-  height: clamp(18px, 2.2vw, 24px);
+  height: clamp(14px, 1.6vw, 18px);
   width: auto;
 }
 
