@@ -20,8 +20,8 @@ export default function HomeHero() {
         <div className="bd-hero-meta">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            className="bd-hero-logo"
-            src="/maen-logo.png"
+            className="bd-hero-icon"
+            src="/maen-icon.png"
             alt="Maen Studios"
           />
           <span>since 2020®</span>

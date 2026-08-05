@@ -453,13 +453,14 @@ button,
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 18px;
 }
 
-.bd-hero-logo {
-  height: 14px;
+.bd-hero-icon {
+  height: clamp(72px, 14vw, 120px);
   width: auto;
   display: block;
+  filter: drop-shadow(0 2px 18px rgba(0, 0, 0, 0.35));
 }
 
 .bd-hero-meta span {
