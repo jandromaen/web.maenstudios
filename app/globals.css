@@ -277,10 +277,10 @@ button,
   width: auto;
 }
 
-/* Logo header: altura estricta (PNG muy ancho) */
+/* Logo header: ~25–30% más alto que el texto del menú (PNG muy ancho) */
 .header .brand-logo {
-  height: clamp(8px, 1vw, 10px);
-  max-height: 10px;
+  height: clamp(12px, 1.35vw, 14px);
+  max-height: 14px;
 }
 
 .brand-logo-footer {
@@ -310,20 +310,27 @@ button,
 .nav-links {
   display: none;
   align-items: center;
-  gap: clamp(18px, 2.2vw, 36px);
+  gap: clamp(28px, 3.8vw, 56px);
 }
 
 .nav-links a {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   opacity: 0.92;
-  transition: opacity 0.15s ease;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
 }
 
 .nav-links a:hover {
   opacity: 1;
+}
+
+.nav-links a.is-active {
+  opacity: 1;
+  border-bottom-color: currentColor;
 }
 
 .nav .btn {

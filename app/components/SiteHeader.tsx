@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { navLinks } from "../site-data";
 
@@ -12,6 +13,7 @@ type SiteHeaderProps = {
 };
 
 export default function SiteHeader({ light = false, adaptive = false }: SiteHeaderProps) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [overLight, setOverLight] = useState(light);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -133,11 +135,20 @@ export default function SiteHeader({ light = false, adaptive = false }: SiteHead
             <div className="nav-links">
               {navLinks
                 .filter((l) => l.href !== "/")
-                .map((l) => (
-                  <Link key={l.href} href={l.href}>
-                    {l.label}
-                  </Link>
-                ))}
+                .map((l) => {
+                  const active =
+                    pathname === l.href || pathname.startsWith(`${l.href}/`);
+                  return (
+                    <Link
+                      key={l.href}
+                      href={l.href}
+                      className={active ? "is-active" : undefined}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {l.label}
+                    </Link>
+                  );
+                })}
             </div>
             <button
               type="button"
