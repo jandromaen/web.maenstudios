@@ -21,15 +21,60 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
-const featuredClients = clients.filter((c) => c.logo).slice(0, 3);
-const engagementClients = clients.slice(0, 5);
+const featuredClients = clients
+  .filter((c) => c.previewVideo)
+  .slice(0, 6);
+const engagementClients = clients.filter((c) => c.community).slice(0, 5);
+const brandLogos = clients.filter((c) => c.logo);
 const awards = [
+  "Social Media Production",
   "Agencia de contenido para marcas",
   "Reels & TikToks con intención",
   "Producción, edición y estrategia",
   "Barcelona · España",
   ...marqueeWords,
 ];
+
+function CaseCard({
+  client,
+}: {
+  client: (typeof clients)[number];
+}) {
+  return (
+    <Link className="bd-case" href={`/clientes/${client.slug}`}>
+      <div className="bd-case-media">
+        {client.previewVideo ? (
+          <video
+            src={client.previewVideo}
+            muted
+            loop
+            autoPlay
+            playsInline
+            preload="metadata"
+          />
+        ) : client.logo ? (
+          <div className="bd-case-logo-fallback">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={client.logo} alt="" />
+          </div>
+        ) : null}
+        <div className="bd-case-overlay">
+          {client.community ? (
+            <span className="bd-case-stat">Comunidad: {client.community}</span>
+          ) : null}
+          {client.logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="bd-case-logo" src={client.logo} alt="" />
+          ) : null}
+        </div>
+      </div>
+      <div className="bd-case-body">
+        <h3>{client.name}</h3>
+        <p>{client.tagline}</p>
+      </div>
+    </Link>
+  );
+}
 
 export default function Home() {
   return (
@@ -54,8 +99,8 @@ export default function Home() {
               Maen Studios® es una agencia de contenido para redes sociales que
               convierte cultura, producto y marca en piezas que paran el scroll.{" "}
               <span className="muted">
-                Producimos Reels, TikToks, estrategia y edición para marcas que
-                quieren crecer de verdad.
+                Social media production con intención: Reels, TikToks, estrategia
+                y edición para marcas que quieren crecer de verdad.
               </span>
             </p>
           </div>
@@ -63,46 +108,36 @@ export default function Home() {
 
         <section className="bd-cases" id="clientes">
           <div className="container">
-            <div className="bd-cases-grid">
-              {featuredClients.map((c, i) => (
-                <Link className="bd-case" key={c.slug} href={`/clientes/${c.slug}`}>
-                  <div className="bd-case-media">
-                    {i === 0 ? (
-                      <video
-                        src="/reel-hero.mp4"
-                        muted
-                        loop
-                        autoPlay
-                        playsInline
-                        preload="metadata"
-                      />
-                    ) : i === 1 ? (
-                      <video
-                        src="/reel-focacha.mp4"
-                        muted
-                        loop
-                        autoPlay
-                        playsInline
-                        preload="metadata"
-                      />
-                    ) : (
-                      <video
-                        src="/reel-cocina.mp4"
-                        muted
-                        loop
-                        autoPlay
-                        playsInline
-                        preload="metadata"
-                      />
-                    )}
-                  </div>
-                  <h3>{c.name}</h3>
-                  <p>{c.tagline}</p>
-                </Link>
+            <div className="bd-cases-head">
+              <div>
+                <span className="eyebrow eyebrow-accent">maenbrands</span>
+                <h2>¿Qué marcas han confiado en nosotros?</h2>
+              </div>
+              <Link href="/clientes">Ver todos →</Link>
+            </div>
+            <div className="bd-cases-grid is-featured">
+              {featuredClients.map((c) => (
+                <CaseCard key={c.slug} client={c} />
               ))}
             </div>
           </div>
         </section>
+
+        <div className="bd-brands" aria-hidden="true">
+          <div className="container">
+            <div className="bd-brands-label">Marcas con las que trabajamos</div>
+          </div>
+          <div className="bd-brands-track">
+            {[...brandLogos, ...brandLogos].map((c, i) =>
+              c.logo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img key={`${c.slug}-${i}`} src={c.logo} alt={c.name} />
+              ) : (
+                <span key={`${c.slug}-${i}`}>{c.name}</span>
+              ),
+            )}
+          </div>
+        </div>
 
         <section className="bd-featured">
           <div className="container">
@@ -112,7 +147,14 @@ export default function Home() {
             </div>
             {engagementClients.map((c) => (
               <article className="bd-engagement" key={c.slug}>
-                <h3>{c.name}</h3>
+                <div>
+                  {c.community ? (
+                    <span className="bd-engagement-stat">
+                      Comunidad: {c.community}
+                    </span>
+                  ) : null}
+                  <h3>{c.name}</h3>
+                </div>
                 <div>
                   <p>{c.description}</p>
                   <Link href={`/clientes/${c.slug}`}>Ver trabajo</Link>

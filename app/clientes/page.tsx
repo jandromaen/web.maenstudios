@@ -26,11 +26,12 @@ export default function ClientesPage() {
       <main>
         <section className="page-hero">
           <div className="container">
-            <span className="eyebrow">Work</span>
+            <span className="eyebrow eyebrow-accent">maenbrands</span>
             <h1>Marcas para las que creamos contenido</h1>
             <p className="lead">
-              Todo lo que ves en sus redes lo creamos y gestionamos nosotros.
-              Entra en cada una para ver su trabajo.
+              Social media production para marcas de restauración, moda,
+              lifestyle y más. Todo lo que ves en sus redes lo creamos y
+              gestionamos nosotros.
             </p>
             <div className="hero-actions">
               <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
@@ -42,25 +43,49 @@ export default function ClientesPage() {
 
         <section className="page-section">
           <div className="container">
-            <div className="client-list">
+            <div className="client-portfolio-grid">
               {clients.map((c) => (
-                <Link className="client-row" key={c.slug} href={`/clientes/${c.slug}`}>
-                  <div className="client-row-main">
-                    {c.logo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={c.logo}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
+                <Link
+                  className="client-portfolio-card"
+                  key={c.slug}
+                  href={`/clientes/${c.slug}`}
+                >
+                  <div className="client-portfolio-media">
+                    {c.previewVideo ? (
+                      <video
+                        src={c.previewVideo}
+                        muted
+                        loop
+                        autoPlay
+                        playsInline
+                        preload="metadata"
                       />
-                    ) : null}
-                    <div>
-                      <h3>{c.name}</h3>
-                      {c.tagline ? <div className="tagline">{c.tagline}</div> : null}
+                    ) : c.logo ? (
+                      <div className="client-portfolio-fallback">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={c.logo} alt="" />
+                      </div>
+                    ) : (
+                      <div className="client-portfolio-fallback">{c.name}</div>
+                    )}
+                    <div className="client-portfolio-overlay">
+                      {c.community ? (
+                        <span className="client-portfolio-stat">
+                          Comunidad: {c.community}
+                        </span>
+                      ) : null}
+                      {c.logo ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          className="client-portfolio-logo"
+                          src={c.logo}
+                          alt=""
+                        />
+                      ) : null}
                     </div>
                   </div>
-                  <span className="go">Ver trabajo →</span>
+                  <h3>{c.name}</h3>
+                  {c.tagline ? <div className="tagline">{c.tagline}</div> : null}
                 </Link>
               ))}
             </div>

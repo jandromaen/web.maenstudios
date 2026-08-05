@@ -10,6 +10,7 @@
   --line-strong: rgba(37, 36, 34, 0.22);
   --accent: #f9cdcd;
   --accent-ink: #252422;
+  --charcoal: #2a2d2c;
   --invert-bg: #151515;
   --invert-fg: #f4f4f4;
   --header-fg: #ffffff;
@@ -99,10 +100,10 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: var(--font-body), Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-family: var(--font-display), var(--font-body), Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
   text-transform: uppercase;
 }
 
@@ -123,6 +124,18 @@ h5 {
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 1rem;
+}
+
+.eyebrow-accent {
+  color: var(--fg);
+}
+
+.eyebrow-accent::before {
+  content: "#";
+  color: var(--accent-ink);
+  background: var(--accent);
+  padding: 2px 6px;
+  margin-right: 8px;
 }
 
 .lead {
@@ -505,17 +518,40 @@ h5 {
 
 /* ─── Case studies ────────────────────────────────────── */
 .bd-cases {
-  padding: 0 0 clamp(64px, 10vw, 120px);
+  padding: clamp(48px, 8vw, 96px) 0 clamp(64px, 10vw, 120px);
+}
+
+.bd-cases-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.bd-cases-head h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  max-width: 16ch;
 }
 
 .bd-cases-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(28px, 4vw, 40px);
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 2.5vw, 24px);
 }
 
 @media (min-width: 800px) {
   .bd-cases-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .bd-cases-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .bd-cases-grid.is-featured {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -526,11 +562,29 @@ h5 {
 }
 
 .bd-case-media {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 9 / 16;
   overflow: hidden;
-  background: var(--bg-soft);
+  background: var(--charcoal);
   margin-bottom: 14px;
   position: relative;
+}
+
+.bd-case-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.08) 45%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.bd-case:hover .bd-case-media::after {
+  opacity: 0.92;
 }
 
 .bd-case-media video,
@@ -543,7 +597,39 @@ h5 {
 
 .bd-case:hover .bd-case-media video,
 .bd-case:hover .bd-case-media img {
-  transform: scale(1.04);
+  transform: scale(1.05);
+}
+
+.bd-case-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.bd-case-stat {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 5px 10px;
+}
+
+.bd-case-logo {
+  height: 22px;
+  width: auto;
+  max-width: 70%;
+  object-fit: contain;
+  object-position: left bottom;
+  filter: brightness(0) invert(1);
 }
 
 .bd-case-logo-fallback {
@@ -551,7 +637,7 @@ h5 {
   height: 100%;
   display: grid;
   place-items: center;
-  background: #1a1a1a;
+  background: var(--charcoal);
   color: #fff;
   padding: 24px;
 }
@@ -561,6 +647,20 @@ h5 {
   max-height: 40%;
   object-fit: contain;
   filter: brightness(0) invert(1);
+}
+
+.bd-case-body h3 {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.bd-case-body p {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.45;
 }
 
 .bd-case h3 {
@@ -575,6 +675,55 @@ h5 {
   text-transform: uppercase;
   color: var(--muted);
   line-height: 1.45;
+}
+
+/* Client logo marquee (Canva portfolio feel) */
+.bd-brands {
+  padding: clamp(32px, 5vw, 56px) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.bd-brands-label {
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.bd-brands-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(40px, 6vw, 72px);
+  width: max-content;
+  animation: marquee 50s linear infinite;
+}
+
+.bd-brands-track img {
+  height: clamp(18px, 2.2vw, 28px);
+  width: auto;
+  object-fit: contain;
+  opacity: 0.55;
+  filter: grayscale(1);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.bd-brands-track span {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  white-space: nowrap;
+}
+
+.bd-brands-track img:hover {
+  opacity: 1;
+  filter: none;
 }
 
 /* ─── Featured engagements ────────────────────────────── */
@@ -613,6 +762,18 @@ h5 {
 
 .bd-engagement h3 {
   font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.bd-engagement-stat {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 4px 8px;
+  margin-bottom: 8px;
 }
 
 .bd-engagement p {
@@ -1441,6 +1602,139 @@ section {
   font-weight: 400;
   line-height: 1.55;
   max-width: 42rem;
+}
+
+/* Client listing — portfolio grid */
+.client-portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+@media (min-width: 720px) {
+  .client-portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .client-portfolio-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.client-portfolio-card {
+  display: block;
+  color: inherit;
+}
+
+.client-portfolio-media {
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: var(--charcoal);
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.client-portfolio-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.client-portfolio-media video,
+.client-portfolio-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.client-portfolio-card:hover .client-portfolio-media video,
+.client-portfolio-card:hover .client-portfolio-media img {
+  transform: scale(1.05);
+}
+
+.client-portfolio-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  padding: 14px;
+  pointer-events: none;
+}
+
+.client-portfolio-stat {
+  display: inline-flex;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 4px 8px;
+  margin-bottom: 8px;
+}
+
+.client-portfolio-logo {
+  height: 20px;
+  width: auto;
+  max-width: 80%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.client-portfolio-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--charcoal);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 20px;
+}
+
+.client-portfolio-fallback img {
+  max-width: 55%;
+  max-height: 35%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.client-portfolio-card h3 {
+  font-size: 0.82rem;
+  margin-bottom: 4px;
+}
+
+.client-portfolio-card .tagline {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.client-stat-pill {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 5px 10px;
+  margin: 0 0 12px;
 }
 
 /* Client listing */

@@ -86,6 +86,11 @@ export default async function ClientPage({
               ← Volver a work
             </Link>
             <span className="eyebrow">Client</span>
+            {client.community ? (
+              <span className="client-stat-pill">
+                Comunidad: {client.community}
+              </span>
+            ) : null}
             {client.logo ? (
               <div className="client-logo-big">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
