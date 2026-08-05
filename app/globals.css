@@ -403,6 +403,49 @@ button,
   padding: 8px;
 }
 
+/* Cursor custom del menú: solo icono de tres barras */
+.nav-drawer-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 210;
+  width: clamp(32px, 3.5vw, 44px);
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+  transition: opacity 0.15s ease;
+}
+
+.nav-drawer-cursor.is-active {
+  opacity: 1;
+}
+
+.nav-drawer-cursor img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+[data-theme="dark"] .nav-drawer-cursor img {
+  filter: brightness(0);
+}
+
+@media (pointer: fine) {
+  .nav-drawer.open.is-tracking,
+  .nav-drawer.open.is-tracking * {
+    cursor: none !important;
+  }
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .nav-drawer-cursor {
+    display: none;
+  }
+}
+
 /* ─── Hero ────────────────────────────────────────────── */
 .bd-hero {
   position: relative;
