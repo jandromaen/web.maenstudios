@@ -56,6 +56,7 @@ export default function SiteFooter() {
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Maen Studios</span>
+          <Link href="/privacidad">Política de privacidad</Link>
           <span>Barcelona — contenido con intención</span>
         </div>
       </div>

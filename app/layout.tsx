@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Space_Grotesk } from "next/font/google";
+import CookieBanner from "./components/CookieBanner";
 import { GlobalJsonLd } from "./components/JsonLd";
 import ThemeSchedule from "./components/ThemeSchedule";
 import { themeBootScript } from "./lib/theme-schedule";
@@ -84,6 +85,7 @@ export default function RootLayout({
         <ThemeSchedule />
         <GlobalJsonLd />
         {children}
+        <CookieBanner />
       </body>
     </html>
   );
