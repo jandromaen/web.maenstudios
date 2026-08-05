@@ -50,20 +50,20 @@ export const services = [
   {
     icon: "01",
     title: "Dirección Creativa",
-    sub: "Concepto y mirada de marca",
-    desc: "Definimos el tono, la narrativa y la línea visual de tu contenido. Conceptos con intención que paran el scroll y mantienen coherencia de marca en cada pieza.",
+    sub: "Concepto, tono y mirada de marca",
+    desc: "Definimos la idea, el lenguaje visual y la línea editorial de tu contenido. Conceptos de campaña, guiones y dirección creativa para que cada pieza se sienta coherente, reconocible y con intención.",
   },
   {
     icon: "02",
-    title: "Producción de Contenidos",
-    sub: "De la idea al archivo listo",
-    desc: "Grabamos, editamos y entregamos piezas listas para publicar. Ritmo, motion y formatos adaptados a cada red, con la cadencia que tu marca necesita.",
+    title: "Producción Audiovisual",
+    sub: "Del rodaje al montaje final",
+    desc: "Grabamos y editamos el contenido que tu marca necesita en redes: Reels, spots cortos, piezas de producto y motion. Ritmo, sonido y acabado profesional, listos para publicar.",
   },
   {
     icon: "03",
     title: "Community Management",
     sub: "Presencia activa y conversación",
-    desc: "Gestionamos tu día a día en redes: publicación, interacción y seguimiento. Tu comunidad crece con una voz consistente y atención real.",
+    desc: "Gestionamos tu día a día en redes: calendario, publicación, interacción y seguimiento. Mantenemos la comunidad viva y alineada con los objetivos de la marca.",
   },
 ];
 
@@ -96,23 +96,23 @@ export const heroReels = [
 export const faqs = [
   {
     q: "¿Cuánto cuesta contratar una agencia de creación de contenido?",
-    a: "Depende del volumen y el alcance. En Maen Studios trabajamos con planes mensuales que combinan dirección creativa, producción de contenidos y community management según lo que necesite tu marca. Escríbenos y te preparamos un presupuesto a medida sin compromiso.",
+    a: "Depende del alcance del proyecto. En Maen Studios trabajamos con planes mensuales que combinan dirección creativa, producción audiovisual y community management según lo que necesite tu marca. Escríbenos y te preparamos un presupuesto a medida sin compromiso.",
   },
   {
-    q: "¿Qué incluye la producción de contenidos?",
+    q: "¿Qué incluye el servicio de producción audiovisual?",
     a: "Nos encargamos del proceso completo: idea y guion, grabación, edición, motion y adaptación a cada plataforma. Entregamos las piezas listas para publicar con la cadencia que acordemos.",
   },
   {
     q: "¿Trabajáis solo en Barcelona o en toda España?",
-    a: "Somos una agencia con base en Barcelona, pero producimos contenido para marcas de toda España. Para grabaciones nos desplazamos y, para dirección creativa y community, trabajamos en remoto sin problema.",
+    a: "Somos una agencia con base en Barcelona, pero producimos contenido para marcas de toda España. Para grabaciones nos desplazamos y, para dirección creativa, edición y community, trabajamos en remoto sin problema.",
   },
   {
     q: "¿Cuál es la diferencia entre contratar una agencia y un freelance?",
-    a: "Con una agencia tienes un equipo completo —dirección creativa, producción y community— coordinado desde un único punto de contacto y con entregas constantes. Ganas consistencia, capacidad de producción y una visión de marca a largo plazo.",
+    a: "Con una agencia tienes un equipo completo (dirección creativa, producción audiovisual y community) coordinado desde un único punto de contacto y con entregas constantes. Ganas consistencia, capacidad de producción y una visión de marca a largo plazo.",
   },
   {
-    q: "¿Qué cubre el community management?",
-    a: "Publicación, interacción con la audiencia, seguimiento de comentarios y mensajes, y cuidado de la voz de marca día a día. Mantenemos tu presencia activa para que la comunidad crezca con coherencia.",
+    q: "¿Qué incluye el community management?",
+    a: "Gestionamos la presencia diaria de tu marca en redes: calendario editorial, publicación, interacción con la comunidad y seguimiento de resultados. El objetivo es mantener la conversación activa y alineada con tu estrategia de contenido.",
   },
   {
     q: "¿En cuánto tiempo se ven resultados?",
@@ -122,10 +122,11 @@ export const faqs = [
 
 export const marqueeWords = [
   "Dirección Creativa",
-  "Producción de Contenidos",
+  "Producción Audiovisual",
   "Community Management",
   "Campañas",
   "Social media",
   "Motion",
+  "Contenido",
   "Stop the scroll",
 ];

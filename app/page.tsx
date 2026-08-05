@@ -12,13 +12,12 @@ import { createPageMetadata } from "./seo-config";
 export const metadata: Metadata = createPageMetadata({
   title: "Agencia de creación de contenido para redes sociales",
   description:
-    "Maen Studios: dirección creativa, producción de contenidos y community management. Creamos piezas que paran el scroll y hacen crecer marcas en Instagram, TikTok y YouTube.",
+    "Maen Studios: dirección creativa, producción audiovisual y community management. Creamos piezas que paran el scroll y hacen crecer marcas en Instagram, TikTok y YouTube.",
   path: "/",
   keywords: [
     "agencia creación contenido redes sociales",
-    "dirección creativa barcelona",
-    "producción de contenidos marcas",
-    "community management",
+    "producción audiovisual barcelona",
+    "community management marcas",
   ],
 });
 
@@ -31,7 +30,7 @@ const awards = [
   "Social Media Production",
   "Agencia de contenido para marcas",
   "Dirección Creativa",
-  "Producción de Contenidos",
+  "Producción Audiovisual",
   "Community Management",
   "Barcelona · España",
   ...marqueeWords,
@@ -102,7 +101,7 @@ export default function Home() {
               convierte cultura, producto y marca en piezas que paran el scroll.{" "}
               <span className="muted">
                 Social media production con intención: dirección creativa,
-                producción de contenidos y community management para marcas que
+                producción audiovisual y community management para marcas que
                 quieren crecer de verdad.
               </span>
             </p>

@@ -51,14 +51,14 @@ const organizationSchema = {
   serviceType: [
     "Creación de contenido para redes sociales",
     "Dirección Creativa",
-    "Producción de Contenidos",
+    "Producción Audiovisual",
     "Community Management",
   ],
   knowsAbout: [
     "Social media marketing",
     "Video production",
     "Dirección creativa",
-    "Producción de contenidos",
+    "Producción audiovisual",
     "Community management",
   ],
   sameAs: Object.values(SOCIAL_LINKS),
@@ -120,7 +120,7 @@ export function ServiceJsonLd() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Producción de Contenidos",
+            name: "Producción Audiovisual",
           },
         },
         {

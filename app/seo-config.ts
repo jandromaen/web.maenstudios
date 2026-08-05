@@ -5,13 +5,13 @@ export const SITE_URL = "https://maenstudios.com";
 export const SITE_NAME = "Maen Studios";
 
 export const DEFAULT_DESCRIPTION =
-  "Agencia de creación de contenido para redes sociales. Dirección creativa, producción de contenidos y community management para marcas que quieren crecer en Instagram, TikTok y YouTube.";
+  "Agencia de creación de contenido para redes sociales. Dirección creativa, producción audiovisual y community management para marcas que quieren crecer en Instagram, TikTok y YouTube.";
 
 export const DEFAULT_KEYWORDS = [
   "agencia contenido redes sociales",
   "creación de contenido",
   "dirección creativa",
-  "producción de contenidos",
+  "producción audiovisual",
   "community management",
   "contenido instagram",
   "contenido tiktok",

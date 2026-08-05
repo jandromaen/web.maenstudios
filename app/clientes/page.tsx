@@ -9,7 +9,7 @@ import { createPageMetadata } from "../seo-config";
 export const metadata: Metadata = createPageMetadata({
   title: "Clientes y casos de contenido para redes sociales",
   description:
-    "Marcas y negocios para los que creamos contenido con dirección creativa, producción y community management. Restauración, moda, lifestyle, tecnología y más. Portfolio de Maen Studios.",
+    "Marcas y negocios para los que creamos contenido con dirección creativa, producción audiovisual y community management. Restauración, moda, lifestyle, tecnología y más. Portfolio de Maen Studios.",
   path: "/clientes",
   keywords: [
     "portfolio agencia contenido",

@@ -9,13 +9,13 @@ import { createPageMetadata } from "../seo-config";
 export const metadata: Metadata = createPageMetadata({
   title: "Servicios de contenido para redes sociales",
   description:
-    "Dirección creativa, producción de contenidos y community management. Servicios de agencia creativa para marcas que quieren crecer en redes con entregas constantes.",
+    "Dirección creativa, producción audiovisual y community management. Servicios de agencia creativa para marcas que quieren crecer en redes con entregas constantes.",
   path: "/servicios",
   keywords: [
     "servicios agencia contenido",
     "dirección creativa redes sociales",
-    "producción de contenidos",
-    "community management",
+    "producción audiovisual social media",
+    "community management agencia",
   ],
 });
 
@@ -31,9 +31,9 @@ export default function ServiciosPage() {
             <span className="eyebrow">Services</span>
             <h1>Todo tu contenido, en un mismo sitio</h1>
             <p className="lead">
-              Del concepto a la publicación. Dirección creativa, producción de
-              contenidos y community management para que tu marca no pare de
-              crecer.
+              Tres pilares para tu marca en redes: dirección creativa,
+              producción audiovisual y community management. Del concepto a la
+              conversación diaria, en un mismo equipo.
             </p>
             <div className="hero-actions">
               <a className="btn btn-primary" href={`mailto:${EMAIL}`}>

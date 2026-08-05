@@ -18,13 +18,14 @@ export default function SiteFooter() {
             </Link>
             <p>
               Agencia de creación de contenido para redes sociales. Dirección
-              creativa, producción y community para marcas que quieren crecer.
+              creativa, producción audiovisual y community management para
+              marcas que quieren crecer.
             </p>
           </div>
           <div className="footer-col">
             <h4>Servicios</h4>
             <Link href="/servicios">Dirección Creativa</Link>
-            <Link href="/servicios">Producción de Contenidos</Link>
+            <Link href="/servicios">Producción Audiovisual</Link>
             <Link href="/servicios">Community Management</Link>
           </div>
           <div className="footer-col">
