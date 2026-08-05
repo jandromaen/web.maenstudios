@@ -22,7 +22,11 @@ export default function HomeHero() {
           <img
             className="bd-hero-icon"
             src="/maen-icon.png"
+            width={266}
+            height={240}
             alt="Maen Studios"
+            decoding="async"
+            fetchPriority="high"
           />
           <span>since 2020®</span>
         </div>

@@ -457,10 +457,15 @@ button,
 }
 
 .bd-hero-icon {
-  height: clamp(72px, 14vw, 120px);
+  position: relative;
+  z-index: 3;
+  height: clamp(96px, 18vw, 168px);
   width: auto;
+  max-width: min(42vw, 220px);
   display: block;
-  filter: drop-shadow(0 2px 18px rgba(0, 0, 0, 0.35));
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 28px rgba(0, 0, 0, 0.55));
 }
 
 .bd-hero-meta span {
