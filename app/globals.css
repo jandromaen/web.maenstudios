@@ -263,6 +263,7 @@ button,
   max-width: none;
   padding: 0;
   width: 100%;
+  position: relative;
 }
 
 .brand {
@@ -305,12 +306,26 @@ button,
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .nav-links {
   display: none;
   align-items: center;
   gap: clamp(28px, 3.8vw, 56px);
+}
+
+/* Desktop: logo izq · menú centrado en página · dots der (estilo Basic/Dept) */
+@media (min-width: 960px) {
+  .nav-links {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
 }
 
 .nav-links a {
@@ -349,12 +364,6 @@ button,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-@media (min-width: 960px) {
-  .nav-links {
-    display: flex;
-  }
 }
 
 /* Mobile drawer */
