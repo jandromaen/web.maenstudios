@@ -37,7 +37,7 @@ export const clients: Client[] = [
   {
     slug: "fortuna-tonino",
     name: "Fortuna Tonino",
-    logo: "/clients/fortuna.png",
+    logo: "/clients/fortuna-tonino/logo.png",
     previewVideo: "/clients/fortuna-tonino/reel.mp4",
     tagline: "Good luck, better vibes · Barcelona",
     description:
