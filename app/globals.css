@@ -716,10 +716,10 @@ button,
   height: clamp(18px, 2.2vw, 28px);
   width: auto;
   object-fit: contain;
+  /* Monocromo editorial: logos blancos/color → silueta oscura sobre fondo claro */
   opacity: 0.55;
-  /* Marquee: suaviza sin forzar blanco; color logos se ven en gris ligero */
-  filter: grayscale(0.85) contrast(0.95);
-  transition: opacity 0.2s ease, filter 0.2s ease;
+  filter: brightness(0);
+  transition: opacity 0.25s ease;
 }
 
 .bd-brands-track span {
@@ -732,8 +732,16 @@ button,
 }
 
 .bd-brands-track img:hover {
-  opacity: 1;
-  filter: none;
+  opacity: 0.9;
+}
+
+[data-theme="dark"] .bd-brands-track img {
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+}
+
+[data-theme="dark"] .bd-brands-track img:hover {
+  opacity: 0.85;
 }
 
 /* ─── Featured engagements ────────────────────────────── */
