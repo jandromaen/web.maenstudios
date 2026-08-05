@@ -31,7 +31,7 @@ export default function BlogPage() {
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader light />
 
       <BreadcrumbJsonLd
         items={[

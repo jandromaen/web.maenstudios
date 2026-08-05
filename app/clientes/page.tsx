@@ -21,7 +21,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function ClientesPage() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader light />
 
       <main>
         <section className="page-hero">

@@ -34,7 +34,7 @@ const pillars = [
 export default function TalentsPage() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader light />
 
       <main>
         <section className="page-hero">

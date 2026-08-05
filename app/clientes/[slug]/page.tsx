@@ -64,7 +64,7 @@ export default async function ClientPage({
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader light />
 
       <ClientJsonLd
         name={client.name}

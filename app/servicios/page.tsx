@@ -22,7 +22,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function ServiciosPage() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader light />
       <ServiceJsonLd />
 
       <main>

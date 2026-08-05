@@ -79,7 +79,7 @@ function CaseCard({
 export default function Home() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader adaptive />
       <FaqJsonLd items={faqs.map((f) => ({ q: f.q, a: f.a }))} />
 
       <main id="top">

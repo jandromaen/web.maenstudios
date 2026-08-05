@@ -4,8 +4,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { navLinks } from "../site-data";
 
-export default function SiteHeader() {
+type SiteHeaderProps = {
+  /** Fondo claro fijo: logo y nav oscuros (páginas interiores) */
+  light?: boolean;
+  /** Alterna según scroll sobre el hero (home) */
+  adaptive?: boolean;
+};
+
+export default function SiteHeader({ light = false, adaptive = false }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
+  const [overLight, setOverLight] = useState(light);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -14,9 +22,33 @@ export default function SiteHeader() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (light) {
+      setOverLight(true);
+      return;
+    }
+    if (!adaptive) {
+      setOverLight(false);
+      return;
+    }
+
+    const hero = document.querySelector(".bd-hero");
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setOverLight(!entry.isIntersecting);
+      },
+      { rootMargin: "-56px 0px 0px 0px", threshold: 0 },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [light, adaptive]);
+
   return (
     <>
-      <header className="header">
+      <header className={`header${overLight ? " header--light" : ""}`}>
         <div className="container header-inner">
           <Link className="brand" href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -24,7 +24,7 @@ export default function PodcastPage() {
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader light />
       <PodcastJsonLd />
 
       <main>

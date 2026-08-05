@@ -218,6 +218,24 @@ h5 {
   mix-blend-mode: difference;
 }
 
+/* Fondo claro: logo y nav oscuros (sin blend) */
+.header--light .brand,
+.header--light .nav {
+  mix-blend-mode: normal;
+}
+
+.header--light {
+  color: var(--fg);
+}
+
+.header--light .brand-logo {
+  filter: brightness(0);
+}
+
+[data-theme="dark"] .header--light .brand-logo {
+  filter: none;
+}
+
 .header-inner {
   display: flex;
   align-items: center;
@@ -242,8 +260,8 @@ h5 {
 
 /* Logo header: altura estricta (PNG muy ancho) */
 .header .brand-logo {
-  height: clamp(10px, 1.2vw, 12px);
-  max-height: 12px;
+  height: clamp(8px, 1vw, 10px);
+  max-height: 10px;
 }
 
 .brand-logo-footer {
