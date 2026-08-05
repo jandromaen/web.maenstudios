@@ -1,0 +1,7 @@
+# Vídeos temporales de trabajo — no subir al deploy
+public/reel-hero-source.mp4
+public/reel-hero-temp.mp4
+public/reel-hero-4k-test.mp4
+public/reel-hero-crf22.mp4
+public/reel-hero-crf23.mp4
+ffmpeg2pass-*.log*
