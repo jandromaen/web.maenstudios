@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const SRC =
-  "/Users/ricardojimenez-ridruejotellaeche/.cursor/projects/Users-ricardojimenez-ridruejotellaeche-Desktop-web-maenstudios/assets/Logo_Maen_Blanco-a1e802fe-343d-409d-81ec-1b76621e55d6.png";
+  "/Users/ricardojimenez-ridruejotellaeche/.cursor/projects/Users-ricardojimenez-ridruejotellaeche-Desktop-web-maenstudios/assets/Logo_Maen_Blanc-52394dee-5396-4a7b-ab35-ab0d1d6122d3.png";
 const OUT = path.join(ROOT, "public", "maen-logo.png");
 
 const img = sharp(SRC).ensureAlpha();
