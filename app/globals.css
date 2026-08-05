@@ -209,8 +209,13 @@ h5 {
   right: 0;
   z-index: 100;
   padding: 18px var(--pad);
-  mix-blend-mode: difference;
   color: #fff;
+}
+
+/* blend solo en nav y logo — evita que el contenedor entero amplíe contraste percibido */
+.header .brand,
+.header .nav {
+  mix-blend-mode: difference;
 }
 
 .header-inner {
@@ -232,8 +237,13 @@ h5 {
 
 .brand-logo {
   display: block;
-  height: clamp(14px, 1.6vw, 18px);
   width: auto;
+}
+
+/* Logo header: altura estricta (PNG muy ancho) */
+.header .brand-logo {
+  height: clamp(10px, 1.2vw, 12px);
+  max-height: 12px;
 }
 
 .brand-logo-footer {
