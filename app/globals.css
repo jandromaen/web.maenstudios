@@ -441,7 +441,23 @@ button,
 .bd-hero-content {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
   text-align: center;
+}
+
+/* Sustituye el círculo Watch Reel: marca abstracta pequeña al centro */
+.bd-hero-icon {
+  position: relative;
+  z-index: 3;
+  height: clamp(40px, 7vw, 64px);
+  width: auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 16px rgba(0, 0, 0, 0.45));
 }
 
 .bd-hero-meta {
@@ -453,19 +469,15 @@ button,
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 6px;
 }
 
-.bd-hero-icon {
-  position: relative;
-  z-index: 3;
-  height: clamp(96px, 18vw, 168px);
+.bd-hero-logo {
+  height: 14px;
   width: auto;
-  max-width: min(42vw, 220px);
   display: block;
   object-fit: contain;
-  flex-shrink: 0;
-  filter: drop-shadow(0 4px 28px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 1px 10px rgba(0, 0, 0, 0.4));
 }
 
 .bd-hero-meta span {
