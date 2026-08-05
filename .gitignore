@@ -31,3 +31,9 @@ next-env.d.ts
 
 # vercel
 .vercel
+
+# hero video processing artifacts
+public/reel-hero-source.mp4
+public/reel-hero-temp.mp4
+public/reel-hero-4k-test.mp4
+public/reel-hero-encoded.mp4
