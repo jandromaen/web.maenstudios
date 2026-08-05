@@ -49,39 +49,21 @@ export const steps = [
 export const services = [
   {
     icon: "01",
-    title: "Reels & Shorts",
-    sub: "Vídeo vertical que retiene",
-    desc: "Piezas pensadas para enganchar en los 3 primeros segundos y mantener la atención hasta el final. Ganchos, ritmo y subtítulos optimizados para cada plataforma.",
+    title: "Dirección Creativa",
+    sub: "Concepto y mirada de marca",
+    desc: "Definimos el tono, la narrativa y la línea visual de tu contenido. Conceptos con intención que paran el scroll y mantienen coherencia de marca en cada pieza.",
   },
   {
     icon: "02",
-    title: "Edición & postproducción",
-    sub: "Montaje profesional",
-    desc: "Ritmo, motion graphics, sonido y color. El montaje que convierte una grabación en un vídeo que la gente termina de ver.",
+    title: "Producción de Contenidos",
+    sub: "De la idea al archivo listo",
+    desc: "Grabamos, editamos y entregamos piezas listas para publicar. Ritmo, motion y formatos adaptados a cada red, con la cadencia que tu marca necesita.",
   },
   {
     icon: "03",
-    title: "Estrategia & crecimiento",
-    sub: "Planificación con intención",
-    desc: "Convertimos tu contenido en un sistema: qué decir, cómo decirlo y para qué. Líneas editoriales y planes de crecimiento orientados a resultados.",
-  },
-  {
-    icon: "04",
-    title: "UGC & creadores",
-    sub: "Contenido auténtico",
-    desc: "Producimos contenido con creadores reales que se adaptan a la voz de tu marca: testimoniales, reviews y piezas naturales que generan confianza.",
-  },
-  {
-    icon: "05",
-    title: "Social media",
-    sub: "Optimizado para redes",
-    desc: "Contenido específico para cada red: Reels, TikToks, Shorts, stories y clips. Todo adaptado al algoritmo y a tus objetivos.",
-  },
-  {
-    icon: "06",
-    title: "Marca personal",
-    sub: "Posicionamiento y autoridad",
-    desc: "Contenido estratégico para posicionar tu marca personal y convertirte en referente de tu sector.",
+    title: "Community Management",
+    sub: "Presencia activa y conversación",
+    desc: "Gestionamos tu día a día en redes: publicación, interacción y seguimiento. Tu comunidad crece con una voz consistente y atención real.",
   },
 ];
 
@@ -114,23 +96,23 @@ export const heroReels = [
 export const faqs = [
   {
     q: "¿Cuánto cuesta contratar una agencia de creación de contenido?",
-    a: "Depende del volumen y los formatos. En Maen Studios trabajamos con planes mensuales de contenido adaptados a cada marca (número de Reels, TikToks y piezas al mes, estrategia y edición incluidas). Escríbenos y te preparamos un presupuesto a medida sin compromiso.",
+    a: "Depende del volumen y el alcance. En Maen Studios trabajamos con planes mensuales que combinan dirección creativa, producción de contenidos y community management según lo que necesite tu marca. Escríbenos y te preparamos un presupuesto a medida sin compromiso.",
   },
   {
-    q: "¿Qué incluye el servicio de producción de Reels y TikToks?",
-    a: "Nos encargamos de todo el proceso: idea y guion, grabación, edición, motion graphics, subtítulos y adaptación a cada plataforma. Entregamos las piezas listas para publicar con la cadencia que acordemos.",
+    q: "¿Qué incluye la producción de contenidos?",
+    a: "Nos encargamos del proceso completo: idea y guion, grabación, edición, motion y adaptación a cada plataforma. Entregamos las piezas listas para publicar con la cadencia que acordemos.",
   },
   {
     q: "¿Trabajáis solo en Barcelona o en toda España?",
-    a: "Somos una agencia con base en Barcelona, pero producimos contenido para marcas de toda España. Para grabaciones nos desplazamos y, para estrategia y edición, trabajamos en remoto sin problema.",
+    a: "Somos una agencia con base en Barcelona, pero producimos contenido para marcas de toda España. Para grabaciones nos desplazamos y, para dirección creativa y community, trabajamos en remoto sin problema.",
   },
   {
     q: "¿Cuál es la diferencia entre contratar una agencia y un freelance?",
-    a: "Con una agencia tienes un equipo completo (estrategia, guion, rodaje, edición y talento) coordinado desde un único punto de contacto y con entregas constantes. Ganas consistencia, capacidad de producción y una visión de marca a largo plazo.",
+    a: "Con una agencia tienes un equipo completo —dirección creativa, producción y community— coordinado desde un único punto de contacto y con entregas constantes. Ganas consistencia, capacidad de producción y una visión de marca a largo plazo.",
   },
   {
-    q: "¿Qué es el UGC y por qué funciona en redes?",
-    a: "El UGC (contenido generado por creadores) son piezas grabadas por personas reales con un estilo cercano y auténtico. Funciona porque genera confianza y encaja de forma natural en el feed, sin parecer publicidad tradicional.",
+    q: "¿Qué cubre el community management?",
+    a: "Publicación, interacción con la audiencia, seguimiento de comentarios y mensajes, y cuidado de la voz de marca día a día. Mantenemos tu presencia activa para que la comunidad crezca con coherencia.",
   },
   {
     q: "¿En cuánto tiempo se ven resultados?",
@@ -139,10 +121,9 @@ export const faqs = [
 ];
 
 export const marqueeWords = [
-  "Reels",
-  "Estrategia",
-  "UGC",
-  "Edición",
+  "Dirección Creativa",
+  "Producción de Contenidos",
+  "Community Management",
   "Campañas",
   "Social media",
   "Motion",

@@ -9,11 +9,11 @@ import { createPageMetadata } from "../seo-config";
 export const metadata: Metadata = createPageMetadata({
   title: "Contacto — contrata tu agencia de contenido",
   description:
-    "Contacta con Maen Studios para producir Reels, TikToks y estrategia de contenido para tu marca. Respondemos en menos de 24h. Proyectos: jandro@maenstudios.com · Administración: info@maenstudios.com",
+    "Contacta con Maen Studios para dirección creativa, producción de contenidos y community management. Respondemos en menos de 24h. Proyectos: jandro@maenstudios.com · Administración: info@maenstudios.com",
   path: "/contacto",
   keywords: [
     "contacto agencia contenido",
-    "presupuesto reels",
+    "presupuesto contenido redes",
     "contratar agencia social media",
   ],
 });

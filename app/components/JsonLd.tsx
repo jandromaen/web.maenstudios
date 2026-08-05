@@ -50,17 +50,16 @@ const organizationSchema = {
   },
   serviceType: [
     "Creación de contenido para redes sociales",
-    "Producción de Reels y TikToks",
-    "Estrategia de social media",
-    "Edición de vídeo",
-    "UGC y contenido con creadores",
+    "Dirección Creativa",
+    "Producción de Contenidos",
+    "Community Management",
   ],
   knowsAbout: [
     "Social media marketing",
     "Video production",
-    "Content strategy",
-    "Instagram Reels",
-    "TikTok content",
+    "Dirección creativa",
+    "Producción de contenidos",
+    "Community management",
   ],
   sameAs: Object.values(SOCIAL_LINKS),
 };
@@ -114,28 +113,21 @@ export function ServiceJsonLd() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Producción de Reels y Shorts",
+            name: "Dirección Creativa",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Estrategia de contenido y social media",
+            name: "Producción de Contenidos",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Edición y postproducción de vídeo",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "UGC y contenido con creadores",
+            name: "Community Management",
           },
         },
       ],

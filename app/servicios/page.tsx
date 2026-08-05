@@ -9,13 +9,13 @@ import { createPageMetadata } from "../seo-config";
 export const metadata: Metadata = createPageMetadata({
   title: "Servicios de contenido para redes sociales",
   description:
-    "Reels, TikToks, edición, estrategia de contenido, UGC y social media. Servicios de agencia creativa para marcas que quieren crecer en redes con entregas constantes.",
+    "Dirección creativa, producción de contenidos y community management. Servicios de agencia creativa para marcas que quieren crecer en redes con entregas constantes.",
   path: "/servicios",
   keywords: [
     "servicios agencia contenido",
-    "producción reels",
-    "estrategia social media",
-    "edición vídeo redes sociales",
+    "dirección creativa redes sociales",
+    "producción de contenidos",
+    "community management",
   ],
 });
 
@@ -31,8 +31,8 @@ export default function ServiciosPage() {
             <span className="eyebrow">Services</span>
             <h1>Todo tu contenido, en un mismo sitio</h1>
             <p className="lead">
-              Del concepto a la publicación. Nos encargamos de la idea, la
-              grabación, el montaje y la estrategia para que tu marca no pare de
+              Del concepto a la publicación. Dirección creativa, producción de
+              contenidos y community management para que tu marca no pare de
               crecer.
             </p>
             <div className="hero-actions">

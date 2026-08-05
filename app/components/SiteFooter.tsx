@@ -17,16 +17,15 @@ export default function SiteFooter() {
               />
             </Link>
             <p>
-              Agencia de creación de contenido para redes sociales. Reels,
-              TikToks, estrategia y edición para marcas que quieren crecer.
+              Agencia de creación de contenido para redes sociales. Dirección
+              creativa, producción y community para marcas que quieren crecer.
             </p>
           </div>
           <div className="footer-col">
             <h4>Servicios</h4>
-            <Link href="/servicios">Reels & Shorts</Link>
-            <Link href="/servicios">Edición</Link>
-            <Link href="/servicios">Estrategia</Link>
-            <Link href="/servicios">UGC & creadores</Link>
+            <Link href="/servicios">Dirección Creativa</Link>
+            <Link href="/servicios">Producción de Contenidos</Link>
+            <Link href="/servicios">Community Management</Link>
           </div>
           <div className="footer-col">
             <h4>Estudio</h4>

@@ -12,12 +12,13 @@ import { createPageMetadata } from "./seo-config";
 export const metadata: Metadata = createPageMetadata({
   title: "Agencia de creación de contenido para redes sociales",
   description:
-    "Maen Studios: agencia especializada en Reels, TikToks, estrategia de contenido, edición y UGC. Creamos piezas que paran el scroll y hacen crecer marcas en Instagram, TikTok y YouTube.",
+    "Maen Studios: dirección creativa, producción de contenidos y community management. Creamos piezas que paran el scroll y hacen crecer marcas en Instagram, TikTok y YouTube.",
   path: "/",
   keywords: [
     "agencia creación contenido redes sociales",
-    "producción reels barcelona",
-    "contenido tiktok marcas",
+    "dirección creativa barcelona",
+    "producción de contenidos marcas",
+    "community management",
   ],
 });
 
@@ -29,8 +30,9 @@ const brandLogos = clients.filter((c) => c.logo);
 const awards = [
   "Social Media Production",
   "Agencia de contenido para marcas",
-  "Reels & TikToks con intención",
-  "Producción, edición y estrategia",
+  "Dirección Creativa",
+  "Producción de Contenidos",
+  "Community Management",
   "Barcelona · España",
   ...marqueeWords,
 ];
@@ -99,8 +101,9 @@ export default function Home() {
               Maen Studios® es una agencia de contenido para redes sociales que
               convierte cultura, producto y marca en piezas que paran el scroll.{" "}
               <span className="muted">
-                Social media production con intención: Reels, TikToks, estrategia
-                y edición para marcas que quieren crecer de verdad.
+                Social media production con intención: dirección creativa,
+                producción de contenidos y community management para marcas que
+                quieren crecer de verdad.
               </span>
             </p>
           </div>
