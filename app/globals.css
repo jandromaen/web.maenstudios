@@ -395,14 +395,6 @@ h5 {
   color: #fff;
 }
 
-.bd-hero.is-tracking {
-  cursor: none;
-}
-
-.bd-hero.is-tracking * {
-  cursor: none !important;
-}
-
 .bd-hero-media {
   position: absolute;
   inset: 0;
@@ -427,44 +419,10 @@ h5 {
   );
 }
 
-.bd-hero-cursor {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.bd-hero-content {
+  position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
   text-align: center;
-  transform: translate3d(-50%, -50%, 0);
-  will-change: transform;
-  pointer-events: none;
-}
-
-.bd-hero-cursor .bd-reel-btn {
-  pointer-events: auto;
-}
-
-.bd-reel-btn {
-  width: clamp(88px, 9vw, 112px);
-  height: clamp(88px, 9vw, 112px);
-  border-radius: 50%;
-  border: none;
-  background: #fff;
-  color: #151515;
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: none;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16);
-  line-height: 1.25;
-}
-
-.bd-reel-btn:hover {
-  transform: scale(1.06);
 }
 
 .bd-hero-meta {
@@ -1457,45 +1415,6 @@ section {
 .prose ul {
   padding-left: 1.2em;
   list-style: disc;
-}
-
-/* Reel modal */
-.bd-reel-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 300;
-  background: rgba(0, 0, 0, 0.92);
-  display: grid;
-  place-items: center;
-  padding: 24px;
-}
-
-.bd-reel-modal-inner {
-  width: min(960px, 100%);
-  aspect-ratio: 16 / 9;
-  background: #000;
-  position: relative;
-}
-
-.bd-reel-modal-inner video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.bd-reel-modal-close {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  z-index: 2;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: transparent;
-  color: #fff;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.2rem;
 }
 
 /* ─── Shared page utilities ───────────────────────────── */
