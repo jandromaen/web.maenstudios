@@ -336,7 +336,7 @@ export const posts: Post[] = [
       { type: "h2", text: "5. Cercanía: no es un detalle menor" },
       {
         type: "p",
-        text: "Si tu negocio necesita rodajes recurrentes —restauración, retail, servicios con local—, que la agencia esté en la ciudad importa. Se traduce en poder grabar el mismo día que surge una oportunidad, en visitas para entender el sitio antes de rodar y en no pagar desplazamientos en cada factura. Nuestra oficina de Madrid está en Calle de Génova 9, a minutos de Chamberí, Salamanca y Chueca.",
+        text: "Si tu negocio necesita rodajes recurrentes —restauración, retail, servicios con local—, que la agencia esté en la ciudad importa. Se traduce en poder grabar el mismo día que surge una oportunidad, en visitas para entender el sitio antes de rodar y en no pagar desplazamientos en cada factura. Nuestra oficina de Madrid está en Calle de Génova 3, a minutos de Chamberí, Salamanca y Chueca.",
       },
       { type: "h2", text: "Señales de alarma" },
       {

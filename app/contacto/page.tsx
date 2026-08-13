@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = createPageMetadata({
   title: "Contacto — agencia de contenido en Barcelona y Madrid",
   description:
-    "Contacta con Maen Studios: oficinas en Barcelona y Madrid (Calle de Génova 9). Dirección creativa, producción audiovisual y community management. Respondemos en menos de 24h.",
+    "Contacta con Maen Studios: oficinas en Barcelona y Madrid (Calle de Génova 3). Dirección creativa, producción audiovisual y community management. Respondemos en menos de 24h.",
   path: "/contacto",
   keywords: [
     "contacto agencia contenido",

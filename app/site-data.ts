@@ -104,11 +104,11 @@ export const faqs = [
   },
   {
     q: "¿Dónde estáis y trabajáis en toda España?",
-    a: "Tenemos oficina en Barcelona y en Madrid (Calle de Génova 9), y producimos contenido para marcas de toda España. Para rodajes nos desplazamos desde la oficina más cercana y, para dirección creativa, edición y community management, trabajamos en remoto sin problema.",
+    a: "Tenemos oficina en Barcelona y en Madrid (Calle de Génova 3), y producimos contenido para marcas de toda España. Para rodajes nos desplazamos desde la oficina más cercana y, para dirección creativa, edición y community management, trabajamos en remoto sin problema.",
   },
   {
     q: "¿Podéis grabar en Madrid?",
-    a: "Sí. Desde nuestra oficina de Madrid (Génova 9) cubrimos rodajes en la ciudad y en toda la Comunidad de Madrid: local, producto, eventos y contenido con creadores. El mismo equipo y el mismo estándar de producción que en Barcelona.",
+    a: "Sí. Desde nuestra oficina de Madrid (Génova 3) cubrimos rodajes en la ciudad y en toda la Comunidad de Madrid: local, producto, eventos y contenido con creadores. El mismo equipo y el mismo estándar de producción que en Barcelona.",
   },
   {
     q: "¿Cuál es la diferencia entre contratar una agencia y un freelance?",

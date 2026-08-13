@@ -125,7 +125,7 @@ export const localLandings: LocalLanding[] = [
     path: "/agencia-de-contenido-madrid",
     metaTitle: "Agencia de contenido para redes sociales en Madrid",
     metaDescription:
-      "Agencia de creación de contenido en Madrid, oficina en Calle de Génova 9. Reels, TikToks, producción audiovisual y community management para marcas y restaurantes. Respuesta en 24h.",
+      "Agencia de creación de contenido en Madrid, oficina en Calle de Génova 3. Reels, TikToks, producción audiovisual y community management para marcas y restaurantes. Respuesta en 24h.",
     keywords: [
       "agencia de contenido Madrid",
       "agencia redes sociales Madrid",
@@ -138,14 +138,14 @@ export const localLandings: LocalLanding[] = [
     ],
     eyebrow: "Madrid",
     h1: "Agencia de contenido para redes sociales en Madrid",
-    lead: "Abrimos oficina en Madrid, en Calle de Génova 9. El mismo equipo y el mismo estándar de producción que llevamos años aplicando en Barcelona, ahora a pie de calle en el centro de Madrid.",
+    lead: "Abrimos oficina en Madrid, en Calle de Génova 3. El mismo equipo y el mismo estándar de producción que llevamos años aplicando en Barcelona, ahora a pie de calle en el centro de Madrid.",
     intro: [
-      "Maen Studios llega a Madrid con un portfolio ya construido: decenas de marcas para las que producimos Reels, TikToks y campañas de contenido cada mes. Nuestra oficina de Génova 9 nos sitúa en el centro, a minutos de Chamberí, Salamanca, Chueca y Malasaña, que es donde se concentra buena parte de la hostelería y el retail que necesita contenido constante.",
+      "Maen Studios llega a Madrid con un portfolio ya construido: decenas de marcas para las que producimos Reels, TikToks y campañas de contenido cada mes. Nuestra oficina de Génova 3 nos sitúa en el centro, a minutos de Chamberí, Salamanca, Chueca y Malasaña, que es donde se concentra buena parte de la hostelería y el retail que necesita contenido constante.",
       "No somos una agencia que subcontrata: dirección creativa, rodaje y edición salen del mismo equipo. Eso significa un solo interlocutor, un criterio visual coherente y entregas que no dependen de encadenar proveedores.",
     ],
     blocks: [
       {
-        title: "Oficina en Génova 9, rodajes en toda la Comunidad",
+        title: "Oficina en Génova 3, rodajes en toda la Comunidad",
         body: "Estar en el centro nos permite cubrir rodajes en el mismo día por Madrid capital y desplazarnos sin fricción a Alcobendas, Pozuelo, Las Rozas o Majadahonda. Grabamos en tu local, en plató o en exteriores, según lo que pida la pieza.",
       },
       {
@@ -190,7 +190,7 @@ export const localLandings: LocalLanding[] = [
     faqs: [
       {
         q: "¿Dónde está la oficina de Maen Studios en Madrid?",
-        a: "En Calle de Génova 9, 28004 Madrid, en pleno centro y a un paso de Chamberí y Chueca. Puedes escribirnos y concertar una visita para ver el plan de contenido en persona.",
+        a: "En Calle de Génova 3, 28004 Madrid, en pleno centro y a un paso de Chamberí y Chueca. Puedes escribirnos y concertar una visita para ver el plan de contenido en persona.",
       },
       {
         q: "¿Cuánto cuesta una agencia de contenido en Madrid?",
@@ -198,7 +198,7 @@ export const localLandings: LocalLanding[] = [
       },
       {
         q: "¿Grabáis en toda la Comunidad de Madrid?",
-        a: "Sí. Cubrimos Madrid capital y municipios como Alcobendas, Pozuelo de Alarcón, Las Rozas o Majadahonda. Desde Génova 9 llegamos a cualquier punto de la ciudad en el mismo día de rodaje.",
+        a: "Sí. Cubrimos Madrid capital y municipios como Alcobendas, Pozuelo de Alarcón, Las Rozas o Majadahonda. Desde Génova 3 llegamos a cualquier punto de la ciudad en el mismo día de rodaje.",
       },
       {
         q: "¿Sois nuevos en Madrid? ¿Con qué marcas habéis trabajado?",
