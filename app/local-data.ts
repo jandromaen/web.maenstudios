@@ -40,7 +40,7 @@ export const localLandings: LocalLanding[] = [
     path: "/agencia-de-contenido-barcelona",
     metaTitle: "Agencia de contenido para redes sociales en Barcelona",
     metaDescription:
-      "Agencia de creación de contenido en Barcelona: Reels, TikToks, producción audiovisual y community management para restaurantes, moda y lifestyle. Rodamos en toda la ciudad. Respuesta en 24h.",
+      "Agencia de creación de contenido en Barcelona, oficina en Carrer del Bruc 61 (Eixample). Reels, TikToks, producción audiovisual y community management para restaurantes, moda y lifestyle. Respuesta en 24h.",
     keywords: [
       "agencia de contenido Barcelona",
       "agencia redes sociales Barcelona",
@@ -54,7 +54,7 @@ export const localLandings: LocalLanding[] = [
     h1: "Agencia de contenido para redes sociales en Barcelona",
     lead: "Somos el equipo de contenido de marcas y negocios de Barcelona: pensamos la idea, la grabamos en tu local y la publicamos con una línea coherente. Reels, TikToks, producción audiovisual y community management.",
     intro: [
-      "Maen Studios nació en Barcelona y aquí seguimos: es la ciudad donde hemos producido la mayor parte de nuestro trabajo. Conocemos su hostelería, su ritmo y el tipo de contenido que funciona en una ciudad donde compites por la atención con miles de negocios que también publican cada día.",
+      "Maen Studios nació en Barcelona y aquí seguimos, con oficina en el Carrer del Bruc 61, en pleno Eixample. Es la ciudad donde hemos producido la mayor parte de nuestro trabajo: conocemos su hostelería, su ritmo y el tipo de contenido que funciona donde compites por la atención con miles de negocios que también publican cada día.",
       "Trabajamos sobre todo con restauración, moda, lifestyle y marcas de producto. No enviamos un freelance con un móvil: llega un equipo con dirección creativa, cámara y un plan de contenido pensado para que las piezas se sostengan mes a mes, no solo el día del rodaje.",
     ],
     blocks: [
@@ -105,6 +105,10 @@ export const localLandings: LocalLanding[] = [
       {
         q: "¿Cuánto cuesta una agencia de contenido en Barcelona?",
         a: "Depende del volumen y de si hay rodaje presencial. Los planes mensuales de Maen Studios suelen partir de un pack de 8 a 12 piezas al mes con dirección creativa, grabación en tu local y edición incluida. Escríbenos y te preparamos un presupuesto cerrado sin compromiso.",
+      },
+      {
+        q: "¿Dónde está la oficina de Maen Studios en Barcelona?",
+        a: "En el Carrer del Bruc 61, 08009 Barcelona, en el Eixample. Puedes escribirnos o llamarnos al +34 688 629 688 y concertar una visita para ver el plan de contenido en persona.",
       },
       {
         q: "¿En qué zonas de Barcelona grabáis?",

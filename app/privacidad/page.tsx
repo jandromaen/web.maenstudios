@@ -76,9 +76,9 @@ export default function PrivacidadPage() {
 
             <h2>Responsable</h2>
             <p>
-              Maen Studios · Barcelona y Madrid (Calle de Génova 3, 28004
-              Madrid). Para ejercer tus derechos de acceso, rectificación o
-              eliminación, escríbenos a{" "}
+              Maen Studios · Carrer del Bruc 61, 08009 Barcelona y Calle de
+              Génova 3, 28004 Madrid. Para ejercer tus derechos de acceso,
+              rectificación o eliminación, escríbenos a{" "}
               <a href={`mailto:${EMAIL_ADMIN}`}>{EMAIL_ADMIN}</a>.
             </p>
 

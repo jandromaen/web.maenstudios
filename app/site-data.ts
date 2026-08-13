@@ -104,7 +104,7 @@ export const faqs = [
   },
   {
     q: "¿Dónde estáis y trabajáis en toda España?",
-    a: "Tenemos oficina en Barcelona y en Madrid (Calle de Génova 3), y producimos contenido para marcas de toda España. Para rodajes nos desplazamos desde la oficina más cercana y, para dirección creativa, edición y community management, trabajamos en remoto sin problema.",
+    a: "Tenemos oficina en Barcelona (Carrer del Bruc 61, Eixample) y en Madrid (Calle de Génova 3), y producimos contenido para marcas de toda España. Para rodajes nos desplazamos desde la oficina más cercana y, para dirección creativa, edición y community management, trabajamos en remoto sin problema.",
   },
   {
     q: "¿Podéis grabar en Madrid?",

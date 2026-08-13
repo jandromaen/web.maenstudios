@@ -38,10 +38,10 @@ export const SOCIAL_LINKS = {
  * y en el schema LocalBusiness (Google lo usa para el SEO local y para
  * mostrar el botón de llamada en móvil).
  */
-export const PHONE = "";
+export const PHONE = "+34688629688";
 
 /** Formato legible del teléfono (ej: "+34 600 00 00 00"). */
-export const PHONE_DISPLAY = "";
+export const PHONE_DISPLAY = "+34 688 629 688";
 
 export type Office = {
   /** Identificador para el @id del schema (ej: "#oficina-barcelona") */
@@ -73,12 +73,14 @@ export const OFFICES: Office[] = [
     id: "oficina-barcelona",
     city: "Barcelona",
     label: "Barcelona",
-    streetAddress: "", // pendiente: calle y número de la oficina de Barcelona
-    postalCode: "", // pendiente
+    streetAddress: "Carrer del Bruc 61",
+    postalCode: "08009",
     addressRegion: "Cataluña",
     addressCountry: "ES",
-    latitude: 41.3874,
-    longitude: 2.1686,
+    // Eixample Dreta, entre Consell de Cent y Diputació
+    latitude: 41.3928,
+    longitude: 2.1704,
+    mapUrl: "https://maps.google.com/?q=Carrer+del+Bruc+61,+08009+Barcelona",
     landingPath: "/agencia-de-contenido-barcelona",
     areasServed: [
       "Barcelona",
