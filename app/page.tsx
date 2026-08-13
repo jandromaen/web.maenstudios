@@ -3,21 +3,31 @@ import Link from "next/link";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import HomeHero from "./components/HomeHero";
-import { FaqJsonLd } from "./components/JsonLd";
+import LazyVideo from "./components/LazyVideo";
+import { FaqJsonLd, ItemListJsonLd, ServiceJsonLd } from "./components/JsonLd";
 import { clients } from "./clients";
 import { posts } from "./blog-data";
 import { EMAIL, faqs, marqueeWords } from "./site-data";
-import { createPageMetadata } from "./seo-config";
+import { createPageMetadata, OFFICES } from "./seo-config";
+
+/**
+ * La home es el segmento raíz, así que Next NO le aplica el template
+ * `%s | Maen Studios` del layout: el título se escribe completo aquí.
+ */
+const HOME_TITLE =
+  "Agencia de contenido para redes sociales en Barcelona y Madrid | Maen Studios";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Agencia de creación de contenido para redes sociales",
+  title: HOME_TITLE,
   description:
-    "Maen Studios: dirección creativa, producción audiovisual y community management. Creamos piezas con alma propia que hacen crecer marcas en Instagram, TikTok y YouTube.",
+    "Agencia de contenido para redes sociales en Barcelona y Madrid: dirección creativa, producción audiovisual y community management. Piezas con alma propia que hacen crecer marcas en Instagram, TikTok y YouTube. Respuesta en 24h.",
   path: "/",
   keywords: [
     "agencia creación contenido redes sociales",
-    "producción audiovisual barcelona",
+    "productora audiovisual Barcelona",
+    "agencia contenido Madrid",
     "community management marcas",
+    "agencia de reels",
   ],
 });
 
@@ -32,7 +42,7 @@ const awards = [
   "Dirección Creativa",
   "Producción Audiovisual",
   "Community Management",
-  "Barcelona · España",
+  "Barcelona · Madrid · España",
   ...marqueeWords,
 ];
 
@@ -45,18 +55,11 @@ function CaseCard({
     <Link className="bd-case" href={`/clientes/${client.slug}`}>
       <div className="bd-case-media">
         {client.previewVideo ? (
-          <video
-            src={client.previewVideo}
-            muted
-            loop
-            autoPlay
-            playsInline
-            preload="metadata"
-          />
+          <LazyVideo src={client.previewVideo} />
         ) : client.logo ? (
           <div className="bd-case-logo-fallback">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={client.logo} alt="" />
+            <img src={client.logo} alt="" loading="lazy" decoding="async" />
           </div>
         ) : null}
         <div className="bd-case-overlay">
@@ -65,7 +68,7 @@ function CaseCard({
           ) : null}
           {client.logo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img className="bd-case-logo" src={client.logo} alt="" />
+            <img className="bd-case-logo" src={client.logo} alt="" loading="lazy" decoding="async" />
           ) : null}
         </div>
       </div>
@@ -82,6 +85,15 @@ export default function Home() {
     <>
       <SiteHeader adaptive />
       <FaqJsonLd items={faqs.map((f) => ({ q: f.q, a: f.a }))} />
+      <ServiceJsonLd />
+      <ItemListJsonLd
+        name="Casos de contenido para marcas — Maen Studios"
+        items={featuredClients.map((c) => ({
+          name: c.name,
+          path: `/clientes/${c.slug}`,
+          description: c.tagline,
+        }))}
+      />
 
       <main id="top">
         <HomeHero />
@@ -96,13 +108,19 @@ export default function Home() {
 
         <section className="bd-overview">
           <div className="container">
+            <h2 className="bd-overview-title">
+              Agencia de contenido para redes sociales en Barcelona y Madrid
+            </h2>
             <p className="bd-overview-text">
               Maen Studios® es una agencia de contenido para redes sociales que
               convierte cultura, producto y marca en piezas con alma propia.{" "}
               <span className="muted">
                 Social media production con intención: dirección creativa,
                 producción audiovisual y community management para marcas que
-                quieren crecer de verdad.
+                quieren crecer de verdad. Con oficina en{" "}
+                <Link href="/agencia-de-contenido-barcelona">Barcelona</Link> y en{" "}
+                <Link href="/agencia-de-contenido-madrid">Madrid</Link>, y rodajes
+                en toda España.
               </span>
             </p>
           </div>
@@ -115,7 +133,7 @@ export default function Home() {
                 <span className="eyebrow eyebrow-accent">maenbrands</span>
                 <h2>¿Qué marcas han confiado en nosotros?</h2>
               </div>
-              <Link href="/clientes">Ver todos →</Link>
+              <Link href="/clientes">Ver todos los clientes →</Link>
             </div>
             <div className="bd-cases-grid is-featured">
               {featuredClients.map((c) => (
@@ -133,7 +151,13 @@ export default function Home() {
             {[...brandLogos, ...brandLogos].map((c, i) =>
               c.logo ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img key={`${c.slug}-${i}`} src={c.logo} alt={c.name} />
+                <img
+                  key={`${c.slug}-${i}`}
+                  src={c.logo}
+                  alt={`Logo de ${c.name}`}
+                  loading="lazy"
+                  decoding="async"
+                />
               ) : (
                 <span key={`${c.slug}-${i}`}>{c.name}</span>
               ),
@@ -145,7 +169,7 @@ export default function Home() {
           <div className="container">
             <div className="bd-featured-head">
               <h2>Featured Engagements</h2>
-              <Link href="/clientes">Ver todos →</Link>
+              <Link href="/clientes">Ver todos los casos →</Link>
             </div>
             {engagementClients.map((c) => (
               <article className="bd-engagement" key={c.slug}>
@@ -210,6 +234,42 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="bd-offices" id="oficinas">
+          <div className="container">
+            <div className="section-head">
+              <span className="eyebrow">Dónde estamos</span>
+              <h2>Dos oficinas, un mismo equipo</h2>
+              <p>
+                Producimos desde Barcelona y Madrid, y nos desplazamos a
+                cualquier punto de España cuando el rodaje lo pide.
+              </p>
+            </div>
+            <div className="office-grid">
+              {OFFICES.map((office) => (
+                <Link
+                  className="office-card"
+                  key={office.id}
+                  href={office.landingPath}
+                >
+                  <h3>{office.city}</h3>
+                  {office.streetAddress ? (
+                    <address>
+                      {office.streetAddress}
+                      <br />
+                      {office.postalCode} {office.city}
+                    </address>
+                  ) : (
+                    <address>{office.city}, España</address>
+                  )}
+                  <span className="office-link">
+                    Agencia de contenido en {office.city} →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="bd-contact" id="contacto">
           <div className="container">
             <h2>Cuéntanos tu proyecto</h2>
@@ -219,7 +279,7 @@ export default function Home() {
             </p>
             <div className="bd-contact-actions">
               <Link className="btn btn-invert" href="/contacto">
-                Contactar
+                Pedir presupuesto
               </Link>
               <a className="btn btn-invert" href={`mailto:${EMAIL}`}>
                 {EMAIL}

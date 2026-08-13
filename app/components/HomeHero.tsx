@@ -60,6 +60,11 @@ export default function HomeHero() {
 
   return (
     <section className="bd-hero" aria-label="Inicio" ref={heroRef}>
+      {/* H1 de la página: el hero es visual, pero Google necesita el encabezado */}
+      <h1 className="sr-only">
+        Maen Studios — Agencia de creación de contenido para redes sociales en
+        Barcelona y Madrid
+      </h1>
       <div className="bd-hero-media">
         <video
           src={reelSrc}

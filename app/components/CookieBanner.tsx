@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { COOKIE_CONSENT_EVENT, COOKIE_CONSENT_KEY } from "../lib/consent";
 
-const STORAGE_KEY = "maen-cookies-accepted";
+const STORAGE_KEY = COOKIE_CONSENT_KEY;
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
@@ -18,12 +19,14 @@ export default function CookieBanner() {
     }
   }, []);
 
-  function persistAndHide() {
+  /** "1" = analítica permitida; "0" = cerrado sin aceptar (no se carga GA4). */
+  function persistAndHide(accepted: boolean) {
     try {
-      window.localStorage.setItem(STORAGE_KEY, "1");
+      window.localStorage.setItem(STORAGE_KEY, accepted ? "1" : "0");
     } catch {
       /* ignore quota / private mode */
     }
+    window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
     setVisible(false);
   }
 
@@ -74,7 +77,7 @@ export default function CookieBanner() {
           <button
             type="button"
             className="cookie-banner-accept"
-            onClick={persistAndHide}
+            onClick={() => persistAndHide(true)}
             aria-label="Aceptar cookies"
           >
             Aceptar cookies
@@ -82,7 +85,7 @@ export default function CookieBanner() {
           <button
             type="button"
             className="cookie-banner-close"
-            onClick={persistAndHide}
+            onClick={() => persistAndHide(false)}
             aria-label="Cerrar aviso de cookies"
           >
             <span aria-hidden="true">×</span>

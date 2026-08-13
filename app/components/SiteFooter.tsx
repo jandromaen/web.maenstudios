@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { EMAIL } from "../site-data";
-import { SOCIAL_LINKS } from "../seo-config";
+import { OFFICES, PHONE, PHONE_DISPLAY, SOCIAL_LINKS } from "../seo-config";
 
 export default function SiteFooter() {
   return (
@@ -17,9 +17,9 @@ export default function SiteFooter() {
               />
             </Link>
             <p>
-              Agencia de creación de contenido para redes sociales. Dirección
-              creativa, producción audiovisual y community management para
-              marcas que quieren crecer.
+              Agencia de creación de contenido para redes sociales en Barcelona
+              y Madrid. Dirección creativa, producción audiovisual y community
+              management para marcas que quieren crecer.
             </p>
           </div>
           <div className="footer-col">
@@ -27,6 +27,29 @@ export default function SiteFooter() {
             <Link href="/servicios">Dirección Creativa</Link>
             <Link href="/servicios">Producción Audiovisual</Link>
             <Link href="/servicios">Community Management</Link>
+            <Link href="/talents">UGC y creadores</Link>
+          </div>
+          <div className="footer-col footer-offices">
+            <h4>Oficinas</h4>
+            {OFFICES.map((office) => (
+              <div className="footer-office" key={office.id}>
+                <Link href={office.landingPath}>{office.city}</Link>
+                <address>
+                  {office.streetAddress ? (
+                    <>
+                      {office.streetAddress}
+                      <br />
+                      {office.postalCode} {office.city}
+                    </>
+                  ) : (
+                    <>{office.city}, España</>
+                  )}
+                </address>
+              </div>
+            ))}
+            {PHONE ? (
+              <a href={`tel:${PHONE}`}>{PHONE_DISPLAY || PHONE}</a>
+            ) : null}
           </div>
           <div className="footer-col">
             <h4>Estudio</h4>
@@ -57,7 +80,7 @@ export default function SiteFooter() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Maen Studios</span>
           <Link href="/privacidad">Política de privacidad</Link>
-          <span>Barcelona — contenido con intención</span>
+          <span>Barcelona · Madrid — contenido con intención</span>
         </div>
       </div>
     </footer>

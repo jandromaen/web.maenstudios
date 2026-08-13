@@ -2,15 +2,21 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
-import { EMAIL } from "../site-data";
+import { BreadcrumbJsonLd } from "../components/JsonLd";
 import { createPageMetadata } from "../seo-config";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Talents — creadores y UGC para marcas",
   description:
-    "Red de creadores y talento para campañas de UGC, Reels y contenido auténtico en redes sociales. Maen Studios conecta marcas con perfiles que generan confianza.",
+    "Red de creadores y talento para campañas de UGC, Reels y contenido auténtico en redes sociales. Maen Studios conecta marcas de Barcelona y Madrid con perfiles que generan confianza.",
   path: "/talents",
-  keywords: ["UGC España", "creadores contenido marcas", "talento social media"],
+  keywords: [
+    "UGC España",
+    "creadores contenido marcas",
+    "talento social media",
+    "campañas influencers Madrid",
+    "campañas influencers Barcelona",
+  ],
 });
 
 const pillars = [
@@ -36,6 +42,13 @@ export default function TalentsPage() {
     <>
       <SiteHeader light />
 
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", path: "/" },
+          { name: "Talents", path: "/talents" },
+        ]}
+      />
+
       <main>
         <section className="page-hero">
           <div className="container">
@@ -47,9 +60,9 @@ export default function TalentsPage() {
               influencers, microinfluencers y UGC.
             </p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                Trabaja con nosotros
-              </a>
+              <Link className="btn btn-primary" href="/contacto">
+                Quiero una campaña
+              </Link>
               <Link className="btn btn-ghost" href="/contacto">
                 Soy creador/a
               </Link>

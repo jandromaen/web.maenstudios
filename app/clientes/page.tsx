@@ -2,19 +2,21 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import LazyVideo from "../components/LazyVideo";
+import { BreadcrumbJsonLd, ItemListJsonLd } from "../components/JsonLd";
 import { clients } from "../clients";
-import { EMAIL } from "../site-data";
 import { createPageMetadata } from "../seo-config";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Clientes y casos de contenido para redes sociales",
   description:
-    "Marcas y negocios para los que creamos contenido con dirección creativa, producción audiovisual y community management. Restauración, moda, lifestyle, tecnología y más. Portfolio de Maen Studios.",
+    "Marcas y negocios de Barcelona y Madrid para los que creamos contenido con dirección creativa, producción audiovisual y community management. Restauración, moda, lifestyle, tecnología y más. Portfolio de Maen Studios.",
   path: "/clientes",
   keywords: [
     "portfolio agencia contenido",
     "clientes agencia social media",
     "casos éxito social media",
+    "casos de éxito contenido redes",
   ],
 });
 
@@ -23,6 +25,21 @@ export default function ClientesPage() {
     <>
       <SiteHeader light />
 
+      <ItemListJsonLd
+        name="Clientes de Maen Studios"
+        items={clients.map((c) => ({
+          name: c.name,
+          path: `/clientes/${c.slug}`,
+          description: c.tagline,
+        }))}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", path: "/" },
+          { name: "Clientes", path: "/clientes" },
+        ]}
+      />
+
       <main>
         <section className="page-hero">
           <div className="container">
@@ -30,13 +47,13 @@ export default function ClientesPage() {
             <h1>Marcas para las que creamos contenido</h1>
             <p className="lead">
               Social media production para marcas de restauración, moda,
-              lifestyle y más. Todo lo que ves en sus redes lo creamos y
-              gestionamos nosotros.
+              lifestyle y más, en Barcelona, Madrid y toda España. Todo lo que
+              ves en sus redes lo creamos y gestionamos nosotros.
             </p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
+              <Link className="btn btn-primary" href="/contacto">
                 Quiero algo así
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -52,18 +69,11 @@ export default function ClientesPage() {
                 >
                   <div className="client-portfolio-media">
                     {c.previewVideo ? (
-                      <video
-                        src={c.previewVideo}
-                        muted
-                        loop
-                        autoPlay
-                        playsInline
-                        preload="metadata"
-                      />
+                      <LazyVideo src={c.previewVideo} />
                     ) : c.logo ? (
                       <div className="client-portfolio-fallback">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={c.logo} alt="" />
+                        <img src={c.logo} alt="" loading="lazy" decoding="async" />
                       </div>
                     ) : (
                       <div className="client-portfolio-fallback">{c.name}</div>

@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import CookieBanner from "./components/CookieBanner";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import { GlobalJsonLd } from "./components/JsonLd";
 import ThemeSchedule from "./components/ThemeSchedule";
 import { themeBootScript } from "./lib/theme-schedule";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_KEYWORDS,
+  GSC_VERIFICATION,
   OG_IMAGE,
   SITE_NAME,
   SITE_URL,
@@ -40,25 +43,41 @@ const body = Plus_Jakarta_Sans({
   style: ["normal", "italic"],
 });
 
+const DEFAULT_TITLE = `${SITE_NAME} | Agencia de contenido para redes sociales en Barcelona y Madrid`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} | Agencia de contenido para redes sociales`,
+    default: DEFAULT_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
   keywords: DEFAULT_KEYWORDS,
+  applicationName: SITE_NAME,
+  category: "Marketing y publicidad",
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
-  robots: { index: true, follow: true },
+  formatDetection: { telephone: true, email: true, address: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
+  },
+  ...(GSC_VERIFICATION ? { verification: { google: GSC_VERIFICATION } } : {}),
   alternates: { canonical: SITE_URL },
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png" }],
     apple: [{ url: "/apple-icon.png", type: "image/png" }],
   },
   openGraph: {
-    title: `${SITE_NAME} | Agencia de contenido para redes sociales`,
+    title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
@@ -68,7 +87,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} | Agencia de contenido para redes sociales`,
+    title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
     images: [OG_IMAGE.url],
   },
@@ -89,6 +108,8 @@ export default function RootLayout({
         <GlobalJsonLd />
         {children}
         <CookieBanner />
+        <GoogleAnalytics />
+        <Analytics />
       </body>
     </html>
   );

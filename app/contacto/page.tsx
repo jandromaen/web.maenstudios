@@ -4,17 +4,25 @@ import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import ContactForm from "../components/ContactForm";
 import ContactEmails from "../components/ContactEmails";
-import { createPageMetadata } from "../seo-config";
+import { BreadcrumbJsonLd, ContactPageJsonLd } from "../components/JsonLd";
+import {
+  createPageMetadata,
+  OFFICES,
+  PHONE,
+  PHONE_DISPLAY,
+} from "../seo-config";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Contacto — contrata tu agencia de contenido",
+  title: "Contacto — agencia de contenido en Barcelona y Madrid",
   description:
-    "Contacta con Maen Studios para dirección creativa, producción audiovisual y community management. Respondemos en menos de 24h. Proyectos: jandro@maenstudios.com · Administración: info@maenstudios.com",
+    "Contacta con Maen Studios: oficinas en Barcelona y Madrid (Calle de Génova 9). Dirección creativa, producción audiovisual y community management. Respondemos en menos de 24h.",
   path: "/contacto",
   keywords: [
     "contacto agencia contenido",
     "presupuesto contenido redes",
     "contratar agencia social media",
+    "agencia contenido Madrid contacto",
+    "agencia contenido Barcelona contacto",
   ],
 });
 
@@ -22,6 +30,13 @@ export default function ContactoPage() {
   return (
     <>
       <SiteHeader light />
+      <ContactPageJsonLd />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", path: "/" },
+          { name: "Contacto", path: "/contacto" },
+        ]}
+      />
 
       <main>
         <section className="page-hero">
@@ -35,13 +50,56 @@ export default function ContactoPage() {
               </p>
               <div className="mail-line">o escríbenos directamente:</div>
               <ContactEmails />
+              {PHONE ? (
+                <div className="contact-phone">
+                  <a href={`tel:${PHONE}`}>{PHONE_DISPLAY || PHONE}</a>
+                </div>
+              ) : null}
+
+              <div className="contact-offices">
+                <h2>Nuestras oficinas</h2>
+                {OFFICES.map((office) => (
+                  <div className="contact-office" key={office.id}>
+                    <h3>{office.city}</h3>
+                    <address>
+                      {office.streetAddress ? (
+                        <>
+                          {office.streetAddress}
+                          <br />
+                          {office.postalCode} {office.city},{" "}
+                          {office.addressRegion}
+                        </>
+                      ) : (
+                        <>
+                          {office.city}, {office.addressRegion}
+                        </>
+                      )}
+                    </address>
+                    <div className="contact-office-links">
+                      {office.mapUrl ? (
+                        <a
+                          href={office.mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Ver en Google Maps
+                        </a>
+                      ) : null}
+                      <Link href={office.landingPath}>
+                        Agencia de contenido en {office.city}
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               <div className="hero-actions">
                 <Link className="btn btn-ghost" href="/servicios">
                   Ver servicios
                 </Link>
               </div>
             </div>
-            <ContactForm />
+            <ContactForm origen="contacto" />
           </div>
         </section>
       </main>

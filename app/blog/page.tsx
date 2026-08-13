@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
-import { BreadcrumbJsonLd } from "../components/JsonLd";
+import { BreadcrumbJsonLd, ItemListJsonLd } from "../components/JsonLd";
 import { posts } from "../blog-data";
 import { createPageMetadata } from "../seo-config";
 
@@ -38,6 +38,14 @@ export default function BlogPage() {
           { name: "Inicio", path: "/" },
           { name: "Blog", path: "/blog" },
         ]}
+      />
+      <ItemListJsonLd
+        name="Artículos de Maen Studios"
+        items={sorted.map((p) => ({
+          name: p.title,
+          path: `/blog/${p.slug}`,
+          description: p.description,
+        }))}
       />
 
       <main>

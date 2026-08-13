@@ -103,8 +103,12 @@ export const faqs = [
     a: "Nos encargamos del proceso completo: idea y guion, grabación, edición, motion y adaptación a cada plataforma. Entregamos las piezas listas para publicar con la cadencia que acordemos.",
   },
   {
-    q: "¿Trabajáis solo en Barcelona o en toda España?",
-    a: "Somos una agencia con base en Barcelona, pero producimos contenido para marcas de toda España. Para grabaciones nos desplazamos y, para dirección creativa, edición y community, trabajamos en remoto sin problema.",
+    q: "¿Dónde estáis y trabajáis en toda España?",
+    a: "Tenemos oficina en Barcelona y en Madrid (Calle de Génova 9), y producimos contenido para marcas de toda España. Para rodajes nos desplazamos desde la oficina más cercana y, para dirección creativa, edición y community management, trabajamos en remoto sin problema.",
+  },
+  {
+    q: "¿Podéis grabar en Madrid?",
+    a: "Sí. Desde nuestra oficina de Madrid (Génova 9) cubrimos rodajes en la ciudad y en toda la Comunidad de Madrid: local, producto, eventos y contenido con creadores. El mismo equipo y el mismo estándar de producción que en Barcelona.",
   },
   {
     q: "¿Cuál es la diferencia entre contratar una agencia y un freelance?",
@@ -117,6 +121,14 @@ export const faqs = [
   {
     q: "¿En cuánto tiempo se ven resultados?",
     a: "Los primeros datos de alcance y engagement suelen verse en las primeras semanas, pero el crecimiento sólido de comunidad y marca es un trabajo continuo. Por eso medimos y optimizamos cada ciclo de contenido.",
+  },
+  {
+    q: "¿Cuántos vídeos al mes produce Maen Studios para una marca?",
+    a: "Lo habitual es entre 8 y 12 piezas mensuales, que es la cadencia con la que las redes premian la constancia. Ajustamos el volumen a tus objetivos y a tu presupuesto: hay marcas con 4 piezas al mes y otras con producción semanal continua.",
+  },
+  {
+    q: "¿Hay permanencia o puedo cancelar cuando quiera?",
+    a: "Trabajamos con ciclos mensuales sin ataduras innecesarias. Recomendamos un mínimo de tres meses porque es el tiempo en el que el contenido empieza a mostrar datos fiables, pero no te atamos a contratos largos.",
   },
 ];
 

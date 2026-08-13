@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import { clients, getClient } from "../../clients";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
+import LazyVideo from "../../components/LazyVideo";
 import { ClientJsonLd, BreadcrumbJsonLd } from "../../components/JsonLd";
-import { EMAIL } from "../../site-data";
 import { createPageMetadata, SITE_URL } from "../../seo-config";
 
 export function generateStaticParams() {
@@ -94,7 +94,12 @@ export default async function ClientPage({
             {client.logo ? (
               <div className="client-logo-big">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={client.logo} alt={client.name} />
+                <img
+                  src={client.logo}
+                  alt={`Logo de ${client.name}`}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             ) : null}
             <h1>{client.name}</h1>
@@ -122,9 +127,9 @@ export default async function ClientPage({
                     : "Visitar web"}
                 </a>
               ) : null}
-              <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>
+              <Link className="btn btn-ghost" href="/contacto">
                 Quiero algo así
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -139,15 +144,7 @@ export default async function ClientPage({
               <div className="grid portfolio-grid">
                 {client.videos.map((v, i) => (
                   <div className="reel" key={i}>
-                    <video
-                      className="reel-video"
-                      src={v.src}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                    />
+                    <LazyVideo className="reel-video" src={v.src} />
                     {v.title ? (
                       <div className="meta">
                         <div className="title">{v.title}</div>
@@ -186,9 +183,9 @@ export default async function ClientPage({
               <Link className="btn btn-primary" href="/servicios">
                 Ver servicios
               </Link>
-              <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>
+              <Link className="btn btn-ghost" href="/contacto">
                 Quiero algo así
-              </a>
+              </Link>
             </div>
           </div>
         </section>

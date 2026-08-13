@@ -2,28 +2,43 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
-import { ServiceJsonLd } from "../components/JsonLd";
-import { EMAIL, steps, services, perks } from "../site-data";
-import { createPageMetadata } from "../seo-config";
+import {
+  BreadcrumbJsonLd,
+  FaqJsonLd,
+  ServiceJsonLd,
+} from "../components/JsonLd";
+import { steps, services, perks, faqs } from "../site-data";
+import { createPageMetadata, OFFICES } from "../seo-config";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Servicios de contenido para redes sociales",
   description:
-    "Dirección creativa, producción audiovisual y community management. Servicios de agencia creativa para marcas que quieren crecer en redes con entregas constantes.",
+    "Dirección creativa, producción audiovisual y community management en Barcelona y Madrid. Servicios de agencia creativa para marcas que quieren crecer en redes con entregas constantes.",
   path: "/servicios",
   keywords: [
     "servicios agencia contenido",
     "dirección creativa redes sociales",
     "producción audiovisual social media",
     "community management agencia",
+    "servicios contenido Madrid",
+    "servicios contenido Barcelona",
   ],
 });
+
+const serviceFaqs = faqs.slice(0, 4);
 
 export default function ServiciosPage() {
   return (
     <>
       <SiteHeader light />
       <ServiceJsonLd />
+      <FaqJsonLd items={serviceFaqs} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", path: "/" },
+          { name: "Servicios", path: "/servicios" },
+        ]}
+      />
 
       <main>
         <section className="page-hero">
@@ -33,12 +48,13 @@ export default function ServiciosPage() {
             <p className="lead">
               Tres pilares para tu marca en redes: dirección creativa,
               producción audiovisual y community management. Del concepto a la
-              conversación diaria, en un mismo equipo.
+              conversación diaria, en un mismo equipo, desde nuestras oficinas
+              de Barcelona y Madrid.
             </p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                Agenda una llamada
-              </a>
+              <Link className="btn btn-primary" href="/contacto">
+                Pedir presupuesto
+              </Link>
               <Link className="btn btn-ghost" href="/clientes">
                 Ver clientes
               </Link>
@@ -103,6 +119,64 @@ export default function ServiciosPage() {
           </div>
         </section>
 
+        <section className="page-section">
+          <div className="container container-narrow">
+            <div className="section-head">
+              <span className="eyebrow">FAQ</span>
+              <h2>Dudas habituales antes de contratar</h2>
+            </div>
+            <div className="faq-list">
+              {serviceFaqs.map((f) => (
+                <details className="faq-item" key={f.q}>
+                  <summary>
+                    <span>{f.q}</span>
+                    <span className="faq-icon" aria-hidden="true">
+                      +
+                    </span>
+                  </summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="page-section">
+          <div className="container">
+            <div className="section-head">
+              <span className="eyebrow">Dónde trabajamos</span>
+              <h2>Servicios de contenido en Barcelona y Madrid</h2>
+              <p>
+                Producimos desde nuestras dos oficinas y nos desplazamos al
+                resto de España cuando el rodaje lo pide.
+              </p>
+            </div>
+            <div className="office-grid">
+              {OFFICES.map((office) => (
+                <Link
+                  className="office-card"
+                  key={office.id}
+                  href={office.landingPath}
+                >
+                  <h3>{office.city}</h3>
+                  {office.streetAddress ? (
+                    <address>
+                      {office.streetAddress}
+                      <br />
+                      {office.postalCode} {office.city}
+                    </address>
+                  ) : (
+                    <address>{office.city}, España</address>
+                  )}
+                  <span className="office-link">
+                    Agencia de contenido en {office.city} →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="page-band">
           <div className="container">
             <span className="eyebrow">¿Empezamos?</span>
@@ -111,11 +185,11 @@ export default function ServiciosPage() {
               Te respondemos en menos de 24h con ideas para tu marca.
             </p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                Agenda una llamada
-              </a>
-              <Link className="btn btn-ghost" href="/contacto">
-                Contacto
+              <Link className="btn btn-primary" href="/contacto">
+                Pedir presupuesto
+              </Link>
+              <Link className="btn btn-ghost" href="/clientes">
+                Ver casos
               </Link>
             </div>
           </div>

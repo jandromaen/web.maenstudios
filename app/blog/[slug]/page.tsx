@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import { BreadcrumbJsonLd, BlogPostingJsonLd } from "../../components/JsonLd";
-import { posts, getPost } from "../../blog-data";
-import { EMAIL } from "../../site-data";
+import { posts, getPost, type Post } from "../../blog-data";
 import { createPageMetadata } from "../../seo-config";
 
 export function generateStaticParams() {
@@ -33,7 +32,19 @@ export async function generateMetadata({
     description: post.description,
     path: `/blog/${post.slug}`,
     keywords: post.keywords,
+    type: "article",
+    publishedTime: post.date,
+    modifiedTime: post.updated ?? post.date,
   });
+}
+
+/** Palabras del artículo: señal de profundidad para el schema. */
+function countWords(post: Post) {
+  return post.content.reduce((total, block) => {
+    const text =
+      block.type === "ul" ? block.items.join(" ") : block.text;
+    return total + text.split(/\s+/).filter(Boolean).length;
+  }, 0);
 }
 
 function formatDate(iso: string) {
@@ -53,7 +64,14 @@ export default async function BlogPostPage({
   const post = getPost(slug);
   if (!post) notFound();
 
-  const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  // Primero artículos de la misma categoría: enlazado interno con más sentido
+  const sameCategory = posts.filter(
+    (p) => p.slug !== post.slug && p.category === post.category,
+  );
+  const others = posts.filter(
+    (p) => p.slug !== post.slug && p.category !== post.category,
+  );
+  const related = [...sameCategory, ...others].slice(0, 3);
 
   return (
     <>
@@ -64,6 +82,9 @@ export default async function BlogPostPage({
         description={post.description}
         slug={post.slug}
         datePublished={post.date}
+        dateModified={post.updated}
+        wordCount={countWords(post)}
+        keywords={post.keywords}
       />
       <BreadcrumbJsonLd
         items={[
@@ -83,6 +104,12 @@ export default async function BlogPostPage({
             <h1>{post.title}</h1>
             <div className="blog-card-meta">
               <time dateTime={post.date}>{formatDate(post.date)}</time>
+              {post.updated && post.updated !== post.date ? (
+                <span>
+                  · Actualizado el{" "}
+                  <time dateTime={post.updated}>{formatDate(post.updated)}</time>
+                </span>
+              ) : null}
               <span>· {post.readingMinutes} min</span>
             </div>
 
@@ -105,12 +132,15 @@ export default async function BlogPostPage({
               <h2>¿Quieres contenido así para tu marca?</h2>
               <p>
                 En Maen Studios somos tu equipo de contenido para redes
-                sociales. Cuéntanos tu proyecto y te respondemos en menos de 24h.
+                sociales, con oficina en{" "}
+                <Link href="/agencia-de-contenido-barcelona">Barcelona</Link> y{" "}
+                <Link href="/agencia-de-contenido-madrid">Madrid</Link>.
+                Cuéntanos tu proyecto y te respondemos en menos de 24h.
               </p>
               <div className="hero-actions">
-                <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                  Agenda una llamada
-                </a>
+                <Link className="btn btn-primary" href="/contacto">
+                  Pedir presupuesto
+                </Link>
                 <Link className="btn btn-ghost" href="/servicios">
                   Ver servicios
                 </Link>

@@ -45,23 +45,40 @@ export default function PrivacidadPage() {
             </p>
             <p>
               No usamos cookies de publicidad de terceros ni perfiles de
-              marketing sin tu consentimiento explícito. Si en el futuro
-              incorporamos herramientas de analítica, te lo indicaremos y
-              pediremos el consentimiento cuando corresponda.
+              marketing sin tu consentimiento explícito.
+            </p>
+
+            <h2>Analítica</h2>
+            <p>
+              Usamos Vercel Analytics, una herramienta de medición agregada que
+              no utiliza cookies ni almacena identificadores personales, para
+              conocer qué páginas se visitan.
+            </p>
+            <p>
+              Además, si aceptas el aviso de cookies, cargamos Google Analytics
+              4 con la IP anonimizada y la personalización publicitaria
+              desactivada, para entender cómo se usa la web y qué contenidos
+              funcionan. Si cierras el aviso sin aceptar, Google Analytics no se
+              carga. Puedes revocar tu consentimiento borrando los datos del
+              sitio en tu navegador.
             </p>
 
             <h2>Datos de contacto</h2>
             <p>
               Si nos escribes a través del formulario o por email, trataremos
-              tus datos (nombre, email y mensaje) únicamente para responder a
-              tu consulta o gestionar un posible proyecto. No vendemos ni
-              cedemos tus datos a terceros con fines comerciales.
+              tus datos (nombre, apellido, email, teléfono y mensaje)
+              únicamente para responder a tu consulta o gestionar un posible
+              proyecto. El formulario envía esos datos por correo electrónico a
+              través de Resend, nuestro proveedor de envío, y no se almacenan en
+              ninguna base de datos de la web. No vendemos ni cedemos tus datos
+              a terceros con fines comerciales.
             </p>
 
             <h2>Responsable</h2>
             <p>
-              Maen Studios · Barcelona. Para ejercer tus derechos de acceso,
-              rectificación o eliminación, escríbenos a{" "}
+              Maen Studios · Barcelona y Madrid (Calle de Génova 9, 28004
+              Madrid). Para ejercer tus derechos de acceso, rectificación o
+              eliminación, escríbenos a{" "}
               <a href={`mailto:${EMAIL_ADMIN}`}>{EMAIL_ADMIN}</a>.
             </p>
 
