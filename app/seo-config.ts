@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = "https://maenstudios.com";
+/**
+ * Dominio canónico. Debe ser un host que resuelva de verdad: hoy solo lo hace
+ * `www` (la raíz no tiene registro DNS en Wix). Si algún día se publica la raíz
+ * y se prefiere como canónica, se cambia aquí y se propaga a canonicals,
+ * sitemap, robots, JSON-LD e imágenes OG.
+ */
+export const SITE_URL = "https://www.maenstudios.com";
 
 export const SITE_NAME = "Maen Studios";
 
