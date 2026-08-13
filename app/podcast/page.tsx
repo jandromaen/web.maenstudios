@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
-import { PodcastJsonLd } from "../components/JsonLd";
+import { BreadcrumbJsonLd, PodcastJsonLd } from "../components/JsonLd";
 import { EMAIL } from "../site-data";
 import {
   podcastInfo,
@@ -26,6 +26,12 @@ export default function PodcastPage() {
     <>
       <SiteHeader light />
       <PodcastJsonLd />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", path: "/" },
+          { name: "Podcast", path: "/podcast" },
+        ]}
+      />
 
       <main>
         <section className="page-hero">
