@@ -132,11 +132,12 @@ export const faqs = [
   },
 ];
 
-/** Métricas reales del portfolio (ver app/clients.ts). */
+/** Métricas del estudio. "Marcas" no se calcula desde app/clients.ts: la web
+    enseña una selección, no el total con el que hemos trabajado. */
 export const studioStats = [
   {
     label: "Marcas",
-    value: "23",
+    value: "+100",
     note: "Restauración, moda, lifestyle, producto y tecnología.",
   },
   {
@@ -150,9 +151,11 @@ export const studioStats = [
     note: "Barcelona y Madrid, con rodajes en toda España.",
   },
   {
+    /* Sin contar los años: "cinco" se escribió en 2025 y ya iban seis.
+       Con la fecha sola, el dato no caduca. */
     label: "Desde",
     value: "2020",
-    note: "Cinco años produciendo contenido para marcas.",
+    note: "Produciendo contenido para marcas de forma continuada.",
   },
 ];
 
