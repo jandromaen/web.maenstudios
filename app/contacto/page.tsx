@@ -50,30 +50,49 @@ export default function ContactoPage() {
           </div>
         </section>
 
+        {/* Entre el titular y el formulario: primero a quién le escribes,
+            después el formulario. */}
+        <section className="bd-founders" id="estudio">
+          <div className="container bd-founders-grid">
+            <div className="bd-founders-media">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/equipo/founders.jpg"
+                alt="Richi y Jandro, fundadores de Maen Studios"
+                width={941}
+                height={1672}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div className="bd-founders-copy">
+              <span className="eyebrow">Fundadores</span>
+              <h2>Detrás de Maen hay dos personas</h2>
+              <p>
+                Montamos el estudio en 2020 y seguimos metidos en cada
+                proyecto. Cuando trabajas con Maen no hablas con un
+                departamento: hablas con nosotros.
+              </p>
+              <dl className="bd-founders-names">
+                <div>
+                  <dt>Richi</dt>
+                  <dd>Cofundador</dd>
+                </div>
+                <div>
+                  <dt>Jandro</dt>
+                  <dd>Cofundador</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
         <section className="page-section contact-section">
           <div className="container contact-grid">
             {/* Columna de datos: etiqueta pequeña y dato, separados por filete.
                 Antes era un panel de color con dos titulares que repetían lo
                 que ya dice el hero. */}
             <aside className="contact-aside">
-              {/* En una página de contacto la foto tiene un argumento que no
-                  tenía en la home: dice quién va a responder el correo. */}
-              <figure className="contact-founders">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/equipo/founders.jpg"
-                  alt="Richi y Jandro, fundadores de Maen Studios"
-                  width={941}
-                  height={1672}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption>
-                  Te respondemos nosotros: <strong>Richi</strong> y{" "}
-                  <strong>Jandro</strong>, fundadores del estudio.
-                </figcaption>
-              </figure>
-
               <div className="contact-block">
                 <span className="contact-label">Correo</span>
                 <ContactEmails />
