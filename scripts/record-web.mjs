@@ -147,30 +147,34 @@ const PLANOS = [
             position: fixed; inset: 0;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            gap: clamp(28px, 4vh, 52px);
-            animation: entrar 1100ms cubic-bezier(.22,1,.36,1) both;
+            gap: clamp(18px, 2.6vh, 34px);
+            animation: entrar 620ms cubic-bezier(.22,1,.36,1) both;
           }
           #cierre img {
             width: min(46vw, 520px);
             height: auto;
           }
+          /* Monument no trae fichero de cursiva —solo Regular y Ultrabold—,
+             así que la oblicua la sintetiza el navegador. Es exactamente el
+             mismo efecto que ya tiene el logo. */
           #cierre p {
             font-family: var(--font-heading);
-            font-size: clamp(1rem, 2.2vw, 1.9rem);
-            font-weight: 800;
-            letter-spacing: 0.16em;
+            font-style: italic;
+            font-size: clamp(0.72rem, 1.35vw, 1.2rem);
+            font-weight: 400;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--fg);
-            opacity: .78;
+            opacity: .72;
             margin: 0;
           }
           @keyframes entrar {
-            from { opacity: 0; transform: translateY(18px); }
+            from { opacity: 0; transform: translateY(12px); }
             to   { opacity: 1; transform: none; }
           }`;
         document.head.appendChild(css);
       });
-      await page.waitForTimeout(3400);
+      await page.waitForTimeout(2600);
     },
   },
 ];
