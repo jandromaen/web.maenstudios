@@ -64,16 +64,6 @@ function FeaturedCase({ client }: { client: Client }) {
         <span className="index-label">
           Caso {position(client)} / {total}
         </span>
-        {client.logo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            className="case-feature-logo"
-            src={client.logo}
-            alt={`Logo de ${client.name}`}
-            loading="lazy"
-            decoding="async"
-          />
-        ) : null}
         <h3>
           <Link href={`/clientes/${client.slug}`}>{client.name}</Link>
         </h3>
@@ -263,10 +253,6 @@ export default function ClientesPage() {
                   >
                     <div className="client-row-main">
                       <span className="client-row-index">{position(c)}</span>
-                      {c.logo ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={c.logo} alt="" loading="lazy" />
-                      ) : null}
                       <div>
                         <h3>{c.name}</h3>
                         <div className="tagline">{c.tagline}</div>

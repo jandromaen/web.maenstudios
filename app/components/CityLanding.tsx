@@ -183,10 +183,6 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
                     href={`/clientes/${c.slug}`}
                   >
                     <div className="client-row-main">
-                      {c.logo ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={c.logo} alt="" loading="lazy" />
-                      ) : null}
                       <div>
                         <h3>{c.name}</h3>
                         {c.tagline ? (

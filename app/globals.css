@@ -2006,14 +2006,6 @@ section {
   }
 }
 
-.client-row-main img {
-  height: 28px;
-  width: auto;
-  max-width: 120px;
-  object-fit: contain;
-  object-position: left;
-}
-
 .client-row h3 {
   font-size: clamp(1rem, 1.8vw, 1.25rem);
 }
@@ -2039,16 +2031,6 @@ section {
 /* Client detail */
 .case-hero {
   padding: clamp(120px, 16vw, 180px) 0 clamp(40px, 6vw, 64px);
-}
-
-.client-logo-big {
-  margin: 12px 0 20px;
-}
-
-.client-logo-big img {
-  height: 42px;
-  width: auto;
-  object-fit: contain;
 }
 
 .case-hero h1 {
@@ -3401,15 +3383,6 @@ section {
   background: var(--accent);
   color: var(--accent-ink);
   padding: 6px 10px;
-}
-
-.case-feature-logo {
-  height: 30px;
-  width: auto;
-  max-width: 160px;
-  object-fit: contain;
-  object-position: left center;
-  margin: 16px 0 4px;
 }
 
 .case-feature-body h3 {

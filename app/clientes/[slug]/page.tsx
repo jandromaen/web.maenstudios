@@ -118,17 +118,6 @@ export default async function ClientPage({
                 <span className="index-label">
                   Client · {position} / {total}
                 </span>
-                {client.logo ? (
-                  <div className="client-logo-big">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={client.logo}
-                      alt={`Logo de ${client.name}`}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                ) : null}
                 <h1>{client.name}</h1>
                 {client.tagline ? (
                   <p className="client-tagline">{client.tagline}</p>
