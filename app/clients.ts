@@ -10,13 +10,17 @@ export type Client = {
   tagline: string;
   description: string;
   url: string; // web o Instagram, "" si todavía no hay
+  /** Handle de Instagram sin la @. Sin esto no se pinta el botón. */
+  instagram?: string;
   /** Sector de la marca: agrupa casos relacionados y alimenta las keywords. */
   sector: string;
   videos: ClientVideo[];
   /** Seguidores en redes (portfolio Canva) */
   community?: string;
-  /** Vídeo vertical de preview para grids */
+  /** Preview corto y ligero (10s, 540px) para las rejillas */
   previewVideo?: string;
+  /** Primer fotograma: pinta la tarjeta antes de que baje un solo byte de vídeo */
+  poster?: string;
 };
 
 /**
@@ -38,7 +42,8 @@ export const clients: Client[] = [
     name: "Macala",
     logo: "/clients/macala.png",
     community: "+10,4k",
-    previewVideo: "/clients/macala/reel.mp4",
+    previewVideo: "/clients/macala/preview.mp4",
+    poster: "/clients/macala/poster.jpg",
     tagline: "Alpargatas hechas en España",
     description:
       "Creamos el contenido en redes de Macala, marca de alpargatas y ropa sostenible hecha en España. Reels, UGC y estrategia con su sello: tradición y producto de calidad.",
@@ -50,11 +55,13 @@ export const clients: Client[] = [
     slug: "fortuna-tonino",
     name: "Fortuna Tonino",
     logo: "/clients/fortuna-tonino/logo.png",
-    previewVideo: "/clients/fortuna-tonino/reel.mp4",
+    previewVideo: "/clients/fortuna-tonino/preview.mp4",
+    poster: "/clients/fortuna-tonino/poster.jpg",
     tagline: "Good luck, better vibes · Barcelona",
     description:
       "Contenido para Fortuna Tonino, coctelería y ambiente nocturno en Barcelona. Reels que transmiten la energía del local y llenan sus noches.",
     url: "https://www.fortunatonino.com/",
+    instagram: "fortuna_tonino",
     sector: "Ocio nocturno",
     videos: [{ src: "/clients/fortuna-tonino/reel.mp4", title: "Reel Fortuna" }],
   },
@@ -62,11 +69,13 @@ export const clients: Client[] = [
     slug: "gran-tonino",
     name: "Gran Tonino",
     community: "+14,5k",
-    previewVideo: "/clients/gran-tonino/reel.mp4",
+    previewVideo: "/clients/gran-tonino/preview.mp4",
+    poster: "/clients/gran-tonino/poster.jpg",
     tagline: "Piano bar · Barcelona",
     description:
       "Contenido para Gran Tonino Piano Club: cenas, cócteles y música en directo con un piano de cola como protagonista. Piezas que capturan la experiencia del local.",
     url: "https://www.grantonino.com/",
+    instagram: "gran_tonino_club",
     sector: "Ocio nocturno",
     videos: [{ src: "/clients/gran-tonino/reel.mp4", title: "Reel Gran Tonino" }],
   },
@@ -74,11 +83,13 @@ export const clients: Client[] = [
     slug: "canallita",
     name: "Canallita",
     community: "+63k",
-    previewVideo: "/clients/canallita/reel.mp4",
+    previewVideo: "/clients/canallita/preview.mp4",
+    poster: "/clients/canallita/poster.jpg",
     tagline: "Moda para machos",
     description:
       "Producción de contenido y reels para Canallita, marca de moda masculina con una personalidad muy marcada.",
     url: "https://canallita.com/",
+    instagram: "canallita.es",
     sector: "Moda",
     videos: [{ src: "/clients/canallita/reel.mp4", title: "Reel Canallita" }],
   },
@@ -86,11 +97,13 @@ export const clients: Client[] = [
     slug: "tram-tram",
     name: "Tram-Tram",
     community: "+15k",
-    previewVideo: "/clients/tram-tram/reel.mp4",
+    previewVideo: "/clients/tram-tram/preview.mp4",
+    poster: "/clients/tram-tram/poster.jpg",
     tagline: "Restaurante familiar · Sarrià, Barcelona",
     description:
       "Contenido gastronómico para Tram-Tram, restaurante familiar de la zona alta de Barcelona con 35 años de historia. Piezas que ponen en valor su cocina y sus platos.",
     url: "https://tram-tram.com/",
+    instagram: "restaurant_tramtram",
     sector: "Gastronomía",
     videos: [{ src: "/clients/tram-tram/reel.mp4", title: "Reel Tram-Tram" }],
   },
@@ -98,11 +111,13 @@ export const clients: Client[] = [
     slug: "besmaya",
     name: "Besmaya",
     community: "+26k",
-    previewVideo: "/clients/besmaya/reel.mp4",
+    previewVideo: "/clients/besmaya/preview.mp4",
+    poster: "/clients/besmaya/poster.jpg",
     tagline: "Proyecto musical",
     description:
       "Contenido audiovisual para el proyecto musical Besmaya: piezas para redes que acompañan su música y su gira.",
     url: "https://www.somosbesmaya.com/",
+    instagram: "somosbesmaya",
     sector: "Música",
     videos: [{ src: "/clients/besmaya/reel.mp4", title: "Reel Besmaya" }],
   },
@@ -110,11 +125,13 @@ export const clients: Client[] = [
     slug: "focacha",
     name: "Focacha BCN",
     community: "+6k",
-    previewVideo: "/clients/focacha/reel.mp4",
+    previewVideo: "/clients/focacha/preview.mp4",
+    poster: "/clients/focacha/poster.jpg",
     tagline: "Focaccia · Barcelona",
     description:
       "Focacha BCN es el speakeasy de focaccia del que todo el mundo habla en Barcelona. Creamos sus Reels y contenido en redes: piezas con ritmo y estética que transmiten el ambiente del local y despiertan las ganas de ir.",
     url: "https://www.instagram.com/focacha.bcn/",
+    instagram: "focacha.bcn",
     sector: "Gastronomía",
     videos: [{ src: "/clients/focacha/reel.mp4", title: "Reel Focacha" }],
   },
@@ -122,11 +139,13 @@ export const clients: Client[] = [
     slug: "pigili-originals",
     name: "Pigili Originals",
     community: "+44k",
-    previewVideo: "/clients/pigili-originals/reel.mp4",
+    previewVideo: "/clients/pigili-originals/preview.mp4",
+    poster: "/clients/pigili-originals/poster.jpg",
     tagline: "Marca con carácter propio",
     description:
       "Producimos el contenido en redes de Pigili Originals. Reels y piezas sociales que refuerzan su identidad de marca y conectan con su comunidad con un estilo reconocible.",
     url: "https://www.instagram.com/pigili.originals/",
+    instagram: "pigili.originals",
     sector: "Lifestyle",
     videos: [{ src: "/clients/pigili-originals/reel.mp4", title: "Reel Pigili" }],
   },
@@ -156,7 +175,8 @@ export const clients: Client[] = [
     slug: "macchina",
     name: "Macchina Pasta Bar",
     logo: "/clients/macchina.png",
-    previewVideo: "/clients/macchina/reel.mp4",
+    previewVideo: "/clients/macchina/preview.mp4",
+    poster: "/clients/macchina/poster.jpg",
     tagline: "Pasta bar",
     description:
       "Contenido gastronómico para Macchina Pasta Bar: reels apetecibles que llevan gente al local.",
@@ -169,11 +189,13 @@ export const clients: Client[] = [
     name: "Ultramarinos Marín",
     logo: "/clients/ultramarinos.png",
     community: "+55,3k",
-    previewVideo: "/clients/ultramarinos-marin/reel.mp4",
+    previewVideo: "/clients/ultramarinos-marin/preview.mp4",
+    poster: "/clients/ultramarinos-marin/poster.jpg",
     tagline: "Bar-asador · Barcelona",
     description:
       "Contenido para Ultramarinos Marín, bar-asador de producto en Balmes. Reels y piezas que transmiten la cocina honesta y artesanal del local.",
     url: "https://www.ultramarinosmarin.com/",
+    instagram: "ultramarinosmarin",
     sector: "Gastronomía",
     videos: [
       { src: "/clients/ultramarinos-marin/reel.mp4", title: "Reel Ultramarinos" },
@@ -192,11 +214,13 @@ export const clients: Client[] = [
   {
     slug: "hijos-de-javier",
     name: "Hijos de Javier",
-    previewVideo: "/clients/hijos-de-javier/reel.mp4",
+    previewVideo: "/clients/hijos-de-javier/preview.mp4",
+    poster: "/clients/hijos-de-javier/poster.jpg",
     tagline: "Bodega · Sarrià, Barcelona",
     description:
       "Contenido para Hijos de Javier, bodega con personalidad en Sarrià. Reels y piezas que capturan su humor, tapas y ambiente de bar de toda la vida.",
     url: "https://www.instagram.com/hijosdejavier/",
+    instagram: "hijosdejavier",
     sector: "Gastronomía",
     videos: [
       { src: "/clients/hijos-de-javier/reel.mp4", title: "Reel Hijos de Javier" },
@@ -205,7 +229,8 @@ export const clients: Client[] = [
   {
     slug: "mimosas",
     name: "Mimosas",
-    previewVideo: "/clients/mimosas/reel.mp4",
+    previewVideo: "/clients/mimosas/preview.mp4",
+    poster: "/clients/mimosas/poster.jpg",
     tagline: "Marca lifestyle",
     description:
       "Creamos el contenido audiovisual de Mimosas: Reels y piezas para redes pensadas para destacar su producto y su estilo, con una estética cuidada y coherente en cada publicación.",
@@ -217,11 +242,13 @@ export const clients: Client[] = [
     slug: "mantis",
     name: "Mantis",
     community: "+22,6k",
-    previewVideo: "/clients/mantis/reel.mp4",
+    previewVideo: "/clients/mantis/preview.mp4",
+    poster: "/clients/mantis/poster.jpg",
     tagline: "Cocina ecléctica · Barcelona",
     description:
       "Contenido para Mantis, restaurante de cocina ecléctica con influencia asiática y raíces catalanas. Piezas que reflejan su omakase y su cocina a la vista.",
     url: "https://www.restaurantemantis.com/",
+    instagram: "mantisbcn",
     sector: "Gastronomía",
     videos: [{ src: "/clients/mantis/reel.mp4", title: "Reel Mantis" }],
   },
@@ -229,7 +256,8 @@ export const clients: Client[] = [
     slug: "b-de-bocata",
     name: "B de Bocata",
     logo: "/clients/bdebocata.png",
-    previewVideo: "/clients/b-de-bocata/reel.mp4",
+    previewVideo: "/clients/b-de-bocata/preview.mp4",
+    poster: "/clients/b-de-bocata/poster.jpg",
     tagline: "Bocatería · Barcelona",
     description:
       "Reels y contenido para redes de B de Bocata, con un estilo fresco y apetecible que pone el producto en el centro y despierta las ganas de visitarlos.",
@@ -278,17 +306,8 @@ export const clients: Client[] = [
     description:
       "Contenido para Soccer Solver, software de inteligencia artificial que ayuda a clubes a tomar mejores decisiones en el mercado de fichajes.",
     url: "https://soccersolver.com/",
+    instagram: "soccersolver",
     sector: "Tecnología",
-    videos: [],
-  },
-  {
-    slug: "mr-crop",
-    name: "Mr. Crop",
-    tagline: "Marca de producto",
-    description:
-      "Producimos contenido audiovisual y de social media para Mr. Crop. Reels y piezas que dan personalidad a la marca y mantienen su presencia activa en redes.",
-    url: "",
-    sector: "Producto",
     videos: [],
   },
   {
@@ -298,6 +317,7 @@ export const clients: Client[] = [
     description:
       "Contenido para ALUXE, concept store de streetwear, arte y diseño nacido en Barcelona. Piezas que reflejan su universo visual y sus lanzamientos.",
     url: "https://aluxestore.com/",
+    instagram: "aluxe.store",
     sector: "Moda",
     videos: [],
   },
@@ -308,6 +328,7 @@ export const clients: Client[] = [
     description:
       "Contenido para Cooltra, la compañía de movilidad sostenible en dos ruedas nacida en Barcelona en 2006 y hoy referente europeo en motosharing y alquiler de motos eléctricas. Piezas para redes que acercan un servicio de ciudad a su público del día a día.",
     url: "https://cooltra.com/es/",
+    instagram: "cooltra_motos",
     sector: "Movilidad",
     videos: [],
   },
@@ -318,6 +339,7 @@ export const clients: Client[] = [
     description:
       "Contenido para Freixenet, la casa de cava del Penedès y una de las marcas de vino espumoso más conocidas del mundo. Piezas de social media que trasladan una marca histórica al lenguaje y al ritmo de las redes.",
     url: "https://www.freixenet.es/",
+    instagram: "freixenet",
     sector: "Bebidas",
     videos: [],
   },
@@ -328,6 +350,7 @@ export const clients: Client[] = [
     description:
       "Contenido gastronómico para Burmet, referencia en Madrid de hamburguesas y carnes a la brasa con locales en Chamartín, Arganzuela y Moncloa. Reels que ponen el producto y el horno de brasa en el centro.",
     url: "https://burmet.es/",
+    instagram: "burmetmadrid",
     sector: "Gastronomía",
     videos: [],
   },

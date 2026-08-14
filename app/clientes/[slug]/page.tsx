@@ -5,6 +5,7 @@ import { clients, getClient, CORE_SERVICES } from "../../clients";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import LazyVideo from "../../components/LazyVideo";
+import InstagramLink from "../../components/InstagramLink";
 import Statement from "../../components/Statement";
 import { ClientJsonLd, BreadcrumbJsonLd } from "../../components/JsonLd";
 import { createPageMetadata, SITE_URL } from "../../seo-config";
@@ -128,19 +129,24 @@ export default async function ClientPage({
                   ))}
                 </div>
                 <div className="hero-actions">
-                  {client.url ? (
+                  {client.instagram ? (
+                    <InstagramLink
+                      handle={client.instagram}
+                      name={client.name}
+                      variant="btn"
+                    />
+                  ) : null}
+                  {client.url && !client.url.includes("instagram.com") ? (
                     <a
-                      className="btn btn-primary"
+                      className="btn btn-ghost"
                       href={client.url}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {client.url.includes("instagram.com")
-                        ? "Ver en Instagram"
-                        : "Visitar web"}
+                      Visitar web
                     </a>
                   ) : null}
-                  <Link className="btn btn-ghost" href="/contacto">
+                  <Link className="btn btn-primary" href="/contacto">
                     Quiero algo así
                   </Link>
                 </div>
@@ -148,7 +154,7 @@ export default async function ClientPage({
 
               {heroVideo ? (
                 <div className="case-hero-media">
-                  <LazyVideo src={heroVideo} />
+                  <LazyVideo src={heroVideo} poster={client.poster} />
                   {client.community ? (
                     <span className="case-feature-stat">
                       {client.community}
@@ -174,7 +180,15 @@ export default async function ClientPage({
               <div>
                 <dt>Enlace</dt>
                 <dd>
-                  {client.url ? (
+                  {client.instagram ? (
+                    <a
+                      href={`https://www.instagram.com/${client.instagram}/`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      @{client.instagram} ↗
+                    </a>
+                  ) : client.url ? (
                     <a href={client.url} target="_blank" rel="noreferrer">
                       {prettyUrl(client.url)} ↗
                     </a>
@@ -266,7 +280,7 @@ export default async function ClientPage({
                 >
                   <div className="client-portfolio-media">
                     {c.previewVideo ? (
-                      <LazyVideo src={c.previewVideo} />
+                      <LazyVideo src={c.previewVideo} poster={c.poster} />
                     ) : c.logo ? (
                       <div className="client-portfolio-fallback">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -275,21 +289,11 @@ export default async function ClientPage({
                     ) : (
                       <div className="client-portfolio-fallback">{c.name}</div>
                     )}
-                    <div className="client-portfolio-overlay">
-                      {c.community ? (
-                        <span className="client-portfolio-stat">
-                          {c.community}
-                        </span>
-                      ) : null}
-                      {c.logo ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          className="client-portfolio-logo"
-                          src={c.logo}
-                          alt=""
-                        />
-                      ) : null}
-                    </div>
+                    {c.community ? (
+                      <span className="client-portfolio-stat">
+                        {c.community}
+                      </span>
+                    ) : null}
                     <span className="client-portfolio-cta" aria-hidden="true">
                       Ver caso →
                     </span>

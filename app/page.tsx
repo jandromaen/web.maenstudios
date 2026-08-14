@@ -55,7 +55,7 @@ function CaseCard({
     <Link className="bd-case" href={`/clientes/${client.slug}`}>
       <div className="bd-case-media">
         {client.previewVideo ? (
-          <LazyVideo src={client.previewVideo} />
+          <LazyVideo src={client.previewVideo} poster={client.poster} />
         ) : client.logo ? (
           <div className="bd-case-logo-fallback">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -65,10 +65,6 @@ function CaseCard({
         <div className="bd-case-overlay">
           {client.community ? (
             <span className="bd-case-stat">Comunidad: {client.community}</span>
-          ) : null}
-          {client.logo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img className="bd-case-logo" src={client.logo} alt="" loading="lazy" decoding="async" />
           ) : null}
         </div>
       </div>

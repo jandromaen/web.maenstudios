@@ -68,6 +68,7 @@ export default function HomeHero() {
       <div className="bd-hero-media">
         <video
           src={reelSrc}
+          poster="/reel-hero-poster.jpg"
           autoPlay
           muted
           loop

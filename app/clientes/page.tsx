@@ -4,6 +4,7 @@ import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import LazyVideo from "../components/LazyVideo";
 import Marquee from "../components/Marquee";
+import InstagramLink from "../components/InstagramLink";
 import StatGrid from "../components/StatGrid";
 import Statement from "../components/Statement";
 import { BreadcrumbJsonLd, ItemListJsonLd } from "../components/JsonLd";
@@ -54,7 +55,9 @@ function FeaturedCase({ client }: { client: Client }) {
         aria-label={`Ver el caso de ${client.name}`}
         tabIndex={-1}
       >
-        {client.previewVideo ? <LazyVideo src={client.previewVideo} /> : null}
+        {client.previewVideo ? (
+          <LazyVideo src={client.previewVideo} poster={client.poster} />
+        ) : null}
         {client.community ? (
           <span className="case-feature-stat">{client.community}</span>
         ) : null}
@@ -92,9 +95,14 @@ function FeaturedCase({ client }: { client: Client }) {
             <dd>{String(client.videos.length).padStart(2, "0")}</dd>
           </div>
         </dl>
-        <Link className="case-feature-link" href={`/clientes/${client.slug}`}>
-          Ver el caso
-        </Link>
+        <div className="case-feature-actions">
+          <Link className="case-feature-link" href={`/clientes/${client.slug}`}>
+            Ver el caso
+          </Link>
+          {client.instagram ? (
+            <InstagramLink handle={client.instagram} name={client.name} />
+          ) : null}
+        </div>
       </div>
     </article>
   );
@@ -102,10 +110,15 @@ function FeaturedCase({ client }: { client: Client }) {
 
 function ClientCard({ client }: { client: Client }) {
   return (
-    <Link className="client-portfolio-card" href={`/clientes/${client.slug}`}>
-      <div className="client-portfolio-media">
+    <article className="client-portfolio-card">
+      <Link
+        className="client-portfolio-media"
+        href={`/clientes/${client.slug}`}
+        aria-label={`Ver el caso de ${client.name}`}
+        tabIndex={-1}
+      >
         {client.previewVideo ? (
-          <LazyVideo src={client.previewVideo} />
+          <LazyVideo src={client.previewVideo} poster={client.poster} />
         ) : client.logo ? (
           <div className="client-portfolio-fallback">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -114,27 +127,28 @@ function ClientCard({ client }: { client: Client }) {
         ) : (
           <div className="client-portfolio-fallback">{client.name}</div>
         )}
-        <div className="client-portfolio-overlay">
-          {client.community ? (
-            <span className="client-portfolio-stat">{client.community}</span>
-          ) : null}
-          {client.logo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img className="client-portfolio-logo" src={client.logo} alt="" />
-          ) : null}
-        </div>
+        {client.community ? (
+          <span className="client-portfolio-stat">{client.community}</span>
+        ) : null}
         <span className="client-portfolio-cta" aria-hidden="true">
           Ver caso →
         </span>
-      </div>
+      </Link>
 
       <div className="client-portfolio-body">
         <span className="client-portfolio-index">{position(client)}</span>
-        <h3>{client.name}</h3>
+        <h3>
+          <Link href={`/clientes/${client.slug}`}>{client.name}</Link>
+        </h3>
         <div className="tagline">{client.tagline}</div>
-        <div className="client-portfolio-services">{client.sector}</div>
+        <div className="client-portfolio-foot">
+          <span className="client-portfolio-services">{client.sector}</span>
+          {client.instagram ? (
+            <InstagramLink handle={client.instagram} name={client.name} />
+          ) : null}
+        </div>
       </div>
-    </Link>
+    </article>
   );
 }
 
@@ -248,21 +262,26 @@ export default function ClientesPage() {
               </div>
               <div className="client-list">
                 {withoutVideo.map((c) => (
-                  <Link
-                    className="client-row"
-                    key={c.slug}
-                    href={`/clientes/${c.slug}`}
-                  >
+                  <div className="client-row" key={c.slug}>
                     <div className="client-row-main">
                       <span className="client-row-index">{position(c)}</span>
                       <div>
-                        <h3>{c.name}</h3>
+                        <h3>
+                          <Link href={`/clientes/${c.slug}`}>{c.name}</Link>
+                        </h3>
                         <div className="tagline">{c.tagline}</div>
                       </div>
                     </div>
                     <span className="client-row-services">{c.sector}</span>
-                    <span className="go">Ver →</span>
-                  </Link>
+                    <div className="client-row-actions">
+                      {c.instagram ? (
+                        <InstagramLink handle={c.instagram} name={c.name} />
+                      ) : null}
+                      <Link className="go" href={`/clientes/${c.slug}`}>
+                        Ver →
+                      </Link>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
