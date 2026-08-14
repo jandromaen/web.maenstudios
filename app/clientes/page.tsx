@@ -13,6 +13,7 @@ import {
   clients,
   sectors,
   reelsFor,
+  communitySize,
   CORE_SERVICES,
   type Client,
 } from "../clients";
@@ -31,12 +32,6 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
-/** "+55,3k" → 55.3. Ordena el portfolio por tamaño de comunidad. */
-function communitySize(client: Client): number {
-  if (!client.community) return 0;
-  return Number(client.community.replace(/[^\d,]/g, "").replace(",", ".")) || 0;
-}
-
 const total = String(clients.length).padStart(2, "0");
 const position = (client: Client) =>
   String(clients.indexOf(client) + 1).padStart(2, "0");
@@ -53,7 +48,13 @@ const withVideo = clients.filter(
 );
 const withoutVideo = clients.filter((c) => !c.previewVideo);
 
-function FeaturedCase({ client }: { client: Client }) {
+function FeaturedCase({
+  client,
+  priority = false,
+}: {
+  client: Client;
+  priority?: boolean;
+}) {
   return (
     <article className="case-feature">
       <Link
@@ -63,7 +64,11 @@ function FeaturedCase({ client }: { client: Client }) {
         tabIndex={-1}
       >
         {client.previewVideo ? (
-          <LazyVideo src={client.previewVideo} poster={client.poster} />
+          <LazyVideo
+            src={client.previewVideo}
+            poster={client.poster}
+            priority={priority}
+          />
         ) : null}
         {client.community ? (
           <span className="case-feature-stat">{client.community}</span>
@@ -244,8 +249,9 @@ export default function ClientesPage() {
               </p>
             </div>
             <div className="case-feature-list">
-              {featured.map((c) => (
-                <FeaturedCase key={c.slug} client={c} />
+              {featured.map((c, i) => (
+                /* El primero entra en pantalla casi de inmediato al bajar */
+                <FeaturedCase key={c.slug} client={c} priority={i === 0} />
               ))}
             </div>
           </div>

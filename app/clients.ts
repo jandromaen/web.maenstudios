@@ -407,6 +407,19 @@ export function getClient(slug: string): Client | undefined {
 /** Sectores presentes en el portfolio, sin repetir y en orden de aparición. */
 export const sectors = [...new Set(clients.map((c) => c.sector))];
 
+/** "+55,3k" → 55.3. Las cifras se guardan como texto con coma decimal. */
+export function communitySize(client: Client): number {
+  if (!client.community) return 0;
+  return Number(client.community.replace(/[^\d,]/g, "").replace(",", ".")) || 0;
+}
+
+/** Las marcas con más seguidores, de mayor a menor. */
+export function topByCommunity(n: number): Client[] {
+  return [...clients]
+    .sort((a, b) => communitySize(b) - communitySize(a))
+    .slice(0, n);
+}
+
 /**
  * Reels listos para un hero, en el orden pedido. Se leen del portfolio en vez
  * de escribir rutas a mano: si un cliente cambia de vídeo o sale de la web, el

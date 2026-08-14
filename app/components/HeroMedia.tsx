@@ -17,7 +17,8 @@ export function HeroReels({ reels }: { reels: HeroReel[] }) {
     <div className="hero-media hero-reels" aria-hidden="true">
       {reels.map((r) => (
         <div className="hero-reel" key={r.src}>
-          <LazyVideo src={r.src} poster={r.poster} />
+          {/* Está en el primer pantallazo: carga desde el HTML, sin esperar a React */}
+          <LazyVideo src={r.src} poster={r.poster} priority />
         </div>
       ))}
     </div>

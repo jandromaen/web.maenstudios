@@ -6,6 +6,12 @@ type LazyVideoProps = {
   src: string;
   className?: string;
   poster?: string;
+  /**
+   * Para los vídeos que ya se ven al abrir la página. Pone el src en el HTML
+   * del servidor, así el navegador lo encuentra al parsear —antes de bajar y
+   * ejecutar React— y empieza a descargar de inmediato.
+   */
+  priority?: boolean;
 };
 
 /**
@@ -13,10 +19,19 @@ type LazyVideoProps = {
  * entrar) en pantalla. Las rejillas de casos tienen decenas de reels: cargarlos
  * todos de golpe hunde el LCP y dispara el consumo de datos en móvil, que es
  * justo lo que penaliza Google en Core Web Vitals.
+ *
+ * Con `priority` se invierte el criterio: el vídeo carga desde el primer byte
+ * de HTML y arranca solo con `autoPlay`, sin esperar a la hidratación. El
+ * observador se mantiene igualmente para pausarlo al salir de pantalla.
  */
-export default function LazyVideo({ src, className, poster }: LazyVideoProps) {
+export default function LazyVideo({
+  src,
+  className,
+  poster,
+  priority = false,
+}: LazyVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(priority);
 
   useEffect(() => {
     const el = ref.current;
@@ -27,13 +42,13 @@ export default function LazyVideo({ src, className, poster }: LazyVideoProps) {
         if (entry.isIntersecting) {
           setVisible(true);
           el.play().catch(() => {
-            /* autoplay bloqueado: se queda en el primer frame */
+            /* autoplay bloqueado: se queda en el póster */
           });
         } else {
           el.pause();
         }
       },
-      { rootMargin: "300px 0px" },
+      { rootMargin: "600px 0px" },
     );
 
     observer.observe(el);
@@ -46,10 +61,11 @@ export default function LazyVideo({ src, className, poster }: LazyVideoProps) {
       className={className}
       src={visible ? src : undefined}
       poster={poster}
+      autoPlay
       muted
       loop
       playsInline
-      preload="none"
+      preload={priority ? "auto" : "none"}
     />
   );
 }

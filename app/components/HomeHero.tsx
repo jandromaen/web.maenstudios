@@ -73,7 +73,7 @@ export default function HomeHero() {
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
         />
       </div>

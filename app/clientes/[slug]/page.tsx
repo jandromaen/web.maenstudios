@@ -154,7 +154,7 @@ export default async function ClientPage({
 
               {heroVideo ? (
                 <div className="case-hero-media">
-                  <LazyVideo src={heroVideo} poster={client.poster} />
+                  <LazyVideo src={heroVideo} poster={client.poster} priority />
                   {client.community ? (
                     <span className="case-feature-stat">
                       {client.community}

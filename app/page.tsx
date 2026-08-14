@@ -5,7 +5,7 @@ import SiteFooter from "./components/SiteFooter";
 import HomeHero from "./components/HomeHero";
 import LazyVideo from "./components/LazyVideo";
 import { FaqJsonLd, ItemListJsonLd, ServiceJsonLd } from "./components/JsonLd";
-import { clients } from "./clients";
+import { clients, topByCommunity } from "./clients";
 import { posts } from "./blog-data";
 import { EMAIL, faqs, marqueeWords } from "./site-data";
 import { createPageMetadata, OFFICES } from "./seo-config";
@@ -31,10 +31,12 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
-const featuredClients = clients
-  .filter((c) => c.previewVideo)
-  .slice(0, 6);
-const engagementClients = clients.filter((c) => c.community).slice(0, 5);
+/* La home enseña solo las seis marcas con más comunidad: es la carta de
+   presentación, y ahí pesan más los nombres grandes que el catálogo entero.
+   Las mismas seis alimentan las dos secciones, para no mandar señales
+   distintas sobre qué marcas nos representan. */
+const featuredClients = topByCommunity(6);
+const engagementClients = featuredClients;
 const brandLogos = clients.filter((c) => c.logo);
 const awards = [
   "Social Media Production",
