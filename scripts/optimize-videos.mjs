@@ -52,7 +52,9 @@ function encode(src, { width, crf, seconds, desde = 0, out = src }) {
     ...(desde ? ["-ss", String(desde)] : []),
     ...(seconds ? ["-t", String(seconds)] : []),
     "-i", src,
-    "-vf", `scale=${width}:-2`,
+    /* min(ancho, iw): nunca escalar por encima del original. Ampliar no añade
+       detalle, solo peso — y algún reel llega ya a 360px de ancho. */
+    "-vf", `scale='min(${width},iw)':-2`,
     "-c:v", "libx264",
     "-profile:v", "main",
     "-preset", "slow",

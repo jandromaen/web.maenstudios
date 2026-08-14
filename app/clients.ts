@@ -330,13 +330,15 @@ export const clients: Client[] = [
     slug: "burmet",
     name: "Burmet",
     community: "+34,9k",
+    previewVideo: "/clients/burmet/preview.mp4",
+    poster: "/clients/burmet/poster.jpg",
     tagline: "Hamburguesas a la brasa · Madrid",
     description:
       "Contenido gastronómico para Burmet, referencia en Madrid de hamburguesas y carnes a la brasa con locales en Chamartín, Arganzuela y Moncloa. Reels que ponen el producto y el horno de brasa en el centro.",
     url: "https://burmet.es/",
     instagram: "burmetmadrid",
     sector: "Gastronomía",
-    videos: [],
+    videos: [{ src: "/clients/burmet/reel.mp4", title: "Reel Burmet" }],
   },
   // ── Pendientes de copy real ────────────────────────────────────────────────
   // Estas cuatro fichas siguen el patrón genérico de la casa porque no hay

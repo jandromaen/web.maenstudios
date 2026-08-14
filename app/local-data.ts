@@ -181,6 +181,9 @@ export const localLandings: LocalLanding[] = [
       "Tecnología y startups",
     ],
     clientSlugs: [
+      // Burmet abre la lista: es el único cliente con local en Madrid, así que
+      // la landing deja de ilustrarse solo con trabajo de Barcelona.
+      "burmet",
       "macala",
       "canallita",
       "jansana",
