@@ -2,12 +2,23 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import Marquee from "../components/Marquee";
+import StatGrid from "../components/StatGrid";
+import Statement from "../components/Statement";
 import {
   BreadcrumbJsonLd,
   FaqJsonLd,
   ServiceJsonLd,
 } from "../components/JsonLd";
-import { steps, services, perks, faqs } from "../site-data";
+import {
+  steps,
+  services,
+  perks,
+  faqs,
+  studioStats,
+  capabilities,
+  marqueeWords,
+} from "../site-data";
 import { createPageMetadata, OFFICES } from "../seo-config";
 
 export const metadata: Metadata = createPageMetadata({
@@ -43,13 +54,12 @@ export default function ServiciosPage() {
       <main>
         <section className="page-hero">
           <div className="container">
-            <span className="eyebrow">Services</span>
+            <span className="index-label">Services · 01 / 03</span>
             <h1>Todo tu contenido, en un mismo sitio</h1>
             <p className="lead">
               Tres pilares para tu marca en redes: dirección creativa,
               producción audiovisual y community management. Del concepto a la
-              conversación diaria, en un mismo equipo, desde nuestras oficinas
-              de Barcelona y Madrid.
+              conversación diaria, en un mismo equipo.
             </p>
             <div className="hero-actions">
               <Link className="btn btn-primary" href="/contacto">
@@ -59,11 +69,32 @@ export default function ServiciosPage() {
                 Ver clientes
               </Link>
             </div>
+            <div className="page-hero-meta">
+              <span>
+                <strong>Barcelona</strong> · Carrer del Bruc 61
+              </span>
+              <span>
+                <strong>Madrid</strong> · Calle de Génova 3
+              </span>
+              <span>Respuesta en 24h</span>
+            </div>
+          </div>
+        </section>
+
+        <Marquee items={marqueeWords} />
+
+        <section className="page-section" style={{ paddingTop: 0 }}>
+          <div className="container" style={{ padding: 0 }}>
+            <StatGrid stats={studioStats} />
           </div>
         </section>
 
         <section className="page-section">
           <div className="container">
+            <div className="section-head">
+              <span className="eyebrow">Qué hacemos</span>
+              <h2>Tres servicios, un solo equipo</h2>
+            </div>
             <div className="service-index">
               {services.map((s, i) => (
                 <article className="service-row" key={s.title}>
@@ -79,14 +110,21 @@ export default function ServiciosPage() {
           </div>
         </section>
 
-        <section className="page-section">
+        <Statement
+          before="Tu departamento de contenido"
+          after="sin montarlo dentro"
+          invert
+          sub="Contratar un equipo interno de creatividad, rodaje y edición cuesta lo que cuesta. Nosotros ya lo tenemos montado: entras al mes siguiente y produces desde la primera semana."
+        />
+
+        <section className="page-section" style={{ paddingTop: "clamp(64px, 10vw, 110px)" }}>
           <div className="container">
             <div className="section-head">
               <span className="eyebrow">Método</span>
               <h2>De la idea a publicar</h2>
               <p>
-                Un proceso claro de principio a fin para que solo te preocupes de
-                tu negocio.
+                Un proceso claro de principio a fin para que solo te preocupes
+                de tu negocio.
               </p>
             </div>
             <div className="grid steps">
@@ -95,6 +133,27 @@ export default function ServiciosPage() {
                   <div className="step-num">{s.n}</div>
                   <h3>{s.title}</h3>
                   <p>{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="page-section">
+          <div className="container">
+            <div className="section-head">
+              <span className="eyebrow">Capacidades</span>
+              <h2>Qué producimos y dónde se publica</h2>
+            </div>
+            <div className="cap-grid">
+              {capabilities.map((col) => (
+                <div className="cap-col" key={col.title}>
+                  <h3>{col.title}</h3>
+                  <ul className="cap-list">
+                    {col.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>

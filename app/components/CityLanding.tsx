@@ -2,9 +2,12 @@ import Link from "next/link";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import ContactForm from "./ContactForm";
+import Marquee from "./Marquee";
+import StatGrid from "./StatGrid";
+import Statement from "./Statement";
 import { BreadcrumbJsonLd, FaqJsonLd, ServiceJsonLd } from "./JsonLd";
 import { clients } from "../clients";
-import { services } from "../site-data";
+import { services, studioStats } from "../site-data";
 import type { LocalLanding } from "../local-data";
 import { getOffice, PHONE, PHONE_DISPLAY } from "../seo-config";
 
@@ -32,27 +35,11 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
       <main>
         <section className="page-hero">
           <div className="container">
-            <span className="eyebrow eyebrow-accent">{landing.eyebrow}</span>
+            <span className="index-label">
+              {landing.eyebrow} · Agencia de contenido
+            </span>
             <h1>{landing.h1}</h1>
             <p className="lead">{landing.lead}</p>
-            {office?.streetAddress ? (
-              <address className="city-address">
-                {office.streetAddress} · {office.postalCode} {office.city}
-                {office.mapUrl ? (
-                  <>
-                    {" "}
-                    ·{" "}
-                    <a
-                      href={office.mapUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Ver en Maps
-                    </a>
-                  </>
-                ) : null}
-              </address>
-            ) : null}
             <div className="hero-actions">
               <Link className="btn btn-primary" href="#presupuesto">
                 Pedir presupuesto
@@ -66,10 +53,38 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
                 </a>
               ) : null}
             </div>
+            <div className="page-hero-meta">
+              {office?.streetAddress ? (
+                <span>
+                  <strong>Oficina</strong> · {office.streetAddress},{" "}
+                  {office.postalCode} {office.city}
+                </span>
+              ) : null}
+              {office?.mapUrl ? (
+                <span>
+                  <a
+                    href={office.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Ver en Maps →
+                  </a>
+                </span>
+              ) : null}
+              <span>Respuesta en 24h</span>
+            </div>
           </div>
         </section>
 
-        <section className="page-section">
+        <Marquee items={landing.sectors} />
+
+        <section className="page-section" style={{ paddingTop: 0 }}>
+          <div className="container" style={{ padding: 0 }}>
+            <StatGrid stats={studioStats} />
+          </div>
+        </section>
+
+        <section className="page-section" style={{ paddingTop: "clamp(56px, 8vw, 96px)" }}>
           <div className="container container-narrow">
             <div className="city-intro">
               {landing.intro.map((paragraph) => (
@@ -118,20 +133,31 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
           </div>
         </section>
 
-        <section className="page-section">
+        <Statement
+          before={`Contenido con intención`}
+          after={`en ${landing.city}`}
+          invert
+          sub="La misma pieza no funciona para todas las marcas ni para todos los públicos. Trabajamos el gancho, el ritmo y la línea visual para que tu contenido sea reconocible entre el ruido."
+        />
+
+        <section className="page-section" style={{ paddingTop: "clamp(64px, 10vw, 110px)" }}>
           <div className="container">
-            <div className="city-columns">
-              <div>
-                <h2>{landing.areasTitle}</h2>
-                <ul className="city-list">
+            <div className="section-head">
+              <span className="eyebrow">Cobertura</span>
+              <h2>Dónde rodamos y para quién</h2>
+            </div>
+            <div className="cap-grid">
+              <div className="cap-col">
+                <h3>{landing.areasTitle}</h3>
+                <ul className="cap-list">
                   {landing.areas.map((area) => (
                     <li key={area}>{area}</li>
                   ))}
                 </ul>
               </div>
-              <div>
-                <h2>Sectores con los que trabajamos</h2>
-                <ul className="city-list">
+              <div className="cap-col">
+                <h3>Sectores con los que trabajamos</h3>
+                <ul className="cap-list">
                   {landing.sectors.map((sector) => (
                     <li key={sector}>{sector}</li>
                   ))}

@@ -132,6 +132,62 @@ export const faqs = [
   },
 ];
 
+/** Métricas reales del portfolio (ver app/clients.ts). */
+export const studioStats = [
+  {
+    label: "Marcas",
+    value: "23",
+    note: "Restauración, moda, lifestyle, producto y tecnología.",
+  },
+  {
+    label: "Comunidad",
+    value: "+250k",
+    note: "Seguidores acumulados de las cuentas que gestionamos.",
+  },
+  {
+    label: "Oficinas",
+    value: "02",
+    note: "Barcelona y Madrid, con rodajes en toda España.",
+  },
+  {
+    label: "Desde",
+    value: "2020",
+    note: "Cinco años produciendo contenido para marcas.",
+  },
+];
+
+/** Formatos y plataformas: listas de capacidades al estilo editorial. */
+export const capabilities = [
+  {
+    title: "Formatos que producimos",
+    items: [
+      "Reels y TikToks",
+      "Spots cortos para campaña",
+      "Piezas de producto",
+      "Contenido UGC con creadores",
+      "Motion graphics y grafismo",
+      "Entrevistas y testimoniales",
+      "Aftermovies de evento",
+      "Fotografía para redes",
+      "Carruseles y formatos estáticos",
+    ],
+  },
+  {
+    title: "Dónde se publica",
+    items: [
+      "Instagram",
+      "TikTok",
+      "YouTube y Shorts",
+      "LinkedIn",
+      "Meta y TikTok Ads",
+      "Web y ecommerce",
+      "Email y newsletters",
+      "Pantallas en local",
+      "Presentaciones y prensa",
+    ],
+  },
+];
+
 export const marqueeWords = [
   "Dirección Creativa",
   "Producción Audiovisual",

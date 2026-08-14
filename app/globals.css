@@ -1086,18 +1086,53 @@ button,
 }
 
 /* ─── Inner pages ─────────────────────────────────────── */
+/* Hero editorial: número de sección, titular grande y regla a sangre.
+   Da a las interiores el mismo peso visual que el hero de la home. */
 .page-hero {
-  padding: clamp(120px, 16vw, 180px) 0 clamp(48px, 8vw, 80px);
+  padding: clamp(132px, 17vw, 200px) 0 clamp(36px, 5vw, 60px);
+  position: relative;
+}
+
+.page-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--line);
 }
 
 .page-hero h1 {
-  font-size: clamp(2.2rem, 7vw, 5rem);
-  max-width: 14ch;
-  margin: 0.4em 0 0.5em;
+  font-size: clamp(2.6rem, 8.5vw, 6.5rem);
+  max-width: 15ch;
+  margin: 0.22em 0 0.4em;
 }
 
 .page-hero .lead {
   margin-top: 8px;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  max-width: 44rem;
+}
+
+/* Fila de datos bajo el titular: ciudad, servicios, fecha… */
+.page-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 32px;
+  margin-top: clamp(28px, 4vw, 44px);
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.page-hero-meta strong {
+  color: var(--fg);
+  font-weight: 700;
 }
 
 section {
@@ -1678,7 +1713,7 @@ section {
 .client-portfolio-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(16px, 2.5vw, 24px);
+  gap: clamp(20px, 2.5vw, 32px) clamp(12px, 2vw, 24px);
 }
 
 @media (min-width: 720px) {
@@ -1698,12 +1733,23 @@ section {
   color: inherit;
 }
 
+/* Desfase alterno: rompe la retícula rígida y da lectura editorial */
+@media (min-width: 720px) {
+  .client-portfolio-card:nth-child(even) {
+    transform: translateY(clamp(20px, 3vw, 44px));
+  }
+
+  .client-portfolio-grid {
+    padding-bottom: clamp(20px, 3vw, 44px);
+  }
+}
+
 .client-portfolio-media {
   aspect-ratio: 9 / 16;
   overflow: hidden;
   background: var(--charcoal);
   position: relative;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .client-portfolio-media::after {
@@ -1711,12 +1757,14 @@ section {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.55) 0%,
-    rgba(0, 0, 0, 0.12) 32%,
-    transparent 58%
-  );
+      to top,
+      rgba(0, 0, 0, 0.58) 0%,
+      rgba(0, 0, 0, 0.12) 34%,
+      transparent 60%
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, transparent 26%);
   pointer-events: none;
+  transition: opacity 0.4s ease;
 }
 
 .client-portfolio-media video,
@@ -1734,16 +1782,18 @@ section {
 
 .client-portfolio-overlay {
   position: absolute;
-  inset: auto 0 0 0;
+  inset: 0;
   z-index: 1;
   padding: 12px 14px 14px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 8px;
   pointer-events: none;
 }
 
+/* La cifra de comunidad es el dato que vende: pastilla de acento arriba */
 .client-portfolio-stat {
   display: inline-flex;
   font-size: 0.6rem;
@@ -1754,6 +1804,38 @@ section {
   color: var(--accent-ink);
   padding: 4px 8px;
   margin-bottom: 0;
+}
+
+.client-portfolio-overlay > :only-child {
+  margin-top: auto;
+}
+
+.client-portfolio-overlay > .client-portfolio-stat:only-child {
+  margin-top: 0;
+  margin-bottom: auto;
+}
+
+/* "Ver caso" aparece al pasar el ratón, centrado sobre el reel */
+.client-portfolio-cta {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  padding: 12px 14px;
+  text-align: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--accent-ink);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.client-portfolio-card:hover .client-portfolio-cta,
+.client-portfolio-card:focus-visible .client-portfolio-cta {
+  transform: translateY(0);
 }
 
 .client-portfolio-logo {
@@ -1789,9 +1871,40 @@ section {
   filter: none;
 }
 
+/* Ficha bajo el reel: número de caso, nombre, claim y servicios */
+.client-portfolio-body {
+  position: relative;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.client-portfolio-body::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--fg);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.client-portfolio-card:hover .client-portfolio-body::before {
+  width: 100%;
+}
+
+.client-portfolio-index {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--line-strong);
+  margin-bottom: 6px;
+}
+
 .client-portfolio-card h3 {
-  font-size: 0.82rem;
-  margin-bottom: 4px;
+  font-size: 0.86rem;
+  margin-bottom: 5px;
 }
 
 .client-portfolio-card .tagline {
@@ -1800,6 +1913,15 @@ section {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+.client-portfolio-services {
+  margin-top: 8px;
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  opacity: 0.85;
 }
 
 .client-stat-pill {
@@ -1822,15 +1944,22 @@ section {
 .client-row {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 16px;
+  gap: 6px 16px;
   align-items: center;
   padding: 22px 0;
   border-bottom: 1px solid var(--line);
-  transition: background 0.2s ease;
+  transition: background 0.25s ease, padding-left 0.25s ease;
+}
+
+@media (min-width: 860px) {
+  .client-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) auto;
+  }
 }
 
 .client-row:hover {
-  background: rgba(0, 0, 0, 0.02);
+  background: var(--bg-soft);
+  padding-left: 12px;
 }
 
 .client-row-main {
@@ -1838,6 +1967,43 @@ section {
   align-items: center;
   gap: 18px;
   min-width: 0;
+}
+
+.client-row-index {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--line-strong);
+  flex-shrink: 0;
+}
+
+/* En móvil los servicios bajan a una segunda línea a todo el ancho */
+.client-row-main {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.client-row .go {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.client-row-services {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+@media (min-width: 860px) {
+  .client-row-main,
+  .client-row .go,
+  .client-row-services {
+    grid-column: auto;
+    grid-row: auto;
+  }
 }
 
 .client-row-main img {
@@ -1871,7 +2037,7 @@ section {
 }
 
 /* Client detail */
-.client-hero {
+.case-hero {
   padding: clamp(120px, 16vw, 180px) 0 clamp(40px, 6vw, 64px);
 }
 
@@ -1885,8 +2051,8 @@ section {
   object-fit: contain;
 }
 
-.client-hero h1 {
-  font-size: clamp(2.2rem, 7vw, 5rem);
+.case-hero h1 {
+  font-size: clamp(2.2rem, 6vw, 4.4rem);
   margin: 0.2em 0 0.35em;
 }
 
@@ -2690,4 +2856,768 @@ section {
 .contact-form button[disabled] {
   opacity: 0.6;
   cursor: progress;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SISTEMA EDITORIAL DE PÁGINAS INTERIORES
+   Referencia: basicagency.com — cuerpo de texto grande y ligero,
+   titulares de sección contenidos, statements enormes, rejillas de
+   métricas y bandas a sangre que rompen el ritmo.
+   ══════════════════════════════════════════════════════════ */
+
+/* ─── Escala de texto (Basic: cuerpo 18px / peso 300) ──── */
+.page-hero .lead,
+.city-intro p,
+.contact-info p,
+.section-head p {
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.service-row p,
+.client-desc,
+.client-approach-text,
+.empty-note,
+.faq-item p {
+  font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+/* ─── Etiqueta de índice: "00 / 05 ●" ─────────────────── */
+.index-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.index-label::after {
+  content: "●";
+  color: var(--accent);
+  font-size: 0.7em;
+}
+
+/* ─── Statement: el bloque tipográfico grande ─────────── */
+.statement {
+  padding: clamp(72px, 12vw, 150px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.statement-text {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 6.25vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  max-width: 20ch;
+}
+
+.statement-text .dot {
+  color: var(--accent);
+}
+
+.statement-sub {
+  margin-top: clamp(24px, 4vw, 40px);
+  max-width: 40rem;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.statement--invert {
+  background: var(--invert-bg);
+  color: var(--invert-fg);
+  border-top: none;
+}
+
+.statement--invert .statement-sub {
+  color: rgba(244, 244, 244, 0.7);
+}
+
+/* ─── Rejilla de métricas ─────────────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .stat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat {
+  background: var(--bg);
+  padding: clamp(24px, 3.5vw, 40px) clamp(16px, 2vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-label {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.stat-note {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* ─── Listas de capacidades a dos columnas ────────────── */
+.cap-grid {
+  display: grid;
+  gap: clamp(32px, 5vw, 72px);
+  padding-top: clamp(32px, 4vw, 48px);
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 860px) {
+  .cap-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cap-col h3 {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  margin-bottom: 20px;
+}
+
+.cap-list li {
+  display: flex;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.cap-list li::before {
+  content: counter(cap-item, decimal-leading-zero);
+  counter-increment: cap-item;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--line-strong);
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
+.cap-list {
+  counter-reset: cap-item;
+}
+
+/* ─── Marquesina reutilizable en interiores ───────────── */
+.page-marquee {
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  padding: 16px 0;
+}
+
+.page-marquee-track {
+  display: flex;
+  gap: 48px;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+.page-marquee-track span::before {
+  content: "●";
+  margin-right: 48px;
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-marquee-track,
+  .bd-awards-track,
+  .bd-brands-track,
+  .bd-spotlight-track {
+    animation: none;
+  }
+}
+
+/* ─── Blog: portada + filas editoriales ───────────────── */
+.post-feature {
+  display: grid;
+  gap: clamp(20px, 3vw, 40px);
+  padding-bottom: clamp(40px, 6vw, 64px);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 900px) {
+  .post-feature {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+  }
+}
+
+.post-thumb {
+  aspect-ratio: 1200 / 630;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+
+.post-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.post-feature:hover .post-thumb img,
+.post-row:hover .post-thumb img {
+  transform: scale(1.04);
+}
+
+.post-feature h2 {
+  font-size: clamp(1.5rem, 3.4vw, 2.6rem);
+  margin: 14px 0;
+  max-width: 18ch;
+}
+
+.post-feature p {
+  color: var(--muted);
+  font-weight: 300;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  max-width: 38rem;
+}
+
+.post-list {
+  margin-top: clamp(40px, 6vw, 64px);
+}
+
+.post-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  padding: clamp(22px, 3vw, 32px) 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+
+@media (min-width: 760px) {
+  .post-row {
+    grid-template-columns: 200px 1fr auto;
+    gap: 32px;
+  }
+}
+
+.post-row .post-thumb {
+  max-width: 200px;
+}
+
+.post-row h3 {
+  font-size: clamp(1.05rem, 1.9vw, 1.35rem);
+  margin-bottom: 8px;
+}
+
+.post-row p {
+  color: var(--muted);
+  font-weight: 300;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 46rem;
+}
+
+.post-row .post-meta,
+.post-feature .post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.post-row .post-go {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+.post-row:hover .post-go {
+  color: var(--fg);
+}
+
+/* ─── Artículo ────────────────────────────────────────── */
+.blog-article h1 {
+  font-size: clamp(2rem, 5.5vw, 3.8rem);
+}
+
+.blog-body > p:first-of-type {
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--fg);
+  margin-bottom: 1.4em;
+}
+
+.blog-body h2 {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  padding-top: 0.4em;
+  border-top: 1px solid var(--line);
+}
+
+.blog-body ul li::marker {
+  color: var(--accent);
+}
+
+/* ─── Contacto: panel rosa azalea (overlay de Basic) ──── */
+.contact-panel {
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: clamp(32px, 5vw, 56px);
+  align-self: stretch;
+}
+
+.contact-panel h1,
+.contact-panel h2 {
+  color: var(--accent-ink);
+}
+
+.contact-panel p,
+.contact-panel .eyebrow,
+.contact-panel .mail-line,
+.contact-panel .contact-email-label,
+.contact-panel address,
+.contact-panel .contact-offices h2 {
+  color: rgba(37, 36, 34, 0.72);
+}
+
+.contact-panel a {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-panel .contact-offices,
+.contact-panel .contact-office h3 {
+  border-color: rgba(37, 36, 34, 0.2);
+}
+
+.contact-panel .contact-offices {
+  border-top-color: rgba(37, 36, 34, 0.2);
+}
+
+/* ─── Ajustes de las landings de ciudad ───────────────── */
+.city-intro p {
+  font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+}
+
+.city-blocks h2 {
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+}
+
+.city-blocks p {
+  font-weight: 300;
+  font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+}
+
+/* ─── Numerales grandes en método y ventajas ──────────── */
+.steps .step-num,
+.perks .big {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--line-strong);
+  margin-bottom: 18px;
+}
+
+.steps .step,
+.perks .perk {
+  padding-top: 28px;
+}
+
+.steps .step p,
+.perks .perk p {
+  font-weight: 300;
+}
+
+/* ─── Ajustes finales del sistema interior ────────────── */
+/* La ficha de cliente comparte el cierre a sangre del hero */
+.case-hero {
+  position: relative;
+  padding-bottom: clamp(32px, 5vw, 52px);
+}
+
+.case-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--line);
+}
+
+.case-hero .index-label {
+  margin-bottom: 16px;
+}
+
+/* Artículo: entradilla bajo el titular */
+.blog-article .lead {
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.blog-article .index-label {
+  margin-bottom: 14px;
+}
+
+/* Cierre del hero de contacto: sin regla, la marquesina ya separa */
+.page-hero:has(+ .page-marquee)::after {
+  display: none;
+}
+
+/* El panel rosa mantiene legible el formulario contiguo */
+@media (min-width: 900px) {
+  .contact-grid .contact-panel {
+    position: sticky;
+    top: 96px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   CLIENTES — portadas editoriales y ficha de caso
+   ══════════════════════════════════════════════════════════ */
+
+/* La rejilla de métricas abre el portfolio pegada a la marquesina */
+.client-stats {
+  padding-top: clamp(40px, 6vw, 72px);
+  padding-bottom: clamp(48px, 8vw, 90px);
+}
+
+/* ─── Caso destacado: reel grande + ficha completa ────── */
+.case-feature-list {
+  display: grid;
+  gap: clamp(56px, 8vw, 110px);
+}
+
+.case-feature {
+  display: grid;
+  gap: clamp(20px, 3vw, 44px);
+  align-items: center;
+}
+
+@media (min-width: 860px) {
+  .case-feature {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+
+  /* Alterna el lado del vídeo para que la lectura no sea monótona */
+  .case-feature:nth-child(even) .case-feature-media {
+    order: 2;
+  }
+}
+
+.case-feature-media {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  max-height: min(78vh, 620px);
+  overflow: hidden;
+  background: var(--charcoal);
+  display: block;
+}
+
+@media (min-width: 860px) {
+  .case-feature-media {
+    justify-self: center;
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+.case-feature-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.case-feature:hover .case-feature-media video {
+  transform: scale(1.04);
+}
+
+.case-feature-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.28), transparent 30%);
+  pointer-events: none;
+}
+
+.case-feature-stat {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 1;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 6px 10px;
+}
+
+.case-feature-logo {
+  height: 30px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  object-position: left center;
+  margin: 16px 0 4px;
+}
+
+.case-feature-body h3 {
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+  margin: 0.18em 0 0.3em;
+}
+
+.case-feature-tagline {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.case-feature-desc {
+  max-width: 44rem;
+  color: var(--muted);
+  font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+  font-weight: 300;
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.case-feature-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 clamp(28px, 5vw, 56px);
+  margin: 22px 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.case-feature-facts dt {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.case-feature-facts dd {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* Enlace con subrayado que se dibuja al entrar el ratón */
+.case-feature-link {
+  display: inline-block;
+  position: relative;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding-bottom: 6px;
+}
+
+.case-feature-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.case-feature-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─── Ficha de caso: hero partido y datos ─────────────── */
+.case-hero-grid {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  margin-top: clamp(16px, 2vw, 24px);
+}
+
+@media (min-width: 900px) {
+  .case-hero-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    align-items: start;
+  }
+}
+
+.case-hero-media {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: var(--charcoal);
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .case-hero-media {
+    max-width: 340px;
+    justify-self: end;
+    position: sticky;
+    top: 96px;
+  }
+}
+
+.case-hero-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.case-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: clamp(36px, 5vw, 64px);
+}
+
+@media (min-width: 760px) {
+  .case-facts {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.case-facts > div {
+  background: var(--bg);
+  padding: clamp(18px, 2.5vw, 26px);
+  min-width: 0;
+}
+
+.case-facts dt {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.case-facts dd {
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.case-facts dd a:hover {
+  color: var(--muted);
+}
+
+/* ─── Paso al caso anterior / siguiente ───────────────── */
+.case-nav {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.case-nav .container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  padding: 0;
+  max-width: none;
+}
+
+.case-nav-item {
+  background: var(--bg);
+  padding: clamp(24px, 4vw, 44px) var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background 0.25s ease;
+}
+
+.case-nav-item:hover {
+  background: var(--bg-soft);
+}
+
+.case-nav-item--next {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.case-nav-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.case-nav-name {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2.6vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.client-work,
+.client-related {
+  padding-top: clamp(56px, 9vw, 100px);
 }

@@ -100,8 +100,9 @@ export default async function BlogPostPage({
             <Link className="back-link" href="/blog">
               ← Volver a news
             </Link>
-            <span className="eyebrow">{post.category}</span>
+            <span className="index-label">{post.category}</span>
             <h1>{post.title}</h1>
+            <p className="lead">{post.excerpt}</p>
             <div className="blog-card-meta">
               <time dateTime={post.date}>{formatDate(post.date)}</time>
               {post.updated && post.updated !== post.date ? (

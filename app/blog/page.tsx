@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import Marquee from "../components/Marquee";
 import { BreadcrumbJsonLd, ItemListJsonLd } from "../components/JsonLd";
 import { posts } from "../blog-data";
 import { createPageMetadata } from "../seo-config";
@@ -22,12 +23,14 @@ export const metadata: Metadata = createPageMetadata({
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("es-ES", {
     year: "numeric",
-    month: "short",
+    month: "long",
   });
 }
 
 export default function BlogPage() {
   const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+  const [featured, ...rest] = sorted;
+  const categories = [...new Set(sorted.map((p) => p.category))];
 
   return (
     <>
@@ -51,27 +54,85 @@ export default function BlogPage() {
       <main>
         <section className="page-hero">
           <div className="container">
-            <span className="eyebrow">News</span>
+            <span className="index-label">News · {sorted.length} artículos</span>
             <h1>Ideas para crecer en redes</h1>
             <p className="lead">
               Todo lo que sabemos sobre Reels, TikToks, estrategia y contenido
               para redes sociales. Sin humo y aplicable a tu marca.
             </p>
+            <div className="page-hero-meta">
+              {categories.map((c) => (
+                <span key={c}>{c}</span>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="page-section">
+        <Marquee items={categories} />
+
+        {featured ? (
+          <section className="page-section" style={{ paddingTop: "clamp(40px, 6vw, 72px)" }}>
+            <div className="container">
+              <Link className="post-feature" href={`/blog/${featured.slug}`}>
+                <div className="post-thumb">
+                  {/* Reutiliza la imagen social generada para cada artículo */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/blog/${featured.slug}/opengraph-image`}
+                    alt={featured.title}
+                    width={1200}
+                    height={630}
+                    fetchPriority="high"
+                  />
+                </div>
+                <div>
+                  <div className="post-meta">
+                    <span>Último artículo</span>
+                    <span>{featured.category}</span>
+                    <span>{featured.readingMinutes} min</span>
+                  </div>
+                  <h2>{featured.title}</h2>
+                  <p>{featured.excerpt}</p>
+                  <div className="post-meta" style={{ marginTop: 18 }}>
+                    <span>{formatDate(featured.date)}</span>
+                    <span>Leer artículo →</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </section>
+        ) : null}
+
+        <section className="page-section" style={{ paddingTop: 0 }}>
           <div className="container">
-            <div className="bd-news-list">
-              {sorted.map((post) => (
+            <div className="post-list">
+              {rest.map((post) => (
                 <Link
-                  className="bd-news-item"
+                  className="post-row"
                   key={post.slug}
                   href={`/blog/${post.slug}`}
                 >
-                  <span className="cat">{post.category}</span>
-                  <h3>{post.title}</h3>
-                  <span className="meta">{formatDate(post.date)}</span>
+                  <div className="post-thumb">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/blog/${post.slug}/opengraph-image`}
+                      alt={post.title}
+                      width={1200}
+                      height={630}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div>
+                    <div className="post-meta">
+                      <span>{post.category}</span>
+                      <span>{formatDate(post.date)}</span>
+                      <span>{post.readingMinutes} min</span>
+                    </div>
+                    <h3>{post.title}</h3>
+                    <p>{post.excerpt}</p>
+                  </div>
+                  <span className="post-go">Leer →</span>
                 </Link>
               ))}
             </div>

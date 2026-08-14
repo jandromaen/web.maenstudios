@@ -5,6 +5,7 @@ import { clients, getClient } from "../../clients";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import LazyVideo from "../../components/LazyVideo";
+import Statement from "../../components/Statement";
 import { ClientJsonLd, BreadcrumbJsonLd } from "../../components/JsonLd";
 import { createPageMetadata, SITE_URL } from "../../seo-config";
 
@@ -41,6 +42,20 @@ export async function generateMetadata({
   });
 }
 
+/** Enlace externo del cliente en formato legible: "macala.es", "@focacha.bcn". */
+function prettyUrl(url: string): string {
+  try {
+    const { hostname, pathname } = new URL(url);
+    if (hostname.includes("instagram.com")) {
+      const handle = pathname.replace(/\//g, "");
+      return handle ? `@${handle}` : "Instagram";
+    }
+    return hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
 export default async function ClientPage({
   params,
 }: {
@@ -62,6 +77,18 @@ export default async function ClientPage({
       ? related
       : clients.filter((c) => c.slug !== client.slug).slice(0, 4);
 
+  // Índice del caso dentro del portfolio: "03 / 23", al estilo de Basic
+  const index = clients.findIndex((c) => c.slug === client.slug);
+  const position = String(index + 1).padStart(2, "0");
+  const total = String(clients.length).padStart(2, "0");
+
+  // Navegación circular entre casos: el portfolio nunca termina en un callejón
+  const prev = clients[(index - 1 + clients.length) % clients.length];
+  const next = clients[(index + 1) % clients.length];
+
+  const heroVideo = client.videos[0]?.src ?? client.previewVideo;
+  const gallery = client.videos.slice(heroVideo === client.videos[0]?.src ? 1 : 0);
+
   return (
     <>
       <SiteHeader light />
@@ -80,57 +107,97 @@ export default async function ClientPage({
       />
 
       <main>
-        <section className="client-hero">
+        <section className="case-hero">
           <div className="container">
             <Link className="back-link" href="/clientes">
               ← Volver a work
             </Link>
-            <span className="eyebrow">Client</span>
-            {client.community ? (
-              <span className="client-stat-pill">
-                Comunidad: {client.community}
-              </span>
-            ) : null}
-            {client.logo ? (
-              <div className="client-logo-big">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={client.logo}
-                  alt={`Logo de ${client.name}`}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            ) : null}
-            <h1>{client.name}</h1>
-            {client.tagline ? (
-              <p className="client-tagline">{client.tagline}</p>
-            ) : null}
-            <p className="client-desc">{client.description}</p>
-            <div className="client-tags">
-              {client.services.map((s) => (
-                <span className="tag-pill" key={s}>
-                  {s}
+
+            <div className="case-hero-grid">
+              <div className="case-hero-body">
+                <span className="index-label">
+                  Client · {position} / {total}
                 </span>
-              ))}
-            </div>
-            <div className="hero-actions">
-              {client.url ? (
-                <a
-                  className="btn btn-primary"
-                  href={client.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {client.url.includes("instagram.com")
-                    ? "Ver en Instagram"
-                    : "Visitar web"}
-                </a>
+                {client.logo ? (
+                  <div className="client-logo-big">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={client.logo}
+                      alt={`Logo de ${client.name}`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ) : null}
+                <h1>{client.name}</h1>
+                {client.tagline ? (
+                  <p className="client-tagline">{client.tagline}</p>
+                ) : null}
+                <p className="client-desc">{client.description}</p>
+                <div className="client-tags">
+                  {client.services.map((s) => (
+                    <span className="tag-pill" key={s}>
+                      {s}
+                    </span>
+                  ))}
+                </div>
+                <div className="hero-actions">
+                  {client.url ? (
+                    <a
+                      className="btn btn-primary"
+                      href={client.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {client.url.includes("instagram.com")
+                        ? "Ver en Instagram"
+                        : "Visitar web"}
+                    </a>
+                  ) : null}
+                  <Link className="btn btn-ghost" href="/contacto">
+                    Quiero algo así
+                  </Link>
+                </div>
+              </div>
+
+              {heroVideo ? (
+                <div className="case-hero-media">
+                  <LazyVideo src={heroVideo} />
+                  {client.community ? (
+                    <span className="case-feature-stat">
+                      {client.community}
+                    </span>
+                  ) : null}
+                </div>
               ) : null}
-              <Link className="btn btn-ghost" href="/contacto">
-                Quiero algo así
-              </Link>
             </div>
+
+            <dl className="case-facts">
+              <div>
+                <dt>Proyecto</dt>
+                <dd>{client.tagline || client.name}</dd>
+              </div>
+              <div>
+                <dt>Servicios</dt>
+                <dd>{client.services.join(" · ")}</dd>
+              </div>
+              <div>
+                <dt>Comunidad</dt>
+                <dd>{client.community ?? "—"}</dd>
+              </div>
+              <div>
+                <dt>Enlace</dt>
+                <dd>
+                  {client.url ? (
+                    <a href={client.url} target="_blank" rel="noreferrer">
+                      {prettyUrl(client.url)} ↗
+                    </a>
+                  ) : (
+                    "—"
+                  )}
+                </dd>
+              </div>
+            </dl>
           </div>
         </section>
 
@@ -140,9 +207,9 @@ export default async function ClientPage({
               <span className="eyebrow">Selected work</span>
               <h2>Algunos de sus mejores vídeos</h2>
             </div>
-            {client.videos.length > 0 ? (
+            {gallery.length > 0 ? (
               <div className="grid portfolio-grid">
-                {client.videos.map((v, i) => (
+                {gallery.map((v, i) => (
                   <div className="reel" key={i}>
                     <LazyVideo className="reel-video" src={v.src} />
                     {v.title ? (
@@ -155,40 +222,47 @@ export default async function ClientPage({
               </div>
             ) : (
               <div className="empty-note">
-                Pronto subiremos aquí los mejores vídeos de {client.name}.
+                {heroVideo
+                  ? `Arriba tienes la pieza destacada de ${client.name}. Iremos subiendo aquí el resto del trabajo.`
+                  : `Pronto subiremos aquí los mejores vídeos de ${client.name}.`}
               </div>
             )}
           </div>
         </section>
 
-        <section className="client-approach">
+        <Statement
+          before={`Somos el equipo de contenido de ${client.name}`}
+          sub={
+            <>
+              Pensamos la idea, la grabamos, la editamos y la publicamos con una
+              línea coherente: {client.services.join(", ").toLowerCase()}.
+              <div className="hero-actions" style={{ marginTop: 24 }}>
+                <Link className="btn btn-primary" href="/servicios">
+                  Ver servicios
+                </Link>
+                <Link className="btn btn-ghost" href="/contacto">
+                  Quiero algo así
+                </Link>
+              </div>
+            </>
+          }
+        />
+
+        <nav className="case-nav" aria-label="Navegación entre casos">
           <div className="container">
-            <div className="section-head">
-              <span className="eyebrow">Approach</span>
-              <h2>Contenido con intención para {client.name}</h2>
-            </div>
-            <p className="client-approach-text">
-              En Maen Studios somos el equipo de contenido de {client.name}:
-              pensamos la idea, la grabamos, la editamos y la publicamos con una
-              línea coherente.
-            </p>
-            <div className="client-tags">
-              {client.services.map((s) => (
-                <span className="tag-pill" key={s}>
-                  {s}
-                </span>
-              ))}
-            </div>
-            <div className="hero-actions">
-              <Link className="btn btn-primary" href="/servicios">
-                Ver servicios
-              </Link>
-              <Link className="btn btn-ghost" href="/contacto">
-                Quiero algo así
-              </Link>
-            </div>
+            <Link className="case-nav-item" href={`/clientes/${prev.slug}`}>
+              <span className="case-nav-label">← Caso anterior</span>
+              <span className="case-nav-name">{prev.name}</span>
+            </Link>
+            <Link
+              className="case-nav-item case-nav-item--next"
+              href={`/clientes/${next.slug}`}
+            >
+              <span className="case-nav-label">Caso siguiente →</span>
+              <span className="case-nav-name">{next.name}</span>
+            </Link>
           </div>
-        </section>
+        </nav>
 
         <section className="client-related">
           <div className="container">
@@ -196,26 +270,47 @@ export default async function ClientPage({
               <span className="eyebrow">More work</span>
               <h2>Otras marcas</h2>
             </div>
-            <div className="client-list">
+            <div className="client-portfolio-grid">
               {relatedClients.map((c) => (
                 <Link
-                  className="client-row"
+                  className="client-portfolio-card"
                   key={c.slug}
                   href={`/clientes/${c.slug}`}
                 >
-                  <div className="client-row-main">
-                    {c.logo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={c.logo} alt="" loading="lazy" />
-                    ) : null}
-                    <div>
-                      <h3>{c.name}</h3>
-                      {c.tagline ? (
-                        <div className="tagline">{c.tagline}</div>
+                  <div className="client-portfolio-media">
+                    {c.previewVideo ? (
+                      <LazyVideo src={c.previewVideo} />
+                    ) : c.logo ? (
+                      <div className="client-portfolio-fallback">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={c.logo} alt="" loading="lazy" decoding="async" />
+                      </div>
+                    ) : (
+                      <div className="client-portfolio-fallback">{c.name}</div>
+                    )}
+                    <div className="client-portfolio-overlay">
+                      {c.community ? (
+                        <span className="client-portfolio-stat">
+                          {c.community}
+                        </span>
+                      ) : null}
+                      {c.logo ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          className="client-portfolio-logo"
+                          src={c.logo}
+                          alt=""
+                        />
                       ) : null}
                     </div>
+                    <span className="client-portfolio-cta" aria-hidden="true">
+                      Ver caso →
+                    </span>
                   </div>
-                  <span className="go">Ver →</span>
+                  <div className="client-portfolio-body">
+                    <h3>{c.name}</h3>
+                    <div className="tagline">{c.tagline}</div>
+                  </div>
                 </Link>
               ))}
             </div>

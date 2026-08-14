@@ -19,7 +19,8 @@ export type Client = {
 };
 
 // NOTA: previewVideo alineado con Portfolio Canva (y9j1nbo6190zkc0) cuando hay asset local.
-// Marcas del Canva sin ficha en web: Cooltra, Freixenet, Gastroconnect, Burmet, Té Pone, Daddies, Gota.
+// Ya están todas las marcas del Canva. Las siete últimas se añadieron sin assets
+// (logo ni reel), así que salen en el índice de /clientes, no en la rejilla de vídeo.
 export const clients: Client[] = [
   {
     slug: "macala",
@@ -287,6 +288,80 @@ export const clients: Client[] = [
       "Contenido para ALUXE, concept store de streetwear, arte y diseño nacido en Barcelona. Piezas que reflejan su universo visual y sus lanzamientos.",
     url: "https://aluxestore.com/",
     services: ["Reels", "Social media", "Moda"],
+    videos: [],
+  },
+  {
+    slug: "cooltra",
+    name: "Cooltra",
+    tagline: "Movilidad eléctrica · Barcelona",
+    description:
+      "Contenido para Cooltra, la compañía de movilidad sostenible en dos ruedas nacida en Barcelona en 2006 y hoy referente europeo en motosharing y alquiler de motos eléctricas. Piezas para redes que acercan un servicio de ciudad a su público del día a día.",
+    url: "https://cooltra.com/es/",
+    services: ["Reels", "Social media", "Marca"],
+    videos: [],
+  },
+  {
+    slug: "freixenet",
+    name: "Freixenet",
+    tagline: "Cava · Sant Sadurní d'Anoia",
+    description:
+      "Contenido para Freixenet, la casa de cava del Penedès y una de las marcas de vino espumoso más conocidas del mundo. Piezas de social media que trasladan una marca histórica al lenguaje y al ritmo de las redes.",
+    url: "https://www.freixenet.es/",
+    services: ["Reels", "Social media", "Marca"],
+    videos: [],
+  },
+  {
+    slug: "burmet",
+    name: "Burmet",
+    tagline: "Hamburguesas a la brasa · Madrid",
+    description:
+      "Contenido gastronómico para Burmet, referencia en Madrid de hamburguesas y carnes a la brasa con locales en Chamartín, Arganzuela y Moncloa. Reels que ponen el producto y el horno de brasa en el centro.",
+    url: "https://burmet.es/",
+    services: ["Reels", "Gastronomía", "Social media"],
+    videos: [],
+  },
+  // ── Pendientes de copy real ────────────────────────────────────────────────
+  // Estas cuatro fichas siguen el patrón genérico de la casa porque no hay
+  // fuente pública que confirme sector, claim ni servicios contratados.
+  // Sustituir tagline / description / services por los datos reales.
+  {
+    slug: "gastroconnect",
+    name: "Gastroconnect",
+    tagline: "Sector gastronómico",
+    description:
+      "Producimos el contenido audiovisual y de social media de Gastroconnect: reels y piezas para redes que mantienen la marca activa y reconocible entre su audiencia.",
+    url: "",
+    services: ["Reels", "Gastronomía", "Social media"],
+    videos: [],
+  },
+  {
+    slug: "te-pone",
+    name: "Té Pone",
+    tagline: "Marca de producto",
+    description:
+      "Contenido audiovisual y social media para Té Pone. Reels y piezas para redes pensadas para dar personalidad a la marca y sostener su presencia con una estética coherente.",
+    url: "",
+    services: ["Reels", "Social media"],
+    videos: [],
+  },
+  {
+    slug: "daddies",
+    name: "Daddies",
+    tagline: "Marca de producto",
+    description:
+      "Producimos contenido para redes de Daddies: reels y piezas sociales que refuerzan su identidad de marca y la mantienen activa frente a su comunidad.",
+    url: "",
+    services: ["Reels", "Social media"],
+    videos: [],
+  },
+  {
+    slug: "gota",
+    name: "Gota",
+    tagline: "Marca de producto",
+    description:
+      "Contenido audiovisual y de social media para Gota. Reels y piezas para redes que ponen el producto en valor con una línea visual cuidada y constante.",
+    url: "",
+    services: ["Reels", "Social media"],
     videos: [],
   },
 ];
