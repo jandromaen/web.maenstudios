@@ -1009,9 +1009,20 @@ button,
   color: var(--muted);
 }
 
+/* Los titulares de artículo van en la tipografía de cuerpo. Monument Extended
+   es una fuente ancha: seis titulares largos seguidos en mayúsculas llenan la
+   pantalla y la página se ve recargada. Se reserva para los titulares de
+   sección, que es donde pesa a favor. */
+.bd-news-item h3,
+.post-row h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+
 .bd-news-item h3 {
   font-size: clamp(0.95rem, 1.6vw, 1.2rem);
-  font-weight: 700;
 }
 
 .bd-news-item .meta {
