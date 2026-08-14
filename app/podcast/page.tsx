@@ -10,6 +10,7 @@ import {
   podcastEpisodes,
 } from "../podcast-data";
 import { createPageMetadata } from "../seo-config";
+import { HeroFrames } from "../components/HeroMedia";
 
 export const metadata: Metadata = createPageMetadata({
   title: "The After Podcast — conversaciones sobre negocio y contenido",
@@ -34,29 +35,44 @@ export default function PodcastPage() {
       />
 
       <main>
-        <section className="page-hero">
+        <section className="page-hero page-hero--media">
           <div className="container">
-            <span className="eyebrow">Podcast</span>
-            <h1>The After Podcast</h1>
-            <p className="lead">
-              Un espacio donde invitamos a nuestros clientes y colaboradores a
-              sentarse frente al micrófono. Historias de emprendimiento,
-              creatividad y de todo lo que ocurre{" "}
-              <em className="podcast-em">después</em> del contenido.
-            </p>
-            <div className="hero-actions">
-              <a
-                className="btn btn-primary"
-                href={podcastInfo.playlistUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Ver en YouTube
-              </a>
-              <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>
-                Quiero ser invitado
-              </a>
+            <div className="page-hero-copy">
+              <span className="eyebrow">Podcast</span>
+              <h1>The After Podcast</h1>
+              <p className="lead">
+                Un espacio donde invitamos a nuestros clientes y colaboradores a
+                sentarse frente al micrófono. Historias de emprendimiento,
+                creatividad y de todo lo que ocurre{" "}
+                <em className="podcast-em">después</em> del contenido.
+              </p>
+              <div className="hero-actions">
+                <a
+                  className="btn btn-primary"
+                  href={podcastInfo.playlistUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Ver en YouTube
+                </a>
+                <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>
+                  Quiero ser invitado
+                </a>
+              </div>
+              <div className="page-hero-meta">
+                <span>
+                  <strong>{podcastEpisodes.length}</strong> episodios
+                </span>
+                <span>Clientes y colaboradores</span>
+                <span>En YouTube</span>
+              </div>
             </div>
+            <HeroFrames
+              frames={podcastEpisodes.slice(0, 4).map((e) => ({
+                src: `https://i.ytimg.com/vi/${e.id}/hqdefault.jpg`,
+                alt: `${e.guest} — The After Podcast #${e.number}`,
+              }))}
+            />
           </div>
         </section>
 

@@ -406,3 +406,15 @@ export function getClient(slug: string): Client | undefined {
 
 /** Sectores presentes en el portfolio, sin repetir y en orden de aparición. */
 export const sectors = [...new Set(clients.map((c) => c.sector))];
+
+/**
+ * Reels listos para un hero, en el orden pedido. Se leen del portfolio en vez
+ * de escribir rutas a mano: si un cliente cambia de vídeo o sale de la web, el
+ * hero no se queda apuntando a un fichero que ya no existe.
+ */
+export function reelsFor(slugs: string[]) {
+  return slugs
+    .map((slug) => clients.find((c) => c.slug === slug))
+    .filter((c): c is Client => Boolean(c?.previewVideo))
+    .map((c) => ({ src: c.previewVideo as string, poster: c.poster }));
+}

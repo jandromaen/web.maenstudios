@@ -20,6 +20,8 @@ import {
   marqueeWords,
 } from "../site-data";
 import { createPageMetadata, OFFICES } from "../seo-config";
+import { HeroReels } from "../components/HeroMedia";
+import { reelsFor } from "../clients";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Servicios de contenido para redes sociales",
@@ -52,32 +54,37 @@ export default function ServiciosPage() {
       />
 
       <main>
-        <section className="page-hero">
+        <section className="page-hero page-hero--media">
           <div className="container">
-            <span className="index-label">Services · 01 / 03</span>
-            <h1>Todo tu contenido, en un mismo sitio</h1>
-            <p className="lead">
-              Tres pilares para tu marca en redes: dirección creativa,
-              producción audiovisual y community management. Del concepto a la
-              conversación diaria, en un mismo equipo.
-            </p>
-            <div className="hero-actions">
-              <Link className="btn btn-primary" href="/contacto">
-                Pedir presupuesto
-              </Link>
-              <Link className="btn btn-ghost" href="/clientes">
-                Ver clientes
-              </Link>
+            <div className="page-hero-copy">
+              <span className="index-label">Services · 01 / 03</span>
+              <h1>Todo tu contenido, en un mismo sitio</h1>
+              <p className="lead">
+                Tres pilares para tu marca en redes: dirección creativa,
+                producción audiovisual y community management. Del concepto a la
+                conversación diaria, en un mismo equipo.
+              </p>
+              <div className="hero-actions">
+                <Link className="btn btn-primary" href="/contacto">
+                  Pedir presupuesto
+                </Link>
+                <Link className="btn btn-ghost" href="/clientes">
+                  Ver clientes
+                </Link>
+              </div>
+              <div className="page-hero-meta">
+                <span>
+                  <strong>Barcelona</strong> · Carrer del Bruc 61
+                </span>
+                <span>
+                  <strong>Madrid</strong> · Calle de Génova 3
+                </span>
+                <span>Respuesta en 24h</span>
+              </div>
             </div>
-            <div className="page-hero-meta">
-              <span>
-                <strong>Barcelona</strong> · Carrer del Bruc 61
-              </span>
-              <span>
-                <strong>Madrid</strong> · Calle de Génova 3
-              </span>
-              <span>Respuesta en 24h</span>
-            </div>
+            <HeroReels
+              reels={reelsFor(["canallita", "ultramarinos-marin", "macala"])}
+            />
           </div>
         </section>
 

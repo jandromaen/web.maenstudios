@@ -6,6 +6,8 @@ import Marquee from "../components/Marquee";
 import { BreadcrumbJsonLd, ItemListJsonLd } from "../components/JsonLd";
 import { posts } from "../blog-data";
 import { createPageMetadata } from "../seo-config";
+import { HeroReels } from "../components/HeroMedia";
+import { reelsFor } from "../clients";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Blog — contenido, redes sociales y marca",
@@ -52,19 +54,26 @@ export default function BlogPage() {
       />
 
       <main>
-        <section className="page-hero">
+        <section className="page-hero page-hero--media">
           <div className="container">
-            <span className="index-label">News · {sorted.length} artículos</span>
-            <h1>Ideas para crecer en redes</h1>
-            <p className="lead">
-              Todo lo que sabemos sobre Reels, TikToks, estrategia y contenido
-              para redes sociales. Sin humo y aplicable a tu marca.
-            </p>
-            <div className="page-hero-meta">
-              {categories.map((c) => (
-                <span key={c}>{c}</span>
-              ))}
+            <div className="page-hero-copy">
+              <span className="index-label">
+                News · {sorted.length} artículos
+              </span>
+              <h1>Ideas para crecer en redes</h1>
+              <p className="lead">
+                Todo lo que sabemos sobre Reels, TikToks, estrategia y contenido
+                para redes sociales. Sin humo y aplicable a tu marca.
+              </p>
+              <div className="page-hero-meta">
+                {categories.map((c) => (
+                  <span key={c}>{c}</span>
+                ))}
+              </div>
             </div>
+            <HeroReels
+              reels={reelsFor(["focacha", "hijos-de-javier", "gran-tonino"])}
+            />
           </div>
         </section>
 

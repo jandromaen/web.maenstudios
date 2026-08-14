@@ -6,7 +6,8 @@ import Marquee from "./Marquee";
 import StatGrid from "./StatGrid";
 import Statement from "./Statement";
 import { BreadcrumbJsonLd, FaqJsonLd, ServiceJsonLd } from "./JsonLd";
-import { clients } from "../clients";
+import { HeroReels } from "./HeroMedia";
+import { clients, reelsFor } from "../clients";
 import { services, studioStats } from "../site-data";
 import type { LocalLanding } from "../local-data";
 import { getOffice, PHONE, PHONE_DISPLAY } from "../seo-config";
@@ -16,6 +17,17 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
   const showcase = landing.clientSlugs
     .map((slug) => clients.find((c) => c.slug === slug))
     .filter((c): c is (typeof clients)[number] => Boolean(c));
+
+  /* Reels de la propia ciudad; si esa oficina aún no tiene piezas subidas,
+     se cae a trabajo del estudio para que el hero nunca quede vacío. */
+  const heroReels = reelsFor(landing.clientSlugs).slice(0, 3);
+  const reels =
+    heroReels.length === 3
+      ? heroReels
+      : [
+          ...heroReels,
+          ...reelsFor(["canallita", "ultramarinos-marin", "macala"]),
+        ].slice(0, 3);
 
   return (
     <>
@@ -33,8 +45,9 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
       />
 
       <main>
-        <section className="page-hero">
+        <section className="page-hero page-hero--media">
           <div className="container">
+            <div className="page-hero-copy">
             <span className="index-label">
               {landing.eyebrow} · Agencia de contenido
             </span>
@@ -73,6 +86,8 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
               ) : null}
               <span>Respuesta en 24h</span>
             </div>
+            </div>
+            <HeroReels reels={reels} />
           </div>
         </section>
 

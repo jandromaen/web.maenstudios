@@ -3623,6 +3623,100 @@ section {
   flex-wrap: wrap;
 }
 
+/* ══════════════════════════════════════════════════════════
+   HEROES INTERIORES CON MEDIOS
+   Somos una productora: el titular solo no cuenta lo que hacemos.
+   El texto baja de tamaño y le cede la mitad al material audiovisual.
+   ══════════════════════════════════════════════════════════ */
+.page-hero--media {
+  padding-top: clamp(112px, 14vw, 168px);
+  padding-bottom: clamp(40px, 6vw, 72px);
+}
+
+@media (min-width: 980px) {
+  .page-hero--media > .container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+    gap: clamp(36px, 5vw, 80px);
+    align-items: center;
+  }
+}
+
+/* Titular más contenido: en un hero partido, 6.5rem se come la columna */
+.page-hero--media h1 {
+  font-size: clamp(2rem, 4.4vw, 3.6rem);
+  max-width: 13ch;
+  margin: 0.24em 0 0.5em;
+}
+
+.page-hero--media .lead {
+  font-size: clamp(0.98rem, 1.3vw, 1.12rem);
+  max-width: 36rem;
+}
+
+.page-hero--media .page-hero-meta {
+  margin-top: clamp(22px, 3vw, 32px);
+}
+
+.hero-media {
+  margin-top: clamp(32px, 5vw, 0px);
+}
+
+@media (min-width: 980px) {
+  .hero-media {
+    margin-top: 0;
+  }
+}
+
+/* Tira de reels en vertical, con desfase alterno tipo hoja de contactos */
+.hero-reels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(8px, 1.2vw, 14px);
+}
+
+.hero-reel {
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: var(--charcoal);
+  position: relative;
+}
+
+.hero-reel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-reel:nth-child(2) {
+  transform: translateY(clamp(-30px, -3vw, -12px));
+}
+
+/* Rejilla de fotogramas o miniaturas 16:9 */
+.hero-frames {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(8px, 1.2vw, 14px);
+}
+
+.hero-frames img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--charcoal);
+}
+
+.hero-frames img:nth-child(odd) {
+  transform: translateY(clamp(-24px, -2.4vw, -10px));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-reel,
+  .hero-frames img {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
 /* ─── Interruptor de tema, abajo a la derecha ─────────── */
 /* Sin JavaScript el botón no haría nada, así que solo aparece con data-js,
    que marca el propio script de arranque del tema. */

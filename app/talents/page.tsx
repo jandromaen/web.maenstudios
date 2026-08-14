@@ -6,6 +6,8 @@ import Marquee from "../components/Marquee";
 import Statement from "../components/Statement";
 import { BreadcrumbJsonLd } from "../components/JsonLd";
 import { createPageMetadata } from "../seo-config";
+import { HeroReels } from "../components/HeroMedia";
+import { reelsFor } from "../clients";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Talents — creadores y UGC para marcas",
@@ -84,30 +86,35 @@ export default function TalentsPage() {
       />
 
       <main>
-        <section className="page-hero">
+        <section className="page-hero page-hero--media">
           <div className="container">
-            <span className="index-label">Talents · UGC &amp; creadores</span>
-            <h1>El talento que mueve tu marca</h1>
-            <p className="lead">
-              Conectamos marcas con creadores que encajan con su voz:
-              descubrimiento, negociación, producción y gestión de campañas con
-              influencers, microinfluencers y UGC.
-            </p>
-            <div className="hero-actions">
-              <Link className="btn btn-primary" href="/contacto">
-                Quiero una campaña
-              </Link>
-              <Link className="btn btn-ghost" href="/contacto">
-                Soy creador/a
-              </Link>
+            <div className="page-hero-copy">
+              <span className="index-label">Talents · UGC &amp; creadores</span>
+              <h1>El talento que mueve tu marca</h1>
+              <p className="lead">
+                Conectamos marcas con creadores que encajan con su voz:
+                descubrimiento, negociación, producción y gestión de campañas
+                con influencers, microinfluencers y UGC.
+              </p>
+              <div className="hero-actions">
+                <Link className="btn btn-primary" href="/contacto">
+                  Quiero una campaña
+                </Link>
+                <Link className="btn btn-ghost" href="/contacto">
+                  Soy creador/a
+                </Link>
+              </div>
+              <div className="page-hero-meta">
+                <span>
+                  <strong>Barcelona</strong> · <strong>Madrid</strong>
+                </span>
+                <span>Campañas en toda España</span>
+                <span>Respuesta en 24h</span>
+              </div>
             </div>
-            <div className="page-hero-meta">
-              <span>
-                <strong>Barcelona</strong> · <strong>Madrid</strong>
-              </span>
-              <span>Campañas en toda España</span>
-              <span>Respuesta en 24h</span>
-            </div>
+            <HeroReels
+              reels={reelsFor(["pigili-originals", "canallita", "mimosas"])}
+            />
           </div>
         </section>
 

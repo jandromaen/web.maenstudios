@@ -8,7 +8,14 @@ import InstagramLink from "../components/InstagramLink";
 import StatGrid from "../components/StatGrid";
 import Statement from "../components/Statement";
 import { BreadcrumbJsonLd, ItemListJsonLd } from "../components/JsonLd";
-import { clients, sectors, CORE_SERVICES, type Client } from "../clients";
+import { HeroReels } from "../components/HeroMedia";
+import {
+  clients,
+  sectors,
+  reelsFor,
+  CORE_SERVICES,
+  type Client,
+} from "../clients";
 import { createPageMetadata } from "../seo-config";
 
 export const metadata: Metadata = createPageMetadata({
@@ -173,20 +180,25 @@ export default function ClientesPage() {
       />
 
       <main>
-        <section className="page-hero">
+        <section className="page-hero page-hero--media">
           <div className="container">
-            <span className="eyebrow eyebrow-accent">maenbrands</span>
-            <h1>Marcas para las que creamos contenido</h1>
-            <p className="lead">
-              Social media production para marcas de restauración, moda,
-              lifestyle y más, en Barcelona, Madrid y toda España. Todo lo que
-              ves en sus redes lo creamos y gestionamos nosotros.
-            </p>
-            <div className="hero-actions">
-              <Link className="btn btn-primary" href="/contacto">
-                Quiero algo así
-              </Link>
+            <div className="page-hero-copy">
+              <span className="eyebrow eyebrow-accent">maenbrands</span>
+              <h1>Marcas para las que creamos contenido</h1>
+              <p className="lead">
+                Social media production para marcas de restauración, moda,
+                lifestyle y más, en Barcelona, Madrid y toda España. Todo lo que
+                ves en sus redes lo creamos y gestionamos nosotros.
+              </p>
+              <div className="hero-actions">
+                <Link className="btn btn-primary" href="/contacto">
+                  Quiero algo así
+                </Link>
+              </div>
             </div>
+            <HeroReels
+              reels={reelsFor(["mantis", "b-de-bocata", "focacha"])}
+            />
           </div>
         </section>
 
