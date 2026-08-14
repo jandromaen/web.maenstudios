@@ -37,4 +37,4 @@ export function resolveTheme(): ThemeMode {
  * así el botón ya viene en el HTML (no aparece de golpe al hidratar) pero no
  * se le enseña a quien tenga JavaScript desactivado, donde no haría nada.
  */
-export const themeBootScript = `(function(){var e=document.documentElement;e.setAttribute("data-js","1");var t="${DEFAULT_THEME}";try{var s=localStorage.getItem("${THEME_STORAGE_KEY}");if(s==="dark"||s==="light")t=s}catch(x){}e.setAttribute("data-theme",t)})();`;
+export const themeBootScript = `(function(){var e=document.documentElement;e.setAttribute("data-js","1");var t="${DEFAULT_THEME}";try{var s=localStorage.getItem("${THEME_STORAGE_KEY}");if(s==="dark"||s==="light")t=s}catch(x){}e.setAttribute("data-theme",t);try{if(!(window.CSS&&CSS.supports&&CSS.supports("animation-timeline","view()")))e.setAttribute("data-anim-js","1")}catch(x){e.setAttribute("data-anim-js","1")}})();`;

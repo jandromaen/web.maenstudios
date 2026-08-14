@@ -3546,6 +3546,60 @@ section {
   }
 }
 
+/* ─── Respaldo sin animation-timeline ─────────────────── */
+/*
+ * `data-anim-js` lo pone el script de arranque en <head>, y SOLO cuando el
+ * navegador no soporta la animación ligada al scroll. Así el estado oculto se
+ * aplica antes del primer pintado —sin parpadeo— y de la transición se encarga
+ * el IntersectionObserver de ScrollReveal.
+ *
+ * La lista de selectores está duplicada en components/ScrollReveal.tsx: si se
+ * toca aquí, hay que tocarla allí.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-anim-js]:not([data-anim-listo]) .section-head,
+  [data-anim-js]:not([data-anim-listo]) .case-feature,
+  [data-anim-js]:not([data-anim-listo]) .client-row,
+  [data-anim-js]:not([data-anim-listo]) .service-row,
+  [data-anim-js]:not([data-anim-listo]) .stat,
+  [data-anim-js]:not([data-anim-listo]) .bd-engagement,
+  [data-anim-js]:not([data-anim-listo]) .bd-news-item,
+  [data-anim-js]:not([data-anim-listo]) .post-feature,
+  [data-anim-js]:not([data-anim-listo]) .post-row,
+  [data-anim-js]:not([data-anim-listo]) .card,
+  [data-anim-js]:not([data-anim-listo]) .step,
+  [data-anim-js]:not([data-anim-listo]) .perk,
+  [data-anim-js]:not([data-anim-listo]) .office-card,
+  [data-anim-js]:not([data-anim-listo]) .episode-card,
+  [data-anim-js]:not([data-anim-listo]) .cap-col,
+  [data-anim-js]:not([data-anim-listo]) .faq-item,
+  [data-anim-js]:not([data-anim-listo]) .contact-block,
+  [data-anim-js]:not([data-anim-listo]) .bd-founders-grid,
+  [data-anim-js]:not([data-anim-listo]) .bd-overview-body,
+  [data-anim-js]:not([data-anim-listo]) .statement-text,
+  [data-anim-js]:not([data-anim-listo]) .statement-sub,
+  [data-anim-js]:not([data-anim-listo]) .tabla-legal-scroll {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Con transform propio: solo opacidad, como en la versión CSS */
+  [data-anim-js]:not([data-anim-listo]) .client-portfolio-card,
+  [data-anim-js]:not([data-anim-listo]) .hero-reel,
+  [data-anim-js]:not([data-anim-listo]) .hero-frames img,
+  [data-anim-js]:not([data-anim-listo]) .bd-case {
+    opacity: 0;
+    transition: opacity 620ms ease-out;
+  }
+
+  [data-anim-js] .es-visible {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* ─── Páginas legales ─────────────────────────────────── */
 /* La tabla se desborda dentro de su propio contenedor: en móvil, una tabla de
    cinco columnas no cabe, y sin esto arrastraría la página entera. */

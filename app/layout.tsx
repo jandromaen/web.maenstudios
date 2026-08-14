@@ -6,6 +6,7 @@ import CookieBanner from "./components/CookieBanner";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { GlobalJsonLd } from "./components/JsonLd";
 import ThemeToggle from "./components/ThemeToggle";
+import ScrollReveal from "./components/ScrollReveal";
 import { themeBootScript } from "./lib/theme";
 import {
   DEFAULT_DESCRIPTION,
@@ -106,6 +107,7 @@ export default function RootLayout({
       <body>
         <GlobalJsonLd />
         {children}
+        <ScrollReveal />
         <ThemeToggle />
         <CookieBanner />
         <GoogleAnalytics />
