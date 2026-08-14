@@ -315,13 +315,15 @@ export const clients: Client[] = [
   {
     slug: "aluxe",
     name: "Aluxe",
+    previewVideo: "/clients/aluxe/preview.mp4",
+    poster: "/clients/aluxe/poster.jpg",
     tagline: "Streetwear · arte · diseño",
     description:
       "Contenido para ALUXE, concept store de streetwear, arte y diseño nacido en Barcelona. Piezas que reflejan su universo visual y sus lanzamientos.",
     url: "https://aluxestore.com/",
     instagram: "aluxe.store",
     sector: "Moda",
-    videos: [],
+    videos: [{ src: "/clients/aluxe/reel.mp4", title: "Reel Aluxe" }],
   },
   {
     slug: "cooltra",
