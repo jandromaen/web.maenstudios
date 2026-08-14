@@ -8,9 +8,11 @@ import {
   podcastInfo,
   podcastValues,
   podcastEpisodes,
+  podcastReels,
 } from "../podcast-data";
+import InstagramLink from "../components/InstagramLink";
 import { createPageMetadata } from "../seo-config";
-import { HeroFrames } from "../components/HeroMedia";
+import { HeroFrames, HeroReels } from "../components/HeroMedia";
 
 export const metadata: Metadata = createPageMetadata({
   title: "The After Podcast — conversaciones sobre negocio y contenido",
@@ -55,6 +57,11 @@ export default function PodcastPage() {
                 >
                   Ver en YouTube
                 </a>
+                <InstagramLink
+                  handle={podcastInfo.instagram}
+                  name={podcastInfo.name}
+                  variant="btn"
+                />
                 <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>
                   Quiero ser invitado
                 </a>
@@ -67,12 +74,17 @@ export default function PodcastPage() {
                 <span>En YouTube</span>
               </div>
             </div>
-            <HeroFrames
-              frames={podcastEpisodes.slice(0, 4).map((e) => ({
-                src: `https://i.ytimg.com/vi/${e.id}/hqdefault.jpg`,
-                alt: `${e.guest} — The After Podcast #${e.number}`,
-              }))}
-            />
+            {/* Los reels mandan en cuanto existan; hasta entonces, YouTube */}
+            {podcastReels.length > 0 ? (
+              <HeroReels reels={podcastReels} />
+            ) : (
+              <HeroFrames
+                frames={podcastEpisodes.slice(0, 4).map((e) => ({
+                  src: `https://i.ytimg.com/vi/${e.id}/hqdefault.jpg`,
+                  alt: `${e.guest} — The After Podcast #${e.number}`,
+                }))}
+              />
+            )}
           </div>
         </section>
 

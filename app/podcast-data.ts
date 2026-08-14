@@ -1,11 +1,24 @@
 export const podcastInfo = {
   name: "The After Podcast",
+  instagram: "theafter.podcast",
   playlistId: "PLsfyGPkvFTaOUeXy12Ss0Muk3CB6iu8Tb",
   playlistUrl:
     "https://www.youtube.com/playlist?list=PLsfyGPkvFTaOUeXy12Ss0Muk3CB6iu8Tb",
   channelUrl: "https://www.youtube.com/@MaenStudios",
   featuredVideoId: "G3Yb-1dMqso",
 };
+
+/**
+ * Reels verticales del Instagram del podcast para el hero.
+ *
+ * Instagram no deja descargar los vídeos de una cuenta sin sesión, así que
+ * los ficheros hay que dejarlos a mano en `public/podcast/`. En cuanto haya
+ * tres entradas aquí, el hero cambia solo: pasa de las miniaturas de YouTube
+ * a la tira de reels. Para generar preview y póster:
+ *
+ *   npm i -D ffmpeg-static && node scripts/optimize-videos.mjs && npm un ffmpeg-static
+ */
+export const podcastReels: { src: string; poster?: string }[] = [];
 
 export const podcastValues = [
   {

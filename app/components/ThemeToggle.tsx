@@ -4,7 +4,7 @@ import {
   resolveTheme,
   setStoredTheme,
   type ThemeMode,
-} from "../lib/theme-schedule";
+} from "../lib/theme";
 
 /**
  * Interruptor flotante de tema. Al pulsarlo la elección queda guardada y pasa

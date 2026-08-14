@@ -63,6 +63,20 @@ for (const dir of readdirSync(raiz)) {
   if (existsSync(reel)) tareas.push({ tipo: "reel", reel, carpeta });
 }
 
+// Reels verticales del podcast: mismo tratamiento que los de cliente.
+// Basta con dejar los .mp4 en public/podcast/ y volver a lanzar el script.
+if (existsSync("public/podcast")) {
+  for (const f of readdirSync("public/podcast")) {
+    if (!f.endsWith(".mp4") || f.includes("preview")) continue;
+    tareas.push({
+      tipo: "reel",
+      reel: join("public/podcast", f),
+      carpeta: "public/podcast",
+      nombre: f.replace(/\.mp4$/, ""),
+    });
+  }
+}
+
 // Vídeos sueltos de la home y del pitch
 for (const [ruta, width, crf] of [
   ["public/reel-hero.mp4", 1600, 30],
@@ -79,15 +93,21 @@ let despues = 0;
 
 for (const t of tareas) {
   if (t.tipo === "reel") {
+    /* Los reels de cliente son uno por carpeta (preview.mp4 / poster.jpg);
+       los del podcast comparten carpeta, así que se prefijan con su nombre. */
+    const base = t.nombre ? `${t.nombre}-` : "";
+    const previewOut = join(t.carpeta, `${base}preview.mp4`);
+    const posterOut = join(t.carpeta, `${base}poster.jpg`);
+
     const original = MB(t.reel);
     antes += original;
     encode(t.reel, { width: 720, crf: 28 });
-    encode(t.reel, { width: 540, crf: 30, seconds: 10, out: join(t.carpeta, "preview.mp4") });
-    poster(t.reel, join(t.carpeta, "poster.jpg"), 540);
-    const nuevo = MB(t.reel) + MB(join(t.carpeta, "preview.mp4")) + MB(join(t.carpeta, "poster.jpg"));
+    encode(t.reel, { width: 540, crf: 30, seconds: 10, out: previewOut });
+    poster(t.reel, posterOut, 540);
+    const nuevo = MB(t.reel) + MB(previewOut) + MB(posterOut);
     despues += nuevo;
     console.log(
-      `${t.carpeta.replace("public/clients/", "").padEnd(20)} ${original.toFixed(1).padStart(5)} MB → ${nuevo.toFixed(1).padStart(5)} MB (reel + preview + póster)`,
+      `${(t.nombre ?? t.carpeta.replace("public/clients/", "")).padEnd(20)} ${original.toFixed(1).padStart(5)} MB → ${nuevo.toFixed(1).padStart(5)} MB (reel + preview + póster)`,
     );
   } else {
     const original = MB(t.ruta);

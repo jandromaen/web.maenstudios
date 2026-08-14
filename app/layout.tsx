@@ -5,9 +5,8 @@ import { Analytics } from "@vercel/analytics/next";
 import CookieBanner from "./components/CookieBanner";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { GlobalJsonLd } from "./components/JsonLd";
-import ThemeSchedule from "./components/ThemeSchedule";
 import ThemeToggle from "./components/ThemeToggle";
-import { themeBootScript } from "./lib/theme-schedule";
+import { themeBootScript } from "./lib/theme";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_KEYWORDS,
@@ -105,7 +104,6 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
       <body>
-        <ThemeSchedule />
         <GlobalJsonLd />
         {children}
         <ThemeToggle />
