@@ -302,8 +302,15 @@ button,
   filter: brightness(0);
 }
 
+/* El logo del PNG es blanco y el cajón usa el fondo invertido, que con el tema
+   oscuro es claro: ahí el logo hay que pasarlo a negro. Con el tema claro el
+   cajón sale oscuro y el blanco original ya vale. */
 .brand-logo-drawer {
   height: 22px;
+  filter: brightness(0);
+}
+
+[data-theme="light"] .brand-logo-drawer {
   filter: none;
 }
 
@@ -412,10 +419,14 @@ button,
   text-transform: uppercase;
   letter-spacing: -0.03em;
   line-height: 1.05;
-  color: var(--accent);
+  /* El rosa sobre el fondo claro del cajón no tiene contraste: a 4,5rem se
+     leía a duras penas. Reposo apagado, hover a plena tinta. */
+  color: var(--invert-muted);
+  transition: color 0.2s ease;
 }
 
-.nav-drawer-links a:hover {
+.nav-drawer-links a:hover,
+.nav-drawer-links a:focus-visible {
   color: var(--invert-fg);
 }
 
