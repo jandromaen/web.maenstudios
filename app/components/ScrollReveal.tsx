@@ -163,26 +163,77 @@ export default function ScrollReveal() {
       .filter((c): c is HTMLElement => Boolean(c));
 
     const observados = [...bloques, ...titulares, ...contenedores];
+    const pendientes = new Set<Element>(observados);
+
+    function revelar(el: Element) {
+      el.classList.add("es-visible");
+      pendientes.delete(el);
+      observer.unobserve(el);
+    }
+
     const observer = new IntersectionObserver(
       (entradas) => {
-        for (const e of entradas) {
-          /* Además de lo que entra, se revela lo que ya ha quedado por encima:
-             al recargar con la página desplazada, o al saltar con un ancla,
-             esos bloques nunca llegan a intersecar y se quedarían invisibles
-             para siempre. */
-          const yaPasado =
-            !e.isIntersecting &&
-            e.boundingClientRect.bottom < (e.rootBounds?.top ?? 0);
-          if (!e.isIntersecting && !yaPasado) continue;
-          e.target.classList.add("es-visible");
-          observer.unobserve(e.target); // una vez dentro, se queda
-        }
+        for (const e of entradas) if (e.isIntersecting) revelar(e.target);
       },
       { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
     );
 
+    /**
+     * Red de seguridad. El observador solo avisa cuando se cruza su umbral, y
+     * si un bloque atraviesa la pantalla entre dos fotogramas —scroll rápido,
+     * salto a un ancla, arrastrar la barra, recargar la página desplazada— ese
+     * cruce no llega a ocurrir y el bloque se queda invisible para siempre.
+     *
+     * Esto repasa lo que falta y descubre todo lo que ya esté a la altura de
+     * la pantalla o por encima. Se apaga solo cuando no queda nada pendiente.
+     */
+    let pedido = 0;
+    let ultimo = 0;
+    function barrer() {
+      pedido = 0;
+      ultimo = performance.now();
+      const limite = window.innerHeight * 0.92;
+      for (const el of pendientes) {
+        if (el.getBoundingClientRect().top < limite) revelar(el);
+      }
+      if (pendientes.size === 0) desconectar();
+    }
+    /* Cada 150 ms como mucho, no en cada fotograma: esto es solo una red de
+       seguridad —del ritmo bueno se encarga el observador— y medir la posición
+       de decenas de elementos en cada fotograma entorpecería el propio scroll,
+       que es justo lo que se quiere que vaya fino.
+     *
+     * La llamada de cierre se programa siempre: descartándola, si el scroll
+     * termina dentro de la ventana de espera, el último barrido no llegaba a
+     * ejecutarse nunca y quedaba contenido sin revelar. */
+    let temporizador = 0;
+    function alDesplazar() {
+      if (pedido || temporizador) return;
+      const transcurrido = performance.now() - ultimo;
+      if (transcurrido >= 150) {
+        pedido = requestAnimationFrame(barrer);
+      } else {
+        temporizador = window.setTimeout(() => {
+          temporizador = 0;
+          pedido = requestAnimationFrame(barrer);
+        }, 150 - transcurrido);
+      }
+    }
+
+    function desconectar() {
+      observer.disconnect();
+      window.removeEventListener("scroll", alDesplazar);
+      window.removeEventListener("resize", alDesplazar);
+      if (pedido) cancelAnimationFrame(pedido);
+      if (temporizador) clearTimeout(temporizador);
+    }
+
     for (const el of observados) observer.observe(el);
-    return () => observer.disconnect();
+    window.addEventListener("scroll", alDesplazar, { passive: true });
+    window.addEventListener("resize", alDesplazar, { passive: true });
+    requestAnimationFrame(barrer); // por si se entra ya desplazado
+
+    return desconectar;
   }, []);
 
   return null;
