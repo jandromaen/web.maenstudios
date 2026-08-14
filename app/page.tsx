@@ -35,7 +35,7 @@ export const metadata: Metadata = createPageMetadata({
    presentación, y ahí pesan más los nombres grandes que el catálogo entero.
    Las mismas seis alimentan las dos secciones, para no mandar señales
    distintas sobre qué marcas nos representan. */
-const featuredClients = topByCommunity(6);
+const featuredClients = topByCommunity(6, { conReel: true });
 const engagementClients = featuredClients;
 const brandLogos = clients.filter((c) => c.logo);
 const awards = [

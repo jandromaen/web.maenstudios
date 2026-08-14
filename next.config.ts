@@ -3,10 +3,20 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      // Mr. Crop se retiró del portfolio: su ficha ya estaba indexada, así que
-      // se redirige en vez de dejar un 404 suelto.
+      // Fichas retiradas del portfolio. Estaban indexadas, así que se redirigen
+      // en vez de dejar 404 sueltos.
       {
         source: "/clientes/mr-crop",
+        destination: "/clientes",
+        permanent: true,
+      },
+      {
+        source: "/clientes/cooltra",
+        destination: "/clientes",
+        permanent: true,
+      },
+      {
+        source: "/clientes/freixenet",
         destination: "/clientes",
         permanent: true,
       },

@@ -327,30 +327,9 @@ export const clients: Client[] = [
     videos: [{ src: "/clients/aluxe/reel.mp4", title: "Reel Aluxe" }],
   },
   {
-    slug: "cooltra",
-    name: "Cooltra",
-    tagline: "Movilidad eléctrica · Barcelona",
-    description:
-      "Contenido para Cooltra, la compañía de movilidad sostenible en dos ruedas nacida en Barcelona en 2006 y hoy referente europeo en motosharing y alquiler de motos eléctricas. Piezas para redes que acercan un servicio de ciudad a su público del día a día.",
-    url: "https://cooltra.com/es/",
-    instagram: "cooltra_motos",
-    sector: "Movilidad",
-    videos: [],
-  },
-  {
-    slug: "freixenet",
-    name: "Freixenet",
-    tagline: "Cava · Sant Sadurní d'Anoia",
-    description:
-      "Contenido para Freixenet, la casa de cava del Penedès y una de las marcas de vino espumoso más conocidas del mundo. Piezas de social media que trasladan una marca histórica al lenguaje y al ritmo de las redes.",
-    url: "https://www.freixenet.es/",
-    instagram: "freixenet",
-    sector: "Bebidas",
-    videos: [],
-  },
-  {
     slug: "burmet",
     name: "Burmet",
+    community: "+34,9k",
     tagline: "Hamburguesas a la brasa · Madrid",
     description:
       "Contenido gastronómico para Burmet, referencia en Madrid de hamburguesas y carnes a la brasa con locales en Chamartín, Arganzuela y Moncloa. Reels que ponen el producto y el horno de brasa en el centro.",
@@ -418,9 +397,16 @@ export function communitySize(client: Client): number {
   return Number(client.community.replace(/[^\d,]/g, "").replace(",", ".")) || 0;
 }
 
-/** Las marcas con más seguidores, de mayor a menor. */
-export function topByCommunity(n: number): Client[] {
-  return [...clients]
+/**
+ * Las marcas con más seguidores, de mayor a menor.
+ *
+ * `conReel` las limita a las que tienen vídeo. La home es una parrilla de
+ * reels: una marca sin pieza sale como un recuadro vacío entre vídeos, y eso
+ * la perjudica más que no aparecer. En cuanto tenga reel entra sola.
+ */
+export function topByCommunity(n: number, { conReel = false } = {}): Client[] {
+  return clients
+    .filter((c) => (conReel ? Boolean(c.previewVideo) : true))
     .sort((a, b) => communitySize(b) - communitySize(a))
     .slice(0, n);
 }
