@@ -76,11 +76,11 @@ export default function ContactoPage() {
               <dl className="bd-founders-names">
                 <div>
                   <dt>Richi</dt>
-                  <dd>Cofundador</dd>
+                  <dd>Director Creativo</dd>
                 </div>
                 <div>
                   <dt>Jandro</dt>
-                  <dd>Cofundador</dd>
+                  <dd>Director de Cuentas</dd>
                 </div>
               </dl>
             </div>
