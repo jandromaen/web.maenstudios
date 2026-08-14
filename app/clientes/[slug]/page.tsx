@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { clients, getClient } from "../../clients";
+import { clients, getClient, CORE_SERVICES } from "../../clients";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import LazyVideo from "../../components/LazyVideo";
@@ -37,7 +37,8 @@ export async function generateMetadata({
       client.name,
       `contenido ${client.name}`,
       "reels",
-      ...(client.services ?? []),
+      `agencia de contenido ${client.sector.toLowerCase()}`,
+      ...CORE_SERVICES,
     ],
   });
 }
@@ -66,11 +67,7 @@ export default async function ClientPage({
   if (!client) notFound();
 
   const related = clients
-    .filter(
-      (c) =>
-        c.slug !== client.slug &&
-        c.services.some((s) => client.services.includes(s)),
-    )
+    .filter((c) => c.slug !== client.slug && c.sector === client.sector)
     .slice(0, 4);
   const relatedClients =
     related.length > 0
@@ -124,7 +121,7 @@ export default async function ClientPage({
                 ) : null}
                 <p className="client-desc">{client.description}</p>
                 <div className="client-tags">
-                  {client.services.map((s) => (
+                  {CORE_SERVICES.map((s) => (
                     <span className="tag-pill" key={s}>
                       {s}
                     </span>
@@ -163,12 +160,12 @@ export default async function ClientPage({
 
             <dl className="case-facts">
               <div>
-                <dt>Proyecto</dt>
-                <dd>{client.tagline || client.name}</dd>
+                <dt>Sector</dt>
+                <dd>{client.sector}</dd>
               </div>
               <div>
                 <dt>Servicios</dt>
-                <dd>{client.services.join(" · ")}</dd>
+                <dd>{CORE_SERVICES.join(" · ")}</dd>
               </div>
               <div>
                 <dt>Comunidad</dt>
@@ -223,8 +220,9 @@ export default async function ClientPage({
           before={`Somos el equipo de contenido de ${client.name}`}
           sub={
             <>
-              Pensamos la idea, la grabamos, la editamos y la publicamos con una
-              línea coherente: {client.services.join(", ").toLowerCase()}.
+              Servicio completo: dirección creativa, producción audiovisual y
+              community management. Pensamos la idea, la grabamos, la editamos y
+              la publicamos con una línea coherente.
               <div className="hero-actions" style={{ marginTop: 24 }}>
                 <Link className="btn btn-primary" href="/servicios">
                   Ver servicios

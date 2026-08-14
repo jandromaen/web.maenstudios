@@ -7,7 +7,7 @@ import Marquee from "../components/Marquee";
 import StatGrid from "../components/StatGrid";
 import Statement from "../components/Statement";
 import { BreadcrumbJsonLd, ItemListJsonLd } from "../components/JsonLd";
-import { clients, type Client } from "../clients";
+import { clients, sectors, CORE_SERVICES, type Client } from "../clients";
 import { createPageMetadata } from "../seo-config";
 
 export const metadata: Metadata = createPageMetadata({
@@ -70,13 +70,17 @@ function FeaturedCase({ client }: { client: Client }) {
         <p className="case-feature-tagline">{client.tagline}</p>
         <p className="case-feature-desc">{client.description}</p>
         <div className="client-tags">
-          {client.services.map((s) => (
+          {CORE_SERVICES.map((s) => (
             <span className="tag-pill" key={s}>
               {s}
             </span>
           ))}
         </div>
         <dl className="case-feature-facts">
+          <div>
+            <dt>Sector</dt>
+            <dd>{client.sector}</dd>
+          </div>
           {client.community ? (
             <div>
               <dt>Comunidad</dt>
@@ -128,9 +132,7 @@ function ClientCard({ client }: { client: Client }) {
         <span className="client-portfolio-index">{position(client)}</span>
         <h3>{client.name}</h3>
         <div className="tagline">{client.tagline}</div>
-        <div className="client-portfolio-services">
-          {client.services.join(" · ")}
-        </div>
+        <div className="client-portfolio-services">{client.sector}</div>
       </div>
     </Link>
   );
@@ -197,8 +199,8 @@ export default function ClientesPage() {
                 },
                 {
                   label: "Sectores",
-                  value: "08",
-                  note: "Restauración, moda, música, lifestyle, interiorismo, producto, tecnología y ocio nocturno",
+                  value: String(sectors.length).padStart(2, "0"),
+                  note: sectors.join(", "),
                 },
               ]}
             />
@@ -258,9 +260,7 @@ export default function ClientesPage() {
                         <div className="tagline">{c.tagline}</div>
                       </div>
                     </div>
-                    <span className="client-row-services">
-                      {c.services.join(" · ")}
-                    </span>
+                    <span className="client-row-services">{c.sector}</span>
                     <span className="go">Ver →</span>
                   </Link>
                 ))}
