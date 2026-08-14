@@ -4,9 +4,7 @@ import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import ContactForm from "../components/ContactForm";
 import ContactEmails from "../components/ContactEmails";
-import Marquee from "../components/Marquee";
 import { BreadcrumbJsonLd, ContactPageJsonLd } from "../components/JsonLd";
-import { marqueeWords } from "../site-data";
 import {
   createPageMetadata,
   OFFICES,
@@ -41,69 +39,68 @@ export default function ContactoPage() {
       />
 
       <main>
-        <section className="page-hero">
+        <section className="page-hero contact-hero">
           <div className="container">
-            <span className="index-label">Contact · Barcelona &amp; Madrid</span>
+            <span className="index-label">Contacto</span>
             <h1>Cuéntanos tu proyecto</h1>
             <p className="lead">
-              Te respondemos en menos de 24h con una primera idea para tu marca
-              y un presupuesto cerrado. Sin compromiso.
+              Te respondemos en menos de 24h con una primera idea y un
+              presupuesto cerrado. Sin compromiso.
             </p>
           </div>
         </section>
 
-        <Marquee items={marqueeWords} />
-
-        <section className="page-section" style={{ paddingTop: "clamp(40px, 6vw, 72px)" }}>
+        <section className="page-section contact-section">
           <div className="container contact-grid">
-            <div className="contact-info contact-panel">
-              <span className="eyebrow">Escríbenos</span>
-              <h2>Hablemos de tu marca</h2>
-              <div className="mail-line">Correo directo</div>
-              <ContactEmails />
+            {/* Columna de datos: etiqueta pequeña y dato, separados por filete.
+                Antes era un panel de color con dos titulares que repetían lo
+                que ya dice el hero. */}
+            <aside className="contact-aside">
+              <div className="contact-block">
+                <span className="contact-label">Correo</span>
+                <ContactEmails />
+              </div>
+
               {PHONE ? (
-                <div className="contact-phone">
-                  <a href={`tel:${PHONE}`}>{PHONE_DISPLAY || PHONE}</a>
+                <div className="contact-block">
+                  <span className="contact-label">Teléfono</span>
+                  <a className="contact-value" href={`tel:${PHONE}`}>
+                    {PHONE_DISPLAY || PHONE}
+                  </a>
                 </div>
               ) : null}
 
-              <div className="contact-offices">
-                <h2>Nuestras oficinas</h2>
+              <div className="contact-block">
+                <span className="contact-label">Oficinas</span>
                 {OFFICES.map((office) => (
                   <div className="contact-office" key={office.id}>
-                    <h3>{office.city}</h3>
+                    <Link
+                      className="contact-value"
+                      href={office.landingPath}
+                    >
+                      {office.city}
+                    </Link>
                     <address>
-                      {office.streetAddress ? (
-                        <>
-                          {office.streetAddress}
-                          <br />
-                          {office.postalCode} {office.city},{" "}
-                          {office.addressRegion}
-                        </>
-                      ) : (
-                        <>
-                          {office.city}, {office.addressRegion}
-                        </>
-                      )}
-                    </address>
-                    <div className="contact-office-links">
+                      {office.streetAddress
+                        ? `${office.streetAddress}, ${office.postalCode}`
+                        : office.addressRegion}
                       {office.mapUrl ? (
-                        <a
-                          href={office.mapUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Ver en Google Maps
-                        </a>
+                        <>
+                          {" · "}
+                          <a
+                            href={office.mapUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Maps ↗
+                          </a>
+                        </>
                       ) : null}
-                      <Link href={office.landingPath}>
-                        Agencia de contenido en {office.city}
-                      </Link>
-                    </div>
+                    </address>
                   </div>
                 ))}
               </div>
-            </div>
+            </aside>
 
             <ContactForm origen="contacto" />
           </div>
