@@ -109,18 +109,24 @@ export default function Home() {
             <h2 className="bd-overview-title">
               Agencia de contenido para redes sociales en Barcelona y Madrid
             </h2>
-            <p className="bd-overview-text">
-              Maen Studios® es una agencia de contenido para redes sociales que
-              convierte cultura, producto y marca en piezas con alma propia.{" "}
-              <span className="muted">
+            {/* El texto largo va entero por SEO, pero partido en dos pesos: la
+                frase que define el estudio en grande, y el detalle en cuerpo
+                pequeño al lado. Todo del mismo tamaño era un muro. */}
+            <div className="bd-overview-body">
+              <p className="bd-overview-text">
+                Maen Studios® es una agencia de contenido para redes sociales
+                que convierte cultura, producto y marca en piezas con alma
+                propia.
+              </p>
+              <p className="bd-overview-sub">
                 Social media production con intención: dirección creativa,
                 producción audiovisual y community management para marcas que
                 quieren crecer de verdad. Con oficina en{" "}
-                <Link href="/agencia-de-contenido-barcelona">Barcelona</Link> y en{" "}
-                <Link href="/agencia-de-contenido-madrid">Madrid</Link>, y rodajes
-                en toda España.
-              </span>
-            </p>
+                <Link href="/agencia-de-contenido-barcelona">Barcelona</Link> y
+                en <Link href="/agencia-de-contenido-madrid">Madrid</Link>, y
+                rodajes en toda España.
+              </p>
+            </div>
           </div>
         </section>
 
