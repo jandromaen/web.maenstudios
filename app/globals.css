@@ -3477,37 +3477,24 @@ section {
   animation: entrada-pagina 420ms ease-out both;
 }
 
-/* ─── Aparición por scroll ────────────────────────────── */
+/* ─── Aparición al entrar en pantalla ─────────────────── */
 /*
- * Va con animation-timeline: view(), no con IntersectionObserver.
+ * `data-anim` lo pone el script de arranque en <head>, antes del primer
+ * pintado: por eso los bloques ya nacen ocultos y no hay parpadeo. De
+ * revelarlos se encarga components/ScrollReveal.tsx con un
+ * IntersectionObserver, que añade `es-visible`.
  *
- * La razón es el parpadeo: para ocultar los bloques con JavaScript habría que
- * esperar a que React monte, y para entonces la página ya se ha pintado — se
- * verían aparecer, desaparecer y volver. Con la animación ligada al scroll, el
- * estado inicial lo aplica el propio CSS antes del primer pintado.
+ * Las tres listas de selectores están duplicadas en ese componente. Si se
+ * toca una, hay que tocar la otra.
  *
- * `animation-range: entry` limita la animación a la entrada en pantalla: lo
- * que ya quedó atrás se queda visible en vez de volver a desvanecerse. Y va
- * todo dentro de @supports porque en los navegadores que no lo implementan el
- * contenido simplemente sale, sin animación y sin romperse.
+ * `--paso` es el retardo en ms que calcula el JS: la posición del elemento
+ * dentro de su grupo, para que las rejillas entren en cascada y no de golpe.
  */
-@keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: translateY(26px);
-  }
-}
-
-@keyframes aparecer-sin-mover {
-  from {
-    opacity: 0;
-  }
-}
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .section-head,
-    .case-feature,
+@media (prefers-reduced-motion: no-preference) {
+  [data-anim]:not([data-anim-listo]) :where(
+    .section-head .eyebrow,
+    .section-head p,
+    .case-feature-body,
     .client-row,
     .service-row,
     .stat,
@@ -3523,80 +3510,86 @@ section {
     .cap-col,
     .faq-item,
     .contact-block,
-    .bd-founders-grid,
-    .bd-overview-body,
-    .statement-text,
+    .bd-founders-copy,
+    .bd-overview-sub,
     .statement-sub,
-    .tabla-legal-scroll {
-      animation: aparecer 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 55%;
-    }
+    .tabla-legal-scroll,
+    .client-portfolio-body,
+    .hero-actions,
+    .page-hero-meta
+  ) {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 620ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--paso, 0) * 1ms),
+      transform 720ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--paso, 0) * 1ms);
+  }
 
-    /* Estos ya llevan su propio transform —el desfase alterno de la rejilla,
-       el reel elevado del hero— y animarlo aquí lo pisaría. Solo opacidad. */
-    .client-portfolio-card,
+  /* Los medios no se funden: se descubren con un barrido de abajo arriba, y
+     la imagen entra con una escala mínima que asienta al terminar. Es lo que
+     diferencia un portfolio de un fundido genérico. */
+  [data-anim]:not([data-anim-listo]) :where(
+    .client-portfolio-media,
+    .case-feature-media,
     .hero-reel,
     .hero-frames img,
-    .bd-case {
-      animation: aparecer-sin-mover 620ms ease-out both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 50%;
-    }
-  }
-}
-
-/* ─── Respaldo sin animation-timeline ─────────────────── */
-/*
- * `data-anim-js` lo pone el script de arranque en <head>, y SOLO cuando el
- * navegador no soporta la animación ligada al scroll. Así el estado oculto se
- * aplica antes del primer pintado —sin parpadeo— y de la transición se encarga
- * el IntersectionObserver de ScrollReveal.
- *
- * La lista de selectores está duplicada en components/ScrollReveal.tsx: si se
- * toca aquí, hay que tocarla allí.
- */
-@media (prefers-reduced-motion: no-preference) {
-  [data-anim-js]:not([data-anim-listo]) .section-head,
-  [data-anim-js]:not([data-anim-listo]) .case-feature,
-  [data-anim-js]:not([data-anim-listo]) .client-row,
-  [data-anim-js]:not([data-anim-listo]) .service-row,
-  [data-anim-js]:not([data-anim-listo]) .stat,
-  [data-anim-js]:not([data-anim-listo]) .bd-engagement,
-  [data-anim-js]:not([data-anim-listo]) .bd-news-item,
-  [data-anim-js]:not([data-anim-listo]) .post-feature,
-  [data-anim-js]:not([data-anim-listo]) .post-row,
-  [data-anim-js]:not([data-anim-listo]) .card,
-  [data-anim-js]:not([data-anim-listo]) .step,
-  [data-anim-js]:not([data-anim-listo]) .perk,
-  [data-anim-js]:not([data-anim-listo]) .office-card,
-  [data-anim-js]:not([data-anim-listo]) .episode-card,
-  [data-anim-js]:not([data-anim-listo]) .cap-col,
-  [data-anim-js]:not([data-anim-listo]) .faq-item,
-  [data-anim-js]:not([data-anim-listo]) .contact-block,
-  [data-anim-js]:not([data-anim-listo]) .bd-founders-grid,
-  [data-anim-js]:not([data-anim-listo]) .bd-overview-body,
-  [data-anim-js]:not([data-anim-listo]) .statement-text,
-  [data-anim-js]:not([data-anim-listo]) .statement-sub,
-  [data-anim-js]:not([data-anim-listo]) .tabla-legal-scroll {
-    opacity: 0;
-    transform: translateY(26px);
-    transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    .bd-case-media,
+    .case-hero-media,
+    .post-thumb
+  ) {
+    clip-path: inset(0 0 100% 0);
+    transform: scale(1.06);
+    transition:
+      clip-path 900ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--paso, 0) * 1ms),
+      transform 1100ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--paso, 0) * 1ms);
   }
 
-  /* Con transform propio: solo opacidad, como en la versión CSS */
-  [data-anim-js]:not([data-anim-listo]) .client-portfolio-card,
-  [data-anim-js]:not([data-anim-listo]) .hero-reel,
-  [data-anim-js]:not([data-anim-listo]) .hero-frames img,
-  [data-anim-js]:not([data-anim-listo]) .bd-case {
-    opacity: 0;
-    transition: opacity 620ms ease-out;
+  /* Las listas de arriba van en :where() y no en :is() por especificidad:
+     :is() adopta la de su argumento más específico, y basta con que la lista
+     incluya algo como ".section-head .eyebrow" —dos clases— para que la regla
+     que oculta pese más que esta y los bloques no lleguen a aparecer nunca.
+     :where() no aporta especificidad, así que esta gana siempre. */
+  [data-anim]:not([data-anim-listo]) .es-visible {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
   }
 
-  [data-anim-js] .es-visible {
-    opacity: 1 !important;
-    transform: none !important;
+  /* El medio se descubre cuando entra su contenedor, no cuando entra él: con
+     el recorte a cero no tiene área y el observador nunca lo vería. */
+  [data-anim]:not([data-anim-listo]) .es-visible :where(
+    .client-portfolio-media,
+    .case-feature-media,
+    .hero-reel,
+    .hero-frames img,
+    .bd-case-media,
+    .case-hero-media,
+    .post-thumb
+  ) {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+
+  /* Titulares palabra a palabra: la exterior recorta, la interior sube. Así
+     cada palabra asoma desde debajo de su propia línea. */
+  [data-anim] .palabra {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    /* Aire para que no recorte tildes, colas de las jotas ni subrayados */
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+
+  [data-anim] .palabra > span {
+    display: inline-block;
+    transform: translateY(105%);
+    transition: transform 780ms cubic-bezier(0.22, 1, 0.36, 1)
+      calc(var(--paso, 0) * 1ms);
+  }
+
+  [data-anim]:not([data-anim-listo]) .es-visible .palabra > span {
+    transform: none;
   }
 }
 
