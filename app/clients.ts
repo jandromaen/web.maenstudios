@@ -315,6 +315,7 @@ export const clients: Client[] = [
   {
     slug: "aluxe",
     name: "Aluxe",
+    community: "+1,1k",
     previewVideo: "/clients/aluxe/preview.mp4",
     poster: "/clients/aluxe/poster.jpg",
     tagline: "Streetwear · arte · diseño",
