@@ -18,7 +18,11 @@ export const podcastInfo = {
  *
  *   npm i -D ffmpeg-static && node scripts/optimize-videos.mjs && npm un ffmpeg-static
  */
-export const podcastReels: { src: string; poster?: string }[] = [];
+export const podcastReels: { src: string; poster?: string }[] = [
+  { src: "/podcast/reel-1-preview.mp4", poster: "/podcast/reel-1-poster.jpg" },
+  { src: "/podcast/reel-2-preview.mp4", poster: "/podcast/reel-2-poster.jpg" },
+  { src: "/podcast/reel-3-preview.mp4", poster: "/podcast/reel-3-poster.jpg" },
+];
 
 export const podcastValues = [
   {

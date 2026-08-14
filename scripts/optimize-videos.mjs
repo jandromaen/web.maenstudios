@@ -29,6 +29,22 @@ const MB = (p) => statSync(p).size / 1048576;
 const run = (args) =>
   execFileSync(ffmpeg, ["-y", "-hide_banner", "-loglevel", "error", ...args]);
 
+/**
+ * ¿Este vídeo ya pasó por aquí? El script elimina siempre la pista de audio,
+ * así que un vídeo sin audio ya está procesado. Volver a comprimirlo encadena
+ * pérdidas y puede incluso engordarlo. Sin esta guarda, ejecutar el script para
+ * añadir un vídeo nuevo estropea todos los anteriores.
+ */
+function yaOptimizado(ruta) {
+  try {
+    execFileSync(ffmpeg, ["-hide_banner", "-i", ruta], { stdio: "pipe" });
+    return false;
+  } catch (e) {
+    // ffmpeg sale con error al no indicarle salida; la info va por stderr
+    return !/Stream #\d+:\d+.*: Audio:/.test(String(e.stderr));
+  }
+}
+
 /** Recodifica sobre el propio fichero pasando por un temporal. */
 function encode(src, { width, crf, seconds, out = src }) {
   const tmp = join(dirname(out), `.tmp-${Date.now()}.mp4`);
@@ -90,8 +106,15 @@ for (const [ruta, width, crf] of [
 
 let antes = 0;
 let despues = 0;
+const forzar = process.argv.includes("--force");
 
 for (const t of tareas) {
+  const origen = t.tipo === "reel" ? t.reel : t.ruta;
+  if (!forzar && yaOptimizado(origen)) {
+    console.log(`${origen.replace("public/", "").padEnd(30)} ya optimizado, se salta`);
+    continue;
+  }
+
   if (t.tipo === "reel") {
     /* Los reels de cliente son uno por carpeta (preview.mp4 / poster.jpg);
        los del podcast comparten carpeta, así que se prefijan con su nombre. */

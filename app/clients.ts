@@ -17,6 +17,8 @@ export type Client = {
   videos: ClientVideo[];
   /** Seguidores en redes (portfolio Canva) */
   community?: string;
+  /** Crecimiento desde que llevamos la cuenta, ej. "+320%". Dato real o nada. */
+  growth?: string;
   /** Preview corto y ligero (10s, 540px) para las rejillas */
   previewVideo?: string;
   /** Primer fotograma: pinta la tarjeta antes de que baje un solo byte de vídeo */

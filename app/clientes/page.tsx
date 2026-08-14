@@ -102,10 +102,15 @@ function FeaturedCase({
               <dd>{client.community}</dd>
             </div>
           ) : null}
-          <div>
-            <dt>Piezas</dt>
-            <dd>{String(client.videos.length).padStart(2, "0")}</dd>
-          </div>
+          {/* El número de piezas no dice nada: llevamos todo su contenido, así
+              que solo mide cuántas hemos subido a la web. Lo que sí importa es
+              cuánto ha crecido la marca. */}
+          {client.growth ? (
+            <div>
+              <dt>Crecimiento</dt>
+              <dd>{client.growth}</dd>
+            </div>
+          ) : null}
         </dl>
         <div className="case-feature-actions">
           <Link className="case-feature-link" href={`/clientes/${client.slug}`}>
@@ -214,8 +219,10 @@ export default function ClientesPage() {
             <StatGrid
               stats={[
                 {
+                  /* La web enseña una selección, no el total: el número real
+                     de marcas no se calcula desde clients.length. */
                   label: "Marcas",
-                  value: String(clients.length),
+                  value: "+100",
                   note: "Proyectos de contenido en activo y cerrados",
                 },
                 {
