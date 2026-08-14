@@ -285,7 +285,7 @@ export default function Home() {
               <Link className="btn btn-invert" href="/contacto">
                 Pedir presupuesto
               </Link>
-              <a className="btn btn-invert" href={`mailto:${EMAIL}`}>
+              <a className="bd-contact-mail" href={`mailto:${EMAIL}`}>
                 {EMAIL}
               </a>
             </div>
