@@ -172,7 +172,7 @@ export default function Home() {
         <section className="bd-featured">
           <div className="container">
             <div className="bd-featured-head">
-              <h2>Featured Engagements</h2>
+              <h2>Casos destacados</h2>
               <Link href="/clientes">Ver todos los casos →</Link>
             </div>
             {engagementClients.map((c) => (
@@ -210,7 +210,7 @@ export default function Home() {
         <section className="bd-news" id="blog">
           <div className="container">
             <div className="bd-news-head">
-              <h2>Featured News</h2>
+              <h2>Últimos artículos</h2>
             </div>
             <div className="bd-news-list">
               {posts.slice(0, 6).map((post) => (
