@@ -79,7 +79,11 @@ export default function SiteFooter() {
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Maen Studios</span>
-          <Link href="/privacidad">Política de privacidad</Link>
+          {/* Las páginas legales van al pie, no al menú: tienen que estar
+              siempre accesibles para surtir efecto, pero sin robar sitio. */}
+          <Link href="/aviso-legal">Aviso legal</Link>
+          <Link href="/privacidad">Privacidad</Link>
+          <Link href="/cookies">Cookies</Link>
           <span>Barcelona · Madrid — contenido con intención</span>
         </div>
       </div>

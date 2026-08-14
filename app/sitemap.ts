@@ -45,12 +45,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
-    {
-      url: `${SITE_URL}/privacidad`,
+    /* Páginas legales: prioridad baja, pero indexables. Ocultarlas no protege
+       de nada; para surtir efecto tienen que estar accesibles. */
+    ...["privacidad", "aviso-legal", "cookies"].map((ruta) => ({
+      url: `${SITE_URL}/${ruta}`,
       lastModified: now,
-      changeFrequency: "yearly",
+      changeFrequency: "yearly" as const,
       priority: 0.3,
-    },
+    })),
   ];
 
   // Landings locales: prioridad alta, son puerta de entrada del SEO local

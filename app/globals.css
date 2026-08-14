@@ -3435,6 +3435,62 @@ section {
   margin-top: 4px;
 }
 
+/* ─── Páginas legales ─────────────────────────────────── */
+/* La tabla se desborda dentro de su propio contenedor: en móvil, una tabla de
+   cinco columnas no cabe, y sin esto arrastraría la página entera. */
+.tabla-legal-scroll {
+  overflow-x: auto;
+  margin: 22px 0 28px;
+  border: 1px solid var(--line);
+}
+
+.tabla-legal {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.tabla-legal th {
+  text-align: left;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.tabla-legal td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.tabla-legal tr:last-child td {
+  border-bottom: none;
+}
+
+.tabla-legal code {
+  font-size: 0.8em;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+
+.legal-fecha {
+  margin-top: clamp(32px, 5vw, 52px);
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
 /* ─── Ajustes de las landings de ciudad ───────────────── */
 .city-intro p {
   font-size: clamp(1.05rem, 1.7vw, 1.2rem);
