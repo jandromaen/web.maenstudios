@@ -1029,10 +1029,28 @@ button,
   margin-bottom: 48px;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 640px) {
   .footer-grid {
-    grid-template-columns: 1.4fr 1fr 1fr 1fr;
-    gap: 32px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 32px;
+  }
+}
+
+@media (min-width: 900px) {
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Los cinco bloques en una sola fila: marca + servicios + oficinas + estudio
+   + redes. Antes se declaraban cuatro columnas para cinco hijos, así que
+   "Síguenos" caía a una segunda fila y dejaba medio pie vacío.
+   Los anchos no son iguales: "Producción Audiovisual" y las direcciones
+   necesitan más sitio que una lista de una palabra. */
+@media (min-width: 1120px) {
+  .footer-grid {
+    grid-template-columns: 1.5fr 1.25fr 1.15fr 0.8fr 0.8fr;
+    gap: clamp(24px, 2.6vw, 44px);
   }
 }
 
