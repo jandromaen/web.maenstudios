@@ -240,6 +240,25 @@ button,
   color: #fff;
 }
 
+/* Velo bajo la cabecera. Sin él, el contenido pasa por debajo y el texto de
+   la página se cruza con el del menú: era el principal foco de ruido visual
+   al hacer scroll. El degradado mantiene el efecto flotante —no es una barra
+   opaca— pero separa lo suficiente para que ambos se lean. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: -18px 0 auto 0;
+  height: 132px;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    var(--bg) 22%,
+    color-mix(in srgb, var(--bg) 55%, transparent) 62%,
+    transparent
+  );
+  pointer-events: none;
+}
+
 /* blend solo en nav y logo — evita que el contenedor entero amplíe contraste percibido */
 .header .brand,
 .header .nav {
@@ -1843,6 +1862,10 @@ section {
 }
 
 .client-portfolio-media {
+  /* display: block es obligatorio, no cosmético: este contenedor es un <a>, y
+     un elemento en línea no recorta con overflow ni respeta aspect-ratio. Sin
+     esto, la pastilla de "Ver caso" se salía del vídeo y pisaba el texto. */
+  display: block;
   aspect-ratio: 9 / 16;
   overflow: hidden;
   background: var(--charcoal);
@@ -1895,26 +1918,30 @@ section {
   pointer-events: none;
 }
 
-/* "Ver caso" aparece al pasar el ratón, centrado sobre el reel */
+/* "Ver caso" sube desde el borde inferior al pasar el ratón. En vez de una
+   banda de color plano, un degradado oscuro sobre el propio reel: se integra
+   con la imagen en lugar de taparla. */
 .client-portfolio-cta {
   position: absolute;
   inset: auto 0 0 0;
   z-index: 2;
-  padding: 12px 14px;
+  padding: 28px 14px 14px;
   text-align: center;
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: var(--accent);
-  color: var(--accent-ink);
-  transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88), transparent);
+  color: #fff;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
 
 .client-portfolio-card:hover .client-portfolio-cta,
-.client-portfolio-card:focus-visible .client-portfolio-cta {
+.client-portfolio-card:focus-within .client-portfolio-cta {
+  opacity: 1;
   transform: translateY(0);
 }
 
