@@ -5,12 +5,40 @@ import { heroReels } from "../site-data";
 
 export default function HomeHero() {
   const heroRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const target = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
   const activeRef = useRef(false);
   const reelSrc = heroReels[0] ?? "/reel-hero.mp4";
+
+  /**
+   * Pausa el vídeo al salir de pantalla. Seguía reproduciéndose —y bajando
+   * bytes— con el visitante a mitad de página, así que se descargaban 8 MB de
+   * un fondo que ya nadie estaba viendo. Pausado, el navegador deja de pedir
+   * datos: quien entra y hace scroll se lleva solo los segundos que vio.
+   */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {
+            /* autoplay bloqueado: se queda en el póster */
+          });
+        } else {
+          video.pause();
+        }
+      },
+      { rootMargin: "100px 0px" },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -67,13 +95,16 @@ export default function HomeHero() {
       </h1>
       <div className="bd-hero-media">
         <video
+          ref={videoRef}
           src={reelSrc}
           poster="/reel-hero-poster.jpg"
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          /* "auto" se bajaría el fichero entero de golpe; con autoPlay el
+             navegador ya pide lo justo para ir reproduciendo */
+          preload="metadata"
           aria-hidden="true"
         />
       </div>
