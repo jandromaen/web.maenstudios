@@ -46,9 +46,10 @@ function yaOptimizado(ruta) {
 }
 
 /** Recodifica sobre el propio fichero pasando por un temporal. */
-function encode(src, { width, crf, seconds, out = src }) {
+function encode(src, { width, crf, seconds, desde = 0, out = src }) {
   const tmp = join(dirname(out), `.tmp-${Date.now()}.mp4`);
   run([
+    ...(desde ? ["-ss", String(desde)] : []),
     ...(seconds ? ["-t", String(seconds)] : []),
     "-i", src,
     "-vf", `scale=${width}:-2`,
@@ -64,9 +65,19 @@ function encode(src, { width, crf, seconds, out = src }) {
   renameSync(tmp, out);
 }
 
-function poster(src, out, width) {
-  run(["-ss", "1", "-i", src, "-frames:v", "1", "-vf", `scale=${width}:-2`, "-q:v", "4", out]);
+/** Fotograma de portada. Se toma un segundo dentro del preview, no del
+    original, para que el póster sea el arranque real de lo que se ve. */
+function poster(src, out, width, desde = 0) {
+  run(["-ss", String(desde + 1), "-i", src, "-frames:v", "1", "-vf", `scale=${width}:-2`, "-q:v", "4", out]);
 }
+
+/**
+ * Segundo por el que empieza el preview de cada reel del podcast. Los primeros
+ * segundos son siempre la pregunta del presentador: si todos arrancan ahí, sale
+ * él en los tres. Cada corte está mirado a mano sobre el punto en el que entra
+ * el invitado —en el reel 1 no es hasta el segundo 8—.
+ */
+const PODCAST_DESDE = { "reel-1": 8, "reel-2": 6, "reel-3": 6 };
 
 const tareas = [];
 
@@ -84,11 +95,13 @@ for (const dir of readdirSync(raiz)) {
 if (existsSync("public/podcast")) {
   for (const f of readdirSync("public/podcast")) {
     if (!f.endsWith(".mp4") || f.includes("preview")) continue;
+    const nombre = f.replace(/\.mp4$/, "");
     tareas.push({
       tipo: "reel",
       reel: join("public/podcast", f),
       carpeta: "public/podcast",
-      nombre: f.replace(/\.mp4$/, ""),
+      nombre,
+      desde: PODCAST_DESDE[nombre] ?? 6,
     });
   }
 }
@@ -110,10 +123,9 @@ const forzar = process.argv.includes("--force");
 
 for (const t of tareas) {
   const origen = t.tipo === "reel" ? t.reel : t.ruta;
-  if (!forzar && yaOptimizado(origen)) {
-    console.log(`${origen.replace("public/", "").padEnd(30)} ya optimizado, se salta`);
-    continue;
-  }
+  /* El original solo se recomprime una vez; preview y póster se rehacen
+     siempre, que son derivados baratos y a veces cambia el punto de corte. */
+  const soloDerivados = !forzar && yaOptimizado(origen);
 
   if (t.tipo === "reel") {
     /* Los reels de cliente son uno por carpeta (preview.mp4 / poster.jpg);
@@ -121,18 +133,24 @@ for (const t of tareas) {
     const base = t.nombre ? `${t.nombre}-` : "";
     const previewOut = join(t.carpeta, `${base}preview.mp4`);
     const posterOut = join(t.carpeta, `${base}poster.jpg`);
+    const desde = t.desde ?? 0;
 
     const original = MB(t.reel);
     antes += original;
-    encode(t.reel, { width: 720, crf: 28 });
-    encode(t.reel, { width: 540, crf: 30, seconds: 10, out: previewOut });
-    poster(t.reel, posterOut, 540);
+    if (!soloDerivados) encode(t.reel, { width: 720, crf: 28 });
+    encode(t.reel, { width: 540, crf: 30, seconds: 10, desde, out: previewOut });
+    poster(t.reel, posterOut, 540, desde);
     const nuevo = MB(t.reel) + MB(previewOut) + MB(posterOut);
     despues += nuevo;
     console.log(
-      `${(t.nombre ?? t.carpeta.replace("public/clients/", "")).padEnd(20)} ${original.toFixed(1).padStart(5)} MB → ${nuevo.toFixed(1).padStart(5)} MB (reel + preview + póster)`,
+      `${(t.nombre ?? t.carpeta.replace("public/clients/", "")).padEnd(20)} ${original.toFixed(1).padStart(5)} MB → ${nuevo.toFixed(1).padStart(5)} MB` +
+        (soloDerivados ? `  (solo preview${desde ? ` desde ${desde}s` : ""} + póster)` : " (reel + preview + póster)"),
     );
   } else {
+    if (soloDerivados) {
+      console.log(`${t.ruta.replace("public/", "").padEnd(20)} ya optimizado, se salta`);
+      continue;
+    }
     const original = MB(t.ruta);
     antes += original;
     encode(t.ruta, { width: t.width, crf: t.crf });
