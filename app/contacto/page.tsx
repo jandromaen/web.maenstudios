@@ -56,6 +56,24 @@ export default function ContactoPage() {
                 Antes era un panel de color con dos titulares que repetían lo
                 que ya dice el hero. */}
             <aside className="contact-aside">
+              {/* En una página de contacto la foto tiene un argumento que no
+                  tenía en la home: dice quién va a responder el correo. */}
+              <figure className="contact-founders">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/equipo/founders.jpg"
+                  alt="Richi y Jandro, fundadores de Maen Studios"
+                  width={941}
+                  height={1672}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  Te respondemos nosotros: <strong>Richi</strong> y{" "}
+                  <strong>Jandro</strong>, fundadores del estudio.
+                </figcaption>
+              </figure>
+
               <div className="contact-block">
                 <span className="contact-label">Correo</span>
                 <ContactEmails />

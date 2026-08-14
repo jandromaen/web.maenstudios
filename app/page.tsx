@@ -130,47 +130,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Va justo detrás del texto que explica qué es Maen: ese párrafo lo
-            cuenta en abstracto y aquí se le pone cara, antes de pasar al
-            trabajo de clientes. */}
-        <section className="bd-founders" id="estudio">
-          <div className="container bd-founders-grid">
-            <div className="bd-founders-media">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/equipo/founders.jpg"
-                alt="Richi y Jandro, fundadores de Maen Studios"
-                width={941}
-                height={1672}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="bd-founders-copy">
-              <span className="eyebrow">Fundadores</span>
-              <h2>Detrás de Maen hay dos personas</h2>
-              <p>
-                Montamos el estudio en 2020 y seguimos metidos en cada
-                proyecto. Cuando trabajas con Maen no hablas con un
-                departamento: hablas con nosotros.
-              </p>
-              <dl className="bd-founders-names">
-                <div>
-                  <dt>Richi</dt>
-                  <dd>Cofundador</dd>
-                </div>
-                <div>
-                  <dt>Jandro</dt>
-                  <dd>Cofundador</dd>
-                </div>
-              </dl>
-              <Link className="btn btn-ghost" href="/contacto">
-                Hablemos
-              </Link>
-            </div>
-          </div>
-        </section>
-
         <section className="bd-cases" id="clientes">
           <div className="container">
             <div className="bd-cases-head">
