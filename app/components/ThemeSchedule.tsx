@@ -2,12 +2,13 @@
 
 import { useEffect } from "react";
 import {
-  getThemeMode,
   msUntilNextThemeChange,
+  resolveTheme,
 } from "../lib/theme-schedule";
 
+/** resolveTheme respeta la elección manual: el reloj solo decide si no la hay. */
 function applyTheme() {
-  document.documentElement.setAttribute("data-theme", getThemeMode());
+  document.documentElement.setAttribute("data-theme", resolveTheme());
 }
 
 export default function ThemeSchedule() {

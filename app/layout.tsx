@@ -6,6 +6,7 @@ import CookieBanner from "./components/CookieBanner";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { GlobalJsonLd } from "./components/JsonLd";
 import ThemeSchedule from "./components/ThemeSchedule";
+import ThemeToggle from "./components/ThemeToggle";
 import { themeBootScript } from "./lib/theme-schedule";
 import {
   DEFAULT_DESCRIPTION,
@@ -107,6 +108,7 @@ export default function RootLayout({
         <ThemeSchedule />
         <GlobalJsonLd />
         {children}
+        <ThemeToggle />
         <CookieBanner />
         <GoogleAnalytics />
         <Analytics />
