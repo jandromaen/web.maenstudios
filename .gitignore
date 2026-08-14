@@ -37,3 +37,6 @@ public/reel-hero-source.mp4
 public/reel-hero-temp.mp4
 public/reel-hero-4k-test.mp4
 public/reel-hero-encoded.mp4
+
+# Material de vídeo generado con scripts/record-web.mjs — no va al repo
+video-web/
