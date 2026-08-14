@@ -1,20 +1,19 @@
 /**
  * Datos para las páginas legales.
  *
- * ⚠️ PENDIENTE: la LSSI-CE (art. 10) obliga a publicar la razón social y el
- * NIF del titular del sitio. Mientras `razonSocial` y `nif` estén vacíos, el
- * aviso legal se publica sin ellos y NO cumple ese artículo. Rellenarlos es
- * cambiar dos cadenas; las páginas los muestran solas en cuanto existan.
- *
  * Estos textos son borradores técnicos, no asesoramiento jurídico: describen
  * con exactitud qué hace la web, que es la parte que las plantillas genéricas
  * se inventan. La revisión legal sigue siendo necesaria.
  */
 export const LEGAL = {
-  /** Ej.: "Maen Studios S.L." — vacío mientras no se confirme */
-  razonSocial: "",
-  /** Ej.: "B12345678" */
-  nif: "",
+  razonSocial: "Maen Marketing And Advertising, S.L.",
+  nif: "B22788806",
+  /**
+   * Domicilio social, que no coincide con las oficinas comerciales de Bruc 61
+   * y Génova 3. El art. 10 de la LSSI pide el domicilio de la sociedad, así
+   * que se publican por separado y etiquetados: confundirlos induce a error.
+   */
+  domicilio: "Carrer Fastenrath, 9, 2º-2ª, 08035 Barcelona, España",
   /** Datos del Registro Mercantil, si la sociedad está inscrita */
   registro: "",
   nombreComercial: "Maen Studios",

@@ -10,6 +10,7 @@ import {
   type Office,
 } from "../seo-config";
 import { EMAIL_PROJECTS } from "../site-data";
+import { LEGAL } from "../legal-data";
 
 function postalAddress(office: Office) {
   return {
@@ -38,7 +39,11 @@ function officeSchema(office: Office) {
     "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": `${SITE_URL}/#${office.id}`,
     name: `${SITE_NAME} ${office.city}`,
-    legalName: SITE_NAME,
+    /* La razón social y el CIF reales, no el nombre comercial: es lo que
+       permite a Google casar la ficha con la empresa registrada. */
+    legalName: LEGAL.razonSocial,
+    vatID: LEGAL.nif,
+    taxID: LEGAL.nif,
     description: `Agencia de creación de contenido para redes sociales en ${office.city}: dirección creativa, producción audiovisual y community management.`,
     url: `${SITE_URL}${office.landingPath}`,
     logo: `${SITE_URL}/maen-logo.png`,
@@ -73,6 +78,9 @@ const organizationSchema = {
   "@type": ["Organization", "ProfessionalService"],
   "@id": `${SITE_URL}/#organization`,
   name: SITE_NAME,
+  legalName: LEGAL.razonSocial,
+  vatID: LEGAL.nif,
+  taxID: LEGAL.nif,
   alternateName: "Maen",
   url: SITE_URL,
   logo: {

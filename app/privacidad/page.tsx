@@ -39,14 +39,16 @@ export default function PrivacidadPage() {
             <h2>Responsable del tratamiento</h2>
             <ul>
               <li>
-                <strong>Titular:</strong>{" "}
-                {LEGAL.razonSocial || LEGAL.nombreComercial}
-                {LEGAL.nif ? ` · NIF ${LEGAL.nif}` : null}
+                <strong>Responsable:</strong> {LEGAL.razonSocial} · NIF{" "}
+                {LEGAL.nif}
+              </li>
+              <li>
+                <strong>Domicilio social:</strong> {LEGAL.domicilio}
               </li>
               {OFFICES.map((o) => (
                 <li key={o.id}>
-                  <strong>{o.city}:</strong> {o.streetAddress}, {o.postalCode}{" "}
-                  {o.city}
+                  <strong>Oficina de {o.city}:</strong> {o.streetAddress},{" "}
+                  {o.postalCode} {o.city}
                 </li>
               ))}
               <li>

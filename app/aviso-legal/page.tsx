@@ -42,28 +42,21 @@ export default function AvisoLegalPage() {
               la Sociedad de la Información y de Comercio Electrónico:
             </p>
             <ul>
-              {LEGAL.razonSocial ? (
-                <li>
-                  <strong>Titular:</strong> {LEGAL.razonSocial}
-                  {LEGAL.nombreComercial
-                    ? `, que opera bajo el nombre comercial ${LEGAL.nombreComercial}`
-                    : null}
-                </li>
-              ) : (
-                <li>
-                  <strong>Nombre comercial:</strong> {LEGAL.nombreComercial}
-                </li>
-              )}
-              {LEGAL.nif ? (
-                <li>
-                  <strong>NIF:</strong> {LEGAL.nif}
-                </li>
-              ) : null}
+              <li>
+                <strong>Titular:</strong> {LEGAL.razonSocial}, que opera bajo el
+                nombre comercial {LEGAL.nombreComercial}
+              </li>
+              <li>
+                <strong>NIF:</strong> {LEGAL.nif}
+              </li>
               {LEGAL.registro ? (
                 <li>
                   <strong>Registro Mercantil:</strong> {LEGAL.registro}
                 </li>
               ) : null}
+              <li>
+                <strong>Domicilio social:</strong> {LEGAL.domicilio}
+              </li>
               {OFFICES.map((o) => (
                 <li key={o.id}>
                   <strong>Oficina de {o.city}:</strong> {o.streetAddress},{" "}
