@@ -22,6 +22,10 @@ import { join } from "node:path";
 const BASE = process.env.BASE ?? "http://localhost:4000";
 const OUT = "video-web";
 
+/* Filtro opcional por id, para regrabar un plano suelto sin rehacer los doce:
+   node scripts/record-web.mjs 07-cierre */
+const SOLO = process.argv.slice(2);
+
 /**
  * Desplazamiento suave y lento, del tipo que se usa en una demo de producto.
  *
@@ -123,6 +127,52 @@ const PLANOS = [
       await page.waitForTimeout(1600);
     },
   },
+  {
+    /* Cierre de marca. Se monta sobre la web ya cargada, no sobre un HTML
+       aparte, para heredar Monument Extended y la paleta reales: una fuente
+       parecida en el último plano se nota más que en ningún otro sitio. */
+    id: "07-cierre",
+    url: "/",
+    async guion(page) {
+      await page.evaluate(() => {
+        document.body.innerHTML = `
+          <div id="cierre">
+            <img src="/maen-logo.png" alt="Maen Studios">
+            <p>Created to create ©</p>
+          </div>`;
+        const css = document.createElement("style");
+        css.textContent = `
+          body { background: var(--bg); overflow: hidden; }
+          #cierre {
+            position: fixed; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: clamp(28px, 4vh, 52px);
+            animation: entrar 1100ms cubic-bezier(.22,1,.36,1) both;
+          }
+          #cierre img {
+            width: min(46vw, 520px);
+            height: auto;
+          }
+          #cierre p {
+            font-family: var(--font-heading);
+            font-size: clamp(1rem, 2.2vw, 1.9rem);
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--fg);
+            opacity: .78;
+            margin: 0;
+          }
+          @keyframes entrar {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: none; }
+          }`;
+        document.head.appendChild(css);
+      });
+      await page.waitForTimeout(3400);
+    },
+  },
 ];
 
 const scrollY = (page) => page.evaluate(() => window.scrollY);
@@ -152,13 +202,14 @@ const navegador = await chromium.launch({
   ],
 });
 
-rmSync(OUT, { recursive: true, force: true });
+if (!SOLO.length) rmSync(OUT, { recursive: true, force: true });
 
 for (const formato of FORMATOS) {
   const dir = join(OUT, formato.nombre);
   mkdirSync(dir, { recursive: true });
 
   for (const plano of PLANOS) {
+    if (SOLO.length && !SOLO.includes(plano.id)) continue;
     const ctx = await navegador.newContext({
       viewport: formato.viewport,
       deviceScaleFactor: formato.escala,

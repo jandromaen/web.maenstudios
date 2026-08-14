@@ -23,6 +23,9 @@ const MONTAJES = {
       { id: "03-clientes", desde: 2.8, dur: 6.2 },
       { id: "04-ficha", desde: 3.5, dur: 4.0 },
       { id: "06-contacto", desde: 3.4, dur: 5.0 },
+      /* El cierre entra cuando la locución ya ha terminado: el eslogan cae en
+         silencio, que es donde se queda. */
+      { id: "07-cierre", desde: 1.4, dur: 3.2 },
     ],
   },
   largo: {
@@ -34,6 +37,7 @@ const MONTAJES = {
       { id: "04-ficha", desde: 0, dur: 8.0 },
       { id: "05-tema", desde: 0, dur: 9.5 },
       { id: "06-contacto", desde: 0, dur: 10.0 },
+      { id: "07-cierre", desde: 1.4, dur: 3.4 },
     ],
   },
 };
