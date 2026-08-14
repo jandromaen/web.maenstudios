@@ -138,7 +138,7 @@ const PLANOS = [
         document.body.innerHTML = `
           <div id="cierre">
             <img src="/maen-logo.png" alt="Maen Studios">
-            <p>Created to create ©</p>
+            <p>Created to create</p>
           </div>`;
         const css = document.createElement("style");
         css.textContent = `
