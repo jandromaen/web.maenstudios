@@ -3477,6 +3477,48 @@ section {
   animation: entrada-pagina 420ms ease-out both;
 }
 
+/* ─── Entrada del hero ────────────────────────────────── */
+/*
+ * Lo primero que se ve NO usa el sistema de más abajo, y es a propósito: aquel
+ * oculta con CSS y revela con JavaScript, así que nada de lo que dependa de él
+ * aparece hasta que React ha cargado y montado. Medido: 230 ms en escritorio, y
+ * bastante más en un móvil normal, con el vídeo en negro todo ese rato.
+ *
+ * Esto es una animación CSS pura: empieza en el primer pintado, sin esperar a
+ * nada. Los vídeos del hero ni se ocultan: aparecen con su póster al instante.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .page-hero > .container > *,
+  /* En los heroes partidos el texto va dentro de .page-hero-copy, así que sus
+     hijos no son hijos directos del contenedor y quedaban fuera. */
+  .page-hero-copy > *,
+  .case-hero .case-hero-body > *,
+  .hero-media {
+    animation: entrada-hero 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Escalonado por orden de aparición, sin JavaScript de por medio */
+  .page-hero > .container > *:nth-child(1) { animation-delay: 40ms; }
+  .page-hero > .container > *:nth-child(2) { animation-delay: 110ms; }
+  .page-hero > .container > *:nth-child(3) { animation-delay: 180ms; }
+  .page-hero > .container > *:nth-child(4) { animation-delay: 250ms; }
+  .page-hero-copy > *:nth-child(1) { animation-delay: 40ms; }
+  .page-hero-copy > *:nth-child(2) { animation-delay: 110ms; }
+  .page-hero-copy > *:nth-child(3) { animation-delay: 180ms; }
+  .page-hero-copy > *:nth-child(4) { animation-delay: 250ms; }
+  .page-hero-copy > *:nth-child(n + 5) { animation-delay: 310ms; }
+  .case-hero .case-hero-body > *:nth-child(n + 2) { animation-delay: 90ms; }
+  .case-hero .case-hero-body > *:nth-child(n + 4) { animation-delay: 170ms; }
+  .hero-media { animation-delay: 140ms; }
+}
+
+@keyframes entrada-hero {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
 /* ─── Aparición al entrar en pantalla ─────────────────── */
 /*
  * `data-anim` lo pone el script de arranque en <head>, antes del primer
@@ -3514,9 +3556,7 @@ section {
     .bd-overview-sub,
     .statement-sub,
     .tabla-legal-scroll,
-    .client-portfolio-body,
-    .hero-actions,
-    .page-hero-meta
+    .client-portfolio-body
   ) {
     opacity: 0;
     transform: translateY(22px);
@@ -3531,10 +3571,7 @@ section {
   [data-anim]:not([data-anim-listo]) :where(
     .client-portfolio-media,
     .case-feature-media,
-    .hero-reel,
-    .hero-frames img,
     .bd-case-media,
-    .case-hero-media,
     .post-thumb
   ) {
     clip-path: inset(0 0 100% 0);
@@ -3560,10 +3597,7 @@ section {
   [data-anim]:not([data-anim-listo]) .es-visible :where(
     .client-portfolio-media,
     .case-feature-media,
-    .hero-reel,
-    .hero-frames img,
     .bd-case-media,
-    .case-hero-media,
     .post-thumb
   ) {
     clip-path: inset(0 0 0 0);

@@ -5,6 +5,11 @@ import { useEffect } from "react";
 /**
  * Bloques que entran completos, con cascada entre hermanos.
  *
+ * Nada de lo que se ve al abrir la página entra aquí. Este sistema oculta con
+ * CSS y revela con JavaScript, así que lo que dependa de él no aparece hasta
+ * que React ha cargado y montado: medido, 230 ms en escritorio y mucho más en
+ * móvil. Los heroes se animan solo con CSS, en el bloque "Entrada del hero".
+ *
  * ⚠️ Esta lista y las dos siguientes están duplicadas en globals.css, en el
  * bloque "Aparición al entrar en pantalla": el CSS necesita conocerlas para
  * ocultar antes del primer pintado, y el JS para observarlas. Si se toca una,
@@ -34,14 +39,10 @@ const BLOQUES = [
   ".statement-sub",
   ".tabla-legal-scroll",
   ".client-portfolio-body",
-  ".hero-actions",
-  ".page-hero-meta",
 ].join(",");
 
 /** Titulares que se componen palabra a palabra. */
 const TITULARES = [
-  ".page-hero h1",
-  ".case-hero h1",
   ".section-head h2",
   ".statement-text",
   ".bd-overview-text",
@@ -53,10 +54,7 @@ const TITULARES = [
 const MEDIOS = [
   ".client-portfolio-media",
   ".case-feature-media",
-  ".hero-reel",
-  ".hero-frames img",
   ".bd-case-media",
-  ".case-hero-media",
   ".post-thumb",
 ].join(",");
 
@@ -66,12 +64,7 @@ const MEDIOS = [
  * de una tarjeta toman el de su tarjeta. Calculado sobre el padre directo de
  * cada pieza salían todos a cero, porque cada una es hija única de la suya.
  */
-const GRUPOS = [
-  ".client-portfolio-card",
-  ".bd-case",
-  ".hero-reel",
-  ".hero-frames img",
-].join(",");
+const GRUPOS = [".client-portfolio-card", ".bd-case"].join(",");
 
 /** Escalón de la cascada, en ms. Se corta pronto: más de ocho y se hace lento. */
 const PASO = 70;

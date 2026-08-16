@@ -3,6 +3,16 @@
 import { useEffect, useRef } from "react";
 import { heroReels } from "../site-data";
 
+/**
+ * Elige el vídeo del hero según el ancho, mientras el navegador aún está
+ * leyendo el HTML: se ejecuta justo después del <video>, antes de pintar.
+ *
+ * En un móvil, el fichero de escritorio son 8,5 MB para una pantalla de 390px.
+ * Con la versión reducida baja a 3 MB. Se hace aquí y no en React porque
+ * cambiar el src después de hidratar descargaría los dos.
+ */
+const ELEGIR_FUENTE = `(function(){var v=document.currentScript.previousElementSibling;if(!v||v.tagName!=="VIDEO")return;var m=window.innerWidth<820;if(m&&v.dataset.posterMovil)v.poster=v.dataset.posterMovil;v.src=m?v.dataset.srcMovil:v.dataset.src})();`;
+
 export default function HomeHero() {
   const heroRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -94,10 +104,15 @@ export default function HomeHero() {
         Barcelona y Madrid
       </h1>
       <div className="bd-hero-media">
+        {/* El src no viene puesto: lo elige el script de abajo antes de pintar,
+            según el ancho de pantalla. Con dos <video> o cambiándolo después de
+            hidratar se descargarían los dos ficheros. */}
         <video
           ref={videoRef}
-          src={reelSrc}
           poster="/reel-hero-poster.jpg"
+          data-src={reelSrc}
+          data-src-movil="/reel-hero-movil.mp4"
+          data-poster-movil="/reel-hero-movil-poster.jpg"
           autoPlay
           muted
           loop
@@ -107,6 +122,7 @@ export default function HomeHero() {
           preload="metadata"
           aria-hidden="true"
         />
+        <script dangerouslySetInnerHTML={{ __html: ELEGIR_FUENTE }} />
       </div>
       <div className="bd-hero-cursor" ref={cursorRef}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
