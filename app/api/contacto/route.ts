@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { EMAIL_PROJECTS } from "../../site-data";
+import { EMAIL_ADMIN, EMAIL_PROJECTS } from "../../site-data";
 
 export const runtime = "nodejs";
 
@@ -9,7 +9,26 @@ export const runtime = "nodejs";
  * (Resend → Domains → maenstudios.com). Configurable por si se usa otro.
  */
 const FROM = process.env.CONTACT_FROM_EMAIL ?? "web@maenstudios.com";
-const TO = process.env.CONTACT_TO_EMAIL ?? EMAIL_PROJECTS;
+
+/**
+ * Todo lo que entra por el formulario llega a los dos buzones. Se envía en un
+ * único correo con ambos destinatarios, no en dos correos: así comparten hilo
+ * y al responder uno, el otro ve la respuesta.
+ *
+ * CONTACT_TO_EMAIL admite varias direcciones separadas por comas y, si está
+ * definida, sustituye a esta lista.
+ */
+const DESTINATARIOS = (
+  process.env.CONTACT_TO_EMAIL
+    ? process.env.CONTACT_TO_EMAIL.split(",")
+    : [EMAIL_PROJECTS, EMAIL_ADMIN]
+)
+  .map((d) => d.trim())
+  .filter(Boolean)
+  .filter((d, i, todos) => todos.indexOf(d) === i); // sin repetidos
+
+/** Dirección que se enseña al visitante si el envío falla. */
+const TO = DESTINATARIOS[0] ?? EMAIL_PROJECTS;
 
 type ContactPayload = {
   nombre?: string;
@@ -102,7 +121,7 @@ export async function POST(request: Request) {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
       from: `Maen Studios Web <${FROM}>`,
-      to: [TO],
+      to: DESTINATARIOS,
       replyTo: email,
       subject: `Nuevo proyecto — ${fullName || "Contacto web"}`,
       html,
