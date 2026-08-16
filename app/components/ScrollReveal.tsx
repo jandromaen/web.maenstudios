@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * Bloques que entran completos, con cascada entre hermanos.
@@ -105,6 +106,16 @@ function partirEnPalabras(el: HTMLElement) {
 }
 
 export default function ScrollReveal() {
+  /**
+   * La ruta va como dependencia a propósito.
+   *
+   * Este componente vive en el layout, y el layout NO se vuelve a montar al
+   * navegar entre páginas: sin esto, el efecto corre una sola vez y se queda
+   * observando los elementos de la primera página. Los de las siguientes nacen
+   * ocultos por CSS y nadie los descubre nunca — desaparecían hasta recargar.
+   */
+  const ruta = usePathname();
+
   useEffect(() => {
     const raiz = document.documentElement;
 
@@ -227,7 +238,7 @@ export default function ScrollReveal() {
     requestAnimationFrame(barrer); // por si se entra ya desplazado
 
     return desconectar;
-  }, []);
+  }, [ruta]);
 
   return null;
 }
