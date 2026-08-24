@@ -1194,6 +1194,33 @@ button,
   opacity: 1;
 }
 
+/* Segundo nivel de la columna de servicios: las landings tienen títulos
+   largos, y en negrita y mayúsculas formaban un muro que se comía el resto
+   del pie. Bajan de peso, de tamaño y salen de las mayúsculas —una frase
+   larga en caja alta ocupa casi el doble y cuesta el triple de leer—, así
+   que quedan como lo que son: enlaces secundarios. */
+.footer-col a.footer-link-soft {
+  font-size: 0.72rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.45;
+  margin-bottom: 7px;
+  opacity: 0.55;
+}
+
+/* Un respiro que separa los dos niveles sin necesidad de una línea.
+   Va por hermano adyacente y no por :first-of-type: ese pseudo mira el tipo
+   de elemento, no la clase, así que el "primer <a>" de la columna siempre es
+   uno de los de arriba y la regla no llegaría a aplicarse nunca. */
+.footer-col a:not(.footer-link-soft) + a.footer-link-soft {
+  margin-top: 14px;
+}
+
+.footer-col a.footer-link-soft:hover {
+  opacity: 0.95;
+}
+
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;

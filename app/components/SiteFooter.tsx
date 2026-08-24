@@ -32,7 +32,11 @@ export default function SiteFooter() {
             {/* Las landings de servicio necesitan enlace desde todo el sitio:
                 sin él no reciben autoridad y no llegan a posicionar. */}
             {serviceLandings.map((landing) => (
-              <Link key={landing.slug} href={`/${landing.slug}`}>
+              <Link
+                className="footer-link-soft"
+                key={landing.slug}
+                href={`/${landing.slug}`}
+              >
                 {landing.metaTitle}
               </Link>
             ))}
