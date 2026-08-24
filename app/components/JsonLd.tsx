@@ -65,7 +65,12 @@ function officeSchema(office: Office) {
       name,
     })),
     parentOrganization: { "@id": `${SITE_URL}/#organization` },
-    sameAs: Object.values(SOCIAL_LINKS),
+    /* La ficha de Google Business va aquí: es la señal que ata esta página
+       con el resultado del mapa. */
+    sameAs: [
+      ...Object.values(SOCIAL_LINKS),
+      ...(office.perfilNegocio ? [office.perfilNegocio] : []),
+    ],
   };
 }
 

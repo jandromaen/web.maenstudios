@@ -65,6 +65,13 @@ export type Office = {
   mapUrl?: string;
   /** Ruta de la landing local correspondiente */
   landingPath: string;
+  /**
+   * URL de la ficha de Google Business Profile de esta oficina, cuando exista.
+   * No es un simple "hecho/no hecho": se publica en el sameAs del schema, que
+   * es lo que permite a Google casar la web con la ficha del mapa. Mientras
+   * esté vacío, el informe semanal lo reclama.
+   */
+  perfilNegocio?: string;
   /** Zonas que se atienden desde esta oficina */
   areasServed: string[];
 };

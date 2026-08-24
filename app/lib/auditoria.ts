@@ -1,11 +1,14 @@
 import { promises as dns } from "node:dns";
 import { clients } from "../clients";
 import { posts } from "../blog-data";
+import { localLandings } from "../local-data";
+import { serviceLandings } from "../service-landings";
+import { OFFICES } from "../seo-config";
 import { EMAIL_ADMIN } from "../site-data";
 
 /**
- * Revisión del estado de la web. La usan el informe semanal
- * (app/api/informe-semanal) y el comando manual (scripts/informe-pendientes.mjs).
+ * Revisión del estado de la web. La usa el informe semanal que envía el cron
+ * de los viernes (app/api/informe-semanal).
  *
  * No hay ninguna lista de tareas escrita a mano: cada punto sale de comprobar
  * algo —producción, el DNS, la API de Resend, los propios datos del proyecto—,
@@ -189,7 +192,20 @@ async function revisarMedicion(): Promise<Punto[]> {
 }
 
 /* ── Que las páginas respondan ────────────────────────────────────────────── */
-const RUTAS = ["/", "/clientes", "/servicios", "/blog", "/contacto", "/podcast", "/talents", "/sitemap.xml"];
+/* Se deduce de los propios datos: cada landing que se añada entra sola en la
+   comprobación, sin tener que acordarse de apuntarla aquí. */
+const RUTAS = [
+  "/",
+  "/clientes",
+  "/servicios",
+  "/blog",
+  "/contacto",
+  "/podcast",
+  "/talents",
+  "/sitemap.xml",
+  ...localLandings.map((l) => l.path),
+  ...serviceLandings.map((l) => `/${l.slug}`),
+];
 
 async function revisarPaginas(): Promise<Punto[]> {
   const area = "Páginas";
@@ -280,6 +296,85 @@ function revisarContenido(): Punto[] {
   return puntos;
 }
 
+/* ── Ficha de Google Business ─────────────────────────────────────────────────
+   En las búsquedas con ciudad, el bloque del mapa sale por encima de los
+   resultados normales: sin ficha verificada no se aparece ahí por buena que
+   sea la landing. No hay forma de consultarlo por API sin credenciales, así
+   que se deduce de un dato que la web usa de verdad: la URL del perfil, que
+   se publica en el sameAs del schema para atar la web con la ficha. En cuanto
+   se rellena en seo-config, el punto desaparece. */
+function revisarPerfilNegocio(): Punto[] {
+  const area = "SEO local";
+  const sinFicha = OFFICES.filter((o) => !o.perfilNegocio);
+
+  if (!sinFicha.length) {
+    return [{ estado: "ok", area, titulo: "Las dos oficinas tienen ficha de Google Business enlazada" }];
+  }
+
+  return sinFicha.map((oficina) => ({
+    estado: "bloqueo" as const,
+    area,
+    titulo: `Sin ficha de Google Business en ${oficina.city}`,
+    detalle: `Al buscar «agencia de contenido ${oficina.city}» el mapa sale por encima de los resultados normales, y ahí no aparecemos. La landing ${oficina.landingPath} compite con una mano atada.`,
+    accion: `Crear la ficha en business.google.com con el mismo nombre, dirección y teléfono que la web, y pasar su URL para añadirla a seo-config.`,
+  }));
+}
+
+/* ── Enlaces entrantes ────────────────────────────────────────────────────────
+   Es el factor donde peor estamos y el único que no se arregla escribiendo
+   mejor. El enlace más fácil de conseguir es el del cliente cuyo caso ya
+   tenemos publicado: nosotros le enlazamos y él no. Esto lo comprueba de
+   verdad, visitando su web y buscando el enlace de vuelta. */
+async function revisarEnlacesEntrantes(): Promise<Punto[]> {
+  const area = "Enlaces";
+
+  /* Solo webs propias: en Instagram o TikTok no hay HTML que mirar, y el
+     enlace de la biografía no cuenta como enlace para Google. */
+  const candidatos = clients.filter(
+    (c) => c.url && /^https?:\/\//.test(c.url) && !/instagram\.com|tiktok\.com/.test(c.url),
+  );
+
+  if (!candidatos.length) return [];
+
+  const resultados = await Promise.all(
+    candidatos.map(async (cliente) => {
+      try {
+        const res = await fetch(cliente.url, {
+          cache: "no-store",
+          signal: AbortSignal.timeout(10_000),
+          headers: NAVEGADOR,
+        });
+        if (!res.ok) return { cliente, enlaza: null };
+        const html = await res.text();
+        return { cliente, enlaza: html.includes(DOMINIO) };
+      } catch {
+        return { cliente, enlaza: null }; // caída o bloqueo: no es un "no enlaza"
+      }
+    }),
+  );
+
+  const sinEnlace = resultados.filter((r) => r.enlaza === false).map((r) => r.cliente.name);
+  const conEnlace = resultados.filter((r) => r.enlaza === true).length;
+  const sinComprobar = resultados.filter((r) => r.enlaza === null).length;
+
+  if (!sinEnlace.length) {
+    return [{
+      estado: "ok", area,
+      titulo: conEnlace ? `${conEnlace} clientes enlazan a la web` : "No se ha podido comprobar ninguna web de cliente",
+      detalle: sinComprobar ? `${sinComprobar} no respondieron.` : undefined,
+    }];
+  }
+
+  const muestra = sinEnlace.slice(0, 8).join(", ");
+
+  return [{
+    estado: "aviso", area,
+    titulo: `${sinEnlace.length} clientes con caso publicado no nos enlazan`,
+    detalle: `Les damos un enlace desde su ficha y no lo devuelven: ${muestra}${sinEnlace.length > 8 ? ` y ${sinEnlace.length - 8} más` : ""}.${conEnlace ? ` Sí lo hacen ${conEnlace}.` : ""}`,
+    accion: "Pedirles un «Contenido por Maen Studios» en el pie de su web. Es el enlace más fácil de conseguir y de los que más pesan.",
+  }];
+}
+
 const mensaje = (err: unknown) => (err instanceof Error ? err.message : String(err));
 
 export async function auditar(): Promise<Punto[]> {
@@ -289,6 +384,8 @@ export async function auditar(): Promise<Punto[]> {
     revisarDns(),
     revisarMedicion(),
     revisarPaginas(),
+    revisarEnlacesEntrantes(),
+    Promise.resolve().then(revisarPerfilNegocio),
     Promise.resolve().then(revisarContenido),
   ]);
   return grupos.flat();
