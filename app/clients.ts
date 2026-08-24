@@ -316,17 +316,6 @@ export const clients: Client[] = [
     videos: [],
   },
   {
-    slug: "soccer-solver",
-    name: "Soccer Solver",
-    tagline: "IA para clubes de fútbol",
-    description:
-      "Contenido para Soccer Solver, software de inteligencia artificial que ayuda a clubes a tomar mejores decisiones en el mercado de fichajes.",
-    url: "https://soccersolver.com/",
-    instagram: "soccersolver",
-    sector: "Tecnología",
-    videos: [],
-  },
-  {
     slug: "aluxe",
     name: "Aluxe",
     community: "+1,1k",

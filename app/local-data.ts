@@ -188,7 +188,6 @@ export const localLandings: LocalLanding[] = [
       "canallita",
       "jansana",
       "thinking-home",
-      "soccer-solver",
       "aluxe",
     ],
     clientsTitle: "El trabajo que traemos a Madrid",

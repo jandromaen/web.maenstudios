@@ -135,7 +135,6 @@ export const serviceLandings: ServiceLanding[] = [
       "macala",
       "jansana",
       "thinking-home",
-      "soccer-solver",
     ],
     clientsTitle: "Marcas para las que hemos rodado en Barcelona",
     clientsIntro:
