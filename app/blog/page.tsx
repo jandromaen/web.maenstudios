@@ -84,10 +84,11 @@ export default function BlogPage() {
             <div className="container">
               <Link className="post-feature" href={`/blog/${featured.slug}`}>
                 <div className="post-thumb">
-                  {/* Reutiliza la imagen social generada para cada artículo */}
+                  {/* Imagen propia del artículo, no la social: esa lleva el
+                      título y aquí el título ya está justo al lado. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={`/blog/${featured.slug}/opengraph-image`}
+                    src={featured.image ?? `/blog/${featured.slug}/opengraph-image`}
                     alt={featured.title}
                     width={1200}
                     height={630}
@@ -124,7 +125,7 @@ export default function BlogPage() {
                   <div className="post-thumb">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`/blog/${post.slug}/opengraph-image`}
+                      src={post.image ?? `/blog/${post.slug}/opengraph-image`}
                       alt={post.title}
                       width={1200}
                       height={630}
