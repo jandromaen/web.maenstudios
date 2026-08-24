@@ -27,7 +27,7 @@ export type Post = {
 export const posts: Post[] = [
   {
     slug: "cuanto-cuesta-un-reel",
-    image: "/clients/pigili-originals/poster.jpg",
+    image: "/blog/fotos/cuanto-cuesta-un-reel.jpg",
     title: "¿Cuánto cuesta un Reel para redes sociales en 2026?",
     description:
       "Guía de precios para producir Reels y TikToks: qué influye en el coste, modelos de tarifa y qué esperar al contratar una agencia de contenido.",
@@ -81,7 +81,7 @@ export const posts: Post[] = [
   },
   {
     slug: "reels-que-funcionan-estructura",
-    image: "/clients/canallita/poster.jpg",
+    image: "/blog/fotos/reels-que-funcionan-estructura.jpg",
     title: "Cómo hacer Reels que funcionan: la estructura que retiene",
     description:
       "La anatomía de un Reel que la gente termina de ver: gancho, desarrollo y cierre. Errores frecuentes y cómo mejorar la retención en Instagram y TikTok.",
@@ -142,7 +142,7 @@ export const posts: Post[] = [
   },
   {
     slug: "estrategia-contenido-restaurantes",
-    image: "/clients/ultramarinos-marin/poster.jpg",
+    image: "/blog/fotos/estrategia-contenido-restaurantes.jpg",
     title: "Estrategia de contenido para restaurantes: cómo llenar tu local con Reels",
     description:
       "Cómo usar Reels y TikTok para atraer clientes a tu restaurante: tipos de contenido, frecuencia y errores que hacen que tus vídeos no lleguen a nadie.",
@@ -197,7 +197,7 @@ export const posts: Post[] = [
   },
   {
     slug: "que-es-ugc-como-usarlo",
-    image: "/clients/macala/poster.jpg",
+    image: "/blog/fotos/que-es-ugc-como-usarlo.jpg",
     title: "Qué es el UGC y cómo usarlo para vender más",
     description:
       "UGC (contenido generado por creadores): qué es, por qué funciona mejor que la publicidad tradicional y cómo integrarlo en la estrategia de tu marca.",
@@ -246,7 +246,7 @@ export const posts: Post[] = [
   },
   {
     slug: "agencia-vs-freelance-contenido",
-    image: "/podcast/reel-1-poster.jpg",
+    image: "/blog/fotos/agencia-vs-freelance-contenido.jpg",
     title: "Agencia de contenido vs freelance: ¿qué le conviene a tu marca?",
     description:
       "Diferencias reales entre contratar una agencia de contenido y un freelance: coste, consistencia, capacidad y estrategia. Cómo elegir según tu marca.",
@@ -295,7 +295,7 @@ export const posts: Post[] = [
   },
   {
     slug: "agencia-de-contenido-madrid-como-elegir",
-    image: "/clients/burmet/poster.jpg",
+    image: "/blog/fotos/agencia-de-contenido-madrid-como-elegir.jpg",
     title: "Cómo elegir una agencia de contenido en Madrid (guía 2026)",
     description:
       "Qué mirar antes de contratar una agencia de contenido en Madrid: qué debe incluir la propuesta, qué precios son realistas, qué preguntas hacer y las señales de alarma.",
@@ -370,7 +370,7 @@ export const posts: Post[] = [
   },
   {
     slug: "cuanto-cuesta-community-manager",
-    image: "/podcast/reel-2-poster.jpg",
+    image: "/blog/fotos/cuanto-cuesta-community-manager.jpg",
     title: "¿Cuánto cuesta un community manager en 2026?",
     description:
       "Precios reales de un community manager en España: freelance, agencia o interno. Qué incluye cada opción y cómo saber cuál le conviene a tu negocio.",
@@ -434,7 +434,7 @@ export const posts: Post[] = [
   },
   {
     slug: "precio-video-corporativo-empresa",
-    image: "/reel-proyecto-poster.jpg",
+    image: "/blog/fotos/precio-video-corporativo-empresa.jpg",
     title: "Cuánto cuesta un vídeo corporativo para una empresa",
     description:
       "Qué influye en el precio de un vídeo corporativo o de marca: preproducción, equipo, jornada de rodaje, postproducción y derechos. Con rangos orientativos.",
@@ -490,7 +490,7 @@ export const posts: Post[] = [
   },
   {
     slug: "cada-cuanto-publicar-redes-sociales",
-    image: "/clients/mimosas/poster.jpg",
+    image: "/blog/fotos/cada-cuanto-publicar-redes-sociales.jpg",
     title: "¿Cada cuánto hay que publicar en redes sociales?",
     description:
       "Frecuencia recomendada de publicación en Instagram, TikTok y YouTube según el tamaño de tu marca, y por qué la constancia importa más que el volumen.",
@@ -544,7 +544,7 @@ export const posts: Post[] = [
   },
   {
     slug: "tiktok-para-marcas-guia",
-    image: "/clients/besmaya/poster.jpg",
+    image: "/blog/fotos/tiktok-para-marcas-guia.jpg",
     title: "TikTok para marcas: guía práctica para empezar bien",
     description:
       "Cómo debe entrar una marca en TikTok en 2026: qué contenido funciona, qué tono usar, cómo reaprovechar los Reels y los errores que hunden una cuenta nueva.",
@@ -609,7 +609,7 @@ export const posts: Post[] = [
   },
   {
     slug: "preparar-local-dia-de-rodaje",
-    image: "/reel-cocina-poster.jpg",
+    image: "/blog/fotos/preparar-local-dia-de-rodaje.jpg",
     title: "Cómo preparar tu negocio para un día de rodaje de contenido",
     description:
       "Checklist para que una jornada de grabación en tu local salga bien: qué preparar, cuándo grabar, qué necesita el equipo y cómo sacar contenido para semanas.",
@@ -663,7 +663,7 @@ export const posts: Post[] = [
   },
   {
     slug: "contenido-redes-sociales-tiendas-moda",
-    image: "/clients/aluxe/poster.jpg",
+    image: "/blog/fotos/contenido-redes-sociales-tiendas-moda.jpg",
     title: "Contenido en redes para marcas de moda y tiendas de ropa",
     description:
       "Cómo debe comunicar una marca de moda en Instagram y TikTok: tipos de pieza que venden, calendario por temporada y errores frecuentes en retail.",
