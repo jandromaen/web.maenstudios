@@ -4145,6 +4145,21 @@ section {
     gap: clamp(36px, 5vw, 80px);
     align-items: center;
   }
+
+  /* El hero se queda con la primera pantalla entera, así que lo último que se
+     ve sin bajar es la línea de oficinas. Antes asomaban a la vez el marquee y
+     la tira de cifras, y la portada se leía como un amontonamiento.
+
+     svh y no vh: en móvil vh cuenta la barra del navegador como si no
+     estuviera, y el hero se salía por abajo. Aquí solo aplica de 980px para
+     arriba —donde el hero va a dos columnas—, pero el fallback queda puesto
+     para los navegadores que no entienden svh. */
+  .page-hero--media {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    align-content: center;
+  }
 }
 
 /* Titular más contenido: en un hero partido, 6.5rem se come la columna */
