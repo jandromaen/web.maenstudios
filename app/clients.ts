@@ -23,6 +23,12 @@ export type Client = {
   previewVideo?: string;
   /** Primer fotograma: pinta la tarjeta antes de que baje un solo byte de vídeo */
   poster?: string;
+  /**
+   * Fotos de las sesiones, para las fichas que aún no tienen vídeo o para
+   * acompañarlo. Sin esto la ficha de un cliente sin reel se queda en un texto
+   * y un vacío, que es lo que le pasaba a once de las veintisiete.
+   */
+  photos?: string[];
 };
 
 /**
@@ -155,12 +161,20 @@ export const clients: Client[] = [
     slug: "jansana",
     name: "Jansana",
     logo: "/clients/jansana.png",
+    previewVideo: "/clients/jansana/preview.mp4",
+    poster: "/clients/jansana/poster.jpg",
     tagline: "Gluten freedom",
     description:
       "Creamos y gestionamos todo el contenido de Jansana en redes: reels, fotografía de producto y estrategia para conectar con su comunidad.",
     url: "",
     sector: "Alimentación",
-    videos: [],
+    videos: [{ src: "/clients/jansana/reel.mp4", title: "Pastelería sin gluten" }],
+    photos: [
+      "/clients/jansana/fotos/a.jpg",
+      "/clients/jansana/fotos/c.jpg",
+      "/clients/jansana/fotos/d.jpg",
+      "/clients/jansana/fotos/b.jpg",
+    ],
   },
   {
     slug: "prototipalo",

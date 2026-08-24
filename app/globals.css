@@ -4301,3 +4301,63 @@ body:has(.cookie-banner) .theme-toggle {
     transform: none;
   }
 }
+
+/* ─── Fotografía de la sesión, en la ficha de cliente ──────────────────────
+   Once de las veintisiete fichas no tenían ningún vídeo: eran un texto y un
+   hueco. Estas fotos les dan cuerpo, y a las que sí tienen reel las completan.
+   No entran en el sistema de revelado por scroll a propósito; ese sistema
+   oculta con CSS y descubre con JavaScript, y aquí no compensa el riesgo. */
+.client-stills {
+  padding: clamp(48px, 8vw, 96px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.client-stills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* La primera manda: en una rejilla de iguales la sesión se aplana y ninguna
+   foto lidera. */
+.client-still:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.client-still {
+  margin: 0;
+  overflow: hidden;
+  background: var(--charcoal);
+  aspect-ratio: 4 / 3;
+}
+
+.client-still:first-child {
+  aspect-ratio: auto;
+}
+
+.client-still img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Caras y producto suelen caer en el tercio superior */
+  object-position: center 40%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.client-still:hover img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 720px) {
+  .client-stills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* En dos columnas, que la primera ocupe cuatro celdas deja huecos raros */
+  .client-still:first-child {
+    grid-column: span 2;
+    grid-row: auto;
+    aspect-ratio: 4 / 3;
+  }
+}

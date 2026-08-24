@@ -230,6 +230,32 @@ export default async function ClientPage({
           </div>
         </section>
 
+        {client.photos && client.photos.length > 0 ? (
+          <section className="client-stills">
+            <div className="container">
+              <div className="section-head">
+                <span className="eyebrow">Fotografía</span>
+                <h2>De la misma sesión</h2>
+              </div>
+              {/* La primera ocupa dos columnas: una rejilla de iguales aplana
+                  la sesión y hace que ninguna foto mande. */}
+              <div className="client-stills-grid">
+                {client.photos.map((foto, i) => (
+                  <figure className="client-still" key={foto}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={foto}
+                      alt={`Fotografía de la sesión de ${client.name}`}
+                      loading={i === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                    />
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
         <Statement
           before={`Somos el equipo de contenido de ${client.name}`}
           sub={
