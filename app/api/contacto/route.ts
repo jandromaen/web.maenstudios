@@ -1,19 +1,17 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { EMAIL_ADMIN, EMAIL_PROJECTS } from "../../site-data";
+import { EMAIL_PROJECTS } from "../../site-data";
+import { BUZONES, REMITENTE } from "../../lib/remitente";
 
 export const runtime = "nodejs";
 
-/**
- * Remitente del email. Debe ser un dominio verificado en Resend
- * (Resend → Domains → maenstudios.com). Configurable por si se usa otro.
- */
-const FROM = process.env.CONTACT_FROM_EMAIL ?? "web@maenstudios.com";
+/** Ver app/lib/remitente.ts: hasta que el dominio verifique, esto es limitado. */
+const FROM = REMITENTE;
 
 /**
- * Todo lo que entra por el formulario llega a los dos buzones. Se envía en un
- * único correo con ambos destinatarios, no en dos correos: así comparten hilo
- * y al responder uno, el otro ve la respuesta.
+ * Todo lo que entra por el formulario se manda en un único correo con todos los
+ * destinatarios, no en varios correos: así comparten hilo y al responder uno,
+ * el otro ve la respuesta.
  *
  * CONTACT_TO_EMAIL admite varias direcciones separadas por comas y, si está
  * definida, sustituye a esta lista.
@@ -21,7 +19,7 @@ const FROM = process.env.CONTACT_FROM_EMAIL ?? "web@maenstudios.com";
 const DESTINATARIOS = (
   process.env.CONTACT_TO_EMAIL
     ? process.env.CONTACT_TO_EMAIL.split(",")
-    : [EMAIL_PROJECTS, EMAIL_ADMIN]
+    : BUZONES
 )
   .map((d) => d.trim())
   .filter(Boolean)

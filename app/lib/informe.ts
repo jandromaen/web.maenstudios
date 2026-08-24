@@ -1,24 +1,9 @@
 import { auditar, type Punto } from "./auditoria";
-import { EMAIL_ADMIN, EMAIL_PROJECTS } from "../site-data";
+import { BUZONES, REMITENTE as DIRECCION } from "./remitente";
 
-/**
- * Compone y envía el informe semanal de pendientes.
- *
- * El remitente por defecto es onboarding@resend.dev, que no es nuestro. Resend
- * solo deja enviar a la dirección dueña de la cuenta mientras el dominio no
- * esté verificado, y esa es info@. Cuando verifique, basta con definir
- * CONTACT_FROM_EMAIL y el informe pasará a salir del dominio propio y a llegar
- * también a jandro@: hasta entonces él mismo lo recuerda cada semana.
- */
-const DOMINIO_VERIFICADO = Boolean(process.env.CONTACT_FROM_EMAIL);
-
-const REMITENTE = DOMINIO_VERIFICADO
-  ? `Web de Maen Studios <${process.env.CONTACT_FROM_EMAIL}>`
-  : "Web de Maen Studios <onboarding@resend.dev>";
-
-const DESTINATARIOS = DOMINIO_VERIFICADO
-  ? [EMAIL_ADMIN, EMAIL_PROJECTS]
-  : [EMAIL_ADMIN];
+/** Compone y envía el informe semanal de pendientes. */
+const REMITENTE = `Web de Maen Studios <${DIRECCION}>`;
+const DESTINATARIOS = BUZONES;
 
 const ORDEN: Record<Punto["estado"], number> = { bloqueo: 0, aviso: 1, ok: 2 };
 const ETIQUETA: Record<Punto["estado"], string> = { bloqueo: "BLOQUEO", aviso: "PENDIENTE", ok: "RESUELTO" };
