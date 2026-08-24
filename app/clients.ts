@@ -186,6 +186,12 @@ export const clients: Client[] = [
     url: "",
     sector: "Tecnología",
     videos: [],
+    photos: [
+      "/clients/prototipalo/fotos/1.jpg",
+      "/clients/prototipalo/fotos/2.jpg",
+      "/clients/prototipalo/fotos/3.jpg",
+      "/clients/prototipalo/fotos/4.jpg",
+    ],
   },
   {
     slug: "macchina",
@@ -386,6 +392,12 @@ export const clients: Client[] = [
     url: "",
     sector: "Producto",
     videos: [],
+    photos: [
+      "/clients/gota/fotos/1.jpg",
+      "/clients/gota/fotos/2.jpg",
+      "/clients/gota/fotos/3.jpg",
+      "/clients/gota/fotos/4.jpg",
+    ],
   },
 ];
 
