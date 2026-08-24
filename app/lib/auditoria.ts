@@ -250,6 +250,21 @@ function revisarContenido(): Punto[] {
 
   if (!puntos.length) puntos.push({ estado: "ok", area, titulo: "Todas las fichas están completas" });
 
+  /* Los artículos se ilustran con el primer fotograma de un reel: un vertical
+     comprimido para vídeo, recortado a 4:3. Se puso como parche mientras no
+     hubiera otra cosa, y en el Drive sí la hay —las sesiones de foto editadas,
+     en «<cliente>/SHOOTING <fecha>/FOTOS/EDITADAS»—. En cuanto apunten ahí,
+     este punto desaparece. */
+  const conFotograma = posts.filter((p) => p.image?.includes("poster"));
+  if (conFotograma.length) {
+    puntos.push({
+      estado: "aviso", area: "Blog",
+      titulo: `${conFotograma.length} artículos ilustrados con un fotograma de vídeo`,
+      detalle: "Son capturas de reels verticales, comprimidas para vídeo y recortadas: al lado de una foto de verdad se nota.",
+      accion: "Sustituirlas por fotos de las sesiones editadas del Drive.",
+    });
+  }
+
   /* El blog es lo único de la web que envejece solo: si deja de crecer, Google
      deja de tener motivos para volver a pasar. */
   const ultimo = [...posts].sort((a, b) => +new Date(b.date) - +new Date(a.date))[0];
