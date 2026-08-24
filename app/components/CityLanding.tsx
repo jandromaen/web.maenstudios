@@ -10,6 +10,7 @@ import { HeroReels } from "./HeroMedia";
 import { clients, reelsFor } from "../clients";
 import { services, studioStats } from "../site-data";
 import type { LocalLanding } from "../local-data";
+import { serviceLandingsForCity } from "../service-landings";
 import { getOffice, PHONE, PHONE_DISPLAY } from "../seo-config";
 
 export default function CityLanding({ landing }: { landing: LocalLanding }) {
@@ -17,6 +18,10 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
   const showcase = landing.clientSlugs
     .map((slug) => clients.find((c) => c.slug === slug))
     .filter((c): c is (typeof clients)[number] => Boolean(c));
+
+  /* Landings de servicio de esta misma ciudad: el enlace va en las dos
+     direcciones para que la autoridad circule entre ellas. */
+  const relatedServices = serviceLandingsForCity(landing.city);
 
   /* Reels de la propia ciudad; si esa oficina aún no tiene piezas subidas,
      se cae a trabajo del estudio para que el hero nunca quede vacío. */
@@ -234,6 +239,34 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
             </div>
           </div>
         </section>
+
+        {relatedServices.length > 0 ? (
+          <section className="page-section">
+            <div className="container">
+              <div className="section-head">
+                <span className="eyebrow">Especialidades</span>
+                <h2>Si buscas algo más concreto</h2>
+              </div>
+              <div className="section-cta section-cta--wrap">
+                {relatedServices.map((service) => (
+                  <Link
+                    className="btn btn-ghost"
+                    key={service.slug}
+                    href={`/${service.slug}`}
+                  >
+                    {service.metaTitle}
+                  </Link>
+                ))}
+                <Link
+                  className="btn btn-ghost"
+                  href="/agencia-de-contenido-para-restaurantes"
+                >
+                  Contenido para restaurantes
+                </Link>
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         <section className="page-section city-form" id="presupuesto">
           <div className="container contact-grid">

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { clients } from "./clients";
 import { posts } from "./blog-data";
 import { localLandings } from "./local-data";
+import { serviceLandings } from "./service-landings";
 import { SITE_URL } from "./seo-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -63,6 +64,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
+  /* Landings de servicio y sector: cola larga, menos competida que el
+     genérico de ciudad. */
+  const serviceRoutes: MetadataRoute.Sitemap = serviceLandings.map((landing) => ({
+    url: `${SITE_URL}/${landing.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   const clientRoutes: MetadataRoute.Sitemap = clients.map((client) => ({
     url: `${SITE_URL}/clientes/${client.slug}`,
     lastModified: now,
@@ -77,5 +87,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...localRoutes, ...clientRoutes, ...blogRoutes];
+  return [
+    ...staticRoutes,
+    ...localRoutes,
+    ...serviceRoutes,
+    ...clientRoutes,
+    ...blogRoutes,
+  ];
 }

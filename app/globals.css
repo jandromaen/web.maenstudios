@@ -1283,6 +1283,14 @@ section {
   margin-top: 32px;
 }
 
+/* Bloque de enlaces relacionados: varios botones que tienen que poder saltar
+   de línea en móvil sin desbordar. */
+.section-cta--wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .grid {
   display: grid;
   gap: 20px;

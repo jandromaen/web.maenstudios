@@ -188,7 +188,13 @@ const SERVICE_CATALOG = [
   },
 ];
 
-export function ServiceJsonLd({ city }: { city?: string } = {}) {
+export function ServiceJsonLd({
+  city,
+  /* Las landings de servicio describen un servicio concreto (productora,
+     Reels, community management), no el genérico de la agencia. */
+  serviceType,
+  description,
+}: { city?: string; serviceType?: string; description?: string } = {}) {
   const area = city
     ? [{ "@type": "City", name: city }]
     : BUSINESS.areasServed.map((name) => ({
@@ -199,15 +205,19 @@ export function ServiceJsonLd({ city }: { city?: string } = {}) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    serviceType: city
-      ? `Agencia de creación de contenido para redes sociales en ${city}`
-      : "Agencia de creación de contenido para redes sociales",
-    name: city
-      ? `Creación de contenido para redes sociales en ${city}`
-      : "Creación de contenido para redes sociales",
+    serviceType:
+      serviceType ??
+      (city
+        ? `Agencia de creación de contenido para redes sociales en ${city}`
+        : "Agencia de creación de contenido para redes sociales"),
+    name:
+      serviceType ??
+      (city
+        ? `Creación de contenido para redes sociales en ${city}`
+        : "Creación de contenido para redes sociales"),
     provider: { "@id": `${SITE_URL}/#organization` },
     areaServed: area,
-    description: DEFAULT_DESCRIPTION,
+    description: description ?? DEFAULT_DESCRIPTION,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Servicios de contenido para redes sociales",

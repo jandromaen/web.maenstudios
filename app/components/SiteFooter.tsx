@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { EMAIL } from "../site-data";
 import { OFFICES, PHONE, PHONE_DISPLAY, SOCIAL_LINKS } from "../seo-config";
+import { serviceLandings } from "../service-landings";
 
 export default function SiteFooter() {
   return (
@@ -28,6 +29,13 @@ export default function SiteFooter() {
             <Link href="/servicios">Producción Audiovisual</Link>
             <Link href="/servicios">Community Management</Link>
             <Link href="/talents">UGC y creadores</Link>
+            {/* Las landings de servicio necesitan enlace desde todo el sitio:
+                sin él no reciben autoridad y no llegan a posicionar. */}
+            {serviceLandings.map((landing) => (
+              <Link key={landing.slug} href={`/${landing.slug}`}>
+                {landing.metaTitle}
+              </Link>
+            ))}
           </div>
           <div className="footer-col footer-offices">
             <h4>Oficinas</h4>
