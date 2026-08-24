@@ -23,6 +23,11 @@
   /* Fichas sin color: iguales en los dos temas */
   --charcoal: #2a2d2c;
   --radius: 0;
+  /* Los reels son la excepción a las esquinas rectas del resto de la web:
+     van redondeados como una pantalla de móvil, que es lo que son. Referencia:
+     mammateam.com/content. Un solo token para que las siete rejillas de vídeo
+     no se separen nunca entre sí. */
+  --reel-radius: 24px;
   --maxw: 1440px;
   --pad: clamp(16px, 3vw, 40px);
   /* Tipografía Canva: Monument Extended (display) + TT Fors → Plus Jakarta Sans (body) */
@@ -735,6 +740,7 @@ button,
 .bd-case-media {
   aspect-ratio: 9 / 16;
   overflow: hidden;
+  border-radius: var(--reel-radius);
   background: var(--charcoal);
   margin-bottom: 14px;
   position: relative;
@@ -1876,6 +1882,7 @@ section {
   display: block;
   aspect-ratio: 9 / 16;
   overflow: hidden;
+  border-radius: var(--reel-radius);
   background: var(--charcoal);
   position: relative;
   margin-bottom: 14px;
@@ -2211,6 +2218,7 @@ section {
   position: relative;
   aspect-ratio: 9 / 16;
   overflow: hidden;
+  border-radius: var(--reel-radius);
   background: #111;
 }
 
@@ -3805,6 +3813,7 @@ section {
   aspect-ratio: 9 / 16;
   max-height: min(78vh, 620px);
   overflow: hidden;
+  border-radius: var(--reel-radius);
   background: var(--charcoal);
   display: block;
 }
@@ -3945,6 +3954,7 @@ section {
   position: relative;
   aspect-ratio: 9 / 16;
   overflow: hidden;
+  border-radius: var(--reel-radius);
   background: var(--charcoal);
   width: 100%;
 }
@@ -4173,6 +4183,7 @@ section {
 .hero-reel {
   aspect-ratio: 9 / 16;
   overflow: hidden;
+  border-radius: var(--reel-radius);
   background: var(--charcoal);
   position: relative;
 }
