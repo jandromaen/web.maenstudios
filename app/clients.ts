@@ -306,13 +306,15 @@ export const clients: Client[] = [
   {
     slug: "perritos-calientes",
     name: "Perritos Calientes",
+    previewVideo: "/clients/perritos-calientes/preview.mp4",
+    poster: "/clients/perritos-calientes/poster.jpg",
     logo: "/clients/perritos.png",
     tagline: "Hot dog & cocktails · Barcelona",
     description:
       "Reels y contenido para Perritos Calientes, capturando el ambiente nocturno y su producto —hot dogs y cócteles— con piezas dinámicas pensadas para redes.",
     url: "",
     sector: "Gastronomía",
-    videos: [],
+    videos: [{ src: "/clients/perritos-calientes/reel.mp4", title: "Reel Perritos Calientes" }],
   },
   {
     slug: "thinking-home",
