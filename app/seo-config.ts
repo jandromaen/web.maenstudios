@@ -141,7 +141,7 @@ export const OPENING_HOURS = {
     "Friday",
   ],
   opens: "09:00",
-  closes: "18:00",
+  closes: "19:00",
 };
 
 export const BUSINESS = {
