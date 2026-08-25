@@ -41,12 +41,62 @@ export default function ContactoPage() {
       <main>
         <section className="page-hero contact-hero">
           <div className="container">
-            <span className="index-label">Contacto</span>
-            <h1>Cuéntanos tu proyecto</h1>
-            <p className="lead">
-              Te respondemos en menos de 24h con una primera idea y un
-              presupuesto cerrado. Sin compromiso.
-            </p>
+            <div className="page-hero-copy">
+              <span className="index-label">Contacto</span>
+              <h1>Cuéntanos tu proyecto</h1>
+              <p className="lead">
+                Te respondemos en menos de 24h con una primera idea y un
+                presupuesto cerrado. Sin compromiso.
+              </p>
+            </div>
+
+            {/* Los datos de contacto van aquí y no debajo del formulario:
+                quien entra en esta página quiere el correo o el teléfono, y
+                antes había que pasar por delante de todo el bloque de
+                fundadores para llegar a ellos. */}
+            <aside className="contact-aside">
+              <div className="contact-block">
+                <span className="contact-label">Correo</span>
+                <ContactEmails />
+              </div>
+
+              {PHONE ? (
+                <div className="contact-block">
+                  <span className="contact-label">Teléfono</span>
+                  <a className="contact-value" href={`tel:${PHONE}`}>
+                    {PHONE_DISPLAY || PHONE}
+                  </a>
+                </div>
+              ) : null}
+
+              <div className="contact-block">
+                <span className="contact-label">Oficinas</span>
+                {OFFICES.map((office) => (
+                  <div className="contact-office" key={office.id}>
+                    <Link className="contact-value" href={office.landingPath}>
+                      {office.city}
+                    </Link>
+                    <address>
+                      {office.streetAddress
+                        ? `${office.streetAddress}, ${office.postalCode}`
+                        : office.addressRegion}
+                      {office.mapUrl ? (
+                        <>
+                          {" · "}
+                          <a
+                            href={office.mapUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Maps ↗
+                          </a>
+                        </>
+                      ) : null}
+                    </address>
+                  </div>
+                ))}
+              </div>
+            </aside>
           </div>
         </section>
 
@@ -88,57 +138,11 @@ export default function ContactoPage() {
         </section>
 
         <section className="page-section contact-section">
-          <div className="container contact-grid">
-            {/* Columna de datos: etiqueta pequeña y dato, separados por filete.
-                Antes era un panel de color con dos titulares que repetían lo
-                que ya dice el hero. */}
-            <aside className="contact-aside">
-              <div className="contact-block">
-                <span className="contact-label">Correo</span>
-                <ContactEmails />
-              </div>
-
-              {PHONE ? (
-                <div className="contact-block">
-                  <span className="contact-label">Teléfono</span>
-                  <a className="contact-value" href={`tel:${PHONE}`}>
-                    {PHONE_DISPLAY || PHONE}
-                  </a>
-                </div>
-              ) : null}
-
-              <div className="contact-block">
-                <span className="contact-label">Oficinas</span>
-                {OFFICES.map((office) => (
-                  <div className="contact-office" key={office.id}>
-                    <Link
-                      className="contact-value"
-                      href={office.landingPath}
-                    >
-                      {office.city}
-                    </Link>
-                    <address>
-                      {office.streetAddress
-                        ? `${office.streetAddress}, ${office.postalCode}`
-                        : office.addressRegion}
-                      {office.mapUrl ? (
-                        <>
-                          {" · "}
-                          <a
-                            href={office.mapUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Maps ↗
-                          </a>
-                        </>
-                      ) : null}
-                    </address>
-                  </div>
-                ))}
-              </div>
-            </aside>
-
+          <div className="container container-narrow">
+            <div className="section-head">
+              <span className="eyebrow">Formulario</span>
+              <h2>Cuéntanos qué necesitas</h2>
+            </div>
             <ContactForm origen="contacto" />
           </div>
         </section>
