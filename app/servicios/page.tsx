@@ -58,7 +58,7 @@ export default function ServiciosPage() {
           <div className="container">
             <div className="page-hero-copy">
               <span className="index-label">Services · 01 / 03</span>
-              <h1>Todo tu contenido, en un mismo sitio</h1>
+              <h1>Todo tu equipo Social Media en un mismo sitio</h1>
               <p className="lead">
                 Tres pilares para tu marca en redes: dirección creativa,
                 producción audiovisual y community management. Del concepto a la
