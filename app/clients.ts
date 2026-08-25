@@ -226,12 +226,14 @@ export const clients: Client[] = [
   {
     slug: "ultrapaninos-marin",
     name: "Ultrapaninos Marín",
+    previewVideo: "/clients/ultrapaninos-marin/preview.mp4",
+    poster: "/clients/ultrapaninos-marin/poster.jpg",
     tagline: "Bar de bocadillos · Barcelona",
     description:
       "Contenido para Ultrapaninos Marín, el brazo de bocadillos de alta gastronomía del grupo Marín. Piezas apetecibles que ponen en valor su pan, embutidos y producto de obrador.",
     url: "https://www.timeout.es/barcelona/es/restaurantes/ultrapaninos-marin",
     sector: "Gastronomía",
-    videos: [],
+    videos: [{ src: "/clients/ultrapaninos-marin/reel.mp4", title: "Reel Ultrapaninos Marín" }],
   },
   {
     slug: "hijos-de-javier",
