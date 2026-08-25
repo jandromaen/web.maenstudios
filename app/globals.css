@@ -22,6 +22,10 @@
 
   /* Fichas sin color: iguales en los dos temas */
   --charcoal: #2a2d2c;
+  /* Triplete RGB del fondo, no un color cerrado: el velo del hero de contacto
+     necesita alfa variable dentro del degradado, y rgba() no acepta una
+     variable que ya traiga su propia opacidad. */
+  --bg-rgb: 21, 21, 21;
   --radius: 0;
   /* Los reels son la excepción a las esquinas rectas del resto de la web:
      van redondeados como una pantalla de móvil, que es lo que son. Referencia:
@@ -39,6 +43,7 @@
 [data-theme="light"] {
   color-scheme: light;
   --bg: #f4f4f4;
+  --bg-rgb: 244, 244, 244;
   --bg-soft: #ececec;
   --panel: #ffffff;
   --fg: #252422;
@@ -3333,6 +3338,55 @@ section {
    compite con el propio formulario. */
 .contact-hero {
   padding-bottom: clamp(20px, 3vw, 36px);
+  position: relative;
+  isolation: isolate;
+}
+
+/* Foto de fondo con velo. Va en un pseudoelemento y no en el background de la
+   sección para poder apilar degradado y foto sin que el contenido herede nada.
+
+   Sube del 80% pedido al 88-97%: la foto del obrador es muy clara —batas
+   blancas, pan dorado— y a 80% el pan competía con el titular y dejaba los
+   correos casi ilegibles. Con una foto oscura, el 80% habría bastado.
+
+   El degradado va en diagonal y se cierra hacia la izquierda, donde cae el
+   titular, pero no baja del 88% en ningún punto porque la columna derecha
+   también lleva texto. */
+.contact-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(
+      105deg,
+      rgba(var(--bg-rgb), 0.97) 0%,
+      rgba(var(--bg-rgb), 0.93) 40%,
+      rgba(var(--bg-rgb), 0.9) 70%,
+      rgba(var(--bg-rgb), 0.88) 100%
+    ),
+    url("/contacto/fondo.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* En claro el velo tiene que apretar más. El texto es oscuro sobre fondo
+   claro, así que quien le roba contraste no son las zonas claras de la foto
+   sino las oscuras: medido, la línea gris de las direcciones caía a 3,9:1
+   sobre el cuchillo y el guante, por debajo del 4,5 que pide WCAG AA. Con
+   estos valores vuelve a 4,7 y la foto sigue intuyéndose, aunque en claro es
+   casi un susurro: es el precio de que el texto siga siendo legible. */
+[data-theme="light"] .contact-hero::before {
+  background-image:
+    linear-gradient(
+      105deg,
+      rgba(var(--bg-rgb), 1) 0%,
+      rgba(var(--bg-rgb), 0.99) 40%,
+      rgba(var(--bg-rgb), 0.98) 70%,
+      rgba(var(--bg-rgb), 0.97) 100%
+    ),
+    url("/contacto/fondo.webp");
 }
 
 /* El hero de contacto va a dos columnas como el resto de páginas —titular a
