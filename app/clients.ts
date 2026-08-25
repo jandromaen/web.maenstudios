@@ -177,23 +177,6 @@ export const clients: Client[] = [
     ],
   },
   {
-    slug: "prototipalo",
-    name: "Prototipalo",
-    logo: "/clients/prototipalo.png",
-    tagline: "Producto e innovación",
-    description:
-      "Producción de contenido audiovisual y social media para Prototipalo. Piezas para redes que comunican su propuesta de forma clara, atractiva y con una estética a la altura del producto.",
-    url: "",
-    sector: "Tecnología",
-    videos: [],
-    photos: [
-      "/clients/prototipalo/fotos/1.jpg",
-      "/clients/prototipalo/fotos/2.jpg",
-      "/clients/prototipalo/fotos/3.jpg",
-      "/clients/prototipalo/fotos/4.jpg",
-    ],
-  },
-  {
     slug: "macchina",
     name: "Macchina Pasta Bar",
     logo: "/clients/macchina.png",
@@ -315,17 +298,6 @@ export const clients: Client[] = [
     url: "",
     sector: "Gastronomía",
     videos: [{ src: "/clients/perritos-calientes/reel.mp4", title: "Reel Perritos Calientes" }],
-  },
-  {
-    slug: "thinking-home",
-    name: "Thinking Home",
-    logo: "/clients/thinkinghome.png",
-    tagline: "Estudio de interiorismo",
-    description:
-      "Contenido audiovisual para el estudio de interiorismo Thinking Home: piezas que muestran sus proyectos con elegancia.",
-    url: "",
-    sector: "Interiorismo",
-    videos: [],
   },
   {
     slug: "aluxe",
