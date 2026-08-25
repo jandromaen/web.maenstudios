@@ -292,6 +292,8 @@ export const clients: Client[] = [
   {
     slug: "gozice",
     name: "Gozice",
+    previewVideo: "/clients/gozice/preview.mp4",
+    poster: "/clients/gozice/poster.jpg",
     logo: "/clients/gozice.png",
     community: "+2k",
     tagline: "Marca de producto",
@@ -299,7 +301,7 @@ export const clients: Client[] = [
       "Contenido audiovisual y social media para Gozice: Reels y piezas para redes que mantienen la marca activa, reconocible y bien posicionada en su sector.",
     url: "",
     sector: "Producto",
-    videos: [],
+    videos: [{ src: "/clients/gozice/reel.mp4", title: "Reel Gozice" }],
   },
   {
     slug: "perritos-calientes",
