@@ -4485,3 +4485,50 @@ body:has(.cookie-banner) .theme-toggle {
     aspect-ratio: 4 / 3;
   }
 }
+
+/* ─── Reels que reaccionan al cursor ───────────────────────────────────────
+   Se inclinan siguiendo al ratón y se pueden coger y arrastrar; al soltarlos
+   vuelven solos. La lógica vive en app/components/ReelMotion.tsx, que añade
+   .medio-vivo solo cuando hay ratón de verdad y el visitante no ha pedido
+   menos movimiento. Sin esa clase todo esto queda inerte: en táctil el
+   arrastre pelearía con el scroll de la página. */
+
+/* La perspectiva va en el contenedor: puesta en cada pieza, cada una tendría
+   su propio punto de fuga y la rejilla se vería torcida. */
+.client-portfolio-grid,
+.portfolio-grid,
+.case-hero-grid {
+  perspective: 1400px;
+}
+
+.medio-vivo {
+  cursor: grab;
+  transform: translate3d(var(--dx, 0px), var(--dy, 0px), 0)
+    rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--s, 1));
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+.medio-vivo:hover {
+  --s: 1.03;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+
+/* Durante el arrastre no hay transición: con ella el reel iría por detrás del
+   cursor y se sentiría pegajoso. */
+.medio-arrastrando {
+  cursor: grabbing;
+  transition: none;
+  z-index: 3;
+  --s: 1.05;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+}
+
+/* Nada de dentro debe capturar el puntero: si lo hace, el arrastre se pierde
+   en cuanto el cursor pasa por encima del vídeo o del rótulo. */
+.medio-vivo > * {
+  pointer-events: none;
+}
