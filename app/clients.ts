@@ -386,12 +386,14 @@ export const clients: Client[] = [
   {
     slug: "daddies",
     name: "Daddies",
+    previewVideo: "/clients/daddies/preview.mp4",
+    poster: "/clients/daddies/poster.jpg",
     tagline: "Marca de producto",
     description:
       "Producimos contenido para redes de Daddies: reels y piezas sociales que refuerzan su identidad de marca y la mantienen activa frente a su comunidad.",
     url: "",
     sector: "Producto",
-    videos: [],
+    videos: [{ src: "/clients/daddies/reel.mp4", title: "Reel Daddies" }],
   },
   {
     slug: "gota",
