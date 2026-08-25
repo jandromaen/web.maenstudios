@@ -374,12 +374,14 @@ export const clients: Client[] = [
   {
     slug: "te-pone",
     name: "Té Pone",
+    previewVideo: "/clients/te-pone/preview.mp4",
+    poster: "/clients/te-pone/poster.jpg",
     tagline: "Marca de producto",
     description:
       "Contenido audiovisual y social media para Té Pone. Reels y piezas para redes pensadas para dar personalidad a la marca y sostener su presencia con una estética coherente.",
     url: "",
     sector: "Producto",
-    videos: [],
+    videos: [{ src: "/clients/te-pone/reel.mp4", title: "Reel Té Pone" }],
   },
   {
     slug: "daddies",
