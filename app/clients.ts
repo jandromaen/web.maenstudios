@@ -360,12 +360,14 @@ export const clients: Client[] = [
   {
     slug: "gastroconnect",
     name: "Gastroconnect",
+    previewVideo: "/clients/gastroconnect/preview.mp4",
+    poster: "/clients/gastroconnect/poster.jpg",
     tagline: "Sector gastronómico",
     description:
       "Producimos el contenido audiovisual y de social media de Gastroconnect: reels y piezas para redes que mantienen la marca activa y reconocible entre su audiencia.",
     url: "",
     sector: "Gastronomía",
-    videos: [],
+    videos: [{ src: "/clients/gastroconnect/reel.mp4", title: "Reel Gastroconnect" }],
   },
   {
     slug: "te-pone",
