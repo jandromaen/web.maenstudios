@@ -392,12 +392,14 @@ export const clients: Client[] = [
   {
     slug: "gota",
     name: "Gota",
+    previewVideo: "/clients/gota/preview.mp4",
+    poster: "/clients/gota/poster.jpg",
     tagline: "Marca de producto",
     description:
       "Contenido audiovisual y de social media para Gota. Reels y piezas para redes que ponen el producto en valor con una línea visual cuidada y constante.",
     url: "",
     sector: "Producto",
-    videos: [],
+    videos: [{ src: "/clients/gota/reel.mp4", title: "Reel Gota" }],
     photos: [
       "/clients/gota/fotos/1.jpg",
       "/clients/gota/fotos/2.jpg",
