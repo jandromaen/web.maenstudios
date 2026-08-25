@@ -717,23 +717,23 @@ button,
 
 .bd-cases-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(16px, 2.5vw, 24px);
 }
 
 @media (min-width: 800px) {
   .bd-cases-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1200px) {
   .bd-cases-grid {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .bd-cases-grid.is-featured {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1143,14 +1143,14 @@ button,
 
 @media (min-width: 640px) {
   .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 36px 32px;
   }
 }
 
 @media (min-width: 900px) {
   .footer-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1340,7 +1340,7 @@ section {
 
 @media (min-width: 720px) {
   .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1399,13 +1399,13 @@ section {
 
 @media (min-width: 720px) {
   .steps {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1100px) {
   .steps {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1415,7 +1415,7 @@ section {
 
 @media (min-width: 800px) {
   .perks {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1425,13 +1425,13 @@ section {
 
 @media (min-width: 640px) {
   .client-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1000px) {
   .client-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1873,21 +1873,26 @@ section {
 }
 
 /* Client listing — portfolio grid */
+/* Las columnas van con minmax(0, 1fr) en todas las rejillas de la web, no solo
+   aquí: `1fr` es en realidad `minmax(auto, 1fr)`, y ese `auto` impide que la
+   columna baje del tamaño mínimo de su contenido. En pantallas de 320px eso
+   hacía que las dos columnas sumaran más que la pantalla y se llevaran la
+   página entera en scroll horizontal. */
 .client-portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(20px, 2.5vw, 32px) clamp(12px, 2vw, 24px);
 }
 
 @media (min-width: 720px) {
   .client-portfolio-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1100px) {
   .client-portfolio-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -2187,7 +2192,16 @@ section {
 }
 
 .case-hero h1 {
-  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  /* El suelo del clamp baja de 2.2rem a 1.85rem por el ancho de pantalla más
+     estrecho que sigue habiendo (320px). Con 2.2rem, un nombre como
+     «Ultramarinos» o «Gastroconnect» medía 313px dentro de una columna de 288
+     y empujaba toda la ficha: la página entera se iba en scroll horizontal.
+
+     El partido de palabras lo pone la regla general de más arriba, con
+     `anywhere`. Aquí no se repite: al ser este selector más específico,
+     declarar `break-word` ganaría por especificidad y anularía justo la parte
+     que hace que el grid recalcule la columna. */
+  font-size: clamp(1.85rem, 6vw, 4.4rem);
   margin: 0.2em 0 0.35em;
 }
 
@@ -2236,13 +2250,13 @@ section {
 
 @media (min-width: 700px) {
   .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1100px) {
   .portfolio-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -2559,7 +2573,7 @@ section {
 
 @media (min-width: 800px) {
   .talent-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -3033,9 +3047,35 @@ section {
   border-top: 1px solid var(--line);
 }
 
+/* Red de seguridad de toda la tipografía display.
+   El tipo es ancho y en mayúsculas, y a 320px una sola palabra larga —el
+   nombre de un cliente, «GASTROCONNECT», «ULTRAMARINOS»— mide más que la
+   columna entera. Como no puede partirse, empuja el documento y toda la
+   página se va en scroll horizontal.
+
+   Es `anywhere` y no `break-word` a propósito, que es la parte que cuesta ver:
+   los dos parten palabras igual, pero solo `anywhere` reduce el tamaño mínimo
+   intrínseco del elemento, y ese es justo el número que consulta el grid para
+   decidir el ancho de la columna. Con `break-word` la columna se seguía
+   calculando como si la palabra fuera indivisible y el desbordamiento no
+   desaparecía.
+
+   Solo actúa cuando la palabra de verdad no cabe, así que en la inmensa
+   mayoría de los casos no cambia nada. */
+h1,
+h2,
+h3,
+.statement-text,
+.case-nav-name,
+.client-row h3 {
+  overflow-wrap: anywhere;
+}
+
 .statement-text {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 6.25vw, 5.5rem);
+  /* El suelo baja de 2rem a 1.6rem: con 2rem, «Somos el equipo de contenido de
+     Gastroconnect» se salía 85px de la columna en una pantalla de 320px. */
+  font-size: clamp(1.6rem, 6.25vw, 5.5rem);
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: -0.03em;
@@ -3069,7 +3109,7 @@ section {
 /* ─── Rejilla de métricas ─────────────────────────────── */
 .stat-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   background: var(--line);
   border-top: 1px solid var(--line);
@@ -3078,7 +3118,7 @@ section {
 
 @media (min-width: 760px) {
   .stat-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -3125,7 +3165,7 @@ section {
 
 @media (min-width: 860px) {
   .cap-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -4085,7 +4125,7 @@ section {
 
 .case-facts {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
@@ -4094,7 +4134,7 @@ section {
 
 @media (min-width: 760px) {
   .case-facts {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -4132,7 +4172,11 @@ section {
 
 .case-nav .container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* minmax(0, 1fr) y no 1fr: `1fr` equivale a `minmax(auto, 1fr)`, y ese `auto`
+     impide que la columna baje del tamaño mínimo de su contenido. Con un nombre
+     largo en una pantalla de 320px, las dos columnas sumaban más que la
+     pantalla y se llevaban la página entera en scroll horizontal. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   background: var(--line);
   padding: 0;
@@ -4224,6 +4268,10 @@ section {
   justify-content: space-between;
   gap: 12px;
   margin-top: 8px;
+  /* En una tarjeta de dos columnas a 320px, el pie mide 138px y el enlace de
+     Instagram 82: sin permitir el salto de línea se salía de la tarjeta y
+     arrastraba la página entera a scroll horizontal. */
+  flex-wrap: wrap;
 }
 
 .client-portfolio-foot .client-portfolio-services {
@@ -4300,7 +4348,7 @@ section {
 /* Tira de reels en vertical, con desfase alterno tipo hoja de contactos */
 .hero-reels {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(8px, 1.2vw, 14px);
 }
 
@@ -4325,7 +4373,7 @@ section {
 /* Rejilla de fotogramas o miniaturas 16:9 */
 .hero-frames {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(8px, 1.2vw, 14px);
 }
 
@@ -4438,7 +4486,7 @@ body:has(.cookie-banner) .theme-toggle {
 
 .client-stills-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -4476,7 +4524,7 @@ body:has(.cookie-banner) .theme-toggle {
 
 @media (max-width: 720px) {
   .client-stills-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   /* En dos columnas, que la primera ocupe cuatro celdas deja huecos raros */
   .client-still:first-child {
