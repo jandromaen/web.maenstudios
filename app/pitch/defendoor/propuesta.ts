@@ -206,8 +206,10 @@ export const PORTADA = [
   "te-pone",
   "gran-tonino",
   "pigili-originals",
-  "canallita",
   "ultramarinos-marin",
+  /* Canallita va la última a propósito: esa posición es la que queda más
+     abajo y detrás de todas en el apilamiento de la baraja. */
+  "canallita",
 ];
 
 /**
