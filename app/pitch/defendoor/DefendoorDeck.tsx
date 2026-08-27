@@ -12,6 +12,7 @@ import type { Client } from "../../clients";
 import {
   CLIENTE,
   PACK,
+  DESGLOSE,
   LO_QUE_PIDEN,
   METODOLOGIA,
   DUDAS,
@@ -322,40 +323,58 @@ export default function DefendoorDeck({
       id: "precio",
       titulo: "El precio",
       render: () => (
-        <div className="dk-precio">
-          <div className="dk-cifra">
-            {euros(PACK.precioMes)}
-            <span className="dk-eur">€</span>
-            <span className="dk-mes-lbl">/ mes + IVA</span>
+        <div className="dk-centro dk-centro--ancho">
+          <div className="dk-precio-grid">
+            <div>
+              <div className="dk-cifra">
+                {euros(PACK.precioMes)}
+                <span className="dk-eur">€</span>
+              </div>
+              <p className="dk-mes-lbl">al mes + IVA</p>
+              <p className="dk-porpieza">
+                {euros(Math.round(PACK.precioMes / PACK.piezasMes))} € por pieza,
+                con todo dentro.
+              </p>
+              <dl className="dk-precio-datos">
+                <div>
+                  <dt>Vídeos cada semana</dt>
+                  <dd>{PACK.piezasSemana}</dd>
+                </div>
+                <div>
+                  <dt>Compromiso</dt>
+                  <dd>{PACK.permanencia} meses</dd>
+                </div>
+                <div className="dk-opcional">
+                  <dt>Presentador nuestro</dt>
+                  <dd>+{euros(PACK.presentadorMes)} €</dd>
+                </div>
+              </dl>
+            </div>
+
+            {/* El desglose va al lado del total, no en otra diapositiva: la
+                cifra grande impresiona y el desglose es lo que la justifica.
+                Separarlas deja la impresión sin su explicación. */}
+            <div>
+              <h3 className="dk-desglose-tit">Qué estáis pagando</h3>
+              <ul className="dk-desglose">
+                {DESGLOSE.map((l) => (
+                  <li key={l.concepto}>
+                    <div>
+                      <strong>{l.concepto}</strong>
+                      <span>{l.detalle}</span>
+                    </div>
+                    <b>{euros(l.importe)} €</b>
+                  </li>
+                ))}
+                <li className="dk-desglose-total">
+                  <div>
+                    <strong>Total</strong>
+                  </div>
+                  <b>{euros(PACK.precioMes)} €</b>
+                </li>
+              </ul>
+            </div>
           </div>
-          <p className="dk-porpieza">
-            {euros(Math.round(PACK.precioMes / PACK.piezasMes))} € por pieza, con
-            guion, rodaje, edición, publicación y comunidad dentro
-          </p>
-          <dl>
-            <div>
-              <dt>Vídeos cada semana</dt>
-              <dd>{PACK.piezasSemana}</dd>
-            </div>
-            <div>
-              <dt>Jornada de rodaje</dt>
-              <dd>
-                {PACK.jornadasMes} al mes en {CLIENTE.ciudad}
-              </dd>
-            </div>
-            <div>
-              <dt>Canales</dt>
-              <dd>{PACK.canales.join(" · ")}</dd>
-            </div>
-            <div>
-              <dt>Compromiso</dt>
-              <dd>{PACK.permanencia} meses</dd>
-            </div>
-            <div className="dk-opcional">
-              <dt>Presentador nuestro (opcional)</dt>
-              <dd>+{euros(PACK.presentadorMes)} € / mes</dd>
-            </div>
-          </dl>
           <p className="dk-pie">
             Los {PACK.permanencia} meses no son una atadura: son el tiempo
             mínimo para tener datos. Con dos semanas publicando no se sabe nada;

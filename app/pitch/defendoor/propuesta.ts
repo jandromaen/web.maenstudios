@@ -20,6 +20,49 @@ export const CLIENTE = {
   especialidad: "Ley de Segunda Oportunidad",
 };
 
+/**
+ * Desglose del presupuesto, por partida.
+ *
+ * ⚠️ EL REPARTO ESTÁ SIN CONFIRMAR, igual que el total. Es una distribución
+ * defendible del trabajo que hay detrás -la jornada de rodaje y la edición se
+ * llevan lo grueso-, no las tarifas internas de Maen. Revisar antes de enviar.
+ *
+ * El total del pack se calcula sumando esto y no se escribe aparte: dos
+ * cifras que deberían cuadrar acaban descuadrando el día que se toca una.
+ */
+export const DESGLOSE = [
+  {
+    concepto: "Dirección creativa",
+    importe: 320,
+    detalle: "Briefing mensual, enfoque y guiones de las doce piezas",
+  },
+  {
+    concepto: "Producción audiovisual",
+    importe: 560,
+    detalle: "Jornada de rodaje en Granollers con equipo completo",
+  },
+  {
+    concepto: "Edición del contenido",
+    importe: 480,
+    detalle: "Montaje, subtítulos, versiones vertical y horizontal",
+  },
+  {
+    concepto: "Calendario social media",
+    importe: 200,
+    detalle: "Qué sale, dónde y qué día, con los copys escritos",
+  },
+  {
+    concepto: "Programación y publicación",
+    importe: 190,
+    detalle: "Publicación en los tres canales y respuesta a la comunidad",
+  },
+  {
+    concepto: "Análisis de reportes y métricas",
+    importe: 140,
+    detalle: "Informe mensual y decisiones para el mes siguiente",
+  },
+] as const;
+
 export const PACK = {
   /**
    * El volumen se cuenta por semana, que es como lo pidió José y como se vive
@@ -34,8 +77,8 @@ export const PACK = {
   /** Una hora de briefing y tres de rodaje. Es todo lo que les pedimos. */
   horasMes: 4,
   canales: ["Instagram", "Facebook", "YouTube"],
-  /** ⚠️ Sin confirmar por Jandro */
-  precioMes: 1890,
+  /** Suma del desglose. No se escribe a mano para que no pueda descuadrar. */
+  precioMes: DESGLOSE.reduce((t, l) => t + l.importe, 0),
   /**
    * Coste de aportar nosotros a la persona que sale en los vídeos: casting,
    * caché y su presencia en la jornada de rodaje.

@@ -831,3 +831,118 @@ body.deck-abierto .theme-toggle {
 .dk-opcional dd {
   color: var(--muted) !important;
 }
+
+/* ── Precio con desglose ──────────────────────────────────────────────────
+   El total y el desglose van juntos y no en diapositivas distintas: la cifra
+   grande impresiona y el desglose es lo que la justifica. Separarlas deja la
+   impresión sin su explicación, que es como se pierden las propuestas. */
+.dk-precio-grid {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  margin-top: 10px;
+}
+
+@media (min-width: 900px) {
+  .dk-precio-grid {
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: start;
+  }
+}
+
+.dk-precio-datos {
+  margin: 26px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.dk-precio-datos > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.dk-precio-datos dt {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.dk-precio-datos dd {
+  margin: 0;
+  font-weight: 650;
+  font-size: 0.92rem;
+}
+
+.dk-desglose-tit {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+.dk-desglose {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dk-desglose li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.dk-desglose li > div {
+  display: grid;
+  gap: 2px;
+}
+
+.dk-desglose strong {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.dk-desglose span {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.dk-desglose b {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.dk-desglose-total {
+  border-bottom: none !important;
+  border-top: 1px solid var(--fg) !important;
+  margin-top: 4px;
+  padding-top: 16px !important;
+}
+
+.dk-desglose-total b {
+  font-size: clamp(20px, 2.6vw, 28px);
+}
+
+/* En la columna del desglose la cifra tiene menos sitio: sin esto el símbolo
+   de euro se caía a la línea de abajo y el número parecía partido. */
+.dk-precio-grid .dk-cifra {
+  font-size: clamp(52px, 7.6vw, 100px);
+  flex-wrap: nowrap;
+}
+
+.dk-precio-grid .dk-mes-lbl {
+  display: block;
+  margin: 10px 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
