@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LazyVideo from "./LazyVideo";
 
 /**
@@ -90,6 +90,79 @@ function Tarjeta({
 export default function CasesGrid({ casos }: { casos: CasoTarjeta[] }) {
   const [visibles, setVisibles] = useState(TANDA);
   const rejilla = useRef<HTMLDivElement>(null);
+  const boton = useRef<HTMLButtonElement>(null);
+  const yaPedidos = useRef(new Set<string>());
+
+  /**
+   * Precarga la siguiente tanda antes de que nadie la pida.
+   *
+   * Las tarjetas ocultas no están en el HTML, así que sus vídeos no empezaban a
+   * bajar hasta el momento de pulsar: se pintaba el nombre de la marca y un
+   * rectángulo negro durante segundos, justo en el gesto de alguien que quiere
+   * ver más trabajo.
+   *
+   * Arranca cuando el botón entra en pantalla y no al cargar la página: eso
+   * mantiene intacta la carga inicial de la home, que es lo que buscaba no
+   * pintar estas tarjetas de entrada. Quien no baja hasta aquí no descarga un
+   * solo byte de más.
+   *
+   * De uno en uno, además, para no competir con los vídeos que se están viendo
+   * ahora mismo en pantalla.
+   */
+  useEffect(() => {
+    const el = boton.current;
+    if (!el) return;
+
+    const siguientes = casos
+      .slice(visibles, visibles + TANDA)
+      .map((c) => c.previewVideo)
+      .filter((src): src is string => Boolean(src) && !yaPedidos.current.has(src!));
+
+    if (siguientes.length === 0) return;
+
+    let cancelado = false;
+    const creados: HTMLVideoElement[] = [];
+
+    const precalentar = async () => {
+      for (const src of siguientes) {
+        if (cancelado) return;
+        yaPedidos.current.add(src);
+        await new Promise<void>((listo) => {
+          const v = document.createElement("video");
+          v.preload = "auto";
+          v.muted = true;
+          v.src = src;
+          creados.push(v);
+          const seguir = () => listo();
+          v.addEventListener("canplaythrough", seguir, { once: true });
+          v.addEventListener("error", seguir, { once: true });
+          /* Tope por vídeo: con una conexión mala, esperar a que termine uno
+             dejaría los cinco siguientes sin empezar. */
+          setTimeout(seguir, 4000);
+        });
+      }
+    };
+
+    const observador = new IntersectionObserver(
+      ([entrada]) => {
+        if (!entrada.isIntersecting) return;
+        observador.disconnect();
+        precalentar();
+      },
+      { rootMargin: "400px 0px" },
+    );
+    observador.observe(el);
+
+    return () => {
+      cancelado = true;
+      observador.disconnect();
+      /* Soltar el src corta la descarga si se navega a otra página a medias */
+      creados.forEach((v) => {
+        v.removeAttribute("src");
+        v.load();
+      });
+    };
+  }, [casos, visibles]);
 
   const quedan = casos.length - visibles;
   const mostrados = casos.slice(0, visibles);
@@ -117,7 +190,12 @@ export default function CasesGrid({ casos }: { casos: CasoTarjeta[] }) {
 
       {quedan > 0 ? (
         <div className="bd-cases-mas">
-          <button className="btn btn-ghost" type="button" onClick={mostrarMas}>
+          <button
+            className="btn btn-ghost"
+            type="button"
+            onClick={mostrarMas}
+            ref={boton}
+          >
             Mostrar más
           </button>
         </div>
