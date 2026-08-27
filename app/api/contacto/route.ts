@@ -35,6 +35,9 @@ type ContactPayload = {
   telefono?: string;
   comentarios?: string;
   presupuesto?: string;
+  /* Solo los manda el formulario del podcast; el de contacto no los tiene. */
+  proyecto?: string;
+  enlace?: string;
   origen?: string;
   /** Honeypot: si viene relleno, es un bot */
   empresa?: string;
@@ -71,6 +74,19 @@ export async function POST(request: Request) {
   /* Solo se acepta uno de los tramos que ofrece el formulario. El campo llega
      por HTTP y cualquiera puede mandar lo que quiera: sin esta comprobación,
      el correo se convierte en un hueco donde escribir texto arbitrario. */
+  /* Campo libre: se recorta a una longitud razonable. Nadie escribe su marca
+     en 2.000 caracteres, así que un valor largo es basura o un intento de
+     inflar el correo. */
+  const recortar = (v: string | undefined, max: number) =>
+    (v ?? "").trim().slice(0, max);
+
+  const proyecto = recortar(payload.proyecto, 200);
+  const enlace = recortar(payload.enlace, 200);
+
+  /* Una candidatura al podcast y una petición de presupuesto no se leen igual
+     ni se contestan igual: conviene distinguirlas desde el asunto. */
+  const esPodcast = origen.startsWith("podcast");
+
   const enviado = (payload.presupuesto ?? "").trim();
   const presupuesto = (PRESUPUESTOS as readonly string[]).includes(enviado)
     ? enviado
@@ -107,12 +123,20 @@ export async function POST(request: Request) {
     ["Nombre", fullName],
     ["Email", email],
     ["Teléfono", telefono || "—"],
-    ["Presupuesto", presupuesto || "No lo ha indicado"],
+    ...(esPodcast
+      ? ([
+          ["A qué se dedica", proyecto || "—"],
+          ["Instagram o web", enlace || "—"],
+        ] as [string, string][])
+      : ([["Presupuesto", presupuesto || "No lo ha indicado"]] as [
+          string,
+          string,
+        ][])),
     ["Origen", origen],
   ];
 
   const html = `
-    <h2 style="font-family:sans-serif">Nuevo contacto desde la web</h2>
+    <h2 style="font-family:sans-serif">${esPodcast ? "Quiere salir en el podcast" : "Nuevo contacto desde la web"}</h2>
     <table style="font-family:sans-serif;border-collapse:collapse">
       ${rows
         .map(
@@ -121,7 +145,7 @@ export async function POST(request: Request) {
         )
         .join("")}
     </table>
-    <h3 style="font-family:sans-serif">Proyecto</h3>
+    <h3 style="font-family:sans-serif">${esPodcast ? "De qué quiere hablar" : "Proyecto"}</h3>
     <p style="font-family:sans-serif;white-space:pre-wrap">${escapeHtml(comentarios) || "(sin detalles)"}</p>
   `;
 
@@ -133,15 +157,19 @@ export async function POST(request: Request) {
       replyTo: email,
       /* El tramo va en el asunto para poder priorizar desde la bandeja de
          entrada, sin abrir el correo. */
-      subject: presupuesto
-        ? `Nuevo proyecto — ${fullName || "Contacto web"} · ${presupuesto}`
-        : `Nuevo proyecto — ${fullName || "Contacto web"}`,
+      subject: esPodcast
+        ? `Podcast — ${fullName || "Propuesta de invitado"}`
+        : presupuesto
+          ? `Nuevo proyecto — ${fullName || "Contacto web"} · ${presupuesto}`
+          : `Nuevo proyecto — ${fullName || "Contacto web"}`,
       html,
       text: [
         `Nombre: ${fullName}`,
         `Email: ${email}`,
         `Teléfono: ${telefono || "—"}`,
-        `Presupuesto: ${presupuesto || "No lo ha indicado"}`,
+        ...(esPodcast
+          ? [`A qué se dedica: ${proyecto || "—"}`, `Instagram o web: ${enlace || "—"}`]
+          : [`Presupuesto: ${presupuesto || "No lo ha indicado"}`]),
         `Origen: ${origen}`,
         "",
         comentarios,

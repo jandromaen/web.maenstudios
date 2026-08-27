@@ -11,6 +11,7 @@ import {
   podcastReels,
 } from "../podcast-data";
 import InstagramLink from "../components/InstagramLink";
+import PodcastForm from "../components/PodcastForm";
 import { createPageMetadata } from "../seo-config";
 import { HeroFrames, HeroReels } from "../components/HeroMedia";
 
@@ -202,13 +203,31 @@ export default function PodcastPage() {
               Maen, escríbenos. Nos encantaría invitarte a The After Podcast.
             </p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href={`mailto:${EMAIL}`}>
-                Proponer un invitado
-              </a>
+              {/* Antes abría el cliente de correo. Un mailto pide redactar el
+                  mensaje desde cero, y el que llegaba no traía ni el enlace ni
+                  el tema: había que contestar preguntando. */}
+              <Link className="btn btn-primary" href="#quiero-salir">
+                Proponerme como invitado
+              </Link>
               <Link className="btn btn-ghost" href="/clientes">
                 Ver clientes
               </Link>
             </div>
+          </div>
+        </section>
+
+        <section className="page-section" id="quiero-salir">
+          <div className="container container-narrow">
+            <div className="section-head">
+              <span className="eyebrow">Candidatura</span>
+              <h2>Cuéntanos tu historia</h2>
+              <p>
+                No hace falta ser cliente ni tener una marca conocida. Lo que
+                buscamos es alguien con algo que contar y ganas de contarlo sin
+                guion.
+              </p>
+            </div>
+            <PodcastForm />
           </div>
         </section>
       </main>
