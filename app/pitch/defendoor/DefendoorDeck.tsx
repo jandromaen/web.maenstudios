@@ -158,7 +158,8 @@ export default function DefendoorDeck({
               <strong>{PACK.horasMes} h</strong>
               <span className="dk-cifra-que">de vuestro tiempo al mes</span>
               <span className="dk-cifra-nota">
-                Una de briefing y tres de rodaje. Lo demás es nuestro
+                Cuatro de rodaje y una de briefing y reportes. Lo demás es
+                nuestro
               </span>
             </div>
           </div>

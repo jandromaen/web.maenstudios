@@ -86,8 +86,12 @@ export const PACK = {
   piezasSemana: 3,
   piezasMes: 12,
   jornadasMes: 1,
-  /** Una hora de briefing y tres de rodaje. Es todo lo que les pedimos. */
-  horasMes: 4,
+  /**
+   * Lo único que les pedimos: las cuatro horas del rodaje más una de briefing
+   * y repaso de reportes. Coincide con las cuatro del camarógrafo porque son
+   * la misma media jornada, con ellos delante.
+   */
+  horasMes: 5,
   canales: ["Instagram", "Facebook", "YouTube"],
   /** Suma del desglose. No se escribe a mano para que no pueda descuadrar. */
   precioMes: DESGLOSE.reduce((t, l) => t + l.importe, 0),
