@@ -4569,3 +4569,36 @@ body:has(.cookie-banner) .theme-toggle {
 .medio-vivo > * {
   pointer-events: none;
 }
+
+/* ─── Reels del hero: se cogen y se quedan donde los sueltas ───────────────
+   El gesto del ReelDeck que estuvo en la home. La lógica está en
+   app/components/HeroReelDrag.tsx, que añade .hero-reel--movible solo cuando
+   hay ratón de verdad; en táctil el arrastre pelearía con el scroll. */
+.hero-reel--movible {
+  cursor: grab;
+  will-change: transform;
+  touch-action: none;
+  user-select: none;
+}
+
+.hero-reel--movible:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.hero-reel--cogido {
+  cursor: grabbing;
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* El vídeo no debe capturar el puntero: si lo hace, el arrastre se pierde en
+   cuanto el cursor pasa por encima. */
+.hero-reel--movible video,
+.hero-reel--movible img {
+  pointer-events: none;
+}
+
+/* Sin esto, un reel llevado fuera de su celda quedaría cortado por el borde
+   de la rejilla en cuanto la página tuviera recorte en algún ancestro. */
+.hero-reels {
+  overflow: visible;
+}
