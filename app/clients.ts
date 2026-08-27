@@ -49,7 +49,8 @@ export const clients: Client[] = [
     slug: "macala",
     name: "Macala",
     logo: "/clients/macala.png",
-    community: "+10,4k",
+    community: "+11,4k",
+    instagram: "macalacompany",
     previewVideo: "/clients/macala/preview.mp4",
     poster: "/clients/macala/poster.jpg",
     tagline: "Alpargatas hechas en España",
@@ -62,6 +63,7 @@ export const clients: Client[] = [
   {
     slug: "fortuna-tonino",
     name: "Fortuna Tonino",
+    community: "+1,1k",
     logo: "/clients/fortuna-tonino/logo.png",
     previewVideo: "/clients/fortuna-tonino/preview.mp4",
     poster: "/clients/fortuna-tonino/poster.jpg",
@@ -160,6 +162,8 @@ export const clients: Client[] = [
   {
     slug: "jansana",
     name: "Jansana",
+    community: "+29k",
+    instagram: "jansanaglutenfree",
     logo: "/clients/jansana.png",
     previewVideo: "/clients/jansana/preview.mp4",
     poster: "/clients/jansana/poster.jpg",
@@ -179,6 +183,8 @@ export const clients: Client[] = [
   {
     slug: "macchina",
     name: "Macchina Pasta Bar",
+    community: "+32k",
+    instagram: "macchina_pastabar",
     logo: "/clients/macchina.png",
     previewVideo: "/clients/macchina/preview.mp4",
     poster: "/clients/macchina/poster.jpg",
@@ -209,6 +215,8 @@ export const clients: Client[] = [
   {
     slug: "ultrapaninos-marin",
     name: "Ultrapaninos Marín",
+    community: "+7k",
+    instagram: "ultrapaninosmarin",
     previewVideo: "/clients/ultrapaninos-marin/preview.mp4",
     poster: "/clients/ultrapaninos-marin/poster.jpg",
     tagline: "Bar de bocadillos · Barcelona",
@@ -221,6 +229,7 @@ export const clients: Client[] = [
   {
     slug: "hijos-de-javier",
     name: "Hijos de Javier",
+    community: "+13k",
     previewVideo: "/clients/hijos-de-javier/preview.mp4",
     poster: "/clients/hijos-de-javier/poster.jpg",
     tagline: "Bodega · Sarrià, Barcelona",
@@ -236,6 +245,8 @@ export const clients: Client[] = [
   {
     slug: "mimosas",
     name: "Mimosas",
+    community: "+29k",
+    instagram: "mimosasmadrid",
     previewVideo: "/clients/mimosas/preview.mp4",
     poster: "/clients/mimosas/poster.jpg",
     tagline: "Marca lifestyle",
@@ -262,6 +273,8 @@ export const clients: Client[] = [
   {
     slug: "b-de-bocata",
     name: "B de Bocata",
+    community: "+12k",
+    instagram: "b.de.bocata",
     logo: "/clients/bdebocata.png",
     previewVideo: "/clients/b-de-bocata/preview.mp4",
     poster: "/clients/b-de-bocata/poster.jpg",
@@ -289,6 +302,8 @@ export const clients: Client[] = [
   {
     slug: "perritos-calientes",
     name: "Perritos Calientes",
+    community: "+3,5k",
+    instagram: "somosperritoscalientes",
     previewVideo: "/clients/perritos-calientes/preview.mp4",
     poster: "/clients/perritos-calientes/poster.jpg",
     logo: "/clients/perritos.png",
@@ -334,6 +349,8 @@ export const clients: Client[] = [
   {
     slug: "gastroconnect",
     name: "Gastroconnect",
+    community: "+8k",
+    instagram: "gastroconnect_",
     previewVideo: "/clients/gastroconnect/preview.mp4",
     poster: "/clients/gastroconnect/poster.jpg",
     tagline: "Sector gastronómico",
@@ -346,6 +363,8 @@ export const clients: Client[] = [
   {
     slug: "te-pone",
     name: "Té Pone",
+    community: "+4k",
+    instagram: "drinktepone",
     previewVideo: "/clients/te-pone/preview.mp4",
     poster: "/clients/te-pone/poster.jpg",
     tagline: "Marca de producto",
@@ -358,6 +377,8 @@ export const clients: Client[] = [
   {
     slug: "daddies",
     name: "Daddies",
+    community: "+9k",
+    instagram: "daddieshats",
     previewVideo: "/clients/daddies/preview.mp4",
     poster: "/clients/daddies/poster.jpg",
     tagline: "Marca de producto",
@@ -370,6 +391,8 @@ export const clients: Client[] = [
   {
     slug: "gota",
     name: "Gota",
+    community: "+6k",
+    instagram: "wearegota",
     previewVideo: "/clients/gota/preview.mp4",
     poster: "/clients/gota/poster.jpg",
     tagline: "Marca de producto",
