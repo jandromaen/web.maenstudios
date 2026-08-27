@@ -4663,3 +4663,69 @@ body:has(.cookie-banner) .theme-toggle {
 .medio-vivo > * {
   pointer-events: none;
 }
+
+/* ─── Grano ────────────────────────────────────────────────────────────────
+   Una capa de ruido sobre toda la página. No es decoración gratuita: rompe
+   los planos de color liso, que es lo que delata a una web hecha con CSS, y
+   le da al fondo una textura de material impreso.
+
+   El ruido se genera con un filtro SVG incrustado, no con un PNG: pesa unos
+   cientos de bytes en vez de decenas de kilobytes, y no añade una petición.
+
+   La clave es mix-blend-mode: overlay. Un ruido claro con opacidad lavaría
+   los negros y uno oscuro sería invisible sobre fondo oscuro; overlay aclara
+   lo oscuro y oscurece lo claro por igual, así que el mismo grano funciona en
+   los dos temas. Solo cambia la intensidad. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%; /* de sobra para que al animar no asome el borde */
+  z-index: 9999;
+  pointer-events: none; /* no puede robar un solo clic */
+  opacity: var(--grano-fuerza, 0.055);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  will-change: transform;
+}
+
+/* El tema oscuro traga más grano antes de notarse, y el claro se satura
+   antes: la misma opacidad se ve el doble en blanco. */
+:root,
+[data-theme="dark"] {
+  --grano-fuerza: 0.07;
+}
+
+[data-theme="light"] {
+  --grano-fuerza: 0.04;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --grano-fuerza: 0.04;
+  }
+}
+
+/* El grano vivo: ocho posiciones sueltas, sin interpolar. Un grano quieto se
+   lee como una textura pegada encima; moviéndose se lee como película.
+   
+   Solo se anima en pantallas grandes y con ratón. mix-blend-mode obliga al
+   navegador a recomponer toda la pantalla contra el fondo en cada fotograma, y
+   esto cambia ocho veces por segundo: en un portátil no se nota, en un móvil
+   se paga en batería y en fluidez del scroll. Ahí el grano se queda quieto,
+   que es el 90% del efecto por el 0% del coste. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 900px) and (pointer: fine) {
+  body::after {
+    animation: grano 0.7s steps(1) infinite;
+  }
+}
+
+@keyframes grano {
+  0%   { transform: translate(0, 0); }
+  12%  { transform: translate(-3%, -4%); }
+  25%  { transform: translate(-7%, 2%); }
+  37%  { transform: translate(4%, -6%); }
+  50%  { transform: translate(-2%, 6%); }
+  62%  { transform: translate(6%, 3%); }
+  75%  { transform: translate(-6%, -2%); }
+  87%  { transform: translate(2%, 5%); }
+}
