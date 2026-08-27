@@ -21,7 +21,14 @@ export const CLIENTE = {
 };
 
 export const PACK = {
-  /** 3 a la semana, contados por mes para que el cliente vea el volumen real */
+  /**
+   * El volumen se cuenta por semana, que es como lo pidió José y como se vive
+   * de verdad: «tres vídeos cada semana» se entiende al instante, «doce al
+   * mes» obliga a dividir y suena a paquete de agencia.
+   *
+   * El mensual solo se usa para dividir el precio entre piezas.
+   */
+  piezasSemana: 3,
   piezasMes: 12,
   jornadasMes: 2,
   canales: ["Instagram", "Facebook", "YouTube"],
@@ -81,7 +88,7 @@ export const INCLUYE = [
 export const DUDAS = [
   {
     q: "¿Y si un abogado no puede el día del rodaje?",
-    a: "Se ruedan seis piezas por jornada precisamente para tener colchón. Si falla alguien, se reordena el guion en el momento y se graba lo que sí se puede: nunca se pierde la jornada entera.",
+    a: "Se rueda varias semanas por delante precisamente para tener colchón. Si falla alguien, se reordena el guion en el momento y se graba lo que sí se puede: nunca se queda una semana sin publicar.",
   },
   {
     q: "¿Quién decide qué se cuenta?",
@@ -120,19 +127,19 @@ export const MES = [
     semana: "01",
     titulo: "Reunión y guiones",
     texto:
-      "Una hora con vosotros para sacar las preguntas que más os repiten. Salimos con las doce piezas del mes escritas.",
+      "Una hora con vosotros para sacar las preguntas que más os repiten. Salimos de ahí con todos los guiones escritos.",
   },
   {
     semana: "02",
     titulo: "Primera jornada",
     texto:
-      "Vamos a Granollers y rodamos seis piezas. Unas dos horas de vuestro abogado, no más.",
+      "Vamos a Granollers y rodamos de una tirada varias semanas de contenido. Unas dos horas de vuestro abogado, no más.",
   },
   {
     semana: "03",
     titulo: "Publicación y segunda jornada",
     texto:
-      "Empiezan a salir los primeros vídeos mientras rodamos las seis restantes.",
+      "Ya salen tres vídeos por semana mientras rodamos el resto.",
   },
   {
     semana: "04",

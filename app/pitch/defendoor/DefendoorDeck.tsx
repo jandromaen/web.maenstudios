@@ -49,13 +49,14 @@ export default function DefendoorDeck({ muestra }: { muestra: Client[] }) {
           <div>
             <p className="dk-kicker">Propuesta para {CLIENTE.nombre}</p>
             <h1>
-              <span>{PACK.piezasMes} vídeos al mes</span>
-              <span className="dk-tenue">que contestan</span>
-              <span className="dk-tenue">lo que ya os preguntan</span>
+              <span>Un equipo</span>
+              <span>de Social Media</span>
+              <span className="dk-tenue">a medida para</span>
+              <span className="dk-tenue">{CLIENTE.nombre}</span>
             </h1>
             <p className="dk-lead">
-              Hola {CLIENTE.contacto}. Esto es lo que haríamos con vuestras
-              redes, con qué frecuencia y cuánto costaría.
+              Hola {CLIENTE.contacto}. Esto es lo que montaríamos con vosotros:
+              quién lo hace, cada cuánto sale y qué cuesta.
             </p>
           </div>
           <div className="dk-reels dk-reels--tres" aria-hidden="true">
@@ -65,6 +66,31 @@ export default function DefendoorDeck({ muestra }: { muestra: Client[] }) {
               </div>
             ))}
           </div>
+        </div>
+      ),
+    },
+    {
+      /* Va antes que el encargo a propósito: primero por qué importa, después
+         los detalles. Con los datos delante nadie se emociona. */
+      id: "porque",
+      titulo: "Por qué importa",
+      render: () => (
+        <div className="dk-manifiesto">
+          <p className="dk-manifiesto-txt">
+            Ahora mismo, alguien está buscando en su móvil{" "}
+            <span className="dk-tenue">si puede perder su casa</span>.
+          </p>
+          <p className="dk-manifiesto-txt">
+            Va a encontrar foros, publicidad y letra pequeña.
+          </p>
+          <p className="dk-manifiesto-txt dk-manifiesto-txt--fuerte">
+            Lo que queremos es que os encuentre a vosotros. Y que al veros, ya
+            se fíe.
+          </p>
+          <p className="dk-pie">
+            Eso no se consigue con una campaña. Se consigue apareciendo cada
+            semana, contestando lo que de verdad preguntan.
+          </p>
         </div>
       ),
     },
@@ -92,8 +118,8 @@ export default function DefendoorDeck({ muestra }: { muestra: Client[] }) {
       render: () => (
         <div className="dk-cifras">
           {[
-            [String(PACK.piezasMes), "piezas al mes"],
-            [String(PACK.jornadasMes), `jornadas en ${CLIENTE.ciudad}`],
+            [String(PACK.piezasSemana), "vídeos cada semana"],
+            [String(PACK.jornadasMes), `jornadas al mes en ${CLIENTE.ciudad}`],
             [String(PACK.canales.length), "canales gestionados"],
             ["2 h", "de vuestro tiempo al mes"],
           ].map(([n, t]) => (
@@ -252,13 +278,13 @@ export default function DefendoorDeck({ muestra }: { muestra: Client[] }) {
           </p>
           <dl>
             <div>
-              <dt>Piezas al mes</dt>
-              <dd>{PACK.piezasMes}</dd>
+              <dt>Vídeos cada semana</dt>
+              <dd>{PACK.piezasSemana}</dd>
             </div>
             <div>
               <dt>Jornadas de rodaje</dt>
               <dd>
-                {PACK.jornadasMes} en {CLIENTE.ciudad}
+                {PACK.jornadasMes} al mes en {CLIENTE.ciudad}
               </dd>
             </div>
             <div>
@@ -271,9 +297,9 @@ export default function DefendoorDeck({ muestra }: { muestra: Client[] }) {
             </div>
           </dl>
           <p className="dk-pie">
-            Los {PACK.permanencia} meses no son una atadura: son el tiempo mínimo
-            para tener datos. Con cuatro vídeos no se sabe nada; con{" "}
-            {PACK.piezasMes * PACK.permanencia}, sí.
+            Los {PACK.permanencia} meses no son una atadura: son el tiempo
+            mínimo para tener datos. Con dos semanas publicando no se sabe nada;
+            con {PACK.permanencia * 4} semanas seguidas, sí.
           </p>
         </div>
       ),

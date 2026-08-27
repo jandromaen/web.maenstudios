@@ -145,6 +145,26 @@
   .dk-portada { grid-template-columns: 1.1fr 0.9fr; }
 }
 
+/* ── Manifiesto ─────────────────────────────────────────────────────────
+   La diapositiva emocional, antes de cualquier dato. Tipografía grande y
+   pocas palabras: se lee en voz alta durante la llamada, no se estudia. */
+.dk-manifiesto {
+  max-width: 900px;
+}
+
+.dk-manifiesto-txt {
+  font-family: var(--font-heading);
+  font-size: clamp(24px, 4vw, 46px);
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+
+.dk-manifiesto-txt--fuerte {
+  margin-top: 34px;
+}
+
 /* ── Diapositiva centrada ───────────────────────────────────────────────── */
 .dk-centro { max-width: 780px; }
 .dk-centro--ancho { max-width: 1000px; }
