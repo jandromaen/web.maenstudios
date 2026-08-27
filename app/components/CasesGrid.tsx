@@ -19,6 +19,7 @@ export type CasoTarjeta = {
   poster?: string;
   logo?: string;
   community?: string;
+  sector: string;
 };
 
 /** Cuántas se descubren con cada pulsación: dos filas de la rejilla ancha. */
@@ -56,10 +57,18 @@ function Tarjeta({
             <img src={caso.logo} alt="" loading="lazy" decoding="async" />
           </div>
         ) : null}
+        {/* Etiqueta en todas las tarjetas, pero con lo que cada marca tiene de
+            verdad. La mitad del portfolio no lleva apuntado el número de
+            seguidores, y ahí se pone el sector en vez de una cifra inventada:
+            un «+8k» sobre una cuenta que tiene 900 lo desmonta cualquiera
+            abriendo Instagram, y el que queda retratado es el estudio.
+
+            En cuanto haya número, sale el número: esta regla se apaga sola
+            marca a marca según se vayan rellenando en clients.ts. */}
         <div className="bd-case-overlay">
-          {caso.community ? (
-            <span className="bd-case-stat">Comunidad: {caso.community}</span>
-          ) : null}
+          <span className="bd-case-stat">
+            {caso.community ? `Comunidad: ${caso.community}` : caso.sector}
+          </span>
         </div>
       </div>
       <div className="bd-case-body">

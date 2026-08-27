@@ -49,6 +49,7 @@ const casosDeLaRejilla = topByCommunity(100, { conReel: true }).map((c) => ({
   poster: c.poster,
   logo: c.logo,
   community: c.community,
+  sector: c.sector,
 }));
 const engagementClients = featuredClients;
 const brandLogos = clients.filter((c) => c.logo);
