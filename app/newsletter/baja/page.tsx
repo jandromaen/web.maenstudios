@@ -72,7 +72,7 @@ export default async function Baja({
             )}
           </div>
           <div className="hero-actions">
-            <Link className="btn btn-ghost" href="/contacto">
+            <Link className="btn btn-ghost" href="/contacto#formulario">
               Escríbenos
             </Link>
           </div>

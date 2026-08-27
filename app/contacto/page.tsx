@@ -137,7 +137,7 @@ export default function ContactoPage() {
           </div>
         </section>
 
-        <section className="page-section contact-section">
+        <section className="page-section contact-section" id="formulario">
           <div className="container container-narrow">
             <div className="section-head">
               <span className="eyebrow">Formulario</span>

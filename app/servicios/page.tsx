@@ -65,7 +65,7 @@ export default function ServiciosPage() {
                 conversación diaria, en un mismo equipo.
               </p>
               <div className="hero-actions">
-                <Link className="btn btn-primary" href="/contacto">
+                <Link className="btn btn-primary" href="/contacto#formulario">
                   Pedir presupuesto
                 </Link>
                 <Link className="btn btn-ghost" href="/clientes">
@@ -249,7 +249,7 @@ export default function ServiciosPage() {
               Te respondemos en menos de 24h con ideas para tu marca.
             </p>
             <div className="hero-actions">
-              <Link className="btn btn-primary" href="/contacto">
+              <Link className="btn btn-primary" href="/contacto#formulario">
                 Pedir presupuesto
               </Link>
               <Link className="btn btn-ghost" href="/clientes">

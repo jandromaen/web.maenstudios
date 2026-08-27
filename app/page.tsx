@@ -263,7 +263,7 @@ export default function Home() {
               compromiso.
             </p>
             <div className="bd-contact-actions">
-              <Link className="btn btn-invert" href="/contacto">
+              <Link className="btn btn-invert" href="/contacto#formulario">
                 Pedir presupuesto
               </Link>
               <a className="bd-contact-mail" href={`mailto:${EMAIL}`}>

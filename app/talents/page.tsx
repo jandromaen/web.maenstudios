@@ -98,10 +98,13 @@ export default function TalentsPage() {
                 con influencers, microinfluencers y UGC.
               </p>
               <div className="hero-actions">
-                <Link className="btn btn-primary" href="/contacto">
+                <Link className="btn btn-primary" href="/contacto#formulario">
                   Quiero una campaña
                 </Link>
-                <Link className="btn btn-ghost" href="/contacto">
+                {/* Este no va a contacto: quien es creador tiene su propio
+                    formulario en esta misma página, y en el de contacto se le
+                    preguntaría el presupuesto. */}
+                <Link className="btn btn-ghost" href="#red-de-creadores">
                   Soy creador/a
                 </Link>
               </div>

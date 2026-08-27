@@ -146,7 +146,7 @@ export default async function ClientPage({
                       Visitar web
                     </a>
                   ) : null}
-                  <Link className="btn btn-primary" href="/contacto">
+                  <Link className="btn btn-primary" href="/contacto#formulario">
                     Quiero algo así
                   </Link>
                 </div>
@@ -267,7 +267,7 @@ export default async function ClientPage({
                 <Link className="btn btn-primary" href="/servicios">
                   Ver servicios
                 </Link>
-                <Link className="btn btn-ghost" href="/contacto">
+                <Link className="btn btn-ghost" href="/contacto#formulario">
                   Quiero algo así
                 </Link>
               </div>

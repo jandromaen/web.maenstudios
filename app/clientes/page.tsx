@@ -201,7 +201,7 @@ export default function ClientesPage() {
                 ves en sus redes lo creamos y gestionamos nosotros.
               </p>
               <div className="hero-actions">
-                <Link className="btn btn-primary" href="/contacto">
+                <Link className="btn btn-primary" href="/contacto#formulario">
                   Quiero algo así
                 </Link>
               </div>
@@ -320,7 +320,7 @@ export default function ClientesPage() {
               marca en redes. Cuéntanos el proyecto y te respondemos en menos de
               24h con ideas concretas.
               <div className="hero-actions" style={{ marginTop: 24 }}>
-                <Link className="btn btn-primary" href="/contacto">
+                <Link className="btn btn-primary" href="/contacto#formulario">
                   Quiero algo así
                 </Link>
                 <Link className="btn btn-ghost" href="/servicios">

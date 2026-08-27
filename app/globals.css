@@ -72,6 +72,21 @@ body {
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
+/* El corte horizontal va en <html> y no en <body>.
+   Los dos funcionan: la especificación propaga a la ventana el overflow del
+   elemento raíz y, si este es `visible`, coge el del body. Se pone aquí por
+   ser el sitio menos ambiguo —el body se queda `visible` y no hay duda sobre
+   quién hace scroll—, que es lo que se recomienda cuando hay elementos
+   pegajosos o anclajes de por medio.
+
+   Se llegó a esto persiguiendo un anclaje que no saltaba, y conviene dejar
+   dicho que ESA no era la causa: la pestaña de prueba estaba oculta y Chrome
+   no hace scroll por código en pestañas ocultas. El cambio se mantiene por
+   ser el sitio correcto, no porque arreglara aquello. */
+html {
+  overflow-x: hidden;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
@@ -80,7 +95,6 @@ body {
   letter-spacing: -0.01em;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 a {
@@ -1290,6 +1304,19 @@ button,
 .page-hero-meta strong {
   color: var(--fg);
   font-weight: 700;
+}
+
+
+/* Los anclajes tienen que parar por debajo de la cabecera.
+   La cabecera es fija, así que al saltar a #formulario o #red-de-creadores el
+   navegador deja el borde de la sección justo arriba del todo y el menú se
+   come el titular: aterrizas en un formulario sin ver de qué es.
+
+   scroll-margin-top no mueve nada en pantalla; solo le dice al navegador
+   dónde parar. Va en cualquier sección con id, no en una lista de anclas
+   concretas, para que la próxima que se añada ya funcione. */
+section[id] {
+  scroll-margin-top: clamp(96px, 12vh, 132px);
 }
 
 section {

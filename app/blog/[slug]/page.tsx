@@ -139,7 +139,7 @@ export default async function BlogPostPage({
                 Cuéntanos tu proyecto y te respondemos en menos de 24h.
               </p>
               <div className="hero-actions">
-                <Link className="btn btn-primary" href="/contacto">
+                <Link className="btn btn-primary" href="/contacto#formulario">
                   Pedir presupuesto
                 </Link>
                 <Link className="btn btn-ghost" href="/servicios">
