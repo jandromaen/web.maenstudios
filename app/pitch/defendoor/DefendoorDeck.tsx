@@ -252,6 +252,19 @@ export default function DefendoorDeck({
               o entrevistas
             </li>
           </ul>
+          <div className="dk-extra">
+            <div>
+              <span className="dk-extra-que">
+                Si aun así lo preferís desde el principio
+              </span>
+              <span className="dk-extra-nota">
+                Casting, caché y su presencia en el rodaje. Va fuera del pack a
+                propósito: no queremos cobraros de más por algo que os estamos
+                desaconsejando
+              </span>
+            </div>
+            <strong>+{euros(PACK.presentadorMes)} € / mes</strong>
+          </div>
         </div>
       ),
     },
@@ -337,6 +350,10 @@ export default function DefendoorDeck({
             <div>
               <dt>Compromiso</dt>
               <dd>{PACK.permanencia} meses</dd>
+            </div>
+            <div className="dk-opcional">
+              <dt>Presentador nuestro (opcional)</dt>
+              <dd>+{euros(PACK.presentadorMes)} € / mes</dd>
             </div>
           </dl>
           <p className="dk-pie">

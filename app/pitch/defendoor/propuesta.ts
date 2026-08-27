@@ -36,6 +36,15 @@ export const PACK = {
   canales: ["Instagram", "Facebook", "YouTube"],
   /** ⚠️ Sin confirmar por Jandro */
   precioMes: 1890,
+  /**
+   * Coste de aportar nosotros a la persona que sale en los vídeos: casting,
+   * caché y su presencia en la jornada de rodaje.
+   *
+   * Va aparte del pack a propósito. Es la opción que les desaconsejamos, y
+   * meterla dentro del precio base sería cobrarles por algo que les hemos
+   * dicho que no les conviene.
+   */
+  presentadorMes: 500,
   permanencia: 3,
 };
 

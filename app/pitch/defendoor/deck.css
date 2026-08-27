@@ -785,3 +785,49 @@ body.deck-abierto .theme-toggle {
 .dk-fases-detalle li::marker {
   color: var(--line-strong);
 }
+
+/* ── Extra opcional del presentador ───────────────────────────────────────
+   Se enseña justo donde se toma la decisión, no escondido en el precio: si
+   les desaconsejamos la opción, lo mínimo es que vean lo que cuesta en la
+   misma pantalla donde les decimos que no la cojan. */
+.dk-extra {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 22px 0 0;
+  padding: 15px 18px;
+  border: 1px solid var(--line-strong);
+}
+
+.dk-extra > div {
+  display: grid;
+  gap: 4px;
+  max-width: 60ch;
+}
+
+.dk-extra-que {
+  font-size: 0.98rem;
+  color: var(--fg);
+}
+
+.dk-extra-nota {
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.dk-extra strong {
+  font-family: var(--font-heading);
+  font-size: clamp(19px, 2.4vw, 26px);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* En la ficha de precio se marca como opcional para que no se lea como parte
+   de la cuota */
+.dk-opcional dt,
+.dk-opcional dd {
+  color: var(--muted) !important;
+}
