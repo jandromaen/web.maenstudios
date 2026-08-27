@@ -403,7 +403,13 @@ button,
 .nav-drawer {
   position: fixed;
   inset: 0;
-  z-index: 200;
+  /* Por encima del banner de cookies (400). El cajón es un panel a pantalla
+     completa: mientras está abierto manda él, como cualquier modal. Antes
+     quedaba por debajo y la barra le pisaba la esquina inferior, que es justo
+     donde va el selector de idioma. Al cerrarlo, el banner vuelve a estar
+     accesible. Se queda por debajo del interruptor de tema (500), que sí
+     tiene sentido que flote siempre. */
+  z-index: 450;
   background: var(--invert-bg);
   color: var(--invert-fg);
   padding: 24px var(--pad);
@@ -485,11 +491,7 @@ button,
 .selector-idioma {
   position: absolute;
   left: var(--pad);
-  /* Por encima de donde cae la barra de cookies. Esa barra es fija, va con
-     z-index 400 y el cajón con 200, así que se pinta encima pase lo que pase:
-     pegado al borde inferior, el selector quedaba tapado justo en la primera
-     visita, que es cuando alguien busca su idioma. */
-  bottom: clamp(88px, 13vh, 124px);
+  bottom: clamp(24px, 4vh, 40px);
   display: flex;
   align-items: baseline;
   gap: 14px;

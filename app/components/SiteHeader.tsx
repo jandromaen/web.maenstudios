@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { navLinks } from "../site-data";
 import SelectorIdioma from "./SelectorIdioma";
 
@@ -17,6 +18,9 @@ export default function SiteHeader({ light = false, adaptive = false }: SiteHead
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [overLight, setOverLight] = useState(light);
+  /* El portal necesita document, que no existe al renderizar en el servidor. */
+  const [montado, setMontado] = useState(false);
+  useEffect(() => setMontado(true), []);
   const drawerRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const target = useRef({ x: 0, y: 0 });
@@ -164,55 +168,68 @@ export default function SiteHeader({ light = false, adaptive = false }: SiteHead
         </div>
       </header>
 
-      <div
-        className={`nav-drawer${open ? " open" : ""}`}
-        aria-hidden={!open}
-        ref={drawerRef}
-      >
-        <div className="nav-drawer-top">
-          <Link className="brand" href="/" onClick={() => setOpen(false)}>
+      {/* El cajón se pinta colgando del <body>, no aquí dentro.
+
+          Su sitio natural sería este, pero el envoltorio de la animación de
+          entrada crea su propio contexto de apilamiento: dentro de él, el
+          z-index del cajón solo compite con sus hermanos, y la barra de
+          cookies —que cuelga del body— le pasaba por encima justo en la
+          esquina donde va el selector de idioma. Sacándolo a la raíz, su
+          z-index vuelve a valer contra todo lo demás. */}
+      {montado
+        ? createPortal(
+        <div
+          className={`nav-drawer${open ? " open" : ""}`}
+          aria-hidden={!open}
+          ref={drawerRef}
+        >
+          <div className="nav-drawer-top">
+            <Link className="brand" href="/" onClick={() => setOpen(false)}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="brand-logo brand-logo-drawer"
+                src="/maen-logo.png"
+                alt="Maen Studios"
+              />
+            </Link>
+            <button
+              type="button"
+              className="nav-drawer-close"
+              aria-label="Cerrar menú"
+              onClick={() => setOpen(false)}
+            >
+              ✕
+            </button>
+          </div>
+          <div className="nav-drawer-links">
+            <Link href="/" onClick={() => setOpen(false)}>
+              Home
+            </Link>
+            {navLinks.map((l) => (
+              <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
+                {l.label}
+              </Link>
+            ))}
+          </div>
+          {/* Abajo a la izquierda, donde lo pidió Jandro: es una preferencia de
+              lectura, no un apartado del menú, así que no compite con los
+              enlaces. */}
+          <SelectorIdioma />
+
+          <div className="nav-drawer-cursor" ref={cursorRef} aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              className="brand-logo brand-logo-drawer"
-              src="/maen-logo.png"
-              alt="Maen Studios"
+              src="/maen-icon.png"
+              width={266}
+              height={240}
+              alt=""
+              decoding="async"
             />
-          </Link>
-          <button
-            type="button"
-            className="nav-drawer-close"
-            aria-label="Cerrar menú"
-            onClick={() => setOpen(false)}
-          >
-            ✕
-          </button>
-        </div>
-        <div className="nav-drawer-links">
-          <Link href="/" onClick={() => setOpen(false)}>
-            Home
-          </Link>
-          {navLinks.map((l) => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
-              {l.label}
-            </Link>
-          ))}
-        </div>
-        {/* Abajo a la izquierda, donde lo pidió Jandro: es una preferencia de
-            lectura, no un apartado del menú, así que no compite con los
-            enlaces. */}
-        <SelectorIdioma />
-
-        <div className="nav-drawer-cursor" ref={cursorRef} aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/maen-icon.png"
-            width={266}
-            height={240}
-            alt=""
-            decoding="async"
-          />
-        </div>
-      </div>
+          </div>
+        </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }
