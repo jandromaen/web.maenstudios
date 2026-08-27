@@ -359,10 +359,6 @@ export default function DefendoorDeck({
                 <span className="dk-eur">€</span>
               </div>
               <p className="dk-mes-lbl">al mes + IVA</p>
-              <p className="dk-porpieza">
-                {euros(Math.round(PACK.precioMes / PACK.piezasMes))} € por pieza,
-                con todo dentro.
-              </p>
               <dl className="dk-precio-datos">
                 <div>
                   <dt>Vídeos cada semana</dt>

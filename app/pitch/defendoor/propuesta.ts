@@ -41,16 +41,16 @@ export const DESGLOSE = [
   {
     concepto: "Producción audiovisual",
     importe: 560,
-    horas: 10,
+    horas: 4,
     perfil: "Camarógrafo",
-    detalle: "Jornada de rodaje en Granollers con equipo completo",
+    detalle: "Media jornada en Granollers, con montaje y desmontaje",
   },
   {
     concepto: "Edición del contenido",
     importe: 480,
-    horas: 14,
+    horas: 12,
     perfil: "Editor",
-    detalle: "Montaje, subtítulos, versiones vertical y horizontal",
+    detalle: "Una hora por pieza: montaje, subtítulos y versiones",
   },
   {
     concepto: "Calendario social media",
