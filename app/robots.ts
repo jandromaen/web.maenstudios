@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         // Páginas privadas o de conversión: no aportan nada en el índice
-        disallow: ["/api/", "/pitch/", "/gracias"],
+        disallow: ["/api/", "/pitch/", "/gracias", "/lab/"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

@@ -1,0 +1,156 @@
+/* Estilos del ReelDeck, recuperados de a122bd0^ (antes del rediseño al
+   lenguaje de Basic/Dept, que fue el commit que lo quitó de la home).
+
+   Viven aquí y no en globals.css a propósito: esto es una página de repaso,
+   no parte de la web. Si el componente vuelve a producción, estos estilos se
+   mudan; si no, se borra la carpeta entera y no queda rastro. */
+
+.reel-field {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  height: min(560px, 68vw);
+  perspective: 1400px;
+  overflow: visible;
+}
+
+.reel-screen {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(158px, 44%, 220px);
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  will-change: transform;
+  transition: box-shadow 0.25s ease;
+}
+
+.reel-screen:hover:not(.dragging) {
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+.reel-screen.dragging {
+  cursor: grabbing;
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+.reel-screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.reel-screen .phone-badge {
+  top: 72px;
+  right: -8px;
+  /* Por encima de cualquier pantalla: el z-index de las tarjetas sube al
+     arrastrarlas y acababa tapando la chapa. */
+  z-index: 20;
+}
+
+.reel-field-hint {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.phone-badge {
+  position: absolute;
+  top: 88px;
+  right: -10px;
+  z-index: 3;
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.phone-badge .num {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.phone-badge .lbl {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+
+/* En móvil el tablero se estrecha, como estaba en el original */
+@media (max-width: 900px) {
+  .reel-field {
+    height: min(460px, 78vw);
+    max-width: 340px;
+  }
+}
+
+/* ── Marco de la página de repaso, no del componente ──────────────────── */
+.lab {
+  min-height: 100vh;
+  /* Flex y no grid: place-items no ganaba contra los estilos de main que ya
+     trae la web, y el tablero se quedaba pegado a la izquierda. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 140px;
+  gap: 64px;
+}
+
+.lab-head {
+  max-width: 60ch;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lab-head .eyebrow {
+  display: block;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.lab-head h1 {
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.lab-head p {
+  color: var(--muted);
+  margin: 0 0 10px;
+  line-height: 1.6;
+}
+
+.lab-head a {
+  color: var(--fg);
+}
