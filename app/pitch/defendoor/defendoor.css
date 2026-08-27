@@ -1,0 +1,300 @@
+/* ==========================================================================
+   Propuesta para Defendoor Abogados
+
+   Hereda los colores y las tipografías de la web —es un documento nuestro,
+   no una marca aparte— pero se compone como un documento y no como una
+   landing: una columna, medida de lectura corta y aire entre bloques.
+   Todo cuelga de .dfd para no tocar nada del resto del sitio.
+   ========================================================================== */
+
+.dfd {
+  padding: clamp(56px, 9vw, 110px) 24px clamp(80px, 12vw, 140px);
+}
+
+.dfd-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ── Cabecera ───────────────────────────────────────────────────────────── */
+.dfd-hero {
+  padding-bottom: clamp(36px, 6vw, 56px);
+  border-bottom: 1px solid var(--line);
+}
+
+.dfd-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+
+.dfd h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 5.2vw, 50px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+
+.dfd-lead {
+  font-size: clamp(17px, 2.1vw, 20px);
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+  max-width: 58ch;
+}
+
+/* ── Secciones ──────────────────────────────────────────────────────────── */
+.dfd-sec {
+  padding: clamp(40px, 6vw, 64px) 0;
+  border-bottom: 1px solid var(--line-soft, var(--line));
+}
+
+.dfd h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+
+.dfd h3 {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+
+.dfd p {
+  margin: 0 0 16px;
+  line-height: 1.68;
+  max-width: 62ch;
+}
+
+.dfd strong {
+  font-weight: 650;
+}
+
+.dfd-nota {
+  color: var(--muted);
+  font-size: 0.94rem;
+  border-left: 2px solid var(--line-strong);
+  padding-left: 16px;
+  margin-top: 22px !important;
+}
+
+/* El bloque del presentador es el que contesta su pregunta directa: se
+   separa del resto para que no se lea en diagonal. */
+.dfd-destacado {
+  background: var(--bg-soft);
+  margin: 0 calc(-1 * clamp(20px, 4vw, 40px));
+  padding-left: clamp(20px, 4vw, 40px);
+  padding-right: clamp(20px, 4vw, 40px);
+  border-bottom: none;
+}
+
+/* ── Listas con marca ───────────────────────────────────────────────────── */
+.dfd-check {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  max-width: 62ch;
+}
+
+.dfd-check li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.dfd-check li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 10px;
+  height: 1px;
+  background: var(--fg);
+  opacity: 0.5;
+}
+
+/* ── Bloques de lo que incluye ──────────────────────────────────────────── */
+.dfd-bloques {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 28px;
+}
+
+.dfd-bloque {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 18px;
+}
+
+.dfd-bloque ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.dfd-bloque li {
+  margin-bottom: 10px;
+  line-height: 1.55;
+  font-size: 0.96rem;
+}
+
+.dfd-bloque li::marker {
+  color: var(--muted);
+}
+
+/* ── Precio ─────────────────────────────────────────────────────────────── */
+.dfd-precio {
+  border: 1px solid var(--line-strong);
+  padding: clamp(24px, 4vw, 36px);
+  margin-bottom: 24px;
+}
+
+.dfd-cifra {
+  font-family: var(--font-heading);
+  font-size: clamp(38px, 7vw, 62px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 26px;
+}
+
+.dfd-cifra span {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  color: var(--muted);
+  margin-left: 10px;
+}
+
+.dfd-precio dl {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.dfd-precio dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dfd-precio dl > div:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.dfd-precio dt {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.dfd-precio dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ── Pasos del primer mes ───────────────────────────────────────────────── */
+.dfd-pasos {
+  counter-reset: paso;
+  list-style: none;
+  padding: 0;
+  margin: 26px 0 0;
+  max-width: 62ch;
+}
+
+.dfd-pasos li {
+  counter-increment: paso;
+  position: relative;
+  padding-left: 44px;
+  margin-bottom: 22px;
+  line-height: 1.6;
+}
+
+.dfd-pasos li::before {
+  content: counter(paso, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Dudas ──────────────────────────────────────────────────────────────── */
+.dfd-dudas {
+  margin-top: 24px;
+  max-width: 62ch;
+}
+
+.dfd-dudas details {
+  border-bottom: 1px solid var(--line);
+}
+
+.dfd-dudas summary {
+  cursor: pointer;
+  padding: 18px 0;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.dfd-dudas summary::-webkit-details-marker {
+  display: none;
+}
+
+.dfd-dudas summary::after {
+  content: "+";
+  color: var(--muted);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.dfd-dudas details[open] summary::after {
+  content: "−";
+}
+
+.dfd-dudas details p {
+  padding-bottom: 20px;
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ── Cierre ─────────────────────────────────────────────────────────────── */
+.dfd-cierre {
+  padding-top: clamp(44px, 7vw, 72px);
+}
+
+.dfd-acciones {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 26px 0 40px;
+}
+
+.dfd-firma {
+  color: var(--muted);
+  font-size: 0.86rem;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  margin: 0 !important;
+}
