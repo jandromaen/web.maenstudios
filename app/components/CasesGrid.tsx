@@ -24,9 +24,29 @@ export type CasoTarjeta = {
 /** Cuántas se descubren con cada pulsación: dos filas de la rejilla ancha. */
 const TANDA = 6;
 
-function Tarjeta({ caso }: { caso: CasoTarjeta }) {
+function Tarjeta({
+  caso,
+  yaVisible,
+}: {
+  caso: CasoTarjeta;
+  /**
+   * Las tarjetas que aparecen al pulsar el botón nacen ya descubiertas.
+   *
+   * El sistema de aparición al hacer scroll recorre el documento una sola vez
+   * por página: lo que se añada después nunca lo observa nadie. Y como esas
+   * piezas arrancan recortadas a altura cero por CSS, se quedaban así para
+   * siempre — se veía el nombre de la marca y un hueco donde iba el vídeo.
+   *
+   * Tampoco tendría sentido animarlas: han aparecido porque alguien las ha
+   * pedido, no porque hayan entrado en pantalla.
+   */
+  yaVisible: boolean;
+}) {
   return (
-    <Link className="bd-case" href={`/clientes/${caso.slug}`}>
+    <Link
+      className={`bd-case${yaVisible ? " es-visible" : ""}`}
+      href={`/clientes/${caso.slug}`}
+    >
       <div className="bd-case-media">
         {caso.previewVideo ? (
           <LazyVideo src={caso.previewVideo} poster={caso.poster} />
@@ -81,8 +101,8 @@ export default function CasesGrid({ casos }: { casos: CasoTarjeta[] }) {
   return (
     <>
       <div className="bd-cases-grid is-featured" ref={rejilla}>
-        {mostrados.map((caso) => (
-          <Tarjeta key={caso.slug} caso={caso} />
+        {mostrados.map((caso, i) => (
+          <Tarjeta key={caso.slug} caso={caso} yaVisible={i >= TANDA} />
         ))}
       </div>
 
@@ -90,8 +110,6 @@ export default function CasesGrid({ casos }: { casos: CasoTarjeta[] }) {
         <div className="bd-cases-mas">
           <button className="btn btn-ghost" type="button" onClick={mostrarMas}>
             Mostrar más
-            {/* El número evita la duda de si quedan dos marcas o veinte */}
-            <span className="bd-cases-cuentan"> ({quedan})</span>
           </button>
         </div>
       ) : null}

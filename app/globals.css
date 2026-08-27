@@ -723,11 +723,6 @@ button,
   margin-top: clamp(20px, 3vw, 32px);
 }
 
-/* La cuenta pesa menos que la etiqueta: informa, no compite con ella */
-.bd-cases-cuentan {
-  opacity: 0.6;
-}
-
 @media (min-width: 800px) {
   .bd-cases-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
