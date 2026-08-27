@@ -239,10 +239,16 @@ button,
   color: #fff;
 }
 
-/* Velo bajo la cabecera. Sin él, el contenido pasa por debajo y el texto de
-   la página se cruza con el del menú: era el principal foco de ruido visual
-   al hacer scroll. El degradado mantiene el efecto flotante —no es una barra
-   opaca— pero separa lo suficiente para que ambos se lean. */
+/* Velo bajo la cabecera, pero solo cuando la cabecera está sobre contenido.
+   Sobre el hero de la home no se pinta: ahí metía una banda clara encima del
+   vídeo y era justo lo que sobraba.
+
+   No se puede quitar del todo. Sin él, al hacer scroll el texto de la página
+   pasa por debajo del menú y se cruzan las dos líneas: se leen los titulares
+   atravesando WORK, SERVICES y compañía. Que aparezca a la vez que la tinta
+   se vuelve oscura resuelve las dos cosas con el mismo interruptor.
+
+   Va con transición para que no salte de golpe al pasar el hero. */
 .header::before {
   content: "";
   position: absolute;
@@ -256,17 +262,25 @@ button,
     transparent
   );
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* blend solo en nav y logo — evita que el contenedor entero amplíe contraste percibido */
+.header--light::before {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header::before {
+    transition: none;
+  }
+}
+
+/* Blanco liso, sin invertirse contra el fondo. El blend estaba pensado para
+   una imagen fija; sobre el vídeo de la home el fondo cambia con cada
+   fotograma y el menú cambiaba de color solo. */
 .header .brand,
 .header .nav {
-  mix-blend-mode: difference;
-}
-
-/* Fondo claro: logo y nav oscuros (sin blend) */
-.header--light .brand,
-.header--light .nav {
   mix-blend-mode: normal;
 }
 
@@ -274,36 +288,13 @@ button,
   color: var(--fg);
 }
 
+
+
+/* Sobre fondo claro el logo va a negro. Depende de .header--light y no del
+   tema: lo que decide es qué hay detrás de la cabecera, no si el visitante
+   eligió blanco o negro. En el hero de la home el logo se queda blanco. */
+[data-theme="light"] .header--light .brand-logo,
 .header--light .brand-logo {
-  filter: none;
-}
-
-[data-theme="light"] .header--light .brand-logo {
-  filter: brightness(0);
-}
-
-/* Con el tema claro, tinta negra en la cabecera siempre —también sobre el
-   vídeo de la home—.
-
-   El motivo es el velo de aquí arriba: se pinta con --bg, que en claro es casi
-   blanco, y cubre justo la banda donde caen el logo y el menú. Por debajo puede
-   haber un vídeo, pero lo que hay detrás de las letras es ese velo. Con letras
-   blancas encima, blanco sobre blanco.
-
-   Y se apaga el blend. La idea de invertir contra el fondo es buena cuando
-   detrás hay una imagen fija; sobre un vídeo el fondo cambia con cada
-   fotograma, así que el menú se leería mejor o peor según el segundo. Un color
-   fijo es peor truco y mejor lectura. */
-[data-theme="light"] .header {
-  color: var(--fg);
-}
-
-[data-theme="light"] .header .brand,
-[data-theme="light"] .header .nav {
-  mix-blend-mode: normal;
-}
-
-[data-theme="light"] .header .brand-logo {
   filter: brightness(0);
 }
 
