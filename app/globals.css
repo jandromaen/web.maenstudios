@@ -93,90 +93,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Granulado de película sobre toda la web. Antes era una textura fija; lo que
-   la hace parecer grano de verdad es que se mueva, que es como lo resuelve
-   Basic (basicagency.com), la referencia de la que ya sale el Statement.
-
-   Tres detalles que importan:
-
-   `steps(2)` en vez de una curva suave: el grano tiene que saltar de sitio, no
-   deslizarse. Con una transición continua se ve como una textura arrastrándose
-   por la pantalla, que es justo el efecto contrario.
-
-   El `inset` negativo saca la capa 150px por los cuatro lados. La animación la
-   desplaza hasta 9rem (144px), y sin ese margen se vería asomar el borde en
-   cada salto.
-
-   Se anima `transform` y nada más: el navegador lo resuelve en la GPU sin
-   repintar la página, así que un fondo que cambia veinte veces por segundo
-   sale casi gratis. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: -150px;
-  background-image: var(--noise);
-  /* El SVG no trae dimensiones propias: sin esto se estira hasta llenar la
-     capa y el grano sale gigante y borroso. Con tamaño fijo se repite en
-     baldosas, que es lo que hace que al moverse cambie de verdad. */
-  background-size: 200px 200px;
-  background-repeat: repeat;
-  pointer-events: none;
-  z-index: 9998;
-  /* overlay y no opacidad a secas: sobre el gris medio del ruido, este modo
-     aclara donde el grano es claro y oscurece donde es oscuro. Con opacidad
-     normal solo se puede echar un velo, y sobre negro un velo negro no se ve. */
-  mix-blend-mode: overlay;
-  /* Medido sobre el fondo real: a 0.16 el grano variaba 3 niveles de gris, que
-     es el umbral de lo invisible. A 0.35 varía 7, que se percibe como textura
-     sin llegar a ensuciar. */
-  opacity: 0.35;
-  will-change: transform;
-  animation: grano 1s steps(2) infinite;
-}
-
-@keyframes grano {
-  0% { transform: translate3d(0, 9rem, 0); }
-  10% { transform: translate3d(-1rem, -4rem, 0); }
-  20% { transform: translate3d(-8rem, 2rem, 0); }
-  30% { transform: translate3d(9rem, -9rem, 0); }
-  40% { transform: translate3d(-2rem, 7rem, 0); }
-  50% { transform: translate3d(-9rem, -4rem, 0); }
-  60% { transform: translate3d(2rem, 6rem, 0); }
-  70% { transform: translate3d(7rem, -8rem, 0); }
-  80% { transform: translate3d(-9rem, 1rem, 0); }
-  90% { transform: translate3d(6rem, -5rem, 0); }
-  100% { transform: translate3d(-7rem, 0, 0); }
-}
-
-/* Un fondo que parpadea veinte veces por segundo es exactamente lo que hace
-   daño a quien tiene sensibilidad al movimiento. Se queda quieto, no se quita:
-   la textura sigue estando. */
-/* Cerca del blanco, `overlay` comprime mucho más que cerca del negro: con la
-   misma opacidad, el tema claro se queda en 3,7 niveles frente a los 7 del
-   oscuro. Se sube para que el grano se note igual en los dos. */
-[data-theme="light"] body::before {
-  opacity: 0.55;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body::before {
-    animation: none;
-    transform: none;
-  }
-}
-
-/* En táctil el grano se queda quieto. Una capa a pantalla completa con modo de
-   fusión que se recompone veinte veces por segundo obliga al compositor a
-   volver a mezclar toda la pantalla en cada fotograma, y eso en un móvil se
-   paga en batería. Encima es donde menos se nota: pantalla pequeña y mucha
-   densidad de píxel. La textura se queda; lo que se va es el parpadeo. */
-@media (pointer: coarse) {
-  body::before {
-    animation: none;
-    transform: none;
-  }
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -4680,7 +4596,11 @@ body::after {
   content: "";
   position: fixed;
   inset: -50%; /* de sobra para que al animar no asome el borde */
-  z-index: 9999;
+  /* Detrás del contenido, no delante. En 9999 el grano caía también sobre los
+     reels y las fotos, y ahí ensucia justo el trabajo que la web enseña. En -1
+     se pinta sobre el fondo del body y por debajo de todo lo demás: textura en
+     el fondo, piezas limpias. */
+  z-index: -1;
   pointer-events: none; /* no puede robar un solo clic */
   opacity: var(--grano-fuerza, 0.055);
   mix-blend-mode: overlay;
@@ -4717,6 +4637,29 @@ body::after {
   body::after {
     animation: grano 0.7s steps(1) infinite;
   }
+}
+
+/* El pie y las bandas invertidas son los dos únicos bloques con fondo opaco
+   propio: taparían el grano del body y quedarían como parches lisos en medio
+   de una página con textura. Llevan el suyo, también por detrás de su
+   contenido. La banda invertida da la vuelta al fondo, así que le toca la
+   intensidad del tema contrario. */
+.footer,
+.statement--invert {
+  position: relative;
+  isolation: isolate;
+}
+
+.footer::before,
+.statement--invert::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: var(--grano-fuerza, 0.055);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 
 @keyframes grano {
