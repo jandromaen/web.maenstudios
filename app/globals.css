@@ -262,18 +262,14 @@ button,
 
 
 
-/* El PNG del logo es blanco, así que sin filtro ya vale para el tema oscuro:
-   ahí se queda tal cual esté la cabecera.
+/* El logo de la cabecera va blanco siempre, en los dos temas y en todas las
+   páginas. Decisión de Jandro, pedida dos veces y con la contrapartida sobre
+   la mesa: el PNG es blanco, así que con el tema claro queda blanco sobre un
+   fondo casi blanco y prácticamente no se lee.
 
-   A negro solo con el tema claro, y solo cuando la cabecera lleva --light, que
-   es cuando está sobre el fondo de la página. En el hero de la home no lo
-   lleva, así que sobre el vídeo el logo se queda blanco en los dos temas.
-
-   La condición del tema es imprescindible y me la había comido: sin ella el
-   logo se ponía negro también en oscuro, o sea negro sobre negro. */
-[data-theme="light"] .header--light .brand-logo {
-  filter: brightness(0);
-}
+   Aquí ya no hay ninguna regla que lo tiña: el filtro se retira entero en
+   lugar de dejarlo condicionado, para que no reaparezca por descuido al tocar
+   estas reglas otra vez. */
 
 .header-inner {
   display: flex;
