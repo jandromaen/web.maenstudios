@@ -657,3 +657,96 @@ body.deck-abierto .cookie-banner,
 body.deck-abierto .theme-toggle {
   display: none;
 }
+
+/* ── Las cinco fases ─────────────────────────────────────────────────────
+   Numeradas porque son una secuencia real: el reporte de un mes alimenta el
+   briefing del siguiente, y saltarse una rompe la cadena.
+
+   Van al final del fichero a propósito: sus reglas para h3 tienen la misma
+   especificidad que las de `.dk h3`, así que gana la última en aparecer. */
+.dk-fases {
+  list-style: none;
+  padding: 0;
+  margin: 26px 0 0;
+}
+
+.dk-fases li {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 0 14px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.dk-fase-num {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.45em;
+}
+
+.dk-fases h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(17px, 2.1vw, 22px);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  font-weight: 650;
+  margin: 0 0 4px;
+}
+
+.dk-fases p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.5;
+  max-width: 62ch;
+}
+
+/* El detalle de cada fase, en rejilla de cinco */
+.dk-fases-detalle {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  margin-top: 26px;
+}
+
+.dk-fases-detalle > div {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 14px;
+}
+
+.dk-fases-detalle .dk-fase-num {
+  display: block;
+  margin-bottom: 8px;
+  padding-top: 0;
+}
+
+.dk-fases-detalle h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  font-weight: 650;
+  margin: 0 0 10px;
+}
+
+.dk-fases-detalle ul {
+  margin: 0;
+  padding-left: 15px;
+}
+
+.dk-fases-detalle li {
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.dk-fases-detalle li::marker {
+  color: var(--line-strong);
+}

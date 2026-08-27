@@ -30,7 +30,7 @@ export const PACK = {
    */
   piezasSemana: 3,
   piezasMes: 12,
-  jornadasMes: 2,
+  jornadasMes: 1,
   canales: ["Instagram", "Facebook", "YouTube"],
   /** ⚠️ Sin confirmar por Jandro */
   precioMes: 1890,
@@ -45,41 +45,57 @@ export const LO_QUE_PIDEN = [
   "Saber si podemos aportar nosotros al presentador",
 ];
 
-/** Lo que entra en el pack, agrupado por bloque de trabajo. */
-export const INCLUYE = [
+/**
+ * Las cinco fases del método, que es como Maen lo cuenta siempre.
+ *
+ * Sustituyen al antiguo «qué incluye» por bloques sueltos: un cliente que va a
+ * pagar todos los meses no quiere una lista de la compra, quiere saber por
+ * dónde pasa su contenido y en qué momento le toca a él decidir algo.
+ */
+export const METODOLOGIA = [
   {
-    bloque: "Antes del rodaje",
+    nombre: "Briefing creativo",
+    resumen: "Una hora con vosotros al mes. Es lo único que os pedimos además del rodaje.",
     puntos: [
-      "Reunión mensual de contenido: qué dudas está recibiendo el despacho y cuáles merecen vídeo",
-      "Guion de las doce piezas, con el gancho de los primeros tres segundos escrito",
-      "Teleprónter en el rodaje: nadie tiene que memorizar nada",
-      "Plan de jornada cerrado para que ningún abogado pierda más de dos horas",
+      "Qué dudas está recibiendo el despacho este mes",
+      "Cuáles merecen vídeo y con qué enfoque",
+      "Guiones cerrados, con el gancho de los primeros tres segundos escrito",
     ],
   },
   {
-    bloque: "Los dos días de rodaje",
+    nombre: "Rodaje",
+    resumen: "Una jornada al mes en vuestras oficinas. Sale todo el contenido del mes de una tirada.",
     puntos: [
-      "Dos jornadas al mes en vuestras oficinas de Granollers",
       "Equipo completo: cámara, sonido de solapa e iluminación propia",
-      "Seis piezas por jornada, rodadas del tirón",
-      "Dirección en plató: la persona que sale se limita a hablar",
+      "Teleprónter, para que nadie tenga que memorizar",
+      "Dirección en plató: quien sale se limita a hablar",
     ],
   },
   {
-    bloque: "Después",
+    nombre: "Postproducción",
+    resumen: "Montaje, ritmo y acabado. Aquí es donde una grabación se convierte en una pieza.",
     puntos: [
       "Edición vertical con subtítulos incrustados, que es como se ve sin sonido",
-      "Versión horizontal para YouTube de las piezas que lo aguanten",
+      "Versión horizontal para YouTube de lo que lo aguante",
       "Portadas y títulos pensados para búsqueda, no para quedar bonitos",
-      "Publicación y calendario en Instagram, Facebook y YouTube",
+    ],
+  },
+  {
+    nombre: "Calendario de contenido",
+    resumen: "Qué sale, dónde y qué día. Vosotros lo veis antes de que se publique nada.",
+    puntos: [
+      "Tres publicaciones por semana repartidas entre los tres canales",
+      "Copys y hashtags escritos por nosotros",
       "Respuesta a comentarios y mensajes en horario laboral",
     ],
   },
   {
-    bloque: "Cada mes",
+    nombre: "Reportes y métricas",
+    resumen: "Qué ha funcionado, qué no, y qué cambiamos por eso.",
     puntos: [
-      "Informe de qué ha funcionado y qué no, con la decisión que tomamos a partir de ahí",
-      "Ajuste del plan del mes siguiente según lo que haya rendido",
+      "Informe mensual sin florituras: alcance, guardados y mensajes recibidos",
+      "Qué temas han traído consultas reales al despacho",
+      "El briefing del mes siguiente sale de aquí, no de una lluvia de ideas",
     ],
   },
 ];
@@ -88,7 +104,7 @@ export const INCLUYE = [
 export const DUDAS = [
   {
     q: "¿Y si un abogado no puede el día del rodaje?",
-    a: "Se rueda varias semanas por delante precisamente para tener colchón. Si falla alguien, se reordena el guion en el momento y se graba lo que sí se puede: nunca se queda una semana sin publicar.",
+    a: "La fecha se cierra en el briefing, con dos semanas de margen, y se puede mover mientras aviséis con antelación. Si el día falla alguien, se rueda con quien esté: por eso conviene tener dos caras preparadas y no una.",
   },
   {
     q: "¿Quién decide qué se cuenta?",
@@ -155,7 +171,7 @@ export const MES = [
     semana: "02",
     titulo: "Primera jornada",
     texto:
-      "Vamos a Granollers y rodamos de una tirada varias semanas de contenido. Unas dos horas de vuestro abogado, no más.",
+      "Una jornada en Granollers y sale el contenido del mes entero. Unas tres horas de vuestro abogado, no más.",
   },
   {
     semana: "03",

@@ -13,9 +13,8 @@ import {
   CLIENTE,
   PACK,
   LO_QUE_PIDEN,
-  INCLUYE,
+  METODOLOGIA,
   DUDAS,
-  MES,
 } from "./propuesta";
 
 /**
@@ -133,7 +132,7 @@ export default function DefendoorDeck({
         <div className="dk-cifras">
           {[
             [String(PACK.piezasSemana), "vídeos cada semana"],
-            [String(PACK.jornadasMes), `jornadas al mes en ${CLIENTE.ciudad}`],
+            [String(PACK.jornadasMes), `jornada de rodaje al mes`],
             [String(PACK.canales.length), "canales gestionados"],
             ["2 h", "de vuestro tiempo al mes"],
           ].map(([n, t]) => (
@@ -238,38 +237,49 @@ export default function DefendoorDeck({
       ),
     },
     {
-      id: "incluye",
-      titulo: "Qué incluye",
+      id: "metodo",
+      titulo: "El método",
       render: () => (
         <div className="dk-centro dk-centro--ancho">
-          <h2>Qué incluye</h2>
-          <div className="dk-bloques">
-            {INCLUYE.map((b) => (
-              <div key={b.bloque}>
-                <h3>{b.bloque}</h3>
-                <ul>
-                  {b.puntos.map((p) => (
-                    <li key={p}>{p}</li>
-                  ))}
-                </ul>
-              </div>
+          <h2>Cómo trabajamos, cada mes</h2>
+          <p className="dk-sub">
+            Cinco fases, siempre las mismas. Vosotros solo entráis en la
+            primera y en el rodaje.
+          </p>
+          <ol className="dk-fases">
+            {METODOLOGIA.map((f, i) => (
+              <li key={f.nombre}>
+                <span className="dk-fase-num">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3>{f.nombre}</h3>
+                  <p>{f.resumen}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       ),
     },
     {
-      id: "mes",
-      titulo: "Un mes por dentro",
+      id: "metodo-detalle",
+      titulo: "El método por dentro",
       render: () => (
         <div className="dk-centro dk-centro--ancho">
-          <h2>Un mes por dentro</h2>
-          <div className="dk-mes">
-            {MES.map((s) => (
-              <div key={s.semana}>
-                <span className="dk-sem">{s.semana}</span>
-                <h3>{s.titulo}</h3>
-                <p>{s.texto}</p>
+          <h2>Qué pasa en cada fase</h2>
+          <div className="dk-fases-detalle">
+            {METODOLOGIA.map((f, i) => (
+              <div key={f.nombre}>
+                <span className="dk-fase-num">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3>{f.nombre}</h3>
+                <ul>
+                  {f.puntos.map((p) => (
+                    <li key={p}>{p}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -296,7 +306,7 @@ export default function DefendoorDeck({
               <dd>{PACK.piezasSemana}</dd>
             </div>
             <div>
-              <dt>Jornadas de rodaje</dt>
+              <dt>Jornada de rodaje</dt>
               <dd>
                 {PACK.jornadasMes} al mes en {CLIENTE.ciudad}
               </dd>
