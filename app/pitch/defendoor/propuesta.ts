@@ -34,31 +34,43 @@ export const DESGLOSE = [
   {
     concepto: "Dirección creativa",
     importe: 320,
+    horas: 8,
+    perfil: "Brand Manager",
     detalle: "Briefing mensual, enfoque y guiones de las doce piezas",
   },
   {
     concepto: "Producción audiovisual",
     importe: 560,
+    horas: 10,
+    perfil: "Camarógrafo",
     detalle: "Jornada de rodaje en Granollers con equipo completo",
   },
   {
     concepto: "Edición del contenido",
     importe: 480,
+    horas: 14,
+    perfil: "Editor",
     detalle: "Montaje, subtítulos, versiones vertical y horizontal",
   },
   {
     concepto: "Calendario social media",
     importe: 200,
+    horas: 5,
+    perfil: "Brand Manager",
     detalle: "Qué sale, dónde y qué día, con los copys escritos",
   },
   {
     concepto: "Programación y publicación",
     importe: 190,
+    horas: 8,
+    perfil: "Community Manager",
     detalle: "Publicación en los tres canales y respuesta a la comunidad",
   },
   {
     concepto: "Análisis de reportes y métricas",
     importe: 140,
+    horas: 3,
+    perfil: "Brand Manager",
     detalle: "Informe mensual y decisiones para el mes siguiente",
   },
 ] as const;
@@ -88,6 +100,8 @@ export const PACK = {
    * dicho que no les conviene.
    */
   presentadorMes: 500,
+  /** Horas de trabajo nuestro al mes. Sale del desglose, no se escribe. */
+  horasNuestras: DESGLOSE.reduce((t, l) => t + l.horas, 0),
   permanencia: 3,
 };
 
@@ -238,5 +252,29 @@ export const MES = [
     titulo: "Números y ajuste",
     texto:
       "Qué se ha visto, qué se ha guardado y qué preguntas ha traído. Con eso se escribe el mes siguiente.",
+  },
+];
+
+/**
+ * El equipo que toca la cuenta. Se enseña porque es la diferencia real entre
+ * contratar una agencia y contratar a un freelance: cuatro oficios distintos,
+ * y ninguno haciendo el trabajo del otro a medias.
+ */
+export const EQUIPO = [
+  {
+    rol: "Brand Manager",
+    hace: "Lleva la cuenta. Decide qué se cuenta cada mes, escribe los guiones y os presenta los resultados.",
+  },
+  {
+    rol: "Camarógrafo",
+    hace: "Rueda la jornada en vuestras oficinas: cámara, luz y sonido. Y dirige a quien sale, para que no tenga que actuar.",
+  },
+  {
+    rol: "Editor",
+    hace: "Monta las doce piezas, subtitula y saca las versiones para cada canal.",
+  },
+  {
+    rol: "Community Manager",
+    hace: "Publica, programa y contesta. Es quien está al otro lado cuando alguien pregunta algo en un comentario.",
   },
 ];

@@ -13,6 +13,7 @@ import {
   CLIENTE,
   PACK,
   DESGLOSE,
+  EQUIPO,
   LO_QUE_PIDEN,
   METODOLOGIA,
   DUDAS,
@@ -320,6 +321,33 @@ export default function DefendoorDeck({
       ),
     },
     {
+      id: "equipo",
+      titulo: "Vuestro equipo",
+      render: () => (
+        <div className="dk-centro dk-centro--ancho">
+          <h2>Cuatro personas, no una</h2>
+          <p className="dk-sub">
+            Es la diferencia real entre una agencia y un freelance: cuatro
+            oficios distintos, y ninguno haciendo el trabajo del otro a medias.
+          </p>
+          <div className="dk-equipo">
+            {EQUIPO.map((m) => (
+              <div key={m.rol}>
+                <h3>{m.rol}</h3>
+                <p>{m.hace}</p>
+              </div>
+            ))}
+          </div>
+          <p className="dk-extra dk-extra--simple">
+            <span className="dk-extra-que">
+              {PACK.horasNuestras} horas de trabajo nuestro al mes, frente a las{" "}
+              {PACK.horasMes} vuestras
+            </span>
+          </p>
+        </div>
+      ),
+    },
+    {
       id: "precio",
       titulo: "El precio",
       render: () => (
@@ -361,7 +389,9 @@ export default function DefendoorDeck({
                   <li key={l.concepto}>
                     <div>
                       <strong>{l.concepto}</strong>
-                      <span>{l.detalle}</span>
+                      <span>
+                        {l.horas} h · {l.perfil}
+                      </span>
                     </div>
                     <b>{euros(l.importe)} €</b>
                   </li>
@@ -369,6 +399,7 @@ export default function DefendoorDeck({
                 <li className="dk-desglose-total">
                   <div>
                     <strong>Total</strong>
+                    <span>{PACK.horasNuestras} h de trabajo al mes</span>
                   </div>
                   <b>{euros(PACK.precioMes)} €</b>
                 </li>
