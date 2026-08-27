@@ -24,6 +24,55 @@ export default function HomeHero() {
   const reelSrc = heroReels[0] ?? "/reel-hero.mp4";
 
   /**
+   * Red de seguridad para la elección de fuente.
+   *
+   * El script de arriba solo corre cuando el navegador parsea el HTML, es
+   * decir en una carga completa. Al llegar a la home desde otra página de la
+   * web, React reutiliza el DOM y los <script> insertados con
+   * dangerouslySetInnerHTML no se vuelven a ejecutar: el vídeo se quedaba sin
+   * src ninguno y solo se veía el póster. En móvil eso es peor de lo que
+   * parece, porque iOS dibuja su propio botón de play encima de un vídeo
+   * parado, y da la sensación de que hay que pulsarlo para verlo.
+   *
+   * Aquí se repite la misma decisión si el src sigue vacío. Cuando el script
+   * sí llegó a correr, este efecto no hace nada.
+   */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    /* El atributo del HTML no basta cuando la fuente se asigna por JS: iOS
+       comprueba que el elemento esté silenciado en el momento de pedir la
+       reproducción, y solo la propiedad lo garantiza. */
+    video.muted = true;
+
+    if (!video.getAttribute("src")) {
+      const movil = window.innerWidth < 820;
+      const posterMovil = video.dataset.posterMovil;
+      if (movil && posterMovil) video.poster = posterMovil;
+
+      const fuente = movil ? video.dataset.srcMovil : video.dataset.src;
+      if (fuente) video.src = fuente;
+    }
+
+    /* Se intenta ya y otra vez cuando haya datos. La primera llamada ocurre
+       antes de que el vídeo tenga un solo fotograma, y algunos navegadores
+       —Safari sobre todo— la rechazan por eso y no vuelven a intentarlo solos.
+       El segundo intento cuesta nada y recupera justo esos casos. */
+    const intentar = () => {
+      video.play().catch(() => {
+        /* Bloqueada de verdad: modo de bajo consumo o ahorro de datos en iOS.
+           Eso no lo puede saltar una web; se queda el póster, que para eso
+           está. */
+      });
+    };
+
+    intentar();
+    video.addEventListener("loadeddata", intentar);
+    return () => video.removeEventListener("loadeddata", intentar);
+  }, []);
+
+  /**
    * Pausa el vídeo al salir de pantalla. Seguía reproduciéndose —y bajando
    * bytes— con el visitante a mitad de página, así que se descargaban 8 MB de
    * un fondo que ya nadie estaba viendo. Pausado, el navegador deja de pedir
