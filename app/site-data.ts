@@ -4,6 +4,30 @@ export const EMAIL_ADMIN = "info@maenstudios.com";
 /** Proyectos / formulario de contacto */
 export const EMAIL = EMAIL_PROJECTS;
 
+/**
+ * Horquillas de presupuesto del formulario de contacto.
+ *
+ * Van aquí y no dentro del formulario porque son una decisión de negocio, no
+ * de maquetación: cambiarlas es editar esta lista y nada más. El texto se
+ * guarda tal cual en el correo, así que lo que se escriba aquí es lo que se
+ * lee al recibir el aviso.
+ *
+ * ATENCIÓN: estos tramos son una propuesta. La web no publica precios en
+ * ningún sitio, así que no hay de dónde deducirlos; ajústalos a lo que
+ * cobráis de verdad antes de darlos por buenos.
+ *
+ * El último no es un tramo: es la salida para quien todavía no lo sabe. Sin
+ * ella, esa persona o miente o abandona el formulario.
+ */
+export const PRESUPUESTOS = [
+  "Menos de 750 € al mes",
+  "750 – 1.500 € al mes",
+  "1.500 – 3.000 € al mes",
+  "Más de 3.000 € al mes",
+  "Es un proyecto puntual, no mensual",
+  "Aún no lo tengo claro",
+] as const;
+
 export const navLinks = [
   { label: "Work", href: "/clientes" },
   { label: "Services", href: "/servicios" },

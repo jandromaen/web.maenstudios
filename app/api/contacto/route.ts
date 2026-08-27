@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { EMAIL_PROJECTS } from "../../site-data";
+import { EMAIL_PROJECTS, PRESUPUESTOS } from "../../site-data";
 import { BUZONES, REMITENTE } from "../../lib/remitente";
 
 export const runtime = "nodejs";
@@ -34,6 +34,7 @@ type ContactPayload = {
   email?: string;
   telefono?: string;
   comentarios?: string;
+  presupuesto?: string;
   origen?: string;
   /** Honeypot: si viene relleno, es un bot */
   empresa?: string;
@@ -67,6 +68,14 @@ export async function POST(request: Request) {
   const comentarios = (payload.comentarios ?? "").trim();
   const origen = (payload.origen ?? "web").trim();
 
+  /* Solo se acepta uno de los tramos que ofrece el formulario. El campo llega
+     por HTTP y cualquiera puede mandar lo que quiera: sin esta comprobación,
+     el correo se convierte en un hueco donde escribir texto arbitrario. */
+  const enviado = (payload.presupuesto ?? "").trim();
+  const presupuesto = (PRESUPUESTOS as readonly string[]).includes(enviado)
+    ? enviado
+    : "";
+
   if (!nombre || !email) {
     return NextResponse.json(
       { error: "Necesitamos al menos tu nombre y tu email." },
@@ -98,6 +107,7 @@ export async function POST(request: Request) {
     ["Nombre", fullName],
     ["Email", email],
     ["Teléfono", telefono || "—"],
+    ["Presupuesto", presupuesto || "No lo ha indicado"],
     ["Origen", origen],
   ];
 
@@ -121,12 +131,17 @@ export async function POST(request: Request) {
       from: `Maen Studios Web <${FROM}>`,
       to: DESTINATARIOS,
       replyTo: email,
-      subject: `Nuevo proyecto — ${fullName || "Contacto web"}`,
+      /* El tramo va en el asunto para poder priorizar desde la bandeja de
+         entrada, sin abrir el correo. */
+      subject: presupuesto
+        ? `Nuevo proyecto — ${fullName || "Contacto web"} · ${presupuesto}`
+        : `Nuevo proyecto — ${fullName || "Contacto web"}`,
       html,
       text: [
         `Nombre: ${fullName}`,
         `Email: ${email}`,
         `Teléfono: ${telefono || "—"}`,
+        `Presupuesto: ${presupuesto || "No lo ha indicado"}`,
         `Origen: ${origen}`,
         "",
         comentarios,

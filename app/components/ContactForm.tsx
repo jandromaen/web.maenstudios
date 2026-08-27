@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { EMAIL_PROJECTS } from "../site-data";
+import { EMAIL_PROJECTS, PRESUPUESTOS } from "../site-data";
 import { trackEvent } from "../lib/consent";
 
 type Status = "idle" | "sending" | "error";
@@ -31,6 +31,7 @@ export default function ContactForm({ origen = "web" }: { origen?: string }) {
           email: data.get("email"),
           telefono: data.get("telefono"),
           comentarios: data.get("comentarios"),
+          presupuesto: data.get("presupuesto"),
           empresa: data.get("empresa"), // honeypot
           origen,
         }),
@@ -49,7 +50,10 @@ export default function ContactForm({ origen = "web" }: { origen?: string }) {
         return;
       }
 
-      trackEvent("generate_lead", { origen });
+      trackEvent("generate_lead", {
+        origen,
+        presupuesto: String(data.get("presupuesto") || "sin indicar"),
+      });
       form.reset();
       router.push("/gracias");
     } catch {
@@ -111,6 +115,25 @@ export default function ContactForm({ origen = "web" }: { origen?: string }) {
           rows={4}
           placeholder="¿Qué contenido necesitas?"
         />
+      </label>
+
+      {/* Va después de contar el proyecto y no antes, a propósito: es la
+          pregunta que más frena, y se responde mucho mejor cuando quien
+          escribe ya se ha implicado explicando lo que necesita.
+
+          Tampoco es obligatoria. Un presupuesto forzado en el primer contacto
+          hace que la gente se invente una cifra o cierre la pestaña, y las dos
+          cosas son peores que no saberlo. */}
+      <label>
+        Presupuesto estimado
+        <select name="presupuesto" defaultValue="">
+          <option value="">Prefiero no decirlo</option>
+          {PRESUPUESTOS.map((tramo) => (
+            <option key={tramo} value={tramo}>
+              {tramo}
+            </option>
+          ))}
+        </select>
       </label>
 
       {/* Honeypot antispam: invisible para personas, tentador para bots */}
