@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import NewsletterForm from "../components/NewsletterForm";
+import { DOMINIO_VERIFICADO } from "../lib/remitente";
 import Marquee from "../components/Marquee";
 import { BreadcrumbJsonLd, ItemListJsonLd } from "../components/JsonLd";
 import { posts } from "../blog-data";
@@ -146,6 +148,17 @@ export default function BlogPage() {
             </div>
           </div>
         </section>
+
+        {/* Solo se enseña cuando el dominio verifica en Resend. Sin eso el
+            correo de confirmación no puede salir, y un formulario que recoge
+            direcciones y luego no escribe a nadie es peor que no tenerlo. */}
+        {DOMINIO_VERIFICADO ? (
+          <section className="page-section">
+            <div className="container">
+              <NewsletterForm />
+            </div>
+          </section>
+        ) : null}
       </main>
 
       <SiteFooter />

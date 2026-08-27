@@ -86,11 +86,40 @@ export default function PrivacidadPage() {
               en ningún otro sitio de esta web.
             </p>
 
+            <h2>Newsletter</h2>
+            <p>
+              Si te suscribes al boletín del blog, tratamos tu correo con la
+              única finalidad de enviarte esos contenidos. Tres cosas que
+              conviene que sepas:
+            </p>
+            <ul>
+              <li>
+                <strong>El alta es en dos pasos.</strong> Al suscribirte te
+                enviamos un correo con un enlace y no te damos de alta hasta que
+                lo pulsas. Así nadie puede apuntar a otra persona.
+              </li>
+              <li>
+                <strong>Puedes darte de baja con un clic</strong>, desde el
+                enlace que va al pie de cada envío. No pedimos motivos ni hay
+                trámite intermedio.
+              </li>
+              <li>
+                <strong>Solo usamos tu correo para el boletín.</strong> No lo
+                cruzamos con las consultas del formulario de contacto ni lo
+                cedemos a nadie.
+              </li>
+            </ul>
+            <p>
+              Conservamos la dirección mientras sigas suscrito. Al darte de baja
+              la marcamos como tal y deja de recibir envíos.
+            </p>
+
             <h2>Base legal</h2>
             <ul>
               <li>
-                <strong>Tu consentimiento</strong> al enviar el formulario, y
-                al aceptar el aviso de cookies para la analítica.
+                <strong>Tu consentimiento</strong> al enviar el formulario, al
+                suscribirte al boletín y al aceptar el aviso de cookies para la
+                analítica.
               </li>
               <li>
                 <strong>Interés legítimo</strong> en responder a consultas

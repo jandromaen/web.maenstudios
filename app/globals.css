@@ -2966,6 +2966,121 @@ section {
 }
 
 /* ─── Formulario: honeypot y errores ──────────────────── */
+/* ─── Desplegable propio ───────────────────────────────────────────────────
+   Reproduce el lenguaje del resto de campos —sin fondo, filete abajo, esquinas
+   rectas— y añade el panel que el <select> nativo no deja tocar. */
+.campo-select {
+  position: relative;
+  display: grid;
+  gap: 6px;
+}
+
+.campo-select-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.campo-select-boton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 0;
+  border: none;
+  border-bottom: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.campo-select-boton:hover,
+.campo-select-boton.abierto {
+  border-bottom-color: var(--fg);
+}
+
+.campo-select-boton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Quien no ha elegido nada ve el texto atenuado, como un placeholder de input */
+.campo-select-vacio {
+  color: var(--muted);
+}
+
+/* Punta de flecha dibujada con bordes: sin SVG y hereda el color del texto */
+.campo-select-flecha {
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.campo-select-boton.abierto .campo-select-flecha {
+  transform: translateY(1px) rotate(-135deg);
+}
+
+.campo-select-lista {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  /* El panel flota sobre el formulario: sin sombra no se separa del fondo */
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+  max-height: 300px;
+  overflow-y: auto;
+  animation: campo-select-entra 0.14s ease-out;
+}
+
+@keyframes campo-select-entra {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campo-select-lista { animation: none; }
+  .campo-select-flecha { transition: none; }
+}
+
+.campo-select-opcion {
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+/* Una sola marca de resalte para el ratón y para el teclado: así la flecha
+   abajo y el puntero se ven igual, en vez de competir. */
+.campo-select-opcion.activa {
+  background: var(--bg-soft);
+}
+
+.campo-select-opcion.elegida {
+  font-weight: 700;
+}
+
 .hp-field {
   position: absolute;
   left: -9999px;
@@ -4601,4 +4716,73 @@ body:has(.cookie-banner) .theme-toggle {
    de la rejilla en cuanto la página tuviera recorte en algún ancestro. */
 .hero-reels {
   overflow: visible;
+}
+
+/* ─── Newsletter del blog ─────────────────────────────────────────────────── */
+.news-box {
+  border: 1px solid var(--line);
+  padding: clamp(28px, 4vw, 44px);
+  max-width: 560px;
+}
+
+.news-box h3 {
+  font-size: clamp(21px, 2.6vw, 26px);
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.news-box > p {
+  color: var(--muted);
+  margin: 0 0 22px;
+  max-width: 46ch;
+}
+
+.news-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.news-row input[type="email"] {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 13px 16px;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--fg);
+  font: inherit;
+  border-radius: var(--radius);
+}
+
+.news-row input[type="email"]:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+/* La casilla nace sin marcar y es obligatoria: el consentimiento tiene que ser
+   un acto, no una omisión. */
+.news-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 16px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.news-consent input {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.news-consent a {
+  color: var(--fg);
+}
+
+.news-error {
+  margin: 14px 0 0;
+  font-size: 0.9rem;
+  color: #e08a8a;
 }
