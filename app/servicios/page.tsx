@@ -21,7 +21,7 @@ import {
 } from "../site-data";
 import { createPageMetadata, OFFICES } from "../seo-config";
 import { HeroReels } from "../components/HeroMedia";
-import { reelsFor } from "../clients";
+import { reelsDeHero } from "../clients";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Servicios de contenido para redes sociales",
@@ -82,9 +82,7 @@ export default function ServiciosPage() {
                 <span>Respuesta en 24h</span>
               </div>
             </div>
-            <HeroReels
-              reels={reelsFor(["canallita", "ultramarinos-marin", "macala"])}
-            />
+            <HeroReels reels={reelsDeHero("servicios")} />
           </div>
         </section>
 

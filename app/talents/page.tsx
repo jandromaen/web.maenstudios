@@ -7,7 +7,7 @@ import Statement from "../components/Statement";
 import { BreadcrumbJsonLd } from "../components/JsonLd";
 import { createPageMetadata } from "../seo-config";
 import { HeroReels } from "../components/HeroMedia";
-import { reelsFor } from "../clients";
+import { reelsDeHero } from "../clients";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Talents — creadores y UGC para marcas",
@@ -112,9 +112,7 @@ export default function TalentsPage() {
                 <span>Respuesta en 24h</span>
               </div>
             </div>
-            <HeroReels
-              reels={reelsFor(["pigili-originals", "canallita", "mimosas"])}
-            />
+            <HeroReels reels={reelsDeHero("talents")} />
           </div>
         </section>
 

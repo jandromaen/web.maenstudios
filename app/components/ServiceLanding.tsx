@@ -7,7 +7,7 @@ import StatGrid from "./StatGrid";
 import Statement from "./Statement";
 import { BreadcrumbJsonLd, FaqJsonLd, ServiceJsonLd } from "./JsonLd";
 import { HeroReels } from "./HeroMedia";
-import { clients, reelsFor } from "../clients";
+import { clients, reelsDeLanding, reelsDeReserva } from "../clients";
 import { studioStats } from "../site-data";
 import { getLocalLanding } from "../local-data";
 import type { ServiceLanding as ServiceLandingData } from "../service-landings";
@@ -28,13 +28,15 @@ export default function ServiceLanding({
 
   /* Reels de los clientes de esta landing; si no llegan a tres, se completa
      con trabajo del estudio para que el hero nunca quede a medias. */
-  const ownReels = reelsFor(landing.clientSlugs).slice(0, 3);
+  const ownReels = reelsDeLanding(landing.clientSlugs).slice(0, 3);
   const reels =
     ownReels.length === 3
       ? ownReels
       : [
           ...ownReels,
-          ...reelsFor(["canallita", "ultramarinos-marin", "macala"]),
+          /* El relleno sale de marcas que no usa ninguna página del menú:
+             antes eran las tres de /servicios y la landing la repetía. */
+          ...reelsDeReserva(),
         ].slice(0, 3);
 
   /* Enlaces cruzados: sin ellos estas páginas no reciben autoridad del resto

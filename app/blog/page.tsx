@@ -7,7 +7,7 @@ import { BreadcrumbJsonLd, ItemListJsonLd } from "../components/JsonLd";
 import { posts } from "../blog-data";
 import { createPageMetadata } from "../seo-config";
 import { HeroReels } from "../components/HeroMedia";
-import { reelsFor } from "../clients";
+import { reelsDeHero } from "../clients";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Blog — contenido, redes sociales y marca",
@@ -71,9 +71,7 @@ export default function BlogPage() {
                 ))}
               </div>
             </div>
-            <HeroReels
-              reels={reelsFor(["focacha", "hijos-de-javier", "gran-tonino"])}
-            />
+            <HeroReels reels={reelsDeHero("blog")} />
           </div>
         </section>
 

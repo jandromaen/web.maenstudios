@@ -7,7 +7,7 @@ import StatGrid from "./StatGrid";
 import Statement from "./Statement";
 import { BreadcrumbJsonLd, FaqJsonLd, ServiceJsonLd } from "./JsonLd";
 import { HeroReels } from "./HeroMedia";
-import { clients, reelsFor } from "../clients";
+import { clients, reelsDeLanding, reelsDeReserva } from "../clients";
 import { services, studioStats } from "../site-data";
 import type { LocalLanding } from "../local-data";
 import { serviceLandingsForCity } from "../service-landings";
@@ -25,13 +25,15 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
 
   /* Reels de la propia ciudad; si esa oficina aún no tiene piezas subidas,
      se cae a trabajo del estudio para que el hero nunca quede vacío. */
-  const heroReels = reelsFor(landing.clientSlugs).slice(0, 3);
+  const heroReels = reelsDeLanding(landing.clientSlugs).slice(0, 3);
   const reels =
     heroReels.length === 3
       ? heroReels
       : [
           ...heroReels,
-          ...reelsFor(["canallita", "ultramarinos-marin", "macala"]),
+          /* El relleno sale de marcas que no usa ninguna página del menú:
+             antes eran las tres de /servicios y la landing la repetía. */
+          ...reelsDeReserva(),
         ].slice(0, 3);
 
   return (

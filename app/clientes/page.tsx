@@ -12,7 +12,7 @@ import { HeroReels } from "../components/HeroMedia";
 import {
   clients,
   sectors,
-  reelsFor,
+  reelsDeHero,
   communitySize,
   CORE_SERVICES,
   type Client,
@@ -206,9 +206,7 @@ export default function ClientesPage() {
                 </Link>
               </div>
             </div>
-            <HeroReels
-              reels={reelsFor(["mantis", "b-de-bocata", "focacha"])}
-            />
+            <HeroReels reels={reelsDeHero("clientes")} />
           </div>
         </section>
 

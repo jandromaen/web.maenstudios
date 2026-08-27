@@ -419,6 +419,104 @@ export function topByCommunity(n: number, { conReel = false } = {}): Client[] {
  * de escribir rutas a mano: si un cliente cambia de vídeo o sale de la web, el
  * hero no se queda apuntando a un fichero que ya no existe.
  */
+/**
+ * Reparto de reels para los heroes de las páginas del menú.
+ *
+ * Antes cada página llevaba su terna escrita a mano en su propio fichero, y
+ * con cinco listas sueltas pasó lo previsible: canallita salía en servicios y
+ * en talents, y focacha en clientes y en blog. Repartiendo desde un solo sitio
+ * eso no puede repetirse, porque la unicidad deja de depender de que alguien
+ * se acuerde.
+ *
+ * Cada página conserva su preferencia editorial —talents pide marcas de
+ * creador, clientes pide hostelería— y solo pierde una elección si otra
+ * página la ha cogido antes. Lo que falte se rellena con el resto del
+ * catálogo, así que las tres siempre están.
+ *
+ * El orden de esta lista es el orden de preferencia: quien va primero gana
+ * cuando dos páginas piden lo mismo.
+ */
+const HERO_PREFERIDOS = {
+  clientes: ["mantis", "b-de-bocata", "focacha"],
+  servicios: ["canallita", "ultramarinos-marin", "macala"],
+  blog: ["hijos-de-javier", "gran-tonino", "macchina"],
+  talents: ["pigili-originals", "mimosas", "aluxe"],
+} as const;
+
+export type PaginaConHero = keyof typeof HERO_PREFERIDOS;
+
+const REPARTO_HERO: Record<PaginaConHero, string[]> = (() => {
+  const tomados = new Set<string>();
+  const salida = {} as Record<PaginaConHero, string[]>;
+
+  for (const pagina of Object.keys(HERO_PREFERIDOS) as PaginaConHero[]) {
+    const elegidos: string[] = [];
+
+    for (const slug of HERO_PREFERIDOS[pagina]) {
+      if (elegidos.length === 3) break;
+      const cliente = clients.find((c) => c.slug === slug);
+      if (cliente?.previewVideo && !tomados.has(slug)) {
+        elegidos.push(slug);
+        tomados.add(slug);
+      }
+    }
+
+    /* Relleno: si una preferencia ya estaba cogida —o si esa marca se retira
+       del portfolio— la terna se completa sola en vez de quedarse coja. */
+    for (const cliente of clients) {
+      if (elegidos.length === 3) break;
+      if (!cliente.previewVideo || tomados.has(cliente.slug)) continue;
+      elegidos.push(cliente.slug);
+      tomados.add(cliente.slug);
+    }
+
+    salida[pagina] = elegidos;
+  }
+
+  return salida;
+})();
+
+/** Slugs que ya usa alguna página del menú en su hero. */
+export const REELS_DE_MENU = new Set(
+  Object.values(REPARTO_HERO).flat(),
+);
+
+/** Los tres reels del hero de una página del menú. */
+export function reelsDeHero(pagina: PaginaConHero) {
+  return reelsFor(REPARTO_HERO[pagina]);
+}
+
+/**
+ * Reels del hero de una landing, a partir de sus propios clientes.
+ *
+ * Una landing tiene que enseñar marcas de su ciudad o de su sector, así que
+ * ahí no se puede imponer la unicidad como en el menú. Lo que sí se puede es
+ * ordenar: primero las que no salen en ninguna página del menú, y solo se
+ * recurre a las repetidas si no hay suficientes propias. Con eso, la landing
+ * de Barcelona deja de repetir ninguna y la de Madrid baja de dos a una.
+ */
+export function reelsDeLanding(slugs: string[]) {
+  const propias = slugs.filter((slug) =>
+    clients.some((c) => c.slug === slug && c.previewVideo),
+  );
+  const sinRepetir = propias.filter((slug) => !REELS_DE_MENU.has(slug));
+  const repetidas = propias.filter((slug) => REELS_DE_MENU.has(slug));
+  return reelsFor([...sinRepetir, ...repetidas]);
+}
+
+/**
+ * Reels para rellenar un hero que no llega a tres piezas propias —una landing
+ * de ciudad recién abierta, por ejemplo—. Deja fuera los que ya salen en el
+ * menú para no repetir de una sección a otra.
+ */
+export function reelsDeReserva() {
+  return reelsFor(
+    clients
+      .filter((c) => c.previewVideo && !REELS_DE_MENU.has(c.slug))
+      .map((c) => c.slug),
+  );
+}
+
 export function reelsFor(slugs: string[]) {
   return slugs
     .map((slug) => clients.find((c) => c.slug === slug))
