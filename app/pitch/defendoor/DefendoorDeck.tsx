@@ -372,6 +372,56 @@ export default function DefendoorDeck({ muestra }: { muestra: Client[] }) {
     return () => document.body.classList.remove("deck-abierto");
   }, []);
 
+  /**
+   * Precarga los reels de la diapositiva de trabajo mientras se ven las
+   * anteriores.
+   *
+   * Son seis vídeos, 3,7 MB en total, y hasta ahora no empezaban a bajar hasta
+   * que se llegaba: el cliente veía seis rectángulos vacíos justo en la
+   * diapositiva donde le enseñamos lo que sabemos hacer. Los pósters tapan el
+   * hueco, pero un póster quieto no demuestra nada.
+   *
+   * Se piden de uno en uno y no a la vez: en paralelo compiten entre ellos y
+   * con lo que esté cargando la diapositiva actual, y no llega antes ninguno.
+   */
+  const precargado = useRef(false);
+  useEffect(() => {
+    if (precargado.current || indice < 1) return;
+    precargado.current = true;
+
+    let cancelado = false;
+    const elementos: HTMLVideoElement[] = [];
+
+    (async () => {
+      for (const c of muestra) {
+        if (cancelado || !c.previewVideo) return;
+        await new Promise<void>((listo) => {
+          const v = document.createElement("video");
+          v.preload = "auto";
+          v.muted = true;
+          v.src = c.previewVideo!;
+          elementos.push(v);
+          /* Se pasa al siguiente cuando hay datos suficientes, o a los tres
+             segundos: con una conexión mala, esperar a que termine uno
+             bloquearía la cola entera. */
+          const seguir = () => listo();
+          v.addEventListener("canplaythrough", seguir, { once: true });
+          v.addEventListener("error", seguir, { once: true });
+          setTimeout(seguir, 3000);
+        });
+      }
+    })();
+
+    return () => {
+      cancelado = true;
+      /* Soltar el src corta la descarga si se cierra el deck a medias */
+      elementos.forEach((v) => {
+        v.removeAttribute("src");
+        v.load();
+      });
+    };
+  }, [indice, muestra]);
+
   useEffect(() => {
     const alPulsar = (e: KeyboardEvent) => {
       switch (e.key) {
