@@ -262,11 +262,16 @@ button,
 
 
 
-/* Sobre fondo claro el logo va a negro. Depende de .header--light y no del
-   tema: lo que decide es qué hay detrás de la cabecera, no si el visitante
-   eligió blanco o negro. En el hero de la home el logo se queda blanco. */
-[data-theme="light"] .header--light .brand-logo,
-.header--light .brand-logo {
+/* El PNG del logo es blanco, así que sin filtro ya vale para el tema oscuro:
+   ahí se queda tal cual esté la cabecera.
+
+   A negro solo con el tema claro, y solo cuando la cabecera lleva --light, que
+   es cuando está sobre el fondo de la página. En el hero de la home no lo
+   lleva, así que sobre el vídeo el logo se queda blanco en los dos temas.
+
+   La condición del tema es imprescindible y me la había comido: sin ella el
+   logo se ponía negro también en oscuro, o sea negro sobre negro. */
+[data-theme="light"] .header--light .brand-logo {
   filter: brightness(0);
 }
 
