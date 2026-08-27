@@ -35,7 +35,13 @@ const euros = (n: number) => n.toLocaleString("es-ES");
 
 type Diapo = { id: string; titulo: string; render: () => ReactNode };
 
-export default function DefendoorDeck({ muestra }: { muestra: Client[] }) {
+export default function DefendoorDeck({
+  muestra,
+  portada,
+}: {
+  muestra: Client[];
+  portada: Client[];
+}) {
   const [indice, setIndice] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
   const contenedor = useRef<HTMLDivElement>(null);
@@ -59,12 +65,20 @@ export default function DefendoorDeck({ muestra }: { muestra: Client[] }) {
               quién lo hace, cada cuánto sale y qué cuesta.
             </p>
           </div>
-          <div className="dk-reels dk-reels--tres" aria-hidden="true">
-            {muestra.slice(0, 3).map((c) => (
-              <div className="dk-reel" key={c.slug}>
-                <LazyVideo src={c.previewVideo!} poster={c.poster} priority />
+          <div className="dk-baraja" aria-hidden="true">
+            {portada.map((c, i) => (
+              <div
+                className="dk-baraja-reel"
+                key={c.slug}
+                data-pos={i}
+                onPointerDown={cogerReel}
+              >
+                <div className="dk-reel">
+                  <LazyVideo src={c.previewVideo!} poster={c.poster} priority />
+                </div>
               </div>
             ))}
+            <span className="dk-baraja-pista">Arrástralos ✦</span>
           </div>
         </div>
       ),
@@ -384,6 +398,55 @@ export default function DefendoorDeck({ muestra }: { muestra: Client[] }) {
    * Se piden de uno en uno y no a la vez: en paralelo compiten entre ellos y
    * con lo que esté cargando la diapositiva actual, y no llega antes ninguno.
    */
+  /**
+   * Arrastre de los reels de la portada: se cogen y se quedan donde se sueltan.
+   *
+   * Es el gesto que Jandro quería recuperar del tablero que estuvo en la home.
+   * Aquí sirve además para romper el hielo en la llamada: el cliente toca algo
+   * antes de que le enseñemos un solo dato.
+   *
+   * Se hace con eventos directos y no con estado de React: mover un reel no
+   * debe repintar la diapositiva entera con cinco vídeos dentro.
+   */
+  const frente = useRef(20);
+  const cogerReel = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    const el = e.currentTarget;
+    const inicioX = e.clientX;
+    const inicioY = e.clientY;
+    const baseX = Number(el.dataset.dx ?? 0);
+    const baseY = Number(el.dataset.dy ?? 0);
+    let arrastrando = false;
+
+    frente.current += 1;
+    el.style.zIndex = String(frente.current);
+    el.setPointerCapture(e.pointerId);
+
+    const mover = (ev: PointerEvent) => {
+      const dx = baseX + (ev.clientX - inicioX);
+      const dy = baseY + (ev.clientY - inicioY);
+      if (!arrastrando && Math.hypot(ev.clientX - inicioX, ev.clientY - inicioY) < 3) return;
+      arrastrando = true;
+      el.classList.add("dk-baraja-reel--cogido");
+      el.dataset.dx = String(dx);
+      el.dataset.dy = String(dy);
+      el.style.setProperty("--dx", `${dx}px`);
+      el.style.setProperty("--dy", `${dy}px`);
+    };
+
+    const soltar = (ev: PointerEvent) => {
+      el.releasePointerCapture(ev.pointerId);
+      el.classList.remove("dk-baraja-reel--cogido");
+      el.removeEventListener("pointermove", mover);
+      el.removeEventListener("pointerup", soltar);
+      el.removeEventListener("pointercancel", soltar);
+    };
+
+    el.addEventListener("pointermove", mover);
+    el.addEventListener("pointerup", soltar);
+    el.addEventListener("pointercancel", soltar);
+  }, []);
+
   const precargado = useRef(false);
   useEffect(() => {
     if (precargado.current || indice < 1) return;

@@ -105,20 +105,42 @@ export const DUDAS = [
 ];
 
 /**
- * Piezas que se le enseñan a José. Elegidas por variedad de sector y de plano,
- * no por afinidad: no hemos rodado ningún despacho todavía, así que lo que
- * demuestra el trabajo es el oficio, no el parecido.
+ * Los cinco reels de la portada, que se pueden arrastrar.
  *
- * Mantis va primera a propósito: es el cliente de la presentación que Jandro
+ * Van aparte de los de la tira y sin repetir ninguno: entre las dos
+ * diapositivas se enseñan once marcas distintas, que es lo que demuestra
+ * catálogo. Repetir el mismo reel dos veces demuestra lo contrario.
+ *
+ * Se cargan con prioridad porque están en la primera pantalla, así que aquí
+ * pesan los más ligeros: 2,3 MB los cinco.
+ */
+export const PORTADA = [
+  "te-pone",
+  "gran-tonino",
+  "pigili-originals",
+  "canallita",
+  "ultramarinos-marin",
+];
+
+/**
+ * Las seis piezas de la diapositiva de trabajo: un sector distinto cada una.
+ *
+ * Antes había dos de gastronomía y dos de moda, y de lejos parecían la misma
+ * marca repetida. Ahora van gastronomía, moda, ocio nocturno, música,
+ * lifestyle y alimentación: se ve de un vistazo que el oficio es el mismo en
+ * seis mundos distintos, que es justo el argumento para un despacho que sería
+ * el séptimo.
+ *
+ * Mantis va la primera a propósito: es el cliente de la presentación que Jandro
  * puso como referencia.
  */
 export const MUESTRA = [
   "mantis",
-  "canallita",
-  "burmet",
-  "macala",
-  "gota",
+  "aluxe",
+  "fortuna-tonino",
   "besmaya",
+  "mimosas",
+  "jansana",
 ];
 
 /** El mes de trabajo, contado semana a semana. */

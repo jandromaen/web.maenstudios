@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import DefendoorDeck from "./DefendoorDeck";
 import { clients, type Client } from "../../clients";
-import { MUESTRA } from "./propuesta";
+import { MUESTRA, PORTADA } from "./propuesta";
 import "./deck.css";
 
 /**
@@ -19,9 +19,12 @@ export const metadata: Metadata = {
 };
 
 export default function PropuestaDefendoor() {
-  const muestra = MUESTRA.map((slug) =>
-    clients.find((c) => c.slug === slug),
-  ).filter((c): c is Client => Boolean(c?.previewVideo));
+  const resolver = (slugs: readonly string[]) =>
+    slugs
+      .map((slug) => clients.find((c) => c.slug === slug))
+      .filter((c): c is Client => Boolean(c?.previewVideo));
 
-  return <DefendoorDeck muestra={muestra} />;
+  return (
+    <DefendoorDeck muestra={resolver(MUESTRA)} portada={resolver(PORTADA)} />
+  );
 }

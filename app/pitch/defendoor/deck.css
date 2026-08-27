@@ -34,6 +34,14 @@
 }
 
 .dk-anim {
+  /* Por encima de las zonas de clic. La animación de entrada crea un contexto
+     de apilamiento aquí, así que cualquier z-index de dentro queda encerrado:
+     hay que elevar esta caja, no la de dentro.
+
+     Solo cubre el ancho del contenido, no la pantalla: a los lados siguen
+     quedando márgenes libres donde las zonas pasan diapositiva. */
+  position: relative;
+  z-index: 3;
   width: 100%;
   max-width: 1180px;
   max-height: 100%;
@@ -197,14 +205,93 @@
   display: block;
 }
 
-/* El del medio manda: rompe la fila de tres iguales */
-@media (min-width: 900px) {
-  .dk-reels--tres .dk-reel:nth-child(2) {
-    transform: translateY(-24px) scale(1.06);
-  }
-  .dk-reels--tres .dk-reel:nth-child(3) {
-    transform: translateY(16px);
-  }
+/* ── Baraja de la portada ────────────────────────────────────────────────
+   Cinco reels superpuestos que se cogen y se quedan donde se sueltan. Además
+   de verse mejor que una fila ordenada, hace que el cliente toque algo antes
+   de que le enseñemos un solo dato. */
+.dk-baraja {
+  position: relative;
+  /* Anchura explícita, no max-width con márgenes automáticos: todos los reels
+     van en posición absoluta, así que este contenedor no tiene contenido en
+     flujo y los márgenes automáticos lo encogían a cero. Se veían los vídeos
+     —salen del flujo— pero la caja no existía para el puntero. */
+  width: min(100%, 520px);
+  margin-inline: auto;
+  /* Por encima de las zonas de clic (z 2), que ocupan el 26% de cada lado y
+     caían justo sobre la baraja: sin esto el arrastre no llega a engancharse
+     porque el evento lo captura la zona de «siguiente». */
+  z-index: 3;
+  aspect-ratio: 1 / 1;
+  touch-action: none;
+}
+
+.dk-baraja-reel {
+  position: absolute;
+  width: 42%;
+  /* La proporción va aquí y no solo en el hijo: un elemento absoluto no toma
+     altura de un hijo que la deriva de aspect-ratio, y la caja se quedaba en
+     0x0 —invisible al puntero aunque el vídeo se viera—. */
+  aspect-ratio: 9 / 16;
+  left: 50%;
+  top: 50%;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+  transform:
+    translate(-50%, -50%)
+    translate(var(--dx, 0px), var(--dy, 0px))
+    translate(var(--x), var(--y))
+    rotate(var(--r));
+  transition: box-shadow 0.25s ease;
+}
+
+/* Reparto inicial: rotaciones y desplazamientos irregulares a propósito.
+   Una baraja perfectamente escalonada se lee como una plantilla. */
+.dk-baraja-reel[data-pos="0"] { --x: -78px; --y: -54px; --r: -8deg; z-index: 3; }
+.dk-baraja-reel[data-pos="1"] { --x:  74px; --y: -70px; --r:  6deg; z-index: 2; }
+.dk-baraja-reel[data-pos="2"] { --x:   4px; --y:   6px; --r: -2deg; z-index: 5; width: 46%; }
+.dk-baraja-reel[data-pos="3"] { --x: -86px; --y:  72px; --r:  9deg; z-index: 4; }
+.dk-baraja-reel[data-pos="4"] { --x:  80px; --y:  62px; --r: -6deg; z-index: 1; }
+
+.dk-baraja-reel .dk-reel {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
+  /* El vídeo no captura el puntero: si lo hiciera, el arrastre se perdería en
+     cuanto el cursor pasara por encima de él. */
+  pointer-events: none;
+}
+
+.dk-baraja-reel:hover .dk-reel {
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.62);
+}
+
+.dk-baraja-reel--cogido {
+  cursor: grabbing;
+}
+
+.dk-baraja-reel--cogido .dk-reel {
+  box-shadow: 0 36px 80px rgba(0, 0, 0, 0.72);
+}
+
+.dk-baraja-pista {
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* En táctil el arrastre pelearía con el paso de diapositiva */
+@media (pointer: coarse) {
+  .dk-baraja-reel { cursor: default; }
+  .dk-baraja-pista { display: none; }
 }
 
 .dk-reel-item { margin: 0; }
