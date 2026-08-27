@@ -215,7 +215,7 @@
      van en posición absoluta, así que este contenedor no tiene contenido en
      flujo y los márgenes automáticos lo encogían a cero. Se veían los vídeos
      —salen del flujo— pero la caja no existía para el puntero. */
-  width: min(100%, 520px);
+  width: min(100%, 560px);
   margin-inline: auto;
   /* Por encima de las zonas de clic (z 2), que ocupan el 26% de cada lado y
      caían justo sobre la baraja: sin esto el arrastre no llega a engancharse
@@ -227,7 +227,7 @@
 
 .dk-baraja-reel {
   position: absolute;
-  width: 42%;
+  width: 39%;
   /* La proporción va aquí y no solo en el hijo: un elemento absoluto no toma
      altura de un hijo que la deriva de aspect-ratio, y la caja se quedaba en
      0x0 —invisible al puntero aunque el vídeo se viera—. */
@@ -247,11 +247,14 @@
 
 /* Reparto inicial: rotaciones y desplazamientos irregulares a propósito.
    Una baraja perfectamente escalonada se lee como una plantilla. */
-.dk-baraja-reel[data-pos="0"] { --x: -78px; --y: -54px; --r: -8deg; z-index: 3; }
-.dk-baraja-reel[data-pos="1"] { --x:  74px; --y: -70px; --r:  6deg; z-index: 2; }
-.dk-baraja-reel[data-pos="2"] { --x:   4px; --y:   6px; --r: -2deg; z-index: 5; width: 46%; }
-.dk-baraja-reel[data-pos="3"] { --x: -86px; --y:  72px; --r:  9deg; z-index: 4; }
-.dk-baraja-reel[data-pos="4"] { --x:  80px; --y:  62px; --r: -6deg; z-index: 1; }
+/* La posición 0 es la del frente, y de ahí hacia atrás. El orden del array
+   coincide con el orden visual a propósito: si no, reordenar la lista da un
+   resultado que no se parece a lo que uno espera. */
+.dk-baraja-reel[data-pos="0"] { --x:    0px; --y:   0px; --r: -2deg; z-index: 5; width: 44%; }
+.dk-baraja-reel[data-pos="1"] { --x: -128px; --y:  56px; --r:  9deg; z-index: 4; }
+.dk-baraja-reel[data-pos="2"] { --x:  126px; --y: -48px; --r:  6deg; z-index: 3; }
+.dk-baraja-reel[data-pos="3"] { --x: -116px; --y: -72px; --r: -8deg; z-index: 2; }
+.dk-baraja-reel[data-pos="4"] { --x:  118px; --y:  78px; --r: -6deg; z-index: 1; }
 
 .dk-baraja-reel .dk-reel {
   width: 100%;

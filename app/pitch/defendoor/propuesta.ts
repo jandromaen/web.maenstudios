@@ -203,13 +203,11 @@ export const DUDAS = [
  * pesan los más ligeros: 2,3 MB los cinco.
  */
 export const PORTADA = [
+  "ultramarinos-marin",
+  "mantis",
+  "focacha",
   "te-pone",
   "gran-tonino",
-  "pigili-originals",
-  "ultramarinos-marin",
-  /* Canallita va la última a propósito: esa posición es la que queda más
-     abajo y detrás de todas en el apilamiento de la baraja. */
-  "canallita",
 ];
 
 /**
@@ -225,7 +223,7 @@ export const PORTADA = [
  * puso como referencia.
  */
 export const MUESTRA = [
-  "mantis",
+  "burmet",
   "aluxe",
   "fortuna-tonino",
   "besmaya",
