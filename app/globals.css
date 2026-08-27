@@ -3063,6 +3063,18 @@ section {
   .campo-select-flecha { transition: none; }
 }
 
+/* Sobre fondo claro, una sombra al 40% se ve como un manchón. El panel blanco
+   ya se separa con su propio filete, así que aquí basta con insinuarla. */
+[data-theme="light"] .campo-select-lista {
+  box-shadow: 0 14px 30px rgba(37, 36, 34, 0.14);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .campo-select-lista {
+    box-shadow: 0 14px 30px rgba(37, 36, 34, 0.14);
+  }
+}
+
 .campo-select-opcion {
   padding: 12px 16px;
   font-size: 0.95rem;

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { EMAIL_PROJECTS, PRESUPUESTOS } from "../site-data";
 import { trackEvent } from "../lib/consent";
+import SelectField from "./SelectField";
 
 type Status = "idle" | "sending" | "error";
 
@@ -124,17 +125,12 @@ export default function ContactForm({ origen = "web" }: { origen?: string }) {
           Tampoco es obligatoria. Un presupuesto forzado en el primer contacto
           hace que la gente se invente una cifra o cierre la pestaña, y las dos
           cosas son peores que no saberlo. */}
-      <label>
-        Presupuesto estimado
-        <select name="presupuesto" defaultValue="">
-          <option value="">Prefiero no decirlo</option>
-          {PRESUPUESTOS.map((tramo) => (
-            <option key={tramo} value={tramo}>
-              {tramo}
-            </option>
-          ))}
-        </select>
-      </label>
+      <SelectField
+        name="presupuesto"
+        label="Presupuesto estimado"
+        placeholder="Prefiero no decirlo"
+        options={PRESUPUESTOS}
+      />
 
       {/* Honeypot antispam: invisible para personas, tentador para bots */}
       <div className="hp-field" aria-hidden="true">
