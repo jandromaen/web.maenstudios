@@ -47,10 +47,14 @@ export default function SelectField({
   const id = useId();
   const idLista = `${id}-lista`;
 
-  /* Todas las opciones incluyen la de no responder, que es la primera y
-     equivale a dejar el campo vacío. */
-  const todas = [placeholder, ...options];
-  const indiceDeValor = valor ? todas.indexOf(valor) : 0;
+  /* El marcador de posición ya no es una opción de la lista: solo es lo que
+     se lee en el campo mientras no se ha elegido nada. La lista son los
+     tramos y nada más.
+
+     El campo sigue sin ser obligatorio: quien no quiera contestar no lo abre,
+     y quien lo abra y no lo tenga claro tiene su tramo para decirlo. */
+  const todas = options;
+  const indiceDeValor = valor ? todas.indexOf(valor) : -1;
 
   useEffect(() => {
     if (!abierto) return;
@@ -78,14 +82,14 @@ export default function SelectField({
     setActiva(limitado);
   };
 
-  const abrir = (desde = indiceDeValor) => {
+  const abrir = (desde = indiceDeValor >= 0 ? indiceDeValor : 0) => {
     situar(desde);
     setAbierto(true);
   };
 
   const elegir = (indice: number = activaRef.current) => {
-    /* El marcador de posición no es una opción: elegirlo es vaciar el campo. */
-    setValor(indice === 0 ? "" : todas[indice]);
+    if (indice < 0 || indice >= todas.length) return;
+    setValor(todas[indice]);
     setAbierto(false);
     boton.current?.focus();
   };

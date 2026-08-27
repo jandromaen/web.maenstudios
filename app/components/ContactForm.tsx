@@ -128,7 +128,7 @@ export default function ContactForm({ origen = "web" }: { origen?: string }) {
       <SelectField
         name="presupuesto"
         label="Presupuesto estimado"
-        placeholder="Prefiero no decirlo"
+        placeholder="Selecciona un tramo"
         options={PRESUPUESTOS}
       />
 
