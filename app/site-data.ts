@@ -28,6 +28,23 @@ export const PRESUPUESTOS = [
   "Aún no lo tengo claro",
 ] as const;
 
+/**
+ * Dónde puede grabar un creador. Va aquí por lo mismo que los tramos de
+ * presupuesto: es una decisión de negocio —dónde hay rodajes— y no de
+ * maquetación.
+ *
+ * «En remoto» no sobra: buena parte del UGC se graba en casa del creador con
+ * el producto enviado por correo, así que la ciudad no siempre importa.
+ */
+export const CIUDADES_CREADOR = [
+  "Barcelona",
+  "Madrid",
+  "Área metropolitana de Barcelona",
+  "Comunidad de Madrid",
+  "Otra ciudad de España",
+  "En remoto, desde donde esté",
+] as const;
+
 export const navLinks = [
   { label: "Work", href: "/clientes" },
   { label: "Services", href: "/servicios" },

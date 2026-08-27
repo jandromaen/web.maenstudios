@@ -35,9 +35,11 @@ type ContactPayload = {
   telefono?: string;
   comentarios?: string;
   presupuesto?: string;
-  /* Solo los manda el formulario del podcast; el de contacto no los tiene. */
+  /* Los mandan los formularios del podcast y de creadores; el de contacto no. */
   proyecto?: string;
   enlace?: string;
+  ciudad?: string;
+  redes?: string;
   origen?: string;
   /** Honeypot: si viene relleno, es un bot */
   empresa?: string;
@@ -71,9 +73,6 @@ export async function POST(request: Request) {
   const comentarios = (payload.comentarios ?? "").trim();
   const origen = (payload.origen ?? "web").trim();
 
-  /* Solo se acepta uno de los tramos que ofrece el formulario. El campo llega
-     por HTTP y cualquiera puede mandar lo que quiera: sin esta comprobación,
-     el correo se convierte en un hueco donde escribir texto arbitrario. */
   /* Campo libre: se recorta a una longitud razonable. Nadie escribe su marca
      en 2.000 caracteres, así que un valor largo es basura o un intento de
      inflar el correo. */
@@ -83,9 +82,16 @@ export async function POST(request: Request) {
   const proyecto = recortar(payload.proyecto, 200);
   const enlace = recortar(payload.enlace, 200);
 
+  /* Solo se acepta uno de los tramos que ofrece el formulario. El campo llega
+     por HTTP y cualquiera puede mandar lo que quiera: sin esta comprobación,
+     el correo se convierte en un hueco donde escribir texto arbitrario. */
   /* Una candidatura al podcast y una petición de presupuesto no se leen igual
      ni se contestan igual: conviene distinguirlas desde el asunto. */
   const esPodcast = origen.startsWith("podcast");
+  const esTalento = origen.startsWith("talents");
+
+  const ciudad = recortar(payload.ciudad, 120);
+  const redes = recortar(payload.redes, 120);
 
   const enviado = (payload.presupuesto ?? "").trim();
   const presupuesto = (PRESUPUESTOS as readonly string[]).includes(enviado)
@@ -128,15 +134,21 @@ export async function POST(request: Request) {
           ["A qué se dedica", proyecto || "—"],
           ["Instagram o web", enlace || "—"],
         ] as [string, string][])
-      : ([["Presupuesto", presupuesto || "No lo ha indicado"]] as [
-          string,
-          string,
-        ][])),
+      : esTalento
+        ? ([
+            ["Redes", redes || "—"],
+            ["Dónde puede grabar", ciudad || "—"],
+            ["Su trabajo", enlace || "—"],
+          ] as [string, string][])
+        : ([["Presupuesto", presupuesto || "No lo ha indicado"]] as [
+            string,
+            string,
+          ][])),
     ["Origen", origen],
   ];
 
   const html = `
-    <h2 style="font-family:sans-serif">${esPodcast ? "Quiere salir en el podcast" : "Nuevo contacto desde la web"}</h2>
+    <h2 style="font-family:sans-serif">${esPodcast ? "Quiere salir en el podcast" : esTalento ? "Quiere entrar en la red de creadores" : "Nuevo contacto desde la web"}</h2>
     <table style="font-family:sans-serif;border-collapse:collapse">
       ${rows
         .map(
@@ -145,7 +157,7 @@ export async function POST(request: Request) {
         )
         .join("")}
     </table>
-    <h3 style="font-family:sans-serif">${esPodcast ? "De qué quiere hablar" : "Proyecto"}</h3>
+    <h3 style="font-family:sans-serif">${esPodcast ? "De qué quiere hablar" : esTalento ? "Qué tipo de contenido hace" : "Proyecto"}</h3>
     <p style="font-family:sans-serif;white-space:pre-wrap">${escapeHtml(comentarios) || "(sin detalles)"}</p>
   `;
 
@@ -159,7 +171,9 @@ export async function POST(request: Request) {
          entrada, sin abrir el correo. */
       subject: esPodcast
         ? `Podcast — ${fullName || "Propuesta de invitado"}`
-        : presupuesto
+        : esTalento
+          ? `Creador UGC — ${fullName || "Candidatura"}`
+          : presupuesto
           ? `Nuevo proyecto — ${fullName || "Contacto web"} · ${presupuesto}`
           : `Nuevo proyecto — ${fullName || "Contacto web"}`,
       html,
@@ -169,7 +183,13 @@ export async function POST(request: Request) {
         `Teléfono: ${telefono || "—"}`,
         ...(esPodcast
           ? [`A qué se dedica: ${proyecto || "—"}`, `Instagram o web: ${enlace || "—"}`]
-          : [`Presupuesto: ${presupuesto || "No lo ha indicado"}`]),
+          : esTalento
+            ? [
+                `Redes: ${redes || "—"}`,
+                `Dónde puede grabar: ${ciudad || "—"}`,
+                `Su trabajo: ${enlace || "—"}`,
+              ]
+            : [`Presupuesto: ${presupuesto || "No lo ha indicado"}`]),
         `Origen: ${origen}`,
         "",
         comentarios,

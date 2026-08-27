@@ -7,6 +7,7 @@ import Statement from "../components/Statement";
 import { BreadcrumbJsonLd } from "../components/JsonLd";
 import { createPageMetadata } from "../seo-config";
 import { HeroReels } from "../components/HeroMedia";
+import TalentForm from "../components/TalentForm";
 import { reelsDeHero } from "../clients";
 
 export const metadata: Metadata = createPageMetadata({
@@ -187,13 +188,31 @@ export default function TalentsPage() {
               escríbenos y te incorporamos a la red.
             </p>
             <div className="hero-actions">
-              <Link className="btn btn-primary" href="/contacto">
-                Escríbenos
+              {/* Antes llevaba a /contacto, donde a un creador se le pregunta
+                  su presupuesto: la pregunta equivocada a la persona
+                  equivocada. */}
+              <Link className="btn btn-primary" href="#red-de-creadores">
+                Entrar en la red
               </Link>
               <Link className="btn btn-ghost" href="/clientes">
                 Ver marcas
               </Link>
             </div>
+          </div>
+        </section>
+
+        <section className="page-section" id="red-de-creadores">
+          <div className="container container-narrow">
+            <div className="section-head">
+              <span className="eyebrow">Candidatura</span>
+              <h2>Enséñanos cómo grabas</h2>
+              <p>
+                Trabajamos con creadores para campañas de UGC de marcas de
+                restauración, moda, producto y lifestyle. Cuando entra una
+                campaña que encaja con tu perfil, te escribimos.
+              </p>
+            </div>
+            <TalentForm />
           </div>
         </section>
       </main>
