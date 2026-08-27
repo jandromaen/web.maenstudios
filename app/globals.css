@@ -320,16 +320,12 @@ button,
   filter: brightness(0);
 }
 
-/* El logo del PNG es blanco y el cajón usa el fondo invertido, que con el tema
-   oscuro es claro: ahí el logo hay que pasarlo a negro. Con el tema claro el
-   cajón sale oscuro y el blanco original ya vale. */
+/* El logo del PNG es blanco y el cajón es claro en los dos temas, así que
+   siempre hay que pasarlo a negro. Antes había una excepción para el tema
+   claro, de cuando el cajón se ponía oscuro ahí; ya no. */
 .brand-logo-drawer {
   height: 22px;
   filter: brightness(0);
-}
-
-[data-theme="light"] .brand-logo-drawer {
-  filter: none;
 }
 
 .brand-wordmark {
@@ -416,6 +412,27 @@ button,
 
 .nav-drawer.open {
   transform: translateY(0);
+}
+
+/* Con el tema claro el cajón se abría en negro: usa los tokens invertidos, e
+   invertir sobre claro da oscuro. Quien elige el tema blanco espera un menú
+   blanco con las letras en negro, no justo lo contrario.
+
+   Se redefinen los tokens dentro del propio cajón en vez de reescribir sus
+   reglas una por una: así el logo, los enlaces, el botón de cerrar y todo lo
+   que ya usa --invert-* se adapta solo, y el cajón queda claro con tinta
+   oscura en los dos temas. */
+[data-theme="light"] .nav-drawer {
+  /* Los mismos valores que usa el cajón con el tema oscuro, a propósito y no
+     por descuido: así el menú es idéntico en los dos temas —panel claro,
+     tinta negra— en vez de tener dos personalidades.
+
+     No se reutiliza --muted del tema claro porque es bastante más flojo
+     (#6b6a67) y las letras salían grises. La tinta al 62% es la que ya se ve
+     en el otro tema. */
+  --invert-bg: #f4f4f4;
+  --invert-fg: #151515;
+  --invert-muted: rgba(21, 21, 21, 0.62);
 }
 
 .nav-drawer-top {
