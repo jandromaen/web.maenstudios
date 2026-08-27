@@ -335,38 +335,73 @@
 .dk-lista--compacta { margin-top: 26px; }
 .dk-lista--compacta li { padding: 12px 0 12px 30px; font-size: 0.98rem; }
 
-/* ── Cifras ─────────────────────────────────────────────────────────────── */
+/* ── Cifras ─────────────────────────────────────────────────────────────
+   Antes eran cuatro números sueltos en una fila: se leían pero no decían
+   nada. Ahora cada uno lleva debajo qué significa en la práctica, y hay
+   jerarquía: la primera cifra es el compromiso que se compra, y la de las
+   horas es la que quita el miedo, así que se destaca. */
 .dk-cifras {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
+  margin-top: 26px;
 }
 
-@media (min-width: 800px) {
-  .dk-cifras { grid-template-columns: repeat(4, 1fr); }
+@media (min-width: 820px) {
+  .dk-cifras {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .dk-cifra-grande {
+    grid-column: span 2;
+  }
+  /* Cierra la rejilla: sin esto la fila de abajo dejaba una celda vacía y el
+     bloque parecía inacabado. */
+  .dk-cifra-destacada {
+    grid-column: span 2;
+  }
 }
 
 .dk-cifras > div {
   background: var(--bg);
-  padding: clamp(26px, 4vw, 50px) clamp(20px, 2.6vw, 32px);
+  padding: clamp(22px, 3vw, 34px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* La cifra que quita el miedo: un despacho no teme el precio, teme el tiempo */
+.dk-cifra-destacada {
+  background: var(--bg-soft) !important;
 }
 
 .dk-cifras strong {
-  display: block;
   font-family: var(--font-heading);
-  font-size: clamp(42px, 6.5vw, 76px);
-  line-height: 1;
+  font-size: clamp(40px, 5.4vw, 66px);
+  line-height: 0.95;
   letter-spacing: -0.035em;
-  margin-bottom: 12px;
   font-variant-numeric: tabular-nums;
 }
 
-.dk-cifras span {
-  font-size: 0.9rem;
+.dk-cifra-grande strong {
+  font-size: clamp(60px, 9vw, 118px);
+}
+
+.dk-cifra-que {
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.25;
+  color: var(--fg);
+}
+
+.dk-cifra-grande .dk-cifra-que {
+  font-size: clamp(18px, 2.2vw, 24px);
+}
+
+.dk-cifra-nota {
+  font-size: 0.84rem;
+  line-height: 1.45;
   color: var(--muted);
-  line-height: 1.4;
+  margin-top: 2px;
 }
 
 /* ── Cita ───────────────────────────────────────────────────────────────── */

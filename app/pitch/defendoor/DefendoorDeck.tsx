@@ -129,18 +129,37 @@ export default function DefendoorDeck({
       id: "cifras",
       titulo: "El pack en cuatro cifras",
       render: () => (
-        <div className="dk-cifras">
-          {[
-            [String(PACK.piezasSemana), "vídeos cada semana"],
-            [String(PACK.jornadasMes), `jornada de rodaje al mes`],
-            [String(PACK.canales.length), "canales gestionados"],
-            ["2 h", "de vuestro tiempo al mes"],
-          ].map(([n, t]) => (
-            <div key={t}>
-              <strong>{n}</strong>
-              <span>{t}</span>
+        <div className="dk-centro dk-centro--ancho">
+          <h2>El pack, en cuatro cifras</h2>
+          <div className="dk-cifras">
+            {/* La primera manda: es el compromiso que de verdad se compra */}
+            <div className="dk-cifra-grande">
+              <strong>{PACK.piezasSemana}</strong>
+              <span className="dk-cifra-que">vídeos cada semana</span>
+              <span className="dk-cifra-nota">
+                Uno cada dos días laborables, sin parar en agosto
+              </span>
             </div>
-          ))}
+            <div>
+              <strong>{PACK.jornadasMes}</strong>
+              <span className="dk-cifra-que">jornada de rodaje al mes</span>
+              <span className="dk-cifra-nota">
+                En vuestras oficinas de {CLIENTE.ciudad}
+              </span>
+            </div>
+            <div>
+              <strong>{PACK.canales.length}</strong>
+              <span className="dk-cifra-que">canales gestionados</span>
+              <span className="dk-cifra-nota">{PACK.canales.join(", ")}</span>
+            </div>
+            <div className="dk-cifra-destacada">
+              <strong>{PACK.horasMes} h</strong>
+              <span className="dk-cifra-que">de vuestro tiempo al mes</span>
+              <span className="dk-cifra-nota">
+                Una de briefing y tres de rodaje. Lo demás es nuestro
+              </span>
+            </div>
+          </div>
         </div>
       ),
     },

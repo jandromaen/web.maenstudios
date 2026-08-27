@@ -31,6 +31,8 @@ export const PACK = {
   piezasSemana: 3,
   piezasMes: 12,
   jornadasMes: 1,
+  /** Una hora de briefing y tres de rodaje. Es todo lo que les pedimos. */
+  horasMes: 4,
   canales: ["Instagram", "Facebook", "YouTube"],
   /** ⚠️ Sin confirmar por Jandro */
   precioMes: 1890,
