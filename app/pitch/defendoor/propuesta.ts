@@ -96,3 +96,48 @@ export const DUDAS = [
     a: `Los tres primeros meses son el compromiso mínimo: antes de ese plazo no hay datos suficientes para saber si funciona. A partir del cuarto, un mes de preaviso y sin penalización.`,
   },
 ];
+
+/**
+ * Piezas que se le enseñan a José. Elegidas por variedad de sector y de plano,
+ * no por afinidad: no hemos rodado ningún despacho todavía, así que lo que
+ * demuestra el trabajo es el oficio, no el parecido.
+ *
+ * Mantis va primera a propósito: es el cliente de la presentación que Jandro
+ * puso como referencia.
+ */
+export const MUESTRA = [
+  "mantis",
+  "canallita",
+  "burmet",
+  "macala",
+  "gota",
+  "besmaya",
+];
+
+/** El mes de trabajo, contado semana a semana. */
+export const MES = [
+  {
+    semana: "01",
+    titulo: "Reunión y guiones",
+    texto:
+      "Una hora con vosotros para sacar las preguntas que más os repiten. Salimos con las doce piezas del mes escritas.",
+  },
+  {
+    semana: "02",
+    titulo: "Primera jornada",
+    texto:
+      "Vamos a Granollers y rodamos seis piezas. Unas dos horas de vuestro abogado, no más.",
+  },
+  {
+    semana: "03",
+    titulo: "Publicación y segunda jornada",
+    texto:
+      "Empiezan a salir los primeros vídeos mientras rodamos las seis restantes.",
+  },
+  {
+    semana: "04",
+    titulo: "Números y ajuste",
+    texto:
+      "Qué se ha visto, qué se ha guardado y qué preguntas ha traído. Con eso se escribe el mes siguiente.",
+  },
+];

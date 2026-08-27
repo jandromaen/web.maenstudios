@@ -1,25 +1,40 @@
 /* ==========================================================================
    Propuesta para Defendoor Abogados
 
-   Hereda los colores y las tipografías de la web —es un documento nuestro,
-   no una marca aparte— pero se compone como un documento y no como una
-   landing: una columna, medida de lectura corta y aire entre bloques.
-   Todo cuelga de .dfd para no tocar nada del resto del sitio.
+   Hereda colores y tipografías de la web —es un documento nuestro, no una
+   marca aparte— pero se compone como una presentación: bloques a sangre,
+   vídeo grande y cifras que se leen desde lejos. Todo cuelga de .dfd.
    ========================================================================== */
 
 .dfd {
-  padding: clamp(56px, 9vw, 110px) 24px clamp(80px, 12vw, 140px);
+  --dfd-max: 1160px;
+  --dfd-lectura: 62ch;
+  overflow-x: hidden;
 }
 
 .dfd-wrap {
-  max-width: 760px;
+  max-width: var(--dfd-max);
   margin: 0 auto;
+  padding: 0 24px;
 }
 
-/* ── Cabecera ───────────────────────────────────────────────────────────── */
-.dfd-hero {
-  padding-bottom: clamp(36px, 6vw, 56px);
-  border-bottom: 1px solid var(--line);
+/* ── Portada ────────────────────────────────────────────────────────────
+   Vídeo desde el primer pixel: a alguien que va a pagar por producción
+   audiovisual se le enseña, no se le cuenta. */
+.dfd-portada {
+  max-width: var(--dfd-max);
+  margin: 0 auto;
+  padding: clamp(48px, 8vw, 96px) 24px clamp(40px, 6vw, 72px);
+  display: grid;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .dfd-portada {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
 }
 
 .dfd-kicker {
@@ -28,38 +43,122 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 0 0 22px;
+  margin: 0 0 24px;
 }
 
 .dfd h1 {
   font-family: var(--font-heading);
-  font-size: clamp(30px, 5.2vw, 50px);
-  line-height: 1.06;
-  letter-spacing: -0.02em;
-  margin: 0 0 22px;
-  text-wrap: balance;
+  font-size: clamp(34px, 6.4vw, 68px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 0 0 26px;
+  display: grid;
+}
+
+/* Las dos últimas líneas bajan de peso visual: el titular se lee en dos
+   tiempos, primero la cifra y después la promesa. */
+.dfd-tenue {
+  color: var(--muted);
 }
 
 .dfd-lead {
-  font-size: clamp(17px, 2.1vw, 20px);
+  font-size: clamp(17px, 2vw, 20px);
   line-height: 1.55;
   color: var(--muted);
   margin: 0;
-  max-width: 58ch;
+  max-width: 46ch;
 }
 
-/* ── Secciones ──────────────────────────────────────────────────────────── */
+.dfd-portada-reels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.dfd-reel {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: var(--reel-radius);
+  background: var(--charcoal);
+}
+
+.dfd-reel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* El primero manda: rompe la fila de tres iguales y da profundidad */
+@media (min-width: 900px) {
+  .dfd-portada-reels .dfd-reel:nth-child(2) {
+    transform: translateY(-26px) scale(1.06);
+    z-index: 2;
+  }
+  .dfd-portada-reels .dfd-reel:nth-child(3) {
+    transform: translateY(18px);
+  }
+}
+
+/* ── Cifras a sangre ───────────────────────────────────────────────────── */
+.dfd-cifras {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 760px) {
+  .dfd-cifras {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dfd-cifras > div {
+  padding: clamp(24px, 3.4vw, 40px) 24px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .dfd-cifras > div {
+    border-bottom: none;
+  }
+  .dfd-cifras > div:last-child {
+    border-right: none;
+  }
+}
+
+.dfd-cifras strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(34px, 5vw, 54px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dfd-cifras span {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.4;
+  display: block;
+}
+
+/* ── Secciones de texto ─────────────────────────────────────────────────── */
 .dfd-sec {
-  padding: clamp(40px, 6vw, 64px) 0;
+  padding: clamp(48px, 7vw, 88px) 0;
   border-bottom: 1px solid var(--line-soft, var(--line));
 }
 
 .dfd h2 {
   font-family: var(--font-heading);
-  font-size: clamp(22px, 3vw, 30px);
-  line-height: 1.18;
-  letter-spacing: -0.015em;
-  margin: 0 0 20px;
+  font-size: clamp(24px, 3.6vw, 38px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px;
   text-wrap: balance;
 }
 
@@ -73,66 +172,203 @@
   margin: 0 0 14px;
 }
 
-.dfd p {
-  margin: 0 0 16px;
-  line-height: 1.68;
-  max-width: 62ch;
+.dfd-parrafo {
+  margin: 0 0 18px;
+  line-height: 1.7;
+  max-width: var(--dfd-lectura);
+  font-size: 1.02rem;
 }
 
-.dfd strong {
-  font-weight: 650;
+.dfd-sub {
+  color: var(--muted);
+  max-width: 58ch;
+  line-height: 1.6;
+  margin: 0 0 36px;
 }
 
 .dfd-nota {
   color: var(--muted);
   font-size: 0.94rem;
+  line-height: 1.6;
   border-left: 2px solid var(--line-strong);
-  padding-left: 16px;
-  margin-top: 22px !important;
+  padding-left: 18px;
+  margin: 26px 0 0;
+  max-width: var(--dfd-lectura);
 }
 
-/* El bloque del presentador es el que contesta su pregunta directa: se
-   separa del resto para que no se lea en diagonal. */
-.dfd-destacado {
-  background: var(--bg-soft);
-  margin: 0 calc(-1 * clamp(20px, 4vw, 40px));
-  padding-left: clamp(20px, 4vw, 40px);
-  padding-right: clamp(20px, 4vw, 40px);
-  border-bottom: none;
+/* La frase que resume la propuesta entera, tratada como tal */
+.dfd-cita {
+  font-family: var(--font-heading);
+  font-size: clamp(21px, 3vw, 32px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin: 34px 0;
+  padding-left: clamp(18px, 3vw, 28px);
+  border-left: 3px solid var(--fg);
+  max-width: 26ch;
 }
 
-/* ── Listas con marca ───────────────────────────────────────────────────── */
-.dfd-check {
+/* ── Listas ─────────────────────────────────────────────────────────────── */
+.dfd-pedido {
   list-style: none;
   padding: 0;
-  margin: 0 0 16px;
-  max-width: 62ch;
+  margin: 0;
+  display: grid;
+  gap: 0;
+  max-width: var(--dfd-lectura);
 }
 
-.dfd-check li {
+.dfd-pedido li {
   position: relative;
-  padding-left: 26px;
-  margin-bottom: 12px;
-  line-height: 1.6;
+  padding: 15px 0 15px 30px;
+  border-bottom: 1px solid var(--line);
+  line-height: 1.55;
 }
 
-.dfd-check li::before {
+.dfd-pedido li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.6em;
-  width: 10px;
+  top: 1.5em;
+  width: 14px;
   height: 1px;
   background: var(--fg);
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
-/* ── Bloques de lo que incluye ──────────────────────────────────────────── */
+/* ── Tira de trabajo real ───────────────────────────────────────────────
+   Sale del contenedor y se desborda a propósito: se arrastra en horizontal
+   como una hoja de contactos, en vez de encajarse en una rejilla. */
+.dfd-trabajo {
+  padding: clamp(48px, 7vw, 88px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.dfd-tira {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(190px, 232px);
+  gap: 14px;
+  overflow-x: auto;
+  padding: 4px 24px 20px;
+  max-width: var(--dfd-max);
+  margin: 0 auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dfd-tira-item {
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.dfd-tira-item figcaption {
+  padding-top: 12px;
+  display: grid;
+  gap: 2px;
+}
+
+.dfd-tira-item figcaption strong {
+  font-size: 0.94rem;
+}
+
+.dfd-tira-item figcaption span {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── El presentador ─────────────────────────────────────────────────────
+   Es la pregunta que hizo José. Va sobre fondo distinto para que no se lea
+   en diagonal con el resto. */
+.dfd-presentador {
+  background: var(--bg-soft);
+  padding: clamp(48px, 7vw, 90px) 0;
+}
+
+.dfd-respuesta {
+  display: grid;
+  gap: clamp(24px, 4vw, 48px);
+  margin: 8px 0 32px;
+}
+
+@media (min-width: 800px) {
+  .dfd-respuesta {
+    grid-template-columns: 1fr 1.3fr;
+  }
+}
+
+.dfd-si,
+.dfd-no {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+}
+
+.dfd-no {
+  color: var(--accent);
+}
+
+.dfd-pedido--claro li {
+  border-bottom-color: var(--line-strong);
+}
+
+/* ── El mes, semana a semana ────────────────────────────────────────────── */
+.dfd-mes {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 30px;
+}
+
+@media (min-width: 820px) {
+  .dfd-mes {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dfd-semana {
+  background: var(--bg);
+  padding: clamp(20px, 2.6vw, 28px);
+}
+
+.dfd-semana-num {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dfd-semana h3 {
+  font-family: var(--font-heading);
+  font-size: 1.06rem;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--fg);
+  margin: 0 0 10px;
+  font-weight: 650;
+}
+
+.dfd-semana p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* ── Qué incluye ────────────────────────────────────────────────────────── */
 .dfd-bloques {
   display: grid;
-  gap: 28px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  margin-top: 28px;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: 30px;
 }
 
 .dfd-bloque {
@@ -146,9 +382,9 @@
 }
 
 .dfd-bloque li {
-  margin-bottom: 10px;
+  margin-bottom: 11px;
   line-height: 1.55;
-  font-size: 0.96rem;
+  font-size: 0.94rem;
 }
 
 .dfd-bloque li::marker {
@@ -156,45 +392,62 @@
 }
 
 /* ── Precio ─────────────────────────────────────────────────────────────── */
+.dfd-precio-sec {
+  background: var(--bg-soft);
+  padding: clamp(48px, 7vw, 90px) 0;
+}
+
 .dfd-precio {
   border: 1px solid var(--line-strong);
-  padding: clamp(24px, 4vw, 36px);
-  margin-bottom: 24px;
+  background: var(--bg);
+  padding: clamp(28px, 4.4vw, 52px);
 }
 
 .dfd-cifra {
   font-family: var(--font-heading);
-  font-size: clamp(38px, 7vw, 62px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  margin-bottom: 26px;
+  font-size: clamp(52px, 11vw, 108px);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 6px;
 }
 
-.dfd-cifra span {
+.dfd-eur {
+  font-size: 0.6em;
+}
+
+.dfd-mes-lbl {
   font-family: var(--font-sans);
   font-size: 0.95rem;
   letter-spacing: 0;
   color: var(--muted);
-  margin-left: 10px;
+  margin-left: 12px;
+  align-self: center;
+}
+
+.dfd-porpieza {
+  color: var(--muted);
+  margin: 18px 0 30px;
+  max-width: 44ch;
+  line-height: 1.55;
 }
 
 .dfd-precio dl {
   margin: 0;
   display: grid;
-  gap: 14px;
+  gap: 0;
+  border-top: 1px solid var(--line);
 }
 
 .dfd-precio dl > div {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding-bottom: 12px;
+  padding: 14px 0;
   border-bottom: 1px solid var(--line);
-}
-
-.dfd-precio dl > div:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
 }
 
 .dfd-precio dt {
@@ -204,43 +457,14 @@
 
 .dfd-precio dd {
   margin: 0;
-  font-weight: 600;
+  font-weight: 650;
   text-align: right;
-}
-
-/* ── Pasos del primer mes ───────────────────────────────────────────────── */
-.dfd-pasos {
-  counter-reset: paso;
-  list-style: none;
-  padding: 0;
-  margin: 26px 0 0;
-  max-width: 62ch;
-}
-
-.dfd-pasos li {
-  counter-increment: paso;
-  position: relative;
-  padding-left: 44px;
-  margin-bottom: 22px;
-  line-height: 1.6;
-}
-
-.dfd-pasos li::before {
-  content: counter(paso, decimal-leading-zero);
-  position: absolute;
-  left: 0;
-  top: 0.1em;
-  font-family: var(--font-sans);
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
 }
 
 /* ── Dudas ──────────────────────────────────────────────────────────────── */
 .dfd-dudas {
-  margin-top: 24px;
-  max-width: 62ch;
+  margin-top: 26px;
+  max-width: var(--dfd-lectura);
 }
 
 .dfd-dudas details {
@@ -249,7 +473,7 @@
 
 .dfd-dudas summary {
   cursor: pointer;
-  padding: 18px 0;
+  padding: 19px 0;
   font-weight: 600;
   list-style: none;
   display: flex;
@@ -274,27 +498,28 @@
 }
 
 .dfd-dudas details p {
-  padding-bottom: 20px;
+  padding-bottom: 22px;
   margin: 0;
   color: var(--muted);
+  line-height: 1.65;
 }
 
 /* ── Cierre ─────────────────────────────────────────────────────────────── */
 .dfd-cierre {
-  padding-top: clamp(44px, 7vw, 72px);
+  padding: clamp(48px, 7vw, 88px) 0 clamp(60px, 9vw, 110px);
 }
 
 .dfd-acciones {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin: 26px 0 40px;
+  margin: 28px 0 44px;
 }
 
 .dfd-firma {
   color: var(--muted);
   font-size: 0.86rem;
   border-top: 1px solid var(--line);
-  padding-top: 22px;
-  margin: 0 !important;
+  padding-top: 24px;
+  margin: 0;
 }
