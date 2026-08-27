@@ -460,10 +460,24 @@ export function topByCommunity(n: number, { conReel = false } = {}): Client[] {
  * cuando dos páginas piden lo mismo.
  */
 const HERO_PREFERIDOS = {
-  clientes: ["mantis", "b-de-bocata", "focacha"],
-  servicios: ["canallita", "ultramarinos-marin", "macala"],
-  blog: ["hijos-de-javier", "gran-tonino", "macchina"],
-  talents: ["pigili-originals", "mimosas", "aluxe"],
+  clientes: { cuantos: 3, marcas: ["mantis", "b-de-bocata", "focacha"] },
+  servicios: {
+    cuantos: 3,
+    marcas: ["canallita", "ultramarinos-marin", "macala"],
+  },
+  /* El blog es el único que los enseña superpuestos, y con cinco la baraja se
+     lee como tal; con tres parecen tres reels mal colocados. */
+  blog: {
+    cuantos: 5,
+    marcas: [
+      "hijos-de-javier",
+      "gran-tonino",
+      "macchina",
+      "jansana",
+      "perritos-calientes",
+    ],
+  },
+  talents: { cuantos: 3, marcas: ["pigili-originals", "mimosas", "aluxe"] },
 } as const;
 
 export type PaginaConHero = keyof typeof HERO_PREFERIDOS;
@@ -473,10 +487,11 @@ const REPARTO_HERO: Record<PaginaConHero, string[]> = (() => {
   const salida = {} as Record<PaginaConHero, string[]>;
 
   for (const pagina of Object.keys(HERO_PREFERIDOS) as PaginaConHero[]) {
+    const { cuantos, marcas } = HERO_PREFERIDOS[pagina];
     const elegidos: string[] = [];
 
-    for (const slug of HERO_PREFERIDOS[pagina]) {
-      if (elegidos.length === 3) break;
+    for (const slug of marcas) {
+      if (elegidos.length === cuantos) break;
       const cliente = clients.find((c) => c.slug === slug);
       if (cliente?.previewVideo && !tomados.has(slug)) {
         elegidos.push(slug);
@@ -487,7 +502,7 @@ const REPARTO_HERO: Record<PaginaConHero, string[]> = (() => {
     /* Relleno: si una preferencia ya estaba cogida —o si esa marca se retira
        del portfolio— la terna se completa sola en vez de quedarse coja. */
     for (const cliente of clients) {
-      if (elegidos.length === 3) break;
+      if (elegidos.length === cuantos) break;
       if (!cliente.previewVideo || tomados.has(cliente.slug)) continue;
       elegidos.push(cliente.slug);
       tomados.add(cliente.slug);

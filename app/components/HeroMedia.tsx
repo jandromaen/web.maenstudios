@@ -12,13 +12,26 @@ export type HeroFrame = { src: string; alt: string };
  * contactos. Todos llevan póster, así que la tira ya está compuesta antes de
  * que baje un solo byte de vídeo.
  */
-export function HeroReels({ reels }: { reels: HeroReel[] }) {
+export function HeroReels({
+  reels,
+  apiladas = false,
+}: {
+  reels: HeroReel[];
+  /** Baraja superpuesta en vez de tira separada. Hoy solo la usa el blog. */
+  apiladas?: boolean;
+}) {
   return (
-    <div className="hero-media hero-reels" aria-hidden="true">
-      {reels.map((r) => (
+    <div
+      className={`hero-media hero-reels${apiladas ? " hero-reels--apiladas" : ""}`}
+      aria-hidden="true"
+    >
+      {reels.map((r, i) => (
         <div className="hero-reel" key={r.src}>
-          {/* Está en el primer pantallazo: carga desde el HTML, sin esperar a React */}
-          <LazyVideo src={r.src} poster={r.poster} priority />
+          {/* Los tres primeros están en el primer pantallazo: cargan desde el
+              HTML, sin esperar a React. Del cuarto en adelante —solo los hay en
+              la baraja del blog— se cargan al entrar en pantalla: van detrás,
+              medio tapados, y no compensa bajarlos antes de tiempo. */}
+          <LazyVideo src={r.src} poster={r.poster} priority={i < 3} />
         </div>
       ))}
     </div>

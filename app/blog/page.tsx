@@ -73,7 +73,7 @@ export default function BlogPage() {
                 ))}
               </div>
             </div>
-            <HeroReels reels={reelsDeHero("blog")} />
+            <HeroReels reels={reelsDeHero("blog")} apiladas />
           </div>
         </section>
 
