@@ -1,0 +1,552 @@
+/* ==========================================================================
+   Propuesta Defendoor · visor de diapositivas
+
+   Mismo modelo que el pitch de «Tornem a ser Barcelona»: ocupa la pantalla
+   entera, se avanza con flechas o pulsando a los lados, y hay barra de
+   progreso, contador y puntos. Todo cuelga de .dk.
+
+   La paleta sale de la web, no de una marca aparte: esto lo enseña Maen en
+   una llamada, y tiene que parecer nuestro.
+   ========================================================================== */
+
+.dk {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+  /* Por encima del banner de cookies (400) y del selector de tema. Esto es un
+     documento que se enseña en una llamada: si el banner tapa el contador y
+     las flechas, no se puede pasar de diapositiva delante del cliente.
+     Al quedar detrás, nadie acepta analítica en esta página — que es
+     justamente el comportamiento conservador. */
+  z-index: 500;
+  --dk-pad: clamp(28px, 5vw, 80px);
+}
+
+/* ── Escena ─────────────────────────────────────────────────────────────── */
+.dk-escena {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: calc(var(--dk-pad) + 20px) var(--dk-pad) calc(var(--dk-pad) + 44px);
+}
+
+.dk-anim {
+  width: 100%;
+  max-width: 1180px;
+  max-height: 100%;
+  overflow-y: auto;
+  /* Sin scrollbar visible: una diapositiva con barra parece una web */
+  scrollbar-width: none;
+}
+
+.dk-anim::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dk-anim--sig {
+    animation: dk-entra-sig 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .dk-anim--ant {
+    animation: dk-entra-ant 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes dk-entra-sig {
+  from { opacity: 0; transform: translateX(38px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes dk-entra-ant {
+  from { opacity: 0; transform: translateX(-38px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Tipografía común ───────────────────────────────────────────────────── */
+.dk h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 5.4vw, 64px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 0 0 24px;
+  display: grid;
+}
+
+.dk h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 4vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin: 0 0 26px;
+  text-wrap: balance;
+}
+
+.dk h3 {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.dk-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+
+.dk-tenue { color: var(--muted); }
+
+.dk-lead {
+  font-size: clamp(16px, 1.9vw, 20px);
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+  max-width: 44ch;
+}
+
+.dk-parrafo {
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.65;
+  margin: 0 0 18px;
+  max-width: 60ch;
+}
+
+.dk-pie {
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.6;
+  max-width: 56ch;
+  margin: 22px 0 0;
+}
+
+.dk-firma {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 40px 0 0;
+}
+
+/* ── Portada ────────────────────────────────────────────────────────────── */
+.dk-portada {
+  display: grid;
+  gap: clamp(28px, 4vw, 60px);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .dk-portada { grid-template-columns: 1.1fr 0.9fr; }
+}
+
+/* ── Diapositiva centrada ───────────────────────────────────────────────── */
+.dk-centro { max-width: 780px; }
+.dk-centro--ancho { max-width: 1000px; }
+
+/* ── Reels ──────────────────────────────────────────────────────────────── */
+.dk-reels { display: grid; gap: 10px; }
+.dk-reels--tres { grid-template-columns: repeat(3, 1fr); }
+
+.dk-reels--seis {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 26px;
+}
+
+@media (min-width: 820px) {
+  .dk-reels--seis { grid-template-columns: repeat(6, 1fr); }
+}
+
+.dk-reel {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: var(--reel-radius);
+  background: var(--charcoal);
+}
+
+.dk-reel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* El del medio manda: rompe la fila de tres iguales */
+@media (min-width: 900px) {
+  .dk-reels--tres .dk-reel:nth-child(2) {
+    transform: translateY(-24px) scale(1.06);
+  }
+  .dk-reels--tres .dk-reel:nth-child(3) {
+    transform: translateY(16px);
+  }
+}
+
+.dk-reel-item { margin: 0; }
+
+.dk-reel-item figcaption {
+  padding-top: 9px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+.dk-trabajo-txt { max-width: 62ch; }
+
+/* ── Listas ─────────────────────────────────────────────────────────────── */
+.dk-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 62ch;
+}
+
+.dk-lista li {
+  position: relative;
+  padding: 16px 0 16px 30px;
+  border-bottom: 1px solid var(--line);
+  line-height: 1.5;
+  font-size: clamp(15px, 1.7vw, 18px);
+}
+
+.dk-lista li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.55em;
+  width: 14px;
+  height: 1px;
+  background: var(--fg);
+  opacity: 0.45;
+}
+
+.dk-lista--compacta { margin-top: 26px; }
+.dk-lista--compacta li { padding: 12px 0 12px 30px; font-size: 0.98rem; }
+
+/* ── Cifras ─────────────────────────────────────────────────────────────── */
+.dk-cifras {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+@media (min-width: 800px) {
+  .dk-cifras { grid-template-columns: repeat(4, 1fr); }
+}
+
+.dk-cifras > div {
+  background: var(--bg);
+  padding: clamp(26px, 4vw, 50px) clamp(20px, 2.6vw, 32px);
+}
+
+.dk-cifras strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(42px, 6.5vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dk-cifras span {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ── Cita ───────────────────────────────────────────────────────────────── */
+.dk-cita {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 3.4vw, 40px);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin: 32px 0;
+  padding-left: clamp(18px, 2.6vw, 28px);
+  border-left: 3px solid var(--fg);
+  max-width: 24ch;
+}
+
+/* ── Dos columnas del presentador ───────────────────────────────────────── */
+.dk-dos {
+  display: grid;
+  gap: clamp(22px, 3.4vw, 44px);
+  margin-top: 6px;
+}
+
+@media (min-width: 820px) {
+  .dk-dos { grid-template-columns: 0.85fr 1.15fr; }
+}
+
+.dk-si,
+.dk-no {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+}
+
+.dk-no { color: var(--accent); }
+
+/* ── Bloques de «qué incluye» ───────────────────────────────────────────── */
+.dk-bloques {
+  display: grid;
+  gap: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+}
+
+.dk-bloques > div { border-top: 1px solid var(--line-strong); padding-top: 16px; }
+.dk-bloques ul { margin: 0; padding-left: 17px; }
+.dk-bloques li { margin-bottom: 9px; line-height: 1.5; font-size: 0.9rem; }
+.dk-bloques li::marker { color: var(--muted); }
+
+/* ── El mes ─────────────────────────────────────────────────────────────── */
+.dk-mes {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+@media (min-width: 820px) {
+  .dk-mes { grid-template-columns: repeat(4, 1fr); }
+}
+
+.dk-mes > div { background: var(--bg); padding: clamp(20px, 2.4vw, 28px); }
+
+.dk-sem {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dk-mes h3 {
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  font-weight: 650;
+  margin: 0 0 8px;
+}
+
+.dk-mes p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--muted); }
+
+/* ── Precio ─────────────────────────────────────────────────────────────── */
+.dk-precio { max-width: 720px; }
+
+.dk-cifra {
+  font-family: var(--font-heading);
+  font-size: clamp(64px, 13vw, 140px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 8px;
+}
+
+.dk-eur { font-size: 0.55em; }
+
+.dk-mes-lbl {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  color: var(--muted);
+  margin-left: 10px;
+  align-self: center;
+}
+
+.dk-porpieza {
+  color: var(--muted);
+  margin: 20px 0 28px;
+  max-width: 44ch;
+  line-height: 1.55;
+}
+
+.dk-precio dl { margin: 0; border-top: 1px solid var(--line); }
+
+.dk-precio dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.dk-precio dt { color: var(--muted); font-size: 0.9rem; }
+.dk-precio dd { margin: 0; font-weight: 650; text-align: right; }
+
+/* ── Dudas ──────────────────────────────────────────────────────────────── */
+.dk-dudas {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.dk-dudas > div { border-top: 1px solid var(--line); padding-top: 16px; }
+
+.dk-dudas h3 {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--fg);
+  font-weight: 650;
+  margin: 0 0 8px;
+  line-height: 1.35;
+}
+
+.dk-dudas p { margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--muted); }
+
+/* ── Cierre ─────────────────────────────────────────────────────────────── */
+.dk-cierre { max-width: 820px; }
+.dk-cierre h2 { display: grid; }
+
+/* ── Zonas de clic ──────────────────────────────────────────────────────
+   Media pantalla a cada lado. Sin ellas hay que buscar el botón, y en una
+   llamada eso se nota. */
+.dk-zona {
+  position: absolute;
+  top: 0;
+  bottom: 60px;
+  width: 26%;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.dk-zona--ant { left: 0; }
+.dk-zona--sig { right: 0; }
+.dk-zona:disabled { cursor: default; }
+
+/* ── Barra de progreso ──────────────────────────────────────────────────── */
+.dk-progreso {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--line);
+  z-index: 4;
+}
+
+.dk-progreso span {
+  display: block;
+  height: 100%;
+  background: var(--fg);
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── HUD ────────────────────────────────────────────────────────────────── */
+.dk-hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px clamp(16px, 3vw, 32px);
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.dk-hud-marca {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.dk-hud-nav { display: flex; align-items: center; gap: 6px; }
+
+.dk-hud-nav button {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--fg);
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.dk-hud-nav button:hover:not(:disabled) { border-color: var(--fg); }
+.dk-hud-nav button:disabled { opacity: 0.3; cursor: default; }
+
+.dk-hud-num {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 62px;
+  text-align: center;
+}
+
+/* ── Puntos ─────────────────────────────────────────────────────────────── */
+.dk-puntos {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 70px;
+  z-index: 4;
+  display: flex;
+  gap: 7px;
+}
+
+.dk-punto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: var(--line-strong);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.dk-punto:hover { background: var(--muted); }
+
+.dk-punto--on {
+  background: var(--fg);
+  transform: scale(1.4);
+}
+
+@media (max-width: 720px) {
+  .dk-puntos { display: none; }
+  .dk-zona { width: 20%; }
+}
+
+/* ── Mientras el deck está abierto ────────────────────────────────────────
+   El banner de cookies y el selector de tema viven fuera del deck y quedaban
+   encima del contador y las flechas. Subir el z-index no sirve: el envoltorio
+   de transición de página crea su propio contexto de apilamiento y encierra
+   al deck dentro. Se apartan mientras dura la presentación.
+
+   No se pide consentimiento de analítica en esta pantalla, que es el
+   comportamiento conservador: sin banner, no se acepta nada. */
+body.deck-abierto .cookie-banner,
+body.deck-abierto .theme-toggle {
+  display: none;
+}
