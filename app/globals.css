@@ -282,6 +282,31 @@ button,
   filter: brightness(0);
 }
 
+/* Con el tema claro, tinta negra en la cabecera siempre —también sobre el
+   vídeo de la home—.
+
+   El motivo es el velo de aquí arriba: se pinta con --bg, que en claro es casi
+   blanco, y cubre justo la banda donde caen el logo y el menú. Por debajo puede
+   haber un vídeo, pero lo que hay detrás de las letras es ese velo. Con letras
+   blancas encima, blanco sobre blanco.
+
+   Y se apaga el blend. La idea de invertir contra el fondo es buena cuando
+   detrás hay una imagen fija; sobre un vídeo el fondo cambia con cada
+   fotograma, así que el menú se leería mejor o peor según el segundo. Un color
+   fijo es peor truco y mejor lectura. */
+[data-theme="light"] .header {
+  color: var(--fg);
+}
+
+[data-theme="light"] .header .brand,
+[data-theme="light"] .header .nav {
+  mix-blend-mode: normal;
+}
+
+[data-theme="light"] .header .brand-logo {
+  filter: brightness(0);
+}
+
 .header-inner {
   display: flex;
   align-items: center;
