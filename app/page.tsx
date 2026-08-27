@@ -3,7 +3,7 @@ import Link from "next/link";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import HomeHero from "./components/HomeHero";
-import LazyVideo from "./components/LazyVideo";
+import CasesGrid from "./components/CasesGrid";
 import { FaqJsonLd, ItemListJsonLd, ServiceJsonLd } from "./components/JsonLd";
 import { clients, topByCommunity } from "./clients";
 import { posts } from "./blog-data";
@@ -36,6 +36,20 @@ export const metadata: Metadata = createPageMetadata({
    Las mismas seis alimentan las dos secciones, para no mandar señales
    distintas sobre qué marcas nos representan. */
 const featuredClients = topByCommunity(6, { conReel: true });
+
+/* Todas las marcas con reel, en el mismo orden. Las seis primeras son las de
+   arriba; el resto es lo que descubre el botón de «mostrar más». Se recortan
+   los campos a lo que pinta la tarjeta: mandar la ficha entera de dos docenas
+   de marcas engordaría la página para no usarlo. */
+const casosDeLaRejilla = topByCommunity(100, { conReel: true }).map((c) => ({
+  slug: c.slug,
+  name: c.name,
+  tagline: c.tagline,
+  previewVideo: c.previewVideo,
+  poster: c.poster,
+  logo: c.logo,
+  community: c.community,
+}));
 const engagementClients = featuredClients;
 const brandLogos = clients.filter((c) => c.logo);
 const awards = [
@@ -47,36 +61,6 @@ const awards = [
   "Barcelona · Madrid · España",
   ...marqueeWords,
 ];
-
-function CaseCard({
-  client,
-}: {
-  client: (typeof clients)[number];
-}) {
-  return (
-    <Link className="bd-case" href={`/clientes/${client.slug}`}>
-      <div className="bd-case-media">
-        {client.previewVideo ? (
-          <LazyVideo src={client.previewVideo} poster={client.poster} />
-        ) : client.logo ? (
-          <div className="bd-case-logo-fallback">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={client.logo} alt="" loading="lazy" decoding="async" />
-          </div>
-        ) : null}
-        <div className="bd-case-overlay">
-          {client.community ? (
-            <span className="bd-case-stat">Comunidad: {client.community}</span>
-          ) : null}
-        </div>
-      </div>
-      <div className="bd-case-body">
-        <h3>{client.name}</h3>
-        <p>{client.tagline}</p>
-      </div>
-    </Link>
-  );
-}
 
 export default function Home() {
   return (
@@ -139,11 +123,7 @@ export default function Home() {
               </div>
               <Link href="/clientes">Ver todos los clientes →</Link>
             </div>
-            <div className="bd-cases-grid is-featured">
-              {featuredClients.map((c) => (
-                <CaseCard key={c.slug} client={c} />
-              ))}
-            </div>
+            <CasesGrid casos={casosDeLaRejilla} />
           </div>
         </section>
 

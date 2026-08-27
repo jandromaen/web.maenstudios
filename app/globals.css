@@ -716,6 +716,18 @@ button,
   gap: clamp(16px, 2.5vw, 24px);
 }
 
+/* Botón de «mostrar más» bajo la rejilla de casos */
+.bd-cases-mas {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(20px, 3vw, 32px);
+}
+
+/* La cuenta pesa menos que la etiqueta: informa, no compite con ella */
+.bd-cases-cuentan {
+  opacity: 0.6;
+}
+
 @media (min-width: 800px) {
   .bd-cases-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
