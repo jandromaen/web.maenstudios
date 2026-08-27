@@ -239,42 +239,14 @@ button,
   color: #fff;
 }
 
-/* Velo bajo la cabecera, pero solo cuando la cabecera está sobre contenido.
-   Sobre el hero de la home no se pinta: ahí metía una banda clara encima del
-   vídeo y era justo lo que sobraba.
+/* Sin velo bajo la cabecera. Lo hubo para separar el menú del contenido que
+   pasa por debajo al hacer scroll, y se retira por decisión de Jandro tras ver
+   las dos opciones: sobre el vídeo de la home metía una banda clara que
+   estropeaba el plano.
 
-   No se puede quitar del todo. Sin él, al hacer scroll el texto de la página
-   pasa por debajo del menú y se cruzan las dos líneas: se leen los titulares
-   atravesando WORK, SERVICES y compañía. Que aparezca a la vez que la tinta
-   se vuelve oscura resuelve las dos cosas con el mismo interruptor.
-
-   Va con transición para que no salte de golpe al pasar el hero. */
-.header::before {
-  content: "";
-  position: absolute;
-  inset: -18px 0 auto 0;
-  height: 132px;
-  z-index: -1;
-  background: linear-gradient(
-    to bottom,
-    var(--bg) 22%,
-    color-mix(in srgb, var(--bg) 55%, transparent) 62%,
-    transparent
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.header--light::before {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .header::before {
-    transition: none;
-  }
-}
+   La contrapartida, que es real y está asumida: al pasar por detrás del menú,
+   un titular de la página y los enlaces se superponen un instante. Lo único
+   que queda separándolos es el cambio de tinta a oscuro, que sigue en pie. */
 
 /* Blanco liso, sin invertirse contra el fondo. El blend estaba pensado para
    una imagen fija; sobre el vídeo de la home el fondo cambia con cada
