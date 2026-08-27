@@ -478,6 +478,61 @@ button,
 }
 
 /* Cursor custom del menú: solo icono de tres barras */
+/* ─── Selector de idioma ───────────────────────────────────────────────────
+   Abajo a la izquierda del cajón. Es una preferencia de lectura, así que pesa
+   menos que los enlaces del menú: letra pequeña, en fila, y el idioma actual
+   solo como referencia a la izquierda. */
+.selector-idioma {
+  position: absolute;
+  left: var(--pad);
+  /* Por encima de donde cae la barra de cookies. Esa barra es fija, va con
+     z-index 400 y el cajón con 200, así que se pinta encima pase lo que pase:
+     pegado al borde inferior, el selector quedaba tapado justo en la primera
+     visita, que es cuando alguien busca su idioma. */
+  bottom: clamp(88px, 13vh, 124px);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  z-index: 2;
+}
+
+.selector-idioma-etiqueta {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--invert-muted);
+}
+
+.selector-idioma-opciones {
+  display: flex;
+  gap: 14px;
+}
+
+.selector-idioma-op {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--invert-muted);
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.selector-idioma-op:hover {
+  color: var(--invert-fg);
+  border-bottom-color: var(--invert-fg);
+}
+
+.selector-idioma-op:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .nav-drawer-cursor {
   position: fixed;
   top: 0;

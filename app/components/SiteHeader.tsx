@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { navLinks } from "../site-data";
+import SelectorIdioma from "./SelectorIdioma";
 
 type SiteHeaderProps = {
   /** Fondo claro fijo: logo y nav oscuros (páginas interiores) */
@@ -196,6 +197,11 @@ export default function SiteHeader({ light = false, adaptive = false }: SiteHead
             </Link>
           ))}
         </div>
+        {/* Abajo a la izquierda, donde lo pidió Jandro: es una preferencia de
+            lectura, no un apartado del menú, así que no compite con los
+            enlaces. */}
+        <SelectorIdioma />
+
         <div className="nav-drawer-cursor" ref={cursorRef} aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
