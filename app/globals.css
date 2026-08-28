@@ -4975,10 +4975,14 @@ body:has(.cookie-banner) .theme-toggle {
   /* El desenfoque grande convierte la foto en mancha de color: no se
      reconoce la imagen, solo su paleta. La saturación compensa lo que el
      desenfoque apaga. */
-  filter: blur(90px) saturate(1.7);
-  opacity: 0.3;
+  /* object-fit para cuando el halo es un <video> */
+  object-fit: cover;
+  filter: blur(70px) saturate(1.8);
+  opacity: 0.34;
   will-change: transform;
-  animation: halo-deriva 26s ease-in-out infinite alternate;
+  /* La deriva se mantiene pero más corta: encima del movimiento del propio
+     reel, sirve para que el encuadre no se quede fijo. */
+  animation: halo-deriva 14s ease-in-out infinite alternate;
 }
 
 [data-theme="light"] .hero-halo {
@@ -4988,8 +4992,8 @@ body:has(.cookie-banner) .theme-toggle {
 }
 
 @keyframes halo-deriva {
-  from { transform: translate3d(-4%, -3%, 0) scale(1.05); }
-  to   { transform: translate3d(5%, 4%, 0) scale(1.18); }
+  from { transform: translate3d(-5%, -4%, 0) scale(1.08); }
+  to   { transform: translate3d(6%, 5%, 0) scale(1.22); }
 }
 
 /* El contenido del hero, por delante del halo */
