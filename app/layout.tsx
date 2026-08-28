@@ -8,6 +8,7 @@ import { GlobalJsonLd } from "./components/JsonLd";
 import ThemeToggle from "./components/ThemeToggle";
 import ScrollReveal from "./components/ScrollReveal";
 import ReelMotion from "./components/ReelMotion";
+import HeroHalo from "./components/HeroHalo";
 import HeroReelDrag from "./components/HeroReelDrag";
 import { themeBootScript } from "./lib/theme";
 import {
@@ -111,6 +112,7 @@ export default function RootLayout({
         {children}
         <ScrollReveal />
         <ReelMotion />
+        <HeroHalo />
         <HeroReelDrag />
         <ThemeToggle />
         <CookieBanner />

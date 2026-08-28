@@ -4955,3 +4955,87 @@ body:has(.cookie-banner) .theme-toggle {
   font-size: 0.9rem;
   color: #e08a8a;
 }
+
+/* ─── Fondo de color en movimiento ───────────────────────────────────────
+   Tres manchas con los colores del reel de cada página, cada una recorriendo
+   un camino distinto por detrás del titular. Los colores los lee
+   app/components/HeroHalo.tsx del póster; aquí solo se mueven.
+
+   Las manchas son medianas y no gigantes, y cruzan de lado a lado: con
+   manchas enormes moviéndose poco solo se percibía el tinte cambiando, no el
+   movimiento. Lo que hace que se vea es que recorran distancia.
+
+   Nada de filter: blur() ni de escalar. El degradado radial ya difumina, y un
+   desenfoque sobre algo que cambia de tamaño se recalcula en cada fotograma:
+   así hundimos la página a 9 fps en el primer intento. Solo se desplazan, que
+   es trabajo del compositor. */
+.hero-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-aurora-mancha {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 54%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--tono) 0%,
+    color-mix(in oklab, var(--tono) 50%, transparent) 34%,
+    transparent 68%
+  );
+  opacity: 0.34;
+  will-change: transform;
+}
+
+/* Un recorrido por mancha, y no el mismo con retardo: con el mismo camino las
+   tres van en fila y nunca se cruzan, que es donde está la mezcla de color. */
+.hero-aurora-mancha:nth-child(1) {
+  animation: aurora-1 13s ease-in-out infinite alternate;
+}
+
+.hero-aurora-mancha:nth-child(2) {
+  opacity: 0.3;
+  animation: aurora-2 17s ease-in-out infinite alternate;
+}
+
+.hero-aurora-mancha:nth-child(3) {
+  opacity: 0.26;
+  animation: aurora-3 21s ease-in-out infinite alternate;
+}
+
+/* Cruza por arriba, de izquierda a derecha */
+@keyframes aurora-1 {
+  from { transform: translate3d(-22%, -28%, 0); }
+  to   { transform: translate3d(96%, 14%, 0); }
+}
+
+/* Sube desde abajo a la derecha hacia arriba a la izquierda */
+@keyframes aurora-2 {
+  from { transform: translate3d(88%, 48%, 0); }
+  to   { transform: translate3d(-6%, -32%, 0); }
+}
+
+/* Baja por el centro, con desvío */
+@keyframes aurora-3 {
+  from { transform: translate3d(18%, -34%, 0); }
+  50%  { transform: translate3d(64%, 22%, 0); }
+  to   { transform: translate3d(6%, 52%, 0); }
+}
+
+[data-theme="light"] .hero-aurora-mancha {
+  /* Sobre blanco la misma mancha ensucia en vez de teñir */
+  opacity: 0.16;
+}
+
+/* El contenido del hero, por delante */
+.page-hero > .container {
+  position: relative;
+  z-index: 1;
+}
