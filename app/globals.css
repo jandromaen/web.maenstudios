@@ -4957,14 +4957,18 @@ body:has(.cookie-banner) .theme-toggle {
 }
 
 /* ─── Fondo de color en movimiento ───────────────────────────────────────
-   Tres manchas con los colores dominantes del reel de cada página, derivando
-   a distinto ritmo. Los colores los lee app/components/HeroHalo.tsx del
-   póster; aquí solo se mueven.
+   Tres manchas con los colores del reel de cada página, cada una recorriendo
+   un camino distinto por detrás del titular. Los colores los lee
+   app/components/HeroHalo.tsx del póster; aquí solo se mueven.
 
-   Antes esto era el reel desenfocado a pantalla completa. Se cambió porque
-   decodificar el mismo vídeo dos veces cuesta caro para lo que aporta: tres
-   divs con transform los mueve el compositor sin tocar la CPU, y el
-   movimiento se lee mejor porque cada mancha va a su aire. */
+   Las manchas son medianas y no gigantes, y cruzan de lado a lado: con
+   manchas enormes moviéndose poco solo se percibía el tinte cambiando, no el
+   movimiento. Lo que hace que se vea es que recorran distancia.
+
+   Nada de filter: blur() ni de escalar. El degradado radial ya difumina, y un
+   desenfoque sobre algo que cambia de tamaño se recalcula en cada fotograma:
+   así hundimos la página a 9 fps en el primer intento. Solo se desplazan, que
+   es trabajo del compositor. */
 .hero-aurora {
   position: absolute;
   inset: 0;
@@ -4975,44 +4979,59 @@ body:has(.cookie-banner) .theme-toggle {
 
 .hero-aurora-mancha {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 86%;
+  top: 0;
+  left: 0;
+  width: 54%;
   aspect-ratio: 1;
   border-radius: 50%;
-  /* El degradado ya se difumina solo: nada de filter: blur(). Un desenfoque
-     sobre un elemento que además escala obliga a recalcularlo en cada
-     fotograma, y eso hundía la página a 9 fps. Sin él, mover las manchas es
-     puro compositor. */
   background: radial-gradient(
     circle,
     var(--tono) 0%,
-    color-mix(in oklab, var(--tono) 45%, transparent) 38%,
-    transparent 70%
+    color-mix(in oklab, var(--tono) 50%, transparent) 34%,
+    transparent 68%
   );
-  opacity: 0.4;
+  opacity: 0.34;
   will-change: transform;
-  /* Cada mancha arranca en un sitio y tarda distinto: si coincidieran, las
-     tres se moverían como una sola y no habría mezcla de color. */
-  animation: aurora-deriva calc(19s + var(--i) * 7s) ease-in-out infinite alternate;
-  animation-delay: calc(var(--i) * -6s);
 }
 
-.hero-aurora-mancha:nth-child(1) { transform: translate(-70%, -60%); }
-.hero-aurora-mancha:nth-child(2) { transform: translate(-20%, -50%); opacity: 0.3; }
-.hero-aurora-mancha:nth-child(3) { transform: translate(-55%, -20%); opacity: 0.26; }
+/* Un recorrido por mancha, y no el mismo con retardo: con el mismo camino las
+   tres van en fila y nunca se cruzan, que es donde está la mezcla de color. */
+.hero-aurora-mancha:nth-child(1) {
+  animation: aurora-1 13s ease-in-out infinite alternate;
+}
+
+.hero-aurora-mancha:nth-child(2) {
+  opacity: 0.3;
+  animation: aurora-2 17s ease-in-out infinite alternate;
+}
+
+.hero-aurora-mancha:nth-child(3) {
+  opacity: 0.26;
+  animation: aurora-3 21s ease-in-out infinite alternate;
+}
+
+/* Cruza por arriba, de izquierda a derecha */
+@keyframes aurora-1 {
+  from { transform: translate3d(-22%, -28%, 0); }
+  to   { transform: translate3d(96%, 14%, 0); }
+}
+
+/* Sube desde abajo a la derecha hacia arriba a la izquierda */
+@keyframes aurora-2 {
+  from { transform: translate3d(88%, 48%, 0); }
+  to   { transform: translate3d(-6%, -32%, 0); }
+}
+
+/* Baja por el centro, con desvío */
+@keyframes aurora-3 {
+  from { transform: translate3d(18%, -34%, 0); }
+  50%  { transform: translate3d(64%, 22%, 0); }
+  to   { transform: translate3d(6%, 52%, 0); }
+}
 
 [data-theme="light"] .hero-aurora-mancha {
   /* Sobre blanco la misma mancha ensucia en vez de teñir */
   opacity: 0.16;
-}
-
-/* Solo desplazamiento, sin escala: escalar cambia el tamaño pintado y obliga
-   a redibujar el degradado; moverlo no. */
-@keyframes aurora-deriva {
-  from { transform: translate3d(-78%, -66%, 0); }
-  50%  { transform: translate3d(-28%, -40%, 0); }
-  to   { transform: translate3d(-62%, -18%, 0); }
 }
 
 /* El contenido del hero, por delante */
