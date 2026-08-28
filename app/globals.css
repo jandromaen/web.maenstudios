@@ -4956,47 +4956,66 @@ body:has(.cookie-banner) .theme-toggle {
   color: #e08a8a;
 }
 
-/* ─── Halo del hero ───────────────────────────────────────────────────────
-   Copia desenfocada del póster del primer reel, detrás del titular. El fondo
-   toma el color del trabajo que se está enseñando en cada página.
+/* ─── Fondo de color en movimiento ───────────────────────────────────────
+   Tres manchas con los colores dominantes del reel de cada página, derivando
+   a distinto ritmo. Los colores los lee app/components/HeroHalo.tsx del
+   póster; aquí solo se mueven.
 
-   La pinta app/components/HeroHalo.tsx: no hay marcado en las páginas porque
-   los heroes salen del servidor y son lo primero que aparece.
-
-   Se desborda por los cuatro lados: al desplazarse con la animación, sin ese
-   margen se vería el borde del rectángulo. */
-.hero-halo {
+   Antes esto era el reel desenfocado a pantalla completa. Se cambió porque
+   decodificar el mismo vídeo dos veces cuesta caro para lo que aporta: tres
+   divs con transform los mueve el compositor sin tocar la CPU, y el
+   movimiento se lee mejor porque cada mancha va a su aire. */
+.hero-aurora {
   position: absolute;
-  inset: -18%;
+  inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-size: cover;
-  background-position: center;
-  /* El desenfoque grande convierte la foto en mancha de color: no se
-     reconoce la imagen, solo su paleta. La saturación compensa lo que el
-     desenfoque apaga. */
-  /* object-fit para cuando el halo es un <video> */
-  object-fit: cover;
-  filter: blur(70px) saturate(1.8);
-  opacity: 0.34;
+  overflow: hidden;
+}
+
+.hero-aurora-mancha {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 86%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* El degradado ya se difumina solo: nada de filter: blur(). Un desenfoque
+     sobre un elemento que además escala obliga a recalcularlo en cada
+     fotograma, y eso hundía la página a 9 fps. Sin él, mover las manchas es
+     puro compositor. */
+  background: radial-gradient(
+    circle,
+    var(--tono) 0%,
+    color-mix(in oklab, var(--tono) 45%, transparent) 38%,
+    transparent 70%
+  );
+  opacity: 0.4;
   will-change: transform;
-  /* La deriva se mantiene pero más corta: encima del movimiento del propio
-     reel, sirve para que el encuadre no se quede fijo. */
-  animation: halo-deriva 14s ease-in-out infinite alternate;
+  /* Cada mancha arranca en un sitio y tarda distinto: si coincidieran, las
+     tres se moverían como una sola y no habría mezcla de color. */
+  animation: aurora-deriva calc(19s + var(--i) * 7s) ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -6s);
 }
 
-[data-theme="light"] .hero-halo {
-  /* Sobre fondo claro la misma opacidad ensucia en vez de teñir */
-  opacity: 0.2;
-  filter: blur(90px) saturate(1.4);
+.hero-aurora-mancha:nth-child(1) { transform: translate(-70%, -60%); }
+.hero-aurora-mancha:nth-child(2) { transform: translate(-20%, -50%); opacity: 0.3; }
+.hero-aurora-mancha:nth-child(3) { transform: translate(-55%, -20%); opacity: 0.26; }
+
+[data-theme="light"] .hero-aurora-mancha {
+  /* Sobre blanco la misma mancha ensucia en vez de teñir */
+  opacity: 0.16;
 }
 
-@keyframes halo-deriva {
-  from { transform: translate3d(-5%, -4%, 0) scale(1.08); }
-  to   { transform: translate3d(6%, 5%, 0) scale(1.22); }
+/* Solo desplazamiento, sin escala: escalar cambia el tamaño pintado y obliga
+   a redibujar el degradado; moverlo no. */
+@keyframes aurora-deriva {
+  from { transform: translate3d(-78%, -66%, 0); }
+  50%  { transform: translate3d(-28%, -40%, 0); }
+  to   { transform: translate3d(-62%, -18%, 0); }
 }
 
-/* El contenido del hero, por delante del halo */
+/* El contenido del hero, por delante */
 .page-hero > .container {
   position: relative;
   z-index: 1;
