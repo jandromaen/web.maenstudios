@@ -38,6 +38,9 @@ function rgbAHsl(r: number, g: number, b: number): [number, number, number] {
 /** Tamaño al que se reduce el póster para leerle el color. */
 const MUESTREO = 8;
 
+/** Póster del que se saca el color cuando el hero no enseña ningún reel. */
+const RESPALDO = "/reel-hero-poster.jpg";
+
 /**
  * Saca tres colores del póster: el más saturado de cada tercio de la imagen.
  *
@@ -105,16 +108,31 @@ export default function HeroHalo() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const heroes = Array.from(document.querySelectorAll<HTMLElement>(".page-hero"));
+    /* Las fichas de cliente usan .case-hero, que es el mismo hero con otro
+       nombre: mismo fondo, mismo filete abajo. Ahí cada marca acaba tiñendo su
+       propia página con el color de su reel, que es justo la gracia. */
+    const heroes = Array.from(
+      document.querySelectorAll<HTMLElement>(".page-hero, .case-hero"),
+    );
     const creados: HTMLElement[] = [];
 
     for (const hero of heroes) {
       if (hero.querySelector(".hero-aurora")) continue;
 
-      const video = hero.querySelector<HTMLVideoElement>(".hero-media video");
-      const imagen = hero.querySelector<HTMLImageElement>(".hero-media img");
-      const fuente = video?.getAttribute("poster") ?? imagen?.getAttribute("src");
-      if (!fuente) continue;
+      const video = hero.querySelector<HTMLVideoElement>(
+        ".hero-media video, .case-hero-media video",
+      );
+      const imagen = hero.querySelector<HTMLImageElement>(
+        ".hero-media img, .case-hero-media img",
+      );
+      /* Contacto tiene el mismo fondo oscuro que las demás pero no lleva
+         reels, así que no hay póster del que sacar el color. En vez de
+         inventarle una paleta se usa el de nuestro propio showreel: el color
+         sigue saliendo de un trabajo nuestro, que es la regla. */
+      const fuente =
+        video?.getAttribute("poster") ??
+        imagen?.getAttribute("src") ??
+        RESPALDO;
 
       const capa = document.createElement("div");
       capa.className = "hero-aurora";
