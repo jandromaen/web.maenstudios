@@ -477,7 +477,11 @@ const HERO_PREFERIDOS = {
       "perritos-calientes",
     ],
   },
-  talents: { cuantos: 3, marcas: ["pigili-originals", "mimosas", "aluxe"] },
+  /* Solo dos: el hueco del medio lo ocupa una pieza elegida a mano, que se
+     inserta en app/talents/page.tsx. Pedir tres aquí dejaría una marca cogida
+     por el reparto y luego tapada, que es peor que no pedirla: esa marca no
+     podría salir en ningún otro hero. */
+  talents: { cuantos: 2, marcas: ["pigili-originals", "aluxe"] },
 } as const;
 
 export type PaginaConHero = keyof typeof HERO_PREFERIDOS;

@@ -24,6 +24,24 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
+/**
+ * Reel del medio del hero, elegido a mano.
+ *
+ * Los otros dos salen del reparto automático de reels de cliente, que reparte
+ * marcas entre secciones sin repetir ninguna. Este no: es una pieza concreta
+ * que se quiere ahí, así que se pone tal cual en el hueco central en vez de
+ * meterla en el reparto. Para cambiarla basta con sustituir el fichero.
+ */
+const REEL_CENTRAL = {
+  src: "/talents/hero/gozice.mp4",
+  poster: "/talents/hero/gozice-poster.jpg",
+};
+
+const reelsDelHero = (() => {
+  const [primero, ...resto] = reelsDeHero("talents");
+  return [primero, REEL_CENTRAL, ...resto];
+})();
+
 const pillars = [
   {
     n: "01",
@@ -116,7 +134,7 @@ export default function TalentsPage() {
                 <span>Respuesta en 24h</span>
               </div>
             </div>
-            <HeroReels reels={reelsDeHero("talents")} />
+            <HeroReels reels={reelsDelHero} />
           </div>
         </section>
 

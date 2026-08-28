@@ -115,6 +115,10 @@ for (const [ruta, width, crf] of [
   ["public/reel-focacha.mp4", 900, 30],
   ["public/reel-proyecto.mp4", 900, 30],
   ["public/pitch/tornem-video.mp4", 1280, 30],
+  /* Reel central del hero de /talents. crf 32 y no 30 como el resto: es un
+     plano con mucho movimiento y a 30 salía al doble de peso que los dos
+     reels que tiene al lado, en un bloque que carga en el primer pantallazo. */
+  ["public/talents/hero/gozice.mp4", 540, 32],
 ]) {
   if (existsSync(ruta)) tareas.push({ tipo: "suelto", ruta, width, crf });
 }
