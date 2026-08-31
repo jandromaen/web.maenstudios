@@ -4,10 +4,13 @@
  * Todo lo negociable vive aquí y no repartido por el JSX: si Jandro cambia el
  * precio o el número de piezas, se toca un sitio y la página entera cuadra.
  *
- * ⚠️ EL PRECIO ESTÁ SIN CONFIRMAR. Sale del propio formulario de la web
- * (tramo «1.500 – 3.000 € al mes») y de lo que implica el encargo: doce piezas
+ * ⚠️ EL PRECIO MENSUAL SIGUE SIN CONFIRMAR, y con él el reparto entre las seis
+ * líneas del desglose. Sale del propio formulario de la web (tramo
+ * «1.500 – 3.000 € al mes») y de lo que implica el encargo: doce piezas
  * mensuales, dos jornadas de rodaje en Granollers y cuatro canales gestionados.
  * No es una tarifa publicada de Maen. Revisar antes de enviar el enlace.
+ *
+ * ✅ El caché del presentador sí está confirmado: 500 € al mes.
  */
 
 export const CLIENTE = {
@@ -118,6 +121,9 @@ export const PACK = {
    * Va aparte del pack a propósito. Es la opción que les desaconsejamos, y
    * meterla dentro del precio base sería cobrarles por algo que les hemos
    * dicho que no les conviene.
+   *
+   * ✅ Confirmado por Jandro el 31/08/2026: son 500 € AL MES mientras dure el
+   * servicio, no un pago único de casting.
    */
   presentadorMes: 500,
   /** Horas de trabajo nuestro al mes. Sale del desglose, no se escribe. */

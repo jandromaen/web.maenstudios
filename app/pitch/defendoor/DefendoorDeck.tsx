@@ -369,9 +369,12 @@ export default function DefendoorDeck({
                   <dt>Compromiso</dt>
                   <dd>{PACK.permanencia} meses</dd>
                 </div>
+                {/* Lleva «al mes» aunque el precio grande de arriba ya lo diga:
+                    es la única línea recurrente de una tabla cuya vecina son 3
+                    meses de compromiso, y sin ponerlo se lee como pago único. */}
                 <div className="dk-opcional">
                   <dt>Presentador nuestro</dt>
-                  <dd>+{euros(PACK.presentadorMes)} €</dd>
+                  <dd>+{euros(PACK.presentadorMes)} € al mes</dd>
                 </div>
               </dl>
             </div>
