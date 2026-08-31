@@ -183,10 +183,10 @@ export default function DefendoorDeck({
             teléfono.
           </blockquote>
           <p className="dk-parrafo">
-            Funciona en Instagram, pero sobre todo en <strong>YouTube</strong>:
-            ahí la gente busca exactamente eso y el vídeo sigue trayendo clientes
-            dos años después. Es el canal que más va a rendir y el que casi
-            ningún despacho trabaja.
+            Funciona en Instagram y TikTok, pero sobre todo en{" "}
+            <strong>YouTube</strong>: ahí la gente busca exactamente eso y el
+            vídeo sigue trayendo clientes dos años después. Es el canal que más
+            va a rendir y el que casi ningún despacho trabaja.
           </p>
         </div>
       ),

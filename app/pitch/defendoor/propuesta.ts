@@ -6,7 +6,7 @@
  *
  * ⚠️ EL PRECIO ESTÁ SIN CONFIRMAR. Sale del propio formulario de la web
  * (tramo «1.500 – 3.000 € al mes») y de lo que implica el encargo: doce piezas
- * mensuales, dos jornadas de rodaje en Granollers y tres canales gestionados.
+ * mensuales, dos jornadas de rodaje en Granollers y cuatro canales gestionados.
  * No es una tarifa publicada de Maen. Revisar antes de enviar el enlace.
  */
 
@@ -30,6 +30,22 @@ export const CLIENTE = {
  * El total del pack se calcula sumando esto y no se escribe aparte: dos
  * cifras que deberían cuadrar acaban descuadrando el día que se toca una.
  */
+/**
+ * Canales que gestionamos. Ojo: no son exactamente los que pidieron —ellos
+ * hablaban de Instagram, Facebook y YouTube—. TikTok lo añadimos nosotros.
+ */
+export const CANALES = ["Instagram", "TikTok", "Facebook", "YouTube"];
+
+/**
+ * El número escrito con letra, para las frases que hablan de «los N canales».
+ *
+ * Estaban escritas a mano y decían «tres» cuando la lista pasó a cuatro. Es el
+ * mismo problema que ya se resuelve con el precio y las horas, que se suman en
+ * vez de teclearse: si mañana entra otro canal, estas frases se corrigen solas.
+ */
+const EN_LETRA = ["cero", "un", "dos", "tres", "cuatro", "cinco", "seis"];
+export const CUANTOS_CANALES = EN_LETRA[CANALES.length] ?? String(CANALES.length);
+
 export const DESGLOSE = [
   {
     concepto: "Dirección creativa",
@@ -64,7 +80,7 @@ export const DESGLOSE = [
     importe: 190,
     horas: 8,
     perfil: "Community Manager",
-    detalle: "Publicación en los tres canales y respuesta a la comunidad",
+    detalle: `Publicación en los ${CUANTOS_CANALES} canales y respuesta a la comunidad`,
   },
   {
     concepto: "Análisis de reportes y métricas",
@@ -92,7 +108,7 @@ export const PACK = {
    * la misma media jornada, con ellos delante.
    */
   horasMes: 5,
-  canales: ["Instagram", "Facebook", "YouTube"],
+  canales: CANALES,
   /** Suma del desglose. No se escribe a mano para que no pueda descuadrar. */
   precioMes: DESGLOSE.reduce((t, l) => t + l.importe, 0),
   /**
@@ -156,7 +172,7 @@ export const METODOLOGIA = [
     nombre: "Calendario de contenido",
     resumen: "Qué sale, dónde y qué día. Vosotros lo veis antes de que se publique nada.",
     puntos: [
-      "Tres publicaciones por semana repartidas entre los tres canales",
+      `Tres publicaciones por semana repartidas entre los ${CUANTOS_CANALES} canales`,
       "Copys y hashtags escritos por nosotros",
       "Respuesta a comentarios y mensajes en horario laboral",
     ],
