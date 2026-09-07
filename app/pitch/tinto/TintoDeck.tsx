@@ -4,12 +4,15 @@ import LazyVideo from "../../components/LazyVideo";
 import Visor, { useArrastreDeReels, type Diapo } from "../Visor";
 import type { Client } from "../../clients";
 import {
+  ARRANQUE,
   CLIENTE,
-  PACK,
+  DIAS_SEMANA,
+  DUDAS,
+  EQUIPO,
   LO_ACORDADO,
   METODOLOGIA,
-  EQUIPO,
-  DUDAS,
+  PACK,
+  semanasDe,
 } from "./propuesta";
 
 /**
@@ -33,15 +36,7 @@ const euros = (n: number) => n.toLocaleString("es-ES");
 /** «Canal» o «Canales» según cuántos haya, para que no cante si entra TikTok. */
 const CANALES_ETIQUETA = PACK.canales.length === 1 ? "Canal" : "Canales";
 
-export default function TintoDeck({
-  portada,
-  barrio,
-  muestra,
-}: {
-  portada: Client[];
-  barrio: Client[];
-  muestra: Client[];
-}) {
+export default function TintoDeck({ portada }: { portada: Client[] }) {
   const cogerReel = useArrastreDeReels();
 
   const diapos: Diapo[] = [
@@ -89,21 +84,20 @@ export default function TintoDeck({
       render: () => (
         <div className="dk-manifiesto">
           <p className="dk-manifiesto-txt">
-            Un restaurante nuevo tiene{" "}
-            <span className="dk-tenue">unos pocos meses</span> para que el
-            barrio decida que existe.
+            En {CLIENTE.apertura} abrís las puertas.
           </p>
           <p className="dk-manifiesto-txt">
-            Y esa decisión ya no se toma pasando por delante. Se toma en un
-            móvil, la noche anterior.
+            Casi todos empiezan a contarse{" "}
+            <span className="dk-tenue">el día que abren</span>. Y ese día ya es
+            tarde.
           </p>
           <p className="dk-manifiesto-txt dk-manifiesto-txt--fuerte">
-            Lo que queremos es que, cuando alguien de {CLIENTE.zona} busque
-            dónde cenar, {CLIENTE.nombre} ya le suene.
+            Queremos que {CLIENTE.nombre} llegue a su primera noche con gente
+            esperando.
           </p>
           <p className="dk-pie">
-            Eso no lo hace una campaña. Lo hace aparecer cada semana, sin fallar
-            uno solo, desde el primer mes.
+            Por eso empezamos en septiembre. Las semanas de antes valen más que
+            las de después, y no vuelven.
           </p>
         </div>
       ),
@@ -162,62 +156,6 @@ export default function TintoDeck({
                 Rodaje, edición y gestión dentro. Sin extras por pieza
               </span>
             </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      /* El argumento más fuerte que tenemos con ellos, así que va solo y a
-         doble tamaño: no es «hacemos restaurantes», es el barrio de al lado. */
-      id: "barrio",
-      titulo: "Ya trabajamos en la zona",
-      render: () => (
-        <div className="dk-centro dk-centro--ancho">
-          <p className="dk-kicker">A diez minutos de {CLIENTE.zona}</p>
-          <h2>Vuestro barrio ya nos conoce</h2>
-          <p className="dk-parrafo">
-            Llevamos dos casas de la zona alta, y las dos son de las difíciles:
-            una con treinta y cinco años detrás y una bodega de toda la vida. El
-            público al que le vais a hablar es exactamente el mismo.
-          </p>
-          <div className="dk-reels dk-reels--dos">
-            {barrio.map((c) => (
-              <figure className="dk-reel-item" key={c.slug}>
-                <div className="dk-reel">
-                  <LazyVideo src={c.previewVideo!} poster={c.poster} />
-                </div>
-                <figcaption>
-                  {c.name}
-                  {c.community ? ` · ${c.community}` : ""}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: "trabajo",
-      titulo: "Esto es lo que producimos",
-      render: () => (
-        <div className="dk-trabajo">
-          <div className="dk-trabajo-txt">
-            <h2>Esto es lo que producimos</h2>
-            <p className="dk-pie">
-              Seis casas distintas, del bocadillo a la cocina de autor. Cambia
-              el plato y cambia el tono, pero el oficio es el mismo: que se vea
-              apetecible en un móvil, a las once de la noche y sin sonido.
-            </p>
-          </div>
-          <div className="dk-reels dk-reels--seis">
-            {muestra.map((c) => (
-              <figure className="dk-reel-item" key={c.slug}>
-                <div className="dk-reel">
-                  <LazyVideo src={c.previewVideo!} poster={c.poster} />
-                </div>
-                <figcaption>{c.name}</figcaption>
-              </figure>
-            ))}
           </div>
         </div>
       ),
@@ -380,18 +318,95 @@ export default function TintoDeck({
       ),
     },
     {
+      /* Va después del precio y de las dudas a propósito: es lo único que le
+         pedimos al cliente en todo el deck, y una petición se hace cuando ya
+         no queda nada por explicar. */
+      id: "arranque",
+      titulo: "Cuándo empezamos",
+      render: () => (
+        <div className="dk-centro dk-centro--ancho">
+          <p className="dk-kicker">Antes de abrir, no después</p>
+          <h2>Elegid día para el arranque</h2>
+          <div className="dk-arranque">
+            <div>
+              <p className="dk-cal-mes">
+                {ARRANQUE.nombreMes} {ARRANQUE.anio}
+              </p>
+              <div className="dk-cal-rejilla">
+                {DIAS_SEMANA.map((d, i) => (
+                  <span className="dk-cal-cab" key={i}>
+                    {d}
+                  </span>
+                ))}
+                {semanasDe(ARRANQUE.anio, ARRANQUE.mes)
+                  .flat()
+                  .map((dia, i) => (
+                    <span
+                      key={i}
+                      className={[
+                        "dk-cal-dia",
+                        dia === null ? "dk-cal-dia--vacio" : "",
+                        dia !== null && ARRANQUE.opciones.includes(dia)
+                          ? "dk-cal-dia--opcion"
+                          : "",
+                        /* El último día del mes: enseña cuánto margen queda
+                           entre la reunión y la apertura sin escribirlo. */
+                        dia === 30 ? "dk-cal-dia--hito" : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                    >
+                      {dia ?? ""}
+                    </span>
+                  ))}
+              </div>
+              <div className="dk-cal-leyenda">
+                <span>
+                  <i className="dk-cal-marca--opcion" />
+                  Reunión de arranque
+                </span>
+                <span>
+                  <i className="dk-cal-marca--hito" />
+                  Fin de mes · abrís en {CLIENTE.apertura}
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <p className="dk-parrafo">
+                Lunes {ARRANQUE.opciones[0]}, martes {ARRANQUE.opciones[1]} o
+                miércoles {ARRANQUE.opciones[2]}. Nos vale cualquiera de los
+                tres: decidid vosotros y bloqueamos la agenda.
+              </p>
+              <h3 className="dk-desglose-tit">Qué sale de esa reunión</h3>
+              <ul className="dk-lista dk-lista--compacta">
+                {ARRANQUE.ordenDelDia.map((punto) => (
+                  <li key={punto}>{punto}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <p className="dk-pie">
+            Con esa fecha quedan dos semanas largas hasta la apertura: tiempo
+            para rodar, editar y llegar a {CLIENTE.apertura} con el primer mes
+            entero ya publicado o listo para publicarse.
+          </p>
+        </div>
+      ),
+    },
+    {
       id: "cierre",
       titulo: "El siguiente paso",
       render: () => (
         <div className="dk-cierre">
           <h2>
-            Una hora de briefing
-            <span className="dk-tenue"> y rodamos en dos semanas</span>
+            Nos vemos en septiembre
+            <span className="dk-tenue"> y abrís contados</span>
           </h2>
           <p className="dk-parrafo">
-            Nos sentamos con vosotros a ver la carta, decidimos qué entra en el
-            primer mes y cerramos la fecha del rodaje. A partir de ahí, lo
-            único que os pedimos es abrirnos la puerta fuera del servicio.
+            Decidnos cuál de los tres días os va bien y nos ponemos en marcha.
+            A partir de ahí lo único que os pedimos es una hora al mes y
+            abrirnos la puerta fuera del servicio.
           </p>
           <p className="dk-firma">
             Maen Studios · Barcelona y Madrid · jandro@maenstudios.com
@@ -401,11 +416,7 @@ export default function TintoDeck({
     },
   ];
 
-  return (
-    <Visor
-      marca={`Maen × ${CLIENTE.nombre}`}
-      diapos={diapos}
-      precargar={[...barrio, ...muestra].map((c) => c.previewVideo!)}
-    />
-  );
+  /* Sin precarga: los únicos vídeos que quedan son los cinco de la portada, y
+     esos ya bajan con prioridad en la primera pantalla. */
+  return <Visor marca={`Maen × ${CLIENTE.nombre}`} diapos={diapos} />;
 }

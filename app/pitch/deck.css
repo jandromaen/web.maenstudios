@@ -1022,3 +1022,98 @@ body.deck-abierto .theme-toggle {
   letter-spacing: -0.015em;
   color: var(--fg);
 }
+
+/* ── Calendario de arranque ───────────────────────────────────────────────
+   Un mes entero con los días candidatos marcados.
+
+   Se enseña el mes completo y no las tres fechas sueltas porque lo que tiene
+   que verse de un vistazo no es el día: es el hueco que queda entre esa
+   reunión y la apertura. Tres fechas en una lista no enseñan margen.
+   ────────────────────────────────────────────────────────────────────────── */
+.dk-arranque {
+  display: grid;
+  gap: clamp(24px, 3.6vw, 48px);
+  margin-top: 26px;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .dk-arranque { grid-template-columns: 1fr 1fr; }
+}
+
+.dk-cal-mes {
+  font-family: var(--font-heading);
+  font-size: clamp(15px, 1.5vw, 18px);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin: 0 0 14px;
+}
+
+.dk-cal-rejilla {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.dk-cal-cab {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+.dk-cal-dia {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  border: 1px solid transparent;
+}
+
+/* Los huecos del principio y del final del mes: ocupan sitio y no pintan nada */
+.dk-cal-dia--vacio { visibility: hidden; }
+
+/* Las tres fechas entre las que elige el cliente */
+.dk-cal-dia--opcion {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  border-radius: 2px;
+}
+
+/* El día en que abren: el otro extremo del margen que queremos que se vea */
+.dk-cal-dia--hito {
+  border-color: var(--line-strong);
+  color: var(--fg);
+  font-weight: 650;
+}
+
+.dk-cal-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 18px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.dk-cal-leyenda span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dk-cal-leyenda i {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.dk-cal-leyenda .dk-cal-marca--opcion { background: var(--accent); }
+.dk-cal-leyenda .dk-cal-marca--hito { border: 1px solid var(--line-strong); }

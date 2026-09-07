@@ -16,11 +16,11 @@
 
 export const CLIENTE = {
   nombre: "Tinto",
-  zona: "Mandri",
   ciudad: "Barcelona",
-  /* No es «un restaurante» a secas: es uno que acaba de abrir. Todo el
-     contenido depende de entender eso — no hay clientela hecha todavía. */
-  momento: "recién abierto",
+  /* Lo que lo cambia todo: TODAVÍA NO HAN ABIERTO. No estamos contando un
+     restaurante que ya funciona, estamos construyéndole público antes de que
+     exista. Por eso el arranque es en septiembre y no en octubre. */
+  apertura: "octubre",
 };
 
 /**
@@ -203,12 +203,13 @@ export const DUDAS = [
 /**
  * Los cinco reels de la portada, que se pueden arrastrar.
  *
- * Todos de hostelería y todos distintos de los de las otras dos diapositivas:
- * entre las tres se enseñan trece marcas sin repetir ni una, que es lo que
- * demuestra catálogo. Repetir el mismo reel dos veces demuestra lo contrario.
+ * Son lo único que queda de trabajo nuestro en el deck, y es a propósito: a
+ * un cliente que ya ha firmado no hay que demostrarle catálogo, así que las
+ * dos diapositivas de portfolio se quitaron. Aquí no argumentan nada, hacen
+ * de portada y de excusa para que el cliente toque algo antes de empezar.
  *
- * Se cargan con prioridad porque están en la primera pantalla, así que aquí
- * pesan los más ligeros: 2,5 MB los cinco.
+ * Todos de hostelería. Se cargan con prioridad porque están en la primera
+ * pantalla, así que pesan los más ligeros: 2,5 MB los cinco.
  */
 export const PORTADA = [
   "burmet",
@@ -219,27 +220,49 @@ export const PORTADA = [
 ];
 
 /**
- * Los dos casos del barrio.
+ * La reunión de arranque.
  *
- * Es el argumento más fuerte que tenemos con Tinto y por eso va en una
- * diapositiva propia y a doble tamaño, no perdido en una rejilla de seis:
- * Tram-Tram e Hijos de Javier están en Sarrià, a diez minutos de Mandri. No
- * es «hacemos restaurantes», es «ya trabajamos en tu barrio».
+ * Tinto abre en octubre, así que esto no es «cuándo nos vemos»: es el margen.
+ * Sentarse a mediados de septiembre deja dos semanas para cerrar dirección,
+ * hacer el primer briefing y rodar antes de que abran las puertas. Empezar en
+ * octubre significaría contar la apertura desde detrás.
+ *
+ * Las tres fechas son lunes, martes y miércoles de la misma semana: elige
+ * Tinto, a nosotros nos vale cualquiera.
  */
-export const BARRIO = ["tram-tram", "hijos-de-javier"];
+export const ARRANQUE = {
+  anio: 2026,
+  mes: 9,
+  nombreMes: "Septiembre",
+  opciones: [14, 15, 16],
+  ordenDelDia: [
+    "Dirección del proyecto: qué queremos que sea Tinto en redes antes de que exista",
+    "Primer briefing, con la carta y la sala delante",
+    "Calendario del mes de apertura, cerrado de principio a fin",
+    "Fecha del primer rodaje, con margen para editarlo antes de octubre",
+  ],
+};
 
 /**
- * Las seis piezas de la diapositiva de trabajo.
+ * La rejilla del mes, de lunes a domingo.
  *
- * Todas de hostelería, pero de seis casas distintas —cocina de autor,
- * focaccia, bocatería, bar de barrio, sin gluten y sector gastronómico—: se ve
- * de un vistazo que el oficio aguanta desde un bocadillo hasta un omakase.
+ * Se calcula y no se teclea: un calendario escrito a mano se equivoca de día
+ * de la semana una vez y nadie lo revisa, y aquí el error se lo estaríamos
+ * enseñando al cliente en la diapositiva donde le pedimos una fecha.
  */
-export const MUESTRA = [
-  "mantis",
-  "focacha",
-  "b-de-bocata",
-  "ultrapaninos-marin",
-  "jansana",
-  "gastroconnect",
-];
+export function semanasDe(anio: number, mes: number): (number | null)[][] {
+  const primero = new Date(Date.UTC(anio, mes - 1, 1));
+  const dias = new Date(Date.UTC(anio, mes, 0)).getUTCDate();
+  /* getUTCDay() cuenta el domingo como 0; aquí la semana empieza en lunes. */
+  const hueco = (primero.getUTCDay() + 6) % 7;
+  const celdas: (number | null)[] = [
+    ...Array<null>(hueco).fill(null),
+    ...Array.from({ length: dias }, (_, i) => i + 1),
+  ];
+  while (celdas.length % 7) celdas.push(null);
+  return Array.from({ length: celdas.length / 7 }, (_, i) =>
+    celdas.slice(i * 7, i * 7 + 7),
+  );
+}
+
+export const DIAS_SEMANA = ["L", "M", "X", "J", "V", "S", "D"];

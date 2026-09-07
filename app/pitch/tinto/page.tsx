@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import TintoDeck from "./TintoDeck";
 import { clients, type Client } from "../../clients";
-import { BARRIO, MUESTRA, PORTADA } from "./propuesta";
+import { PORTADA } from "./propuesta";
 import "../deck.css";
 
 /**
@@ -27,11 +27,5 @@ export default function PropuestaTinto() {
       .map((slug) => clients.find((c) => c.slug === slug))
       .filter((c): c is Client => Boolean(c?.previewVideo));
 
-  return (
-    <TintoDeck
-      portada={resolver(PORTADA)}
-      barrio={resolver(BARRIO)}
-      muestra={resolver(MUESTRA)}
-    />
-  );
+  return <TintoDeck portada={resolver(PORTADA)} />;
 }
