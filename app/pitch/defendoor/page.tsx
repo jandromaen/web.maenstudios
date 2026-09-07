@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import DefendoorDeck from "./DefendoorDeck";
 import { clients, type Client } from "../../clients";
 import { MUESTRA, PORTADA } from "./propuesta";
-import "./deck.css";
+import "../deck.css";
 
 /**
  * Propuesta para Defendoor Abogados, en formato de diapositivas.

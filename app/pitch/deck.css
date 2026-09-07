@@ -1,9 +1,14 @@
 /* ==========================================================================
-   Propuesta Defendoor · visor de diapositivas
+   Visor de propuestas · estilos compartidos
 
-   Mismo modelo que el pitch de «Tornem a ser Barcelona»: ocupa la pantalla
-   entera, se avanza con flechas o pulsando a los lados, y hay barra de
-   progreso, contador y puntos. Todo cuelga de .dk.
+   Los usan todas las propuestas de /pitch: ocupa la pantalla entera, se
+   avanza con flechas o pulsando a los lados, y hay barra de progreso,
+   contador y puntos. Todo cuelga de .dk.
+
+   Vive aquí y no dentro de la carpeta de un cliente porque no hay una sola
+   regla que sea de un cliente concreto: son mil líneas de visor. Con una
+   copia por propuesta, el día que se arregle un fallo de maquetación se
+   arreglaría en una y quedaría roto en las demás.
 
    La paleta sale de la web, no de una marca aparte: esto lo enseña Maen en
    una llamada, y tiene que parecer nuestro.
@@ -188,6 +193,15 @@
 
 @media (min-width: 820px) {
   .dk-reels--seis { grid-template-columns: repeat(6, 1fr); }
+}
+
+/* Dos reels grandes, para cuando la diapositiva enseña dos casos concretos y
+   no un catálogo: a este tamaño se ve el trabajo, no la miniatura. */
+.dk-reels--dos {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 520px;
+  margin-top: 26px;
 }
 
 .dk-reel {
