@@ -375,6 +375,61 @@ async function revisarEnlacesEntrantes(): Promise<Punto[]> {
   }];
 }
 
+/**
+ * Claves que le faltan al despliegue.
+ *
+ * Esto nació de un fallo que estuvo semanas sin detectar: el cron de los
+ * martes redactaba el artículo solo si existía ANTHROPIC_API_KEY y, como no
+ * existía, mandaba un correo con el tema propuesto y sin texto. El correo
+ * llegaba, así que nada parecía roto — pero el sistema llevaba un mes sin
+ * hacer su trabajo. Se descubrió de casualidad, mirando las variables del
+ * proyecto a mano.
+ *
+ * Se comprueba la PRESENCIA, nunca el valor: esto acaba en un correo.
+ *
+ * Ojo, y por eso no se comprueban aquí las NEXT_PUBLIC_: esas se incrustan al
+ * compilar y hay que mirarlas en el HTML de producción, que es lo que ya hace
+ * revisarMedicion(). Aquí solo van las que el servidor lee en caliente.
+ */
+function revisarClaves(): Punto[] {
+  const area = "Configuración";
+
+  const claves = [
+    {
+      nombre: "CONTACT_FROM_EMAIL",
+      queRompe: "El formulario y este informe salen desde onboarding@resend.dev y solo llegan a un buzón.",
+      accion: `Crearla en Vercel con el valor web@${DOMINIO} y volver a desplegar. El dominio ya verifica en Resend.`,
+      estado: "bloqueo" as const,
+    },
+    {
+      nombre: "ANTHROPIC_API_KEY",
+      queRompe: "El borrador de los martes llega con el tema propuesto pero sin artículo redactado.",
+      accion: "Crearla en Vercel con una clave de la consola de Anthropic.",
+      estado: "bloqueo" as const,
+    },
+    {
+      nombre: "GITHUB_TOKEN",
+      queRompe: "El artículo de los martes no se publica solo: se queda en borrador por correo.",
+      accion: "Token de GitHub con permiso de escritura de contenido sobre el repositorio de la web.",
+      estado: "aviso" as const,
+    },
+  ];
+
+  const faltan = claves.filter((c) => !process.env[c.nombre]);
+
+  if (!faltan.length) {
+    return [{ estado: "ok", area, titulo: "Todas las claves del servidor están puestas" }];
+  }
+
+  return faltan.map((c) => ({
+    estado: c.estado,
+    area,
+    titulo: `Falta ${c.nombre}`,
+    detalle: c.queRompe,
+    accion: c.accion,
+  }));
+}
+
 const mensaje = (err: unknown) => (err instanceof Error ? err.message : String(err));
 
 export async function auditar(): Promise<Punto[]> {
@@ -387,6 +442,7 @@ export async function auditar(): Promise<Punto[]> {
     revisarEnlacesEntrantes(),
     Promise.resolve().then(revisarPerfilNegocio),
     Promise.resolve().then(revisarContenido),
+    Promise.resolve().then(revisarClaves),
   ]);
   return grupos.flat();
 }
