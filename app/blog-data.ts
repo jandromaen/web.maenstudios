@@ -725,6 +725,102 @@ export const posts: Post[] = [
       },
     ],
   },
+  {
+    slug: "contenido-redes-sociales-bares-coctelerias",
+    title: "Contenido en redes para bares y coctelerías: qué funciona de noche",
+    description:
+      "Cómo grabar y publicar contenido para bares, coctelerías y locales de noche: qué falla con poca luz, qué formatos llenan mesa y cuándo publicar cada cosa.",
+    category: "Sectores",
+    date: "2026-09-08",
+    readingMinutes: 6,
+    keywords: [
+      "contenido redes sociales bares",
+      "instagram para coctelerías",
+      "reels bar de noche",
+      "marketing para bares y locales de copas",
+      "contenido ocio nocturno",
+    ],
+    excerpt:
+      "De noche la cámara lo tiene todo en contra: poca luz, mucho ruido y el local lleno. Así grabamos los bares y coctelerías con los que trabajamos.",
+    content: [
+      {
+        type: "p",
+        text: "Un bar de noche es el sitio más difícil que hay para grabar y, a la vez, el negocio que más depende de que alguien vea algo en el móvil y decida venir. Nadie reserva una copa con dos semanas de antelación: se decide a las nueve, mirando historias. Eso cambia por completo cómo hay que trabajar la cuenta.",
+      },
+      {
+        type: "p",
+        text: "Llevamos varios locales de noche en Barcelona —un piano bar, una coctelería y un sitio de hot dogs y cócteles— y todo lo que viene aquí sale de rodar en ellos, no de un manual.",
+      },
+      { type: "h2", text: "La luz es el problema, y no se arregla con mejor cámara" },
+      {
+        type: "p",
+        text: "Con poca luz cualquier cámara sube la sensibilidad, y al subirla aparece ruido y los colores se van. Por eso tantos vídeos de bares se ven sucios y verdosos: no es el móvil, es la física. La solución no es comprar otro equipo, es grabar donde sí hay luz y aprovechar la que el local ya tiene.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Rodamos el producto antes de abrir, con luz propia, y guardamos ese material para todo el mes.",
+          "El ambiente sí se graba de noche, pero apoyándonos en lo que ya ilumina: la barra, los neones, la vela de la mesa.",
+          "Un plano corto siempre aguanta mejor que uno general: menos superficie oscura y el foco donde interesa.",
+          "El grano se nota más cuanto más se mueve la cámara. De noche, planos quietos.",
+        ],
+      },
+      { type: "h2", text: "Qué se graba en un bar" },
+      {
+        type: "p",
+        text: "La copa es lo obvio y es lo que menos rinde sola. Un cóctel quieto sobre la barra es una foto bonita que no cuenta nada. Lo que para el scroll es el gesto: el hielo cayendo, el cítrico exprimiéndose, el líquido subiendo por el vaso. La coctelería tiene la suerte de que su producto se prepara delante del cliente, y eso ya es una escena.",
+      },
+      {
+        type: "ul",
+        items: [
+          "La preparación de la copa, en plano cerrado y con sonido real.",
+          "La carta nueva, presentada por quien la ha creado.",
+          "El local llenándose: no el local lleno, sino el momento en que se llena.",
+          "La gente que ya está dentro, siempre con permiso y sin convertirlo en un anuncio.",
+        ],
+      },
+      { type: "h2", text: "El calendario de un bar no se parece al de un restaurante" },
+      {
+        type: "p",
+        text: "Un restaurante puede programar el contenido de la semana el lunes. Un bar no: la decisión de salir se toma el mismo día, muchas veces con un par de horas de margen. Por eso separamos las dos capas y las tratamos distinto.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Los reels van programados y buscan que te descubra gente que no te sigue. Trabajan a semanas vista.",
+          "Las historias van del día: quién toca esta noche, si queda sitio, la copa nueva. Trabajan a horas vista.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Confundirlas es el error más común. Un local que solo publica historias no crece nunca, porque solo las ve quien ya le sigue. Y uno que solo publica reels queda muy bien y tiene la barra vacía un jueves.",
+      },
+      { type: "h2", text: "La música es la mitad del vídeo, y es la que da problemas" },
+      {
+        type: "p",
+        text: "En un bar el sonido ambiente es parte de lo que quieres vender, pero si en la grabación suena un tema comercial, la plataforma puede silenciar el vídeo o limitar su alcance sin avisar. Lo resolvemos grabando el ambiente por separado —conversación, hielo, cristal— y montándolo con música de la biblioteca de la propia red social, que además es la que el algoritmo mueve mejor.",
+      },
+      { type: "h2", text: "Lo que no funciona, por mucho que se repita" },
+      {
+        type: "ul",
+        items: [
+          "El cartel del evento como publicación. Es un PDF en una red de vídeo: no lo ve nadie que no te siga ya.",
+          "Publicar solo cuando hay fiesta. Las semanas normales son las que sostienen la cuenta.",
+          "Grabar a las dos de la mañana con el local a tope y esperar que se vea bien.",
+          "Copiar el tono de una discoteca cuando lo tuyo es una coctelería de barrio. El público no es el mismo y se nota.",
+        ],
+      },
+      { type: "h2", text: "Cómo medimos si está funcionando" },
+      {
+        type: "p",
+        text: "En hostelería nocturna los «me gusta» dicen poco. Miramos los guardados y los compartidos, que es lo que hace alguien cuando está decidiendo dónde ir con otra persona, y los mensajes preguntando por reservas o por la carta. Si un formato trae conversaciones, se repite; si solo trae likes, se cambia.",
+      },
+      {
+        type: "p",
+        text: "Rodamos en Barcelona y Madrid cada semana. Si llevas un bar o una coctelería y quieres ver cómo sería una jornada en tu local, escríbenos.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {
