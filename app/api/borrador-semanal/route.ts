@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { BUZONES, REMITENTE } from "../../lib/remitente";
 import { temaDeLaSemana, temasPendientes } from "../../lib/blog-temas";
 import { redactarBorrador, slugDe, type BorradorArticulo } from "../../lib/borrador";
+import { publicarEnRepo, revisar, type Publicacion } from "../../lib/publicar";
+import { SITE_URL } from "../../seo-config";
 import type { Tema } from "../../lib/blog-temas";
 
 export const runtime = "nodejs";
@@ -61,18 +63,43 @@ function comoTexto(b: BorradorArticulo) {
     .join("\n");
 }
 
-function componer(tema: Tema, b: BorradorArticulo | null, fallo?: string) {
+function componer(
+  tema: Tema,
+  b: BorradorArticulo | null,
+  fallo?: string,
+  publicado?: Publicacion | null,
+  noPublicado?: string,
+) {
   const fecha = new Date().toLocaleDateString("es-ES", {
     day: "numeric",
     month: "long",
   });
   const pendientes = temasPendientes();
 
-  const asunto = b
-    ? `Borrador de blog · ${b.titulo}`
-    : `Borrador de blog · tema propuesto (sin redactar)`;
+  const asunto = publicado
+    ? `Publicado en el blog · ${b?.titulo ?? tema.titulo}`
+    : b
+      ? `Borrador de blog · ${b.titulo}`
+      : `Borrador de blog · tema propuesto (sin redactar)`;
 
-  const cabecera = `<div style="font:600 11px/1 ${FUENTE};letter-spacing:.16em;color:#a0a0a0">MAEN STUDIOS · BORRADOR DEL ${fecha.toUpperCase()}</div>`;
+  const rotulo = publicado ? "PUBLICADO EL" : "BORRADOR DEL";
+  const cabecera = `<div style="font:600 11px/1 ${FUENTE};letter-spacing:.16em;color:#a0a0a0">MAEN STUDIOS · ${rotulo} ${fecha.toUpperCase()}</div>`;
+
+  /* Cuando se publica solo, este aviso es lo único que se interpone entre un
+     artículo flojo y que se quede ahí para siempre. Va arriba del todo y con
+     el enlace y la forma de retirarlo, no enterrado al final. */
+  const aviso = publicado
+    ? `<div style="font:400 14px/1.6 ${FUENTE};color:#1a4731;background:#e8f3ec;border:1px solid #cfe3d6;padding:14px 16px;margin:0 0 22px">
+        <strong>Ya está publicado.</strong> Nadie lo ha leído antes que tú.<br>
+        <a href="${SITE_URL}/blog/${escapar(publicado.slug)}" style="color:#1a4731">${SITE_URL}/blog/${escapar(publicado.slug)}</a><br>
+        <span style="color:#4a6b58">Commit ${escapar(publicado.commit)} · para retirarlo, revierte ese commit y se cae solo en el siguiente despliegue.</span>
+      </div>`
+    : noPublicado
+      ? `<div style="font:400 14px/1.6 ${FUENTE};color:#7a4a00;background:#fdf3e3;border:1px solid #f0dcbc;padding:14px 16px;margin:0 0 22px">
+          <strong>No se ha publicado.</strong> ${escapar(noPublicado)}<br>
+          <span style="color:#8a6206">Va abajo como borrador, para que decidas tú.</span>
+        </div>`
+      : "";
 
   const bloqueTema = `
     <table style="font:400 14px/1.6 ${FUENTE};color:#444;border-collapse:collapse;margin:0 0 24px">
@@ -96,9 +123,12 @@ function componer(tema: Tema, b: BorradorArticulo | null, fallo?: string) {
 
   const html = `<div style="max-width:680px;margin:0 auto;padding:36px 24px;background:#fff">
     ${cabecera}
+    ${aviso}
     ${cuerpo}
     <p style="font:400 12px/1.55 ${FUENTE};color:#b0b0b0;margin-top:30px;border-top:1px solid #ededed;padding-top:18px">
-      Esto es un borrador: no se ha publicado nada. Léelo, corrígelo y pégalo si te convence.
+      ${publicado
+        ? "Publicado automáticamente por el cron de los martes."
+        : "Esto es un borrador: no se ha publicado nada. Léelo, corrígelo y pégalo si te convence."}
       Quedan ${pendientes} temas sin cubrir en la cola.
     </p>
   </div>`;
@@ -154,7 +184,33 @@ export async function GET(request: Request) {
     }
   }
 
-  const correo = componer(tema, borrador, fallo);
+  /* Publicar sin pasar por nadie.
+     Lo activa la presencia de GITHUB_TOKEN y no una bandera aparte: así el
+     sistema no puede quedarse en un estado a medias donde cree que publica y
+     no tiene con qué. Sin la variable, esto se comporta como siempre y manda
+     el borrador por correo. */
+  let publicado: Publicacion | null = null;
+  let noPublicado: string | undefined;
+
+  if (borrador && process.env.GITHUB_TOKEN) {
+    const veredicto = revisar(borrador);
+    if (!veredicto.ok) {
+      noPublicado = veredicto.motivo;
+    } else {
+      try {
+        publicado = await publicarEnRepo(
+          borrador,
+          tema,
+          new Date().toISOString().slice(0, 10),
+        );
+      } catch (err) {
+        noPublicado = `No se pudo escribir en el repositorio: ${err instanceof Error ? err.message : String(err)}`;
+        console.error("[borrador-semanal] publicar:", err);
+      }
+    }
+  }
+
+  const correo = componer(tema, borrador, fallo, publicado, noPublicado);
   const clave = process.env.RESEND_API_KEY;
   if (!clave) {
     return NextResponse.json(
@@ -185,6 +241,9 @@ export async function GET(request: Request) {
     ok: true,
     tema: tema.titulo,
     redactado: Boolean(borrador),
+    publicado: publicado?.slug ?? false,
+    commit: publicado?.commit,
+    noPublicado,
     fallo,
   });
 }
