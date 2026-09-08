@@ -43,3 +43,6 @@ video-web/
 
 # Capturas sueltas de los scripts de vídeo
 undefined/
+
+# Configuración personal de Claude Code, no del proyecto
+.claude/settings.local.json
