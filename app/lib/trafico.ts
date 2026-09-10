@@ -94,7 +94,10 @@ async function agrupar(by: Dimension, desdeDias: number): Promise<Fila[]> {
       clave: String(f[by] ?? "—"),
       visitas: Number(f.pageviews ?? f.visitors ?? 0),
     }))
-    .filter((f: Fila) => f.clave && f.clave !== "—");
+    /* Vercel añade un cajón «Others» con todo lo que no cabe en el límite.
+       Fuera: en una lista de cinco, un sexto elemento llamado «otros» no dice
+       qué página es y se lee como si fuera una URL más. */
+    .filter((f: Fila) => f.clave && f.clave !== "—" && f.clave.toLowerCase() !== "others");
 }
 
 /**
