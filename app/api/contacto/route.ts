@@ -53,6 +53,43 @@ function escapeHtml(value: string) {
     .replace(/"/g, "&quot;");
 }
 
+/**
+ * Ademas del correo, el lead se registra en el CRM y avisa a quien lo lleva.
+ *
+ * Se hace con un secreto compartido porque quien llama es este servidor, no el
+ * navegador del visitante: la clave nunca sale de aqui.
+ *
+ * No corta el envio si falla: el correo es el canal principal y un CRM caido
+ * no puede hacer que un cliente potencial se quede sin contactar.
+ */
+async function registrarEnCrm(datos: {
+  nombre: string;
+  apellido: string;
+  email: string;
+  telefono: string;
+  comentarios: string;
+  presupuesto: string;
+  origen: string;
+}) {
+  const destino = process.env.CRM_LEADS_URL;
+  const secreto = process.env.CRM_LEADS_SECRET;
+  if (!destino || !secreto) return;
+
+  try {
+    const res = await fetch(destino, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-maen-webhook": secreto },
+      body: JSON.stringify(datos),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) {
+      console.error("[contacto] el CRM rechazo el lead:", res.status);
+    }
+  } catch (err) {
+    console.error("[contacto] no se pudo avisar al CRM:", err);
+  }
+}
+
 export async function POST(request: Request) {
   let payload: ContactPayload;
   try {
@@ -195,6 +232,18 @@ export async function POST(request: Request) {
         comentarios,
       ].join("\n"),
     });
+
+    if (!error) {
+      await registrarEnCrm({
+        nombre,
+        apellido,
+        email,
+        telefono,
+        comentarios,
+        presupuesto,
+        origen,
+      });
+    }
 
     if (error) {
       console.error("[contacto] Resend devolvió un error:", error);
