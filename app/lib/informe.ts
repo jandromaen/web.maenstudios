@@ -1,4 +1,5 @@
 import { auditar, type Punto } from "./auditoria";
+import { traficoSemanal, variacion, type Trafico } from "./trafico";
 import { BUZONES, REMITENTE as DIRECCION } from "./remitente";
 
 /** Compone y envía el informe semanal de pendientes. */
@@ -12,7 +13,7 @@ const COLOR: Record<Punto["estado"], string> = { bloqueo: "#c0392b", aviso: "#b7
 const FUENTE = "-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
 
 /** El correo se lee en clientes que ignoran el CSS externo: todo va en línea. */
-function componer(puntos: Punto[]) {
+function componer(puntos: Punto[], trafico: Trafico | null) {
   const orden = [...puntos].sort((a, b) => ORDEN[a.estado] - ORDEN[b.estado]);
   const bloqueos = orden.filter((p) => p.estado === "bloqueo").length;
   const avisos = orden.filter((p) => p.estado === "aviso").length;
@@ -31,6 +32,45 @@ function componer(puntos: Punto[]) {
       ? "Nada roto de cara al visitante. Lo que queda puede esperar."
       : "Nada pendiente. La web está como debe estar.";
 
+
+  /* El tráfico va ARRIBA de los pendientes, y no al final como un anexo: es lo
+     primero que Jandro quiere ver el viernes, y una lista de pendientes leída
+     sin saber si entra gente no permite priorizar nada. */
+  const numero = (n: number) => n.toLocaleString("es-ES");
+
+  const listita = (titulo: string, filas: { clave: string; visitas: number }[]) =>
+    filas.length
+      ? `<div style="margin-top:14px">
+          <div style="font:600 11px/1 ${FUENTE};letter-spacing:.08em;color:#a0a0a0">${escapar(titulo.toUpperCase())}</div>
+          ${filas
+            .map(
+              (f) =>
+                `<div style="font:400 13px/1.6 ${FUENTE};color:#444;display:flex;justify-content:space-between;gap:12px">
+                   <span>${escapar(f.clave)}</span><b style="color:#111">${numero(f.visitas)}</b>
+                 </div>`,
+            )
+            .join("")}
+        </div>`
+      : "";
+
+  const bloqueTrafico = !trafico
+    ? ""
+    : `<div style="background:#fafaf8;border:1px solid #ededed;padding:18px 20px;margin:0 0 26px">
+        <div style="font:600 11px/1 ${FUENTE};letter-spacing:.14em;color:#a0a0a0">TRÁFICO DE LOS ÚLTIMOS 7 DÍAS</div>
+        <div style="font:700 30px/1.15 ${FUENTE};color:#111;margin:10px 0 2px">
+          ${numero(trafico.visitantes)} <span style="font:400 15px/1 ${FUENTE};color:#666">visitantes</span>
+          <span style="color:#ddd">·</span>
+          ${numero(trafico.paginas)} <span style="font:400 15px/1 ${FUENTE};color:#666">páginas vistas</span>
+        </div>
+        <div style="font:400 13px/1.5 ${FUENTE};color:#666">${escapar(variacion(trafico.visitantes, trafico.visitantesPrevios))}</div>
+        ${listita("Páginas más vistas", trafico.topPaginas)}
+        ${listita("De dónde llegan", trafico.topOrigenes)}
+        ${listita("Dispositivo", trafico.dispositivos)}
+        <div style="font:400 11px/1.5 ${FUENTE};color:#b0b0b0;margin-top:14px">
+          Medido en el navegador, así que subcuenta: quien use bloqueador no aparece. Sirve para ver tendencia.
+        </div>
+      </div>`;
+
   const fila = (p: Punto) => `
     <tr>
       <td style="padding:16px 14px 16px 0;vertical-align:top;white-space:nowrap">
@@ -48,6 +88,7 @@ function componer(puntos: Punto[]) {
     <div style="font:600 11px/1 ${FUENTE};letter-spacing:.16em;color:#a0a0a0">MAEN STUDIOS · ${fecha.toUpperCase()}</div>
     <h1 style="font:700 27px/1.25 ${FUENTE};color:#111;margin:14px 0 8px">Pendientes de la web</h1>
     <p style="font:400 15px/1.55 ${FUENTE};color:#555;margin:0 0 26px">${escapar(resumen)}</p>
+    ${bloqueTrafico}
     <table style="width:100%;border-collapse:collapse">${orden.map(fila).join("")}</table>
     <p style="font:400 12px/1.55 ${FUENTE};color:#b0b0b0;margin-top:30px">
       Generado comprobando producción, el DNS, Resend y los datos del proyecto. No es una lista escrita a mano:
@@ -59,6 +100,9 @@ function componer(puntos: Punto[]) {
     `PENDIENTES DE LA WEB · ${fecha}`,
     resumen,
     "",
+    trafico
+      ? `TRÁFICO (7 días): ${trafico.visitantes} visitantes, ${trafico.paginas} páginas vistas · ${variacion(trafico.visitantes, trafico.visitantesPrevios)}`
+      : "",
     ...orden.map((p) =>
       [
         `[${ETIQUETA[p.estado]}] ${p.titulo} (${p.area})`,
@@ -78,8 +122,17 @@ function escapar(valor: string) {
 }
 
 export async function enviarInforme({ soloComponer = false } = {}) {
-  const puntos = await auditar();
-  const correo = componer(puntos);
+  /* Si la analítica falla, el informe sale igual sin el bloque de tráfico: los
+     pendientes son la razón de ser de este correo y no deben caerse porque
+     Vercel tarde en responder o falte el token. */
+  const [puntos, trafico] = await Promise.all([
+    auditar(),
+    traficoSemanal().catch((err) => {
+      console.error("[informe] tráfico:", err);
+      return null;
+    }),
+  ]);
+  const correo = componer(puntos, trafico);
 
   if (soloComponer) return { ...correo, enviado: false, destinatarios: DESTINATARIOS };
 

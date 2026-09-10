@@ -408,6 +408,12 @@ function revisarClaves(): Punto[] {
       estado: "bloqueo" as const,
     },
     {
+      nombre: "VERCEL_TOKEN",
+      queRompe: "El informe sale sin el bloque de tráfico: sin token no se puede consultar la analítica.",
+      accion: "Token de solo lectura en vercel.com/account/settings/tokens, guardado como VERCEL_TOKEN.",
+      estado: "aviso" as const,
+    },
+    {
       nombre: "GITHUB_TOKEN",
       queRompe: "El artículo de los martes no se publica solo: se queda en borrador por correo.",
       accion: "Token de GitHub con permiso de escritura de contenido sobre el repositorio de la web.",
