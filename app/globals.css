@@ -276,14 +276,20 @@ button,
 
 
 
-/* El logo de la cabecera va blanco siempre, en los dos temas y en todas las
-   páginas. Decisión de Jandro, pedida dos veces y con la contrapartida sobre
-   la mesa: el PNG es blanco, así que con el tema claro queda blanco sobre un
-   fondo casi blanco y prácticamente no se lee.
+/* El logo de la cabecera se tiñe de negro cuando está sobre fondo claro.
+   Vuelve a estar así desde el 10/09/2026: Jandro había pedido dos veces que
+   fuera blanco siempre, y al verlo en el tema claro -blanco sobre un fondo casi
+   blanco, ilegible- pidió lo contrario con la pantalla delante.
 
-   Aquí ya no hay ninguna regla que lo tiña: el filtro se retira entero en
-   lugar de dejarlo condicionado, para que no reaparezca por descuido al tocar
-   estas reglas otra vez. */
+   El PNG del logo es blanco, así que basta con apagarlo a negro por filtro.
+   Se cuelga de .header--light y no del tema, porque esa clase es la que ya
+   sabe si la cabecera tiene debajo algo claro: la ponen tanto las páginas
+   interiores (prop `light`) como la home al pasar el hero (prop `adaptive`).
+   Atarlo a [data-theme="light"] dejaría fuera las secciones claras del tema
+   oscuro, que es donde el problema también aparece. */
+.header--light .brand-logo {
+  filter: brightness(0);
+}
 
 .header-inner {
   display: flex;
