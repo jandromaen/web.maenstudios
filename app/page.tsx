@@ -66,7 +66,7 @@ const awards = [
 export default function Home() {
   return (
     <>
-      <SiteHeader adaptive />
+      <SiteHeader />
       <FaqJsonLd items={faqs.map((f) => ({ q: f.q, a: f.a }))} />
       <ServiceJsonLd />
       <ItemListJsonLd

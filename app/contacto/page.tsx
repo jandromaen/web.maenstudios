@@ -29,7 +29,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function ContactoPage() {
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
       <ContactPageJsonLd />
       <BreadcrumbJsonLd
         items={[

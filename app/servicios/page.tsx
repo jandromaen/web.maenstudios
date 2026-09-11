@@ -43,7 +43,7 @@ const serviceFaqs = faqs.slice(0, 4);
 export default function ServiciosPage() {
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
       <ServiceJsonLd />
       <FaqJsonLd items={serviceFaqs} />
       <BreadcrumbJsonLd

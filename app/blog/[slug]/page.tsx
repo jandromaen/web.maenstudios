@@ -75,7 +75,7 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
 
       <BlogPostingJsonLd
         title={post.title}

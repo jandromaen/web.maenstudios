@@ -28,7 +28,7 @@ export default function PodcastPage() {
 
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
       <PodcastJsonLd />
       <BreadcrumbJsonLd
         items={[

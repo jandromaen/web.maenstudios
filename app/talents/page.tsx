@@ -95,7 +95,7 @@ const talentTypes = [
 export default function TalentsPage() {
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
 
       <BreadcrumbJsonLd
         items={[

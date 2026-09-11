@@ -17,7 +17,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function AvisoLegalPage() {
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
 
       <main>
         <section className="page-hero">

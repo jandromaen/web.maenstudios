@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
 
       <main>
         <section className="page-hero">

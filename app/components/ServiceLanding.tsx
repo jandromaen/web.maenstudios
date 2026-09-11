@@ -45,7 +45,7 @@ export default function ServiceLanding({
 
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
 
       {/* LocalBusiness ya lo emite GlobalJsonLd en todas las páginas. */}
       <ServiceJsonLd

@@ -15,7 +15,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function GraciasPage() {
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
 
       <main>
         <section className="page-hero">

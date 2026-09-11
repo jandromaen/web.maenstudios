@@ -172,7 +172,7 @@ function ClientCard({ client }: { client: Client }) {
 export default function ClientesPage() {
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
 
       <ItemListJsonLd
         name="Clientes de Maen Studios"

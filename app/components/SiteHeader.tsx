@@ -7,17 +7,25 @@ import { createPortal } from "react-dom";
 import { navLinks } from "../site-data";
 import SelectorIdioma from "./SelectorIdioma";
 
-type SiteHeaderProps = {
-  /** Fondo claro fijo: logo y nav oscuros (páginas interiores) */
-  light?: boolean;
-  /** Alterna según scroll sobre el hero (home) */
-  adaptive?: boolean;
-};
-
-export default function SiteHeader({ light = false, adaptive = false }: SiteHeaderProps) {
+/**
+ * La cabecera no recibe ninguna prop de color a propósito.
+ *
+ * Antes había `light` y `adaptive` para decirle de qué color iba, y las
+ * páginas interiores pasaban `light` fijo. Eso significaba que el servidor
+ * pintaba ya la clase de «fondo claro», que en el tema oscuro -el de la casa-
+ * era mentira: el logo salía negro sobre negro durante los 2-3 segundos que
+ * tardaba en hidratar. Medido en producción, no supuesto.
+ *
+ * Ahora el HTML del servidor sale siempre con el logo blanco, que es lo
+ * correcto para el tema por defecto, y en cuanto hay JavaScript la medición
+ * decide. Sin props no hay forma de volver a mentirle.
+ */
+export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [overLight, setOverLight] = useState(light);
+  /* Arranca en falso -logo blanco- y no en lo que diga una prop: es lo que
+     pinta el servidor, y tiene que ser correcto para el tema por defecto. */
+  const [overLight, setOverLight] = useState(false);
   /* El portal necesita document, que no existe al renderizar en el servidor. */
   const [montado, setMontado] = useState(false);
   useEffect(() => setMontado(true), []);
@@ -50,8 +58,6 @@ export default function SiteHeader({ light = false, adaptive = false }: SiteHead
    * cualquier sección presente o futura sin marcarla de ninguna manera, que es
    * lo que pidió Jandro: que se adapte al color de cada momento.
    *
-   * Corre siempre, también con `light`: esa prop pasa a ser solo el valor de
-   * partida antes de la primera medición, no una decisión fija.
    */
   useEffect(() => {
     const marca = () => document.querySelector(".header .brand");
@@ -118,7 +124,7 @@ export default function SiteHeader({ light = false, adaptive = false }: SiteHead
       window.removeEventListener("resize", alMoverse);
       observador.disconnect();
     };
-  }, [light, adaptive]);
+  }, []);
 
   useEffect(() => {
     const drawer = drawerRef.current;

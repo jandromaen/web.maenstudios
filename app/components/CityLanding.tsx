@@ -38,7 +38,7 @@ export default function CityLanding({ landing }: { landing: LocalLanding }) {
 
   return (
     <>
-      <SiteHeader light />
+      <SiteHeader />
 
       {/* La ficha LocalBusiness ya la emite GlobalJsonLd en todas las páginas:
           repetirla aquí duplicaría el mismo @id. */}
