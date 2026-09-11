@@ -414,6 +414,12 @@ function revisarClaves(): Punto[] {
       estado: "aviso" as const,
     },
     {
+      nombre: "GOOGLE_SERVICE_ACCOUNT_JSON",
+      queRompe: "El informe sale sin el bloque de búsquedas: no se puede leer Search Console.",
+      accion: "Clave JSON de una cuenta de servicio con permiso de lectura sobre la propiedad en Search Console.",
+      estado: "aviso" as const,
+    },
+    {
       nombre: "GITHUB_TOKEN",
       queRompe: "El artículo de los martes no se publica solo: se queda en borrador por correo.",
       accion: "Token de GitHub con permiso de escritura de contenido sobre el repositorio de la web.",

@@ -1,5 +1,6 @@
 import { auditar, type Punto } from "./auditoria";
 import { traficoSemanal, variacion, type Trafico } from "./trafico";
+import { busquedasSemanales, type Busquedas, type Consulta } from "./busquedas";
 import { BUZONES, REMITENTE as DIRECCION } from "./remitente";
 
 /** Compone y envía el informe semanal de pendientes. */
@@ -13,7 +14,7 @@ const COLOR: Record<Punto["estado"], string> = { bloqueo: "#c0392b", aviso: "#b7
 const FUENTE = "-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
 
 /** El correo se lee en clientes que ignoran el CSS externo: todo va en línea. */
-function componer(puntos: Punto[], trafico: Trafico | null) {
+function componer(puntos: Punto[], trafico: Trafico | null, busquedas: Busquedas | null) {
   const orden = [...puntos].sort((a, b) => ORDEN[a.estado] - ORDEN[b.estado]);
   const bloqueos = orden.filter((p) => p.estado === "bloqueo").length;
   const avisos = orden.filter((p) => p.estado === "aviso").length;
@@ -71,6 +72,45 @@ function componer(puntos: Punto[], trafico: Trafico | null) {
         </div>
       </div>`;
 
+
+  /* Las búsquedas van justo debajo del tráfico: el tráfico dice cuánta gente
+     entra y esto dice por qué. Separarlos obligaría a leer dos veces. */
+  const consultas = (titulo: string, filas: Consulta[], pie?: string) =>
+    filas.length
+      ? `<div style="margin-top:16px">
+          <div style="font:600 11px/1 ${FUENTE};letter-spacing:.08em;color:#a0a0a0">${escapar(titulo.toUpperCase())}</div>
+          ${pie ? `<div style="font:400 11px/1.5 ${FUENTE};color:#b0b0b0;margin:2px 0 6px">${escapar(pie)}</div>` : ""}
+          ${filas
+            .map(
+              (c) =>
+                `<div style="font:400 13px/1.6 ${FUENTE};color:#444;display:flex;justify-content:space-between;gap:12px">
+                   <span>${escapar(c.termino)}</span>
+                   <span style="white-space:nowrap;color:#888">${numero(c.impresiones)} veces · pos. ${c.posicion}${c.clics ? ` · ${numero(c.clics)} clic${c.clics > 1 ? "s" : ""}` : ""}</span>
+                 </div>`,
+            )
+            .join("")}
+        </div>`
+      : "";
+
+  const bloqueBusquedas = !busquedas
+    ? ""
+    : `<div style="background:#fafaf8;border:1px solid #ededed;padding:18px 20px;margin:0 0 26px">
+        <div style="font:600 11px/1 ${FUENTE};letter-spacing:.14em;color:#a0a0a0">QUÉ BUSCA LA GENTE PARA ENCONTRARTE</div>
+        <div style="font:700 30px/1.15 ${FUENTE};color:#111;margin:10px 0 2px">
+          ${numero(busquedas.clics)} <span style="font:400 15px/1 ${FUENTE};color:#666">clics desde Google</span>
+          <span style="color:#ddd">·</span>
+          ${numero(busquedas.impresiones)} <span style="font:400 15px/1 ${FUENTE};color:#666">veces que saliste</span>
+        </div>
+        <div style="font:400 13px/1.5 ${FUENTE};color:#666">
+          Posición media ${busquedas.posicionMedia} · ${escapar(variacion(busquedas.clics, busquedas.clicsPrevios))}
+        </div>
+        ${consultas("Lo que más te trae", busquedas.top)}
+        ${consultas("A tiro de primera página", busquedas.aTiro, "Posiciones 8 a 20: aquí un artículo o un retoque de copy sí mueve la aguja.")}
+        <div style="font:400 11px/1.5 ${FUENTE};color:#b0b0b0;margin-top:14px">
+          Google publica estos datos con dos o tres días de retraso, así que la semana termina hace tres días.
+        </div>
+      </div>`;
+
   const fila = (p: Punto) => `
     <tr>
       <td style="padding:16px 14px 16px 0;vertical-align:top;white-space:nowrap">
@@ -89,6 +129,7 @@ function componer(puntos: Punto[], trafico: Trafico | null) {
     <h1 style="font:700 27px/1.25 ${FUENTE};color:#111;margin:14px 0 8px">Pendientes de la web</h1>
     <p style="font:400 15px/1.55 ${FUENTE};color:#555;margin:0 0 26px">${escapar(resumen)}</p>
     ${bloqueTrafico}
+    ${bloqueBusquedas}
     <table style="width:100%;border-collapse:collapse">${orden.map(fila).join("")}</table>
     <p style="font:400 12px/1.55 ${FUENTE};color:#b0b0b0;margin-top:30px">
       Generado comprobando producción, el DNS, Resend y los datos del proyecto. No es una lista escrita a mano:
@@ -125,14 +166,18 @@ export async function enviarInforme({ soloComponer = false } = {}) {
   /* Si la analítica falla, el informe sale igual sin el bloque de tráfico: los
      pendientes son la razón de ser de este correo y no deben caerse porque
      Vercel tarde en responder o falte el token. */
-  const [puntos, trafico] = await Promise.all([
+  const [puntos, trafico, busquedas] = await Promise.all([
     auditar(),
     traficoSemanal().catch((err) => {
       console.error("[informe] tráfico:", err);
       return null;
     }),
+    busquedasSemanales().catch((err) => {
+      console.error("[informe] búsquedas:", err);
+      return null;
+    }),
   ]);
-  const correo = componer(puntos, trafico);
+  const correo = componer(puntos, trafico, busquedas);
 
   if (soloComponer) return { ...correo, enviado: false, destinatarios: DESTINATARIOS };
 
