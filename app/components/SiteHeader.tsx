@@ -35,28 +35,89 @@ export default function SiteHeader({ light = false, adaptive = false }: SiteHead
     };
   }, [open]);
 
+  /**
+   * Mira qué color tiene debajo la cabecera y se tiñe al contrario.
+   *
+   * Antes esto era un IntersectionObserver sobre el hero, que solo sabía
+   * responder «he pasado el hero o no». Con eso bastaba mientras la home fuera
+   * hero oscuro + resto claro, pero se rompía en todo lo demás: en el tema
+   * oscuro las páginas interiores tienen fondo oscuro y el logo salía negro
+   * sobre negro, y las bandas `.statement--invert` invierten el color a mitad
+   * de página en los dos temas.
+   *
+   * Así que en vez de deducir el color, se mide: se mira qué elemento hay justo
+   * detrás del logo y se calcula la luminancia de su fondo. Funciona con
+   * cualquier sección presente o futura sin marcarla de ninguna manera, que es
+   * lo que pidió Jandro: que se adapte al color de cada momento.
+   *
+   * Corre siempre, también con `light`: esa prop pasa a ser solo el valor de
+   * partida antes de la primera medición, no una decisión fija.
+   */
   useEffect(() => {
-    if (light) {
-      setOverLight(true);
-      return;
-    }
-    if (!adaptive) {
-      setOverLight(false);
-      return;
-    }
+    const marca = () => document.querySelector(".header .brand");
 
-    const hero = document.querySelector(".bd-hero");
-    if (!hero) return;
+    /* Un color CSS a luminancia relativa (la fórmula de contraste de la WCAG).
+       Devuelve null si es transparente: entonces hay que seguir buscando
+       detrás, porque ese elemento no pinta fondo ninguno. */
+    const luminancia = (css: string): number | null => {
+      const n = css.match(/-?[\d.]+/g)?.map(Number);
+      if (!n || n.length < 3) return null;
+      const [r, g, b, a = 1] = n;
+      if (a === 0) return null;
+      const canal = (v: number) => {
+        const x = v / 255;
+        return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4;
+      };
+      return 0.2126 * canal(r) + 0.7152 * canal(g) + 0.0722 * canal(b);
+    };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setOverLight(!entry.isIntersecting);
-      },
-      { rootMargin: "-56px 0px 0px 0px", threshold: 0 },
-    );
+    const medir = () => {
+      const el = marca();
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      /* El punto de muestra es el centro del propio logo, no el de la pantalla:
+         lo que importa es lo que hay detrás de ÉL, no detrás del menú. */
+      const detras = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2);
 
-    observer.observe(hero);
-    return () => observer.disconnect();
+      for (const candidato of detras) {
+        /* La cabecera no tiene fondo, pero sus hijos salen igual en el sondeo
+           y taparían la respuesta. */
+        if (candidato.closest(".header")) continue;
+        const lum = luminancia(getComputedStyle(candidato).backgroundColor);
+        if (lum === null) continue;
+        setOverLight(lum > 0.55);
+        return;
+      }
+    };
+
+    /* Una medición por fotograma como mucho: el sondeo es barato, pero hacerlo
+       en cada evento de scroll no lo sería. */
+    let pendiente = false;
+    const alMoverse = () => {
+      if (pendiente) return;
+      pendiente = true;
+      requestAnimationFrame(() => {
+        pendiente = false;
+        medir();
+      });
+    };
+
+    medir();
+    window.addEventListener("scroll", alMoverse, { passive: true });
+    window.addEventListener("resize", alMoverse);
+    /* El interruptor de tema cambia los fondos sin que haya scroll, así que
+       hay que volver a medir cuando cambia el atributo. */
+    const observador = new MutationObserver(alMoverse);
+    observador.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => {
+      window.removeEventListener("scroll", alMoverse);
+      window.removeEventListener("resize", alMoverse);
+      observador.disconnect();
+    };
   }, [light, adaptive]);
 
   useEffect(() => {
