@@ -23,6 +23,9 @@ type Dimension = "requestPath" | "referrerHostname" | "deviceType" | "country";
 
 export type Fila = { clave: string; visitas: number };
 
+/** Un día de la serie temporal. */
+export type Dia = { fecha: string; visitantes: number; paginas: number };
+
 export type Trafico = {
   visitantes: number;
   paginas: number;
@@ -32,6 +35,9 @@ export type Trafico = {
   topPaginas: Fila[];
   topOrigenes: Fila[];
   dispositivos: Fila[];
+  paises: Fila[];
+  /** Los últimos 30 días, del más antiguo al más reciente. */
+  serie: Dia[];
 };
 
 /**
@@ -80,6 +86,26 @@ async function contar(desdeDias: number, hastaDias: number) {
   };
 }
 
+/**
+ * La serie día a día, para el gráfico de evolución.
+ *
+ * Vercel agrupa por `day` y devuelve también los días a cero, que es lo que se
+ * quiere: un hueco en la línea se leería como «no hay dato» en vez de «no entró
+ * nadie», y son cosas distintas.
+ */
+async function serieDiaria(dias: number): Promise<Dia[]> {
+  const d = await pedir("aggregate", { ...ventana(dias, -1), by: "day", limit: "100" });
+  const filas = Array.isArray(d?.data) ? d.data : [];
+  return filas
+    .map((f: Record<string, unknown>) => ({
+      fecha: String(f.timestamp ?? "").slice(0, 10),
+      visitantes: Number(f.visitors ?? 0),
+      paginas: Number(f.pageviews ?? 0),
+    }))
+    .filter((x: Dia) => x.fecha)
+    .sort((a: Dia, b: Dia) => a.fecha.localeCompare(b.fecha));
+}
+
 async function agrupar(by: Dimension, desdeDias: number): Promise<Fila[]> {
   const d = await pedir("aggregate", {
     ...ventana(desdeDias, -1),
@@ -107,13 +133,15 @@ async function agrupar(by: Dimension, desdeDias: number): Promise<Fila[]> {
 export async function traficoSemanal(): Promise<Trafico | null> {
   if (!process.env.VERCEL_TOKEN) return null;
 
-  const [semana, anterior, topPaginas, topOrigenes, dispositivos] =
+  const [semana, anterior, topPaginas, topOrigenes, dispositivos, paises, serie] =
     await Promise.all([
       contar(7, -1),
       contar(14, 7),
       agrupar("requestPath", 7),
       agrupar("referrerHostname", 7),
       agrupar("deviceType", 7),
+      agrupar("country", 7),
+      serieDiaria(30),
     ]);
 
   return {
@@ -124,6 +152,8 @@ export async function traficoSemanal(): Promise<Trafico | null> {
     topPaginas,
     topOrigenes,
     dispositivos,
+    paises,
+    serie,
   };
 }
 
