@@ -89,21 +89,32 @@ async function contar(desdeDias: number, hastaDias: number) {
 /**
  * La serie día a día, para el gráfico de evolución.
  *
- * Vercel agrupa por `day` y devuelve también los días a cero, que es lo que se
- * quiere: un hueco en la línea se leería como «no hay dato» en vez de «no entró
- * nadie», y son cosas distintas.
+ * Devuelve solo desde el PRIMER día con datos. La analítica se activó el 10 de
+ * septiembre de 2026, así que pedir treinta días trae veintiocho ceros que no
+ * significan «no entró nadie» sino «no se estaba midiendo»: pintados en un
+ * gráfico son una línea plana que hace pensar que la web está muerta. Un cero
+ * dentro del periodo medido sí es información y se conserva.
+ *
+ * Y se recorta el futuro. La ventana termina mañana a propósito -Vercel deja
+ * fuera el día en curso si se le pide hasta hoy- y eso colaba un día venidero
+ * con cero que hundía el final de la línea.
  */
 async function serieDiaria(dias: number): Promise<Dia[]> {
   const d = await pedir("aggregate", { ...ventana(dias, -1), by: "day", limit: "100" });
   const filas = Array.isArray(d?.data) ? d.data : [];
-  return filas
+  const hoy = new Date().toISOString().slice(0, 10);
+
+  const todos: Dia[] = filas
     .map((f: Record<string, unknown>) => ({
       fecha: String(f.timestamp ?? "").slice(0, 10),
       visitantes: Number(f.visitors ?? 0),
       paginas: Number(f.pageviews ?? 0),
     }))
-    .filter((x: Dia) => x.fecha)
+    .filter((x: Dia) => x.fecha && x.fecha <= hoy)
     .sort((a: Dia, b: Dia) => a.fecha.localeCompare(b.fecha));
+
+  const primero = todos.findIndex((x) => x.visitantes > 0 || x.paginas > 0);
+  return primero === -1 ? [] : todos.slice(primero);
 }
 
 async function agrupar(by: Dimension, desdeDias: number): Promise<Fila[]> {
