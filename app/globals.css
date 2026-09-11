@@ -287,8 +287,30 @@ button,
    interiores (prop `light`) como la home al pasar el hero (prop `adaptive`).
    Atarlo a [data-theme="light"] dejaría fuera las secciones claras del tema
    oscuro, que es donde el problema también aparece. */
+/* Base sin JavaScript, para acertar en el PRIMER pintado.
+   La medición no llega hasta que hidrata React, y eso son entre 0,7 y 1,3
+   segundos medidos en producción: un segundo largo con el logo del color
+   equivocado, que es exactamente el fallo que se quería arreglar.
+
+   El tema ya se conoce al pintar, y el fondo por defecto de una página es el
+   del tema, así que con eso basta para acertar de salida. Se excluyen las
+   páginas con hero de vídeo -sólo la home- porque ahí el fondo es #111 en los
+   dos temas: `:has()` permite saberlo sin que la página tenga que declararlo,
+   que es lo que acabamos de quitar a propósito.
+
+   Va envuelta en :where() para que no pese nada en especificidad y las dos
+   reglas de abajo, que son las medidas de verdad, siempre ganen. */
+:where([data-theme="light"] body:not(:has(.bd-hero)) .header) .brand-logo {
+  filter: brightness(0);
+}
+
+/* Y estas son ya la medición: ganan a la base en los dos sentidos. */
 .header--light .brand-logo {
   filter: brightness(0);
+}
+
+.header--oscuro .brand-logo {
+  filter: none;
 }
 
 .header-inner {

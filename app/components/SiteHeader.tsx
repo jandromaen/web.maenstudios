@@ -23,9 +23,10 @@ import SelectorIdioma from "./SelectorIdioma";
 export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  /* Arranca en falso -logo blanco- y no en lo que diga una prop: es lo que
-     pinta el servidor, y tiene que ser correcto para el tema por defecto. */
-  const [overLight, setOverLight] = useState(false);
+  /* Arranca en null: «todavía no lo he medido». Mientras tanto manda la base
+     en CSS, que ya acierta en el primer pintado. Un booleano obligaría a
+     elegir un color antes de saberlo, y ese es el fallo que se arrastraba. */
+  const [overLight, setOverLight] = useState<boolean | null>(null);
   /* El portal necesita document, que no existe al renderizar en el servidor. */
   const [montado, setMontado] = useState(false);
   useEffect(() => setMontado(true), []);
@@ -193,7 +194,9 @@ export default function SiteHeader() {
 
   return (
     <>
-      <header className={`header${overLight ? " header--light" : ""}`}>
+      <header
+        className={`header${overLight === null ? "" : overLight ? " header--light" : " header--oscuro"}`}
+      >
         <div className="container header-inner">
           <Link className="brand" href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}
