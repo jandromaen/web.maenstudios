@@ -34,6 +34,16 @@ export type Consulta = {
   posicion: number;
 };
 
+export type Mes = {
+  /** "2026-09" */
+  mes: string;
+  clics: number;
+  impresiones: number;
+  /** Porcentaje de veces que salir acabó en clic. */
+  ctr: number;
+  posicion: number;
+};
+
 export type Busquedas = {
   clics: number;
   impresiones: number;
@@ -50,6 +60,8 @@ export type Busquedas = {
    * consulta en la que sales el 60º no sirve de nada.
    */
   aTiro: Consulta[];
+  /** Serie mensual, la más reciente primero. */
+  meses: Mes[];
 };
 
 function dia(atras: number) {
@@ -169,6 +181,42 @@ async function consultar(
   return (await res.json()).rows ?? [];
 }
 
+/**
+ * La serie mes a mes.
+ *
+ * Se pide por días y se agrupa aquí en vez de hacer una consulta por mes: son
+ * doce llamadas contra una, y la API tiene cuota. Search Console guarda unos
+ * 16 meses, así que un año entero cabe de sobra.
+ *
+ * La posición del mes es la media PONDERADA por impresiones, no la media de
+ * las medias: un día con tres impresiones no puede pesar lo mismo que uno con
+ * trescientas, y con la media simple un día flojo hunde el mes entero.
+ */
+async function porMeses(acceso: string, meses: number): Promise<Mes[]> {
+  const filas = await consultar(acceso, dia(RETRASO_DIAS + meses * 31), dia(RETRASO_DIAS), ["date"], 600);
+
+  const cubos = new Map<string, { clics: number; impresiones: number; posPorImpr: number }>();
+  for (const f of filas) {
+    const mes = (f.keys?.[0] ?? "").slice(0, 7);
+    if (!mes) continue;
+    const c = cubos.get(mes) ?? { clics: 0, impresiones: 0, posPorImpr: 0 };
+    c.clics += f.clicks;
+    c.impresiones += f.impressions;
+    c.posPorImpr += f.position * f.impressions;
+    cubos.set(mes, c);
+  }
+
+  return [...cubos.entries()]
+    .map(([mes, c]) => ({
+      mes,
+      clics: c.clics,
+      impresiones: c.impresiones,
+      ctr: c.impresiones ? Math.round((c.clics / c.impresiones) * 1000) / 10 : 0,
+      posicion: c.impresiones ? Math.round((c.posPorImpr / c.impresiones) * 10) / 10 : 0,
+    }))
+    .sort((a, b) => b.mes.localeCompare(a.mes));
+}
+
 const aConsulta = (f: Fila): Consulta => ({
   termino: f.keys?.[0] ?? "—",
   clics: f.clicks,
@@ -192,10 +240,11 @@ export async function busquedasSemanales(): Promise<Busquedas | null> {
   const finPrevia = dia(RETRASO_DIAS + 8);
   const inicioPrevia = dia(RETRASO_DIAS + 15);
 
-  const [totales, previos, porConsulta] = await Promise.all([
+  const [totales, previos, porConsulta, meses] = await Promise.all([
     consultar(acceso, inicioSemana, finSemana, [], 1),
     consultar(acceso, inicioPrevia, finPrevia, [], 1),
     consultar(acceso, inicioSemana, finSemana, ["query"], 100),
+    porMeses(acceso, 12),
   ]);
 
   const t = totales[0];
@@ -215,5 +264,6 @@ export async function busquedasSemanales(): Promise<Busquedas | null> {
       .filter((c) => c.posicion >= 8 && c.posicion <= 20 && c.impresiones > 0)
       .sort((a, b) => b.impresiones - a.impresiones)
       .slice(0, 8),
+    meses,
   };
 }
