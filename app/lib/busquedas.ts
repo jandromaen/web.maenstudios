@@ -56,6 +56,39 @@ function dia(atras: number) {
   return new Date(Date.now() - atras * 86_400_000).toISOString().slice(0, 10);
 }
 
+/**
+ * Token de acceso a partir de un refresh token de usuario.
+ *
+ * Es la vía que acabamos usando. La de cuenta de servicio (más abajo) requiere
+ * descargar una clave JSON, y la organización de Google Workspace de Maen lo
+ * tiene bloqueado por política: una clave así no caduca nunca y si se filtra da
+ * acceso indefinido. Con OAuth de usuario no existe ningún fichero que filtrar,
+ * y el permiso se revoca desde la cuenta de Google cuando se quiera.
+ */
+async function tokenDeUsuario() {
+  const id = process.env.GOOGLE_OAUTH_CLIENT_ID;
+  const secreto = process.env.GOOGLE_OAUTH_CLIENT_SECRET;
+  const refresco = process.env.GOOGLE_OAUTH_REFRESH_TOKEN;
+  if (!id || !secreto || !refresco) return null;
+
+  const res = await fetch(TOKEN_URL, {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: id,
+      client_secret: secreto,
+      refresh_token: refresco,
+      grant_type: "refresh_token",
+    }),
+    signal: AbortSignal.timeout(15_000),
+  });
+
+  if (!res.ok) {
+    throw new Error(`OAuth refresco ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  }
+  return (await res.json()).access_token as string;
+}
+
 /** Credenciales de la cuenta de servicio, si están puestas. */
 function credenciales() {
   const bruto = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
@@ -148,10 +181,11 @@ const aConsulta = (f: Fila): Consulta => ({
  * el informe diga que no puede mirar a que enseñe ceros que parecen un desastre.
  */
 export async function busquedasSemanales(): Promise<Busquedas | null> {
+  /* Primero el token de usuario, que es el que está en uso; la cuenta de
+     servicio se queda como alternativa por si algún día se desbloquea. */
   const cred = credenciales();
-  if (!cred) return null;
-
-  const acceso = await token(cred.correo, cred.clave);
+  const acceso = (await tokenDeUsuario()) ?? (cred ? await token(cred.correo, cred.clave) : null);
+  if (!acceso) return null;
 
   const finSemana = dia(RETRASO_DIAS);
   const inicioSemana = dia(RETRASO_DIAS + 7);
