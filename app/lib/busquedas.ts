@@ -228,17 +228,36 @@ const aConsulta = (f: Fila): Consulta => ({
  * El resumen de la semana. Devuelve null si no hay credenciales: es mejor que
  * el informe diga que no puede mirar a que enseñe ceros que parecen un desastre.
  */
-export async function busquedasSemanales(): Promise<Busquedas | null> {
+export async function busquedasSemanales(desde?: string, hasta?: string): Promise<Busquedas | null> {
   /* Primero el token de usuario, que es el que está en uso; la cuenta de
      servicio se queda como alternativa por si algún día se desbloquea. */
   const cred = credenciales();
   const acceso = (await tokenDeUsuario()) ?? (cred ? await token(cred.correo, cred.clave) : null);
   if (!acceso) return null;
 
-  const finSemana = dia(RETRASO_DIAS);
-  const inicioSemana = dia(RETRASO_DIAS + 7);
-  const finPrevia = dia(RETRASO_DIAS + 8);
-  const inicioPrevia = dia(RETRASO_DIAS + 15);
+  /*
+    Google publica con dias de retraso, asi que el final del rango se recorta a
+    lo ultimo que ya tiene publicado. Sin esto, elegir un rango que llegue a hoy
+    devolveria ceros en los ultimos dias y pareceria una caida de trafico que no
+    ha ocurrido.
+  */
+  const ultimoPublicado = dia(RETRASO_DIAS);
+  const finSemana = hasta && hasta < ultimoPublicado ? hasta : ultimoPublicado;
+  const inicioSemana = desde ?? dia(RETRASO_DIAS + 7);
+
+  const dias = Math.max(
+    1,
+    Math.round(
+      (new Date(`${finSemana}T00:00:00Z`).getTime() - new Date(`${inicioSemana}T00:00:00Z`).getTime()) / 86_400_000,
+    ) + 1,
+  );
+  const retroceder = (f: string, n: number) => {
+    const d = new Date(`${f}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() - n);
+    return d.toISOString().slice(0, 10);
+  };
+  const finPrevia = retroceder(inicioSemana, 1);
+  const inicioPrevia = retroceder(finPrevia, dias - 1);
 
   const [totales, previos, porConsulta, meses] = await Promise.all([
     consultar(acceso, inicioSemana, finSemana, [], 1),

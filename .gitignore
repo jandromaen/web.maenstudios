@@ -46,3 +46,10 @@ undefined/
 
 # Configuración personal de Claude Code, no del proyecto
 .claude/settings.local.json
+
+# Material en bruto que se deja caer en la carpeta al trabajar (vídeos y audios
+# de grabaciones). No es codigo ni assets de la web: son cientos de MB que
+# GitHub rechaza y que ademas atascan cualquier push.
+/0804*/
+/0814*/
+*.MP3

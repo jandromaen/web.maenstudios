@@ -58,6 +58,38 @@ function ventana(desdeDias: number, hastaDias: number) {
   };
 }
 
+/** La misma ventana, pero entre dos fechas concretas (YYYY-MM-DD, ambas incluidas). */
+function ventanaEntre(desde: string, hasta: string) {
+  /* `until` va al dia SIGUIENTE al ultimo que se quiere: Vercel deja fuera el
+     dia en curso si se le pide hasta hoy, y sin esto el ultimo dia del rango
+     elegido se perderia. Mismo motivo que en ventana(). */
+  const siguiente = new Date(`${hasta}T00:00:00Z`);
+  siguiente.setUTCDate(siguiente.getUTCDate() + 1);
+  return {
+    since: `${desde}T00:00:00Z`,
+    until: `${siguiente.toISOString().slice(0, 10)}T00:00:00Z`,
+  };
+}
+
+/** Los dias que cubre un rango, contando los dos extremos. */
+export function diasDelRango(desde: string, hasta: string): number {
+  const ms = new Date(`${hasta}T00:00:00Z`).getTime() - new Date(`${desde}T00:00:00Z`).getTime();
+  return Math.max(1, Math.round(ms / 86_400_000) + 1);
+}
+
+/** El rango inmediatamente anterior, de la misma duracion, para comparar. */
+export function rangoAnterior(desde: string, hasta: string): { desde: string; hasta: string } {
+  const dias = diasDelRango(desde, hasta);
+  const finPrevio = new Date(`${desde}T00:00:00Z`);
+  finPrevio.setUTCDate(finPrevio.getUTCDate() - 1);
+  const inicioPrevio = new Date(finPrevio);
+  inicioPrevio.setUTCDate(inicioPrevio.getUTCDate() - (dias - 1));
+  return {
+    desde: inicioPrevio.toISOString().slice(0, 10),
+    hasta: finPrevio.toISOString().slice(0, 10),
+  };
+}
+
 async function pedir(ruta: string, params: Record<string, string>) {
   const url = new URL(`${API}/${ruta}`);
   url.search = new URLSearchParams({
@@ -78,8 +110,8 @@ async function pedir(ruta: string, params: Record<string, string>) {
   return res.json();
 }
 
-async function contar(desdeDias: number, hastaDias: number) {
-  const d = await pedir("count", ventana(desdeDias, hastaDias));
+async function contar(v: { since: string; until: string }) {
+  const d = await pedir("count", v);
   return {
     visitantes: Number(d?.data?.visitors ?? 0),
     paginas: Number(d?.data?.pageviews ?? 0),
@@ -99,8 +131,8 @@ async function contar(desdeDias: number, hastaDias: number) {
  * fuera el día en curso si se le pide hasta hoy- y eso colaba un día venidero
  * con cero que hundía el final de la línea.
  */
-async function serieDiaria(dias: number): Promise<Dia[]> {
-  const d = await pedir("aggregate", { ...ventana(dias, -1), by: "day", limit: "100" });
+async function serieDiaria(v: { since: string; until: string }): Promise<Dia[]> {
+  const d = await pedir("aggregate", { ...v, by: "day", limit: "100" });
   const filas = Array.isArray(d?.data) ? d.data : [];
   const hoy = new Date().toISOString().slice(0, 10);
 
@@ -117,12 +149,8 @@ async function serieDiaria(dias: number): Promise<Dia[]> {
   return primero === -1 ? [] : todos.slice(primero);
 }
 
-async function agrupar(by: Dimension, desdeDias: number): Promise<Fila[]> {
-  const d = await pedir("aggregate", {
-    ...ventana(desdeDias, -1),
-    by,
-    limit: "5",
-  });
+async function agrupar(by: Dimension, v: { since: string; until: string }): Promise<Fila[]> {
+  const d = await pedir("aggregate", { ...v, by, limit: "5" });
   const filas = Array.isArray(d?.data) ? d.data : [];
   return filas
     .map((f: Record<string, unknown>) => ({
@@ -141,18 +169,36 @@ async function agrupar(by: Dimension, desdeDias: number): Promise<Fila[]> {
  * El resumen de la semana. Devuelve null si no hay token: sin él no se puede
  * consultar, y es mejor que el informe lo diga a que finja ceros.
  */
-export async function traficoSemanal(): Promise<Trafico | null> {
+export async function traficoSemanal(desde?: string, hasta?: string): Promise<Trafico | null> {
   if (!process.env.VERCEL_TOKEN) return null;
+
+  /* Sin rango, lo de siempre: los ultimos 7 dias terminando hoy. Asi el informe
+     de los viernes sigue pidiendo lo mismo sin enterarse de este cambio. */
+  const hoy = new Date().toISOString().slice(0, 10);
+  const haceUnaSemana = new Date(Date.now() - 6 * 86_400_000).toISOString().slice(0, 10);
+  const fin = hasta ?? hoy;
+  const ini = desde ?? haceUnaSemana;
+
+  const actual = ventanaEntre(ini, fin);
+  const previo = rangoAnterior(ini, fin);
+  const anteriorV = ventanaEntre(previo.desde, previo.hasta);
+
+  /* La serie diaria cubre el rango elegido, pero nunca menos de 30 dias: es el
+     grafico de evolucion y con siete puntos no se ve ninguna tendencia. */
+  const diasSerie = Math.max(30, diasDelRango(ini, fin));
+  const inicioSerie = new Date(`${fin}T00:00:00Z`);
+  inicioSerie.setUTCDate(inicioSerie.getUTCDate() - (diasSerie - 1));
+  const serieV = ventanaEntre(inicioSerie.toISOString().slice(0, 10), fin);
 
   const [semana, anterior, topPaginas, topOrigenes, dispositivos, paises, serie] =
     await Promise.all([
-      contar(7, -1),
-      contar(14, 7),
-      agrupar("requestPath", 7),
-      agrupar("referrerHostname", 7),
-      agrupar("deviceType", 7),
-      agrupar("country", 7),
-      serieDiaria(30),
+      contar(actual),
+      contar(anteriorV),
+      agrupar("requestPath", actual),
+      agrupar("referrerHostname", actual),
+      agrupar("deviceType", actual),
+      agrupar("country", actual),
+      serieDiaria(serieV),
     ]);
 
   return {
