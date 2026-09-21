@@ -46,7 +46,14 @@ function rangoPedido(q: URLSearchParams): { desde?: string; hasta?: string; avis
 
   if (desde < PRIMER_DIA) {
     desde = PRIMER_DIA;
-    avisos.push(`la analítica se activó el ${PRIMER_DIA}, así que no hay dato anterior`);
+    avisos.push(
+      `la analítica se activó el ${new Date(`${PRIMER_DIA}T00:00:00Z`).toLocaleDateString("es-ES", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC",
+      })}, así que no hay dato anterior`,
+    );
   }
 
   /* Vercel guarda un mes de histórico en este plan: pedir mas no da error, da
