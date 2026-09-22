@@ -30,6 +30,10 @@ export async function POST(request: Request) {
   const ciudad = h.get("x-vercel-ip-city") ?? "";
   const region = h.get("x-vercel-ip-country-region") ?? "";
   const pais = h.get("x-vercel-ip-country") ?? "";
+  /* Para poder pintar la ciudad en el mapa. El CRM las redondea a dos
+     decimales antes de guardarlas: marca la ciudad, no a la persona. */
+  const lat = h.get("x-vercel-ip-latitude");
+  const lon = h.get("x-vercel-ip-longitude");
 
   if (!ciudad || !pais) return NextResponse.json({ ok: true, contado: false });
 
@@ -37,7 +41,7 @@ export async function POST(request: Request) {
     await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-maen-visitas": secreto },
-      body: JSON.stringify({ ciudad, region, pais }),
+      body: JSON.stringify({ ciudad, region, pais, lat, lon }),
       cache: "no-store",
       signal: AbortSignal.timeout(4_000),
     });
