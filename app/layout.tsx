@@ -14,7 +14,6 @@ import { themeBootScript } from "./lib/theme";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_KEYWORDS,
-  GSC_VERIFICATION,
   OG_IMAGE,
   SITE_NAME,
   SITE_URL,
@@ -74,7 +73,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  ...(GSC_VERIFICATION ? { verification: { google: GSC_VERIFICATION } } : {}),
+  verification: {
+    google: "F8q96DiuWidyV1yyV-B5FOgkH2RFHn2My3mw4hklS4E",
+  },
   alternates: { canonical: SITE_URL },
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png" }],
