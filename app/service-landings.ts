@@ -771,7 +771,8 @@ export const serviceLandings: ServiceLanding[] = [
         items: [
           "Campañas de temporada",
           "Lookbooks de colección",
-          "Fotografía de ficha de producto",
+          "Casting y estilismo",
+          "Ficha, packshot y maniquí invisible",
           "Bodegón de prenda y accesorio",
           "Reels y TikToks de moda",
           "Vídeo de campaña y teaser de drop",
@@ -825,7 +826,7 @@ export const serviceLandings: ServiceLanding[] = [
       },
       {
         q: "¿Ponéis vosotros modelos, estilismo y localización?",
-        a: "[RELLENAR: confirmar si el estudio ofrece casting y estilismo propios, los subcontrata o los pone la marca]. Lo que sí llevamos en todas las producciones es dirección de arte, cámara, iluminación y edición, y la localización la cerramos contigo en preproducción para que no haya sorpresas el día de la sesión.",
+        a: "Sí, las tres cosas. El casting y el estilismo los llevamos nosotros: te proponemos perfiles que encajen con la marca y preparamos el estilismo de cada look antes de la sesión, no sobre la marcha. La localización la cerramos contigo en preproducción. Así el día del rodaje no se decide nada, solo se ejecuta lo que ya está aprobado.",
       },
       {
         q: "¿Cuántas prendas entran en una jornada?",
@@ -833,7 +834,7 @@ export const serviceLandings: ServiceLanding[] = [
       },
       {
         q: "¿Hacéis también las fotos de ficha para el ecommerce?",
-        a: "Sí, y lo recomendamos sacarlo en la misma producción que la campaña: aprovechas el estilismo, el planchado y la prenda ya preparada. [RELLENAR: confirmar si ofrecéis fondo blanco de catálogo y maniquí invisible, o solo ficha con modelo]. Entregamos cada imagen en las medidas y el peso que pide tu tienda online.",
+        a: "Sí, y lo recomendamos sacarlo en la misma producción que la campaña: aprovechas el estilismo, el planchado y la prenda ya preparada. Hacemos ficha con modelo, packshot sobre fondo blanco de catálogo y maniquí invisible, que es la que enseña la caída y el interior de la prenda sin cuerpo dentro. Entregamos cada imagen en las medidas y el peso que pide tu tienda online.",
       },
       {
         q: "¿Con cuánta antelación hay que producir una campaña de temporada?",
