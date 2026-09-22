@@ -109,7 +109,11 @@ export default function Home() {
                 quieren crecer de verdad. Con oficina en{" "}
                 <Link href="/agencia-de-contenido-barcelona">Barcelona</Link> y
                 en <Link href="/agencia-de-contenido-madrid">Madrid</Link>, y
-                rodajes en toda España.
+                rodajes en toda España. Nuestra especialidad es la{" "}
+                <Link href="/creacion-de-contenido-gastronomico">
+                  creación de contenido gastronómico
+                </Link>
+                : foto y vídeo para restaurantes y marcas de comida.
               </p>
             </div>
           </div>

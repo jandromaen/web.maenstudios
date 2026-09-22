@@ -159,6 +159,30 @@ export default function ServiceLanding({
           sub={landing.statement.sub}
         />
 
+        {landing.steps ? (
+          <section className="page-section">
+            <div className="container">
+              <div className="section-head">
+                <span className="eyebrow">Método</span>
+                <h2>Cómo trabajamos</h2>
+                <p>
+                  Un proceso cerrado de principio a fin: tú solo tienes que
+                  decidir qué quieres enseñar.
+                </p>
+              </div>
+              <div className="grid steps">
+                {landing.steps.map((s) => (
+                  <div className="step" key={s.n}>
+                    <div className="step-num">{s.n}</div>
+                    <h3>{s.title}</h3>
+                    <p>{s.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
         <section
           className="page-section"
           style={{ paddingTop: "clamp(64px, 10vw, 110px)" }}

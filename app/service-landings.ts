@@ -33,6 +33,12 @@ export type ServiceLanding = {
   columnsTitle: string;
   columns: ServiceLandingColumn[];
   statement: { before: string; after: string; sub: string };
+  /**
+   * Proceso de trabajo, si la landing lo explica. Es opcional a propósito: las
+   * landings de ciudad se apoyan en el método genérico de /servicios, y las de
+   * sector solo lo detallan cuando el proceso es parte de lo que se vende.
+   */
+  steps?: { n: string; title: string; desc: string }[];
   /** Palabras del marquee: sectores o formatos, según la landing */
   marquee: string[];
   clientSlugs: string[];
@@ -529,6 +535,159 @@ export const serviceLandings: ServiceLanding[] = [
       },
     ],
     formTitle: "Cuéntanos cómo es tu local",
+  },
+  {
+    slug: "creacion-de-contenido-gastronomico",
+    metaTitle: "Creación de contenido gastronómico: foto y vídeo",
+    metaDescription:
+      "Creación de contenido gastronómico en Barcelona y Madrid: fotografía de producto y plato, vídeo y Reels para restaurantes, obradores y marcas de comida. Foto y vídeo de la misma sesión. Presupuesto en 24h.",
+    keywords: [
+      "creación de contenido gastronómico",
+      "contenido gastronómico",
+      "fotografía gastronómica",
+      "fotografía gastronómica Barcelona",
+      "fotografía gastronómica Madrid",
+      "vídeo gastronómico",
+      "fotografía de producto alimentación",
+      "contenido audiovisual para restaurantes",
+      "food styling",
+      "contenido para marcas de comida",
+      "fotografía de carta",
+    ],
+    serviceType: "Creación de contenido gastronómico: fotografía y vídeo de comida",
+    eyebrow: "Gastronomía · Foto y vídeo",
+    h1: "Creación de contenido gastronómico",
+    lead: "Fotografía y vídeo de comida para restaurantes, obradores y marcas de alimentación. Producimos plato, producto y proceso en una sola sesión, y te lo entregamos listo para redes, carta, web y ecommerce.",
+    intro: [
+      "La comida es el producto más difícil de grabar bien y el que peor aguanta la improvisación: el brillo se apaga, el helado se derrite, la pasta se seca y el pan pierde el vapor en dos minutos. Por eso el contenido gastronómico no es fotografía de producto con un plato delante, es un oficio propio, con su forma de iluminar, su ritmo de trabajo con cocina y sus trucos para que lo que sale en pantalla se parezca a lo que llega a la mesa.",
+      "En Maen Studios llevamos desde 2020 produciendo contenido de comida, y hoy es la especialidad de la casa: más de la mitad de nuestro portfolio es gastronomía. Trabajamos desde Barcelona y Madrid para restaurantes, bares, obradores y marcas de alimentación, con rodajes en toda España.",
+    ],
+    blocks: [
+      {
+        title: "Qué producimos: foto y vídeo de la misma sesión",
+        body: "Montamos las luces una vez y nos llevamos las dos cosas. En una jornada salen los vídeos verticales para Reels y TikTok, los planos de proceso y ambiente, y la fotografía fija de cada plato para la carta, la web y las plataformas de reserva o delivery. Separar la foto y el vídeo en dos días duplica el coste y, sobre todo, duplica el trabajo que le pides a tu cocina.",
+      },
+      {
+        title: "Para quién trabajamos",
+        body: "Restaurantes y bares que necesitan alimentar sus redes y renovar la carta; obradores, panaderías y pastelerías con producto que entra por los ojos; marcas de alimentación y bebidas que venden en tienda o en ecommerce y necesitan bodegón, packaging y contenido social; y grupos con varios locales que quieren una línea visual común. Si lo que buscas es que además gestionemos la cuenta día a día, eso lo cubre nuestra agencia de contenido para restaurantes.",
+      },
+      {
+        title: "Food styling sin trampas",
+        body: "No usamos pegamento ni laca: lo que sale en la foto es un plato que se puede comer. Lo que sí hacemos es trabajar con cocina el emplatado para cámara, tener dobles preparados de lo que se estropea rápido y rodar en el orden correcto, empezando por lo que menos aguanta. Un cliente que pide lo que vio en la foto y recibe otra cosa es una reseña mala, no una venta.",
+      },
+      {
+        title: "Por qué elegirnos",
+        body: "Porque es nuestro sector, no un encargo suelto: sabemos rodar en una cocina en plena hora punta, sabemos que la luz de un local a las ocho de la tarde no es la de las cuatro y sabemos qué plato nunca sale bien en cámara antes de citar al equipo. Dirección, cámara, estilismo y edición salen del mismo estudio, así que tienes un solo interlocutor y un criterio visual que no cambia a mitad de proyecto.",
+      },
+      {
+        title: "Dónde trabajamos: Barcelona, Madrid y toda España",
+        body: "Tenemos oficina en Barcelona, en el Carrer del Bruc 61 (Eixample), y en Madrid, en la Calle de Génova 3 (Chamberí-Justicia), y cubrimos las dos áreas metropolitanas sin coste de desplazamiento. Para producciones fuera de esas zonas presupuestamos el viaje aparte, y en marcas de producto solemos resolverlo rodando en nuestro espacio con el producto enviado.",
+      },
+    ],
+    steps: [
+      {
+        n: "01",
+        title: "Briefing y selección",
+        desc: "Vemos tu carta o tu catálogo y elegimos qué se graba: lo que más margen deja, lo que mejor funciona en cámara y lo que quieres empujar esta temporada.",
+      },
+      {
+        n: "02",
+        title: "Preproducción",
+        desc: "Cerramos guion de planos, atrezo, vajilla y horario. Cocina recibe por escrito qué tiene que emplatar y a qué hora, para que el día del rodaje nadie improvise.",
+      },
+      {
+        n: "03",
+        title: "Sesión de foto y vídeo",
+        desc: "Una jornada en tu local o en plató, con el negocio abierto si hace falta. Equipo ligero, plan por horas y rodaje en el orden que exige cada plato.",
+      },
+      {
+        n: "04",
+        title: "Edición y entrega",
+        desc: "Montaje, color y subtítulos. Recibes el vertical para redes, el horizontal para web y las fotos retocadas en los formatos de carta, web y delivery.",
+      },
+    ],
+    columnsEyebrow: "Capacidades",
+    columnsTitle: "Tipos de contenido y tipos de cliente",
+    columns: [
+      {
+        title: "Qué producimos",
+        items: [
+          "Fotografía de plato y carta",
+          "Fotografía de producto y bodegón",
+          "Reels y TikToks de comida",
+          "Vídeo de proceso y cocina",
+          "Ambiente de sala y barra",
+          "Packaging y producto para ecommerce",
+          "Fotografía de equipo y local",
+          "UGC con creadores gastronómicos",
+        ],
+      },
+      {
+        title: "Para quién",
+        items: [
+          "Restaurantes de carta y menú",
+          "Bares, bodegas y coctelerías",
+          "Obradores, panaderías y pastelerías",
+          "Marcas de alimentación y bebidas",
+          "Food trucks y delivery",
+          "Grupos con varios locales",
+          "Aperturas y nuevos conceptos",
+          "Ferias y eventos gastronómicos",
+        ],
+      },
+    ],
+    statement: {
+      before: "La foto no vende el plato",
+      after: "vende las ganas",
+      sub: "Nadie guarda un Reel porque la comida esté enfocada. Lo guarda porque le entra hambre. Ese es el único listón que le ponemos a cada pieza que entregamos.",
+    },
+    marquee: [
+      "Plato",
+      "Producto",
+      "Bodegón",
+      "Proceso",
+      "Carta",
+      "Reels",
+      "Packaging",
+      "Food styling",
+    ],
+    clientSlugs: [
+      "jansana",
+      "gastroconnect",
+      "hijos-de-javier",
+      "ultrapaninos-marin",
+      "macchina",
+    ],
+    clientsTitle: "Contenido gastronómico que hemos producido",
+    clientsIntro:
+      "De marcas de alimentación a bodegas de barrio y pasta bars. Entra en cada caso para ver las piezas reales que salieron de sus sesiones.",
+    faqs: [
+      {
+        q: "¿Cuánto cuesta una sesión de contenido gastronómico?",
+        a: "Depende de cuántos platos entren, de si es una sesión suelta o un plan mensual y de si quieres solo fotografía o foto y vídeo. Lo habitual es cerrar una jornada con un número pactado de platos y llevarse las dos cosas, que sale bastante mejor que contratarlas por separado. Cuéntanos tu carta y te pasamos un presupuesto cerrado en 24h.",
+      },
+      {
+        q: "¿Tenemos que cerrar el restaurante para grabar?",
+        a: "No. Rodamos con el local abierto: equipo ligero, plan por horas y coordinación previa con cocina. Solemos aprovechar el montaje antes del servicio y los huecos entre turnos, y las fotos de sala se hacen cuando la luz acompaña.",
+      },
+      {
+        q: "¿Cuántos platos se pueden fotografiar en una jornada?",
+        a: "Con la preproducción hecha y cocina avisada, una jornada da de sobra para la carta de un restaurante medio, y aun así entran los planos de proceso y ambiente. Lo que marca el ritmo no es el número de platos, es cuántos montajes de luz distintos necesitan.",
+      },
+      {
+        q: "¿Las fotos sirven también para la carta, la web y el delivery?",
+        a: "Sí, y las entregamos ya adaptadas. Cada plataforma pide su proporción y su peso: Glovo y Just Eat no admiten lo mismo que tu web ni que un Reel. Te llega cada archivo en el formato que le toca, no un recorte automático del mismo original.",
+      },
+      {
+        q: "¿Trabajáis con marcas de alimentación, no solo con restaurantes?",
+        a: "Sí. Con marcas de producto solemos rodar bodegón, packaging y piezas sociales, y en muchos casos ni hace falta que te muevas: nos envías el producto y lo producimos nosotros. Jansana es un ejemplo del portfolio.",
+      },
+      {
+        q: "¿En qué ciudades trabajáis?",
+        a: "Tenemos oficina en Barcelona (Carrer del Bruc 61) y en Madrid (Calle de Génova 3), y cubrimos las dos áreas metropolitanas. Producimos en toda España presupuestando el desplazamiento aparte.",
+      },
+    ],
+    formTitle: "Cuéntanos qué tienes que grabar",
   },
 ];
 
