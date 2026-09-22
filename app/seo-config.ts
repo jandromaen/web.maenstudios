@@ -95,6 +95,7 @@ export const OFFICES: Office[] = [
     longitude: 2.1704,
     mapUrl: "https://maps.google.com/?q=Carrer+del+Bruc+61,+08009+Barcelona",
     landingPath: "/agencia-de-contenido-barcelona",
+    perfilNegocio: "https://share.google/poxTiinCCL4glXQ12",
     areasServed: [
       "Barcelona",
       "Área metropolitana de Barcelona",
@@ -115,6 +116,7 @@ export const OFFICES: Office[] = [
     longitude: -3.6959,
     mapUrl: "https://maps.google.com/?q=Calle+de+G%C3%A9nova+3,+28004+Madrid",
     landingPath: "/agencia-de-contenido-madrid",
+    perfilNegocio: "https://share.google/VqzNCjvSiKBhP6Uc2",
     areasServed: [
       "Madrid",
       "Comunidad de Madrid",
