@@ -689,6 +689,163 @@ export const serviceLandings: ServiceLanding[] = [
     ],
     formTitle: "Cuéntanos qué tienes que grabar",
   },
+  {
+    slug: "contenido-moda",
+    metaTitle: "Creación de contenido de moda: campaña y lookbook",
+    metaDescription:
+      "Creación de contenido de moda en Barcelona y Madrid: campañas de temporada, lookbooks, fotografía de ecommerce y Reels para marcas de ropa, streetwear y accesorios. Presupuesto cerrado en 24h.",
+    keywords: [
+      "creación de contenido de moda",
+      "contenido para marcas de moda",
+      "fotografía de moda Barcelona",
+      "fotografía de moda Madrid",
+      "lookbook marca de ropa",
+      "campaña de moda",
+      "fotografía de ecommerce de ropa",
+      "vídeo para marcas de moda",
+      "reels marca de ropa",
+      "producción de moda Barcelona",
+      "contenido para streetwear",
+    ],
+    serviceType: "Creación de contenido de moda: campaña, lookbook y ecommerce",
+    eyebrow: "Moda · Campaña y lookbook",
+    h1: "Creación de contenido de moda",
+    lead: "Campañas de temporada, lookbooks, fotografía de ecommerce y vídeo para marcas de ropa, calzado y accesorios. Una sola producción de la que sale todo lo que necesitas publicar y vender.",
+    intro: [
+      "Una marca de ropa necesita dos cosas que casi se contradicen. Por un lado, imágenes de ecommerce fieles, limpias y homogéneas, donde la prenda se vea tal cual va a llegar a casa. Por otro, campañas que generen ganas: contexto, cuerpo, actitud y una idea detrás. Producir cada cosa por su lado sale caro y, sobre todo, acaba dando dos marcas distintas: la del catálogo y la del Instagram.",
+      "Nosotros lo planteamos como una sola producción por temporada. De las mismas jornadas salen el lookbook, las piezas de campaña, el vertical para Reels y TikTok y las fotos de ficha de producto. Trabajamos desde Barcelona y Madrid con marcas de moda, streetwear y lifestyle —Macala, Canallita o Aluxe están en el portfolio— y producimos en toda España.",
+    ],
+    blocks: [
+      {
+        title: "Qué producimos: campaña, lookbook y ecommerce",
+        body: "La campaña es la imagen con la que abres temporada y la que sostiene la publicidad. El lookbook enseña la colección completa y ordenada, prenda a prenda y en combinaciones que se pueden comprar juntas. Y la ficha de producto es la que cierra la venta. Las tres salen del mismo bloque de producción, con la misma dirección de arte, para que tu marca se reconozca igual en una valla, en un Reel y en la página de pago.",
+      },
+      {
+        title: "Para quién trabajamos",
+        body: "Marcas de ropa con tienda física, ecommerce o las dos cosas; proyectos de streetwear que viven de los lanzamientos; calzado, accesorios y joyería, donde el detalle manda; concept stores que representan varias marcas; y proyectos que están preparando su primera colección y necesitan estrenar con imagen propia desde el día uno.",
+      },
+      {
+        title: "La ficha de producto también es contenido",
+        body: "La foto de ecommerce es la que más se mira y la que peor se suele cuidar. Una prenda mal representada no solo vende menos: vende y vuelve. El color que no corresponde, la caída que no se aprecia o la talla que no se entiende acaban en devoluciones, que en moda es donde se come el margen. Por eso tratamos la ficha con el mismo criterio que la campaña, y no como el descarte de la sesión.",
+      },
+      {
+        title: "Se produce por temporada, no por encargo suelto",
+        body: "La moda vive de picos: cambio de temporada, drops, rebajas, campaña de Navidad. El error habitual es empezar a producir cuando el pico ya está encima. Trabajamos con tu calendario comercial por delante, de forma que el material esté montado y aprobado antes de que abra la ventana de venta, y quede banco de imágenes para sostener las semanas valle que vienen después.",
+      },
+      {
+        title: "Por qué una marca de moda nos elige",
+        body: "Casi todos los proveedores del sector vienen de un lado o del otro. El estudio de catálogo resuelve volumen pero no aporta mirada, y el fotógrafo de editorial te entrega una imagen preciosa y el ecommerce sin resolver. Nosotros producimos las dos cosas en el mismo bloque y con el mismo equipo, que es justo lo que necesita una marca que vende online y además tiene que publicar cada semana. La dirección de arte no se subcontrata: es nuestra de principio a fin.",
+      },
+      {
+        title: "Dónde producimos: Barcelona, Madrid y envío de colección",
+        body: "En moda hay una ventaja que otros sectores no tienen: no siempre hace falta que viaje el equipo, basta con que viaje la ropa. Con marcas de fuera lo más habitual, y lo más barato, es que nos envíes la colección y la produzcamos aquí. Cuando la campaña pide una localización concreta, nos desplazamos y lo presupuestamos aparte. Las oficinas están en el Carrer del Bruc 61 de Barcelona y en la Calle de Génova 3 de Madrid, y en esas dos áreas metropolitanas no cobramos desplazamiento.",
+      },
+    ],
+    steps: [
+      {
+        n: "01",
+        title: "Concepto de temporada",
+        desc: "Vemos la colección y tu calendario comercial, y cerramos la idea: qué cuenta la campaña, qué prendas la lideran y qué hace falta para el ecommerce.",
+      },
+      {
+        n: "02",
+        title: "Preproducción",
+        desc: "Selección de prendas, referencias visuales, estilismo, localización y plan de horas. Te llega por escrito y lo apruebas antes de que nadie se mueva.",
+      },
+      {
+        n: "03",
+        title: "Sesión",
+        desc: "Rodamos campaña, lookbook y ficha de producto en el mismo bloque, en foto y en vídeo, aprovechando cada montaje de luz al máximo.",
+      },
+      {
+        n: "04",
+        title: "Retoque y entrega",
+        desc: "Retoque, color y montaje. Recibes cada archivo en el formato de su canal: vertical para redes, horizontal para web y ficha en las medidas de tu tienda online.",
+      },
+    ],
+    columnsEyebrow: "Capacidades",
+    columnsTitle: "Tipos de contenido y tipos de marca",
+    columns: [
+      {
+        title: "Qué producimos",
+        items: [
+          "Campañas de temporada",
+          "Lookbooks de colección",
+          "Fotografía de ficha de producto",
+          "Bodegón de prenda y accesorio",
+          "Reels y TikToks de moda",
+          "Vídeo de campaña y teaser de drop",
+          "Contenido de tienda y equipo",
+          "UGC con creadores de moda",
+        ],
+      },
+      {
+        title: "Para quién",
+        items: [
+          "Marcas de ropa y calzado",
+          "Streetwear y marcas de drops",
+          "Ecommerce de moda",
+          "Tiendas y concept stores",
+          "Accesorios y joyería",
+          "Moda sostenible y producción local",
+          "Primeras colecciones y lanzamientos",
+          "Showrooms y ferias",
+        ],
+      },
+    ],
+    statement: {
+      before: "Una prenda se vende dos veces",
+      after: "en la campaña y en la ficha",
+      sub: "La campaña crea el deseo y la ficha de producto cierra la compra. Si no salen de la misma producción, tu marca acaba teniendo dos caras y el cliente nota cuál de las dos es la de verdad.",
+    },
+    marquee: [
+      "Campaña",
+      "Lookbook",
+      "Ecommerce",
+      "Streetwear",
+      "Editorial",
+      "Drops",
+      "UGC",
+      "Retoque",
+    ],
+    clientSlugs: [
+      "canallita",
+      "macala",
+      "aluxe",
+      "pigili-originals",
+      "mimosas",
+    ],
+    clientsTitle: "Marcas de moda y lifestyle con las que trabajamos",
+    clientsIntro:
+      "Moda masculina, calzado hecho en España, streetwear y marcas lifestyle. Entra en cada caso para ver las piezas reales que producimos para ellas.",
+    faqs: [
+      {
+        q: "¿Cuánto cuesta una sesión de campaña o de lookbook?",
+        a: "Depende del número de prendas, de si hace falta modelo y localización, y de si te llevas solo fotografía o foto y vídeo. Lo que más mueve el presupuesto no son las horas de cámara, son los montajes de luz distintos que pide la colección. Cuéntanos qué tienes que sacar esta temporada y te pasamos un presupuesto cerrado en 24h.",
+      },
+      {
+        q: "¿Ponéis vosotros modelos, estilismo y localización?",
+        a: "[RELLENAR: confirmar si el estudio ofrece casting y estilismo propios, los subcontrata o los pone la marca]. Lo que sí llevamos en todas las producciones es dirección de arte, cámara, iluminación y edición, y la localización la cerramos contigo en preproducción para que no haya sorpresas el día de la sesión.",
+      },
+      {
+        q: "¿Cuántas prendas entran en una jornada?",
+        a: "Con la selección hecha y las prendas preparadas por adelantado, una jornada cunde mucho más de lo que suele pensarse. Lo que marca el ritmo es cuántos cambios de luz, de modelo o de localización pide la colección: veinte prendas con el mismo montaje salen antes que seis repartidas en tres escenarios.",
+      },
+      {
+        q: "¿Hacéis también las fotos de ficha para el ecommerce?",
+        a: "Sí, y lo recomendamos sacarlo en la misma producción que la campaña: aprovechas el estilismo, el planchado y la prenda ya preparada. [RELLENAR: confirmar si ofrecéis fondo blanco de catálogo y maniquí invisible, o solo ficha con modelo]. Entregamos cada imagen en las medidas y el peso que pide tu tienda online.",
+      },
+      {
+        q: "¿Con cuánta antelación hay que producir una campaña de temporada?",
+        a: "Lo ideal es tener el material aprobado antes de que abra la ventana de venta, no durante. Contando preproducción, sesión, retoque y una ronda de cambios, conviene arrancar con varias semanas de margen sobre la fecha de lanzamiento. Si vas justo, dínoslo y ajustamos el plan a lo que dé tiempo a hacer bien.",
+      },
+      {
+        q: "¿Trabajáis con marcas de fuera de Barcelona y Madrid?",
+        a: "Sí. Tenemos oficina en Barcelona (Carrer del Bruc 61) y en Madrid (Calle de Génova 3), y en las dos áreas metropolitanas no hay coste de desplazamiento. Para marcas de otras ciudades, lo más habitual y lo más económico es que nos envíes las prendas y produzcamos aquí; si la campaña necesita una localización concreta, presupuestamos el viaje aparte.",
+      },
+    ],
+    formTitle: "Cuéntanos qué colección tienes que sacar",
+  },
 ];
 
 export function getServiceLanding(slug: string): ServiceLanding | undefined {

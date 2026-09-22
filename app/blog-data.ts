@@ -22,6 +22,13 @@ export type Post = {
   keywords: string[];
   excerpt: string;
   content: Block[];
+  /**
+   * Landing de servicio a la que apunta el cierre del artículo, cuando existe
+   * una del mismo nicho. El post responde a una búsqueda informativa ("cómo se
+   * hace") y la landing a una comercial ("quién me lo hace"): enlazarlos evita
+   * que compitan y manda al lector al sitio donde puede contratar.
+   */
+  relatedLanding?: { href: string; label: string };
 };
 
 export const posts: Post[] = [
@@ -142,6 +149,10 @@ export const posts: Post[] = [
   },
   {
     slug: "estrategia-contenido-restaurantes",
+    relatedLanding: {
+      href: "/creacion-de-contenido-gastronomico",
+      label: "Ver creación de contenido gastronómico",
+    },
     image: "/blog/fotos/estrategia-contenido-restaurantes.jpg",
     title: "Estrategia de contenido para restaurantes: cómo llenar tu local con Reels",
     description:
@@ -663,6 +674,10 @@ export const posts: Post[] = [
   },
   {
     slug: "contenido-redes-sociales-tiendas-moda",
+    relatedLanding: {
+      href: "/contenido-moda",
+      label: "Ver creación de contenido de moda",
+    },
     image: "/blog/fotos/contenido-redes-sociales-tiendas-moda.jpg",
     title: "Contenido en redes para marcas de moda y tiendas de ropa",
     description:

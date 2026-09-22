@@ -142,6 +142,14 @@ export default async function BlogPostPage({
                 <Link className="btn btn-primary" href="/contacto#formulario">
                   Pedir presupuesto
                 </Link>
+                {post.relatedLanding ? (
+                  <Link
+                    className="btn btn-ghost"
+                    href={post.relatedLanding.href}
+                  >
+                    {post.relatedLanding.label}
+                  </Link>
+                ) : null}
                 <Link className="btn btn-ghost" href="/servicios">
                   Ver servicios
                 </Link>
