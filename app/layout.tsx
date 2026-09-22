@@ -4,6 +4,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import CookieBanner from "./components/CookieBanner";
 import GoogleAnalytics from "./components/GoogleAnalytics";
+import ContarVisita from "./components/ContarVisita";
 import { GlobalJsonLd } from "./components/JsonLd";
 import ThemeToggle from "./components/ThemeToggle";
 import ScrollReveal from "./components/ScrollReveal";
@@ -130,6 +131,7 @@ export default function RootLayout({
         <CookieBanner />
         <GoogleAnalytics />
         <Analytics />
+        <ContarVisita />
       </body>
     </html>
   );
