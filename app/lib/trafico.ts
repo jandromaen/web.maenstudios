@@ -33,6 +33,13 @@ export type Trafico = {
   visitantesPrevios: number;
   paginasPrevias: number;
   topPaginas: Fila[];
+  /**
+   * Las paginas mas vistas con mas profundidad que topPaginas. Existe aparte
+   * porque el top de cinco sirve para "que se ve mas", pero no para buscar una
+   * pagina concreta: una landing de servicio nueva casi nunca entra en cinco, y
+   * no aparecer no es lo mismo que no tener visitas.
+   */
+  todasPaginas: Fila[];
   topOrigenes: Fila[];
   dispositivos: Fila[];
   paises: Fila[];
@@ -149,8 +156,12 @@ async function serieDiaria(v: { since: string; until: string }): Promise<Dia[]> 
   return primero === -1 ? [] : todos.slice(primero);
 }
 
-async function agrupar(by: Dimension, v: { since: string; until: string }): Promise<Fila[]> {
-  const d = await pedir("aggregate", { ...v, by, limit: "5" });
+async function agrupar(
+  by: Dimension,
+  v: { since: string; until: string },
+  limite = 5,
+): Promise<Fila[]> {
+  const d = await pedir("aggregate", { ...v, by, limit: String(limite) });
   const filas = Array.isArray(d?.data) ? d.data : [];
   return filas
     .map((f: Record<string, unknown>) => ({
@@ -190,11 +201,12 @@ export async function traficoSemanal(desde?: string, hasta?: string): Promise<Tr
   inicioSerie.setUTCDate(inicioSerie.getUTCDate() - (diasSerie - 1));
   const serieV = ventanaEntre(inicioSerie.toISOString().slice(0, 10), fin);
 
-  const [semana, anterior, topPaginas, topOrigenes, dispositivos, paises, serie] =
+  const [semana, anterior, topPaginas, todasPaginas, topOrigenes, dispositivos, paises, serie] =
     await Promise.all([
       contar(actual),
       contar(anteriorV),
       agrupar("requestPath", actual),
+      agrupar("requestPath", actual, 30),
       agrupar("referrerHostname", actual),
       agrupar("deviceType", actual),
       agrupar("country", actual),
@@ -207,6 +219,7 @@ export async function traficoSemanal(desde?: string, hasta?: string): Promise<Tr
     visitantesPrevios: anterior.visitantes,
     paginasPrevias: anterior.paginas,
     topPaginas,
+    todasPaginas,
     topOrigenes,
     dispositivos,
     paises,
