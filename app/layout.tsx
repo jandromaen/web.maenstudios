@@ -14,6 +14,7 @@ import { themeBootScript } from "./lib/theme";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_KEYWORDS,
+  GSC_VERIFICATION,
   OG_IMAGE,
   SITE_NAME,
   SITE_URL,
@@ -73,8 +74,18 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  /**
+   * Las dos propiedades de Search Console a la vez. La primera sale de
+   * NEXT_PUBLIC_GSC_VERIFICATION (definida en Vercel) y verifica la propiedad
+   * antigua; quitarla la desverificaria, y de ahi salen los datos de busquedas
+   * del informe semanal. La segunda es la propiedad nueva. Google admite
+   * varias etiquetas y comprueba la suya, asi que conviven sin problema.
+   */
   verification: {
-    google: "F8q96DiuWidyV1yyV-B5FOgkH2RFHn2My3mw4hklS4E",
+    google: [
+      GSC_VERIFICATION,
+      "F8q96DiuWidyV1yyV-B5FOgkH2RFHn2My3mw4hklS4E",
+    ].filter(Boolean),
   },
   alternates: { canonical: SITE_URL },
   icons: {
