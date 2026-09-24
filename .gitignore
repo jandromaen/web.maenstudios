@@ -53,3 +53,7 @@ undefined/
 /0804*/
 /0814*/
 *.MP3
+.env*
+
+# Permisos locales de Claude Code: son de cada equipo, no del proyecto
+.claude/settings.local.json
