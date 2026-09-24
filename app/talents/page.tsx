@@ -116,7 +116,12 @@ export default function TalentsPage() {
                 con influencers, microinfluencers y UGC.
               </p>
               <div className="hero-actions">
-                <Link className="btn btn-primary" href="/contacto#formulario">
+                {/* El catálogo primero: una marca que llega buscando creadores
+                    quiere verlos, no rellenar un formulario. */}
+                <Link className="btn btn-primary" href="/talents/creadores">
+                  Ver creadores
+                </Link>
+                <Link className="btn btn-ghost" href="/contacto#formulario">
                   Quiero una campaña
                 </Link>
                 {/* Este no va a contacto: quien es creador tiene su propio
@@ -212,7 +217,7 @@ export default function TalentsPage() {
               {/* Antes llevaba a /contacto, donde a un creador se le pregunta
                   su presupuesto: la pregunta equivocada a la persona
                   equivocada. */}
-              <Link className="btn btn-primary" href="#red-de-creadores">
+              <Link className="btn btn-primary" href="/talents/acceso">
                 Entrar en la red
               </Link>
               <Link className="btn btn-ghost" href="/clientes">
