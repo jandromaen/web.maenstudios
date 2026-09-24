@@ -5067,3 +5067,58 @@ body:has(.cookie-banner) .theme-toggle {
   position: relative;
   z-index: 1;
 }
+
+/* Acceso a Talents ------------------------------------------------------ */
+
+/* Tres bloques —presentación, formulario y argumentario— colocados distinto
+   según el ancho, porque el orden correcto no es el mismo en los dos sitios.
+
+   En móvil: primero se dice dónde estás, luego el formulario, y el
+   argumentario debajo. Poner el formulario del todo arriba deja al visitante
+   ante unos campos sin contexto; ponerlo al final lo esconde detrás de dos
+   pantallas de scroll. En medio es donde funciona.
+
+   En escritorio: presentación y argumentario apilados en la columna
+   izquierda, y el formulario a la derecha ocupando las dos filas. Así la
+   página se usa entera en vez de dejar el formulario solo en el centro. */
+.acceso-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 5vw, 44px);
+}
+
+.acceso-grid .acceso-intro { order: 1; }
+.acceso-grid .acceso-form { order: 2; }
+.acceso-grid .acceso-ventajas { order: 3; }
+
+@media (min-width: 900px) {
+  .acceso-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    column-gap: 64px;
+    row-gap: clamp(28px, 4vw, 44px);
+    align-items: start;
+  }
+
+  .acceso-grid .acceso-intro {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .acceso-grid .acceso-ventajas {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  /* El formulario ocupa las dos filas de la derecha: si no, se pegaría arriba
+     y dejaría un hueco muerto bajo él. */
+  .acceso-grid .acceso-form {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
+/* Sin la línea superior de .cap-grid, que aquí cortaba el texto en seco. */
+.acceso-ventajas {
+  border-top: none;
+  padding-top: 0;
+}
