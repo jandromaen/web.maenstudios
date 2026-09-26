@@ -742,6 +742,7 @@ export const posts: Post[] = [
   },
   {
     slug: "contenido-redes-sociales-bares-coctelerias",
+    image: "/blog/fotos/contenido-redes-sociales-bares-coctelerias.jpg",
     title: "Contenido en redes para bares y coctelerías: qué funciona de noche",
     description:
       "Cómo grabar y publicar contenido para bares, coctelerías y locales de noche: qué falla con poca luz, qué formatos llenan mesa y cuándo publicar cada cosa.",
