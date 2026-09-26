@@ -839,6 +839,7 @@ export const posts: Post[] = [
   },
   {
     slug: "que-incluye-el-servicio-de-produccion-audiovisual",
+    image: "/blog/fotos/que-incluye-el-servicio-de-produccion-audiovisual.jpg",
     title: "Qué incluye el servicio de producción audiovisual",
     description: "Qué cubre exactamente un servicio de producción audiovisual: preproducción, rodaje, montaje y entrega. Qué preguntar antes de contratar.",
     category: "Negocio",
