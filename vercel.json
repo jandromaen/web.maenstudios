@@ -7,6 +7,10 @@
     {
       "path": "/api/informe-seo",
       "schedule": "0 10 * * 5"
+    },
+    {
+      "path": "/api/indexnow",
+      "schedule": "0 10 * * 2"
     }
   ]
 }
