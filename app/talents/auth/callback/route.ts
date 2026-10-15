@@ -33,7 +33,14 @@ export async function GET(request: NextRequest) {
 
   if (fallo) {
     const destino = new URL("/talents/acceso", url.origin);
-    destino.searchParams.set("error", "No hemos podido completar el acceso con Google.");
+    /* El canje falla tambien cuando se confirma el correo desde OTRO navegador
+       o telefono: la prueba criptografica se quedo en el que inicio el
+       registro. No es un error del usuario, asi que se le dice que entre con
+       su contrasena en vez de soltarle un «algo ha fallado». */
+    destino.searchParams.set(
+      "error",
+      "Tu cuenta ya está confirmada, pero este enlace se abrió en otro navegador. Entra aquí con tu correo y tu contraseña.",
+    );
     return NextResponse.redirect(destino);
   }
 

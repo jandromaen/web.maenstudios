@@ -90,7 +90,13 @@ export default function FormularioAcceso() {
       password,
       options: {
         data: { tipo },
-        emailRedirectTo: `${window.location.origin}/talents/acceso`,
+        /* A la ruta de vuelta, NO a /talents/acceso. Esa es una página normal
+           y no sabe canjear el código: quien confirmaba su correo aterrizaba
+           otra vez en el login sin estar dentro, y se iba pensando que no
+           funcionaba. Pasó de verdad con el primer registro real. */
+        emailRedirectTo: `${window.location.origin}/talents/auth/callback?tipo=${tipo}${
+          volver ? `&volver=${encodeURIComponent(volver)}` : ""
+        }`,
       },
     });
 
