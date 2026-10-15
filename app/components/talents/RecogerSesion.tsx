@@ -27,6 +27,17 @@ export default function RecogerSesion() {
     const supabase = crearCliente();
     let hecho = false;
 
+    /* El fragmento, guardado por el script en linea de la pagina antes de que
+       React se lo llevara. Se mira tambien location.hash por si algun dia esa
+       navegacion deja de pasar. */
+    const bruto =
+      (window as unknown as { __maenHash?: string }).__maenHash ||
+      window.location.hash ||
+      "";
+    const h = new URLSearchParams(bruto.replace(/^#/, ""));
+    const access_token = h.get("access_token");
+    const refresh_token = h.get("refresh_token");
+
     const entrar = () => {
       if (hecho) return;
       hecho = true;
@@ -45,7 +56,18 @@ export default function RecogerSesion() {
     });
 
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) entrar();
+      if (data.session) {
+        entrar();
+        return;
+      }
+      /* No habia sesion: se abre con los tokens del enlace. Con flowType PKCE
+         la libreria no canjea sola un fragmento implicito como este, asi que
+         hay que dárselo. */
+      if (access_token && refresh_token) {
+        supabase.auth.setSession({ access_token, refresh_token }).then(({ error }) => {
+          if (!error) entrar();
+        });
+      }
     });
 
     /* Si en doce segundos no hay sesion, se le ofrece la salida manual en vez

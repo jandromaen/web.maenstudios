@@ -17,6 +17,17 @@ export default function ConfirmadoPage() {
     <>
       <SiteHeader />
       <main>
+        {/* Se guarda el fragmento ANTES de que React arranque.
+            Next hace una navegacion de cliente al hidratar y se lleva por
+            delante el «#access_token=...» del enlace de confirmacion: cuando
+            el componente iba a leerlo, ya no estaba. Este script corre
+            mientras el navegador parsea el HTML, antes de todo eso. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{window.__maenHash=window.location.hash||''}catch(e){}",
+          }}
+        />
+
         <section className="page-hero">
           <div className="container container-narrow">
             <h1>Ya casi</h1>
