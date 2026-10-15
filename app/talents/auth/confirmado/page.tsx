@@ -20,7 +20,9 @@ export default function ConfirmadoPage() {
         <section className="page-hero">
           <div className="container container-narrow">
             <h1>Ya casi</h1>
-            <Suspense fallback={<p className="form-status">Confirmando tu cuenta…</p>}>
+            {/* Texto distinto al del componente a proposito: si fueran iguales, no se
+                puede saber mirando la pantalla si el componente llego a arrancar. */}
+            <Suspense fallback={<p className="form-status">Cargando…</p>}>
               <RecogerSesion />
             </Suspense>
           </div>

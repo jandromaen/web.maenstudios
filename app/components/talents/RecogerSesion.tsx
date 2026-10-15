@@ -21,8 +21,16 @@ export default function RecogerSesion() {
   const router = useRouter();
   const params = useSearchParams();
   const [estado, setEstado] = useState<"trabajando" | "fallo">("trabajando");
+  const [detalle, setDetalle] = useState<string | null>(null);
 
   useEffect(() => {
+    /* Red de seguridad: si en diez segundos no ha pasado nada, se le ofrece la
+       salida manual en vez de dejarle mirando un «confirmando» eterno, que es
+       exactamente la pantalla en la que se pierde un registro. */
+    const limite = setTimeout(() => {
+      setEstado("fallo");
+      setDetalle("La confirmación está tardando demasiado.");
+    }, 10000);
     const hash = window.location.hash.startsWith("#")
       ? window.location.hash.slice(1)
       : window.location.hash;
@@ -33,15 +41,19 @@ export default function RecogerSesion() {
     const errorEnlace = h.get("error_description") ?? h.get("error");
 
     if (errorEnlace || !access_token || !refresh_token) {
+      clearTimeout(limite);
       setEstado("fallo");
+      setDetalle(errorEnlace ?? "El enlace no traía la sesión.");
       return;
     }
 
     crearCliente()
       .auth.setSession({ access_token, refresh_token })
       .then(({ error }) => {
+        clearTimeout(limite);
         if (error) {
           setEstado("fallo");
+          setDetalle(error.message);
           return;
         }
         /* Fuera el fragmento de la barra antes de seguir: lleva tokens
@@ -54,16 +66,28 @@ export default function RecogerSesion() {
         router.replace(volver ?? (tipo === "marca" ? "/talents/marca" : "/talents/panel"));
         router.refresh();
       })
-      .catch(() => setEstado("fallo"));
-  }, [router, params]);
+      .catch((e) => {
+        clearTimeout(limite);
+        setEstado("fallo");
+        setDetalle(e instanceof Error ? e.message : String(e));
+      });
+
+    return () => clearTimeout(limite);
+    /* Sin «params» en las dependencias a proposito: useSearchParams devuelve
+       un objeto nuevo en cada render y el efecto se relanzaria en bucle,
+       llamando a setSession una y otra vez. Lo que hace falta de el se lee
+       dentro, una sola vez. */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (estado === "fallo") {
     return (
       <>
         <p className="form-status">
-          Tu cuenta está confirmada, pero este enlace ya se había usado o se
-          abrió en otro navegador. Entra con tu correo y tu contraseña.
+          Tu cuenta está confirmada, pero no hemos podido abrirte la sesión
+          desde este enlace. Entra con tu correo y tu contraseña.
         </p>
+        {detalle ? <p className="form-note">{detalle}</p> : null}
         <div className="hero-actions">
           <Link className="btn btn-primary" href="/talents/acceso">
             Ir a entrar
