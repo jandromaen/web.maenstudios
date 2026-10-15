@@ -94,7 +94,12 @@ export default function FormularioAcceso() {
            y no sabe canjear el código: quien confirmaba su correo aterrizaba
            otra vez en el login sin estar dentro, y se iba pensando que no
            funcionaba. Pasó de verdad con el primer registro real. */
-        emailRedirectTo: `${window.location.origin}/talents/auth/callback?tipo=${tipo}${
+        /* A /confirmado y no a /callback: Supabase manda la sesion del correo
+           en el FRAGMENTO de la URL, que no llega al servidor. /callback es
+           una ruta y no puede leerlo; /confirmado es una pantalla de navegador
+           y si. El de Google sigue yendo a /callback, que recibe su codigo por
+           query. */
+        emailRedirectTo: `${window.location.origin}/talents/auth/confirmado?tipo=${tipo}${
           volver ? `&volver=${encodeURIComponent(volver)}` : ""
         }`,
       },
