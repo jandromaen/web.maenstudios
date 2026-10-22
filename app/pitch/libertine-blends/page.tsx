@@ -15,7 +15,7 @@ import "./libertine.css";
  * diapositiva se escala entera a la pantalla.
  */
 export const metadata: Metadata = {
-  title: "Briefing Libertine Blends · Maen Studios",
+  title: "Briefing Libertine Blends",
   robots: { index: false, follow: false },
 };
 
