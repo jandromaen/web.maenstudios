@@ -1,0 +1,206 @@
+/* ==========================================================================
+   Briefing Libertine Blends
+
+   Todo cuelga de .lb. Las diapositivas traen sus estilos en línea (son el
+   HTML del deck original); aquí solo va el visor y el reinicio mínimo para
+   que los valores por defecto del navegador y de la web no las muevan.
+   ========================================================================== */
+
+/* Tipografías del deck, servidas desde /public (licencias OFL y Apache, se
+   pueden alojar). Van aquí y no por Google Fonts para no depender de un
+   tercero el día que se enseña al cliente. Los nombres son los que usan los
+   estilos en línea de las diapositivas. */
+@font-face { font-family: "Archivo"; font-weight: 400; font-display: swap; src: url("/pitch/libertine-blends/fonts/archivo-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Archivo"; font-weight: 500; font-display: swap; src: url("/pitch/libertine-blends/fonts/archivo-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Archivo"; font-weight: 600 700; font-display: swap; src: url("/pitch/libertine-blends/fonts/archivo-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 500; font-display: swap; src: url("/pitch/libertine-blends/fonts/barlow-condensed-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 600; font-display: swap; src: url("/pitch/libertine-blends/fonts/barlow-condensed-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 700; font-display: swap; src: url("/pitch/libertine-blends/fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Syncopate"; font-weight: 400; font-display: swap; src: url("/pitch/libertine-blends/fonts/syncopate-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Syncopate"; font-weight: 700; font-display: swap; src: url("/pitch/libertine-blends/fonts/syncopate-latin-700-normal.woff2") format("woff2"); }
+
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #151515;
+  color: #f4ece4;
+  overflow: hidden;
+}
+
+.lb-escena {
+  position: absolute;
+  inset: 16px 16px 72px;
+  display: grid;
+  place-items: center;
+}
+
+.lb-marco {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.lb-lienzo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  cursor: pointer;
+}
+
+/* ── Reinicio dentro de la diapositiva ─────────────────────────────────── */
+.lb .lb-lienzo section {
+  position: relative;
+  box-sizing: border-box;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+
+/* En el deck original lo que va después pinta encima, también sobre un
+   elemento fijado con position:absolute (la foto de la portada va antes que el
+   titular). En CSS lo posicionado pinta siempre por encima de lo que no lo
+   está, así que el contenido en flujo se posiciona también y el orden del
+   HTML vuelve a mandar. */
+.lb .lb-lienzo section > *:not([style*="position:absolute"]) {
+  position: relative;
+}
+
+.lb .lb-lienzo *,
+.lb .lb-lienzo *::before,
+.lb .lb-lienzo *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* La web pone en titulares y párrafos su tipografía, peso 800, mayúsculas,
+   interletrado negativo y corte de palabra en cualquier punto. Aquí manda lo
+   que traiga la diapositiva en línea, y lo que no traiga se hereda de ella. */
+.lb .lb-lienzo section {
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
+.lb .lb-lienzo h1,
+.lb .lb-lienzo h2,
+.lb .lb-lienzo h3,
+.lb .lb-lienzo p,
+.lb .lb-lienzo td,
+.lb .lb-lienzo th {
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: inherit;
+  overflow-wrap: normal;
+}
+
+.lb .lb-lienzo h1 { font-weight: 600; line-height: 1.1; }
+.lb .lb-lienzo h2 { font-weight: 600; line-height: 1.15; text-wrap: wrap; }
+.lb .lb-lienzo h3 { font-weight: 600; line-height: 1.2; }
+.lb .lb-lienzo p  { line-height: 1.4; }
+
+.lb .lb-lienzo img,
+.lb .lb-lienzo video {
+  display: block;
+  max-width: none;
+}
+
+.lb .lb-lienzo video {
+  background: #000;
+}
+
+.lb .lb-lienzo table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lb .lb-lienzo th,
+.lb .lb-lienzo td {
+  padding: 0.35em 0.6em;
+  text-align: left;
+  border-bottom: 1px solid rgba(21, 21, 21, 0.25);
+}
+
+.lb .lb-lienzo th {
+  font-weight: 600;
+}
+
+/* ── Controles ──────────────────────────────────────────────────────────── */
+.lb-hud {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 500 13px/1 system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lb-hud-marca {
+  opacity: 0.7;
+}
+
+.lb-hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lb-hud-nav button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(244, 236, 228, 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.lb-hud-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.lb-hud-num {
+  min-width: 72px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.lb-progreso {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(244, 236, 228, 0.12);
+}
+
+.lb-progreso span {
+  display: block;
+  height: 100%;
+  background: #fcf655;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .lb-hud-marca {
+    display: none;
+  }
+  .lb-hud {
+    justify-content: center;
+  }
+}
+
+body.deck-abierto .cookie-banner,
+body.deck-abierto .theme-toggle {
+  display: none;
+}
