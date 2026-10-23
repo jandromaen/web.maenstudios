@@ -302,8 +302,8 @@ const MESES = [
   { m: "Ago", s: 15 }, { m: "Sep", s: 19 }, { m: "Oct", s: 23 },
 ];
 
-export const DIAPOS: Diapo[] = [
-  {
+const portada = (completo: boolean): Diapo => (
+{
     id: "portada",
     titulo: "Portada",
     contenido: (
@@ -314,15 +314,18 @@ export const DIAPOS: Diapo[] = [
         </p>
         <img src="/informedonlay/logo-beige.svg" alt="Don Lay" style={{ ...abs(300, 920), width: 640, height: "auto" }} />
         <h1 className="d-tit d-tit--m" style={{ ...abs(620, 920, 900), lineHeight: 1.1 }}>
-          Informe de Instagram y propuesta de contenido
+          {completo ? "Informe de Instagram y propuesta de contenido" : "Informe de Instagram de los últimos 6 meses"}
         </h1>
         <p style={{ ...abs(960, 920), fontSize: 22, fontWeight: 400, letterSpacing: "0.06em", opacity: 0.8 }}>
           MAEN STUDIOS
         </p>
       </Diapositiva>
     ),
-  },
-  {
+  }
+);
+
+const indice = (completo: boolean): Diapo => (
+{
     id: "indice",
     titulo: "Contenido",
     contenido: (
@@ -335,21 +338,26 @@ export const DIAPOS: Diapo[] = [
             items={["Metodología", "La cuenta hoy", "Actividad", "Rendimiento publicación a publicación"]}
           />
           <ul className="d-lista" style={{ fontSize: 28 }}>
-            {["Qué funciona", "Qué no funciona", "Recomendaciones", "Propuesta de contenido"].map((t, i) => (
+            {["Qué funciona", "Qué no funciona", "Recomendaciones", ...(completo ? ["Propuesta de contenido"] : [])].map((t, i) => (
               <li key={t} data-n={String(i + 5).padStart(2, "0")}>
                 {t}
               </li>
             ))}
           </ul>
         </div>
-        <p style={{ ...abs(880, 96, 1000), fontSize: 24, opacity: 0.7 }}>
-          La propuesta recoge el planning del rodaje del 26 de octubre, los cinco pilares de contenido, las referencias y los
-          vídeos.
-        </p>
+        {completo && (
+          <p style={{ ...abs(880, 96, 1000), fontSize: 24, opacity: 0.7 }}>
+            La propuesta recoge el planning del rodaje del 26 de octubre, los cinco pilares de contenido, las referencias y
+            los vídeos.
+          </p>
+        )}
         <Foto src={FOTO.dimsumCesta} alt="Cesta de dim sum de Don Lay" style={abs(76, 1240, 680, 1004)} />
       </Diapositiva>
     ),
-  },
+  }
+);
+
+const RESTO: Diapo[] = [
   {
     id: "metodologia",
     titulo: "Alcance y metodología",
@@ -983,3 +991,15 @@ export const DIAPOS: Diapo[] = [
   },
 ];
 
+
+/** Deck completo: informe + propuesta de contenido (briefing del rodaje) */
+export const DIAPOS: Diapo[] = [portada(true), indice(true), ...RESTO];
+
+/** Solo el informe: de la portada a «Próximos pasos», y el cierre */
+const finInforme = RESTO.findIndex((d) => d.id === "sep-propuesta");
+export const DIAPOS_INFORME: Diapo[] = [
+  portada(false),
+  indice(false),
+  ...RESTO.slice(0, finInforme),
+  RESTO[RESTO.length - 1],
+];

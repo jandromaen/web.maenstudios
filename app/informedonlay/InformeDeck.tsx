@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { DIAPOS } from "./diapos";
+import { DIAPOS, DIAPOS_INFORME } from "./diapos";
 
 const ANCHO = 1920;
 const ALTO = 1080;
@@ -15,13 +15,14 @@ const ALTO = 1080;
  *
  * La diapositiva se recuerda en el hash (#12) para poder enlazar una concreta.
  */
-export default function InformeDeck() {
+export default function InformeDeck({ version = "completo" }: { version?: "completo" | "informe" }) {
+  const DIAPOS_V = version === "informe" ? DIAPOS_INFORME : DIAPOS;
   const [indice, setIndice] = useState(0);
   const [escala, setEscala] = useState(0);
   const escena = useRef<HTMLDivElement>(null);
   const deck = useRef<HTMLDivElement>(null);
   const toque = useRef<number | null>(null);
-  const total = DIAPOS.length;
+  const total = DIAPOS_V.length;
 
   const ir = useCallback(
     (i: number) => setIndice(Math.max(0, Math.min(total - 1, i))),
@@ -106,8 +107,8 @@ export default function InformeDeck() {
     else siguiente();
   };
 
-  const diapo = DIAPOS[indice];
-  const proxima = DIAPOS[indice + 1];
+  const diapo = DIAPOS_V[indice];
+  const proxima = DIAPOS_V[indice + 1];
 
   return (
     <div
