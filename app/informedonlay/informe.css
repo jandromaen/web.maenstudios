@@ -1,0 +1,332 @@
+/* ==========================================================================
+   Informe de Instagram y propuesta de contenido · Don Lay
+
+   Identidad tomada del Brand Manual 2026 de Don Lay (Genialidades):
+   - Colores: negro #1D1D1B y rojo #79242F a partes iguales, beige #F6F0E8
+     como fondo claro. No se usa ningún otro color: los tonos secundarios son
+     esos mismos con opacidad.
+   - Tipografía principal: Self Modern (titulares y mensajes con carácter).
+   - Tipografía secundaria: Inter (texto corrido).
+   - Logotipo e icono: los trazados vectoriales del propio manual.
+
+   Todo cuelga de .dl. Cada diapositiva es un lienzo fijo de 1920×1080 que el
+   visor escala entero, igual que el briefing de Libertine.
+   ========================================================================== */
+
+/* Inter: OFL, se puede alojar. Self Modern es comercial: se usa si está
+   instalada en el equipo (local) y, en cuanto tengamos el archivo con licencia
+   web, se añade aquí con su url(). Mientras, los titulares caen en Noto Serif. */
+@font-face { font-family: "Inter DL"; font-weight: 300; font-display: swap; src: url("/informedonlay/fonts/inter-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter DL"; font-weight: 400; font-display: swap; src: url("/informedonlay/fonts/inter-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter DL"; font-weight: 500; font-display: swap; src: url("/informedonlay/fonts/inter-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter DL"; font-weight: 600; font-display: swap; src: url("/informedonlay/fonts/inter-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Self Modern"; font-weight: 400; font-display: swap; src: local("Self Modern"), local("SelfModern-Regular"), local("Self Modern Regular"); }
+@font-face { font-family: "Noto Serif DL"; font-weight: 300; font-display: swap; src: url("/informedonlay/fonts/noto-serif-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Noto Serif DL"; font-weight: 400; font-display: swap; src: url("/informedonlay/fonts/noto-serif-latin-400-normal.woff2") format("woff2"); }
+
+.dl {
+  --negro: #1d1d1b;
+  --rojo: #79242f;
+  --beige: #f6f0e8;
+  --serif: "Self Modern", "Noto Serif DL", Georgia, serif;
+  --sans: "Inter DL", "Inter", system-ui, sans-serif;
+
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #121211;
+  color: var(--beige);
+  overflow: hidden;
+  font-family: var(--sans);
+}
+
+/* ── Visor ──────────────────────────────────────────────────────────────── */
+.dl-escena {
+  position: absolute;
+  inset: 16px 16px 72px;
+  display: grid;
+  place-items: center;
+}
+
+.dl-marco {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.dl-lienzo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  cursor: pointer;
+}
+
+.dl-hud {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 500 13px/1 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dl-hud-marca { opacity: 0.6; }
+
+.dl-hud-nav { display: flex; align-items: center; gap: 8px; }
+
+.dl-hud-nav button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(246, 240, 232, 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.dl-hud-nav button:disabled { opacity: 0.3; cursor: default; }
+
+.dl-hud-num { min-width: 72px; text-align: center; font-variant-numeric: tabular-nums; }
+
+.dl-progreso {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(246, 240, 232, 0.1);
+}
+
+.dl-progreso span {
+  display: block;
+  height: 100%;
+  background: var(--rojo);
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .dl-hud-marca { display: none; }
+  .dl-hud { justify-content: center; }
+}
+
+.dl-girar { display: none; }
+@media (orientation: portrait) and (max-width: 700px) {
+  .dl-girar {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 76px;
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.6;
+  }
+}
+
+body.deck-abierto .cookie-banner,
+body.deck-abierto .theme-toggle { display: none; }
+
+/* ── Reinicio dentro del lienzo ─────────────────────────────────────────── */
+.dl-lienzo *,
+.dl-lienzo *::before,
+.dl-lienzo *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.dl-lienzo :where(h1, h2, h3, p, li) {
+  font-family: inherit;
+  font-weight: inherit;
+  text-transform: none;
+  letter-spacing: inherit;
+  overflow-wrap: normal;
+  line-height: inherit;
+  color: inherit;
+}
+
+.dl-lienzo :where(ul) { list-style: none; }
+.dl-lienzo :where(img, video) { display: block; max-width: none; object-fit: cover; }
+
+/* ── Diapositiva ────────────────────────────────────────────────────────── */
+.d {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.d--negro { background: var(--negro); color: var(--beige); }
+.d--rojo { background: var(--rojo); color: var(--beige); }
+.d--beige { background: var(--beige); color: var(--negro); }
+
+/* Cabecera como la del manual: franja fina con el icono en el centro */
+.d-cab {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 76px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 72px;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.d--beige .d-cab { background: var(--rojo); color: var(--beige); }
+.d--negro .d-cab { border-bottom: 1px solid rgba(246, 240, 232, 0.16); }
+.d--rojo .d-cab { border-bottom: 1px solid rgba(246, 240, 232, 0.22); }
+.d-cab img { height: 30px; width: auto; }
+.d-cab span:last-child { text-align: right; }
+.d-cab b { font-weight: 500; }
+
+/* Etiqueta de sección: «Rendimiento • Cifras del periodo», como en el manual */
+.d-et {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+}
+
+.d-tit {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 92px;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+.d-tit--xl { font-size: 150px; line-height: 1; }
+.d-tit--m { font-size: 80px; }
+
+.d-sub { font-size: 30px; opacity: 0.75; }
+
+.d-num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 110px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.d-lista li {
+  position: relative;
+  padding: 20px 0 20px 64px;
+  border-top: 1px solid currentColor;
+  border-color: rgba(127, 127, 120, 0.35);
+}
+.d-lista li:last-child { border-bottom: 1px solid rgba(127, 127, 120, 0.35); }
+.d-lista li::before {
+  content: attr(data-n);
+  position: absolute;
+  left: 0;
+  top: 26px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+}
+
+.d-foto { position: absolute; overflow: hidden; }
+.d-foto img,
+.d-foto video { width: 100%; height: 100%; }
+
+.d-pie-foto {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--beige);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Tarjeta de cifra */
+.d-cifra { border-top: 1px solid rgba(127, 127, 120, 0.45); padding-top: 26px; }
+.d-cifra .d-num { margin-bottom: 12px; font-size: 96px; line-height: 1; opacity: 1; }
+.d-cifra h3 { font-size: 30px; font-weight: 500; margin-bottom: 8px; }
+.d-cifra p { font-size: 24px; line-height: 1.4; opacity: 0.75; }
+
+/* Galería de publicaciones */
+.d-gal {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+.d-gal figure { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #000; }
+.d-gal img,
+.d-gal video { width: 100%; height: 100%; }
+.d-gal figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  background: linear-gradient(transparent, rgba(29, 29, 27, 0.92));
+  color: var(--beige);
+  padding: 40px 14px 12px;
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 400;
+}
+.d-gal figcaption b { display: block; font-family: var(--serif); font-weight: 300; font-size: 46px; line-height: 1; margin-bottom: 4px; }
+.d-gal .d-marca-reel {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 8px;
+  background: var(--rojo);
+  color: var(--beige);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Ranking (top y bottom) */
+.d-rank { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; }
+.d-rank figure { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.d-rank img { width: 100%; height: 100%; }
+.d-rank .d-num { font-size: 84px; margin: 22px 0 8px; opacity: 1; line-height: 1; }
+.d-rank h3 { font-size: 24px; font-weight: 500; line-height: 1.3; margin-bottom: 6px; }
+.d-rank p { font-size: 20px; line-height: 1.4; opacity: 0.75; }
+
+/* Barras de formato */
+.d-barra { height: 14px; background: rgba(127, 127, 120, 0.25); margin: 18px 0 20px; }
+.d-barra span { display: block; height: 100%; background: currentColor; }
+
+/* Teléfono para las referencias */
+.d-movil {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 34px;
+  border: 10px solid #0c0c0b;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  background: #0c0c0b;
+}
+.d-movil img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+.d-ref-et {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  padding: 4px 10px;
+  background: rgba(29, 29, 27, 0.75);
+  color: var(--beige);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
