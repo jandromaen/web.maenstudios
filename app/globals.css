@@ -5122,3 +5122,60 @@ body:has(.cookie-banner) .theme-toggle {
   border-top: none;
   padding-top: 0;
 }
+
+/* Catálogo de creadores ------------------------------------------------- */
+
+/* La rejilla se adapta al número de fichas que hay, no al que habrá algún día.
+   Con la de clientes —cuatro columnas fijas— una sola ficha flotaba en un
+   cuarto de fila con tres cuartos de vacío al lado, y parecía un error de
+   maquetación en vez de un catálogo que empieza. Con pocas fichas, menos
+   columnas y más grandes: ocupan el sitio con intención. */
+.creadores-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.5vw, 32px) clamp(12px, 2vw, 24px);
+}
+
+@media (min-width: 720px) {
+  .creadores-grid {
+    grid-template-columns: repeat(min(var(--columnas, 3), 3), minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .creadores-grid {
+    grid-template-columns: repeat(var(--columnas, 4), minmax(0, 1fr));
+  }
+}
+
+/* La foto manda: en un catálogo de personas, la cara es el producto. El texto
+   va encima en vez de debajo para que la tarjeta sea toda imagen. */
+.creador-card .client-portfolio-media {
+  margin-bottom: 0;
+}
+
+.creador-info {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 16px 16px 14px;
+  display: grid;
+  gap: 2px;
+  /* Degradado y no un color plano: sobre una foto oscura un panel sólido
+     corta la imagen en dos, y sobre una clara el texto se pierde. */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0));
+  color: #fff;
+  z-index: 2;
+}
+
+.creador-info .nombre {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  line-height: 1.1;
+}
+
+.creador-info .donde {
+  font-size: 0.78rem;
+  opacity: 0.82;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}

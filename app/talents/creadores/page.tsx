@@ -40,21 +40,25 @@ export default async function CatalogoPage() {
     <>
       <SiteHeader />
       <main>
-        <section className="page-hero">
+        {/* Héroe corto a propósito: en un catálogo el producto son las caras,
+            y antes había que bajar una pantalla entera para ver la primera.
+            Fuera también el index-label, que se pegaba al enlace de volver y
+            se leía «VOLVER A TALENTSTALENTS». */}
+        <section className="page-hero" style={{ paddingBottom: 0 }}>
           <div className="container">
             <Link className="back-link" href="/talents">
               ← Volver a Talents
             </Link>
-            <span className="index-label">Talents</span>
-            <h1>Creadores UGC</h1>
-            <p className="lead">
-              Perfiles con su trabajo real, no con una promesa. Entra en cada
-              ficha para ver lo que han grabado.
-            </p>
-            <div className="hero-actions">
+            <h1 style={{ marginBottom: 12 }}>Creadores UGC</h1>
+            <div className="hero-actions" style={{ marginTop: 18 }}>
               <Link className="btn btn-primary" href="/talents/acceso">
                 Soy creador, quiero salir aquí
               </Link>
+              <span className="form-note" style={{ alignSelf: "center" }}>
+                {creadores.length === 1
+                  ? "1 creador en el catálogo"
+                  : `${creadores.length} creadores en el catálogo`}
+              </span>
             </div>
           </div>
         </section>
@@ -67,13 +71,67 @@ export default async function CatalogoPage() {
                 <Link href="/talents/acceso">monta la tuya</Link> y serás de los
                 primeros del catálogo.
               </div>
+            ) : creadores.length <= 2 ? (
+              /* Con una o dos fichas una rejilla deja media pantalla vacía y
+                 parece un fallo de maquetación. A ancho completo, la misma
+                 ficha se lee como una presentación y no como un hueco. Se pasa
+                 a rejilla en cuanto hay tres. */
+              creadores.map((c) => {
+                const foto = urlDeFoto(c.foto);
+                const nombre = `${c.nombre}${c.apellido ? ` ${c.apellido}` : ""}`;
+                return (
+                  <div className="case-hero-grid" key={c.id} style={{ marginBottom: 48 }}>
+                    <div className="case-hero-body">
+                      <span className="index-label">
+                        Creador UGC · {c.ciudad}
+                      </span>
+                      <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", margin: "0.2em 0 0.4em" }}>
+                        {nombre}
+                      </h2>
+                      {c.bio ? <p className="client-desc">{c.bio}</p> : null}
+                      {c.sectores?.length ? (
+                        <div className="client-tags">
+                          {c.sectores.map((x) => (
+                            <span className="tag-pill" key={x}>
+                              {x}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
+                      <div className="hero-actions">
+                        <Link className="btn btn-primary" href={`/talents/creadores/${c.slug}`}>
+                          Ver su trabajo
+                        </Link>
+                      </div>
+                    </div>
+                    {foto ? (
+                      <div className="case-hero-media">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={foto}
+                          alt={`Foto de ${nombre}, creador de contenido UGC en ${c.ciudad}`}
+                        />
+                        {c.seguidores ? (
+                          <span className="case-feature-stat">
+                            {Intl.NumberFormat("es-ES", { notation: "compact" }).format(c.seguidores)}
+                          </span>
+                        ) : null}
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })
             ) : (
-              <div className="client-portfolio-grid">
+              <div
+                className="client-portfolio-grid creadores-grid"
+                style={{ ["--columnas" as string]: String(Math.min(creadores.length, 4)) }}
+              >
                 {creadores.map((c) => {
                   const foto = urlDeFoto(c.foto);
+                  const nombre = `${c.nombre}${c.apellido ? ` ${c.apellido}` : ""}`;
                   return (
                     <Link
-                      className="client-portfolio-card"
+                      className="client-portfolio-card creador-card"
                       key={c.id}
                       href={`/talents/creadores/${c.slug}`}
                     >
@@ -82,7 +140,7 @@ export default async function CatalogoPage() {
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={foto}
-                            alt={`Foto de ${c.nombre}${c.apellido ? ` ${c.apellido}` : ""}, creador de contenido UGC en ${c.ciudad}`}
+                            alt={`Foto de ${nombre}, creador de contenido UGC en ${c.ciudad}`}
                             loading="lazy"
                             decoding="async"
                           />
@@ -94,14 +152,15 @@ export default async function CatalogoPage() {
                             {Intl.NumberFormat("es-ES", { notation: "compact" }).format(c.seguidores)}
                           </span>
                         ) : null}
-                      </div>
-                      <div className="meta">
-                        <div className="title">
-                          {c.nombre} {c.apellido ?? ""}
-                        </div>
-                        <div className="tagline">
-                          {c.ciudad}
-                          {c.sectores?.length ? ` · ${c.sectores.slice(0, 2).join(", ")}` : ""}
+                        {/* El nombre va SOBRE la foto: la tarjeta entera es
+                            imagen y el catálogo se lee como una pared de caras,
+                            que es lo que vende. */}
+                        <div className="creador-info">
+                          <span className="nombre">{nombre}</span>
+                          <span className="donde">
+                            {c.ciudad}
+                            {c.sectores?.length ? ` · ${c.sectores.slice(0, 2).join(", ")}` : ""}
+                          </span>
                         </div>
                       </div>
                     </Link>
