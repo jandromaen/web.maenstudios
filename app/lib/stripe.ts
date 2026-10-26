@@ -6,7 +6,7 @@ import Stripe from "stripe";
 import type { Periodo, Plan } from "./planes";
 
 export type { Plan, Periodo, Tarifa } from "./planes";
-export { TARIFAS, tarifa, opciones, esPlan, esPeriodo } from "./planes";
+export { TARIFAS, tarifa, opciones, euros, esPlan, esPeriodo } from "./planes";
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   /* Version fijada a proposito: sin esto Stripe usa la de la cuenta y un dia

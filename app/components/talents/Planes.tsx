@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 /* De lib/planes y NO de lib/stripe: ese otro construye el SDK al cargarse y
    se vendria entero al navegador. */
-import { opciones, type Periodo, type Plan } from "../../lib/planes";
+import { euros, opciones, type Periodo, type Plan } from "../../lib/planes";
 
 const QUE_INCLUYE: Record<Plan, string[]> = {
   marca: [
@@ -98,7 +98,7 @@ export default function Planes({ destacado }: { destacado?: Plan }) {
                   >
                     <div>
                       <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.45rem", lineHeight: 1.1 }}>
-                        {String(t.base).replace(".", ",")} €
+                        {euros(t.base)} €
                         <span style={{ fontSize: "0.5em", fontWeight: 400 }}> + IVA / {t.cada}</span>
                       </div>
                       <div className="form-note">

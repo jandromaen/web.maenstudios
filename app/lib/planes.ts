@@ -28,6 +28,16 @@ export const TARIFAS: Record<string, Tarifa> = {
   "creador:mensual": { plan: "creador", periodo: "mensual", base: 1.5, conIva: "1,82", cada: "mes", alAno: "21,78" },
 };
 
+/**
+ * El precio como se escribe en Espana: «25 €», «12 €», «1,50 €».
+ *
+ * Los enteros van sin decimales y los demas con dos. Un «1,5 €» a secas se lee
+ * como un error de la web, no como un precio.
+ */
+export function euros(n: number): string {
+  return Number.isInteger(n) ? String(n) : n.toFixed(2).replace(".", ",");
+}
+
 export function tarifa(plan: Plan, periodo: Periodo): Tarifa | undefined {
   return TARIFAS[`${plan}:${periodo}`];
 }
