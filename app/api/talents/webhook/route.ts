@@ -48,7 +48,9 @@ async function guardar(sub: Stripe.Subscription) {
 
   const fin = (sub as unknown as { current_period_end?: number }).current_period_end;
 
-  await admin()
+  const cliente = admin();
+
+  await cliente
     .from("suscripciones")
     .upsert(
       {
@@ -61,6 +63,21 @@ async function guardar(sub: Stripe.Subscription) {
       },
       { onConflict: "usuario_id" },
     );
+
+  /* La ficha sale del catalogo cuando se deja de pagar y vuelve cuando se
+     reanuda. Se marca aqui y no se consulta desde la politica publica: esa
+     politica la ejecuta un visitante anonimo, que no puede leer la tabla de
+     suscripciones -y darle permiso para que pudiera seria mucho peor-.
+
+     Importante: la ficha NO se borra ni se despublica. Si vuelve, la tiene
+     entera y reaparece sola. */
+  if (plan === "creador") {
+    const alCorriente = estado === "activa" && (!fin || fin * 1000 > Date.now());
+    await cliente
+      .from("creadores")
+      .update({ oculto_por_impago: !alCorriente })
+      .eq("id", usuario_id);
+  }
 }
 
 export async function POST(request: NextRequest) {

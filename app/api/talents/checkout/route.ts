@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { crearClienteServidor, usuarioActual } from "../../../lib/supabase/servidor";
-import { PRECIOS, esPlan, stripe } from "../../../lib/stripe";
+import { esPeriodo, esPlan, precioDe, stripe } from "../../../lib/stripe";
 import { SITE_URL } from "../../../seo-config";
 
 export const runtime = "nodejs";
@@ -19,15 +19,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Tienes que entrar primero." }, { status: 401 });
   }
 
-  const plan = new URL(request.url).searchParams.get("plan");
+  const q = new URL(request.url).searchParams;
+  const plan = q.get("plan");
   if (!esPlan(plan)) {
     return NextResponse.json({ error: "Plan desconocido." }, { status: 400 });
   }
 
-  const precio = PRECIOS[plan];
+  /* Las marcas solo tienen mensual; el creador elige. Si no dice nada se le
+     pone el anual, que es el que le sale mas barato: por defecto se escoge lo
+     que favorece a quien paga, no lo que mas ingresa. */
+  const pedido = q.get("periodo");
+  const periodo = esPeriodo(pedido) ? pedido : "anual";
+
+  const precio = precioDe(plan, periodo);
   if (!precio) {
     return NextResponse.json(
-      { error: `Falta STRIPE_PRECIO_${plan.toUpperCase()} en las variables de entorno.` },
+      { error: `No hay precio configurado para ${plan} ${periodo}.` },
       { status: 503 },
     );
   }
@@ -54,7 +61,7 @@ export async function POST(request: NextRequest) {
          lo resuelve por el objeto de Stripe, pero esto da una segunda via
          cuando algo llega desordenado. */
       client_reference_id: usuario.id,
-      subscription_data: { metadata: { usuario_id: usuario.id, plan } },
+      subscription_data: { metadata: { usuario_id: usuario.id, plan, periodo } },
       /* Los datos fiscales del cliente hacen falta para la factura, y el NIF
          es lo que permite tratar a una empresa como tal. */
       billing_address_collection: "required",

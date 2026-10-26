@@ -23,10 +23,13 @@ export default function PanelCreador({
   inicial,
   trabajosIniciales,
   usuarioId,
+  bloqueado = false,
 }: {
   inicial: Creador | null;
   trabajosIniciales: Trabajo[];
   usuarioId: string;
+  /** Sin suscripcion: se ve el formulario pero no se puede guardar. */
+  bloqueado?: boolean;
 }) {
   const router = useRouter();
   const supabase = crearCliente();
@@ -279,8 +282,8 @@ export default function PanelCreador({
       ) : null}
 
       <div className="hero-actions">
-        <button className="btn btn-primary" onClick={guardar} disabled={guardando}>
-          {guardando ? "Guardando…" : "Guardar ficha"}
+        <button className="btn btn-primary" onClick={guardar} disabled={guardando || bloqueado}>
+          {guardando ? "Guardando…" : bloqueado ? "Necesitas la suscripción" : "Guardar ficha"}
         </button>
       </div>
 

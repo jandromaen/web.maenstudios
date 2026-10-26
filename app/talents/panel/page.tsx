@@ -5,6 +5,7 @@ import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import PanelCreador from "../../components/talents/PanelCreador";
 import { crearClienteServidor, usuarioActual } from "../../lib/supabase/servidor";
+import { accesoDe } from "../../lib/acceso";
 import { createPageMetadata } from "../../seo-config";
 import type { Creador, Trabajo } from "../../lib/talents";
 
@@ -24,6 +25,7 @@ export default async function PanelPage() {
      decide qué datos enseña no debe fiarse de que otra capa la proteja. */
   if (!usuario) redirect("/talents/acceso?volver=/talents/panel");
 
+  const acceso = await accesoDe(usuario.id);
   const supabase = await crearClienteServidor();
 
   const [{ data: creador }, { data: trabajos }] = await Promise.all([
@@ -49,17 +51,42 @@ export default async function PanelPage() {
             <p className="lead">
               {creador
                 ? "Todo lo que cambies aquí se ve en tu ficha pública."
-                : "Rellena esto una vez y aparecerás en el catálogo que consultan las marcas."}
+                : acceso.creador
+                  ? "Rellena esto una vez y aparecerás en el catálogo que consultan las marcas."
+                  : "Esto es lo que verán las marcas cuando actives tu suscripción."}
             </p>
           </div>
         </section>
 
         <section className="page-section" style={{ paddingTop: 0 }}>
           <div className="container container-narrow">
+            {/* El muro se enseña ANTES del formulario, no después de que lo
+                rellene: dejar que alguien escriba once campos para que la base
+                de datos los rechace al guardar es la peor forma de cobrar. */}
+            {!acceso.creador ? (
+              <div className="empty-note">
+                <p>
+                  Para tener ficha en el catálogo hace falta la suscripción de
+                  creador: <strong>12 € + IVA al año</strong>, o 1,50 € + IVA al
+                  mes si lo prefieres mensual.
+                </p>
+                <p style={{ marginTop: 10 }}>
+                  Con ella apareces en el catálogo que consultan las marcas y
+                  puedes presentarte a todos sus anuncios.
+                </p>
+                <div className="hero-actions" style={{ marginTop: 18 }}>
+                  <Link className="btn btn-primary" href="/talents/suscripcion?plan=creador">
+                    Ver la suscripción
+                  </Link>
+                </div>
+              </div>
+            ) : null}
+
             <PanelCreador
               inicial={(creador as Creador) ?? null}
               trabajosIniciales={(trabajos as Trabajo[]) ?? []}
               usuarioId={usuario.id}
+              bloqueado={!acceso.creador}
             />
           </div>
         </section>

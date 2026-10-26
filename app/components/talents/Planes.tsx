@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 /* De lib/planes y NO de lib/stripe: ese otro construye el SDK al cargarse y
    se vendria entero al navegador. */
-import { TARIFAS, type Plan } from "../../lib/planes";
+import { opciones, type Periodo, type Plan } from "../../lib/planes";
 
 const QUE_INCLUYE: Record<Plan, string[]> = {
   marca: [
@@ -37,11 +37,11 @@ export default function Planes({ destacado }: { destacado?: Plan }) {
     params.get("cancelado") ? "Has cancelado el pago. Puedes volver a intentarlo cuando quieras." : null,
   );
 
-  async function pagar(plan: Plan) {
+  async function pagar(plan: Plan, periodo: Periodo) {
     setCargando(plan);
     setError(null);
     try {
-      const res = await fetch(`/api/talents/checkout?plan=${plan}`, { method: "POST" });
+      const res = await fetch(`/api/talents/checkout?plan=${plan}&periodo=${periodo}`, { method: "POST" });
       const j = await res.json();
       if (!res.ok) throw new Error(j.error ?? "No se ha podido abrir el pago.");
       window.location.href = j.url;
@@ -57,7 +57,11 @@ export default function Planes({ destacado }: { destacado?: Plan }) {
 
       <div className="cap-grid" style={{ borderTop: "none", paddingTop: 0 }}>
         {(["creador", "marca"] as Plan[]).map((plan) => {
-          const t = TARIFAS[plan];
+          const tarifas = opciones(plan);
+          /* El anual primero: es el que le sale mas barato al creador y el que
+             menos se come en comisiones. Por defecto se enseña lo que conviene
+             a quien paga. */
+          const ordenadas = [...tarifas].sort((a, b) => (a.periodo === "anual" ? -1 : 1));
           const es = plan === destacado;
           return (
             <div
@@ -75,25 +79,44 @@ export default function Planes({ destacado }: { destacado?: Plan }) {
               <span className="index-label">
                 {plan === "creador" ? "Creadores" : "Marcas"}
               </span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)", margin: "0.3em 0 0.1em" }}>
-                {t.base} € <span style={{ fontSize: "0.45em", fontWeight: 400 }}>+ IVA / {t.periodo}</span>
-              </h2>
-              <p className="form-note" style={{ marginBottom: 18 }}>
-                {t.conIva} € al {t.periodo}, IVA incluido
-              </p>
-              <ul className="cap-list">
+              <ul className="cap-list" style={{ marginBottom: 20 }}>
                 {QUE_INCLUYE[plan].map((x) => (
                   <li key={x}>{x}</li>
                 ))}
               </ul>
-              <div className="hero-actions" style={{ marginTop: 22 }}>
-                <button
-                  className={`btn ${es ? "btn-primary" : "btn-ghost"}`}
-                  onClick={() => pagar(plan)}
-                  disabled={cargando !== null}
-                >
-                  {cargando === plan ? "Abriendo el pago…" : `Suscribirme como ${plan}`}
-                </button>
+
+              <div style={{ display: "grid", gap: 12 }}>
+                {ordenadas.map((t, i) => (
+                  <div
+                    key={t.periodo}
+                    style={{
+                      display: "flex", justifyContent: "space-between",
+                      alignItems: "center", gap: 14, flexWrap: "wrap",
+                      borderTop: i > 0 ? "1px solid var(--line)" : undefined,
+                      paddingTop: i > 0 ? 12 : 0,
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.45rem", lineHeight: 1.1 }}>
+                        {String(t.base).replace(".", ",")} €
+                        <span style={{ fontSize: "0.5em", fontWeight: 400 }}> + IVA / {t.cada}</span>
+                      </div>
+                      <div className="form-note">
+                        {t.conIva} € con IVA
+                        {/* El coste anual al lado: sin esto, «1,50 al mes»
+                            parece más barato que «12 al año» y no lo es. */}
+                        {ordenadas.length > 1 ? ` · ${t.alAno} € al año` : ""}
+                      </div>
+                    </div>
+                    <button
+                      className={`btn ${es && i === 0 ? "btn-primary" : "btn-ghost"}`}
+                      onClick={() => pagar(plan, t.periodo)}
+                      disabled={cargando !== null}
+                    >
+                      {cargando === plan ? "Abriendo…" : t.periodo === "anual" ? "Pagar al año" : "Pagar al mes"}
+                    </button>
+                  </div>
+                ))}
               </div>
             </div>
           );
