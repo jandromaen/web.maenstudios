@@ -5179,3 +5179,164 @@ body:has(.cookie-banner) .theme-toggle {
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+
+/* Planes de Talents ----------------------------------------------------- */
+
+.planes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(18px, 2.5vw, 28px);
+  /* stretch y no start: las dos tarjetas acaban a la misma altura aunque una
+     tenga mas ventajas. Desalineadas se leen como un error. */
+  align-items: stretch;
+}
+
+@media (min-width: 860px) {
+  .planes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(26px, 3vw, 38px);
+  background: color-mix(in srgb, var(--fg) 3%, transparent);
+  position: relative;
+}
+
+/* El plan recomendado se marca con el borde, no con un color distinto: en un
+   diseño en blanco y negro, meter un color aqui rompe toda la pagina. */
+.plan--destacado {
+  border-color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+
+.plan-sello {
+  position: absolute;
+  top: -11px;
+  left: clamp(26px, 3vw, 38px);
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.plan-quien {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+/* Las dos periodicidades como eleccion, no como dos bloques apilados: apiladas
+   alargaban la tarjeta al doble y parecian dos planes distintos. */
+.plan-periodos {
+  /* flex-start, o dentro de la columna flex se estira a todo el ancho de la
+     tarjeta y deja de parecer un selector. */
+  align-self: flex-start;
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+
+.plan-periodos button {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 15px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.plan-periodos button[aria-pressed="true"] {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.plan-precio {
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.plan-precio small {
+  font-family: var(--font-body, inherit);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--muted);
+  text-transform: none;
+}
+
+.plan-detalle {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 10px;
+  min-height: 2.6em;
+}
+
+.plan-lista {
+  list-style: none;
+  padding: 0;
+  margin: 26px 0 0;
+  display: grid;
+  gap: 11px;
+  /* Empuja el boton al fondo para que los dos queden a la misma altura. */
+  flex: 1;
+}
+
+.plan-lista li {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.plan-lista li::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--fg) 14%, transparent);
+  /* La marca de verificacion dibujada, sin fuente de iconos: una dependencia
+     mas para doce palomitas no se paga sola. */
+  background-image: linear-gradient(45deg, transparent 44%, var(--fg) 44%, var(--fg) 56%, transparent 56%),
+    linear-gradient(-45deg, transparent 52%, var(--fg) 52%, var(--fg) 62%, transparent 62%);
+  background-size: 7px 2px, 10px 2px;
+  background-position: 3px 9px, 5px 7px;
+  background-repeat: no-repeat;
+}
+
+.plan-boton {
+  margin-top: 26px;
+}
+
+.plan-boton .btn {
+  width: 100%;
+  justify-content: center;
+}

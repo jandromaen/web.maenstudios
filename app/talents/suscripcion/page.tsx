@@ -33,24 +33,34 @@ export default async function SuscripcionPage({
     <>
       <SiteHeader />
       <main>
+        {/* Héroe corto: en una página de precios lo que se busca son los
+            precios, y antes quedaban por debajo del primer scroll. */}
         <section className="page-hero" style={{ paddingBottom: 0 }}>
-          <div className="container container-narrow">
+          <div className="container">
             <Link className="back-link" href="/talents">
               ← Volver a Talents
             </Link>
-            <h1 style={{ marginBottom: 12 }}>Precios</h1>
-            <p className="lead">
-              Un sitio donde las marcas encuentran creadores y los creadores
-              encuentran trabajo. Sin comisión por proyecto: lo que cerréis
-              entre vosotros es vuestro.
+            <h1 style={{ marginBottom: 10 }}>Precios</h1>
+            <p className="lead" style={{ maxWidth: "46ch" }}>
+              Sin comisión por proyecto: lo que cerréis entre vosotros es
+              vuestro.
             </p>
           </div>
         </section>
 
-        <section className="page-section">
-          <div className="container container-narrow">
+        <section className="page-section" style={{ paddingTop: "clamp(28px, 4vw, 48px)" }}>
+          <div className="container">
             {!usuario ? (
-              <p className="form-status" style={{ marginBottom: 24 }}>
+              <p
+                className="form-note"
+                style={{
+                  marginBottom: 26,
+                  border: "1px solid var(--line)",
+                  borderRadius: 999,
+                  padding: "11px 18px",
+                  display: "inline-block",
+                }}
+              >
                 Para suscribirte,{" "}
                 <Link href={`/talents/acceso?volver=/talents/suscripcion`}>
                   entra o crea tu cuenta
