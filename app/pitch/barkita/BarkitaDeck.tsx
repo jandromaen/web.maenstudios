@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { DIAPOS } from "./diapos";
+import { DIAPOS, type DiapoHtml } from "./diapos";
 
 const ANCHO = 1920;
 const ALTO = 1080;
@@ -17,12 +17,17 @@ const ALTO = 1080;
  * diapositiva (mitad izquierda, atrás; mitad derecha, adelante). Pulsar un
  * vídeo lo pausa o lo reanuda en vez de pasar de diapositiva.
  */
-export default function BarkitaDeck() {
+type Props = { diapos?: DiapoHtml[]; marca?: string };
+
+export default function BarkitaDeck({
+  diapos = DIAPOS,
+  marca = "Maen Studios × Barkita",
+}: Props) {
   const [indice, setIndice] = useState(0);
   const [escala, setEscala] = useState(0);
   const escena = useRef<HTMLDivElement>(null);
   const deck = useRef<HTMLDivElement>(null);
-  const total = DIAPOS.length;
+  const total = diapos.length;
 
   const ir = useCallback(
     (i: number) => setIndice(Math.max(0, Math.min(total - 1, i))),
@@ -87,6 +92,8 @@ export default function BarkitaDeck() {
   }, [siguiente, anterior, ir, total, pantallaCompleta]);
 
   const alPulsarLienzo = (e: React.MouseEvent<HTMLDivElement>) => {
+    /* Un enlace de la diapositiva (p. ej. el vídeo en Drive) se abre sin pasar de diapositiva */
+    if ((e.target as HTMLElement).closest("a")) return;
     const video = (e.target as HTMLElement).closest("video");
     if (video) {
       if (video.paused) video.play();
@@ -98,7 +105,7 @@ export default function BarkitaDeck() {
     else siguiente();
   };
 
-  const diapo = DIAPOS[indice];
+  const diapo = diapos[indice];
 
   return (
     <div className="bk" ref={deck}>
@@ -118,7 +125,7 @@ export default function BarkitaDeck() {
       </div>
 
       <div className="bk-hud">
-        <span className="bk-hud-marca">Maen Studios × Barkita</span>
+        <span className="bk-hud-marca">{marca}</span>
         <div className="bk-hud-nav">
           <button onClick={anterior} disabled={indice === 0} aria-label="Anterior">
             ‹

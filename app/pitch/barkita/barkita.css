@@ -127,6 +127,12 @@
   font-weight: 600;
 }
 
+.bk .bk-lienzo a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* ── Controles ──────────────────────────────────────────────────────────── */
 .bk-hud {
   position: absolute;
