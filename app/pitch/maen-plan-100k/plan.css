@@ -1,0 +1,342 @@
+/* ==========================================================================
+   Business Plan Maen 2027
+
+   Todo cuelga de .pm. El visor es el de barkita con otro prefijo; las
+   diapositivas usan las clases de abajo más estilos en línea para posiciones.
+   Tipografías: las de la web (--font-display = Monument Extended,
+   --font-body = Plus Jakarta Sans), que ya carga el layout.
+   ========================================================================== */
+
+.pm {
+  --ink: #151515;
+  --paper: #F4F4F4;
+  --rosa: #F9CDCD;
+  --g1: #2A2D2C;
+  --g2: #1E2020;
+  --line: #3A3D3C;
+  --muted: #9A9894;
+  --soft: #C9C7C3;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #0E0E0E;
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.pm-escena {
+  position: absolute;
+  inset: 16px 16px 72px;
+  display: grid;
+  place-items: center;
+}
+
+.pm-marco {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+}
+
+.pm-lienzo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  cursor: pointer;
+}
+
+/* ── Reinicio dentro de la diapositiva ─────────────────────────────────── */
+.pm .pm-lienzo *,
+.pm .pm-lienzo *::before,
+.pm .pm-lienzo *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.pm .pm-lienzo section {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body), "Plus Jakarta Sans", Arial, sans-serif;
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
+.pm .pm-lienzo h1,
+.pm .pm-lienzo h2,
+.pm .pm-lienzo h3,
+.pm .pm-lienzo p,
+.pm .pm-lienzo li {
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: inherit;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.pm .pm-lienzo ul { list-style: none; }
+
+.pm .pm-lienzo img,
+.pm .pm-lienzo video {
+  display: block;
+  max-width: none;
+}
+
+.pm .pm-lienzo .abs { position: absolute; }
+
+/* ── Tipografía ────────────────────────────────────────────────────────── */
+.pm .pm-lienzo .disp {
+  font-family: var(--font-display), "Monument Extended", "Arial Black", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.pm .pm-lienzo .disp-r {
+  font-family: var(--font-display), "Monument Extended", "Arial Black", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.pm .pm-lienzo .pm-eyebrow {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rosa);
+}
+
+.pm .pm-lienzo .muted { color: var(--muted); }
+.pm .pm-lienzo .soft { color: var(--soft); }
+.pm .pm-lienzo .rosa { color: var(--rosa); }
+
+.pm .pm-lienzo .outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--rosa);
+}
+
+/* ── Piezas ────────────────────────────────────────────────────────────── */
+.pm .pm-lienzo .pm-card {
+  background: var(--g1);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+}
+
+.pm .pm-lienzo .pm-card-d {
+  border: 2px dashed #5A5D5C;
+  border-radius: 28px;
+}
+
+.pm .pm-lienzo .pm-card-r {
+  background: var(--rosa);
+  color: var(--ink);
+  border-radius: 28px;
+}
+
+.pm .pm-lienzo .pill {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pm .pm-lienzo .pill-r { background: var(--rosa); color: var(--ink); }
+.pm .pm-lienzo .pill-o { border: 2px solid var(--rosa); color: var(--rosa); }
+.pm .pm-lienzo .pill-k { background: var(--ink); color: var(--rosa); }
+
+.pm .pm-lienzo .pm-reel {
+  position: absolute;
+  object-fit: cover;
+  border-radius: 22px;
+  background: #222;
+  pointer-events: none;
+}
+
+.pm .pm-lienzo .deco { pointer-events: none; }
+
+.pm .pm-lienzo .line-h,
+.pm .pm-lienzo .line-v {
+  position: absolute;
+  background: #5A5D5C;
+}
+.pm .pm-lienzo .line-h { height: 2px; }
+.pm .pm-lienzo .line-v { width: 2px; }
+
+.pm .pm-lienzo .foot {
+  position: absolute;
+  left: 128px;
+  right: 128px;
+  bottom: 56px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.pm .pm-lienzo .foot img { height: 20px; width: auto; }
+.pm .pm-lienzo .foot .n { margin-left: auto; font-weight: 700; color: var(--paper); }
+.pm .pm-lienzo .foot-k { color: #3A2F2F; }
+.pm .pm-lienzo .foot-k .n { color: var(--ink); }
+
+/* ── Movimiento ────────────────────────────────────────────────────────── */
+@keyframes pmSube {
+  from { opacity: 0; transform: translateY(36px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pmFunde {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pmCreceY {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes pmCreceX {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes pmPop {
+  0% { opacity: 0; transform: scale(0.6); }
+  70% { opacity: 1; transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes pmDeriva {
+  from { transform: translateY(0) rotate(var(--rot, -8deg)); }
+  to { transform: translateY(-140px) rotate(var(--rot, -8deg)); }
+}
+
+.pm .pm-lienzo .a {
+  animation: pmSube 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--d, 0) * 90ms + 80ms);
+}
+.pm .pm-lienzo .f {
+  animation: pmFunde 1.2s ease both;
+  animation-delay: calc(var(--d, 0) * 90ms);
+}
+.pm .pm-lienzo .gy {
+  transform-origin: bottom;
+  animation: pmCreceY 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--d, 0) * 120ms + 200ms);
+}
+.pm .pm-lienzo .gx {
+  transform-origin: left;
+  animation: pmCreceX 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--d, 0) * 120ms + 200ms);
+}
+.pm .pm-lienzo .pop {
+  animation: pmPop 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--d, 0) * 40ms + 200ms);
+}
+.pm .pm-lienzo .deriva {
+  animation: pmDeriva 22s linear infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pm .pm-lienzo .a,
+  .pm .pm-lienzo .f,
+  .pm .pm-lienzo .gy,
+  .pm .pm-lienzo .gx,
+  .pm .pm-lienzo .pop,
+  .pm .pm-lienzo .deriva {
+    animation: none;
+  }
+}
+
+/* ── Controles ──────────────────────────────────────────────────────────── */
+.pm-hud {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 500 13px/1 system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pm-hud-marca { opacity: 0.7; }
+.pm-hud-titulo {
+  flex: 1;
+  text-align: center;
+  opacity: 0.45;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pm-hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pm-hud-nav button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(244, 244, 244, 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.pm-hud-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.pm-hud-num {
+  min-width: 72px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.pm-progreso {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(244, 244, 244, 0.12);
+}
+
+.pm-progreso span {
+  display: block;
+  height: 100%;
+  background: #F9CDCD;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 700px) {
+  .pm-hud-marca,
+  .pm-hud-titulo {
+    display: none;
+  }
+  .pm-hud {
+    justify-content: center;
+  }
+}
+
+body.deck-abierto .cookie-banner,
+body.deck-abierto .theme-toggle {
+  display: none;
+}
