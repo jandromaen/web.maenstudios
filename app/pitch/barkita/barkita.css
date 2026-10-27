@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Briefing Barkita
+
+   Todo cuelga de .bk. Las diapositivas traen sus estilos en línea (son el
+   HTML del deck original); aquí solo va el visor y el reinicio mínimo para
+   que los valores por defecto del navegador y de la web no las muevan.
+   ========================================================================== */
+
+/* Tipografías del deck, servidas desde /public (licencias OFL, se pueden
+   alojar). Son las sustitutas libres de las de la marca: Inter (la misma),
+   Figtree por Degular Display, Titan One por Chunko Bold y Gochi Hand por
+   Mr Pickles. Los nombres son los que usan los estilos en línea. */
+@font-face { font-family: "Inter"; font-weight: 100 900; font-display: swap; src: url("/pitch/barkita/fonts/inter-latin-wght-normal.woff2") format("woff2"); }
+@font-face { font-family: "Figtree"; font-weight: 400; font-display: swap; src: url("/pitch/barkita/fonts/figtree-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Figtree"; font-weight: 500; font-display: swap; src: url("/pitch/barkita/fonts/figtree-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Figtree"; font-weight: 600; font-display: swap; src: url("/pitch/barkita/fonts/figtree-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Figtree"; font-weight: 700; font-display: swap; src: url("/pitch/barkita/fonts/figtree-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Titan One"; font-weight: 400; font-display: swap; src: url("/pitch/barkita/fonts/titan-one-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Gochi Hand"; font-weight: 400; font-display: swap; src: url("/pitch/barkita/fonts/gochi-hand-latin-400-normal.woff2") format("woff2"); }
+
+.bk {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #211714;
+  color: #FAF6EE;
+  overflow: hidden;
+}
+
+.bk-escena {
+  position: absolute;
+  inset: 16px 16px 72px;
+  display: grid;
+  place-items: center;
+}
+
+.bk-marco {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.bk-lienzo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  cursor: pointer;
+}
+
+/* ── Reinicio dentro de la diapositiva ─────────────────────────────────── */
+.bk .bk-lienzo section {
+  position: relative;
+  box-sizing: border-box;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+
+/* En el deck original lo que va después pinta encima, también sobre un
+   elemento fijado con position:absolute (la foto de la portada va antes que el
+   titular). En CSS lo posicionado pinta siempre por encima de lo que no lo
+   está, así que el contenido en flujo se posiciona también y el orden del
+   HTML vuelve a mandar. */
+.bk .bk-lienzo section > *:not([style*="position:absolute"]) {
+  position: relative;
+}
+
+.bk .bk-lienzo *,
+.bk .bk-lienzo *::before,
+.bk .bk-lienzo *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* La web pone en titulares y párrafos su tipografía, peso 800, mayúsculas,
+   interletrado negativo y corte de palabra en cualquier punto. Aquí manda lo
+   que traiga la diapositiva en línea, y lo que no traiga se hereda de ella. */
+.bk .bk-lienzo section {
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
+.bk .bk-lienzo h1,
+.bk .bk-lienzo h2,
+.bk .bk-lienzo h3,
+.bk .bk-lienzo p,
+.bk .bk-lienzo td,
+.bk .bk-lienzo th {
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: inherit;
+  overflow-wrap: normal;
+}
+
+.bk .bk-lienzo h1 { font-weight: 600; line-height: 1.1; }
+.bk .bk-lienzo h2 { font-weight: 600; line-height: 1.15; text-wrap: wrap; }
+.bk .bk-lienzo h3 { font-weight: 600; line-height: 1.2; }
+.bk .bk-lienzo p  { line-height: 1.4; }
+
+.bk .bk-lienzo img,
+.bk .bk-lienzo video {
+  display: block;
+  max-width: none;
+}
+
+.bk .bk-lienzo video {
+  background: #000;
+}
+
+.bk .bk-lienzo table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bk .bk-lienzo th,
+.bk .bk-lienzo td {
+  padding: 0.35em 0.6em;
+  text-align: left;
+  border-bottom: 1px solid #D3D1D0;
+}
+
+.bk .bk-lienzo th {
+  font-weight: 600;
+}
+
+/* ── Controles ──────────────────────────────────────────────────────────── */
+.bk-hud {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 500 13px/1 system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bk-hud-marca {
+  opacity: 0.7;
+}
+
+.bk-hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bk-hud-nav button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(250, 246, 238, 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.bk-hud-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.bk-hud-num {
+  min-width: 72px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.bk-progreso {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(250, 246, 238, 0.12);
+}
+
+.bk-progreso span {
+  display: block;
+  height: 100%;
+  background: #FCDC8D;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .bk-hud-marca {
+    display: none;
+  }
+  .bk-hud {
+    justify-content: center;
+  }
+}
+
+body.deck-abierto .cookie-banner,
+body.deck-abierto .theme-toggle {
+  display: none;
+}
