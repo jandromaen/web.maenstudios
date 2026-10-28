@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     .maybeSingle();
 
   try {
-    const sesion = await stripe.checkout.sessions.create({
+    const sesion = await stripe().checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: precio, quantity: 1 }],
       ...(previa?.stripe_customer_id

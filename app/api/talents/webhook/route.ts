@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
 
   let evento: Stripe.Event;
   try {
-    evento = stripe.webhooks.constructEvent(crudo, firma ?? "", secreto);
+    evento = stripe().webhooks.constructEvent(crudo, firma ?? "", secreto);
   } catch (err) {
     /* Sin verificar la firma, cualquiera podria regalarse una suscripcion
        mandando un JSON a esta direccion. */
@@ -118,7 +118,7 @@ export async function POST(request: NextRequest) {
            cuelga de invoice.parent.subscription_details. */
         const sub = factura.parent?.subscription_details?.subscription;
         const subId = typeof sub === "string" ? sub : sub?.id;
-        if (subId) await guardar(await stripe.subscriptions.retrieve(subId));
+        if (subId) await guardar(await stripe().subscriptions.retrieve(subId));
         break;
       }
 
@@ -148,7 +148,7 @@ export async function POST(request: NextRequest) {
         else {
           const cargoId = typeof obj.charge === "string" ? obj.charge : (obj.charge?.id ?? obj.id);
           if (cargoId) {
-            const cargo = await stripe.charges.retrieve(cargoId);
+            const cargo = await stripe().charges.retrieve(cargoId);
             clienteId = typeof cargo.customer === "string" ? cargo.customer : (cargo.customer?.id ?? undefined);
           }
         }
