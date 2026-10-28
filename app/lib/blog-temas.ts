@@ -14,10 +14,11 @@ import { localLandings } from "../local-data";
  * descartan los que ya tienen artículo. Una lista manual envejece: se escribe
  * dos veces sobre lo mismo y se dejan huecos que nadie revisa.
  *
- * Falta la mejor fuente de todas, y es deliberado: las consultas donde la web
- * aparece entre la posición 8 y la 20 en Search Console. Ahí un artículo mueve
- * la aguja de verdad, porque ya se está cerca. En cuanto la propiedad esté
- * verificada, esa fuente entra aquí y manda sobre el resto.
+ * La mejor fuente son las consultas donde la web aparece entre la posición 8 y
+ * la 20 en Search Console: ahí un artículo mueve la aguja de verdad, porque ya
+ * se está cerca. Esa fuente manda sobre el resto y vive en temaDeLaSemanaAsync.
+ * Las listas deducidas de abajo son el respaldo para cuando no hay credenciales
+ * -en local, o si la API no responde-, no la fuente principal.
  */
 
 export type Tema = {
@@ -145,4 +146,74 @@ export function temaDeLaSemana(): Tema | null {
 /** Cuántos temas quedan sin cubrir. Va en el correo como aviso de fondo. */
 export function temasPendientes(): number {
   return candidatos().filter((t) => !yaCubierto(t.keyword)).length;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Search Console: lo que de verdad mueve la aguja
+   ───────────────────────────────────────────────────────────────────────── */
+
+type ConsultaATiro = { termino: string; impresiones: number; posicion: number };
+
+/**
+ * Las busquedas donde ya estamos cerca, de mejor a peor oportunidad.
+ *
+ * Posiciones 8 a 20 es la franja util: por encima ya se esta en la primera
+ * pagina y el articulo aporta poco; por debajo, un solo texto no sube veinte
+ * puestos. En medio, un articulo que responda bien a esa consulta puede ser la
+ * diferencia entre recibir cero clics y recibir los de la primera pagina.
+ *
+ * Se ordena por impresiones y no por posicion: estar a un puesto de entrar en
+ * una busqueda que nadie hace no vale nada. Lo que vale es mucha gente
+ * buscandolo y nosotros justo fuera.
+ */
+export async function temasDeSearchConsole(): Promise<Tema[]> {
+  const secreto = process.env.CRM_METRICS_SECRET;
+  if (!secreto) return [];
+
+  try {
+    const res = await fetch("https://www.maenstudios.com/api/metricas", {
+      headers: { Authorization: `Bearer ${secreto}` },
+      signal: AbortSignal.timeout(45_000),
+    });
+    if (!res.ok) return [];
+
+    const datos = (await res.json()) as { busquedas?: { aTiro?: ConsultaATiro[] } };
+    const aTiro = datos.busquedas?.aTiro ?? [];
+
+    return [...aTiro]
+      .sort((a, b) => b.impresiones - a.impresiones)
+      .map((c) => ({
+        titulo: c.termino.charAt(0).toUpperCase() + c.termino.slice(1),
+        keyword: c.termino,
+        motivo:
+          `Google ya nos enseña en la posición ${Math.round(c.posicion)} para esta búsqueda, ` +
+          `con ${c.impresiones} impresiones y pocos clics. Estamos a un puñado de puestos ` +
+          `de la primera página: un artículo que la responda bien es lo que más puede mover.`,
+        categoria: "Guías",
+      }));
+  } catch {
+    /* Si Search Console no contesta, se sigue con las fuentes deducidas en vez
+       de dejar la semana sin articulo. */
+    return [];
+  }
+}
+
+/**
+ * El tema de la semana, mirando primero lo que dice Search Console.
+ *
+ * La version sincrona de arriba sigue existiendo para quien no tenga
+ * credenciales a mano; esta es la que usa la rutina de los martes.
+ */
+export async function temaDeLaSemanaAsync(): Promise<Tema | null> {
+  const deGoogle = await temasDeSearchConsole();
+  const primero = deGoogle.find((t) => !yaCubierto(t.keyword));
+  if (primero) return primero;
+  return temaDeLaSemana();
+}
+
+/** Cuantos temas quedan, contando los de Search Console. */
+export async function temasPendientesAsync(): Promise<number> {
+  const deGoogle = await temasDeSearchConsole();
+  const sinCubrir = deGoogle.filter((t) => !yaCubierto(t.keyword)).length;
+  return sinCubrir + temasPendientes();
 }
