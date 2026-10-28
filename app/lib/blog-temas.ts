@@ -38,7 +38,7 @@ const VACIAS = new Set([
   "qué", "que", "mi", "tu", "su", "más", "mas",
 ]);
 
-function normalizar(texto: string) {
+export function normalizar(texto: string) {
   return texto
     .toLowerCase()
     .normalize("NFD")
@@ -152,7 +152,12 @@ export function temasPendientes(): number {
    Search Console: lo que de verdad mueve la aguja
    ───────────────────────────────────────────────────────────────────────── */
 
-type ConsultaATiro = { termino: string; impresiones: number; posicion: number };
+export type ConsultaATiro = {
+  termino: string;
+  impresiones: number;
+  posicion: number;
+  clics: number;
+};
 
 /**
  * Las busquedas donde ya estamos cerca, de mejor a peor oportunidad.
@@ -166,7 +171,8 @@ type ConsultaATiro = { termino: string; impresiones: number; posicion: number };
  * una busqueda que nadie hace no vale nada. Lo que vale es mucha gente
  * buscandolo y nosotros justo fuera.
  */
-export async function temasDeSearchConsole(): Promise<Tema[]> {
+/** Las consultas donde ya estamos entre la 8 y la 20, de mas a menos trafico. */
+export async function consultasATiro(): Promise<ConsultaATiro[]> {
   const secreto = process.env.CRM_METRICS_SECRET;
   if (!secreto) return [];
 
@@ -176,11 +182,18 @@ export async function temasDeSearchConsole(): Promise<Tema[]> {
       signal: AbortSignal.timeout(45_000),
     });
     if (!res.ok) return [];
-
     const datos = (await res.json()) as { busquedas?: { aTiro?: ConsultaATiro[] } };
-    const aTiro = datos.busquedas?.aTiro ?? [];
+    return [...(datos.busquedas?.aTiro ?? [])].sort((a, b) => b.impresiones - a.impresiones);
+  } catch {
+    /* Si Search Console no contesta, se sigue con las fuentes deducidas en vez
+       de dejar la semana sin articulo. */
+    return [];
+  }
+}
 
-    return [...aTiro]
+export async function temasDeSearchConsole(): Promise<Tema[]> {
+  const aTiro = await consultasATiro();
+  return [...aTiro]
       .sort((a, b) => b.impresiones - a.impresiones)
       .map((c) => ({
         titulo: c.termino.charAt(0).toUpperCase() + c.termino.slice(1),
@@ -191,11 +204,6 @@ export async function temasDeSearchConsole(): Promise<Tema[]> {
           `de la primera página: un artículo que la responda bien es lo que más puede mover.`,
         categoria: "Guías",
       }));
-  } catch {
-    /* Si Search Console no contesta, se sigue con las fuentes deducidas en vez
-       de dejar la semana sin articulo. */
-    return [];
-  }
 }
 
 /**
