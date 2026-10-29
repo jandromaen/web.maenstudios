@@ -117,50 +117,47 @@ add("idea", "Cómo lo vemos", sec(
     bg=ROSA, color=INK,
 ))
 
-# ── 3. Qué hacemos ───────────────────────────────────────────────────────
+# ── 3. El servicio ───────────────────────────────────────────────────────
 n += 1
 bloques = [
-    ("Creative + social", "Instagram y TikTok de principio a fin: ideas, contenido, publicación y comunidad. TikTok con lenguaje propio."),
-    ("Formatos propios", "Empezando por Can to Table: Barcelona contada por la gente que la hace."),
-    ("Creatividad para paid", "Conceptos, hooks y variaciones de ads para que No Idea los lance en UK."),
+    ("Dirección estratégica y creativa", [
+        "Estrategia por canal",
+        "Ideas y formatos propios",
+        "Briefing mensual",
+    ]),
+    ("Producción y edición", [
+        f"{C['rodajes']} rodaje al mes",
+        f"{C['salidas']} grabaciones rápidas",
+        "Edición para cada canal",
+    ]),
+    ("Calendario", [
+        f"{C['ig_mes']} piezas en Instagram",
+        f"{C['tt_mes']} vídeos en TikTok",
+        "Copy y publicación",
+    ]),
+    ("Community management", [
+        "Comentarios y mensajes",
+        "Stories del día a día",
+        "Reporte mensual",
+    ]),
 ]
 bh = ""
-for i, (t, s_) in enumerate(bloques):
-    x = 128 + i * 568
-    bh += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:528px;height:520px;--d:{i}"></div>'
-        f'<p class="abs a disp outline" style="left:{x + 44}px;top:384px;font-size:72px;--d:{i + 1}">{i + 1:02d}</p>'
-        f'<p class="abs a" style="left:{x + 44}px;top:500px;width:440px;font-size:36px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
-        f'<p class="abs a soft" style="left:{x + 44}px;top:610px;width:440px;font-size:26px;line-height:1.4;--d:{i + 2}">{s_}</p>'
-    )
-add("que", "Qué hacemos", sec(
-    eyebrow("Qué hacemos")
-    + titulo("Tres cosas", size=72)
-    + bh + foot(n),
-))
-
-# ── 4. Cada mes ──────────────────────────────────────────────────────────
-n += 1
-nums = [
-    (str(C["rodajes"]), "producción"),
-    (str(C["salidas"]), "salidas rápidas"),
-    (str(C["ig_mes"]), "piezas Instagram"),
-    (str(C["tt_mes"]), "vídeos TikTok"),
-]
-nh = ""
-for i, (num, t) in enumerate(nums):
+for i, (t, items) in enumerate(bloques):
     x = 128 + i * 424
-    nh += (
-        f'<p class="abs pop disp outline" style="left:{x - 6}px;top:410px;font-size:180px;line-height:1;--d:{i}">{num}</p>'
-        f'<p class="abs a" style="left:{x}px;top:640px;width:380px;font-size:32px;font-weight:800;--d:{i + 2}">{t}</p>'
+    bh += (
+        f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:392px;height:540px;--d:{i}"></div>'
+        f'<p class="abs a disp outline" style="left:{x + 36}px;top:376px;font-size:64px;--d:{i + 1}">{i + 1:02d}</p>'
+        f'<p class="abs a" style="left:{x + 36}px;top:480px;width:330px;font-size:32px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
     )
-add("mes", "Cada mes", sec(
-    eyebrow("Cada mes")
-    + titulo("Más ideas,<br>no más posts", size=72)
-    + nh
-    + '<p class="abs a soft" style="left:128px;top:800px;width:1660px;font-size:28px;--d:7">'
-    "Más la creatividad para paid. Sin briefs pieza a pieza: las ideas salen de nuestro lado.</p>"
-    + foot(n),
+    for j, it in enumerate(items):
+        bh += (
+            f'<p class="abs a soft" style="left:{x + 36}px;top:{640 + j * 66}px;width:330px;font-size:24px;'
+            f'line-height:1.3;--d:{i + j + 2}"><span class="rosa" style="margin-right:10px">—</span>{it}</p>'
+        )
+add("servicio", "El servicio", sec(
+    eyebrow("El servicio")
+    + titulo("Qué incluye", size=72)
+    + bh + foot(n),
 ))
 
 # ── 5. Inversión ─────────────────────────────────────────────────────────
