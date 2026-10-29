@@ -101,7 +101,9 @@ add("portada", "Libertine × Maen", sec(
     'background:linear-gradient(90deg,#151515,rgba(21,21,21,0))"></div>'
     + eyebrow("Propuesta · Octubre 2026", top=150)
     + '<h1 class="abs a disp" style="left:128px;top:300px;font-size:96px;line-height:1;--d:1">Libertine</h1>'
-    '<h1 class="abs a disp outline" style="left:128px;top:410px;font-size:96px;line-height:1;--d:2">× Maen</h1>'
+    '<div class="abs a" style="left:128px;top:430px;display:flex;align-items:center;gap:28px;--d:2">'
+    '<span class="disp" style="font-size:64px;line-height:1">×</span>'
+    '<img src="/maen-logo.png" alt="maen studios" style="height:44px;width:auto"></div>'
     '<p class="abs a soft" style="left:128px;top:580px;width:700px;font-size:32px;line-height:1.35;--d:3">'
     "Vuestro equipo social y creativo.</p>"
 ))
@@ -112,7 +114,7 @@ add("idea", "Cómo lo vemos", sec(
     eyebrow("Cómo lo vemos", k=True)
     + titulo("Libertine pone<br>el contexto.", top=300, size=96, extra="color:#151515;")
     + '<h2 class="abs a disp" style="left:128px;top:540px;width:1660px;font-size:96px;line-height:1.05;'
-    'color:transparent;-webkit-text-stroke:3px #151515;--d:2">Maen trae las ideas<br>y las hace realidad.</h2>'
+    'color:#151515;--d:2">Maen trae las ideas<br>y las hace realidad.</h2>'
     + foot(n, k=True),
     bg=ROSA, color=INK,
 ))
@@ -146,7 +148,7 @@ for i, (t, items) in enumerate(bloques):
     x = 128 + i * 424
     bh += (
         f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:392px;height:540px;--d:{i}"></div>'
-        f'<p class="abs a disp outline" style="left:{x + 36}px;top:376px;font-size:64px;--d:{i + 1}">{i + 1:02d}</p>'
+        f'<p class="abs a disp rosa" style="left:{x + 36}px;top:376px;font-size:56px;--d:{i + 1}">{i + 1:02d}</p>'
         f'<p class="abs a" style="left:{x + 36}px;top:480px;width:330px;font-size:32px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
     )
     for j, it in enumerate(items):
