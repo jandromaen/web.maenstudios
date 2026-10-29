@@ -17,14 +17,14 @@ AMARILLO = "#F6C01B"
 MARCA = "Maen Studios × Gastroconnect"
 
 CIFRAS = {
-    "fee": "2.500 €",
+    "fee": "1.500 €",
     "fee_nota": "al mes + IVA",
     "permanencia": "3 meses",
     # (línea, cantidad, precio) — la suma de precios es el fee
     "desglose": [
-        ("Podcast", "1 episodio + 5 clips", "1.000 €"),
-        ("Contenido foodie", "2 jornadas + 9 reels", "1.200 €"),
-        ("Estrategia y gestión", "calendario, publicación e informe", "300 €"),
+        ("Podcast", "1 episodio + 5 clips", "600 €"),
+        ("Contenido foodie", "2 jornadas + 9 reels", "750 €"),
+        ("Estrategia y gestión", "calendario, publicación e informe", "150 €"),
     ],
 }
 
