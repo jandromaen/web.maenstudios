@@ -29,6 +29,8 @@ export type Post = {
    * que compitan y manda al lector al sitio donde puede contratar.
    */
   relatedLanding?: { href: string; label: string };
+  /** Preguntas frecuentes del artículo, si procede. Alimentan el FAQPage schema. */
+  faq?: { q: string; a: string }[];
 };
 
 export const posts: Post[] = [
@@ -40,6 +42,7 @@ export const posts: Post[] = [
       "Guía de precios para producir Reels y TikToks: qué influye en el coste, modelos de tarifa y qué esperar al contratar una agencia de contenido.",
     category: "Precios",
     date: "2026-06-10",
+    updated: "2026-10-29",
     readingMinutes: 6,
     keywords: [
       "cuánto cuesta un reel",
@@ -49,10 +52,14 @@ export const posts: Post[] = [
     ],
     excerpt:
       "El precio de un Reel puede ir de unos pocos euros a varios cientos. Te explicamos qué influye de verdad en el coste y cómo elegir sin tirar el dinero.",
+    relatedLanding: {
+      href: "/agencia-de-reels-barcelona",
+      label: "Ver agencia de Reels y TikTok",
+    },
     content: [
       {
         type: "p",
-        text: "Es la primera pregunta que nos hace casi todo el mundo: ¿cuánto cuesta un Reel? La respuesta honesta es «depende», pero eso no ayuda a nadie. Así que vamos a desglosar de qué depende realmente el precio para que puedas comparar presupuestos con criterio.",
+        text: "Es la primera pregunta que nos hace casi todo el mundo: ¿cuánto cuesta un Reel? La respuesta corta: va de unos pocos euros, si solo pagas la edición sobre material que grabas tú, a varios cientos por pieza si encargas la producción completa (guion, rodaje y edición) a una agencia. Y si lo contratas dentro de un pack mensual en vez de por pieza suelta, el coste por vídeo baja bastante. La respuesta larga depende de varios factores, así que vamos a desglosarlos para que puedas comparar presupuestos con criterio.",
       },
       { type: "h2", text: "Qué influye en el precio de un Reel" },
       {
@@ -83,6 +90,20 @@ export const posts: Post[] = [
       {
         type: "p",
         text: "El Reel más barato es carísimo si nadie lo ve. Antes de mirar solo el precio, pregunta qué incluye: ¿hay estrategia detrás? ¿te aseguran una cadencia? ¿optimizan según resultados? En Maen Studios trabajamos con planes mensuales adaptados a cada marca. Si quieres un presupuesto a medida, escríbenos y lo preparamos sin compromiso.",
+      },
+    ],
+    faq: [
+      {
+        q: "¿Es más barato un Reel suelto o dentro de un pack mensual?",
+        a: "Por pieza, el pack mensual sale más barato: al agrupar varios Reels en el mismo rodaje y la misma edición, el coste por vídeo baja frente a encargar uno suelto. Por eso la mayoría de agencias trabajan con packs de varias piezas al mes en vez de cobrar por unidad.",
+      },
+      {
+        q: "¿Qué factores influyen más en el precio de un Reel?",
+        a: "Sobre todo cuatro: la preproducción (idea y guion), el rodaje (si grabas tú o se desplaza un equipo con cámara e iluminación), la edición (ritmo, subtítulos y motion) y si el Reel forma parte de una estrategia de contenido o va suelto.",
+      },
+      {
+        q: "¿Me conviene más un freelance o una agencia?",
+        a: "Si publicas poco y de forma puntual, un freelance suele ser más barato por pieza y puede bastarte. Si quieres publicar con regularidad, una agencia te da el equipo completo (guion, rodaje, edición y talento) con entregas constantes sin que tengas que coordinar cada encargo.",
       },
     ],
   },

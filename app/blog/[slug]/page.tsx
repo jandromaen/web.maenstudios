@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
-import { BreadcrumbJsonLd, BlogPostingJsonLd } from "../../components/JsonLd";
+import { BreadcrumbJsonLd, BlogPostingJsonLd, FaqJsonLd } from "../../components/JsonLd";
 import { posts, getPost, type Post } from "../../blog-data";
 import { createPageMetadata } from "../../seo-config";
 
@@ -86,6 +86,7 @@ export default async function BlogPostPage({
         wordCount={countWords(post)}
         keywords={post.keywords}
       />
+      {post.faq ? <FaqJsonLd items={post.faq} /> : null}
       <BreadcrumbJsonLd
         items={[
           { name: "Inicio", path: "/" },
@@ -128,6 +129,23 @@ export default async function BlogPostPage({
                 return <p key={i}>{block.text}</p>;
               })}
             </div>
+
+            {post.faq ? (
+              <div className="faq-list">
+                <h2>Preguntas frecuentes</h2>
+                {post.faq.map((f) => (
+                  <details className="faq-item" key={f.q}>
+                    <summary>
+                      <span>{f.q}</span>
+                      <span className="faq-icon" aria-hidden="true">
+                        +
+                      </span>
+                    </summary>
+                    <p>{f.a}</p>
+                  </details>
+                ))}
+              </div>
+            ) : null}
 
             <div className="blog-cta">
               <h2>¿Quieres contenido así para tu marca?</h2>
