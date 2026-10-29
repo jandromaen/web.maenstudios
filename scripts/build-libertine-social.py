@@ -208,14 +208,17 @@ add("inversion", "Inversión", sec(
 
 # ── 6. Cierre ────────────────────────────────────────────────────────────
 n += 1
-add("cierre", "Lo cerramos", sec(
-    eyebrow("Siguiente paso")
-    + titulo("¿Lo<br>cerramos?", top=260, width=1660, size=140)
-    + '<div class="abs a" style="left:128px;top:720px;font-size:28px;line-height:1.5;--d:3">'
-    '<p style="font-weight:800">Jandro Martín</p>'
-    '<p><a href="mailto:jandro@maenstudios.com" style="color:inherit">jandro@maenstudios.com</a> · +34 688 629 688</p>'
-    "</div>"
-    + foot(n),
+add("cierre", "¿Empezamos?", sec(
+    '<img class="abs f" style="left:1080px;top:0;width:840px;height:1080px;object-fit:cover;'
+    'object-position:50% 28%;--d:0" src="/equipo/founders.jpg" alt="Richi y Jandro, fundadores de Maen Studios">'
+    + '<div class="abs deco" style="left:1040px;top:0;width:200px;height:1080px;'
+    'background:linear-gradient(90deg,#151515,rgba(21,21,21,0))"></div>'
+    + eyebrow("Jandro y Richi")
+    + titulo("A corazón<br>no nos gana<br>nadie.", top=250, width=900, size=84)
+    + '<h2 class="abs a disp rosa" style="left:128px;top:620px;font-size:84px;line-height:1;--d:3">¿Empezamos?</h2>'
+    + '<p class="abs a soft" style="left:128px;top:800px;width:860px;font-size:26px;line-height:1.5;--d:4">'
+    '<a href="mailto:jandro@maenstudios.com" style="color:inherit">jandro@maenstudios.com</a> · +34 688 629 688</p>'
+    + foot(n, width=860),
 ))
 
 out = Path("app/pitch/libertine-social/diapos.ts")

@@ -29,7 +29,7 @@ export const DIAPOS: DiapoHtml[] = [
   },
   {
     "id": "cierre",
-    "titulo": "Lo cerramos",
-    "html": "<section style=\"background:#151515;color:#F4F4F4\"><p class=\"abs a pm-eyebrow\" style=\"left:128px;top:128px;--d:0\">Siguiente paso</p><h2 class=\"abs a disp\" style=\"left:128px;top:260px;width:1660px;font-size:140px;line-height:1.05;--d:1\">¿Lo<br>cerramos?</h2><div class=\"abs a\" style=\"left:128px;top:720px;font-size:28px;line-height:1.5;--d:3\"><p style=\"font-weight:800\">Jandro Martín</p><p><a href=\"mailto:jandro@maenstudios.com\" style=\"color:inherit\">jandro@maenstudios.com</a> · +34 688 629 688</p></div><div class=\"foot\" style=\"left:128px;\"><span>Maen Studios × Libertine Blends</span><span class=\"n\">05</span></div></section>"
+    "titulo": "¿Empezamos?",
+    "html": "<section style=\"background:#151515;color:#F4F4F4\"><img class=\"abs f\" style=\"left:1080px;top:0;width:840px;height:1080px;object-fit:cover;object-position:50% 28%;--d:0\" src=\"/equipo/founders.jpg\" alt=\"Richi y Jandro, fundadores de Maen Studios\"><div class=\"abs deco\" style=\"left:1040px;top:0;width:200px;height:1080px;background:linear-gradient(90deg,#151515,rgba(21,21,21,0))\"></div><p class=\"abs a pm-eyebrow\" style=\"left:128px;top:128px;--d:0\">Jandro y Richi</p><h2 class=\"abs a disp\" style=\"left:128px;top:250px;width:900px;font-size:84px;line-height:1.05;--d:1\">A corazón<br>no nos gana<br>nadie.</h2><h2 class=\"abs a disp rosa\" style=\"left:128px;top:620px;font-size:84px;line-height:1;--d:3\">¿Empezamos?</h2><p class=\"abs a soft\" style=\"left:128px;top:800px;width:860px;font-size:26px;line-height:1.5;--d:4\"><a href=\"mailto:jandro@maenstudios.com\" style=\"color:inherit\">jandro@maenstudios.com</a> · +34 688 629 688</p><div class=\"foot\" style=\"left:128px;right:auto;width:860px;\"><span>Maen Studios × Libertine Blends</span><span class=\"n\">05</span></div></section>"
   }
 ];
