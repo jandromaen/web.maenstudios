@@ -127,9 +127,10 @@ bloques = [
         "Briefing mensual",
     ]),
     ("Producción y edición", [
-        f"{C['rodajes']} rodaje al mes",
-        f"{C['salidas']} grabaciones rápidas",
+        "Grabación de 4 h al mes",
         "Edición para cada canal",
+        "Extra en horario laboral: 50 €/h",
+        "Extra fuera de horario: 100 €/h",
     ]),
     ("Calendario", [
         "2 reels semanales",
@@ -201,7 +202,7 @@ add("inversion", "Inversión", sec(
     + titulo("Dos opciones", top=180, size=72, extra="color:#151515;")
     + ih
     + f'<p class="abs a" style="left:128px;top:930px;font-size:24px;color:#3A2F2F;--d:8">'
-    f"{C['permanencia']} con prórroga automática. El paid lo sigue llevando No Idea.</p>",
+    f"{C['permanencia']} con prórroga automática. Grabaciones extra + IVA, con descuento de cliente. El paid lo sigue llevando No Idea.</p>",
     bg=ROSA, color=INK,
 ))
 
