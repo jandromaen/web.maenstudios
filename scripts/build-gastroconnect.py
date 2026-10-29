@@ -17,10 +17,15 @@ AMARILLO = "#F6C01B"
 MARCA = "Maen Studios × Gastroconnect"
 
 CIFRAS = {
-    "episodios": 1,
-    "jornadas": 3,
-    "reels": 14,
-    "restaurantes": 4,
+    "fee": "2.500 €",
+    "fee_nota": "al mes + IVA",
+    "permanencia": "3 meses",
+    # (línea, cantidad, precio) — la suma de precios es el fee
+    "desglose": [
+        ("Podcast", "1 episodio + 5 clips", "1.000 €"),
+        ("Contenido foodie", "2 jornadas + 9 reels", "1.200 €"),
+        ("Estrategia y gestión", "calendario, publicación e informe", "300 €"),
+    ],
 }
 
 
@@ -96,184 +101,134 @@ add("partida", "Punto de partida", sec(
     bg=AMARILLO, color=INK,
 ))
 
-# ── 3. La idea ────────────────────────────────────────────────────────────
+# ── 3. Estrategia ─────────────────────────────────────────────────────────
 n += 1
 capas = [
-    ("El plato", "Lo que ve el foodie: qué pedir, cómo se hace, cuánto cuesta."),
-    ("El negocio", "Lo que quiere el hostelero: ticket medio, cubiertos al día, coste del plato, cómo se montó."),
+    ("El plato", "Para el foodie: dónde comer, qué pedir y por qué merece la pena."),
+    ("El negocio", "Para el hostelero: cómo funciona ese restaurante por dentro, con datos reales."),
 ]
 ch = ""
 for i, (t, s_) in enumerate(capas):
     x = 128 + i * 560
     ch += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:420px;width:520px;height:440px;--d:{i}"></div>'
-        f'<p class="abs a disp outline" style="left:{x + 44}px;top:464px;font-size:72px;--d:{i + 1}">{i + 1:02d}</p>'
-        f'<p class="abs a" style="left:{x + 44}px;top:580px;width:430px;font-size:40px;font-weight:800;--d:{i + 1}">{t}</p>'
-        f'<p class="abs a soft" style="left:{x + 44}px;top:650px;width:430px;font-size:26px;line-height:1.4;--d:{i + 2}">{s_}</p>'
+        f'<div class="abs pm-card pop" style="left:{x}px;top:550px;width:520px;height:340px;--d:{i}"></div>'
+        f'<p class="abs a disp outline" style="left:{x + 44}px;top:585px;font-size:64px;--d:{i + 1}">{i + 1:02d}</p>'
+        f'<p class="abs a" style="left:{x + 44}px;top:690px;width:430px;font-size:38px;font-weight:800;--d:{i + 1}">{t}</p>'
+        f'<p class="abs a soft" style="left:{x + 44}px;top:752px;width:430px;font-size:26px;line-height:1.4;--d:{i + 2}">{s_}</p>'
     )
-add("idea", "La idea", sec(
-    eyebrow("La idea")
-    + titulo("Cada pieza,<br>dos capas", size=80)
+add("estrategia", "Estrategia", sec(
+    eyebrow("Estrategia general")
+    + titulo("De podcast<br>a medio gastronómico", size=72)
+    + p("Gastroconnect deja de depender solo del plató: el podcast sigue siendo el ancla y el contenido de calle "
+        "abre la cuenta al público foodie, que es el que la hace crecer. Cada pieza habla a las dos audiencias.",
+        128, 370, 1100, size=28, d=2)
     + ch
-    + reel("gastroconnect", 1380, 150, 420, 746, 2, 2)
+    + reel("gastroconnect", 1400, 200, 400, 711, 2, 2)
     + foot(n),
 ))
 
-# ── 4. Pilares ────────────────────────────────────────────────────────────
+# ── 4. Líneas de contenido ────────────────────────────────────────────────
 n += 1
-pilares = [
-    ("5", "Podcast", "El episodio del mes recortado en clips con gancho de dato."),
-    ("4", "Por qué funciona", "Quique visita un restaurante, prueba el plato estrella y saca un dato al dueño."),
-    ("3", "Así se hace", "Un plato icónico cocinado por partes, en la cocina del restaurante."),
-    ("2", "Guías rápidas", "Rankings y recomendaciones cortas, hechas para guardar."),
+lineas = [
+    ("Podcast", "Un episodio al mes en YouTube y sus mejores momentos en clips. La autoridad de la cuenta."),
+    ("Visitas a restaurantes", "Quique sale del plató: plato estrella, dueño y el dato que explica por qué funciona."),
+    ("En cocina", "Platos icónicos contados desde dentro, en series cortas por capítulos."),
+    ("Guías foodie", "Recomendaciones y rankings pensados para guardar y compartir."),
 ]
-ph = ""
-for i, (num, t, s_) in enumerate(pilares):
+lh = ""
+for i, (t, s_) in enumerate(lineas):
     x = 128 + i * 424
-    ph += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:396px;height:560px;--d:{i}"></div>'
-        f'<p class="abs a disp outline" style="left:{x + 36}px;top:370px;font-size:140px;line-height:1;--d:{i + 1}">{num}</p>'
-        f'<p class="abs a muted" style="left:{x + 36}px;top:530px;font-size:20px;letter-spacing:.08em;text-transform:uppercase;--d:{i + 1}">reels</p>'
-        f'<p class="abs a" style="left:{x + 36}px;top:600px;width:330px;font-size:34px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
-        f'<p class="abs a soft" style="left:{x + 36}px;top:690px;width:330px;font-size:24px;line-height:1.4;--d:{i + 2}">{s_}</p>'
+    lh += (
+        f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:396px;height:500px;--d:{i}"></div>'
+        f'<p class="abs a disp outline" style="left:{x + 36}px;top:380px;font-size:64px;--d:{i + 1}">{i + 1:02d}</p>'
+        f'<p class="abs a" style="left:{x + 36}px;top:490px;width:330px;font-size:34px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
+        f'<p class="abs a soft" style="left:{x + 36}px;top:600px;width:330px;font-size:25px;line-height:1.4;--d:{i + 2}">{s_}</p>'
     )
-add("pilares", "Cuatro pilares", sec(
-    eyebrow("Pilares de contenido")
-    + titulo(f"{C['reels']} reels, cuatro pilares", size=72)
-    + ph + foot(n),
+add("lineas", "Líneas de contenido", sec(
+    eyebrow("Líneas de contenido")
+    + titulo("Cuatro líneas", size=72)
+    + lh + foot(n),
 ))
 
-# ── 5. Por qué funciona ───────────────────────────────────────────────────
-n += 1
-pasos = [
-    "Entrada al local y plato estrella en mesa: 3 segundos de gancho.",
-    "Quique lo prueba y dice qué pedir.",
-    "Pregunta de negocio al dueño: «¿cuántos vendes al día?», «¿cuánto te cuesta?».",
-    "Cierre con el dato en pantalla.",
-]
-sh = ""
-for i, t in enumerate(pasos):
-    y = 420 + i * 110
-    sh += (
-        f'<p class="abs a disp outline" style="left:128px;top:{y - 10}px;font-size:56px;line-height:1;--d:{i + 2}">{i + 1:02d}</p>'
-        f'<p class="abs a" style="left:260px;top:{y}px;width:780px;font-size:30px;line-height:1.35;--d:{i + 2}">{t}</p>'
-    )
-add("formato", "Por qué funciona", sec(
-    eyebrow("Formato estrella")
-    + titulo("«Por qué<br>funciona»", size=72)
-    + sh
-    + p("Variante: <b style=\"color:#F4F4F4\">¿Cuánto cuesta este plato?</b> Escandallo del plato estrella frente a su precio de carta.",
-        128, 880, 960, size=26, d=7)
-    + reel("burmet", 1150, 170, 330, 586, -3, 2)
-    + reel("tram-tram", 1500, 290, 330, 586, 3, 3)
-    + foot(n),
-))
-
-# ── 6. Más formatos ───────────────────────────────────────────────────────
-n += 1
-otros = [
-    ("Así se hace", "Plato de otoño en 3 partes (guiso, setas o callos). Cada parte acaba en suspense, como las tortillas de Mantequerías Pirenaicas."),
-    ("Guías rápidas", "«3 sitios para comer bien por menos de 25 €», «Dónde comen los cocineros en su día libre», «Lo mejor del mes»."),
-    ("Clips del podcast", "Lo que ya funciona: titular con número o nombre potente. 5 clips por episodio y el mejor, fijado."),
-]
-oh = ""
-for i, (t, s_) in enumerate(otros):
-    x = 128 + i * 568
-    oh += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:528px;height:520px;--d:{i}"></div>'
-        f'<p class="abs a disp outline" style="left:{x + 44}px;top:384px;font-size:72px;--d:{i + 1}">{i + 1:02d}</p>'
-        f'<p class="abs a" style="left:{x + 44}px;top:500px;width:440px;font-size:36px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
-        f'<p class="abs a soft" style="left:{x + 44}px;top:580px;width:440px;font-size:26px;line-height:1.4;--d:{i + 2}">{s_}</p>'
-    )
-add("formatos", "Más formatos", sec(
-    eyebrow("El resto del mes")
-    + titulo("Tres formatos más", size=72)
-    + oh + foot(n),
-))
-
-# ── 7. Noviembre en números ───────────────────────────────────────────────
+# ── 5. Cantidades ─────────────────────────────────────────────────────────
 n += 1
 nums = [
-    (str(C["episodios"]), "episodio de podcast"),
-    (str(C["restaurantes"]), "restaurantes visitados"),
-    (str(C["jornadas"]), "jornadas de rodaje"),
-    (str(C["reels"]), "reels publicados"),
+    ("1", "episodio de podcast"),
+    ("14", "reels al mes"),
+    ("4", "restaurantes visitados"),
+    ("3", "jornadas de rodaje"),
 ]
 nh = ""
 for i, (num, t) in enumerate(nums):
     x = 128 + i * 424
     nh += (
-        f'<p class="abs pop disp outline" style="left:{x - 6}px;top:410px;font-size:180px;line-height:1;--d:{i}">{num}</p>'
-        f'<p class="abs a" style="left:{x}px;top:640px;width:380px;font-size:32px;font-weight:800;--d:{i + 2}">{t}</p>'
+        f'<p class="abs pop disp outline" style="left:{x - 6}px;top:340px;font-size:180px;line-height:1;--d:{i}">{num}</p>'
+        f'<p class="abs a" style="left:{x}px;top:570px;width:380px;font-size:32px;font-weight:800;--d:{i + 2}">{t}</p>'
     )
-add("numeros", "Noviembre en números", sec(
-    eyebrow("Noviembre")
-    + titulo("El mes,<br>en cuatro cifras", size=72)
-    + nh
-    + p("3–4 reels por semana. Las stories acompañan cada rodaje y empujan el episodio en YouTube.",
-        128, 800, 1660, size=28, d=7)
+reparto = [("Podcast", "5 clips"), ("Visitas", "4 reels"), ("En cocina", "3 reels"), ("Guías", "2 reels")]
+rh = ""
+for i, (t, c) in enumerate(reparto):
+    x = 128 + i * 424
+    rh += (
+        f'<div class="abs a deco" style="left:{x}px;top:700px;width:396px;height:1px;background:#3A3A3A;--d:{i + 4}"></div>'
+        f'<p class="abs a muted" style="left:{x}px;top:730px;font-size:20px;letter-spacing:.08em;text-transform:uppercase;--d:{i + 4}">{t}</p>'
+        f'<p class="abs a rosa" style="left:{x}px;top:770px;font-size:30px;font-weight:800;--d:{i + 4}">{c}</p>'
+    )
+add("cantidades", "Cantidades", sec(
+    eyebrow("Cada mes")
+    + titulo("Cantidades", size=72)
+    + nh + rh
+    + p("3–4 publicaciones por semana, más stories en cada rodaje y en cada estreno.", 128, 870, 1660, size=26, d=8)
     + foot(n),
 ))
 
-# ── 8. Calendario ─────────────────────────────────────────────────────────
+# ── 6. Qué incluye ────────────────────────────────────────────────────────
 n += 1
-cols = ["Semana", "Lunes", "Martes", "Jueves", "Sábado"]
-filas = [
-    ["2–8 nov", "Grabación del episodio", "Por qué funciona #1", "Guía: menos de 25 €", "¿Cuánto cuesta? #2"],
-    ["9–15 nov", "Clip podcast #1", "Así se hace · 1", "Clip podcast #2", "Así se hace · 2"],
-    ["16–22 nov", "Así se hace · 3", "Clip podcast #3", "Por qué funciona #3", "Clip podcast #4"],
-    ["23–29 nov", "—", "Por qué funciona #4", "Clip podcast #5", "Guía: lo mejor del mes"],
+bloques = [
+    ("Estrategia y dirección creativa", "Líneas, ideas y restaurantes de cada mes."),
+    ("Producción y edición", "Rodaje del podcast y de las jornadas foodie, edición de todas las piezas."),
+    ("Calendario y publicación", "Planificación mensual, copies y publicación en Instagram."),
+    ("Informe mensual", "Qué ha funcionado y qué ajustamos el mes siguiente."),
 ]
-xs = [128, 420, 790, 1160, 1530]
-w = [270, 350, 350, 350, 300]
-th = ""
-for j, c in enumerate(cols):
-    th += (f'<p class="abs a muted" style="left:{xs[j]}px;top:330px;width:{w[j]}px;font-size:20px;'
-           f'letter-spacing:.08em;text-transform:uppercase;--d:1">{c}</p>')
-for i, fila in enumerate(filas):
-    y = 400 + i * 130
-    th += f'<div class="abs a deco" style="left:128px;top:{y - 24}px;width:1664px;height:1px;background:#3A3A3A;--d:{i + 1}"></div>'
-    for j, c in enumerate(fila):
-        estilo = "font-weight:800;" if j == 0 else ""
-        clase = "rosa" if ("Por qué" in c or "Cuánto" in c) else ""
-        th += (f'<p class="abs a {clase}" style="left:{xs[j]}px;top:{y}px;width:{w[j]}px;font-size:27px;'
-               f'line-height:1.3;{estilo}--d:{i + 2}">{c}</p>')
-add("calendario", "Calendario", sec(
-    eyebrow("Calendario")
-    + titulo("Noviembre, semana a semana", size=64)
-    + th
-    + p("El episodio completo sale en YouTube la semana del 9, junto al primer clip.", 128, 920, 1660, size=24, d=7)
-    + foot(n),
+bh = ""
+for i, (t, s_) in enumerate(bloques):
+    y = 340 + i * 130
+    bh += (
+        f'<p class="abs a disp outline" style="left:128px;top:{y - 8}px;font-size:56px;line-height:1;--d:{i + 2}">{i + 1:02d}</p>'
+        f'<p class="abs a" style="left:260px;top:{y}px;width:720px;font-size:32px;font-weight:800;--d:{i + 2}">{t}</p>'
+        f'<p class="abs a soft" style="left:1000px;top:{y + 4}px;width:790px;font-size:26px;line-height:1.4;--d:{i + 3}">{s_}</p>'
+    )
+add("incluye", "Qué incluye", sec(
+    eyebrow("El servicio")
+    + titulo("Qué incluye", size=72)
+    + bh + foot(n),
 ))
 
-# ── 9. Producción ─────────────────────────────────────────────────────────
+# ── 7. Inversión ──────────────────────────────────────────────────────────
 n += 1
-jornadas = [
-    ("Podcast", "Episodio completo + intros y cierres para los clips", "3 h"),
-    ("Foodie A", "Visitas #1 y #2 + la serie «Así se hace» completa", "5 h"),
-    ("Foodie B", "Visitas #3 y #4 + recursos para las guías", "4 h"),
-]
-jh = ""
-for i, (t, s_, h) in enumerate(jornadas):
-    y = 440 + i * 120
-    jh += (
-        f'<p class="abs a" style="left:128px;top:{y}px;font-size:34px;font-weight:800;--d:{i + 2}">{t}</p>'
-        f'<p class="abs a" style="left:420px;top:{y + 4}px;width:640px;font-size:28px;line-height:1.35;color:#3A2F2F;--d:{i + 2}">{s_}</p>'
-        f'<p class="abs a disp" style="left:1080px;top:{y - 6}px;font-size:44px;--d:{i + 2}">{h}</p>'
+C = CIFRAS
+dh = ""
+for i, (t, c, pr) in enumerate(C["desglose"]):
+    y = 340 + i * 130
+    dh += (
+        f'<div class="abs a deco" style="left:1180px;top:{y - 30}px;width:612px;height:2px;background:#151515;--d:{i + 2}"></div>'
+        f'<p class="abs a" style="left:1180px;top:{y}px;width:440px;font-size:30px;font-weight:800;--d:{i + 2}">{t}</p>'
+        f'<p class="abs a" style="left:1180px;top:{y + 44}px;width:440px;font-size:24px;color:#3A2F2F;--d:{i + 2}">{c}</p>'
+        f'<p class="abs a disp" style="left:1560px;top:{y}px;width:232px;text-align:right;font-size:40px;--d:{i + 2}">{pr}</p>'
     )
-add("produccion", "Producción", sec(
-    eyebrow("Producción", k=True)
-    + titulo("Tres jornadas,<br>todo el mes", top=190, size=72, extra="color:#151515;")
-    + jh
-    + '<div class="abs a deco" style="left:1300px;top:400px;width:492px;height:440px;border:3px solid #151515;border-radius:22px;--d:3"></div>'
-    + '<p class="abs a" style="left:1344px;top:440px;width:410px;font-size:30px;font-weight:800;--d:4">Lo que necesitamos de Quique</p>'
-    + p("— Los 4 restaurantes, con acceso cerrado<br>— Qué datos de negocio cuenta cada dueño<br>— Invitado y fecha del episodio",
-        1344, 530, 410, size=26, d=5, cls="", extra="line-height:1.6;color:#3A2F2F;")
+add("inversion", "Inversión", sec(
+    eyebrow("Inversión", k=True)
+    + f'<p class="abs pop disp" style="left:120px;top:310px;font-size:170px;line-height:1;--d:1">{C["fee"]}</p>'
+    + f'<p class="abs a" style="left:128px;top:540px;font-size:40px;font-weight:700;--d:2">{C["fee_nota"]}</p>'
+    + dh
+    + '<p class="abs a" style="left:128px;top:700px;width:880px;font-size:26px;line-height:1.5;color:#3A2F2F;--d:3">'
+    f"Compromiso de {C['permanencia']} para medir resultados.<br>"
+    "No incluye paid media, invitados ni consumiciones en los restaurantes.</p>"
     + foot(n, k=True),
     bg=AMARILLO, color=INK,
 ))
 
-# ── 10. Cierre ────────────────────────────────────────────────────────────
+# ── 8. Cierre ────────────────────────────────────────────────────────────
 n += 1
 add("cierre", "Arrancamos", sec(
     eyebrow("Siguiente paso")
