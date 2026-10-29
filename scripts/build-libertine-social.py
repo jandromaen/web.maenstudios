@@ -19,13 +19,12 @@ MARCA = "Maen Studios × Libertine Blends"
 
 # ── Lo negociable ─────────────────────────────────────────────────────────
 CIFRAS = {
-    "fee": "4.000 €",
+    "fee": "2.500 €",
+    "fee_completo": "4.000 €",
     "fee_nota": "al mes + IVA",
     "permanencia": "6 meses",
     "rodajes": 1,
     "salidas": 4,
-    "ig_mes": 12,
-    "tt_mes": 16,
 }
 
 
@@ -133,8 +132,9 @@ bloques = [
         "Edición para cada canal",
     ]),
     ("Calendario", [
-        f"{C['ig_mes']} piezas en Instagram",
-        f"{C['tt_mes']} vídeos en TikTok",
+        "2 reels semanales",
+        "2 carruseles/posts semanales",
+        "En Instagram y en TikTok",
         "Copy y publicación",
     ]),
     ("Community management", [
@@ -153,7 +153,7 @@ for i, (t, items) in enumerate(bloques):
     )
     for j, it in enumerate(items):
         bh += (
-            f'<p class="abs a soft" style="left:{x + 36}px;top:{640 + j * 66}px;width:330px;font-size:24px;'
+            f'<p class="abs a soft" style="left:{x + 36}px;top:{636 + j * 58}px;width:340px;font-size:22px;white-space:nowrap;'
             f'line-height:1.3;--d:{i + j + 2}"><span class="rosa" style="margin-right:10px">—</span>{it}</p>'
         )
 add("servicio", "El servicio", sec(
@@ -164,14 +164,44 @@ add("servicio", "El servicio", sec(
 
 # ── 5. Inversión ─────────────────────────────────────────────────────────
 n += 1
+planes = [
+    ("Base", C["fee"], "Lo que incluye", [
+        "Dirección estratégica y creativa",
+        "Producción y edición",
+        "Calendario",
+        "Community management",
+    ], False),
+    ("Completo", C["fee_completo"], "Base, más", [
+        "Creators y colaboraciones",
+        "Soporte en eventos y lanzamientos",
+        "Creatividad para paid con No Idea",
+    ], True),
+]
+ih = ""
+for i, (nom, precio, sub, items, dark) in enumerate(planes):
+    x = 128 + i * 848
+    ink = "#F4F4F4" if dark else "#151515"
+    ih += (
+        f'<div class="abs pop" style="left:{x}px;top:300px;width:816px;height:600px;border-radius:28px;'
+        f'background:{"#151515" if dark else "rgba(21,21,21,0.06)"};--d:{i}"></div>'
+        f'<p class="abs a" style="left:{x + 56}px;top:344px;font-size:22px;font-weight:700;letter-spacing:0.2em;'
+        f'text-transform:uppercase;color:{"#F9CDCD" if dark else "#3A2F2F"};--d:{i + 1}">{nom}</p>'
+        f'<p class="abs a disp" style="left:{x + 56}px;top:400px;font-size:104px;line-height:1;color:{ink};--d:{i + 1}">{precio}</p>'
+        f'<p class="abs a" style="left:{x + 56}px;top:520px;font-size:28px;font-weight:700;color:{ink};--d:{i + 2}">{C["fee_nota"]}</p>'
+        f'<p class="abs a" style="left:{x + 56}px;top:600px;font-size:22px;letter-spacing:0.14em;text-transform:uppercase;'
+        f'color:{"#9A9A9A" if dark else "#3A2F2F"};--d:{i + 2}">{sub}</p>'
+    )
+    for j, it in enumerate(items):
+        ih += (
+            f'<p class="abs a" style="left:{x + 56}px;top:{650 + j * 56}px;width:700px;font-size:27px;'
+            f'color:{ink};--d:{i + j + 3}"><span style="color:{"#F9CDCD" if dark else "#151515"};margin-right:12px">—</span>{it}</p>'
+        )
 add("inversion", "Inversión", sec(
     eyebrow("Inversión", k=True)
-    + f'<p class="abs pop disp" style="left:120px;top:300px;font-size:200px;line-height:1;--d:1">{C["fee"]}</p>'
-    + f'<p class="abs a" style="left:128px;top:540px;font-size:40px;font-weight:700;--d:2">{C["fee_nota"]}</p>'
-    + '<p class="abs a" style="left:128px;top:680px;width:1300px;font-size:28px;line-height:1.5;color:#3A2F2F;--d:3">'
-    f"{C['permanencia']} con prórroga automática.<br>"
-    "No incluye creators, colaboraciones ni eventos. El paid lo sigue llevando No Idea.</p>"
-    + foot(n, k=True),
+    + titulo("Dos opciones", top=180, size=72, extra="color:#151515;")
+    + ih
+    + f'<p class="abs a" style="left:128px;top:930px;font-size:24px;color:#3A2F2F;--d:8">'
+    f"{C['permanencia']} con prórroga automática. El paid lo sigue llevando No Idea.</p>",
     bg=ROSA, color=INK,
 ))
 
