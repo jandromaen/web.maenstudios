@@ -21,7 +21,7 @@ CIFRAS = {
     "permanencia": "3 meses",
     # (nombre, precio, [lo que incluye]) — cada plan suma al anterior
     "planes": [
-        ("Esencial", "1.000 €", ["Podcast: 1 episodio al mes + clips", "Guía foodie: 2 restaurantes al mes", "2 reels + 2 carruseles"]),
+        ("Esencial", "1.000 €", ["Podcast: 1 episodio al mes + 8 reels", "Guía foodie: 2 restaurantes al mes", "2 reels + 2 carruseles"]),
         ("Completo", "1.250 €", ["Todo lo del plan Esencial", "Guía de los lunes: 1 post semanal", "Temáticas, calendario y festividades"]),
         ("360", "1.500 €", ["Todo lo del plan Completo", "Gestión de LinkedIn"]),
     ],
@@ -129,7 +129,7 @@ add("estrategia", "Estrategia", sec(
 # ── 4. Líneas de contenido ────────────────────────────────────────────────
 n += 1
 lineas = [
-    ("Podcast", "Un episodio al mes en YouTube y sus mejores momentos en clips. La autoridad de la cuenta."),
+    ("Podcast", "Un episodio al mes en YouTube y sus mejores momentos en 8 reels. La autoridad de la cuenta."),
     ("Guía foodie", "Quique visita 2 restaurantes al mes: un reel y un carrusel de cada uno."),
     ("Guía de los lunes", "Un post cada lunes: guía gastronómica por temáticas y fechas del calendario (Navidad, San Valentín…)."),
     ("LinkedIn", "Gastroconnect como referente del sector: el lado negocio de cada episodio y cada visita."),
