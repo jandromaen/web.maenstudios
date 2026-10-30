@@ -21,9 +21,21 @@ CIFRAS = {
     "permanencia": "3 meses",
     # (nombre, precio, [lo que incluye]) — cada plan suma al anterior
     "planes": [
-        ("Esencial", "1.000 €", ["Podcast: 1 episodio al mes + 8 reels", "Guía foodie: 2 restaurantes al mes, con 1 reel y 1 carrusel de cada uno"]),
-        ("Completo", "1.250 €", ["Todo lo del plan Esencial", "Guía de los lunes: 1 post semanal con una guía gastronómica por temáticas o fechas del calendario (Navidad, San Valentín…)"]),
-        ("360", "1.500 €", ["Todo lo del plan Completo", "Gestión de LinkedIn: 1 post semanal"]),
+        ("Esencial", "1.000 €", [
+            "Podcast: 1 episodio al mes + 8 reels",
+            "Guía de los lunes: 1 post semanal por temáticas o fechas del calendario (Navidad, San Valentín…)",
+            "Calendario, publicación y community",
+        ]),
+        ("Completo", "1.250 €", [
+            "Todo lo del plan Esencial",
+            "LinkedIn: 1 post semanal",
+            "Calendario, publicación y community",
+        ]),
+        ("360", "1.500 €", [
+            "Todo lo del plan Completo",
+            "Guía foodie: 2 restaurantes al mes con Richi o Jandro, 1 reel y 1 carrusel de cada uno",
+            "Calendario, publicación y community",
+        ]),
     ],
 }
 
@@ -105,9 +117,9 @@ add("objetivo", "El objetivo", sec(
 n += 1
 movs = [
     ("Autoridad", "Podcast", "Los que mandan en la restauración de Barcelona pasan por el micro. 1 episodio al mes + 8 reels."),
-    ("Presencia", "Guía foodie", "Gastroconnect, en los restaurantes que importan de la ciudad. 2 visitas al mes: reel + carrusel de cada una."),
     ("Hábito", "Guía de los lunes", "Una cita fija cada semana: la guía gastronómica de Barcelona por temáticas y fechas (Navidad, San Valentín…)."),
-    ("Sector", "LinkedIn", "Referente para el profesional: 1 post semanal con el lado negocio de cada episodio y cada visita."),
+    ("Sector", "LinkedIn", "Referente para el profesional: 1 post semanal con el lado negocio de la restauración."),
+    ("Presencia", "Guía foodie", "Comer en los restaurantes que importan de la ciudad con Richi o Jandro. 2 visitas al mes: reel + carrusel de cada una."),
 ]
 mh = ""
 for i, (t, linea, s_) in enumerate(movs):
@@ -130,7 +142,7 @@ n += 1
 bloques = [
     ("Estrategia y dirección creativa", "Líneas, ideas y restaurantes de cada mes."),
     ("Producción y edición", "Rodaje del podcast y de las visitas, edición de todas las piezas."),
-    ("Calendarización y publicación del contenido", "Planificación mensual, copies y publicación."),
+    ("Calendario, publicación y community", "Planificación mensual, copies, publicación y gestión de la comunidad."),
 ]
 bh = ""
 for i, (t, s_) in enumerate(bloques):
@@ -155,24 +167,27 @@ for i, (nombre, precio, items) in enumerate(C["planes"]):
     destacado = i == 1
     borde = "background:#151515;color:#F4F4F4;" if destacado else "border:3px solid #151515;"
     col = "#C9C7C3" if destacado else "#3A2F2F"
-    ph += f'<div class="abs pop" style="left:{x}px;top:300px;width:528px;height:600px;border-radius:22px;{borde}--d:{i}"></div>'
+    ph += f'<div class="abs pop" style="left:{x}px;top:300px;width:528px;height:560px;border-radius:22px;{borde}--d:{i}"></div>'
     tc = "color:#F4F4F4;" if destacado else ""
     ph += f'<p class="abs a pm-eyebrow" style="left:{x + 44}px;top:344px;{"color:" + AMARILLO + ";" if destacado else "color:#151515;"}--d:{i + 1}">Plan {nombre}</p>'
     ph += f'<p class="abs a disp" style="left:{x + 40}px;top:400px;font-size:96px;line-height:1;{tc}--d:{i + 1}">{precio}</p>'
     ph += f'<p class="abs a" style="left:{x + 44}px;top:512px;font-size:24px;font-weight:700;color:{col};--d:{i + 1}">{C["fee_nota"]}</p>'
     lis = "".join(
-        f'<p style="margin:0 0 22px;padding-left:36px;text-indent:-36px">'
+        f'<p style="margin:0 0 18px;padding-left:36px;text-indent:-36px">'
         f'<span style="font-weight:800;display:inline-block;width:36px;text-indent:0">—</span>{it}</p>'
         for it in items
     )
-    ph += (f'<div class="abs a" style="left:{x + 44}px;top:580px;width:440px;font-size:26px;'
+    ph += (f'<div class="abs a" style="left:{x + 44}px;top:570px;width:450px;font-size:24px;'
            f'line-height:1.3;{tc}--d:{i + 2}">{lis}</div>')
 add("planes", "Inversión", sec(
     eyebrow("Inversión", k=True)
     + titulo("Tres planes", top=170, size=72, extra="color:#151515;")
     + ph
+    + p("<b style=\"color:#151515\">Reels extra:</b> 30 € + IVA por reel grabado in situ · "
+        "50 € + IVA por reel si requiere desplazamiento exclusivo (zona Barcelona).",
+        128, 888, 1660, size=24, d=6, cls="", extra="color:#3A2F2F;")
     + p(f"Compromiso de {C['permanencia']} para medir resultados. No incluye paid media, invitados ni consumiciones en los restaurantes.",
-        128, 940, 1660, size=24, d=6, cls="", extra="color:#3A2F2F;")
+        128, 932, 1660, size=22, d=7, cls="", extra="color:#3A2F2F;")
     + foot(n, k=True),
     bg=AMARILLO, color=INK,
 ))
