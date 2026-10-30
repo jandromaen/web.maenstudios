@@ -128,16 +128,15 @@ n += 1
 bloques = [
     ("Estrategia y dirección creativa", "Líneas, ideas y restaurantes de cada mes."),
     ("Producción y edición", "Rodaje del podcast y de las visitas, edición de todas las piezas."),
-    ("Calendario y publicación", "Planificación mensual, copies y publicación."),
-    ("Informe mensual", "Qué ha funcionado y qué ajustamos el mes siguiente."),
+    ("Calendarización y publicación del contenido", "Planificación mensual, copies y publicación."),
 ]
 bh = ""
 for i, (t, s_) in enumerate(bloques):
-    y = 340 + i * 130
+    y = 380 + i * 150
     bh += (
         f'<p class="abs a disp outline" style="left:128px;top:{y - 8}px;font-size:56px;line-height:1;--d:{i + 2}">{i + 1:02d}</p>'
         f'<p class="abs a" style="left:260px;top:{y}px;width:720px;font-size:32px;font-weight:800;--d:{i + 2}">{t}</p>'
-        f'<p class="abs a soft" style="left:1000px;top:{y + 4}px;width:790px;font-size:26px;line-height:1.4;--d:{i + 3}">{s_}</p>'
+        f'<p class="abs a soft" style="left:1080px;top:{y + 4}px;width:710px;font-size:26px;line-height:1.4;--d:{i + 3}">{s_}</p>'
     )
 add("incluye", "Qué incluye", sec(
     eyebrow("En todos los planes")
