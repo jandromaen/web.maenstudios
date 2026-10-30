@@ -78,7 +78,9 @@ C = CIFRAS
 n += 1
 add("portada", "Gastroconnect × Maen", sec(
     reel("gastroconnect", 1060, 150, 340, 604, -4, 1)
-    + reel("mantis", 1450, 300, 340, 604, 3, 2)
+    + ('<video class="pm-reel f" style="left:1450px;top:300px;width:340px;height:604px;'
+       'transform:rotate(3deg);--d:2" src="/pitch/gastroconnect/portada-reel.mp4" '
+       'poster="/pitch/gastroconnect/portada-reel.jpg" autoplay muted loop playsinline preload="auto"></video>')
     + eyebrow("Plan de contenido · 2026–2027", top=150)
     + '<h1 class="abs a disp" style="left:128px;top:300px;font-size:104px;line-height:1;--d:1">Gastro</h1>'
     '<h1 class="abs a disp outline" style="left:128px;top:415px;font-size:104px;line-height:1;--d:2">connect</h1>'
