@@ -23,17 +23,19 @@ CIFRAS = {
     "planes": [
         ("Esencial", "1.000 €", [
             "Podcast: 1 episodio al mes + 8 reels",
-            "Guía de los lunes: 1 post semanal por temáticas o fechas del calendario (Navidad, San Valentín…)",
+            "Guía de los lunes: 1 post semanal por temáticas y festividades",
+            "Guía foodie: 1 restaurante al mes con Richi o Jandro, reel + carrusel",
             "Calendario, publicación y community",
         ]),
         ("Completo", "1.250 €", [
             "Todo lo del plan Esencial",
+            "Guía foodie: 2 restaurantes al mes",
             "LinkedIn: 1 post semanal",
             "Calendario, publicación y community",
         ]),
         ("360", "1.500 €", [
             "Todo lo del plan Completo",
-            "Guía foodie: 2 restaurantes al mes con Richi o Jandro, 1 reel y 1 carrusel de cada uno",
+            "Guía foodie: 3 restaurantes al mes",
             "Calendario, publicación y community",
         ]),
     ],
@@ -119,7 +121,7 @@ movs = [
     ("Autoridad", "Podcast", "Los que mandan en la restauración de Barcelona pasan por el micro. 1 episodio al mes + 8 reels."),
     ("Hábito", "Guía de los lunes", "Una cita fija cada semana: la guía gastronómica de Barcelona por temáticas y fechas (Navidad, San Valentín…)."),
     ("Sector", "LinkedIn", "Referente para el profesional: 1 post semanal con el lado negocio de la restauración."),
-    ("Presencia", "Guía foodie", "Comer en los restaurantes que importan de la ciudad con Richi o Jandro. 2 visitas al mes: reel + carrusel de cada una."),
+    ("Presencia", "Guía foodie", "Comer en los restaurantes que importan de la ciudad con Richi o Jandro. De 1 a 3 visitas al mes según el plan: reel + carrusel de cada una."),
 ]
 mh = ""
 for i, (t, linea, s_) in enumerate(movs):
