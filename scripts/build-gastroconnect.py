@@ -194,9 +194,9 @@ add("planes", "Inversión", sec(
 
 # ── 6. Cierre ────────────────────────────────────────────────────────────
 n += 1
-add("cierre", "A por el nº1", sec(
-    eyebrow("Siguiente paso")
-    + titulo("¿Vamos a<br>por el nº1?", top=260, size=116)
+add("cierre", "Gracias", sec(
+    eyebrow("Contacto")
+    + titulo("Gracias", top=300, size=140)
     + '<div class="abs a" style="left:128px;top:720px;font-size:28px;line-height:1.5;--d:3">'
     '<p style="font-weight:800">Jandro Martín</p>'
     '<p><a href="mailto:jandro@maenstudios.com" style="color:inherit">jandro@maenstudios.com</a> · +34 688 629 688</p>'
