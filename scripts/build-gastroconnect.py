@@ -21,8 +21,8 @@ CIFRAS = {
     "permanencia": "3 meses",
     # (nombre, precio, [lo que incluye]) — cada plan suma al anterior
     "planes": [
-        ("Esencial", "1.000 €", ["Podcast: 1 episodio al mes + 8 reels", "Guía foodie: 2 restaurantes al mes", "2 reels + 2 carruseles"]),
-        ("Completo", "1.250 €", ["Todo lo del plan Esencial", "Guía de los lunes: 1 post semanal", "Temáticas, calendario y festividades"]),
+        ("Esencial", "1.000 €", ["Podcast: 1 episodio al mes + 8 reels", "Guía foodie: 2 restaurantes al mes, con 1 reel y 1 carrusel de cada uno"]),
+        ("Completo", "1.250 €", ["Todo lo del plan Esencial", "Guía de los lunes: 1 post semanal con una guía gastronómica por temáticas o fechas del calendario (Navidad, San Valentín…)"]),
         ("360", "1.500 €", ["Todo lo del plan Completo", "Gestión de LinkedIn"]),
     ],
 }
@@ -158,11 +158,13 @@ for i, (nombre, precio, items) in enumerate(C["planes"]):
     ph += f'<p class="abs a pm-eyebrow" style="left:{x + 44}px;top:344px;{"color:" + AMARILLO + ";" if destacado else "color:#151515;"}--d:{i + 1}">Plan {nombre}</p>'
     ph += f'<p class="abs a disp" style="left:{x + 40}px;top:400px;font-size:96px;line-height:1;{tc}--d:{i + 1}">{precio}</p>'
     ph += f'<p class="abs a" style="left:{x + 44}px;top:512px;font-size:24px;font-weight:700;color:{col};--d:{i + 1}">{C["fee_nota"]}</p>'
-    for j, it in enumerate(items):
-        ph += (
-            f'<p class="abs a" style="left:{x + 44}px;top:{590 + j * 70}px;width:440px;font-size:26px;line-height:1.3;{tc}--d:{i + 2}">'
-            f'<span style="font-weight:800;margin-right:12px">—</span>{it}</p>'
-        )
+    lis = "".join(
+        f'<p style="margin:0 0 22px;padding-left:36px;text-indent:-36px">'
+        f'<span style="font-weight:800;display:inline-block;width:36px;text-indent:0">—</span>{it}</p>'
+        for it in items
+    )
+    ph += (f'<div class="abs a" style="left:{x + 44}px;top:580px;width:440px;font-size:26px;'
+           f'line-height:1.3;{tc}--d:{i + 2}">{lis}</div>')
 add("planes", "Inversión", sec(
     eyebrow("Inversión", k=True)
     + titulo("Tres planes", top=170, size=72, extra="color:#151515;")
