@@ -79,77 +79,51 @@ n += 1
 add("portada", "Gastroconnect × Maen", sec(
     reel("gastroconnect", 1060, 150, 340, 604, -4, 1)
     + reel("mantis", 1450, 300, 340, 604, 3, 2)
-    + eyebrow("Estrategia de contenido · Noviembre 2026", top=150)
+    + eyebrow("Plan de contenido · 2026–2027", top=150)
     + '<h1 class="abs a disp" style="left:128px;top:300px;font-size:104px;line-height:1;--d:1">Gastro</h1>'
     '<h1 class="abs a disp outline" style="left:128px;top:415px;font-size:104px;line-height:1;--d:2">connect</h1>'
-    + p("El plato y el negocio.", 128, 590, 800, size=36, d=3, cls="", extra="font-weight:800;")
-    + p("Podcast + contenido foodie para que la cuenta crezca más allá del plató.", 128, 660, 820, size=30, d=4)
+    + p("El programa nº1 de gastronomía de Barcelona.", 128, 590, 820, size=36, d=3, cls="", extra="font-weight:800;")
 ))
 
-# ── 2. Punto de partida ───────────────────────────────────────────────────
+# ── 2. El objetivo ────────────────────────────────────────────────────────
 n += 1
-add("partida", "Punto de partida", sec(
-    eyebrow("Punto de partida", k=True)
-    + titulo("Un podcast<br>que funciona.", top=260, size=104, extra="color:#151515;")
-    + '<h2 class="abs a disp" style="left:128px;top:500px;width:1660px;font-size:104px;line-height:1.05;'
-    'color:transparent;-webkit-text-stroke:3px #151515;--d:2">Un solo motor.</h2>'
-    + p("220 publicaciones · 8.300 seguidores · 2 temporadas. Todo sale de un episodio al mes: "
-        "noviembre añade una segunda pata que no depende del plató.",
+add("objetivo", "El objetivo", sec(
+    eyebrow("El objetivo", k=True)
+    + titulo("El programa nº1<br>de Barcelona", top=260, size=112, extra="color:#151515;")
+    + '<h2 class="abs a disp" style="left:128px;top:510px;width:1660px;font-size:112px;line-height:1.05;'
+    'color:transparent;-webkit-text-stroke:3px #151515;--d:2">en gastronomía.</h2>'
+    + p("Que cuando alguien en Barcelona quiera saber dónde comer o cómo funciona un restaurante, "
+        "la respuesta sea Gastroconnect. Para el que come y para el que da de comer.",
         128, 720, 1300, size=30, d=3, cls="", extra="color:#3A2F2F;")
     + foot(n, k=True),
     bg=AMARILLO, color=INK,
 ))
 
-# ── 3. Estrategia ─────────────────────────────────────────────────────────
+# ── 3. El plan ────────────────────────────────────────────────────────────
 n += 1
-capas = [
-    ("El plato", "Para el foodie: dónde comer, qué pedir y por qué merece la pena."),
-    ("El negocio", "Para el hostelero: cómo funciona ese restaurante por dentro, con datos reales."),
+movs = [
+    ("Autoridad", "Podcast", "Los que mandan en la restauración de Barcelona pasan por el micro. 1 episodio al mes + 8 reels."),
+    ("Presencia", "Guía foodie", "Gastroconnect, en los restaurantes que importan de la ciudad. 2 visitas al mes: reel + carrusel de cada una."),
+    ("Hábito", "Guía de los lunes", "Una cita fija cada semana: la guía gastronómica de Barcelona por temáticas y fechas (Navidad, San Valentín…)."),
+    ("Sector", "LinkedIn", "Referente para el profesional: el lado negocio de cada episodio y cada visita."),
 ]
-ch = ""
-for i, (t, s_) in enumerate(capas):
-    x = 128 + i * 560
-    ch += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:550px;width:520px;height:340px;--d:{i}"></div>'
-        f'<p class="abs a disp outline" style="left:{x + 44}px;top:585px;font-size:64px;--d:{i + 1}">{i + 1:02d}</p>'
-        f'<p class="abs a" style="left:{x + 44}px;top:690px;width:430px;font-size:38px;font-weight:800;--d:{i + 1}">{t}</p>'
-        f'<p class="abs a soft" style="left:{x + 44}px;top:752px;width:430px;font-size:26px;line-height:1.4;--d:{i + 2}">{s_}</p>'
-    )
-add("estrategia", "Estrategia", sec(
-    eyebrow("Estrategia general")
-    + titulo("De podcast<br>a medio gastronómico", size=72)
-    + p("Gastroconnect deja de depender solo del plató: el podcast sigue siendo el ancla y el contenido de calle "
-        "abre la cuenta al público foodie, que es el que la hace crecer. Cada pieza habla a las dos audiencias.",
-        128, 370, 1100, size=28, d=2)
-    + ch
-    + reel("gastroconnect", 1400, 200, 400, 711, 2, 2)
-    + foot(n),
-))
-
-# ── 4. Líneas de contenido ────────────────────────────────────────────────
-n += 1
-lineas = [
-    ("Podcast", "Un episodio al mes en YouTube y sus mejores momentos en 8 reels. La autoridad de la cuenta."),
-    ("Guía foodie", "Quique visita 2 restaurantes al mes: un reel y un carrusel de cada uno."),
-    ("Guía de los lunes", "Un post cada lunes: guía gastronómica por temáticas y fechas del calendario (Navidad, San Valentín…)."),
-    ("LinkedIn", "Gastroconnect como referente del sector: el lado negocio de cada episodio y cada visita."),
-]
-lh = ""
-for i, (t, s_) in enumerate(lineas):
+mh = ""
+for i, (t, linea, s_) in enumerate(movs):
     x = 128 + i * 424
-    lh += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:396px;height:520px;--d:{i}"></div>'
+    mh += (
+        f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:396px;height:540px;--d:{i}"></div>'
         f'<p class="abs a disp outline" style="left:{x + 36}px;top:380px;font-size:64px;--d:{i + 1}">{i + 1:02d}</p>'
-        f'<p class="abs a" style="left:{x + 36}px;top:490px;width:330px;font-size:34px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
-        f'<p class="abs a soft" style="left:{x + 36}px;top:560px;width:330px;font-size:25px;line-height:1.4;--d:{i + 2}">{s_}</p>'
+        f'<p class="abs a" style="left:{x + 36}px;top:490px;width:330px;font-size:38px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
+        f'<p class="abs a rosa" style="left:{x + 36}px;top:545px;width:330px;font-size:22px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;--d:{i + 1}">{linea}</p>'
+        f'<p class="abs a soft" style="left:{x + 36}px;top:600px;width:330px;font-size:25px;line-height:1.4;--d:{i + 2}">{s_}</p>'
     )
-add("lineas", "Líneas de contenido", sec(
-    eyebrow("Líneas de contenido")
-    + titulo("Cuatro líneas", size=72)
-    + lh + foot(n),
+add("plan", "El plan", sec(
+    eyebrow("El plan")
+    + titulo("Cuatro movimientos para ser el nº1", size=64)
+    + mh + foot(n),
 ))
 
-# ── 5. Qué incluye ────────────────────────────────────────────────────────
+# ── 4. Qué incluye ────────────────────────────────────────────────────────
 n += 1
 bloques = [
     ("Estrategia y dirección creativa", "Líneas, ideas y restaurantes de cada mes."),
@@ -171,7 +145,7 @@ add("incluye", "Qué incluye", sec(
     + bh + foot(n),
 ))
 
-# ── 6. Planes ─────────────────────────────────────────────────────────────
+# ── 5. Planes ─────────────────────────────────────────────────────────────
 n += 1
 C = CIFRAS
 ph = ""
@@ -200,11 +174,11 @@ add("planes", "Inversión", sec(
     bg=AMARILLO, color=INK,
 ))
 
-# ── 7. Cierre ────────────────────────────────────────────────────────────
+# ── 6. Cierre ────────────────────────────────────────────────────────────
 n += 1
-add("cierre", "Arrancamos", sec(
+add("cierre", "A por el nº1", sec(
     eyebrow("Siguiente paso")
-    + titulo("¿Arrancamos<br>noviembre?", top=260, size=116)
+    + titulo("¿Vamos a<br>por el nº1?", top=260, size=116)
     + '<div class="abs a" style="left:128px;top:720px;font-size:28px;line-height:1.5;--d:3">'
     '<p style="font-weight:800">Jandro Martín</p>'
     '<p><a href="mailto:jandro@maenstudios.com" style="color:inherit">jandro@maenstudios.com</a> · +34 688 629 688</p>'
