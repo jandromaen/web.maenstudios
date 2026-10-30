@@ -23,7 +23,7 @@ CIFRAS = {
     "planes": [
         ("Esencial", "1.000 €", ["Podcast: 1 episodio al mes + 8 reels", "Guía foodie: 2 restaurantes al mes, con 1 reel y 1 carrusel de cada uno"]),
         ("Completo", "1.250 €", ["Todo lo del plan Esencial", "Guía de los lunes: 1 post semanal con una guía gastronómica por temáticas o fechas del calendario (Navidad, San Valentín…)"]),
-        ("360", "1.500 €", ["Todo lo del plan Completo", "Gestión de LinkedIn"]),
+        ("360", "1.500 €", ["Todo lo del plan Completo", "Gestión de LinkedIn: 1 post semanal"]),
     ],
 }
 
@@ -107,7 +107,7 @@ movs = [
     ("Autoridad", "Podcast", "Los que mandan en la restauración de Barcelona pasan por el micro. 1 episodio al mes + 8 reels."),
     ("Presencia", "Guía foodie", "Gastroconnect, en los restaurantes que importan de la ciudad. 2 visitas al mes: reel + carrusel de cada una."),
     ("Hábito", "Guía de los lunes", "Una cita fija cada semana: la guía gastronómica de Barcelona por temáticas y fechas (Navidad, San Valentín…)."),
-    ("Sector", "LinkedIn", "Referente para el profesional: el lado negocio de cada episodio y cada visita."),
+    ("Sector", "LinkedIn", "Referente para el profesional: 1 post semanal con el lado negocio de cada episodio y cada visita."),
 ]
 mh = ""
 for i, (t, linea, s_) in enumerate(movs):
