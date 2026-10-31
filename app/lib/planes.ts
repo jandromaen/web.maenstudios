@@ -23,13 +23,14 @@ export type Tarifa = {
 };
 
 export const TARIFAS: Record<string, Tarifa> = {
+  "creador:anual": { plan: "creador", periodo: "anual", base: 10, conIva: "12,10", cada: "año", alAno: "12,10" },
+  "creador:mensual": { plan: "creador", periodo: "mensual", base: 1, conIva: "1,21", cada: "mes", alAno: "14,52" },
+  "marca:anual": { plan: "marca", periodo: "anual", base: 150, conIva: "181,50", cada: "año", alAno: "181,50" },
   "marca:mensual": { plan: "marca", periodo: "mensual", base: 25, conIva: "30,25", cada: "mes", alAno: "363,00" },
-  "creador:anual": { plan: "creador", periodo: "anual", base: 12, conIva: "14,52", cada: "año", alAno: "14,52" },
-  "creador:mensual": { plan: "creador", periodo: "mensual", base: 1.5, conIva: "1,82", cada: "mes", alAno: "21,78" },
 };
 
 /**
- * El precio como se escribe en Espana: «25 €», «12 €», «1,50 €».
+ * El precio como se escribe en Espana: «25 €», «10 €», «1,50 €».
  *
  * Los enteros van sin decimales y los demas con dos. Un «1,5 €» a secas se lee
  * como un error de la web, no como un precio.

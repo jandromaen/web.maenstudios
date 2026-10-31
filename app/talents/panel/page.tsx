@@ -6,6 +6,7 @@ import SiteFooter from "../../components/SiteFooter";
 import PanelCreador from "../../components/talents/PanelCreador";
 import { crearClienteServidor, usuarioActual } from "../../lib/supabase/servidor";
 import { accesoDe } from "../../lib/acceso";
+import { euros, tarifa } from "../../lib/planes";
 import { createPageMetadata } from "../../seo-config";
 import type { Creador, Trabajo } from "../../lib/talents";
 
@@ -67,8 +68,12 @@ export default async function PanelPage() {
               <div className="empty-note">
                 <p>
                   Para tener ficha en el catálogo hace falta la suscripción de
-                  creador: <strong>12 € + IVA al año</strong>, o 1,50 € + IVA al
-                  mes si lo prefieres mensual.
+                  creador:{" "}
+                  <strong>
+                    {euros(tarifa("creador", "anual")!.base)} € + IVA al año
+                  </strong>
+                  , o {euros(tarifa("creador", "mensual")!.base)} € + IVA al mes
+                  si lo prefieres mensual.
                 </p>
                 <p style={{ marginTop: 10 }}>
                   Con ella apareces en el catálogo que consultan las marcas y

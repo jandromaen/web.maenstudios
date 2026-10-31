@@ -5,13 +5,15 @@ import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import Planes from "../../components/talents/Planes";
 import { usuarioActual } from "../../lib/supabase/servidor";
-import { esPlan } from "../../lib/planes";
+import { esPlan, euros, tarifa } from "../../lib/planes";
 import { createPageMetadata } from "../../seo-config";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Precios de Maen Talents",
   description:
-    "Creadores: 12 € + IVA al año para estar en el catálogo y aplicar a los anuncios. Marcas: 25 € + IVA al mes para acceder a los perfiles y publicar.",
+    `Creadores: ${euros(tarifa("creador", "anual")!.base)} € + IVA al año para estar en el ` +
+    `catálogo y aplicar a los anuncios. Marcas: ${euros(tarifa("marca", "mensual")!.base)} € + IVA ` +
+    `al mes para acceder a los perfiles y publicar.`,
   path: "/talents/suscripcion",
   keywords: ["precio marketplace UGC", "suscripción creadores UGC"],
 });

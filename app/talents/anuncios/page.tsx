@@ -6,6 +6,7 @@ import SiteFooter from "../../components/SiteFooter";
 import Aplicar from "../../components/talents/Aplicar";
 import { crearClienteServidor, usuarioActual } from "../../lib/supabase/servidor";
 import { accesoDe } from "../../lib/acceso";
+import { euros, tarifa } from "../../lib/planes";
 import { createPageMetadata } from "../../seo-config";
 
 export const metadata: Metadata = createPageMetadata({
@@ -64,9 +65,15 @@ export default async function AnunciosPage() {
             {!acceso.creador ? (
               <div className="empty-note">
                 <p>
+                  {/* El precio sale de la tabla de tarifas, no escrito aquí:
+                      escrito a mano se queda viejo en cuanto cambian, y ya
+                      pasó. */}
                   Los anuncios son para creadores suscritos. Por{" "}
-                  <strong>12 € + IVA al año</strong> tienes tu ficha en el
-                  catálogo y puedes presentarte a todas las ofertas.
+                  <strong>
+                    {euros(tarifa("creador", "anual")!.base)} € + IVA al año
+                  </strong>{" "}
+                  tienes tu ficha en el catálogo y puedes presentarte a todas
+                  las ofertas.
                 </p>
                 <div className="hero-actions" style={{ marginTop: 18 }}>
                   <Link className="btn btn-primary" href="/talents/suscripcion?plan=creador">

@@ -52,7 +52,11 @@ export function hayPasarela(): boolean {
  * pasar del sandbox a la cuenta real.
  */
 export function precioDe(plan: Plan, periodo: Periodo): string | undefined {
-  if (plan === "marca") return process.env.STRIPE_PRECIO_MARCA;
+  if (plan === "marca") {
+    return periodo === "anual"
+      ? process.env.STRIPE_PRECIO_MARCA_ANUAL
+      : process.env.STRIPE_PRECIO_MARCA;
+  }
   return periodo === "anual"
     ? process.env.STRIPE_PRECIO_CREADOR
     : process.env.STRIPE_PRECIO_CREADOR_MENSUAL;
