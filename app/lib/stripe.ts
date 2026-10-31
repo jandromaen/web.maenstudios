@@ -23,13 +23,31 @@ let cliente: Stripe | null = null;
  * Asi el build pasa en cualquier sitio y la clave solo hace falta cuando de
  * verdad se va a cobrar.
  */
+/**
+ * La clave que se usa, y de donde sale.
+ *
+ * STRIPE_SECRET_KEY la gestiona la integracion de Stripe del Marketplace de
+ * Vercel y apunta a su cuenta de pruebas. Si se sobrescribe a mano con la
+ * clave real, una resincronizacion de la integracion puede devolverla al
+ * sandbox sin avisar, y el fallo seria silencioso: la gente «pagaria» y no
+ * entraria un euro.
+ *
+ * Por eso manda STRIPE_SECRET_KEY_LIVE si existe: esa variable es nuestra y
+ * nadie mas la toca. La otra se queda como respaldo mientras se prueba.
+ */
+export function claveDeStripe(): { clave: string | undefined; fuente: string } {
+  const propia = process.env.STRIPE_SECRET_KEY_LIVE;
+  if (propia) return { clave: propia, fuente: "STRIPE_SECRET_KEY_LIVE" };
+  return { clave: process.env.STRIPE_SECRET_KEY, fuente: "STRIPE_SECRET_KEY (integración)" };
+}
+
 export function stripe(): Stripe {
   if (cliente) return cliente;
 
-  const clave = process.env.STRIPE_SECRET_KEY;
+  const { clave } = claveDeStripe();
   if (!clave) {
     throw new Error(
-      "Falta STRIPE_SECRET_KEY. Es necesaria para cobrar, no para construir el sitio.",
+      "Falta la clave de Stripe. Es necesaria para cobrar, no para construir el sitio.",
     );
   }
 
@@ -44,7 +62,7 @@ export function stripe(): Stripe {
 
 /** Si se puede cobrar en este entorno. Para no enseñar botones que van a fallar. */
 export function hayPasarela(): boolean {
-  return Boolean(process.env.STRIPE_SECRET_KEY);
+  return Boolean(claveDeStripe().clave);
 }
 
 /**

@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { TARIFAS } from "../../../lib/planes";
-import { stripe } from "../../../lib/stripe";
+import { claveDeStripe, stripe } from "../../../lib/stripe";
 import { SITE_URL } from "../../../seo-config";
 
 export const runtime = "nodejs";
@@ -40,7 +40,8 @@ export async function GET(request: NextRequest) {
     /* accounts.retrieve() sin id devuelve la cuenta de la propia clave, pero
        los tipos piden el argumento explicito. */
     const cuenta = await s.accounts.retrieve(undefined as unknown as string);
-    const esReal = !process.env.STRIPE_SECRET_KEY?.startsWith("sk_test");
+    const { clave, fuente } = claveDeStripe();
+    const esReal = !clave?.startsWith("sk_test");
 
     const productos = await s.products.list({ limit: 100, active: true });
     const salida: Record<string, string> = {};
@@ -126,6 +127,7 @@ export async function GET(request: NextRequest) {
         cobros: cuenta.charges_enabled,
         pagosATi: cuenta.payouts_enabled,
         esCuentaReal: esReal,
+        claveUsada: fuente,
       },
       precios: salida,
       webhook: { id: webhook.id, nuevo: Boolean(secretoWebhook), secreto: secretoWebhook ?? "(ya existía)" },
