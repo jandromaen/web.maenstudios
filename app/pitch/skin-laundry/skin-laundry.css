@@ -1,0 +1,210 @@
+/* ==========================================================================
+   Análisis de redes de Skin Laundry (Instagram y TikTok, mayo–octubre 2026)
+
+   Todo cuelga de .sl. Las diapositivas traen sus estilos en línea; aquí solo
+   va el visor y el reinicio mínimo para que los valores por defecto del
+   navegador y de la web no las muevan. Mismo visor que Barkita.
+   ========================================================================== */
+
+/* Tipografías libres (OFL) que sustituyen a las de la marca, que son de pago:
+   Newsreader Light por Apris (titulares) y Figtree por Articulat (texto). */
+@font-face { font-family: "Newsreader"; font-weight: 300; font-style: normal; font-display: swap; src: url("/pitch/skin-laundry/fonts/newsreader-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Newsreader"; font-weight: 300; font-style: italic; font-display: swap; src: url("/pitch/skin-laundry/fonts/newsreader-latin-300-italic.woff2") format("woff2"); }
+@font-face { font-family: "Newsreader"; font-weight: 400; font-style: normal; font-display: swap; src: url("/pitch/skin-laundry/fonts/newsreader-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Newsreader"; font-weight: 400; font-style: italic; font-display: swap; src: url("/pitch/skin-laundry/fonts/newsreader-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Figtree"; font-weight: 400; font-display: swap; src: url("/pitch/skin-laundry/fonts/figtree-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Figtree"; font-weight: 500; font-display: swap; src: url("/pitch/skin-laundry/fonts/figtree-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Figtree"; font-weight: 600; font-display: swap; src: url("/pitch/skin-laundry/fonts/figtree-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Figtree"; font-weight: 700; font-display: swap; src: url("/pitch/skin-laundry/fonts/figtree-latin-700-normal.woff2") format("woff2"); }
+
+.sl {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #3C201D;
+  color: #F6EDE4;
+  overflow: hidden;
+}
+
+.sl-escena {
+  position: absolute;
+  inset: 16px 16px 72px;
+  display: grid;
+  place-items: center;
+}
+
+.sl-marco {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.sl-lienzo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  cursor: pointer;
+}
+
+/* ── Reinicio dentro de la diapositiva ─────────────────────────────────── */
+.sl .sl-lienzo section {
+  position: relative;
+  box-sizing: border-box;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+
+/* En el deck original lo que va después pinta encima, también sobre un
+   elemento fijado con position:absolute (la foto de la portada va antes que el
+   titular). En CSS lo posicionado pinta siempre por encima de lo que no lo
+   está, así que el contenido en flujo se posiciona también y el orden del
+   HTML vuelve a mandar. */
+.sl .sl-lienzo section > *:not([style*="position:absolute"]) {
+  position: relative;
+}
+
+.sl .sl-lienzo *,
+.sl .sl-lienzo *::before,
+.sl .sl-lienzo *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* La web pone en titulares y párrafos su tipografía, peso 800, mayúsculas,
+   interletrado negativo y corte de palabra en cualquier punto. Aquí manda lo
+   que traiga la diapositiva en línea, y lo que no traiga se hereda de ella. */
+.sl .sl-lienzo section {
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
+.sl .sl-lienzo h1,
+.sl .sl-lienzo h2,
+.sl .sl-lienzo h3,
+.sl .sl-lienzo p,
+.sl .sl-lienzo td,
+.sl .sl-lienzo th {
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: inherit;
+  overflow-wrap: normal;
+}
+
+.sl .sl-lienzo h1 { font-weight: 300; line-height: 1.05; }
+.sl .sl-lienzo h2 { font-weight: 300; line-height: 1.08; text-wrap: wrap; }
+.sl .sl-lienzo h3 { font-weight: 600; line-height: 1.2; }
+.sl .sl-lienzo p  { line-height: 1.4; }
+
+.sl .sl-lienzo img,
+.sl .sl-lienzo video {
+  display: block;
+  max-width: none;
+}
+
+.sl .sl-lienzo video {
+  background: #000;
+}
+
+.sl .sl-lienzo table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sl .sl-lienzo th,
+.sl .sl-lienzo td {
+  padding: 0.35em 0.6em;
+  text-align: left;
+  border-bottom: 1px solid #D3D1D0;
+}
+
+.sl .sl-lienzo th {
+  font-weight: 600;
+}
+
+.sl .sl-lienzo a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ── Controles ──────────────────────────────────────────────────────────── */
+.sl-hud {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 500 13px/1 system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sl-hud-marca {
+  opacity: 0.7;
+}
+
+.sl-hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sl-hud-nav button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(246, 237, 228, 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sl-hud-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.sl-hud-num {
+  min-width: 72px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.sl-progreso {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(246, 237, 228, 0.12);
+}
+
+.sl-progreso span {
+  display: block;
+  height: 100%;
+  background: #CDF765;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .sl-hud-marca {
+    display: none;
+  }
+  .sl-hud {
+    justify-content: center;
+  }
+}
+
+body.deck-abierto .cookie-banner,
+body.deck-abierto .theme-toggle {
+  display: none;
+}
