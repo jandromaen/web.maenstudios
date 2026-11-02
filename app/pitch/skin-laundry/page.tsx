@@ -3,7 +3,7 @@ import SkinLaundryDeck from "./SkinLaundryDeck";
 import "./skin-laundry.css";
 
 /**
- * Análisis de Instagram y TikTok de Skin Laundry Barcelona (mayo–octubre
+ * Análisis de Instagram de Skin Laundry Barcelona (mayo–octubre
  * 2026), punto de partida del servicio de social media que Maen lleva con
  * All About Management desde el 1 de noviembre.
  *
@@ -15,7 +15,7 @@ import "./skin-laundry.css";
  * diapositivas se generan con scripts/build-skin-laundry.py.
  */
 export const metadata: Metadata = {
-  title: "Skin Laundry · Análisis de redes",
+  title: "Skin Laundry · Análisis de Instagram",
   robots: { index: false, follow: false },
 };
 

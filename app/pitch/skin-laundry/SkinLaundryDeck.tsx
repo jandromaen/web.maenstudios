@@ -7,7 +7,7 @@ const ANCHO = 1920;
 const ALTO = 1080;
 
 /**
- * Visor del análisis de redes de Skin Laundry.
+ * Visor del análisis de Instagram de Skin Laundry.
  *
  * Cada diapositiva es un lienzo de 1920×1080 que se escala entero para caber
  * en la pantalla, sin recolocar nada: así se ve igual que el deck original en

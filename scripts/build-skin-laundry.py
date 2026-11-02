@@ -1,10 +1,10 @@
-"""Genera app/pitch/skin-laundry/diapos.ts: análisis de Instagram y TikTok de
+"""Genera app/pitch/skin-laundry/diapos.ts: análisis de Instagram de
 Skin Laundry Barcelona (1 de mayo – 1 de noviembre de 2026), primer entregable
 de Maen en el servicio de social media que lleva con All About Management.
 
 Lienzo de 1920×1080 con la identidad de Skin Laundry (espresso, crema y lima;
 Newsreader Light en lugar de Apris y Figtree en lugar de Articulat). Todas las
-cifras viven arriba, en IG y TT: salen de los perfiles públicos el 2 de
+cifras viven arriba, en IG: salen de los perfiles públicos el 2 de
 noviembre de 2026. Si cambian, se tocan ahí y se vuelve a ejecutar desde la
 raíz del repo:
 
@@ -25,7 +25,7 @@ SOFT = "#7A5C55"  # texto secundario sobre crema
 SOFT_D = "rgba(246,237,228,.72)"  # texto secundario sobre espresso
 SERIF = "Newsreader, Georgia, serif"
 SANS = "Figtree, Arial, sans-serif"
-PIE = "Maen Studios × Skin Laundry · Análisis de redes"
+PIE = "Maen Studios × Skin Laundry · Análisis de Instagram"
 
 # ── Datos (perfiles públicos, 2 de noviembre de 2026) ─────────────────────
 IG = {
@@ -40,23 +40,6 @@ IG = {
     "com_reel": "3,9",
     "com_carrusel": "0,9",
     "com_foto": "0,3",
-}
-TT = {
-    "seguidores": "187",
-    "likes_total": "2.566",
-    "videos": 77,
-    "views": "46.700",
-    "media": "607",
-    "max": "1.136",
-    "likes": 422,
-    "comentarios": 12,
-    "compartidos": 26,
-    "guardados": 49,
-    "er": "1,4 %",
-    "con_stats": 61,
-    "sin_com": 54,
-    "rangos": [("0–300", 8), ("300–500", 28), ("500–800", 8), ("800–1.000", 29), ("+1.000", 4)],
-    "meses": [("May", 8369), ("Jun", 9243), ("Jul", 7558), ("Ago", 9516), ("Sep", 10716), ("Oct", 1319)],
 }
 
 
@@ -116,7 +99,7 @@ def pie(n, dark=False, left=128, right=128):
     return (
         f'<p style="position:absolute;left:{left}px;right:{right}px;bottom:56px;display:flex;'
         f"justify-content:space-between;font-size:18px;letter-spacing:2px;text-transform:uppercase;"
-        f'color:{c}"><span>{PIE}</span><span>{n:02d}</span></p>'
+        f'color:{c}"><span>{PIE}</span><span>§N§</span></p>'
     )
 
 
@@ -178,7 +161,8 @@ D = []
 
 
 def add(id_, titulo_, html):
-    D.append({"id": id_, "titulo": titulo_, "html": html})
+    # El número del pie sale del orden real, así quitar o mover una diapositiva no descuadra nada
+    D.append({"id": id_, "titulo": titulo_, "html": html.replace("§N§", f"{len(D) + 1:02d}")})
 
 
 # 01 · Portada
@@ -188,10 +172,10 @@ add(
     sec(
         foto("laser-beige.jpg", "Facial láser de Skin Laundry", 900, 0, 1020, 1080, opos="62% 50%")
         + logo(128, 128, 340)
-        + eyebrow("Análisis de redes · Mayo – Octubre 2026", 128, 330)
-        + titulo("Instagram<br>y TikTok,<br><i>seis meses después</i>", 128, 400, 820, 96, tag="h1")
+        + eyebrow("Análisis de Instagram · Mayo – Octubre 2026", 128, 330)
+        + titulo("Instagram,<br><i>seis meses<br>después</i>", 128, 400, 820, 104, tag="h1")
         + texto(
-            "Dónde está hoy Skin Laundry Barcelona en redes y desde dónde arrancamos.",
+            "Dónde está hoy Skin Laundry Barcelona en Instagram y desde dónde arrancamos.",
             128, 760, 640, 30, SOFT,
         )
         + texto("Maen Studios × Skin Laundry · Noviembre 2026", 128, 960, 760, 22, SOFT,
@@ -211,7 +195,7 @@ add(
         + texto(
             "Una marca global de láser facial y medicina estética con una sola clínica en España, en Diagonal 610, "
             "que en septiembre cumplió su primer año. El respaldo de marca es enorme; la comunidad local, "
-            "todavía pequeña: 9.540 seguidores en Instagram y 187 en TikTok.",
+            "todavía pequeña: 9.540 seguidores en Instagram.",
             880, 440, 900, 30, SOFT,
         )
         + linea(880, 690, 900)
@@ -231,10 +215,12 @@ add(
         + titulo("Todo lo publicado entre el 1 de mayo<br>y el 1 de noviembre de 2026.", 128, 200, 1600, 80)
         + foto("ig-perfil.jpg", "Perfil de Instagram de Skin Laundry Spain", 128, 500, 600, 450, radius=18,
                extra="box-shadow:0 18px 40px rgba(60,32,29,.14)")
-        + foto("tt-perfil.jpg", "Perfil de TikTok de Skin Laundry Spain", 800, 500, 900, 450, opos="0% 0%", radius=18,
-               extra="box-shadow:0 18px 40px rgba(60,32,29,.14)")
+        + post("ig-promo-75.jpg", "Promoción del primer láser facial por 75 €", 800, 520, 225)
+        + post("ig-bronceado.jpg", "Carrusel «El bronceado se va»", 1045, 520, 225)
+        + post("ig-halloween.jpg", "Reel «Halloween Week»", 1290, 520, 225)
+        + post("ig-que-laser.jpg", "Reel «¿Qué láser necesita tu piel este otoño?»", 1535, 520, 225)
         + texto(
-            "Perfiles públicos <b>@skinlaundry_es</b>, consultados el 2 de noviembre. Publicación a publicación: "
+            "Perfil público <b>@skinlaundry_es</b>, consultado el 2 de noviembre. Las 87 publicaciones, una a una: "
             "formato, fecha, comentarios, reproducciones y estilo.",
             128, 400, 1500, 26, SOFT,
         )
@@ -249,17 +235,10 @@ add(
     sec(
         eyebrow("Seis meses en cifras", 128, 128, color=CREAM)
         + titulo("Mucha constancia,<br>poca <i>conversación</i>.", 128, 200, 1400, 96, color=CREAM)
-        + f'<p style="{pos(128, 520)}font-size:24px;letter-spacing:3px;text-transform:uppercase;color:{LIME};font-weight:600">Instagram</p>'
-        + cifra(IG["seguidores"], "seguidores", 128, 580, 380, dark=True, size=104)
-        + cifra(str(IG["posts"]), f'publicaciones · {IG["semana"]} por semana', 520, 580, 400, dark=True, size=104)
-        + f'<div style="{pos(976, 520)}width:1px;height:400px;background:{CREAM};opacity:.2"></div>'
-        + f'<p style="{pos(1040, 520)}font-size:24px;letter-spacing:3px;text-transform:uppercase;color:{LIME};font-weight:600">TikTok</p>'
-        + cifra(TT["seguidores"], "seguidores", 1040, 580, 300, dark=True, size=104)
-        + cifra(str(TT["videos"]), f'vídeos · {TT["views"]} reproducciones', 1350, 580, 460, dark=True, size=104)
-        + cifra(f'{IG["comentarios"]}', "comentarios en Instagram en seis meses: 2 por publicación", 128, 830, 800,
-                dark=True, size=56)
-        + cifra(f'{TT["comentarios"]}', "comentarios en TikTok en 61 vídeos con datos", 1040, 830, 760, dark=True,
-                size=56)
+        + cifra(IG["seguidores"], "seguidores en Instagram", 128, 560, 380, dark=True, size=120)
+        + cifra(str(IG["posts"]), "publicaciones en seis meses", 548, 560, 380, dark=True, size=120)
+        + cifra(IG["semana"], "publicaciones por semana", 968, 560, 380, dark=True, size=120)
+        + cifra(str(IG["comentarios"]), "comentarios en total: 2 por publicación", 1388, 560, 400, dark=True, size=120, acento=LIME)
         + pie(4, dark=True),
         bg=INK,
         color=CREAM,
@@ -415,87 +394,13 @@ add(
     ),
 )
 
-# 10 · TikTok en cifras
-add(
-    "tt-cifras",
-    "TikTok · En cifras",
-    sec(
-        eyebrow("TikTok · En cifras", 128, 128, color=CREAM)
-        + titulo("Se publica casi tanto como en Instagram,<br>pero <i>nadie se queda</i>.", 128, 200, 1600, 80, color=CREAM)
-        + cifra(TT["media"], "reproducciones de media por vídeo", 128, 420, 380, dark=True, size=96, acento=LIME)
-        + cifra(TT["max"], "el vídeo más visto del semestre", 548, 420, 380, dark=True, size=96)
-        + cifra(TT["er"], "de interacción sobre reproducciones", 968, 420, 380, dark=True, size=96)
-        + cifra(f'{TT["sin_com"]}/{TT["con_stats"]}', "vídeos sin un solo comentario", 1388, 420, 400, dark=True, size=96)
-        + foto("tt-ultimos.jpg", "Los seis últimos vídeos del perfil de TikTok", 128, 680, 1157, 240, radius=16)
-        + texto(
-            "Los seis últimos vídeos: 769, 0, 1, 4, 286 y 259 reproducciones. Piezas del feed subidas tal cual, sin adaptar.",
-            1340, 690, 450, 26, SOFT_D,
-        )
-        + pie(10, dark=True),
-        bg=INK,
-        color=CREAM,
-    ),
-)
-
-# 11 · TikTok: el techo
-add(
-    "tt-techo",
-    "TikTok · El techo",
-    sec(
-        eyebrow("TikTok · El techo", 128, 128)
-        + titulo("TikTok prueba cada vídeo<br>y <i>no lo empuja</i>.", 128, 200, 820, 80)
-        + texto(
-            "Los vídeos se quedan en dos escalones, 300–500 y 800–1.000 reproducciones: los grupos de prueba "
-            "del algoritmo. Ninguno sale de ahí. Y los tres últimos de octubre apenas se han visto (0, 1 y 4).",
-            128, 420, 760, 28, SOFT,
-        )
-        + texto(
-            f'{TT["likes"]} «me gusta», {TT["compartidos"]} compartidos y {TT["guardados"]} guardados en {TT["con_stats"]} vídeos con datos.',
-            128, 690, 760, 26, INK, 600,
-        )
-        + barras_v(TT["rangos"], 1000, 300, 800, 420, color=SAND, acento=CARAMEL, idx_acento=4)
-        + texto("Vídeos según reproducciones (mayo–octubre)", 1000, 800, 800, 22, SOFT,
-                extra="text-align:center;letter-spacing:2px;text-transform:uppercase")
-        + pie(11),
-    ),
-)
-
-# 12 · TikTok: por qué
-porques = [
-    ("Mismo rodaje, otro montaje", "Cada reel que hagamos para Instagram sale también en versión TikTok desde la edición. Sin grabar aparte."),
-    ("Portada y primer segundo", "Fuera los rótulos de feed: portada con una persona y el vídeo arranca por su momento más potente."),
-    ("Texto pensado para buscar", "Descripción con lo que la gente busca en TikTok (láser facial Barcelona, manchas, poros) y textos dentro de la zona segura."),
-    ("Sonido y respuesta", "Audio añadido desde la app y respuesta a los comentarios, también en vídeo. Así el algoritmo reparte."),
-]
-pq = ""
-for i, (t, d) in enumerate(porques):
-    y = 400 + i * 140
-    pq += (
-        f'<p style="{pos(128, y)}width:80px;font-family:{SERIF};font-size:64px;font-weight:300;line-height:1;color:{CARAMEL}">{i + 1}</p>'
-        + texto(f"<b>{t}</b>", 230, y, 800, 30)
-        + texto(d, 230, y + 46, 800, 24, SOFT)
-    )
-add(
-    "tt-porque",
-    "TikTok · Cómo reutilizar",
-    sec(
-        eyebrow("TikTok · Cómo reutilizar", 128, 128)
-        + titulo("Reutilizar lo de Instagram,<br><i>con cuatro ajustes</i>.", 128, 200, 1100, 80)
-        + pq
-        + barras_v([(k, round(v / 1000, 1)) for k, v in TT["meses"]], 1200, 440, 600, 380, color=SAND, acento=CARAMEL,
-                   idx_acento=5, fmt=lambda v: f"{str(v).replace('.', ',')}K")
-        + texto("Reproducciones al mes", 1200, 900, 600, 22, SOFT, extra="text-align:center;letter-spacing:2px;text-transform:uppercase")
-        + pie(12),
-    ),
-)
-
 # 13 · Diagnóstico
 diag = [
     "Hay constancia: 3–4 publicaciones a la semana en Instagram durante casi todo el semestre.",
     "No hay conversación: el 59 % de las publicaciones no recibe comentarios y los «me gusta» están ocultos.",
     "Lo que funciona tiene cara: colaboraciones, equipo médico y ganchos con curiosidad.",
     "La identidad se diluye: cada promoción trae su propia estética y el feed deja de parecer premium.",
-    "TikTok no despega: 187 seguidores y ningún vídeo por encima de 1.200 reproducciones.",
+    "Octubre se cae: 9 publicaciones y 19 días seguidos sin publicar.",
 ]
 dg = ""
 for i, t in enumerate(diag):
@@ -523,7 +428,7 @@ ops = [
     ("Una sola identidad", "Crema, espresso y lima también en las promociones. Menos plantillas, más fotografía propia de la clínica."),
     ("Personas delante", "Las doctoras y pacientes reales como caras recurrentes: explican, responden dudas y enseñan su proceso."),
     ("Reel antes que carrusel", "El reel conversa cuatro veces más. Los antes y después, mejor contados en vídeo."),
-    ("TikTok desde Instagram", "Los reels de Instagram, adaptados en edición: portada, primer segundo, texto y audio. Sin grabar aparte."),
+    ("Conversar", "Responder cada comentario y abrir preguntas en stories. Las dudas de la gente son el siguiente contenido."),
     ("Creadoras de Barcelona", "Las colaboraciones son lo que más funciona. Una al mes con perfiles afines a la marca."),
     ("Mostrar y medir", "Volver a mostrar los «me gusta» y medir guardados, mensajes y reservas que llegan desde redes."),
 ]
@@ -564,7 +469,7 @@ add(
 
 out = Path(__file__).resolve().parent.parent / "app/pitch/skin-laundry/diapos.ts"
 out.write_text(
-    "/**\n * Análisis de redes de Skin Laundry (Instagram y TikTok, mayo–octubre 2026).\n"
+    "/**\n * Análisis de Instagram de Skin Laundry (mayo–octubre 2026).\n"
     " * Generado con scripts/build-skin-laundry.py: si cambia el contenido o las\n"
     " * cifras, se edita el script y se vuelve a ejecutar.\n */\n\n"
     "export type DiapoHtml = { id: string; titulo: string; html: string };\n\n"
