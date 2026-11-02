@@ -395,7 +395,7 @@ add(
          "Faciales LED a medida, contenido educativo sobre luz y planes especiales.",
          "«Bridal Squad»: el plan entre amigas antes de la boda, su reel más visto (11.800).",
          "Publicación muy irregular: parón de abril a noviembre de 2026.",
-         "Los planes en grupo, un ángulo que nadie trabaja de forma constante."),
+         "Planes con nombre propio, fáciles de recordar y de compartir."),
     ),
 )
 

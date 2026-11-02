@@ -464,7 +464,6 @@ ops = [
     ("Reel antes que carrusel", "El reel conversa cuatro veces más. Los antes y después, mejor contados en vídeo."),
     ("Comenta y te escribimos", "«Comenta GLOW y te enviamos tu primer láser por 75 €». Y Black Friday ya: Dorsia lo anuncia desde el 30 de octubre."),
     ("Diferenciarse", "Explicar en qué se distingue cada tratamiento de lo que el público ya conoce, como Hydrafacial o la clínica clásica."),
-    ("Planes en grupo", "Amigas, novias, after-work en Diagonal. Nadie lo trabaja de forma constante."),
     ("Creadoras de Barcelona", "Las colaboraciones son lo que más funciona. Una al mes con perfiles afines a la marca."),
     ("Mostrar y medir", "Volver a mostrar los «me gusta» y medir guardados, mensajes y reservas que llegan desde Instagram."),
 ]
@@ -482,13 +481,47 @@ add(
     "Oportunidades",
     sec(
         eyebrow("Por dónde empezamos", 128, 128)
-        + titulo("Nueve movimientos para los <i>próximos meses</i>.", 128, 200, 1600, 80)
+        + titulo("Ocho movimientos para los <i>próximos meses</i>.", 128, 200, 1600, 80)
         + og
         + pie(14),
     ),
 )
 
-# 15 · Cierre
+# 15 · Pilares propuestos
+pilares_nuevos = [
+    ("Antes y después", "Resultados reales y evolución de la piel tras los tratamientos.",
+     "ig-ba-melasma.jpg", "Antes y después de un tratamiento de melasma"),
+    ("Preguntas frecuentes", "Dudas habituales, mitos, beneficios y recomendaciones del equipo médico.",
+     "ig-que-laser.jpg", "Reel «¿Qué láser necesita tu piel este otoño?»"),
+    ("Vídeos de tratamientos", "El procedimiento, cómo funciona la tecnología y cómo es una sesión de principio a fin.",
+     "ig-glowtox.jpg", "Reel de un tratamiento GlowTox"),
+    ("Promociones con CTA", "Ofertas, membresías, campañas y llamadas directas a reservar o pedir información.",
+     "ig-promo-75.jpg", "Promoción del primer láser facial por 75 €"),
+    ("Testimonios y experiencias", "Opiniones de clientas, colaboraciones con creadoras, primeras visitas y «Ven conmigo a Skin Laundry».",
+     "ig-resenas.jpg", "Carrusel de reseñas de clientas"),
+]
+pn = ""
+cw, gap = 312, 26
+for i, (t, d, img, alt) in enumerate(pilares_nuevos):
+    x = 128 + i * (cw + gap)
+    pn += (
+        foto(img, alt, x, 360, cw, 300, radius=16)
+        + f'<p style="{pos(x, 690)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
+        + f'<p style="{pos(x, 726)}width:{cw}px;font-family:{SERIF};font-size:38px;font-weight:300;line-height:1.05">{t}</p>'
+        + texto(d, x, 820, cw - 8, 21, SOFT)
+    )
+add(
+    "pilares-propuestos",
+    "Pilares de contenido",
+    sec(
+        eyebrow("Pilares de contenido", 128, 128)
+        + titulo("Cinco pilares para <i>ordenar el contenido</i>.", 128, 200, 1600, 80)
+        + pn
+        + pie(0),
+    ),
+)
+
+# 16 · Cierre
 add(
     "cierre",
     "Cierre",
