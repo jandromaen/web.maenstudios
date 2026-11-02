@@ -148,6 +148,23 @@ def etiqueta(t, left, top, width, color=SOFT, align="left"):
                  extra=f"letter-spacing:2px;text-transform:uppercase;text-align:{align}")
 
 
+# Logos: el avatar de cada cuenta en Instagram, recortado en círculo
+LOGOS = {
+    "Skin Laundry": "skinlaundry", "Clínicas Dorsia": "dorsia", "Dorsia": "dorsia",
+    "Clínica Planas": "planas", "Planas": "planas", "Santé Clinics": "sante", "Santé": "sante",
+    "Toral Clinic": "toral", "Toral": "toral", "Work Your Face": "workyourface",
+    "The Light Bar": "lightbar", "Hydrafacial España": "hydrafacial", "Hydrafacial": "hydrafacial",
+}
+
+
+def avatar(nombre, left, top, size=64, ring=None):
+    sombra = f"box-shadow:0 0 0 4px {ring};" if ring else "box-shadow:0 4px 14px rgba(60,32,29,.18);"
+    return (
+        f'<img src="{A}/logo-{LOGOS[nombre]}.png" alt="Logo de {nombre}" '
+        f'style="{pos(left, top)}width:{size}px;height:{size}px;border-radius:999px;{sombra}">'
+    )
+
+
 # ── Diapositivas ──────────────────────────────────────────────────────────
 D = []
 
@@ -176,6 +193,7 @@ add(
 )
 
 # 02 · A quién hemos mirado
+circulos_logos = [["Toral", "Santé", "Planas", "Dorsia"], ["Work Your Face", "The Light Bar"], ["Hydrafacial"]]
 circulos = [
     ("Competencia directa", "Medicina estética y láser facial en Barcelona",
      "Toral Clinic · Santé Clinics · Clínica Planas · Clínicas Dorsia",
@@ -194,12 +212,13 @@ for i, (t, s, quien, d) in enumerate(circulos):
     fg = CREAM if i == 0 else INK
     sub = SOFT_D if i == 0 else SOFT
     cg += (
-        f'<div style="{pos(x, 380)}width:536px;height:480px;border-radius:24px;background:{bg}"></div>'
+        f'<div style="{pos(x, 360)}width:536px;height:530px;border-radius:24px;background:{bg}"></div>'
         f'<p style="{pos(x + 40, 420)}font-size:20px;font-weight:600;letter-spacing:2px;color:{LIME if i == 0 else CARAMEL}">0{i + 1}</p>'
         f'<p style="{pos(x + 40, 460)}width:460px;font-family:{SERIF};font-size:48px;font-weight:300;line-height:1.05;color:{fg}">{t}</p>'
         + texto(s, x + 40, 580, 456, 24, sub)
-        + texto(f"<b>{quien}</b>", x + 40, 680, 456, 26, fg)
-        + texto(d, x + 40, 770, 456, 21, sub)
+        + "".join(avatar(n, x + 40 + j * 92, 664, 80, ring=bg) for j, n in enumerate(circulos_logos[i]))
+        + texto(f"<b>{quien}</b>", x + 40, 758, 456, 19, fg)
+        + texto(d, x + 40, 818, 456, 18, sub)
     )
 add(
     "quien",
@@ -211,7 +230,7 @@ add(
         + texto(
             "Perfiles públicos consultados el 2 de noviembre de 2026: seguidores, publicaciones y los últimos 12 reels de cada cuenta. "
             "Como referencia, Skin Laundry global (354.000 seguidores), Glowbar (62.000) y FaceGym (830.000).",
-            128, 900, 1660, 20, SOFT,
+            128, 916, 1660, 20, SOFT,
         )
         + pie(2),
     ),
@@ -255,7 +274,8 @@ for i, (c, u, tipo, seg, rs, med, lk, sl) in enumerate(IG):
     if sl:
         filas += f'<div style="{pos(108, y - 4)}width:1704px;height:60px;border-radius:12px;background:{LIME}"></div>'
     filas += (
-        texto(f"<b>{c}</b> <span style=\"color:{SOFT};font-size:19px\">{tipo}</span>", 128, y + 6, 520, 24)
+        avatar(c, 128, y + 4, 44, ring=LIME if sl else None)
+        + texto(f"<b>{c}</b> <span style=\"color:{SOFT};font-size:19px\">{tipo}</span>", 188, y + 6, 450, 24)
         + texto(miles(seg), 640, y + 6, 200, 24, weight=600)
         + texto(rs, 860, y + 6, 200, 24)
     )
@@ -288,8 +308,9 @@ pg = ""
 for i, (c, v, l, nota) in enumerate(pares):
     x = 128 + i * 568
     pg += (
-        f'<p style="{pos(x, 470)}font-size:22px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:{LIME}">{c}</p>'
-        f'<p style="{pos(x, 520)}font-family:{SERIF};font-weight:300;font-size:120px;line-height:1;letter-spacing:-3px">{v}</p>'
+        avatar(c, x, 404, 72, ring=INK)
+        + f'<p style="{pos(x + 92, 428)}font-size:22px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:{LIME}">{c}</p>'
+        f'<p style="{pos(x, 510)}font-family:{SERIF};font-weight:300;font-size:120px;line-height:1;letter-spacing:-3px">{v}</p>'
         f'<p style="{pos(x, 660)}font-family:{SERIF};font-weight:300;font-size:56px;line-height:1;color:{PEACH}">{l} «me gusta»</p>'
         + texto(nota, x, 740, 480, 22, SOFT_D)
     )
@@ -323,6 +344,7 @@ def ficha(x, y, w, nombre, usuario, seg, hacen, funciona, debil, tomar, dark=Fal
         f'<div style="{pos(x, y)}width:{w}px;height:{h}px;border-radius:24px;background:{bg}"></div>'
         f'<p style="{pos(x + 44, y + 40)}font-family:{SERIF};font-size:52px;font-weight:300;line-height:1;color:{fg}">{nombre}</p>'
         + texto(f"{usuario} · {seg}", x + 44, y + 108, w - 88, 20, sub, 600, extra="letter-spacing:1px")
+        + avatar(nombre, x + w - 44 - 96, y + 32, 96, ring=bg)
     )
     filas = [("Qué hacen", hacen), ("Qué les funciona", funciona), ("Punto débil", debil), ("Qué tomar", tomar)]
     for i, (k, v) in enumerate(filas):
@@ -406,7 +428,8 @@ add(
     sec(
         foto("dos-mujeres.jpg", "Dos clientas sonriendo, imagen de campaña", 1200, 0, 720, 1080, opos="74% 30%")
         + eyebrow("Marca de categoría", 128, 128)
-        + titulo("Hydrafacial ya ocupa<br>la idea de <i>facial express</i>.", 128, 200, 1000, 80)
+        + titulo("Hydrafacial ya ocupa<br>la idea de <i>facial express</i>.", 128, 200, 820, 80)
+        + avatar("Hydrafacial", 960, 196, 160)
         + cifra("94.000", "seguidores de @hydrafacial_es", 128, 450, 320, size=88)
         + cifra("~2", "reels a la semana", 470, 450, 260, size=88)
         + cifra("0–6", "comentarios por reel", 760, 450, 300, size=88)
@@ -437,14 +460,14 @@ puntos = [
 for n, px, py in puntos:
     x, y = X0 + round(px * W), Y0 + round(py * H)
     mapa += (
-        f'<div style="{pos(x - 10, y - 10)}width:20px;height:20px;border-radius:99px;background:{CARAMEL}"></div>'
-        + texto(n, x + 18, y - 18, 220, 22, INK, 600)
+        avatar(n, x - 26, y - 26, 52, ring=CREAM)
+        + texto(n, x + 34, y - 16, 220, 20, INK, 600)
     )
 # Skin Laundry, donde la sitúa hoy su contenido: cerca de las clínicas
-sx, sy = X0 + round(0.34 * W), Y0 + round(0.60 * H)
+sx, sy = X0 + round(0.12 * W), Y0 + round(0.40 * H)
 mapa += (
-    f'<div style="{pos(sx - 14, sy - 14)}width:28px;height:28px;border-radius:99px;background:{LIME};box-shadow:0 0 0 4px {INK}"></div>'
-    + texto("<b>Skin Laundry, hoy</b>", sx + 26, sy - 20, 260, 24)
+    avatar("Skin Laundry", sx - 34, sy - 34, 68, ring=LIME)
+    + texto("<b>Skin Laundry, hoy</b>", sx + 44, sy - 18, 260, 22)
 )
 add(
     "mapa",
