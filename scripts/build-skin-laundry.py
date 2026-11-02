@@ -25,7 +25,7 @@ SOFT = "#7A5C55"  # texto secundario sobre crema
 SOFT_D = "rgba(246,237,228,.72)"  # texto secundario sobre espresso
 SERIF = "Newsreader, Georgia, serif"
 SANS = "Figtree, Arial, sans-serif"
-PIE = "Maen Studios × Skin Laundry · Análisis de Instagram"
+PIE = "All About Management × Skin Laundry · Análisis de Instagram"
 
 # ── Datos (perfiles públicos, 2 de noviembre de 2026) ─────────────────────
 IG = {
@@ -165,6 +165,21 @@ def add(id_, titulo_, html):
     D.append({"id": id_, "titulo": titulo_, "html": html.replace("§N§", f"{len(D) + 1:02d}")})
 
 
+def divisor(id_, num, titulo_t, sub):
+    add(
+        id_,
+        titulo_t.replace("<i>", "").replace("</i>", "").replace("<br>", " "),
+        sec(
+            f'<p style="{pos(128, 300)}font-family:{SERIF};font-weight:300;font-size:200px;line-height:1;color:{LIME}">{num}</p>'
+            + titulo(titulo_t, 128, 540, 1400, 112, color=CREAM)
+            + texto(sub, 128, 820, 1000, 30, SOFT_D)
+            + pie(0, dark=True),
+            bg=INK,
+            color=CREAM,
+        ),
+    )
+
+
 # 01 · Portada
 add(
     "portada",
@@ -172,17 +187,20 @@ add(
     sec(
         foto("laser-beige.jpg", "Facial láser de Skin Laundry", 900, 0, 1020, 1080, opos="62% 50%")
         + logo(128, 128, 340)
-        + eyebrow("Análisis de Instagram · Mayo – Octubre 2026", 128, 330)
-        + titulo("Instagram,<br><i>seis meses<br>después</i>", 128, 400, 820, 104, tag="h1")
+        + eyebrow("Análisis · Noviembre 2026", 128, 330)
+        + titulo("Instagram<br><i>y competencia</i>", 128, 400, 820, 112, tag="h1")
         + texto(
-            "Dónde está hoy Skin Laundry Barcelona en Instagram y desde dónde arrancamos.",
-            128, 760, 640, 30, SOFT,
+            "Cómo está hoy Skin Laundry Barcelona en Instagram, con quién compite y el hueco que nadie ocupa.",
+            128, 680, 640, 30, SOFT,
         )
-        + texto("Maen Studios × Skin Laundry · Noviembre 2026", 128, 960, 760, 22, SOFT,
+        + texto("All About Management × Skin Laundry", 128, 960, 760, 22, SOFT,
                 extra="letter-spacing:2px;text-transform:uppercase"),
         bg="#E2D0BE",
     ),
 )
+
+divisor("parte-1", "01", "Skin Laundry,<br><i>seis meses después</i>",
+        "Las 87 publicaciones de Instagram entre mayo y octubre de 2026.")
 
 # 02 · Punto de partida
 add(
@@ -423,30 +441,48 @@ add(
     ),
 )
 
+# Parte 2 · Competencia (diapositivas de scripts/build-skin-laundry-competencia.py)
+divisor("parte-2", "02", "Quién más habla<br>de piel <i>en Barcelona</i>",
+        "Siete cuentas de la competencia y el cuadrante que nadie ocupa.")
+
+import importlib.util  # noqa: E402
+
+_spec = importlib.util.spec_from_file_location(
+    "competencia", Path(__file__).resolve().parent / "build-skin-laundry-competencia.py")
+_comp = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_comp)
+_por_id = {d["id"]: d for d in _comp.D}
+for _id in ["quien", "resumen", "ig-comparativa", "alcance", "grandes", "diagonal", "concepto", "hydrafacial", "mapa"]:
+    _d = _por_id[_id]
+    add(f"comp-{_id}", _d["titulo"], _d["html"])
+
 # 14 · Oportunidades
 ops = [
+    ("Adueñarse de los 15 minutos", "Cronómetro en pantalla, antes y después sin filtro, el «facial de la hora de comer» en Diagonal."),
     ("Una sola identidad", "Crema, espresso y lima también en las promociones. Menos plantillas, más fotografía propia de la clínica."),
-    ("Personas delante", "Las doctoras y pacientes reales como caras recurrentes: explican, responden dudas y enseñan su proceso."),
+    ("Una cara médica propia", "La doctora del centro y pacientes reales como caras recurrentes: dudas, mitos y procesos."),
     ("Reel antes que carrusel", "El reel conversa cuatro veces más. Los antes y después, mejor contados en vídeo."),
-    ("Conversar", "Responder cada comentario y abrir preguntas en stories. Las dudas de la gente son el siguiente contenido."),
+    ("Comenta y te escribimos", "«Comenta GLOW y te enviamos tu primer láser por 75 €». Y Black Friday ya: Dorsia lo anuncia desde el 30 de octubre."),
+    ("Diferenciarse", "Láser de 15 minutos frente a Hydrafacial y frente a la clínica clásica: una búsqueda que ya existe."),
+    ("Planes en grupo", "Amigas, novias, after-work en Diagonal. Nadie lo trabaja de forma constante."),
     ("Creadoras de Barcelona", "Las colaboraciones son lo que más funciona. Una al mes con perfiles afines a la marca."),
-    ("Mostrar y medir", "Volver a mostrar los «me gusta» y medir guardados, mensajes y reservas que llegan desde redes."),
+    ("Mostrar y medir", "Volver a mostrar los «me gusta» y medir guardados, mensajes y reservas que llegan desde Instagram."),
 ]
 og = ""
 for i, (t, d) in enumerate(ops):
     col, row = i % 3, i // 3
-    x, y = 128 + col * 568, 400 + row * 280
+    x, y = 128 + col * 568, 360 + row * 210
     og += (
         f'<p style="{pos(x, y)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
-        f'<p style="{pos(x, y + 40)}width:520px;font-family:{SERIF};font-size:44px;font-weight:300;line-height:1.05">{t}</p>'
-        + texto(d, x, y + 108, 500, 22, SOFT)
+        f'<p style="{pos(x, y + 34)}width:520px;font-family:{SERIF};font-size:40px;font-weight:300;line-height:1.05">{t}</p>'
+        + texto(d, x, y + 88, 500, 21, SOFT)
     )
 add(
     "oportunidades",
     "Oportunidades",
     sec(
         eyebrow("Por dónde empezamos", 128, 128)
-        + titulo("Seis palancas para los <i>próximos meses</i>.", 128, 200, 1600, 80)
+        + titulo("Nueve movimientos para <i>ganar el hueco</i>.", 128, 200, 1600, 80)
         + og
         + pie(14),
     ),
@@ -459,9 +495,9 @@ add(
     sec(
         foto("inyeccion.jpg", "Tratamiento de medicina estética en Skin Laundry", 1105, 0, 815, 1080, opos="100% 40%")
         + logo(128, 128, 340)
-        + titulo("Your skin.<br><i>Our expertise.</i>", 128, 380, 720, 120, tag="h2")
-        + texto("Y a partir de ahora, también en redes.", 128, 680, 640, 34, SOFT)
-        + texto("Maen Studios × Skin Laundry · Barcelona, noviembre de 2026", 128, 960, 940, 22, SOFT,
+        + titulo("Fifteen minutes.<br><i>Nobody else.</i>", 128, 380, 900, 120, tag="h2")
+        + texto("El hueco está libre. Ahora toca ocuparlo.", 128, 680, 640, 34, SOFT)
+        + texto("All About Management × Skin Laundry · Barcelona", 128, 960, 940, 22, SOFT,
                 extra="letter-spacing:2px;text-transform:uppercase"),
         bg="#E3D1BC",
     ),
@@ -469,7 +505,7 @@ add(
 
 out = Path(__file__).resolve().parent.parent / "app/pitch/skin-laundry/diapos.ts"
 out.write_text(
-    "/**\n * Análisis de Instagram de Skin Laundry (mayo–octubre 2026).\n"
+    "/**\n * Análisis de Instagram y competencia de Skin Laundry (noviembre 2026).\n"
     " * Generado con scripts/build-skin-laundry.py: si cambia el contenido o las\n"
     " * cifras, se edita el script y se vuelve a ejecutar.\n */\n\n"
     "export type DiapoHtml = { id: string; titulo: string; html: string };\n\n"

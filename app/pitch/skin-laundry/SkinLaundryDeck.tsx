@@ -21,7 +21,7 @@ type Props = { diapos?: DiapoHtml[]; marca?: string };
 
 export default function SkinLaundryDeck({
   diapos = DIAPOS,
-  marca = "Maen Studios × Skin Laundry",
+  marca = "All About Management × Skin Laundry",
 }: Props) {
   const [indice, setIndice] = useState(0);
   const [escala, setEscala] = useState(0);

@@ -1,13 +1,13 @@
-"""Genera app/pitch/skin-laundry-competencia/diapos.ts: análisis de los
-principales competidores de Skin Laundry Barcelona en Instagram y TikTok.
+"""Diapositivas de competencia en Instagram de Skin Laundry Barcelona: las
+cuentas de la competencia, las fichas y el mapa con el hueco que nadie ocupa.
 
-Mismo lienzo e identidad que /pitch/skin-laundry (espresso, crema y lima;
-Newsreader Light y Figtree) y mismas fotos y tipografías, que se sirven desde
-/pitch/skin-laundry. Las cifras salen de los perfiles públicos el 2 de
-noviembre de 2026 (últimos 12 reels de cada cuenta). Si cambian, se tocan en
-IG y TT y se vuelve a ejecutar desde la raíz del repo:
+No genera una presentación propia: scripts/build-skin-laundry.py importa D y
+mete estas diapositivas en la parte 2 de /pitch/skin-laundry. Mismo lienzo e
+identidad (espresso, crema y lima; Newsreader Light y Figtree). Las cifras
+salen de los perfiles públicos el 2 de noviembre de 2026 (últimos 12 reels de
+cada cuenta). Para regenerar, se ejecuta el script principal:
 
-    python3 scripts/build-skin-laundry-competencia.py
+    python3 scripts/build-skin-laundry.py
 """
 
 import json
@@ -24,7 +24,7 @@ SOFT = "#7A5C55"
 SOFT_D = "rgba(246,237,228,.72)"
 SERIF = "Newsreader, Georgia, serif"
 SANS = "Figtree, Arial, sans-serif"
-PIE = "Maen Studios × Skin Laundry · Competencia en redes"
+PIE = "All About Management × Skin Laundry · Competencia en Instagram"
 
 # ── Datos (perfiles públicos, 2 de noviembre de 2026) ─────────────────────
 # (cuenta, usuario, tipo, seguidores, reels/semana, mediana de visualizaciones,
@@ -106,7 +106,7 @@ def pie(n, dark=False, left=128, right=128):
     return (
         f'<p style="position:absolute;left:{left}px;right:{right}px;bottom:56px;display:flex;'
         f"justify-content:space-between;font-size:18px;letter-spacing:2px;text-transform:uppercase;"
-        f'color:{c}"><span>{PIE}</span><span>{n:02d}</span></p>'
+        f'color:{c}"><span>{PIE}</span><span>§N§</span></p>'
     )
 
 
@@ -163,13 +163,13 @@ add(
     sec(
         foto("laser-beige.jpg", "Facial láser de Skin Laundry", 900, 0, 1020, 1080, opos="62% 50%")
         + logo(128, 128, 340)
-        + eyebrow("Competencia en redes · Noviembre 2026", 128, 330)
+        + eyebrow("Competencia en Instagram · Noviembre 2026", 128, 330)
         + titulo("Quién más<br>habla de piel<br><i>en Barcelona</i>", 128, 400, 820, 96, tag="h1")
         + texto(
-            "Los principales competidores de Skin Laundry en Instagram y TikTok, y el hueco que nadie ocupa.",
+            "Los principales competidores de Skin Laundry en Instagram y el hueco que nadie ocupa.",
             128, 760, 660, 30, SOFT,
         )
-        + texto("Maen Studios × Skin Laundry · Noviembre 2026", 128, 960, 760, 22, SOFT,
+        + texto("All About Management × Skin Laundry · Noviembre 2026", 128, 960, 760, 22, SOFT,
                 extra="letter-spacing:2px;text-transform:uppercase"),
         bg="#E2D0BE",
     ),
@@ -223,7 +223,6 @@ claves = [
     "Los grandes compran alcance: decenas de miles de reproducciones y apenas cien o doscientos «me gusta».",
     "La mecánica que más se repite es «Comenta X y te lo enviamos por mensaje». Convierte interacción en reservas.",
     "Las caras médicas funcionan. El reel de Skin Laundry con más «me gusta» es la colaboración con una doctora.",
-    "En TikTok nadie gana en local: hasta Dorsia, con 60.000 seguidores, ronda las 1.000 reproducciones.",
 ]
 dg = ""
 for i, t in enumerate(claves):
@@ -313,38 +312,6 @@ add(
     ),
 )
 
-# 06 · TikTok comparativa
-tt = ""
-mxt = max(r[1] for r in TT)
-tt += etiqueta("Seguidores en TikTok", 128, 400, 600)
-for i, (c, seg, vids, vistas, sl) in enumerate(TT):
-    y = 450 + i * 82
-    bw = max(10, round(seg / mxt * 520))
-    color = INK if sl else CARAMEL
-    if sl:
-        tt += f'<div style="{pos(108, y - 8)}width:1080px;height:72px;border-radius:12px;background:{LIME}"></div>'
-    tt += (
-        texto(f"<b>{c}</b>", 128, y, 280, 26)
-        + f'<div style="{pos(400, y + 10)}width:{bw}px;height:24px;border-radius:6px;background:{color}"></div>'
-        + texto(miles(seg), 400 + bw + 16, y, 160, 26, weight=600)
-        + texto(f"{vids} vídeos · {vistas}", 128, y + 36, 900, 18, SOFT)
-    )
-add(
-    "tt-comparativa",
-    "TikTok · Comparativa",
-    sec(
-        eyebrow("TikTok · Comparativa", 128, 128)
-        + titulo("En TikTok <i>nadie gana</i><br>en Barcelona.", 128, 200, 1200, 84)
-        + tt
-        + f'<div style="{pos(1260, 400)}width:532px;height:520px;border-radius:24px;background:{INK}"></div>'
-        + cifra("~1.000", "reproducciones por vídeo de Dorsia, con 60.000 seguidores", 1310, 450, 440, dark=True, size=96, acento=LIME)
-        + cifra("246", "vídeos subidos por Skin Laundry, para 187 seguidores: se replica Instagram en lugar de hacer TikTok", 1310, 660, 440, dark=True, size=96, acento=CREAM)
-        + texto("Santé Clinics e Hydrafacial España no tienen un perfil activo con su usuario de Instagram.", 128, 960, 1100, 20, SOFT)
-        + pie(6),
-    ),
-)
-
-
 # 07–10 · Fichas
 def ficha(x, y, w, nombre, usuario, seg, hacen, funciona, debil, tomar, dark=False):
     bg = INK if dark else SAND
@@ -390,7 +357,7 @@ add(
          "Una dinámica de comentario al mes y Black Friday preparado ya."),
         ("Clínica Planas", "@clinicaplanas", "89.000",
          "5–6 reels a la semana con «Comenta MIA y te enviamos la información».",
-         "Cada reel capta leads por mensaje. En TikTok, vídeos de más de un millón.",
+         "Cada reel capta leads por mensaje.",
          "Foco en cirugía, lejos del cuidado facial diario.",
          "La palabra clave con respuesta automática y el «así lo vivió»."),
     ),
@@ -404,7 +371,7 @@ add(
         ("Santé Clinics", "@sante.clinics · Diagonal 384", "32.000",
          "Un reel a la semana, bilingüe. Posicionamiento de longevidad: «Become superhuman».",
          "Los tours por la clínica, sus reels más vistos (17.700) y con más «me gusta» (349).",
-         "Poca frecuencia y nada de TikTok.",
+         "Poca frecuencia: un reel a la semana.",
          "Mismo público internacional de Diagonal. El tour y la visita real funcionan."),
         ("Toral Clinic", "@toralclinic · Diagonal 598", "5.584",
          "La marca no publica desde 2023: todo sale con la cuenta de su doctora, dos veces por semana.",
@@ -422,7 +389,7 @@ add(
         ("Work Your Face", "@workyourface", "20.000",
          "El gimnasio facial de Barcelona: packs del mes, add-ons y colaboraciones como Foreo.",
          "El lenguaje de entreno y constancia, muy cerca de la lógica de membresía.",
-         "Unas 2.000 reproducciones por reel y 660 seguidores en TikTok.",
+         "Alcance modesto: unas 2.000 reproducciones por reel.",
          "Los «packs del mes». Están en cifras parecidas: el listón es alcanzable."),
         ("The Light Bar", "@thelightbarsalon · Sarrià", "3.295",
          "Faciales LED a medida, contenido educativo sobre luz y planes especiales.",
@@ -538,19 +505,8 @@ add(
         + logo(128, 128, 340)
         + titulo("Fifteen minutes.<br><i>Nobody else.</i>", 128, 380, 900, 120, tag="h2")
         + texto("El hueco está libre. Ahora toca ocuparlo.", 128, 680, 640, 34, SOFT)
-        + texto("Maen Studios × Skin Laundry · Barcelona, noviembre de 2026", 128, 960, 940, 22, SOFT,
+        + texto("All About Management × Skin Laundry · Barcelona, noviembre de 2026", 128, 960, 940, 22, SOFT,
                 extra="letter-spacing:2px;text-transform:uppercase"),
         bg="#E3D1BC",
     ),
 )
-
-out = Path(__file__).resolve().parent.parent / "app/pitch/skin-laundry-competencia/diapos.ts"
-out.parent.mkdir(parents=True, exist_ok=True)
-out.write_text(
-    "/**\n * Competencia en redes de Skin Laundry Barcelona (Instagram y TikTok, noviembre 2026).\n"
-    " * Generado con scripts/build-skin-laundry-competencia.py: si cambia el\n"
-    " * contenido o las cifras, se edita el script y se vuelve a ejecutar.\n */\n\n"
-    'import type { DiapoHtml } from "../skin-laundry/diapos";\n\n'
-    f"export const DIAPOS: DiapoHtml[] = {json.dumps(D, ensure_ascii=False, indent=2)};\n"
-)
-print(f"{len(D)} diapositivas → {out}")
