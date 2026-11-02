@@ -459,7 +459,7 @@ _spec = importlib.util.spec_from_file_location(
 _comp = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_comp)
 _por_id = {d["id"]: d for d in _comp.D}
-for _id in ["quien", "resumen", "ig-comparativa", "alcance", "grandes", "diagonal", "concepto", "hydrafacial", "mapa"]:
+for _id in ["quien", "resumen", "ig-comparativa", "alcance", "grandes", "diagonal", "concepto", "conversacion", "mapa"]:
     _d = _por_id[_id]
     add(f"comp-{_id}", _d["titulo"], _d["html"])
 

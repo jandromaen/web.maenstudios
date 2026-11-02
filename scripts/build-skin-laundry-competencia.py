@@ -32,7 +32,7 @@ PIE = "All About Management × Skin Laundry · Competencia en Instagram"
 IG = [
     ("Skin Laundry", "@skinlaundry_es", "Láser facial", 9540, "1,7", 2400, "7–28", True),
     ("Clínicas Dorsia", "@clinicasdorsia", "Cadena de medicina y cirugía", 295000, "3,5", 55000, "81–270", False),
-    ("Hydrafacial España", "@hydrafacial_es", "Marca de tecnología facial", 94000, "2", 7900, "21–107", False),
+    ("Hydrafacial España", "@hydrafacial_es", "Tecnología facial", 94000, "2", 7900, "21–107", False),
     ("Clínica Planas", "@clinicaplanas", "Cirugía y medicina premium", 89000, "5–6", 17800, "44–489", False),
     ("Santé Clinics", "@sante.clinics", "Medicina estética y longevidad", 32000, "1", 11800, "52–349", False),
     ("Work Your Face", "@workyourface", "Gimnasio facial", 20000, "1,6", 2000, "14–51", False),
@@ -290,7 +290,7 @@ add(
     "Instagram · Comparativa",
     sec(
         eyebrow("Instagram · Comparativa", 128, 128)
-        + titulo("Por tamaño, Skin Laundry juega<br>en la liga de <i>Work Your Face</i>.", 128, 200, 1600, 76)
+        + titulo("Los números de cada uno,<br><i>de un vistazo</i>.", 128, 200, 1600, 76)
         + filas
         + texto("Mediana de reproducciones de los últimos 12 reels. Incluye contenido promocionado, que desde fuera no se puede separar.",
                 128, 960, 1600, 20, SOFT)
@@ -421,23 +421,29 @@ add(
     ),
 )
 
-# 10 · Hydrafacial
+# 10 · La oportunidad: conversar
 add(
-    "hydrafacial",
-    "Ficha · Hydrafacial",
+    "conversacion",
+    "La oportunidad: conversar",
     sec(
         foto("dos-mujeres.jpg", "Dos clientas sonriendo, imagen de campaña", 1200, 0, 720, 1080, opos="74% 30%")
-        + eyebrow("Marca de categoría", 128, 128)
-        + titulo("Hydrafacial ya ocupa<br>la idea de <i>facial express</i>.", 128, 200, 820, 80)
-        + avatar("Hydrafacial", 960, 196, 160)
-        + cifra("94.000", "seguidores de @hydrafacial_es", 128, 450, 320, size=88)
-        + cifra("~2", "reels a la semana", 470, 450, 260, size=88)
-        + cifra("0–6", "comentarios por reel", 760, 450, 300, size=88)
-        + linea(128, 640, 960)
-        + texto("<b>Qué hacen.</b> Marca de tecnología: resultado en una sesión, personalización, otoño y tratamiento capilar.", 128, 670, 960, 24)
-        + texto("<b>Punto débil.</b> Mensaje genérico y casi cero conversación: no es un sitio al que ir.", 128, 750, 960, 24)
-        + texto("<b>Qué tomar.</b> Si el láser facial gana peso, explicar en qué se diferencia de un Hydrafacial. "
-                "Esa comparación ya está en la cabeza del público.", 128, 830, 960, 24, CARAMEL, 600)
+        + eyebrow("La oportunidad", 128, 128)
+        + titulo("Muchas visualizaciones,<br><i>casi nadie conversa</i>.", 128, 200, 1000, 80)
+        + avatar("Hydrafacial", 128, 430, 64)
+        + cifra("0–6", "comentarios por reel en Hydrafacial, con 94.000 seguidores", 212, 410, 300, size=80)
+        + avatar("Clínicas Dorsia", 560, 430, 64)
+        + cifra("781", "comentarios en Dorsia… en un sorteo, no en una conversación", 644, 410, 300, size=80)
+        + avatar("Skin Laundry", 128, 650, 64)
+        + cifra("59 %", "de las publicaciones de Skin Laundry, sin un solo comentario", 212, 630, 300, size=80)
+        + texto(
+            "Las visualizaciones se pueden comprar con pauta; la conversación, no. "
+            "La clínica que consiga que la gente pregunte, comente y escriba tendrá lo que la pauta no da: confianza y consultas reales.",
+            644, 640, 470, 23, INK, 600,
+        )
+        + linea(128, 880, 990)
+        + texto("<b>Cómo:</b> doctoras respondiendo dudas reales, preguntas abiertas en stories, "
+                "respuesta a cada comentario y «comenta y te escribimos» con respuesta por mensaje.",
+                128, 904, 990, 22, SOFT)
         + pie(10, right=820),
     ),
 )
