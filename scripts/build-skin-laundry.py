@@ -149,6 +149,13 @@ def post(src, alt, left, top, w=300, rot=0, ring=None):
     return foto(src, alt, left, top, w, h, radius=14, extra=f"transform:rotate({rot}deg);{r}")
 
 
+def etiqueta_t(t, left, top):
+    return (
+        f'<p style="{pos(left, top)}font-size:18px;font-weight:600;letter-spacing:2px;'
+        f'text-transform:uppercase;color:{SOFT}">{t}</p>'
+    )
+
+
 def pastilla(t, left, top, bg=LIME, color=INK, size=22):
     return (
         f'<p style="{pos(left, top)}padding:10px 22px;border-radius:999px;background:{bg};color:{color};'
@@ -458,32 +465,37 @@ for _id in ["quien", "resumen", "ig-comparativa", "alcance", "grandes", "diagona
 
 # 14 · Oportunidades
 ops = [
-    ("Decidir qué contar primero", "Con Skin Laundry y AAM: qué tratamientos priorizar (láser y membresía, medicina estética o ambos). El contenido se ordena a partir de ahí."),
-    ("Una sola identidad", "Crema, espresso y lima también en las promociones. Menos plantillas, más fotografía propia de la clínica."),
-    ("Una cara médica propia", "La doctora del centro y pacientes reales como caras recurrentes: dudas, mitos y procesos."),
-    ("Reel antes que carrusel", "El reel conversa cuatro veces más. Los antes y después, mejor contados en vídeo."),
-    ("Comenta y te escribimos", "«Comenta GLOW y te enviamos tu primer láser por 75 €». Y Black Friday ya: Dorsia lo anuncia desde el 30 de octubre."),
-    ("Diferenciarse", "Explicar en qué se distingue cada tratamiento de lo que el público ya conoce, como Hydrafacial o la clínica clásica."),
-    ("Creadoras de Barcelona", "Las colaboraciones son lo que más funciona. Una al mes con perfiles afines a la marca."),
-    ("Mostrar y medir", "Volver a mostrar los «me gusta» y medir guardados, mensajes y reservas que llegan desde Instagram."),
+    ("Definir el foco", "Entender qué tratamientos, servicios y objetivos queremos priorizar en la comunicación."),
+    ("Una sola identidad", "Unificar la estética de las publicaciones para reforzar el universo premium de Skin Laundry."),
+    ("Dar voz al equipo médico", "Potenciar la presencia de las doctoras para transmitir confianza y conocimiento, y dar una voz propia a la cuenta."),
+    ("Más conversación", "Explorar contenidos y llamadas a la acción que inviten a participar y faciliten el contacto."),
+    ("Reforzar la diferenciación", "Comunicar mejor qué hace único a Skin Laundry frente a otras clínicas y tratamientos."),
+    ("Conectar con Barcelona", "Explorar colaboraciones con creadoras y perfiles locales afines a la marca."),
+    ("Medir para evolucionar", "Identificar qué contenidos generan interés, interacción, consultas y reservas."),
 ]
-og = ""
+Y0, RH = 372, 84
+og = (
+    texto("Oportunidad", 228, 330, 500, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
+    + texto("Enfoque", 820, 330, 500, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
+)
 for i, (t, d) in enumerate(ops):
-    col, row = i % 3, i // 3
-    x, y = 128 + col * 568, 360 + row * 210
+    y = Y0 + i * RH
     og += (
-        f'<p style="{pos(x, y)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
-        f'<p style="{pos(x, y + 34)}width:520px;font-family:{SERIF};font-size:40px;font-weight:300;line-height:1.05">{t}</p>'
-        + texto(d, x, y + 88, 500, 21, SOFT)
+        linea(128, y, 1664)
+        + f'<p style="{pos(128, y + 24)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
+        + f'<p style="{pos(228, y + 18)}width:560px;font-family:{SERIF};font-size:38px;font-weight:300;line-height:1.1">{t}</p>'
+        # Una línea centrada en la fila; si pasa de una línea, sube para caber entera
+        + texto(d, 820, y + (22 if len(d) < 95 else 9), 972, 23, SOFT)
     )
+og += linea(128, Y0 + len(ops) * RH, 1664)
 add(
     "oportunidades",
-    "Oportunidades",
+    "Por dónde podemos empezar",
     sec(
-        eyebrow("Por dónde empezamos", 128, 128)
-        + titulo("Ocho movimientos para los <i>próximos meses</i>.", 128, 200, 1600, 80)
+        eyebrow("Por dónde podemos empezar", 128, 128)
+        + titulo("Siete oportunidades para <i>explorar juntos</i>.", 128, 200, 1600, 80)
         + og
-        + pie(14),
+        + pie(0),
     ),
 )
 
@@ -495,7 +507,7 @@ add(
         foto("inyeccion.jpg", "Tratamiento de medicina estética en Skin Laundry", 1105, 0, 815, 1080, opos="100% 40%")
         + logo(128, 128, 340)
         + titulo("Your skin.<br><i>Our expertise.</i>", 128, 380, 900, 120, tag="h2")
-        + texto("Siguiente paso: decidir juntos qué contar primero.", 128, 680, 680, 34, SOFT)
+        + texto("Siguiente paso: definir juntos el foco.", 128, 680, 680, 34, SOFT)
         + texto("All About Management × Skin Laundry · Barcelona", 128, 960, 940, 22, SOFT,
                 extra="letter-spacing:2px;text-transform:uppercase"),
         bg="#E3D1BC",
