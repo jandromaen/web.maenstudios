@@ -143,7 +143,7 @@ n += 1
 bloques = [
     ("Estrategia y dirección creativa", "Líneas, ideas y restaurantes de cada mes."),
     ("Producción y edición", "Rodaje del podcast y de las visitas, edición de todas las piezas."),
-    ("Calendario, publicación y community", "Planificación mensual, copies, publicación y gestión de la comunidad."),
+    ("Calendario, publicación y community", "Planificación mensual, copies y publicación. Las respuestas a comentarios y mensajes las lleva Gastroconnect."),
 ]
 bh = ""
 for i, (t, s_) in enumerate(bloques):
