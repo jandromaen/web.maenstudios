@@ -21,6 +21,7 @@ MARCA = "Maen Studios × Libertine Blends"
 CIFRAS = {
     "fee": "2.500 €",
     "fee_completo": "4.000 €",
+    "fee_mixto": "3.250 €",
     "fee_nota": "al mes + IVA",
     "permanencia": "6 meses",
     "rodajes": 1,
@@ -201,6 +202,39 @@ add("inversion", "Inversión", sec(
     eyebrow("Inversión", k=True)
     + titulo("Dos opciones", top=180, size=72, extra="color:#151515;")
     + ih
+    + f'<p class="abs a" style="left:128px;top:930px;font-size:24px;color:#3A2F2F;--d:8">'
+    f"{C['permanencia']} con prórroga automática. Grabaciones extra + IVA, con descuento de cliente. El paid lo sigue llevando No Idea.</p>",
+    bg=ROSA, color=INK,
+))
+
+# ── 5b. Planning mixto ───────────────────────────────────────────────────
+n += 1
+mixto_items = [
+    "Dirección estratégica y creativa",
+    "Producción y edición",
+    "Calendario",
+    "Community management",
+    "Creators y colaboraciones",
+    "Creatividad para paid con No Idea",
+]
+mh = ""
+for j, it in enumerate(mixto_items):
+    col, row = j % 2, j // 2
+    mh += (
+        f'<p class="abs a" style="left:{184 + col * 780}px;top:{620 + row * 64}px;width:740px;font-size:30px;'
+        f'color:#F4F4F4;--d:{j + 3}"><span class="rosa" style="margin-right:14px">—</span>{it}</p>'
+    )
+add("mixto", "Planning mixto", sec(
+    eyebrow("Inversión · Tercera opción", k=True)
+    + titulo("Planning mixto", top=180, size=72, extra="color:#151515;")
+    + '<div class="abs pop" style="left:128px;top:300px;width:1664px;height:600px;border-radius:28px;background:#151515;--d:0"></div>'
+    + '<p class="abs a" style="left:184px;top:344px;font-size:22px;font-weight:700;letter-spacing:0.2em;'
+    'text-transform:uppercase;color:#F9CDCD;--d:1">Mixto</p>'
+    + f'<p class="abs a disp" style="left:184px;top:400px;font-size:104px;line-height:1;color:#F4F4F4;--d:1">{C["fee_mixto"]}</p>'
+    + f'<p class="abs a" style="left:184px;top:520px;font-size:28px;font-weight:700;color:#F4F4F4;--d:2">{C["fee_nota"]}</p>'
+    + '<p class="abs a" style="left:1000px;top:420px;width:740px;font-size:26px;line-height:1.4;color:#C9C9C9;--d:2">'
+    "Todo lo del plan Completo, excepto el soporte en eventos y lanzamientos.</p>"
+    + mh
     + f'<p class="abs a" style="left:128px;top:930px;font-size:24px;color:#3A2F2F;--d:8">'
     f"{C['permanencia']} con prórroga automática. Grabaciones extra + IVA, con descuento de cliente. El paid lo sigue llevando No Idea.</p>",
     bg=ROSA, color=INK,
