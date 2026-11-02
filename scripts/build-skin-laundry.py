@@ -487,45 +487,7 @@ add(
     ),
 )
 
-# 15 · Pilares propuestos
-pilares_nuevos = [
-    ("Antes y después", "Resultados reales y evolución de la piel tras los tratamientos, con la clienta como protagonista.",
-     "ig-ba-melasma.jpg", "Antes y después de un tratamiento de melasma"),
-    ("Preguntas frecuentes", "Dudas habituales, mitos, beneficios y recomendaciones del equipo médico.",
-     "ig-que-laser.jpg", "Reel «¿Qué láser necesita tu piel este otoño?»"),
-    ("Vídeos de tratamientos", "El procedimiento, cómo funciona la tecnología y cómo vive la clienta una sesión de principio a fin.",
-     "ig-glowtox.jpg", "Reel de un tratamiento GlowTox"),
-    ("Promociones con CTA", "Ofertas, membresías, campañas y llamadas directas a reservar o pedir información.",
-     "ig-promo-75.jpg", "Promoción del primer láser facial por 75 €"),
-]
-pn = ""
-cw, gap = 392, 32
-for i, (t, d, img, alt) in enumerate(pilares_nuevos):
-    x = 128 + i * (cw + gap)
-    pn += (
-        foto(img, alt, x, 330, cw, 290, radius=16, opos="50% 72%" if img == "ig-promo-75.jpg" else "50% 50%")
-        + f'<p style="{pos(x, 648)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
-        + f'<p style="{pos(x, 684)}width:{cw}px;font-family:{SERIF};font-size:40px;font-weight:300;line-height:1.05">{t}</p>'
-        + texto(d, x, 744, cw - 12, 21, SOFT)
-    )
-fuera = (
-    f'<div style="{pos(128, 872)}width:1664px;height:84px;border-radius:16px;background:{SAND}"></div>'
-    + texto("<b>Además:</b> colaboraciones con creadoras una o dos veces al mes, en lugar de alguna publicación. "
-            "Reseñas y opiniones de clientas, en stories y destacados.", 168, 898, 1600, 22, INK)
-)
-add(
-    "pilares-propuestos",
-    "Pilares de contenido",
-    sec(
-        eyebrow("Pilares de contenido", 128, 128)
-        + titulo("Cuatro pilares, <i>uno por publicación</i> a la semana.", 128, 200, 1660, 76)
-        + pn
-        + fuera
-        + pie(0),
-    ),
-)
-
-# 16 · Cierre
+# 15 · Cierre
 add(
     "cierre",
     "Cierre",
