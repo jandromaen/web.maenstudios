@@ -1,5 +1,5 @@
 """Diapositivas de competencia en Instagram de Skin Laundry Barcelona: las
-cuentas de la competencia, las fichas y el mapa con el hueco que nadie ocupa.
+cuentas de la competencia, las fichas y el mapa de dónde se sitúa cada una.
 
 No genera una presentación propia: scripts/build-skin-laundry.py importa D y
 mete estas diapositivas en la parte 2 de /pitch/skin-laundry. Mismo lienzo e
@@ -166,7 +166,7 @@ add(
         + eyebrow("Competencia en Instagram · Noviembre 2026", 128, 330)
         + titulo("Quién más<br>habla de piel<br><i>en Barcelona</i>", 128, 400, 820, 96, tag="h1")
         + texto(
-            "Los principales competidores de Skin Laundry en Instagram y el hueco que nadie ocupa.",
+            "Los principales competidores de Skin Laundry en Instagram y dónde se sitúa cada uno.",
             128, 760, 660, 30, SOFT,
         )
         + texto("All About Management × Skin Laundry · Noviembre 2026", 128, 960, 760, 22, SOFT,
@@ -219,7 +219,7 @@ add(
 
 # 03 · En una frase
 claves = [
-    "Nadie en Barcelona comunica «facial láser en 15 minutos, como hábito». El territorio está libre.",
+    "Cada uno tiene su territorio: volumen (Dorsia, Planas), longevidad (Santé), autoridad médica (Toral), hábito (Work Your Face).",
     "Los grandes compran alcance: decenas de miles de reproducciones y apenas cien o doscientos «me gusta».",
     "La mecánica que más se repite es «Comenta X y te lo enviamos por mensaje». Convierte interacción en reservas.",
     "Las caras médicas funcionan. El reel de Skin Laundry con más «me gusta» es la colaboración con una doctora.",
@@ -237,7 +237,7 @@ add(
     sec(
         foto("mujer-perfil.jpg", "Retrato de campaña de Skin Laundry", 1200, 0, 720, 1080, opos="72% 50%")
         + eyebrow("En una frase", 128, 128, color=CREAM)
-        + titulo("Hay mucho ruido,<br>pero <i>el hueco está libre</i>.", 128, 200, 1000, 80, color=CREAM)
+        + titulo("Cada uno tiene su territorio.<br><i>Skin Laundry, todavía no.</i>", 128, 200, 1000, 80, color=CREAM)
         + dg
         + pie(3, dark=True, right=780),
         bg=INK,
@@ -413,7 +413,7 @@ add(
         + linea(128, 640, 960)
         + texto("<b>Qué hacen.</b> Marca de tecnología: resultado en una sesión, personalización, otoño y tratamiento capilar.", 128, 670, 960, 24)
         + texto("<b>Punto débil.</b> Mensaje genérico y casi cero conversación: no es un sitio al que ir.", 128, 750, 960, 24)
-        + texto("<b>Qué tomar.</b> Explicar en qué se diferencia el láser de 15 minutos de un Hydrafacial. "
+        + texto("<b>Qué tomar.</b> Si el láser facial gana peso, explicar en qué se diferencia de un Hydrafacial. "
                 "Esa comparación ya está en la cabeza del público.", 128, 830, 960, 24, CARAMEL, 600)
         + pie(10, right=820),
     ),
@@ -440,26 +440,26 @@ for n, px, py in puntos:
         f'<div style="{pos(x - 10, y - 10)}width:20px;height:20px;border-radius:99px;background:{CARAMEL}"></div>'
         + texto(n, x + 18, y - 18, 220, 22, INK, 600)
     )
-sx, sy = X0 + round(0.22 * W), Y0 + round(0.16 * H)
+# Skin Laundry, donde la sitúa hoy su contenido: cerca de las clínicas
+sx, sy = X0 + round(0.34 * W), Y0 + round(0.60 * H)
 mapa += (
-    f'<div style="{pos(sx - 70, sy - 70)}width:140px;height:140px;border-radius:99px;border:3px dashed {INK};opacity:.5"></div>'
     f'<div style="{pos(sx - 14, sy - 14)}width:28px;height:28px;border-radius:99px;background:{LIME};box-shadow:0 0 0 4px {INK}"></div>'
-    + texto("<b>Skin Laundry</b>", sx + 84, sy - 20, 260, 26)
+    + texto("<b>Skin Laundry, hoy</b>", sx + 26, sy - 20, 260, 24)
 )
 add(
     "mapa",
     "Dónde está Skin Laundry",
     sec(
-        eyebrow("Dónde está Skin Laundry", 128, 128)
-        + titulo("El cuadrante<br>que <i>nadie ocupa</i>.", 128, 200, 600, 84)
+        eyebrow("El mapa de la competencia", 128, 128)
+        + titulo("Dónde se sitúa<br><i>cada uno</i>.", 128, 200, 600, 84)
         + texto(
-            "Médico y rápido a la vez: rigor de clínica con la lógica de un hábito mensual. "
-            "Las clínicas venden tratamientos largos y puntuales; los conceptos de experiencia, ritual sin bata.",
+            "Hoy, en redes, Skin Laundry se parece a las clínicas: ácido hialurónico y neuromoduladores, "
+            "terreno donde Santé, Toral o Dorsia hablan igual o más fuerte.",
             128, 470, 560, 26, SOFT,
         )
         + texto(
-            "Hoy, en redes, Skin Laundry se parece demasiado a las clínicas: ácido hialurónico y neuromoduladores, "
-            "terreno donde Santé, Toral o Dorsia hablan igual o más fuerte.",
+            "Hacia dónde moverse depende de qué quiera priorizar: el láser y la membresía la llevan hacia arriba; "
+            "la medicina estética, hacia las clínicas. Es una decisión para tomar con Skin Laundry.",
             128, 720, 560, 22, INK, 600,
         )
         + mapa

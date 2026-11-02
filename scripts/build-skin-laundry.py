@@ -190,7 +190,7 @@ add(
         + eyebrow("Análisis · Noviembre 2026", 128, 330)
         + titulo("Instagram<br><i>y competencia</i>", 128, 400, 820, 112, tag="h1")
         + texto(
-            "Cómo está hoy Skin Laundry Barcelona en Instagram, con quién compite y el hueco que nadie ocupa.",
+            "Cómo está hoy Skin Laundry Barcelona en Instagram y con quién compite.",
             128, 680, 640, 30, SOFT,
         )
         + texto("All About Management × Skin Laundry", 128, 960, 760, 22, SOFT,
@@ -443,7 +443,7 @@ add(
 
 # Parte 2 · Competencia (diapositivas de scripts/build-skin-laundry-competencia.py)
 divisor("parte-2", "02", "Quién más habla<br>de piel <i>en Barcelona</i>",
-        "Siete cuentas de la competencia y el cuadrante que nadie ocupa.")
+        "Siete cuentas de la competencia y dónde se sitúa cada una.")
 
 import importlib.util  # noqa: E402
 
@@ -458,12 +458,12 @@ for _id in ["quien", "resumen", "ig-comparativa", "alcance", "grandes", "diagona
 
 # 14 · Oportunidades
 ops = [
-    ("Adueñarse de los 15 minutos", "Cronómetro en pantalla, antes y después sin filtro, el «facial de la hora de comer» en Diagonal."),
+    ("Decidir qué contar primero", "Con Skin Laundry y AAM: qué tratamientos priorizar (láser y membresía, medicina estética o ambos). El contenido se ordena a partir de ahí."),
     ("Una sola identidad", "Crema, espresso y lima también en las promociones. Menos plantillas, más fotografía propia de la clínica."),
     ("Una cara médica propia", "La doctora del centro y pacientes reales como caras recurrentes: dudas, mitos y procesos."),
     ("Reel antes que carrusel", "El reel conversa cuatro veces más. Los antes y después, mejor contados en vídeo."),
     ("Comenta y te escribimos", "«Comenta GLOW y te enviamos tu primer láser por 75 €». Y Black Friday ya: Dorsia lo anuncia desde el 30 de octubre."),
-    ("Diferenciarse", "Láser de 15 minutos frente a Hydrafacial y frente a la clínica clásica: una búsqueda que ya existe."),
+    ("Diferenciarse", "Explicar en qué se distingue cada tratamiento de lo que el público ya conoce, como Hydrafacial o la clínica clásica."),
     ("Planes en grupo", "Amigas, novias, after-work en Diagonal. Nadie lo trabaja de forma constante."),
     ("Creadoras de Barcelona", "Las colaboraciones son lo que más funciona. Una al mes con perfiles afines a la marca."),
     ("Mostrar y medir", "Volver a mostrar los «me gusta» y medir guardados, mensajes y reservas que llegan desde Instagram."),
@@ -482,7 +482,7 @@ add(
     "Oportunidades",
     sec(
         eyebrow("Por dónde empezamos", 128, 128)
-        + titulo("Nueve movimientos para <i>ganar el hueco</i>.", 128, 200, 1600, 80)
+        + titulo("Nueve movimientos para los <i>próximos meses</i>.", 128, 200, 1600, 80)
         + og
         + pie(14),
     ),
@@ -495,8 +495,8 @@ add(
     sec(
         foto("inyeccion.jpg", "Tratamiento de medicina estética en Skin Laundry", 1105, 0, 815, 1080, opos="100% 40%")
         + logo(128, 128, 340)
-        + titulo("Fifteen minutes.<br><i>Nobody else.</i>", 128, 380, 900, 120, tag="h2")
-        + texto("El hueco está libre. Ahora toca ocuparlo.", 128, 680, 640, 34, SOFT)
+        + titulo("Your skin.<br><i>Our expertise.</i>", 128, 380, 900, 120, tag="h2")
+        + texto("Siguiente paso: decidir juntos qué contar primero.", 128, 680, 680, 34, SOFT)
         + texto("All About Management × Skin Laundry · Barcelona", 128, 960, 940, 22, SOFT,
                 extra="letter-spacing:2px;text-transform:uppercase"),
         bg="#E3D1BC",
