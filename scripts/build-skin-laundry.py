@@ -428,7 +428,7 @@ add(
         + cifra(f'{TT["sin_com"]}/{TT["con_stats"]}', "vídeos sin un solo comentario", 1388, 420, 400, dark=True, size=96)
         + foto("tt-ultimos.jpg", "Los seis últimos vídeos del perfil de TikTok", 128, 680, 1157, 240, radius=16)
         + texto(
-            "Los seis últimos vídeos: 769, 0, 1, 4, 286 y 259 reproducciones. Las mismas piezas que en Instagram.",
+            "Los seis últimos vídeos: 769, 0, 1, 4, 286 y 259 reproducciones. Piezas del feed subidas tal cual, sin adaptar.",
             1340, 690, 450, 26, SOFT_D,
         )
         + pie(10, dark=True),
@@ -462,10 +462,10 @@ add(
 
 # 12 · TikTok: por qué
 porques = [
-    ("El mismo contenido que en Instagram", "Las mismas piezas del feed, con sus plantillas y rótulos, se suben tal cual a TikTok."),
-    ("Portadas pensadas para el feed", "Títulos de carrusel y fondos de marca en vez de una persona o un momento que invite a quedarse."),
-    ("Cero conversación", "54 de los 61 vídeos con datos no tienen ni un comentario. Sin respuesta, el algoritmo no reparte."),
-    ("Octubre, casi parado", "Seis vídeos y 1.300 reproducciones en el mes; tres de ellos apenas se han visto."),
+    ("Mismo rodaje, otro montaje", "Cada reel que hagamos para Instagram sale también en versión TikTok desde la edición. Sin grabar aparte."),
+    ("Portada y primer segundo", "Fuera los rótulos de feed: portada con una persona y el vídeo arranca por su momento más potente."),
+    ("Texto pensado para buscar", "Descripción con lo que la gente busca en TikTok (láser facial Barcelona, manchas, poros) y textos dentro de la zona segura."),
+    ("Sonido y respuesta", "Audio añadido desde la app y respuesta a los comentarios, también en vídeo. Así el algoritmo reparte."),
 ]
 pq = ""
 for i, (t, d) in enumerate(porques):
@@ -477,10 +477,10 @@ for i, (t, d) in enumerate(porques):
     )
 add(
     "tt-porque",
-    "TikTok · Por qué",
+    "TikTok · Cómo reutilizar",
     sec(
-        eyebrow("TikTok · Por qué pasa", 128, 128)
-        + titulo("TikTok se está usando como<br>un <i>espejo</i> de Instagram.", 128, 200, 1100, 80)
+        eyebrow("TikTok · Cómo reutilizar", 128, 128)
+        + titulo("Reutilizar lo de Instagram,<br><i>con cuatro ajustes</i>.", 128, 200, 1100, 80)
         + pq
         + barras_v([(k, round(v / 1000, 1)) for k, v in TT["meses"]], 1200, 440, 600, 380, color=SAND, acento=CARAMEL,
                    idx_acento=5, fmt=lambda v: f"{str(v).replace('.', ',')}K")
@@ -523,7 +523,7 @@ ops = [
     ("Una sola identidad", "Crema, espresso y lima también en las promociones. Menos plantillas, más fotografía propia de la clínica."),
     ("Personas delante", "Las doctoras y pacientes reales como caras recurrentes: explican, responden dudas y enseñan su proceso."),
     ("Reel antes que carrusel", "El reel conversa cuatro veces más. Los antes y después, mejor contados en vídeo."),
-    ("TikTok nativo", "Grabado para TikTok: gancho en el primer segundo, formatos y audios de la plataforma, sin rótulos de feed."),
+    ("TikTok desde Instagram", "Los reels de Instagram, adaptados en edición: portada, primer segundo, texto y audio. Sin grabar aparte."),
     ("Creadoras de Barcelona", "Las colaboraciones son lo que más funciona. Una al mes con perfiles afines a la marca."),
     ("Mostrar y medir", "Volver a mostrar los «me gusta» y medir guardados, mensajes y reservas que llegan desde redes."),
 ]
