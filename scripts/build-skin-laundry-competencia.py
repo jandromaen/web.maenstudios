@@ -35,7 +35,7 @@ PIE = "All About Management × Skin Laundry · Competencia en Instagram"
 IG = [
     ("Skin Laundry", "@skinlaundry_es", "Láser y medicina estética", 9540, 2400, "Ocultos", "2", True),
     ("Clínicas Dorsia", "@clinicasdorsia", "Cadena de medicina y cirugía", 295000, 55000, "204", "31", False),
-    ("InOut", "@inout.barcelona", "Medicina estética · Diagonal 392", 184000, None, "356", "52", False),
+    ("InOut", "@inout.barcelona", "Medicina estética · Diagonal 392", 184000, 17400, "356", "52", False),
     ("Hydrafacial España", "@hydrafacial_es", "Tecnología facial", 94000, 7900, "46", "2", False),
     ("Clínica Planas", "@clinicaplanas", "Cirugía y medicina premium", 89000, 17800, "130", "33", False),
     ("Santé Clinics", "@sante.clinics", "Medicina estética · Diagonal 384", 32000, 11800, "~150", "31", False),
