@@ -1,0 +1,267 @@
+/* ==========================================================================
+   Propuesta de Maen Studios para Divorare (concurso de agencias, nov 2026)
+
+   Todo cuelga de .dv. Las diapositivas traen sus estilos en línea; aquí van
+   el visor, el reinicio mínimo y unas pocas piezas de la identidad de
+   Divorare (hormigón, papel, cinta, brocha) que se repiten en todas.
+
+   Tipografías libres (OFL) que imitan las de la marca: Anton para el palo
+   seco condensado, Permanent Marker para la brocha y Raleway para el texto.
+   ========================================================================== */
+
+@font-face { font-family: "Anton"; font-weight: 400; font-display: swap; src: url("/pitch/divorare/fonts/anton-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Permanent Marker"; font-weight: 400; font-display: swap; src: url("/pitch/divorare/fonts/permanent-marker-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Raleway"; font-weight: 400; font-display: swap; src: url("/pitch/divorare/fonts/raleway-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Raleway"; font-weight: 500; font-display: swap; src: url("/pitch/divorare/fonts/raleway-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Raleway"; font-weight: 600; font-display: swap; src: url("/pitch/divorare/fonts/raleway-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Raleway"; font-weight: 700; font-display: swap; src: url("/pitch/divorare/fonts/raleway-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Raleway"; font-weight: 800; font-display: swap; src: url("/pitch/divorare/fonts/raleway-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Raleway"; font-weight: 900; font-display: swap; src: url("/pitch/divorare/fonts/raleway-latin-900-normal.woff2") format("woff2"); }
+
+.dv {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #111;
+  color: #f4f4f4;
+  overflow: hidden;
+}
+
+.dv-escena {
+  position: absolute;
+  inset: 16px 16px 72px;
+  display: grid;
+  place-items: center;
+}
+
+.dv-marco {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.dv-lienzo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  cursor: pointer;
+}
+
+/* ── Reinicio dentro de la diapositiva ─────────────────────────────────── */
+.dv .dv-lienzo section {
+  position: relative;
+  box-sizing: border-box;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  font-family: Raleway, Arial, sans-serif;
+  letter-spacing: normal;
+  line-height: 1.4;
+  color: #111;
+  animation: dv-entra 0.45s ease both;
+}
+
+@keyframes dv-entra {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dv .dv-lienzo section > *:not([style*="position:absolute"]) {
+  position: relative;
+}
+
+.dv .dv-lienzo *,
+.dv .dv-lienzo *::before,
+.dv .dv-lienzo *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.dv .dv-lienzo h1,
+.dv .dv-lienzo h2,
+.dv .dv-lienzo h3,
+.dv .dv-lienzo p,
+.dv .dv-lienzo li,
+.dv .dv-lienzo td,
+.dv .dv-lienzo th {
+  font-family: inherit;
+  font-weight: inherit;
+  text-transform: none;
+  letter-spacing: inherit;
+  overflow-wrap: normal;
+  line-height: inherit;
+}
+
+.dv .dv-lienzo img,
+.dv .dv-lienzo video,
+.dv .dv-lienzo svg {
+  display: block;
+  max-width: none;
+}
+
+.dv .dv-lienzo video { background: #000; }
+
+.dv .dv-lienzo a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Piezas de la identidad de Divorare ────────────────────────────────── */
+
+/* Fondo de hormigón (portadas de bloque) */
+.dv .hormigon {
+  background: #a4a4a4 url("/pitch/divorare/hormigon.jpg") center / cover;
+}
+
+/* Fondo de papel con los garabatos de la marca (diapositivas de contenido) */
+.dv .papel {
+  background: #fff url("/pitch/divorare/doodles.jpg") 0 0 / 520px auto;
+}
+
+/* Fondo negro de asfalto */
+.dv .asfalto {
+  background: #141414 url("/pitch/divorare/asfalto.jpg") center / cover;
+  color: #f4f4f4;
+}
+
+.dv .dv-lienzo .anton {
+  font-family: Anton, Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.5px;
+}
+
+.dv .dv-lienzo .marker {
+  font-family: "Permanent Marker", "Comic Sans MS", cursive;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Cartela de papel rasgado: blanco roto con sombra y canto irregular */
+.dv .carta {
+  background: #fbfaf7;
+  clip-path: polygon(0 1.2%, 6% 0, 14% 1%, 23% 0.2%, 31% 1.1%, 42% 0, 51% 0.9%, 63% 0.1%, 72% 1%, 84% 0, 93% 0.8%, 100% 0.2%, 99.4% 22%, 100% 47%, 99.3% 73%, 100% 99%, 91% 100%, 79% 99.1%, 68% 100%, 56% 99.2%, 44% 100%, 33% 99%, 21% 100%, 9% 99.2%, 0 100%, 0.6% 76%, 0 51%, 0.7% 27%);
+}
+
+/* Trozo de cinta adhesiva */
+.dv .cinta {
+  position: absolute;
+  width: 150px;
+  height: 44px;
+  background: rgba(236, 226, 200, 0.85);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* Etiqueta roja tipo "ESENCIAL PRESERVAR" */
+.dv .etiqueta {
+  position: absolute;
+  display: inline-block;
+  padding: 6px 16px 4px;
+  background: #d80036;
+  color: #fff;
+  font-family: Raleway, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Píldora con borde, como las del tono de voz */
+.dv .pildora {
+  display: inline-block;
+  padding: 8px 22px 6px;
+  border: 3px solid #111;
+  border-radius: 999px;
+  font-family: "Permanent Marker", cursive;
+  font-size: 22px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.dv .foto {
+  position: absolute;
+  object-fit: cover;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.25);
+}
+
+.dv .recorte {
+  position: absolute;
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.28));
+}
+
+/* ── Controles ──────────────────────────────────────────────────────────── */
+.dv-hud {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 600 13px/1 system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dv-hud-marca { opacity: 0.7; }
+
+.dv-hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dv-hud-nav button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(244, 244, 244, 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.dv-hud-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.dv-hud-num {
+  min-width: 72px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.dv-progreso {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(244, 244, 244, 0.12);
+}
+
+.dv-progreso span {
+  display: block;
+  height: 100%;
+  background: #d4fb04;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .dv-hud-marca { display: none; }
+  .dv-hud { justify-content: center; }
+}
+
+body.deck-abierto .cookie-banner,
+body.deck-abierto .theme-toggle {
+  display: none;
+}
