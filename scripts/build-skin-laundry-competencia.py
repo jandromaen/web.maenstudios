@@ -234,7 +234,7 @@ add(
 
 # 03 · En una frase
 claves = [
-    "Cada uno tiene su territorio: volumen (Dorsia, Planas), protocolos propios (InOut), longevidad (Santé), autoridad médica (Toral).",
+    "En los demás perfiles se entiende en segundos: volumen (Dorsia, Planas), protocolos propios (InOut), longevidad (Santé), autoridad médica (Toral).",
     "Los grandes compran alcance: decenas de miles de reproducciones y apenas cien o doscientos «me gusta».",
     "La mecánica que más se repite es «Comenta X y te lo enviamos por mensaje». Convierte interacción en reservas.",
     "Lo que más conecta son casos reales: el antes y después de una paciente de InOut sumó 307 comentarios.",
@@ -252,7 +252,7 @@ add(
     sec(
         foto("mujer-perfil.jpg", "Retrato de campaña de Skin Laundry", 1200, 0, 720, 1080, opos="72% 50%")
         + eyebrow("En una frase", 128, 128, color=CREAM)
-        + titulo("Cada uno tiene su territorio.<br><i>Skin Laundry, todavía no.</i>", 128, 200, 1000, 80, color=CREAM)
+        + titulo("Skin Laundry tiene su territorio.<br><i>Falta que se entienda al entrar.</i>", 128, 200, 1040, 70, color=CREAM)
         + dg
         + pie(3, dark=True, right=780),
         bg=INK,
