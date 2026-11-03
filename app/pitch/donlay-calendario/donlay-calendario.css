@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Calendarios de publicaciones de Don Lay
+
+   Usa el visor del briefing de Barkita (.bk) con el tema .bk--donlay: colores
+   del Brand Manual 2026 (negro #1D1D1B, rojo #79242F y beige) y sus
+   tipografías: Self Modern (titulares) e Inter (texto).
+   ========================================================================== */
+
+@font-face { font-family: "Self Modern DL"; font-weight: 700; font-style: normal; font-display: swap; src: url("/pitch/donlay-calendario/fonts/self-modern-bold.woff2") format("woff2"); }
+@font-face { font-family: "Self Modern DL"; font-weight: 400; font-style: italic; font-display: swap; src: url("/pitch/donlay-calendario/fonts/self-modern-italic.woff2") format("woff2"); }
+@font-face { font-family: "Inter DL"; font-weight: 100 900; font-display: swap; src: url("/pitch/barkita/fonts/inter-latin-wght-normal.woff2") format("woff2"); }
+
+.bk.bk--donlay {
+  background: #121211;
+  color: #f6f0e8;
+}
+
+.bk--donlay .bk-hud {
+  font-family: "Inter DL", system-ui, sans-serif;
+}
+
+.bk--donlay .bk-marco {
+  border-radius: 2px;
+}
+
+.bk--donlay .bk-hud-nav button {
+  border-color: rgba(246, 240, 232, 0.3);
+}
+
+.bk--donlay .bk-progreso span {
+  background: #79242f;
+}

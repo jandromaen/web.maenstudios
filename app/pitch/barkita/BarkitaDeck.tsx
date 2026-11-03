@@ -17,11 +17,12 @@ const ALTO = 1080;
  * diapositiva (mitad izquierda, atrás; mitad derecha, adelante). Pulsar un
  * vídeo lo pausa o lo reanuda en vez de pasar de diapositiva.
  */
-type Props = { diapos?: DiapoHtml[]; marca?: string };
+type Props = { diapos?: DiapoHtml[]; marca?: string; tema?: string };
 
 export default function BarkitaDeck({
   diapos = DIAPOS,
   marca = "Maen Studios × Barkita",
+  tema,
 }: Props) {
   const [indice, setIndice] = useState(0);
   const [escala, setEscala] = useState(0);
@@ -108,7 +109,7 @@ export default function BarkitaDeck({
   const diapo = diapos[indice];
 
   return (
-    <div className="bk" ref={deck}>
+    <div className={tema ? `bk ${tema}` : "bk"} ref={deck}>
       <div className="bk-escena" ref={escena}>
         <div
           className="bk-marco"
