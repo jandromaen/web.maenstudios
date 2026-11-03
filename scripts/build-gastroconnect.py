@@ -17,27 +17,9 @@ AMARILLO = "#F6C01B"
 MARCA = "Maen Studios × Gastroconnect"
 
 CIFRAS = {
+    "fee": "1.000 €",
     "fee_nota": "al mes + IVA",
-    "permanencia": "3 meses",
-    # (nombre, precio, [lo que incluye]) — cada plan suma al anterior
-    "planes": [
-        ("Esencial", "1.000 €", [
-            "Podcast: 1 episodio al mes + 8 reels",
-            "Guía de los lunes: 1 post semanal por temáticas y festividades",
-            "Gestión de LinkedIn: 1 post semanal",
-            "Calendario, publicación y community",
-        ]),
-        ("Completo", "1.250 €", [
-            "Todo lo del plan Esencial",
-            "Guía foodie: 1 restaurante al mes con Richi o Jandro, reel + carrusel",
-            "Calendario, publicación y community",
-        ]),
-        ("360", "1.500 €", [
-            "Todo lo del plan Completo",
-            "Guía foodie: 2 restaurantes al mes",
-            "Calendario, publicación y community",
-        ]),
-    ],
+    "permanencia": "4 meses",
 }
 
 
@@ -117,10 +99,10 @@ add("objetivo", "El objetivo", sec(
 # ── 3. El plan ────────────────────────────────────────────────────────────
 n += 1
 movs = [
-    ("Autoridad", "Podcast", "Los que mandan en la restauración de Barcelona pasan por el micro. 1 episodio al mes + 8 reels."),
+    ("Autoridad", "Podcast", "Los que mandan en la restauración de Barcelona pasan por el micro. 1 episodio al mes en YouTube y Spotify."),
     ("Hábito", "Guía de los lunes", "Una cita fija cada semana: la guía gastronómica de Barcelona por temáticas y fechas (Navidad, San Valentín…)."),
     ("Sector", "LinkedIn", "Referente para el profesional: 1 post semanal con el lado negocio de la restauración."),
-    ("Presencia", "Guía foodie", "Comer en los restaurantes que importan de la ciudad con Richi o Jandro. 1 o 2 visitas al mes según el plan: reel + carrusel de cada una."),
+    ("Presencia", "Guía foodie", "Comer en los restaurantes que importan de la ciudad con Richi o Jandro. 1 visita al mes."),
 ]
 mh = ""
 for i, (t, linea, s_) in enumerate(movs):
@@ -138,57 +120,59 @@ add("plan", "El plan", sec(
     + mh + foot(n),
 ))
 
-# ── 4. Qué incluye ────────────────────────────────────────────────────────
+# ── 4. Cada mes ──────────────────────────────────────────────────────────
 n += 1
-bloques = [
-    ("Estrategia y dirección creativa", "Líneas, ideas y restaurantes de cada mes."),
-    ("Producción y edición", "Rodaje del podcast y de las visitas, edición de todas las piezas."),
-    ("Calendario, publicación y community", "Planificación mensual, copies y publicación. Las respuestas a comentarios y mensajes las lleva Gastroconnect."),
+contenido = [
+    "<b>Podcast:</b> 1 episodio en YouTube y Spotify, con miniatura, título y capítulos",
+    "<b>8 reels del día del podcast:</b> 6 del episodio y 2 de la app de reservas",
+    "<b>Guía foodie:</b> 1 restaurante con Richi o Jandro, con su reel y un reel de receta",
+    "<b>Guía de los lunes:</b> 1 carrusel semanal",
+    "<b>LinkedIn:</b> 1 post semanal",
 ]
-bh = ""
-for i, (t, s_) in enumerate(bloques):
-    y = 380 + i * 150
-    bh += (
-        f'<p class="abs a disp outline" style="left:128px;top:{y - 8}px;font-size:56px;line-height:1;--d:{i + 2}">{i + 1:02d}</p>'
-        f'<p class="abs a" style="left:260px;top:{y}px;width:720px;font-size:32px;font-weight:800;--d:{i + 2}">{t}</p>'
-        f'<p class="abs a soft" style="left:1080px;top:{y + 4}px;width:710px;font-size:26px;line-height:1.4;--d:{i + 3}">{s_}</p>'
-    )
-add("incluye", "Qué incluye", sec(
-    eyebrow("En todos los planes")
-    + titulo("Qué incluye", size=72)
-    + bh + foot(n),
-))
+servicio = [
+    "<b>Estrategia de crecimiento</b> con objetivos a 3 y 6 meses",
+    "<b>Informe mensual</b> de KPIs",
+    "<b>Calendario, copies y publicación</b> en Instagram, Facebook, LinkedIn, YouTube y Spotify",
+    "<b>Llamada a reservar</b> en gastroconnect.es en el contenido",
+    "<b>Orden de la cuenta</b> al arrancar",
+]
 
-# ── 5. Planes ─────────────────────────────────────────────────────────────
-n += 1
-C = CIFRAS
-ph = ""
-for i, (nombre, precio, items) in enumerate(C["planes"]):
-    x = 128 + i * 568
-    destacado = i == 1
-    borde = "background:#151515;color:#F4F4F4;" if destacado else "border:3px solid #151515;"
-    col = "#C9C7C3" if destacado else "#3A2F2F"
-    ph += f'<div class="abs pop" style="left:{x}px;top:300px;width:528px;height:560px;border-radius:22px;{borde}--d:{i}"></div>'
-    tc = "color:#F4F4F4;" if destacado else ""
-    ph += f'<p class="abs a pm-eyebrow" style="left:{x + 44}px;top:344px;{"color:" + AMARILLO + ";" if destacado else "color:#151515;"}--d:{i + 1}">Plan {nombre}</p>'
-    ph += f'<p class="abs a disp" style="left:{x + 40}px;top:400px;font-size:96px;line-height:1;{tc}--d:{i + 1}">{precio}</p>'
-    ph += f'<p class="abs a" style="left:{x + 44}px;top:512px;font-size:24px;font-weight:700;color:{col};--d:{i + 1}">{C["fee_nota"]}</p>'
+
+def col(items, x, d):
     lis = "".join(
-        f'<p style="margin:0 0 18px;padding-left:36px;text-indent:-36px">'
-        f'<span style="font-weight:800;display:inline-block;width:36px;text-indent:0">—</span>{it}</p>'
+        f'<p style="margin:0 0 22px;padding-left:36px;text-indent:-36px">'
+        f'<span class="rosa" style="font-weight:800;display:inline-block;width:36px;text-indent:0">—</span>{it}</p>'
         for it in items
     )
-    ph += (f'<div class="abs a" style="left:{x + 44}px;top:570px;width:450px;font-size:24px;'
-           f'line-height:1.3;{tc}--d:{i + 2}">{lis}</div>')
-add("planes", "Inversión", sec(
+    return (f'<div class="abs a" style="left:{x}px;top:430px;width:780px;font-size:27px;'
+            f'line-height:1.35;color:#C9C7C3;--d:{d}">{lis}</div>')
+
+
+add("incluye", "Cada mes", sec(
+    eyebrow("Cada mes")
+    + titulo("Qué incluye", size=72)
+    + '<p class="abs a muted" style="left:128px;top:350px;font-size:20px;letter-spacing:.08em;text-transform:uppercase;--d:1">Contenido</p>'
+    + '<p class="abs a muted" style="left:1010px;top:350px;font-size:20px;letter-spacing:.08em;text-transform:uppercase;--d:1">Servicio</p>'
+    + col(contenido, 128, 2)
+    + col(servicio, 1010, 3)
+    + p("Las respuestas a comentarios y mensajes las lleva GastroConnect.", 128, 900, 1660, size=22, d=5, cls="muted")
+    + foot(n),
+))
+
+# ── 5. Inversión ──────────────────────────────────────────────────────────
+n += 1
+C = CIFRAS
+add("inversion", "Inversión", sec(
     eyebrow("Inversión", k=True)
-    + titulo("Tres planes", top=170, size=72, extra="color:#151515;")
-    + ph
-    + p("<b style=\"color:#151515\">Reels extra:</b> 30 € + IVA por reel grabado in situ · "
-        "50 € + IVA por reel si requiere desplazamiento exclusivo (zona Barcelona).",
-        128, 888, 1660, size=24, d=6, cls="", extra="color:#3A2F2F;")
-    + p(f"Compromiso de {C['permanencia']} para medir resultados. No incluye paid media, invitados ni consumiciones en los restaurantes.",
-        128, 932, 1660, size=22, d=7, cls="", extra="color:#3A2F2F;")
+    + f'<p class="abs pop disp" style="left:120px;top:280px;font-size:200px;line-height:1;--d:1">{C["fee"]}</p>'
+    + f'<p class="abs a" style="left:128px;top:520px;font-size:40px;font-weight:700;--d:2">{C["fee_nota"]}</p>'
+    + f'<p class="abs a" style="left:128px;top:590px;font-size:32px;color:#3A2F2F;--d:3">Compromiso de {C["permanencia"]}</p>'
+    + '<div class="abs a deco" style="left:128px;top:700px;width:1664px;height:2px;background:#151515;--d:4"></div>'
+    + p("<b style=\"color:#151515\">Lo que sobrepase los contenidos fijados se cobra aparte.</b> "
+        "Reels extra: 30 € + IVA por reel grabado in situ · 50 € + IVA si requiere desplazamiento exclusivo (zona Barcelona).",
+        128, 740, 1500, size=28, d=5, cls="", extra="color:#3A2F2F;line-height:1.5;")
+    + p("No incluye paid media ni consumiciones en los restaurantes.",
+        128, 860, 1500, size=24, d=6, cls="", extra="color:#3A2F2F;")
     + foot(n, k=True),
     bg=AMARILLO, color=INK,
 ))
