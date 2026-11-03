@@ -1,0 +1,8 @@
+/* Maen · Prueba — extiende ../maen-plan-100k/plan.css */
+.pm .pm-lienzo .pr-num {
+  font-family: var(--font-display), "Monument Extended", "Arial Black", sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--rosa);
+}
