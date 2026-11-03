@@ -52,6 +52,7 @@ AREAS = [
         "lema": "Todo lo que se graba y se monta, en casa.",
         "gente": [
             {"nombre": "Mati", "rol": "Director de Fotografía", "extra": "DoP · Cámara"},
+            {"nombre": "Víctor", "rol": "Director de Fotografía", "jr": True, "extra": "DoP · Cámara"},
             {"nombre": "Go", "rol": "Editor & Postproducción", "extra": "Montaje · Color"},
         ],
         "hace": ["Rodajes de foto y vídeo", "Dirección de cámara e iluminación",
