@@ -130,8 +130,8 @@ bloques = [
     ("Producción y edición", [
         "Grabación de 4 h al mes",
         "Edición para cada canal",
-        "Extra en horario laboral: 50 €/h",
-        "Extra fuera de horario: 100 €/h",
+        "Extra en horario laboral: 100 €/h",
+        "Extra fuera de horario: 150 €/h",
     ]),
     ("Calendario", [
         "2 reels semanales",
