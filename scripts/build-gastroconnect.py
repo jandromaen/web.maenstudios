@@ -130,7 +130,6 @@ contenido = [
     "<b>LinkedIn:</b> 1 post semanal",
 ]
 servicio = [
-    "<b>Estrategia de crecimiento</b> con objetivos a 3 y 6 meses",
     "<b>Informe mensual</b> de KPIs",
     "<b>Calendario, copies y publicación</b> en Instagram, Facebook, LinkedIn, YouTube y Spotify",
     "<b>Llamada a reservar</b> en gastroconnect.es en el contenido",
