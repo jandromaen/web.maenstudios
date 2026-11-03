@@ -463,6 +463,49 @@ for _id in ["quien", "resumen", "ig-comparativa", "alcance", "grandes", "diagona
     _d = _por_id[_id]
     add(f"comp-{_id}", _d["titulo"], _d["html"])
 
+# Referentes: estética, contenido y funcionalidad
+refs = [
+    ("Estética", "Santé Clinics", "Santé Clinics",
+     "Editorial, minimalista y coherente: mensajes cortos, mucho aire y la misma línea en cada publicación. "
+     "Es el universo premium que Skin Laundry ya tiene en su web y todavía no en Instagram.",
+     "Una sola línea visual, también en las promociones."),
+    ("Contenido", "Clínica Planas", "Clínica Planas",
+     "La que más interacción genera: unas 160 por publicación, con 5 o 6 reels a la semana. "
+     "Temas que la gente reconoce como suyos, historias de pacientes y una llamada a la acción en cada pieza: "
+     "«Escribe SALUD y te enviamos información» sumó 107 comentarios.",
+     "Un CTA claro en cada publicación que convierta la interacción en consultas."),
+    ("Funcionalidad", None, "Skin Laundry",
+     "Ninguna cuenta lo resuelve del todo, y es clave: quien llega al perfil tiene que saber en segundos qué tratamientos hay, "
+     "cuánto cuestan y cómo reservar. Hoy Skin Laundry tiene el enlace de reserva, pero sus destacados "
+     "(«Friends V», «You», «Carta») no orientan.",
+     "Destacados por tratamiento con precios y dudas frecuentes, y reserva y WhatsApp a un toque desde la bio."),
+]
+rg = ""
+for i, (pilar, quien, logo_de, porque, tomar) in enumerate(refs):
+    x = 128 + i * 568
+    dark = i == 2
+    bg, fg, sub = (INK, CREAM, SOFT_D) if dark else (SAND, INK, SOFT)
+    rg += (
+        f'<div style="{pos(x, 340)}width:536px;height:620px;border-radius:24px;background:{bg}"></div>'
+        + f'<p style="{pos(x + 40, 380)}padding:8px 20px;border-radius:999px;background:{LIME};color:{INK};font-size:20px;font-weight:600;letter-spacing:2px;text-transform:uppercase">0{i + 1} · {pilar}</p>'
+        + _comp.avatar(logo_de, x + 536 - 40 - 88, 370, 88, ring=CREAM if dark else bg)
+        + f'<p style="{pos(x + 40, 486)}width:456px;font-family:{SERIF};font-size:46px;font-weight:300;line-height:1.05;color:{fg}">'
+        + (quien if quien else "Un perfil <i>que convierta</i>") + '</p>'
+        + texto(porque, x + 40, 600, 456, 21, sub)
+        + linea(x + 40, 836, 456, CREAM if dark else INK, 0.2)
+        + texto(f"<b>Qué tomamos.</b> {tomar}", x + 40, 856, 456, 20, LIME if dark else CARAMEL, 600)
+    )
+add(
+    "referentes",
+    "Nuestros referentes",
+    sec(
+        eyebrow("Nuestros referentes", 128, 128)
+        + titulo("Qué tomamos <i>de la competencia</i>.", 128, 200, 1600, 80)
+        + rg
+        + pie(0),
+    ),
+)
+
 # 14 · Oportunidades
 ops = [
     ("Definir el foco", "Entender qué tratamientos, servicios y objetivos queremos priorizar en la comunicación."),
