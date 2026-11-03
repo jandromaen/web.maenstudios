@@ -26,27 +26,22 @@ SERIF = "Newsreader, Georgia, serif"
 SANS = "Figtree, Arial, sans-serif"
 PIE = "All About Management × Skin Laundry · Competencia en Instagram"
 
-# ── Datos (perfiles públicos, 2 de noviembre de 2026) ─────────────────────
-# (cuenta, usuario, tipo, seguidores, reels/semana, mediana de visualizaciones,
-#  rango de «me gusta» por reel, es_skin_laundry)
+# ── Datos (perfiles públicos) ─────────────────────────────────────────────
+# (cuenta, usuario, tipo, seguidores, mediana de reproducciones de sus vídeos
+#  (últimos 12, 2 nov.), «me gusta» por publicación, comentarios por
+#  publicación (últimas 8–11 publicaciones, 3 nov.), es_skin_laundry)
+# No se muestra la frecuencia de publicación a propósito: el servicio con
+# AAM no da para comparar volumen de reels con las cuentas grandes.
 IG = [
-    ("Skin Laundry", "@skinlaundry_es", "Láser facial", 9540, "1,7", 2400, "7–28", True),
-    ("Clínicas Dorsia", "@clinicasdorsia", "Cadena de medicina y cirugía", 295000, "3,5", 55000, "81–270", False),
-    ("Hydrafacial España", "@hydrafacial_es", "Tecnología facial", 94000, "2", 7900, "21–107", False),
-    ("Clínica Planas", "@clinicaplanas", "Cirugía y medicina premium", 89000, "5–6", 17800, "44–489", False),
-    ("Santé Clinics", "@sante.clinics", "Medicina estética y longevidad", 32000, "1", 11800, "52–349", False),
-    ("Work Your Face", "@workyourface", "Gimnasio facial", 20000, "1,6", 2000, "14–51", False),
-    ("Toral Clinic", "@toralclinic", "Medicina estética · Diagonal 598", 5584, "2", 1400, "18–53", False),
-    ("The Light Bar", "@thelightbarsalon", "Facial bar LED · Sarrià", 3295, "Irregular", 1800, "11–56", False),
-]
-# (cuenta, seguidores, vídeos, visualizaciones recientes, es_skin_laundry)
-TT = [
-    ("Clínicas Dorsia", 59900, "1.182", "400–2.300", False),
-    ("Clínica Planas", 31000, "883", "650–8.000 · fijados hasta 1,2 M", False),
-    ("Work Your Face", 660, "179", "400–1.500", False),
-    ("Skin Laundry", 187, "246", "300–1.100", True),
-    ("Toral Clinic", 162, "123", "—", False),
-    ("The Light Bar", 66, "57", "—", False),
+    ("Skin Laundry", "@skinlaundry_es", "Láser y medicina estética", 9540, 2400, "Ocultos", "2", True),
+    ("Clínicas Dorsia", "@clinicasdorsia", "Cadena de medicina y cirugía", 295000, 55000, "204", "31", False),
+    ("InOut", "@inout.barcelona", "Medicina estética · Diagonal 392", 184000, None, "356", "52", False),
+    ("Hydrafacial España", "@hydrafacial_es", "Tecnología facial", 94000, 7900, "46", "2", False),
+    ("Clínica Planas", "@clinicaplanas", "Cirugía y medicina premium", 89000, 17800, "130", "33", False),
+    ("Santé Clinics", "@sante.clinics", "Medicina estética · Diagonal 384", 32000, 11800, "~150", "31", False),
+    ("Work Your Face", "@workyourface", "Gimnasio facial", 20000, 2000, "Ocultos", "2", False),
+    ("Toral Clinic", "@toralclinic", "Medicina estética · Diagonal 598", 5584, 1400, "40", "5", False),
+    ("The Light Bar", "@thelightbarsalon", "Facial bar LED · Sarrià", 3295, 1800, "35", "5", False),
 ]
 
 
@@ -154,6 +149,7 @@ LOGOS = {
     "Clínica Planas": "planas", "Planas": "planas", "Santé Clinics": "sante", "Santé": "sante",
     "Toral Clinic": "toral", "Toral": "toral", "Work Your Face": "workyourface",
     "The Light Bar": "lightbar", "Hydrafacial España": "hydrafacial", "Hydrafacial": "hydrafacial",
+    "InOut": "inout",
 }
 
 
@@ -193,11 +189,11 @@ add(
 )
 
 # 02 · A quién hemos mirado
-circulos_logos = [["Toral", "Santé", "Planas", "Dorsia"], ["Work Your Face", "The Light Bar"], ["Hydrafacial"]]
+circulos_logos = [["InOut", "Santé", "Toral", "Planas", "Dorsia"], ["Work Your Face", "The Light Bar"], ["Hydrafacial"]]
 circulos = [
     ("Competencia directa", "Medicina estética y láser facial en Barcelona",
-     "Toral Clinic · Santé Clinics · Clínica Planas · Clínicas Dorsia",
-     "Toral está en Diagonal 598, a cien metros de la clínica. Santé, en Diagonal 384."),
+     "InOut · Santé Clinics · Toral Clinic · Clínica Planas · Clínicas Dorsia",
+     "Tres de ellas en la misma Diagonal: InOut (392), Santé (384) y Toral (598), a cien metros de la clínica."),
     ("Competencia de concepto", "Facial rápido, por hábito o por suscripción",
      "Work Your Face · The Light Bar",
      "El gimnasio facial nacido en Barcelona y un facial bar de luz LED en Sarrià."),
@@ -216,7 +212,7 @@ for i, (t, s, quien, d) in enumerate(circulos):
         f'<p style="{pos(x + 40, 420)}font-size:20px;font-weight:600;letter-spacing:2px;color:{LIME if i == 0 else CARAMEL}">0{i + 1}</p>'
         f'<p style="{pos(x + 40, 460)}width:460px;font-family:{SERIF};font-size:48px;font-weight:300;line-height:1.05;color:{fg}">{t}</p>'
         + texto(s, x + 40, 580, 456, 24, sub)
-        + "".join(avatar(n, x + 40 + j * 92, 664, 80, ring=bg) for j, n in enumerate(circulos_logos[i]))
+        + "".join(avatar(n, x + 40 + j * 88, 664, 76, ring=bg) for j, n in enumerate(circulos_logos[i]))
         + texto(f"<b>{quien}</b>", x + 40, 758, 456, 19, fg)
         + texto(d, x + 40, 818, 456, 18, sub)
     )
@@ -225,10 +221,10 @@ add(
     "A quién hemos mirado",
     sec(
         eyebrow("A quién hemos mirado", 128, 128)
-        + titulo("Siete cuentas, <i>tres círculos</i>.", 128, 200, 1600, 84)
+        + titulo("Ocho cuentas, <i>tres círculos</i>.", 128, 200, 1600, 84)
         + cg
         + texto(
-            "Perfiles públicos consultados el 2 de noviembre de 2026: seguidores, publicaciones y los últimos 12 reels de cada cuenta. "
+            "Perfiles públicos consultados el 2 y el 3 de noviembre de 2026: seguidores, últimas publicaciones y sus vídeos. "
             "Como referencia, Skin Laundry global (354.000 seguidores), Glowbar (62.000) y FaceGym (830.000).",
             128, 916, 1660, 20, SOFT,
         )
@@ -238,10 +234,10 @@ add(
 
 # 03 · En una frase
 claves = [
-    "Cada uno tiene su territorio: volumen (Dorsia, Planas), longevidad (Santé), autoridad médica (Toral), hábito (Work Your Face).",
+    "Cada uno tiene su territorio: volumen (Dorsia, Planas), protocolos propios (InOut), longevidad (Santé), autoridad médica (Toral).",
     "Los grandes compran alcance: decenas de miles de reproducciones y apenas cien o doscientos «me gusta».",
     "La mecánica que más se repite es «Comenta X y te lo enviamos por mensaje». Convierte interacción en reservas.",
-    "Las caras médicas funcionan. El reel de Skin Laundry con más «me gusta» es la colaboración con una doctora.",
+    "Lo que más conecta son casos reales: el antes y después de una paciente de InOut sumó 307 comentarios.",
 ]
 dg = ""
 for i, t in enumerate(claves):
@@ -265,26 +261,29 @@ add(
 )
 
 # 04 · Instagram comparativa
-cols = [(128, "Cuenta"), (640, "Seguidores"), (860, "Reels/semana"), (1080, "Reproducciones por reel"), (1560, "«Me gusta» por reel")]
-filas = "".join(etiqueta(t, x, 380, 400) for x, t in cols)
-filas += linea(128, 420, 1664)
-mx = max(r[5] for r in IG)
-for i, (c, u, tipo, seg, rs, med, lk, sl) in enumerate(IG):
-    y = 440 + i * 64
+cols = [(128, "Cuenta"), (700, "Seguidores"), (920, "Reproducciones por vídeo"), (1400, "«Me gusta»"), (1620, "Comentarios")]
+filas = "".join(etiqueta(t, x, 372, 420) for x, t in cols)
+filas += linea(128, 410, 1664)
+mx = max(r[4] or 0 for r in IG)
+for i, (c, u, tipo, seg, med, lk, cm, sl) in enumerate(IG):
+    y = 426 + i * 58
     if sl:
-        filas += f'<div style="{pos(108, y - 4)}width:1704px;height:60px;border-radius:12px;background:{LIME}"></div>'
+        filas += f'<div style="{pos(108, y - 4)}width:1704px;height:54px;border-radius:12px;background:{LIME}"></div>'
     filas += (
-        avatar(c, 128, y + 4, 44, ring=LIME if sl else None)
-        + texto(f"<b>{c}</b> <span style=\"color:{SOFT};font-size:19px\">{tipo}</span>", 188, y + 6, 450, 24)
-        + texto(miles(seg), 640, y + 6, 200, 24, weight=600)
-        + texto(rs, 860, y + 6, 200, 24)
+        avatar(c, 128, y + 2, 42, ring=LIME if sl else None)
+        + texto(f"<b>{c}</b> <span style=\"color:{SOFT};font-size:18px\">{tipo}</span>", 186, y + 6, 500, 23)
+        + texto(miles(seg), 700, y + 6, 200, 23, weight=600)
+        + texto(lk, 1400, y + 6, 200, 23)
+        + texto(cm, 1620, y + 6, 160, 23, weight=600)
     )
-    bw = max(8, round(med / mx * 340))
-    filas += (
-        f'<div style="{pos(1080, y + 16)}width:{bw}px;height:22px;border-radius:6px;background:{INK if sl else CARAMEL}"></div>'
-        + texto(corto(med), 1080 + bw + 16, y + 6, 120, 24, weight=600)
-        + texto(lk, 1560, y + 6, 220, 24)
-    )
+    if med:
+        bw = max(8, round(med / mx * 300))
+        filas += (
+            f'<div style="{pos(920, y + 15)}width:{bw}px;height:20px;border-radius:6px;background:{INK if sl else CARAMEL}"></div>'
+            + texto(corto(med), 920 + bw + 14, y + 6, 120, 23, weight=600)
+        )
+    else:
+        filas += texto("—", 920, y + 6, 120, 23, SOFT)
 add(
     "ig-comparativa",
     "Instagram · Comparativa",
@@ -292,17 +291,18 @@ add(
         eyebrow("Instagram · Comparativa", 128, 128)
         + titulo("Los números de cada uno,<br><i>de un vistazo</i>.", 128, 200, 1600, 76)
         + filas
-        + texto("Mediana de reproducciones de los últimos 12 reels. Incluye contenido promocionado, que desde fuera no se puede separar.",
-                128, 960, 1600, 20, SOFT)
+        + texto("Reproducciones: mediana de sus últimos 12 vídeos. «Me gusta» y comentarios: media de sus últimas 8 a 11 publicaciones. "
+                "Las cifras incluyen contenido promocionado, que desde fuera no se puede separar.",
+                128, 958, 1660, 18, SOFT)
         + pie(4),
     ),
 )
 
 # 05 · Alcance comprado
 pares = [
-    ("Clínicas Dorsia", "55K", "≈150", "reproducciones · «me gusta» por reel"),
-    ("Hydrafacial España", "174K", "107", "su reel más visto del trimestre"),
-    ("Clínica Planas", "236K", "200", "su reel más visto de octubre"),
+    ("Clínicas Dorsia", "55K", "≈150", "reproducciones · «me gusta» por vídeo"),
+    ("Hydrafacial España", "174K", "107", "su vídeo más visto del trimestre"),
+    ("Clínica Planas", "236K", "200", "su vídeo más visto de octubre"),
 ]
 pg = ""
 for i, (c, v, l, nota) in enumerate(pares):
@@ -319,12 +319,12 @@ add(
     "Alcance comprado",
     sec(
         eyebrow("Lo que no se ve", 128, 128, color=CREAM)
-        + titulo("Las cifras de los grandes<br><i>vienen con pauta</i>.", 128, 200, 1500, 84, color=CREAM)
+        + titulo("Cifras llamativas,<br><i>poca comunidad</i>.", 128, 200, 1500, 84, color=CREAM)
         + pg
         + linea(128, 840, 1664, CREAM, 0.2)
         + texto(
-            "Cuando un reel suma decenas de miles de reproducciones y apenas cien «me gusta», casi seguro es contenido promocionado. "
-            "Es un listón que no se alcanza en orgánico: conviene tenerlo claro antes de comparar cifras.",
+            "Hay cifras que impresionan pero no se traducen en «me gusta», conversación ni comunidad: normalmente son anuncios. "
+            "Por eso no se trata de copiar su volumen, sino de descubrir qué funciona para Skin Laundry.",
             128, 870, 1500, 26, SOFT_D,
         )
         + pie(5, dark=True),
@@ -366,58 +366,75 @@ def diapo_fichas(n, id_, eyebrow_t, titulo_t, a, b):
     )
 
 
+# 07 · El resto de la competencia, en una diapositiva (sin frecuencias de publicación)
+resto = [
+    ("Clínicas Dorsia", "@clinicasdorsia · 295.000",
+     "Mezcla reels y publicaciones: tratamientos corporales, humor y sorteos.",
+     "Mucho alcance de pago y poca conexión. Casi nada facial.",
+     "Black Friday preparado con antelación."),
+    ("Clínica Planas", "@clinicaplanas · 89.000",
+     "Reels y carruseles con historias de pacientes y «Comenta MIA y te enviamos la información».",
+     "Foco en cirugía, lejos del cuidado facial diario.",
+     "La palabra clave con respuesta por mensaje."),
+    ("Toral Clinic", "@toralclinic · Diagonal 598 · 5.584",
+     "Todo sale con la cuenta de su doctora: dudas reales respondidas en primera persona.",
+     "La marca de la clínica casi no se ve.",
+     "La autoridad médica: un reel sobre neuromoduladores llegó a 35.500."),
+    ("Work Your Face", "@workyourface · 20.000",
+     "El gimnasio facial de Barcelona: packs del mes, add-ons y colaboraciones con marcas.",
+     "Alcance modesto y «me gusta» ocultos.",
+     "El lenguaje de hábito y constancia, cerca de la membresía."),
+    ("The Light Bar", "@thelightbarsalon · Sarrià · 3.295",
+     "Faciales LED a medida, contenido educativo sobre luz y planes con nombre propio.",
+     "Publicación muy irregular: parón de abril a octubre de 2026.",
+     "«Bridal Squad», su publicación más vista: planes fáciles de recordar."),
+    ("Hydrafacial España", "@hydrafacial_es · 94.000",
+     "Marca de tecnología: resultados en una sesión, personalización y tratamiento capilar.",
+     "Casi cero conversación: 2 comentarios por publicación.",
+     "Explicar en qué se diferencia cada tratamiento de un Hydrafacial."),
+]
+rg = ""
+for i, (n, meta, hacen, debil, tomar) in enumerate(resto):
+    col, row = i % 3, i // 3
+    x, y = 128 + col * 568, 330 + row * 324
+    dark = False
+    rg += (
+        f'<div style="{pos(x, y)}width:536px;height:300px;border-radius:22px;background:{SAND}"></div>'
+        + avatar(n, x + 32, y + 30, 64, ring=SAND)
+        + f'<p style="{pos(x + 112, y + 32)}width:400px;font-family:{SERIF};font-size:34px;font-weight:300;line-height:1">{n}</p>'
+        + texto(meta, x + 112, y + 74, 400, 17, SOFT, 600, extra="letter-spacing:1px")
+        + texto(hacen, x + 32, y + 118, 472, 19, INK)
+        + texto(f"<b>Punto débil.</b> {debil}", x + 32, y + 178, 472, 18, SOFT)
+        + texto(f"<b>Qué tomar.</b> {tomar}", x + 32, y + 234, 472, 18, CARAMEL, 600)
+    )
 add(
-    "grandes",
-    "Fichas · Los grandes",
-    diapo_fichas(
-        7, "grandes", "Competencia directa · Los grandes",
-        "Volumen, dinámicas y <i>captación por mensaje</i>.",
-        ("Clínicas Dorsia", "@clinicasdorsia", "295.000",
-         "3–4 reels a la semana: tratamientos corporales, humor y sorteos.",
-         "Las dinámicas disparan comentarios (hasta 781). Ya anuncian Black Friday.",
-         "Mucho alcance de pago con poca conexión. Casi nada facial.",
-         "Una dinámica de comentario al mes y Black Friday preparado ya."),
-        ("Clínica Planas", "@clinicaplanas", "89.000",
-         "5–6 reels a la semana con «Comenta MIA y te enviamos la información».",
-         "Cada reel capta leads por mensaje.",
-         "Foco en cirugía, lejos del cuidado facial diario.",
-         "La palabra clave con respuesta automática y el «así lo vivió»."),
+    "resto",
+    "El resto de la competencia",
+    sec(
+        eyebrow("Competencia · Fichas", 128, 128)
+        + titulo("Lo que hace cada uno, <i>de un vistazo</i>.", 128, 200, 1600, 76)
+        + rg
+        + pie(7),
     ),
 )
+
+# 08 · Santé e InOut, en detalle
 add(
-    "diagonal",
-    "Fichas · Diagonal",
+    "sante-inout",
+    "Santé e InOut",
     diapo_fichas(
-        8, "diagonal", "Competencia directa · Diagonal",
-        "Los vecinos: <i>premium</i> y con bata blanca.",
+        8, "sante-inout", "Competencia · En detalle",
+        "Las dos que más se acercan <i>a lo que buscamos</i>.",
         ("Santé Clinics", "@sante.clinics · Diagonal 384", "32.000",
-         "Un reel a la semana, bilingüe. Posicionamiento de longevidad: «Become superhuman».",
-         "Los tours por la clínica, sus reels más vistos (17.700) y con más «me gusta» (349).",
-         "Poca frecuencia: un reel a la semana.",
-         "Mismo público internacional de Diagonal. El tour y la visita real funcionan."),
-        ("Toral Clinic", "@toralclinic · Diagonal 598", "5.584",
-         "La marca no publica desde 2023: todo sale con la cuenta de su doctora, dos veces por semana.",
-         "La autoridad médica. Un reel sobre neuromoduladores llegó a 35.500.",
-         "20–50 «me gusta» por reel y una marca de clínica casi invisible.",
-         "Están empujando el otoño (IPL, manchas). Ganarles con un formato más rápido y visual."),
-    ),
-)
-add(
-    "concepto",
-    "Fichas · Concepto",
-    diapo_fichas(
-        9, "concepto", "Competencia de concepto",
-        "Los que venden <i>hábito y experiencia</i>.",
-        ("Work Your Face", "@workyourface", "20.000",
-         "El gimnasio facial de Barcelona: packs del mes, add-ons y colaboraciones como Foreo.",
-         "El lenguaje de entreno y constancia, muy cerca de la lógica de membresía.",
-         "Alcance modesto: unas 2.000 reproducciones por reel.",
-         "Los «packs del mes». Están en cifras parecidas: el listón es alcanzable."),
-        ("The Light Bar", "@thelightbarsalon · Sarrià", "3.295",
-         "Faciales LED a medida, contenido educativo sobre luz y planes especiales.",
-         "«Bridal Squad»: el plan entre amigas antes de la boda, su reel más visto (11.800).",
-         "Publicación muy irregular: parón de abril a noviembre de 2026.",
-         "Planes con nombre propio, fáciles de recordar y de compartir."),
+         "Publicaciones y reels bilingües con estética editorial: longevidad, «Become superhuman» y su nuevo Skinbar.",
+         "Conversación sin pedirla: unos 31 comentarios por publicación. Su tour por la clínica, 350 «me gusta».",
+         "Contenido muy de marca, con poca llamada directa a reservar.",
+         "La línea estética y el tono: frases cortas, mucho aire y la clínica como protagonista."),
+        ("InOut", "@inout.barcelona · Diagonal 392", "184.000",
+         "Mezcla reels y carruseles con protocolos propios (Refresh, Harmony, Regenerative) y casos reales con nombre.",
+         "Antes y después con historia y «Comenta INFO»: el caso de Belca, 1.571 «me gusta» y 307 comentarios.",
+         "No todo conecta: las piezas de producto sin historia se quedan en 0–4 comentarios.",
+         "Casos reales, protocolos con nombre y un CTA en cada pieza. Y destacados ordenados como un catálogo."),
     ),
 )
 

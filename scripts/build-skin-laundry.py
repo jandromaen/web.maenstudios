@@ -450,7 +450,7 @@ add(
 
 # Parte 2 · Competencia (diapositivas de scripts/build-skin-laundry-competencia.py)
 divisor("parte-2", "02", "Quién más habla<br>de piel <i>en Barcelona</i>",
-        "Siete cuentas de la competencia y dónde se sitúa cada una.")
+        "Ocho cuentas de la competencia y qué tomamos de cada una.")
 
 import importlib.util  # noqa: E402
 
@@ -459,7 +459,7 @@ _spec = importlib.util.spec_from_file_location(
 _comp = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_comp)
 _por_id = {d["id"]: d for d in _comp.D}
-for _id in ["quien", "resumen", "ig-comparativa", "alcance", "grandes", "diagonal", "concepto", "conversacion", "mapa"]:
+for _id in ["quien", "resumen", "ig-comparativa", "alcance", "resto", "sante-inout", "conversacion"]:
     _d = _por_id[_id]
     add(f"comp-{_id}", _d["titulo"], _d["html"])
 
@@ -469,16 +469,16 @@ refs = [
      "Editorial, minimalista y coherente: mensajes cortos, mucho aire y la misma línea en cada publicación. "
      "Es el universo premium que Skin Laundry ya tiene en su web y todavía no en Instagram.",
      "Una sola línea visual, también en las promociones."),
-    ("Contenido", "Clínica Planas", "Clínica Planas",
-     "La que más interacción genera: unas 160 por publicación, con 5 o 6 reels a la semana. "
-     "Temas que la gente reconoce como suyos, historias de pacientes y una llamada a la acción en cada pieza: "
-     "«Escribe SALUD y te enviamos información» sumó 107 comentarios.",
-     "Un CTA claro en cada publicación que convierta la interacción en consultas."),
+    ("Contenido", "InOut", "InOut",
+     "La que más interacción genera: unas 400 por publicación. Casos reales de pacientes con nombre propio, "
+     "protocolos con marca y una llamada a la acción en cada pieza: el antes y después de Belca con «Comenta INFO» "
+     "sumó 307 comentarios.",
+     "Historias reales y un CTA claro en cada publicación que convierta la interacción en consultas."),
     ("Funcionalidad", None, "Skin Laundry",
      "Ninguna cuenta lo resuelve del todo, y es clave: quien llega al perfil tiene que saber en segundos qué tratamientos hay, "
      "cuánto cuestan y cómo reservar. Hoy Skin Laundry tiene el enlace de reserva, pero sus destacados "
      "(«Friends V», «You», «Carta») no orientan.",
-     "Destacados por tratamiento con precios y dudas frecuentes, y reserva y WhatsApp a un toque desde la bio."),
+     "Destacados en formato catálogo, por categorías de tratamiento, y reserva y WhatsApp a un toque desde la bio."),
 ]
 rg = ""
 for i, (pilar, quien, logo_de, porque, tomar) in enumerate(refs):
@@ -513,10 +513,11 @@ ops = [
     ("Dar voz al equipo médico", "Potenciar la presencia de las doctoras para transmitir confianza y conocimiento, y dar una voz propia a la cuenta."),
     ("Más conversación", "Explorar contenidos y llamadas a la acción que inviten a participar y faciliten el contacto."),
     ("Reforzar la diferenciación", "Comunicar mejor qué hace único a Skin Laundry frente a otras clínicas y tratamientos."),
-    ("Conectar con Barcelona", "Explorar colaboraciones con creadoras y perfiles locales afines a la marca."),
+    ("Destacados en formato catálogo", "Rehacer los destacados como un catálogo con las distintas categorías de tratamiento: qué es, para quién y cómo reservar."),
+    ("Conectar con el target", "Que las caras visibles del contenido sean del público al que nos dirigimos, con creadoras y perfiles afines a la marca."),
     ("Medir para evolucionar", "Identificar qué contenidos generan interés, interacción, consultas y reservas."),
 ]
-Y0, RH = 372, 84
+Y0, RH = 352, 76
 og = (
     texto("Oportunidad", 228, 330, 500, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
     + texto("Enfoque", 820, 330, 500, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
@@ -526,9 +527,9 @@ for i, (t, d) in enumerate(ops):
     og += (
         linea(128, y, 1664)
         + f'<p style="{pos(128, y + 24)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
-        + f'<p style="{pos(228, y + 18)}width:560px;font-family:{SERIF};font-size:38px;font-weight:300;line-height:1.1">{t}</p>'
+        + f'<p style="{pos(228, y + 16)}width:580px;font-family:{SERIF};font-size:34px;font-weight:300;line-height:1.1">{t}</p>'
         # Una línea centrada en la fila; si pasa de una línea, sube para caber entera
-        + texto(d, 820, y + (22 if len(d) < 95 else 9), 972, 23, SOFT)
+        + texto(d, 820, y + (20 if len(d) < 98 else 8), 972, 22, SOFT)
     )
 og += linea(128, Y0 + len(ops) * RH, 1664)
 add(
@@ -536,7 +537,7 @@ add(
     "Por dónde podemos empezar",
     sec(
         eyebrow("Por dónde podemos empezar", 128, 128)
-        + titulo("Siete oportunidades para <i>explorar juntos</i>.", 128, 200, 1600, 80)
+        + titulo("Ocho oportunidades para <i>explorar juntos</i>.", 128, 200, 1600, 80)
         + og
         + pie(0),
     ),
@@ -550,7 +551,6 @@ add(
         foto("inyeccion.jpg", "Tratamiento de medicina estética en Skin Laundry", 1105, 0, 815, 1080, opos="100% 40%")
         + logo(128, 128, 340)
         + titulo("Your skin.<br><i>Our expertise.</i>", 128, 380, 900, 120, tag="h2")
-        + texto("Siguiente paso: definir juntos el foco.", 128, 680, 680, 34, SOFT)
         + texto("All About Management × Skin Laundry · Barcelona", 128, 960, 940, 22, SOFT,
                 extra="letter-spacing:2px;text-transform:uppercase"),
         bg="#E3D1BC",
