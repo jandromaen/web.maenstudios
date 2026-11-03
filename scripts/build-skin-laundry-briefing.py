@@ -262,7 +262,7 @@ add(
 razones = [
     ("Diversificar", "Cinco maneras de hablar de la piel para no repetir siempre la misma pieza y llegar a más gente."),
     ("Si uno falla, el resto sostiene", "Ningún pilar carga con todo: si uno no funciona, la cuenta no se cae."),
-    ("Si uno tira, le damos más", "Medimos cada pilar por separado y movemos el peso hacia el que mejor responde."),
+    ("Potenciar lo que funciona", "Medimos cada pilar por separado y movemos el peso hacia el que mejor responde."),
 ]
 rz = ""
 for i, (t, d) in enumerate(razones):
@@ -335,84 +335,16 @@ for i, (pid, n, obj, reel, carr, cta, img, opos) in enumerate(PILARES):
         ),
     )
 
-# 10 · Formato y ritmo
-reglas = [
-    ("2 reels + 2 carruseles o posts", "Cada semana, cuatro publicaciones."),
-    ("Los pilares no tienen formato fijo", "Cada idea decide si es reel o carrusel. Si un pilar no funciona en un formato, se prueba en el otro antes de quitarlo."),
-    ("Los pilares no pesan lo mismo", "Cada mes se reparte según la temporada, lo que quiera empujar la clínica y lo que funcione."),
-    ("Todos siguen vivos", "Cada pilar aparece al menos una vez al mes, para no depender de uno y poder comparar."),
-]
-rg = ""
-for i, (t, d) in enumerate(reglas):
-    y = 360 + i * 140
-    rg += (
-        linea(128, y, 1664)
-        + f'<p style="{pos(128, y + 28)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
-        + f'<p style="{pos(228, y + 22)}width:720px;font-family:{SERIF};font-size:40px;font-weight:300;line-height:1.1">{t}</p>'
-        + texto(d, 1000, y + 28, 790, 23, SOFT)
-    )
-rg += linea(128, 360 + 4 * 140, 1664)
-add(
-    "ritmo",
-    "Formato y ritmo",
-    sec(
-        eyebrow("Formato y ritmo", 128, 128)
-        + titulo("Cómo lo contamos.", 128, 200, 1600, 80)
-        + rg
-        + pie(0),
-    ),
-)
-
-# 11 · Reparto flexible: ejemplo de noviembre
-reparto = [("Antes y después", 5), ("Ofertas", 4), ("Informativo", 3), ("Equipo médico", 2), ("Tratamientos", 2)]
-mx = max(v for _, v in reparto)
-br = ""
-for i, (n, v) in enumerate(reparto):
-    y = 400 + i * 96
-    w = round(v / mx * 760)
-    br += (
-        texto(n, 128, y + 8, 300, 26, INK, 600)
-        + f'<div style="{pos(440, y)}width:{w}px;height:56px;border-radius:12px;background:{INK if i < 2 else CARAMEL}"></div>'
-        + texto(f"{v}", 440 + w + 20, y + 6, 80, 30, INK, 600)
-    )
-criterios = [
-    ("La temporada", "Noviembre es otoño: manchas tras el verano y temporada alta de láser."),
-    ("Lo que quiere empujar la clínica", "Black Friday: las ofertas ganan peso este mes."),
-    ("Lo que funciona", "A partir del segundo mes, el pilar con más consultas suma publicaciones."),
-]
-cr = ""
-for i, (t, d) in enumerate(criterios):
-    y = 400 + i * 160
-    cr += (
-        texto(t, 1380, y, 412, 26, INK, 600)
-        + texto(d, 1380, y + 44, 412, 21, SOFT)
-    )
-add(
-    "reparto",
-    "Reparto flexible",
-    sec(
-        eyebrow("Reparto flexible", 128, 128)
-        + titulo("Noviembre, <i>por ejemplo</i>: 16 publicaciones.", 128, 200, 1600, 76)
-        + br
-        + f'<div style="{pos(1320, 390)}width:1px;height:470px;background:{INK};opacity:.18"></div>'
-        + texto("Cómo se decide", 1380, 340, 400, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
-        + cr
-        + texto("8 reels y 8 carruseles o posts en el mes, repartidos entre los pilares según la idea de cada pieza.",
-                128, 900, 1100, 21, SOFT)
-        + pie(0),
-    ),
-)
-
-# 12 · Temporadas
+# 12 · Temporadas (sin tratamientos: los define Skin Laundry)
 temporadas = [
-    ("Otoño", "Oct – Nov", "Reparar el verano",
-     ["Manchas, melasma y textura", "Temporada alta de láser", "Black Friday"]),
+    ("Otoño", "Sep – Nov", "Vuelta a la rutina",
+     ["Vuelta de vacaciones", "Halloween", "Black Friday"]),
     ("Invierno", "Dic – Feb", "Fiestas y propósitos",
-     ["Glow antes de Navidad: GlowTox", "Tarjetas regalo · piel seca", "Enero: membresía · San Valentín: labios"]),
+     ["Navidad y tarjetas regalo", "Año nuevo, nuevos hábitos", "San Valentín"]),
     ("Primavera", "Mar – May", "Preparar la piel",
-     ["Últimas sesiones de láser antes del sol", "Bodas y Día de la Madre", "Corporal antes del verano: Exion"]),
-    ("Verano", "Jun – Sep", "Cuidar sin riesgos",
-     ["Sol, hidratación y mantenimiento", "Tratamientos sin fotosensibilidad", "Septiembre: vuelta a la rutina"]),
+     ["Sant Jordi", "Bodas y celebraciones", "Día de la Madre"]),
+    ("Verano", "Jun – Ago", "Cuidarse con el sol",
+     ["Antes de las vacaciones", "Sant Joan", "Cuidado y mantenimiento"]),
 ]
 tg = ""
 for i, (t, m, foco, items) in enumerate(temporadas):
@@ -420,11 +352,12 @@ for i, (t, m, foco, items) in enumerate(temporadas):
     dark = i == 0
     bg, fg, sub = (INK, CREAM, SOFT_D) if dark else (SAND, INK, SOFT)
     tg += (
-        f'<div style="{pos(x, 340)}width:398px;height:560px;border-radius:22px;background:{bg}"></div>'
-        + texto(m, x + 36, 374, 330, 18, LIME if dark else CARAMEL, 600, extra="letter-spacing:2px;text-transform:uppercase")
-        + f'<p style="{pos(x + 36, 410)}font-family:{SERIF};font-size:56px;font-weight:300;line-height:1;color:{fg}">{t}</p>'
-        + texto(foco, x + 36, 490, 330, 24, fg, 600)
-        + "".join(texto(f'<span style="color:{LIME if dark else CARAMEL};margin-right:10px">—</span>{it}', x + 36, 560 + j * 84, 330, 21, sub)
+        f'<div style="{pos(x, 400)}width:398px;height:470px;border-radius:22px;background:{bg}"></div>'
+        + texto(m, x + 36, 434, 330, 18, LIME if dark else CARAMEL, 600, extra="letter-spacing:2px;text-transform:uppercase")
+        + f'<p style="{pos(x + 36, 470)}font-family:{SERIF};font-size:56px;font-weight:300;line-height:1;color:{fg}">{t}</p>'
+        + texto(foco, x + 36, 550, 330, 24, fg, 600)
+        + texto("Campañas y momentos", x + 36, 620, 330, 16, sub, 600, extra="letter-spacing:2px;text-transform:uppercase")
+        + "".join(texto(f'<span style="color:{LIME if dark else CARAMEL};margin-right:10px">—</span>{it}', x + 36, 656 + j * 56, 330, 22, fg)
                   for j, it in enumerate(items))
     )
 add(
@@ -432,10 +365,13 @@ add(
     "Temporadas",
     sec(
         eyebrow("Por temporadas", 128, 128)
-        + titulo("Cada época tiene <i>sus tratamientos</i>.", 128, 200, 1600, 76)
+        + titulo("El contenido, <i>por estaciones</i>.", 128, 200, 1600, 76)
+        + texto("Cada época cambia lo que la gente busca y lo que la clínica ofrece, y trae sus propias campañas. "
+                "Organizar el año por estaciones nos permite preparar con antelación tanto los tratamientos como las ofertas.",
+                128, 300, 1560, 24, SOFT)
         + tg
-        + texto("Propuesta a validar con el equipo médico: la temporada marca los tratamientos protagonistas de los cinco pilares.",
-                128, 930, 1600, 20, SOFT)
+        + texto("Los tratamientos protagonistas de cada temporada los definimos junto al equipo de Skin Laundry.",
+                128, 900, 1600, 22, CARAMEL, 600)
         + pie(0),
     ),
 )
@@ -492,8 +428,8 @@ add(
     "Qué medimos",
     sec(
         eyebrow("Qué medimos", 128, 128, color=CREAM)
-        + titulo("Cada mes, <i>por pilar y por formato</i>.", 128, 200, 1600, 80, color=CREAM)
-        + texto("El pilar que más responde gana publicaciones el mes siguiente; el que menos, cambia de formato o pierde peso.",
+        + titulo("Cada mes, <i>análisis y report</i>.", 128, 200, 1600, 80, color=CREAM)
+        + texto("Al cierre de cada mes analizamos los resultados y compartimos un report con lo que ha funcionado y lo que ajustamos para el siguiente.",
                 128, 340, 1500, 26, SOFT_D)
         + mg
         + pie(0, dark=True),
@@ -505,10 +441,10 @@ add(
 # 15 · Lo que necesitamos
 necesidades = [
     ("Prioridades del negocio", "Qué tratamientos y servicios queremos empujar en los próximos meses."),
-    ("Validación del equipo médico", "Revisar el calendario de temporadas y los mensajes de cada tratamiento."),
+    ("Validación del equipo médico", "Qué tratamientos encajan en cada temporada y cómo se comunican."),
     ("Agenda de grabación", "Una mañana al mes con las doctoras y la clínica en funcionamiento."),
     ("Consentimiento de pacientes", "Para los antes y después y los casos con nombre propio."),
-    ("Acceso a estadísticas", "Instagram y reservas, para medir por pilar desde el primer mes."),
+    ("Acceso a estadísticas", "Instagram y reservas, para medir desde el primer mes."),
 ]
 ng = ""
 for i, (t, d) in enumerate(necesidades):
