@@ -1,0 +1,72 @@
+/* ==========================================================================
+   Maen · Organigrama
+
+   Extiende ../maen-plan-100k/plan.css con las piezas propias: avatares con
+   inicial, etiqueta Jr y la cinta de nombres de la portada.
+   ========================================================================== */
+
+.pm .pm-lienzo .og-av {
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--rosa);
+  font-family: var(--font-display), "Monument Extended", "Arial Black", sans-serif;
+  font-weight: 800;
+  line-height: 1;
+}
+.pm .pm-lienzo .og-av-r {
+  background: var(--rosa);
+  color: var(--ink);
+}
+
+.pm .pm-lienzo .og-jr {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 2px solid var(--rosa);
+  color: var(--rosa);
+  font-family: var(--font-body), "Plus Jakarta Sans", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0;
+}
+.pm .pm-lienzo .og-jr-k {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+@keyframes ogCinta {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.pm .pm-lienzo .og-marquee {
+  overflow: hidden;
+  pointer-events: none;
+}
+.pm .pm-lienzo .og-marquee-in {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 72px;
+  line-height: 96px;
+  animation: ogCinta 45s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pm .pm-lienzo .og-marquee-in { animation: none; }
+}
+
+.pm .pm-lienzo .og-av-o {
+  background: transparent;
+  border: 2px solid var(--rosa);
+  color: var(--rosa);
+}
+.pm .pm-lienzo .og-av-ok {
+  border-color: var(--ink);
+  color: var(--ink);
+}
