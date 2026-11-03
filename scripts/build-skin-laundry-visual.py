@@ -582,6 +582,36 @@ add(
     ),
 )
 
+# 13b · Dentro de un destacado: cada categoría como una ficha de catálogo
+historias = [
+    ("Portada", t_foto(REEL, "laser-vertical.jpg", "60% 40%", "Catálogo", "Láser<br><i>facial</i>", size=130)),
+    ("Qué es", t_tipo(REEL, False, "Qué es", "Una frase<br><i>clara</i>", sub="Qué hace el tratamiento y qué vas a notar, en dos líneas.", size=130)),
+    ("Para quién", t_tipo(REEL, False, "Para quién", "Manchas, textura,<br><i>luminosidad</i>", sub="Los problemas de piel que resuelve, en palabras de la gente.", size=104)),
+    ("Resultados", t_ba(REEL, "manchas", "Resultados", "Un caso real<br><i>de la clínica</i>", size=96)),
+    ("Precio y sesiones", t_tipo(REEL, True, "Precio y sesiones", "Desde<br><i>XX €</i>", sub="Duración, sesiones recomendadas y si entra en la membresía.", size=140)),
+    ("Reserva", t_tipo(REEL, True, "Reserva", "Tu primera<br><i>valoración</i>", sub="Enlace directo a la agenda o a WhatsApp.", cta="Reservar cita", size=120)),
+]
+hs = ""
+for i, (n, inner) in enumerate(historias):
+    x = 128 + i * 282
+    hs += (
+        pieza(x, 330, 250, REEL, inner)
+        + texto(f"{i + 1:02d}", x, 800, 250, 18, CARAMEL, 600, extra="letter-spacing:2px")
+        + texto(n, x, 828, 250, 24, INK, 600)
+    )
+add(
+    "destacado-dentro",
+    "Dentro de un destacado",
+    sec(
+        eyebrow("Destacados", 128, 128)
+        + titulo("Cada categoría, <i>una ficha de catálogo</i>.", 128, 200, 1600, 76)
+        + hs
+        + texto("La misma secuencia en todas las categorías: quien entra encuentra siempre lo mismo y en el mismo orden. "
+                "Contenidos, precios y categorías, a cerrar con la clínica.", 128, 905, 1660, 21, SOFT)
+        + pie(0),
+    ),
+)
+
 # 14 · Storyboard de un reel
 frames = [
     ("0–2 s", "El gancho", t_ba(REEL, "manchas", "Antes y después", "Tres sesiones.<br><i>Mira la diferencia.</i>", size=84)),
