@@ -157,7 +157,7 @@ def add(id_, titulo_, html):
 PILARES = [
     # (id, nombre, objetivo, en reel, en carrusel o post, CTA, foto, encuadre)
     ("antes-despues", "Antes y después",
-     "Demostrar que funciona. Es el pilar fijo: la prueba que decide una reserva.",
+     "Demostrar que funciona: la prueba que decide una reserva.",
      ["La doctora explica el caso mientras se ve el resultado: qué preocupaba, qué se hizo y por qué.",
       "La evolución sesión a sesión: primera, tercera y quinta sesión de láser.",
       "El caso con nombre propio, con consentimiento: «Laura, 42 años, manchas tras el verano»."],
@@ -217,7 +217,7 @@ add(
         + logo(128, 128, 340)
         + eyebrow("Briefing de contenido · Instagram", 128, 330)
         + titulo("Cinco pilares<br><i>para ordenar<br>el contenido</i>", 128, 400, 820, 104, tag="h1")
-        + texto("Qué contamos, cómo lo contamos y cómo decidimos cada mes, a partir del análisis de Instagram y la competencia.",
+        + texto("Qué contamos en Instagram, a partir del análisis de la cuenta y de la competencia.",
                 128, 760, 640, 28, SOFT)
         + texto("All About Management × Skin Laundry · Versión 1", 128, 960, 760, 22, SOFT,
                 extra="letter-spacing:2px;text-transform:uppercase"),
@@ -225,77 +225,19 @@ add(
     ),
 )
 
-# 02 · De dónde partimos
-partida = [
-    ("Se publica mucho, se conecta poco",
-     "3–4 publicaciones a la semana, pero el 59 % sin un solo comentario."),
-    ("Lo que conecta tiene cara",
-     "Casos reales, doctoras y creadoras: es lo que más conversa, aquí y en la competencia."),
-    ("Cada pieza necesita un porqué",
-     "Un CTA claro convierte la interacción en consultas: «Comenta INFO» llevó a InOut a 307 comentarios."),
-    ("El territorio tiene que entenderse al entrar",
-     "Una sola línea visual y un perfil que explique qué hay y cómo reservar."),
-]
-pg = ""
-for i, (t, d) in enumerate(partida):
-    y = 440 + i * 136
-    pg += (
-        f'<p style="{pos(128, y)}font-size:20px;font-weight:600;letter-spacing:2px;color:{LIME}">0{i + 1}</p>'
-        + f'<p style="{pos(200, y - 10)}width:860px;font-family:{SERIF};font-size:40px;font-weight:300;line-height:1.1;color:{CREAM}">{t}</p>'
-        + texto(d, 200, y + 46, 860, 23, SOFT_D)
-    )
-add(
-    "partida",
-    "De dónde partimos",
-    sec(
-        foto("mujer-perfil.jpg", "Retrato de campaña de Skin Laundry", 1200, 0, 720, 1080, opos="72% 50%")
-        + eyebrow("De dónde partimos", 128, 128, color=CREAM)
-        + titulo("Lo que nos dice<br><i>el análisis</i>.", 128, 200, 1000, 80, color=CREAM)
-        + pg
-        + pie(0, dark=True, right=780),
-        bg=INK,
-        color=CREAM,
-    ),
-)
-
-# 03 · Por qué cinco pilares
-razones = [
-    ("Diversificar", "Cinco maneras de hablar de la piel para no repetir siempre la misma pieza y llegar a más gente."),
-    ("Si uno falla, el resto sostiene", "Ningún pilar carga con todo: si uno no funciona, la cuenta no se cae."),
-    ("Potenciar lo que funciona", "Medimos cada pilar por separado y movemos el peso hacia el que mejor responde."),
-]
-rz = ""
-for i, (t, d) in enumerate(razones):
-    x = 128 + i * 568
-    rz += (
-        f'<div style="{pos(x, 420)}width:536px;height:420px;border-radius:24px;background:{SAND}"></div>'
-        + f'<p style="{pos(x + 44, 470)}font-family:{SERIF};font-size:120px;font-weight:300;line-height:1;color:{CARAMEL}">{i + 1}</p>'
-        + f'<p style="{pos(x + 44, 620)}width:448px;font-family:{SERIF};font-size:42px;font-weight:300;line-height:1.08">{t}</p>'
-        + texto(d, x + 44, 740, 448, 22, SOFT)
-    )
-add(
-    "por-que",
-    "Por qué cinco pilares",
-    sec(
-        eyebrow("Por qué cinco pilares", 128, 128)
-        + titulo("Una cuenta que <i>no depende</i><br>de una sola idea.", 128, 200, 1600, 80)
-        + rz
-        + pie(0),
-    ),
-)
-
-# 04 · Los cinco pilares
+# 02 · Los cinco pilares, sin numerar ni jerarquizar
+ORDEN = ["equipo-medico", "antes-despues", "informativo", "tratamientos", "ofertas"]
+por_id = {p[0]: p for p in PILARES}
 cards = ""
 cw, gap = 312, 26
-for i, (pid, n, obj, *_rest) in enumerate(PILARES):
+for i, pid in enumerate(ORDEN):
+    _, n, obj, *_rest = por_id[pid]
     x = 128 + i * (cw + gap)
-    dark = i == 0
-    bg, fg, sub = (INK, CREAM, SOFT_D) if dark else (SAND, INK, SOFT)
     cards += (
-        f'<div style="{pos(x, 360)}width:{cw}px;height:560px;border-radius:22px;background:{bg}"></div>'
-        + f'<p style="{pos(x + 32, 396)}font-family:{SERIF};font-size:96px;font-weight:300;line-height:1;color:{LIME if dark else CARAMEL}">{i + 1}</p>'
-        + f'<p style="{pos(x + 32, 530)}width:{cw - 64}px;font-family:{SERIF};font-size:38px;font-weight:300;line-height:1.05;color:{fg}">{n}</p>'
-        + texto(obj, x + 32, 650, cw - 60, 19, sub)
+        f'<div style="{pos(x, 380)}width:{cw}px;height:480px;border-radius:22px;background:{SAND}"></div>'
+        + f'<div style="{pos(x + 32, 420)}width:40px;height:4px;border-radius:2px;background:{CARAMEL}"></div>'
+        + f'<p style="{pos(x + 32, 452)}width:{cw - 64}px;font-family:{SERIF};font-size:42px;font-weight:300;line-height:1.05;color:{INK}">{n}</p>'
+        + texto(obj, x + 32, 600, cw - 60, 20, SOFT)
     )
 add(
     "pilares",
@@ -305,179 +247,6 @@ add(
         + titulo("Qué contamos.", 128, 200, 1600, 80)
         + cards
         + pie(0),
-    ),
-)
-
-# 05–09 · Un pilar por diapositiva
-for i, (pid, n, obj, reel, carr, cta, img, opos) in enumerate(PILARES):
-    extra = ""
-    if pid == "antes-despues":
-        extra = texto("<b>No siempre fotos.</b> El antes y después también puede ser la doctora contando el caso, "
-                      "como hace InOut: el resultado con una voz detrás.", 128, 900, 860, 20, CARAMEL, 600)
-    col = lambda titulo_c, items, x: (
-        texto(titulo_c, x, 470, 400, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
-        + "".join(texto(f'<span style="color:{CARAMEL};font-weight:700;margin-right:10px">—</span>{t}', x, 512 + j * 104, 410, 21, INK)
-                  for j, t in enumerate(items))
-    )
-    add(
-        pid,
-        n,
-        sec(
-            foto(img, "Imagen de campaña de Skin Laundry", 1100, 0, 820, 1080, opos=opos)
-            + eyebrow(f"Pilar {i + 1} de 5", 128, 128)
-            + titulo(n, 128, 190, 940, 88)
-            + texto(obj, 128, 312, 900, 26, SOFT)
-            + col("En reel", reel, 128)
-            + col("En carrusel o post", carr, 578)
-            + f'<p style="{pos(128, 840)}padding:10px 22px;border-radius:999px;background:{LIME};font-size:20px;font-weight:600;white-space:nowrap">CTA · {cta}</p>'
-            + extra
-            + pie(0, right=860),
-        ),
-    )
-
-# 12 · Temporadas (sin tratamientos: los define Skin Laundry)
-temporadas = [
-    ("Otoño", "Sep – Nov", "Vuelta a la rutina",
-     ["Vuelta de vacaciones", "Halloween", "Black Friday"]),
-    ("Invierno", "Dic – Feb", "Fiestas y propósitos",
-     ["Navidad y tarjetas regalo", "Año nuevo, nuevos hábitos", "San Valentín"]),
-    ("Primavera", "Mar – May", "Preparar la piel",
-     ["Sant Jordi", "Bodas y celebraciones", "Día de la Madre"]),
-    ("Verano", "Jun – Ago", "Cuidarse con el sol",
-     ["Antes de las vacaciones", "Sant Joan", "Cuidado y mantenimiento"]),
-]
-tg = ""
-for i, (t, m, foco, items) in enumerate(temporadas):
-    x = 128 + i * 422
-    dark = i == 0
-    bg, fg, sub = (INK, CREAM, SOFT_D) if dark else (SAND, INK, SOFT)
-    tg += (
-        f'<div style="{pos(x, 400)}width:398px;height:470px;border-radius:22px;background:{bg}"></div>'
-        + texto(m, x + 36, 434, 330, 18, LIME if dark else CARAMEL, 600, extra="letter-spacing:2px;text-transform:uppercase")
-        + f'<p style="{pos(x + 36, 470)}font-family:{SERIF};font-size:56px;font-weight:300;line-height:1;color:{fg}">{t}</p>'
-        + texto(foco, x + 36, 550, 330, 24, fg, 600)
-        + texto("Campañas y momentos", x + 36, 620, 330, 16, sub, 600, extra="letter-spacing:2px;text-transform:uppercase")
-        + "".join(texto(f'<span style="color:{LIME if dark else CARAMEL};margin-right:10px">—</span>{it}', x + 36, 656 + j * 56, 330, 22, fg)
-                  for j, it in enumerate(items))
-    )
-add(
-    "temporadas",
-    "Temporadas",
-    sec(
-        eyebrow("Por temporadas", 128, 128)
-        + titulo("El contenido, <i>por estaciones</i>.", 128, 200, 1600, 76)
-        + texto("Cada época cambia lo que la gente busca y lo que la clínica ofrece, y trae sus propias campañas. "
-                "Organizar el año por estaciones nos permite preparar con antelación tanto los tratamientos como las ofertas.",
-                128, 300, 1560, 24, SOFT)
-        + tg
-        + texto("Los tratamientos protagonistas de cada temporada los definimos junto al equipo de Skin Laundry.",
-                128, 900, 1600, 22, CARAMEL, 600)
-        + pie(0),
-    ),
-)
-
-# 13 · Semana tipo
-semana = [
-    ("Reel", "Antes y después", "La doctora explica un caso de manchas tras el verano en tres sesiones de láser.", "«Comenta INFO»"),
-    ("Carrusel", "Informativo", "«¿Por qué el otoño es la época del láser?»", "«Guárdalo»"),
-    ("Reel", "Tratamientos en vivo", "Una sesión de láser facial de principio a fin, en 15 minutos.", "«Reserva desde la bio»"),
-    ("Carrusel", "Ofertas", "Black Friday con la línea visual de Skin Laundry.", "«Escríbenos por WhatsApp»"),
-]
-sg = ""
-for i, (f, p, d, c) in enumerate(semana):
-    x = 128 + i * 422
-    sg += (
-        f'<div style="{pos(x, 340)}width:398px;height:540px;border-radius:22px;background:{SAND}"></div>'
-        + f'<p style="{pos(x + 32, 372)}padding:8px 18px;border-radius:999px;background:{INK if f == "Reel" else LIME};'
-          f'color:{CREAM if f == "Reel" else INK};font-size:18px;font-weight:600;letter-spacing:2px;text-transform:uppercase">{f}</p>'
-        + texto(f"Pieza {i + 1}", x + 32, 452, 330, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
-        + f'<p style="{pos(x + 32, 486)}width:334px;font-family:{SERIF};font-size:40px;font-weight:300;line-height:1.05">{p}</p>'
-        + texto(d, x + 32, 600, 334, 22, INK)
-        + texto(f"CTA · {c}", x + 32, 800, 334, 19, CARAMEL, 600)
-    )
-add(
-    "semana",
-    "Semana tipo",
-    sec(
-        eyebrow("Una semana de noviembre", 128, 128)
-        + titulo("Así se ve <i>en el calendario</i>.", 128, 200, 1600, 76)
-        + sg
-        + texto("La semana siguiente rota: el equipo médico entra en reel y el antes y después pasa a carrusel.",
-                128, 912, 1600, 21, SOFT)
-        + pie(0),
-    ),
-)
-
-# 14 · Qué medimos
-medidas = [
-    ("Comentarios", "La conversación que buscamos."),
-    ("Guardados y compartidos", "Lo que la gente quiere volver a ver."),
-    ("Mensajes y «Comenta INFO»", "Las consultas que genera cada pieza."),
-    ("Reservas desde Instagram", "El objetivo final, junto con la clínica."),
-]
-mg = ""
-for i, (t, d) in enumerate(medidas):
-    x = 128 + i * 422
-    mg += (
-        f'<p style="{pos(x, 470)}font-family:{SERIF};font-size:96px;font-weight:300;line-height:1;color:{LIME}">0{i + 1}</p>'
-        + f'<p style="{pos(x, 600)}width:380px;font-family:{SERIF};font-size:38px;font-weight:300;line-height:1.08;color:{CREAM}">{t}</p>'
-        + texto(d, x, 710, 360, 22, SOFT_D)
-    )
-add(
-    "medir",
-    "Qué medimos",
-    sec(
-        eyebrow("Qué medimos", 128, 128, color=CREAM)
-        + titulo("Cada mes, <i>análisis y report</i>.", 128, 200, 1600, 80, color=CREAM)
-        + texto("Al cierre de cada mes analizamos los resultados y compartimos un report con lo que ha funcionado y lo que ajustamos para el siguiente.",
-                128, 340, 1500, 26, SOFT_D)
-        + mg
-        + pie(0, dark=True),
-        bg=INK,
-        color=CREAM,
-    ),
-)
-
-# 15 · Lo que necesitamos
-necesidades = [
-    ("Prioridades del negocio", "Qué tratamientos y servicios queremos empujar en los próximos meses."),
-    ("Validación del equipo médico", "Qué tratamientos encajan en cada temporada y cómo se comunican."),
-    ("Agenda de grabación", "Una mañana al mes con las doctoras y la clínica en funcionamiento."),
-    ("Consentimiento de pacientes", "Para los antes y después y los casos con nombre propio."),
-    ("Acceso a estadísticas", "Instagram y reservas, para medir desde el primer mes."),
-]
-ng = ""
-for i, (t, d) in enumerate(necesidades):
-    y = 352 + i * 112
-    ng += (
-        linea(128, y, 1664)
-        + f'<p style="{pos(128, y + 30)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
-        + f'<p style="{pos(228, y + 24)}width:620px;font-family:{SERIF};font-size:38px;font-weight:300;line-height:1.1">{t}</p>'
-        + texto(d, 900, y + 30, 890, 23, SOFT)
-    )
-ng += linea(128, 352 + 5 * 112, 1664)
-add(
-    "necesitamos",
-    "Lo que necesitamos",
-    sec(
-        eyebrow("Para arrancar", 128, 128)
-        + titulo("Lo que necesitamos <i>de Skin Laundry</i>.", 128, 200, 1600, 80)
-        + ng
-        + pie(0),
-    ),
-)
-
-# 16 · Cierre
-add(
-    "cierre",
-    "Cierre",
-    sec(
-        foto("inyeccion.jpg", "Tratamiento de medicina estética en Skin Laundry", 1105, 0, 815, 1080, opos="100% 40%")
-        + logo(128, 128, 340)
-        + titulo("Your skin.<br><i>Our expertise.</i>", 128, 380, 900, 120, tag="h2")
-        + texto("All About Management × Skin Laundry · Barcelona", 128, 960, 940, 22, SOFT,
-                extra="letter-spacing:2px;text-transform:uppercase"),
-        bg="#E3D1BC",
     ),
 )
 
