@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { DIAPOS, type DiapoHtml } from "./diapos";
+import { CapaMedios, type Contenido } from "../medios/Medios";
 
 const ANCHO = 1920;
 const ALTO = 1080;
@@ -17,17 +18,21 @@ const ALTO = 1080;
  * diapositiva (mitad izquierda, atrás; mitad derecha, adelante). Pulsar un
  * vídeo lo pausa o lo reanuda en vez de pasar de diapositiva.
  */
-type Props = { diapos?: DiapoHtml[]; marca?: string; tema?: string };
+/* contenido: fotos y vídeos de cada día (carruseles y reels) que se pintan
+   dentro de las diapositivas marcadas con data-slot / data-feed. */
+type Props = { diapos?: DiapoHtml[]; marca?: string; tema?: string; contenido?: Contenido };
 
 export default function BarkitaDeck({
   diapos = DIAPOS,
   marca = "Maen Studios × Barkita",
   tema,
+  contenido,
 }: Props) {
+  const lienzo = useRef<HTMLDivElement>(null);
   const [indice, setIndice] = useState(0);
   const [escala, setEscala] = useState(0);
   const escena = useRef<HTMLDivElement>(null);
-  const deck = useRef<HTMLDivElement>(null);
+  const raiz = useRef<HTMLDivElement>(null);
   const total = diapos.length;
 
   const ir = useCallback(
@@ -38,7 +43,7 @@ export default function BarkitaDeck({
   const anterior = useCallback(() => ir(indice - 1), [ir, indice]);
 
   const pantallaCompleta = useCallback(() => {
-    const el = deck.current;
+    const el = raiz.current;
     if (!el) return;
     if (document.fullscreenElement) document.exitFullscreen();
     else el.requestFullscreen?.();
@@ -94,7 +99,7 @@ export default function BarkitaDeck({
 
   const alPulsarLienzo = (e: React.MouseEvent<HTMLDivElement>) => {
     /* Un enlace de la diapositiva (p. ej. el vídeo en Drive) se abre sin pasar de diapositiva */
-    if ((e.target as HTMLElement).closest("a")) return;
+    if ((e.target as HTMLElement).closest("a, [data-no-nav]")) return;
     const video = (e.target as HTMLElement).closest("video");
     if (video) {
       if (video.paused) video.play();
@@ -109,7 +114,7 @@ export default function BarkitaDeck({
   const diapo = diapos[indice];
 
   return (
-    <div className={tema ? `bk ${tema}` : "bk"} ref={deck}>
+    <div className={tema ? `bk ${tema}` : "bk"} ref={raiz}>
       <div className="bk-escena" ref={escena}>
         <div
           className="bk-marco"
@@ -117,6 +122,7 @@ export default function BarkitaDeck({
         >
           <div
             key={diapo.id}
+            ref={lienzo}
             className="bk-lienzo"
             style={{ transform: `scale(${escala})` }}
             onClick={alPulsarLienzo}
@@ -124,6 +130,8 @@ export default function BarkitaDeck({
           />
         </div>
       </div>
+
+      {contenido && <CapaMedios lienzo={lienzo} diapoId={diapo.id} contenido={contenido} />}
 
       <div className="bk-hud">
         <span className="bk-hud-marca">{marca}</span>

@@ -3,6 +3,7 @@ import BarkitaDeck from "../../barkita/BarkitaDeck";
 import "../../barkita/barkita.css";
 import "../donlay-calendario.css";
 import { DIAPOS } from "./diapos";
+import { CONTENIDO } from "./contenido";
 
 /**
  * Calendario de publicaciones de Don Lay · noviembre 2026.
@@ -18,5 +19,5 @@ export const metadata: Metadata = {
 };
 
 export default function CalendarioNoviembre() {
-  return <BarkitaDeck diapos={DIAPOS} marca="Don Lay · Calendario noviembre" tema="bk--donlay" />;
+  return <BarkitaDeck diapos={DIAPOS} marca="Don Lay · Calendario noviembre" tema="bk--donlay" contenido={CONTENIDO} />;
 }
