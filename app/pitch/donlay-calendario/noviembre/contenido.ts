@@ -90,11 +90,7 @@ export const CONTENIDO: Contenido = {
   "mie-04": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-15-1.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/dom-15-2.webp",
+        "url": "/pitch/donlay-calendario/noviembre/dom-15-4.webp",
         "tipo": "imagen"
       },
       {
@@ -102,7 +98,7 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-15-4.webp",
+        "url": "/pitch/donlay-calendario/noviembre/dom-15-2.webp",
         "tipo": "imagen"
       }
     ]
