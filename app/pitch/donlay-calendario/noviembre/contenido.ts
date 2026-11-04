@@ -35,6 +35,10 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/sab-14-reservas.jpg",
         "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-14-story-1.webp",
+        "tipo": "imagen"
       }
     ]
   },
@@ -90,6 +94,10 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/sab-28-reservas.jpg",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-28-story-1.webp",
         "tipo": "imagen"
       }
     ]
