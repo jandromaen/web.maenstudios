@@ -94,8 +94,7 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/dom-22-1.webp",
-        "tipo": "imagen",
-        "ajuste": "contain"
+        "tipo": "imagen"
       }
     ]
   },
