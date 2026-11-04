@@ -6,6 +6,102 @@ import type { Contenido } from "../../medios/Medios";
  * coloca; los jueves (reels) se añaden cuando estén los vídeos.
  */
 export const CONTENIDO: Contenido = {
+  "dom-08-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/dom-08-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mar-10-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mar-10-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "jue-12-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/jue-12-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "sab-14": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-14-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "dom-15-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/dom-15-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mar-17-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mar-17-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "jue-19-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/jue-19-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "sab-21": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-21-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "dom-22-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/dom-22-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mar-24-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mar-24-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "sab-28": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-28-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "dom-29-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/dom-29-reservas.jpg",
+        "tipo": "imagen"
+      }
+    ]
+  },
   "jue-26": {
     "medios": [
       {
