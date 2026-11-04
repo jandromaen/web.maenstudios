@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useState, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useState, type RefObject } from "react";
 import { createPortal } from "react-dom";
 
 export type Medio = { url: string; tipo: "imagen" | "video"; /** contain: no recortar (fotos horizontales) */ ajuste?: "contain" };
@@ -33,6 +33,20 @@ export function CapaMedios({
   contenido: Contenido;
 }) {
   const [huecos, setHuecos] = useState<Huecos>({ slots: [], feeds: [] });
+
+  /* Precarga de todas las fotos del deck al abrirlo, para que los carruseles
+     y el feed aparezcan al instante al cambiar de diapositiva. */
+  useEffect(() => {
+    Object.values(contenido).forEach(({ medios }) =>
+      medios.forEach((m) => {
+        if (m.tipo === "imagen") {
+          const img = new Image();
+          img.decoding = "async";
+          img.src = m.url;
+        }
+      }),
+    );
+  }, [contenido]);
 
   useLayoutEffect(() => {
     const el = lienzo.current;
@@ -79,55 +93,107 @@ function Pieza({ medio, portada }: { medio: Medio; portada?: boolean }) {
       <video src={medio.url} autoPlay muted loop playsInline style={estilo} />
     );
   }
-  return <img src={medio.url} alt="" style={estilo} />;
+  return <img src={medio.url} alt="" draggable={false} decoding="async" style={estilo} />;
 }
 
-/* Un medio: lo pinta entero. Varios: carrusel con flechas y puntos, como en
-   Instagram. Las flechas no pasan de diapositiva (data-no-nav). */
+/* Un medio: lo pinta entero. Varios: carrusel como el de Instagram, con todas
+   las fotos ya montadas en una tira (cargan a la vez y el paso es inmediato),
+   deslizamiento con el dedo o el ratón, flechas discretas, contador y puntos.
+   Los controles no pasan de diapositiva (data-no-nav). */
 function Pantalla({ medios }: { medios: Medio[] }) {
   const [i, setI] = useState(0);
+  const [arrastre, setArrastre] = useState<{ x0: number; dx: number } | null>(null);
   const n = medios.length;
-  const actual = medios[Math.min(i, n - 1)];
+  const ir = (k: number) => setI(Math.max(0, Math.min(n - 1, k)));
   const flecha = (lado: "izq" | "der"): React.CSSProperties => ({
     position: "absolute",
     top: "50%",
-    [lado === "izq" ? "left" : "right"]: 14,
+    [lado === "izq" ? "left" : "right"]: 16,
     transform: "translateY(-50%)",
-    width: 56,
-    height: 56,
+    width: 44,
+    height: 44,
     borderRadius: "50%",
     border: 0,
-    background: "rgba(246,240,232,0.85)",
+    background: "rgba(255,255,255,0.92)",
+    boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
     color: "#1D1D1B",
-    fontSize: 30,
-    lineHeight: "56px",
+    fontSize: 26,
+    lineHeight: "42px",
     cursor: "pointer",
+    padding: 0,
   });
+  if (n === 1) {
+    return (
+      <div style={{ position: "absolute", inset: 0, background: "#1D1D1B", zIndex: 2 }}>
+        <Pieza medio={medios[0]} />
+      </div>
+    );
+  }
+  const dx = arrastre?.dx ?? 0;
   return (
-    <div style={{ position: "absolute", inset: 0, background: "#1D1D1B", zIndex: 2 }}>
-      <Pieza key={actual.url} medio={actual} />
-      {n > 1 && (
-        <div data-no-nav>
-          {i > 0 && (
-            <button style={flecha("izq")} onClick={() => setI(i - 1)} aria-label="Anterior">
-              ‹
-            </button>
-          )}
-          {i < n - 1 && (
-            <button style={flecha("der")} onClick={() => setI(i + 1)} aria-label="Siguiente">
-              ›
-            </button>
-          )}
-          <div style={{ position: "absolute", left: 0, right: 0, bottom: 18, display: "flex", justifyContent: "center", gap: 10 }}>
-            {medios.map((_, k) => (
-              <span
-                key={k}
-                style={{ width: 12, height: 12, borderRadius: "50%", background: k === i ? "#F6F0E8" : "rgba(246,240,232,0.45)" }}
-              />
-            ))}
+    <div
+      data-no-nav
+      style={{ position: "absolute", inset: 0, background: "#1D1D1B", zIndex: 2, overflow: "hidden", touchAction: "pan-y", userSelect: "none" }}
+      onPointerDown={(e) => {
+        (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+        setArrastre({ x0: e.clientX, dx: 0 });
+      }}
+      onPointerMove={(e) => arrastre && setArrastre({ ...arrastre, dx: e.clientX - arrastre.x0 })}
+      onPointerUp={(e) => {
+        const ancho = (e.currentTarget as HTMLElement).getBoundingClientRect().width;
+        if (arrastre && Math.abs(arrastre.dx) > ancho * 0.15) ir(i + (arrastre.dx < 0 ? 1 : -1));
+        setArrastre(null);
+      }}
+      onPointerCancel={() => setArrastre(null)}
+    >
+      <div
+        style={{
+          display: "flex",
+          height: "100%",
+          transform: `translateX(calc(${-i * 100}% + ${dx}px))`,
+          transition: arrastre ? "none" : "transform 380ms cubic-bezier(0.22, 0.61, 0.36, 1)",
+        }}
+      >
+        {medios.map((m) => (
+          <div key={m.url} style={{ flex: "0 0 100%", height: "100%" }}>
+            <Pieza medio={m} />
           </div>
-        </div>
+        ))}
+      </div>
+      <span
+        style={{
+          position: "absolute",
+          top: 16,
+          right: 16,
+          padding: "5px 12px",
+          borderRadius: 999,
+          background: "rgba(29,29,27,0.6)",
+          color: "#FFFFFF",
+          fontSize: 18,
+          fontWeight: 600,
+          letterSpacing: 1,
+        }}
+      >
+        {i + 1}/{n}
+      </span>
+      {i > 0 && (
+        <button style={flecha("izq")} onClick={() => ir(i - 1)} onPointerDown={(e) => e.stopPropagation()} aria-label="Anterior">
+          ‹
+        </button>
       )}
+      {i < n - 1 && (
+        <button style={flecha("der")} onClick={() => ir(i + 1)} onPointerDown={(e) => e.stopPropagation()} aria-label="Siguiente">
+          ›
+        </button>
+      )}
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: 16, display: "flex", justifyContent: "center", gap: 7 }}>
+        {medios.map((_, k) => (
+          <span
+            key={k}
+            style={{ width: 8, height: 8, borderRadius: "50%", background: k === i ? "#FFFFFF" : "rgba(255,255,255,0.5)", transition: "background 200ms" }}
+          />
+        ))}
+      </div>
     </div>
   );
 }
