@@ -59,6 +59,10 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/jue-05-stories-1.jpg",
         "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/jue-05-repost.webp",
+        "tipo": "imagen"
       }
     ]
   },
@@ -195,6 +199,87 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/dom-22-1.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "vie-06": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/jue-05-1.mp4",
+        "tipo": "video"
+      }
+    ]
+  },
+  "lun-09": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-09-repost.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mie-11": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-11-repost.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "lun-16": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-16-repost.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mie-18": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-18-repost.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "vie-20": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/jue-19-1.mp4",
+        "tipo": "video",
+        "portada": "/pitch/donlay-calendario/noviembre/jue-19-portada.webp"
+      }
+    ]
+  },
+  "lun-23": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-23-repost.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mie-25": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-25-repost.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "vie-27": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/jue-26-1.mp4",
+        "tipo": "video"
+      }
+    ]
+  },
+  "lun-30": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-30-repost.webp",
         "tipo": "imagen"
       }
     ]
