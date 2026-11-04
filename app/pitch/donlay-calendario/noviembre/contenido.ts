@@ -326,8 +326,21 @@ export const CONTENIDO: Contenido = {
   "vie-13": {
     "medios": [
       {
+        "url": "/pitch/donlay-calendario/noviembre/vie-13-repost.mp4",
+        "tipo": "video"
+      },
+      {
         "url": "/pitch/donlay-calendario/noviembre/vie-13-story-1.webp",
         "tipo": "imagen"
+      }
+    ]
+  },
+  "jue-12": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/jue-12-1.mp4",
+        "tipo": "video",
+        "portada": "/pitch/donlay-calendario/noviembre/jue-12-portada.webp"
       }
     ]
   }
