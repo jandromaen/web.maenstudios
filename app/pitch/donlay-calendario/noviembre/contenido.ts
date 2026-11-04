@@ -118,15 +118,15 @@ export const CONTENIDO: Contenido = {
   "mie-04": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-2.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-04-earlylunch-1.webp",
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-3.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-04-earlylunch-2.webp",
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-4.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-04-earlylunch-3.webp",
         "tipo": "imagen"
       }
     ]
