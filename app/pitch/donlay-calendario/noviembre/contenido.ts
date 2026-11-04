@@ -57,10 +57,6 @@ export const CONTENIDO: Contenido = {
   "mar-10": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-1.webp",
-        "tipo": "imagen"
-      },
-      {
         "url": "/pitch/donlay-calendario/noviembre/mar-10-2.webp",
         "tipo": "imagen"
       },
