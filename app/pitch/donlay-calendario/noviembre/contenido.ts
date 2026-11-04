@@ -6,6 +6,14 @@ import type { Contenido } from "../../medios/Medios";
  * coloca; los jueves (reels) se añaden cuando estén los vídeos.
  */
 export const CONTENIDO: Contenido = {
+  "jue-26": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/jue-26-1.mp4",
+        "tipo": "video"
+      }
+    ]
+  },
   "sab-07": {
     "medios": [
       {
