@@ -480,7 +480,34 @@ pilares = [
       ("Membresía", POST, t_tipo(POST, False, "Membresía", "Tu piel,<br><i>cada mes</i>", foto=("dos-mujeres.jpg", "74% 30%"), cta="Descubre qué incluye", size=96)),
       ("Reel: la primera visita", REEL, t_foto(REEL, "inyeccion.jpg", "85% 40%", "Primera visita", "Así es<br><i>tu primera vez</i>", cta="Escríbenos por WhatsApp"))]),
 ]
+OFERTAS_IMG = [  # piezas finales, generadas con scripts/build-skin-laundry-ofertas.py
+    ("oferta-primer-laser.jpg", "Primer láser"),
+    ("oferta-pack-3.jpg", "Campaña de temporada"),
+    ("oferta-halloween.jpg", "Campaña con varios tratamientos"),
+    ("oferta-membresia.jpg", "Membresía"),
+]
 for i, (pid, n, desc, piezas) in enumerate(pilares):
+    if pid == "ofertas":
+        body = ""
+        for j, (src, etq) in enumerate(OFERTAS_IMG):
+            x = 128 + j * 428
+            body += (foto(src, etq, x, 330, 380, 475, radius=14, extra="box-shadow:0 22px 50px rgba(60,32,29,.20)")
+                     + etiqueta_pieza(etq, x - 10, 830, 400))
+        add(
+            f"pilar-{pid}",
+            n,
+            sec(
+                eyebrow(f"Pilar {i + 1} de 5", 128, 128)
+                + titulo(n, 128, 190, 1600, 80)
+                + texto("Sus promociones de siempre, con la nueva línea: espresso o crema, serif fina, precio protagonista y un solo acento en lima.",
+                        1180, 210, 610, 22, SOFT)
+                + body
+                + texto("Ofertas y precios reales de la cuenta y la web de Skin Laundry, rehechos con el sistema visual. Textos a validar con la clínica.",
+                        128, 905, 1660, 20, SOFT)
+                + pie(0),
+            ),
+        )
+        continue
     body = ""
     AH = 570  # alto disponible para las piezas
     ws = [round(AH * 1080 / H) for _, H, _ in piezas]
