@@ -3,7 +3,14 @@
 import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { createPortal } from "react-dom";
 
-export type Medio = { url: string; tipo: "imagen" | "video"; /** contain: no recortar (fotos horizontales) */ ajuste?: "contain" };
+export type Medio = {
+  url: string;
+  tipo: "imagen" | "video";
+  /** contain: no recortar (fotos horizontales) */
+  ajuste?: "contain";
+  /** Vídeos: imagen de portada (feed y fotograma inicial del reel) */
+  portada?: string;
+};
 export type Contenido = Record<string, { medios: Medio[]; drive?: string }>;
 
 /**
@@ -87,10 +94,13 @@ export function CapaMedios({
 function Pieza({ medio, portada }: { medio: Medio; portada?: boolean }) {
   const estilo = { width: "100%", height: "100%", objectFit: (portada ? "cover" : (medio.ajuste ?? "cover")) as "cover" | "contain", display: "block" };
   if (medio.tipo === "video") {
+    if (portada && medio.portada) {
+      return <img src={medio.portada} alt="" draggable={false} decoding="async" style={estilo} />;
+    }
     return portada ? (
       <video src={`${medio.url}#t=0.1`} muted playsInline preload="metadata" style={estilo} />
     ) : (
-      <VideoConSonido url={medio.url} estilo={estilo} />
+      <VideoConSonido url={medio.url} poster={medio.portada} estilo={estilo} />
     );
   }
   return <img src={medio.url} alt="" draggable={false} decoding="async" style={estilo} />;
@@ -98,7 +108,7 @@ function Pieza({ medio, portada }: { medio: Medio; portada?: boolean }) {
 
 /* Reel en bucle: arranca en silencio (los navegadores no dejan autoplay con
    sonido) y un botón abajo a la derecha activa o quita el audio. */
-function VideoConSonido({ url, estilo }: { url: string; estilo: React.CSSProperties }) {
+function VideoConSonido({ url, poster, estilo }: { url: string; poster?: string; estilo: React.CSSProperties }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [silencio, setSilencio] = useState(true);
   const alternar = () => {
@@ -110,7 +120,7 @@ function VideoConSonido({ url, estilo }: { url: string; estilo: React.CSSPropert
   };
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      <video ref={ref} src={url} autoPlay muted loop playsInline style={estilo} />
+      <video ref={ref} src={url} poster={poster} autoPlay muted loop playsInline style={estilo} />
       <button
         data-no-nav
         onClick={alternar}

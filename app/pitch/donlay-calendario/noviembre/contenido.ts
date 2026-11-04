@@ -50,7 +50,8 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/jue-19-1.mp4",
-        "tipo": "video"
+        "tipo": "video",
+        "portada": "/pitch/donlay-calendario/noviembre/jue-19-portada.webp"
       }
     ]
   },
