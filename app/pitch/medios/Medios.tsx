@@ -80,7 +80,8 @@ export function CapaMedios({
         const m = contenido[el.dataset.feed!]?.medios[0];
         if (!m) return null;
         return createPortal(
-          <div style={{ position: "absolute", inset: 0 }}>
+          /* pointer-events: none → el clic llega a la casilla del feed (data-ir) */
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
             <Pieza medio={m} portada />
           </div>,
           el,

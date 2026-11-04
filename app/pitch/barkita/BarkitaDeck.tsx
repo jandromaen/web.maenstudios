@@ -100,6 +100,15 @@ export default function BarkitaDeck({
   const alPulsarLienzo = (e: React.MouseEvent<HTMLDivElement>) => {
     /* Un enlace de la diapositiva (p. ej. el vídeo en Drive) se abre sin pasar de diapositiva */
     if ((e.target as HTMLElement).closest("a, [data-no-nav]")) return;
+    /* data-ir="<id>": salto directo a esa diapositiva (p. ej. un día del calendario) */
+    const destino = (e.target as HTMLElement).closest<HTMLElement>("[data-ir]")?.dataset.ir;
+    if (destino) {
+      const i = diapos.findIndex((d) => d.id === destino);
+      if (i >= 0) {
+        ir(i);
+        return;
+      }
+    }
     const video = (e.target as HTMLElement).closest("video");
     if (video) {
       if (video.paused) video.play();
