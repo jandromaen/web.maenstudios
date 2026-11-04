@@ -250,6 +250,38 @@ add(
     ),
 )
 
+# 03 · Qué vamos a mejorar
+mejoras = [
+    ("Planos más simétricos", "Encuadres limpios y centrados, con la persona o el tratamiento como protagonista y aire alrededor."),
+    ("La misma luz, más cálida", "Siempre la misma iluminación, en tonos cálidos, para que todo el feed se vea como una sola sesión."),
+    ("Más unidad cromática", "Espresso, crema y lima como paleta común en fondos, textos y detalles."),
+    ("Una sola tipografía", "La misma letra en reels y en posts: serif fina para titulares y sans para textos."),
+    ("Reel y post, coherentes", "Los dos formatos siguen el mismo sistema y el mismo ritmo, para que la cuenta se lea como un todo."),
+    ("Una edición más creativa", "Transiciones, ritmo y detalles de montaje que hagan el contenido más atractivo sin perder la línea premium."),
+]
+mg = ""
+for i, (t, d) in enumerate(mejoras):
+    col, row = i % 3, i // 3
+    x, y = 128 + col * 568, 360 + row * 300
+    dark = i == 5
+    bg, fg, sub, ac = (INK, CREAM, SOFT_D, LIME) if dark else (SAND, INK, SOFT, CARAMEL)
+    mg += (
+        f'<div style="{pos(x, y)}width:536px;height:270px;border-radius:22px;background:{bg}"></div>'
+        + f'<p style="{pos(x + 40, y + 34)}font-size:20px;font-weight:600;letter-spacing:2px;color:{ac}">0{i + 1}</p>'
+        + f'<p style="{pos(x + 40, y + 72)}width:456px;font-family:{SERIF};font-size:42px;font-weight:300;line-height:1.05;color:{fg}">{t}</p>'
+        + texto(d, x + 40, y + 140, 456, 21, sub)
+    )
+add(
+    "mejoras",
+    "Qué vamos a mejorar",
+    sec(
+        eyebrow("Qué vamos a mejorar", 128, 128)
+        + titulo("Más coherencia, <i>plano a plano</i>.", 128, 200, 1600, 80)
+        + mg
+        + pie(0),
+    ),
+)
+
 out = Path(__file__).resolve().parent.parent / "app/pitch/skin-laundry-briefing/diapos.ts"
 out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(
