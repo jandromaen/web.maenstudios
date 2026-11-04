@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { createPortal } from "react-dom";
 
 export type Medio = { url: string; tipo: "imagen" | "video"; /** contain: no recortar (fotos horizontales) */ ajuste?: "contain" };
@@ -90,10 +90,69 @@ function Pieza({ medio, portada }: { medio: Medio; portada?: boolean }) {
     return portada ? (
       <video src={`${medio.url}#t=0.1`} muted playsInline preload="metadata" style={estilo} />
     ) : (
-      <video src={medio.url} autoPlay muted loop playsInline style={estilo} />
+      <VideoConSonido url={medio.url} estilo={estilo} />
     );
   }
   return <img src={medio.url} alt="" draggable={false} decoding="async" style={estilo} />;
+}
+
+/* Reel en bucle: arranca en silencio (los navegadores no dejan autoplay con
+   sonido) y un botón abajo a la derecha activa o quita el audio. */
+function VideoConSonido({ url, estilo }: { url: string; estilo: React.CSSProperties }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [silencio, setSilencio] = useState(true);
+  const alternar = () => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    if (!v.muted) v.play().catch(() => {});
+    setSilencio(v.muted);
+  };
+  return (
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <video ref={ref} src={url} autoPlay muted loop playsInline style={estilo} />
+      <button
+        data-no-nav
+        onClick={alternar}
+        onPointerDown={(e) => e.stopPropagation()}
+        aria-label={silencio ? "Activar sonido" : "Silenciar"}
+        title={silencio ? "Activar sonido" : "Silenciar"}
+        style={{
+          position: "absolute",
+          right: 20,
+          bottom: 20,
+          width: 68,
+          height: 68,
+          borderRadius: "50%",
+          border: 0,
+          padding: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "rgba(29,29,27,0.7)",
+          color: "#FFFFFF",
+          boxShadow: "0 4px 14px rgba(0,0,0,0.3)",
+          cursor: "pointer",
+          zIndex: 3,
+        }}
+      >
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor" />
+          {silencio ? (
+            <>
+              <line x1="16" y1="9" x2="22" y2="15" />
+              <line x1="22" y1="9" x2="16" y2="15" />
+            </>
+          ) : (
+            <>
+              <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+              <path d="M18.5 5.5a9 9 0 0 1 0 13" />
+            </>
+          )}
+        </svg>
+      </button>
+    </div>
+  );
 }
 
 /* Un medio: lo pinta entero. Varios: carrusel como el de Instagram, con todas
