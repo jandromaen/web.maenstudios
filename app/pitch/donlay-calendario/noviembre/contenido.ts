@@ -98,22 +98,6 @@ export const CONTENIDO: Contenido = {
   "mar-10": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-2.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-3.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-4.webp",
-        "tipo": "imagen"
-      }
-    ]
-  },
-  "mie-04": {
-    "medios": [
-      {
         "url": "/pitch/donlay-calendario/noviembre/dom-15-4.webp",
         "tipo": "imagen"
       },
@@ -123,6 +107,22 @@ export const CONTENIDO: Contenido = {
       },
       {
         "url": "/pitch/donlay-calendario/noviembre/dom-15-2.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mie-04": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mar-10-2.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mar-10-3.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mar-10-4.webp",
         "tipo": "imagen"
       }
     ]
