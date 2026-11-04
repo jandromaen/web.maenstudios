@@ -206,8 +206,12 @@ export const CONTENIDO: Contenido = {
   "vie-06": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/jue-05-1.mp4",
+        "url": "/pitch/donlay-calendario/noviembre/vie-06-repost.mp4",
         "tipo": "video"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/vie-06-story-1.webp",
+        "tipo": "imagen"
       }
     ]
   },
@@ -215,6 +219,10 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/lun-09-repost.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-09-story-1.webp",
         "tipo": "imagen"
       }
     ]
@@ -224,6 +232,10 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/mie-11-repost.webp",
         "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-11-story-1.webp",
+        "tipo": "imagen"
       }
     ]
   },
@@ -231,6 +243,10 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/lun-16-repost.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-16-story-1.webp",
         "tipo": "imagen"
       }
     ]
@@ -240,15 +256,22 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/mie-18-repost.webp",
         "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-18-story-1.webp",
+        "tipo": "imagen"
       }
     ]
   },
   "vie-20": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/jue-19-1.mp4",
-        "tipo": "video",
-        "portada": "/pitch/donlay-calendario/noviembre/jue-19-portada.webp"
+        "url": "/pitch/donlay-calendario/noviembre/vie-20-repost.mp4",
+        "tipo": "video"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/vie-20-story-1.webp",
+        "tipo": "imagen"
       }
     ]
   },
@@ -256,6 +279,10 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/lun-23-repost.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-23-story-1.webp",
         "tipo": "imagen"
       }
     ]
@@ -265,14 +292,22 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/mie-25-repost.webp",
         "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-25-story-1.webp",
+        "tipo": "imagen"
       }
     ]
   },
   "vie-27": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/jue-26-1.mp4",
+        "url": "/pitch/donlay-calendario/noviembre/vie-27-repost.mp4",
         "tipo": "video"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/vie-27-story-1.webp",
+        "tipo": "imagen"
       }
     ]
   },
@@ -280,6 +315,18 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/lun-30-repost.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-30-story-1.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "vie-13": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/vie-13-story-1.webp",
         "tipo": "imagen"
       }
     ]
