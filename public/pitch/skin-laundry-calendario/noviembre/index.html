@@ -1026,6 +1026,8 @@ const ASSET = {
 
 
 
+
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1411,7 +1413,6 @@ slides.push(() => `
   <div class="inner">
   <img class="logo" src="${ASSET.logoLight}" alt="Skin Laundry">
   <div class="sep"></div>
-  <img class="maen" src="${ASSET.maen}" alt="Maen Studios">
   <div class="cap">Calendario de publicaciones · Noviembre ${YEAR}</div>
   <div class="accent"></div>
   </div>
