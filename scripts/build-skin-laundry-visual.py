@@ -680,7 +680,7 @@ add(
     ),
 )
 
-out = Path(__file__).resolve().parent.parent / "app/pitch/skin-laundry-visual/diapos.ts"
+out = Path("/tmp/skin-laundry-visual-diapos.ts")  # ya no se publica aparte: el briefing toma estas diapositivas
 out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(
     "/**\n * Brief visual de Instagram para Skin Laundry: identidad afinada, plantillas por\n"

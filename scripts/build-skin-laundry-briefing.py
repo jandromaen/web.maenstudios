@@ -716,7 +716,7 @@ indice = [
     ("01", "Punto de partida", "Qué dice el análisis y qué queremos conseguir."),
     ("02", "Ritmo y reparto", "Cuatro piezas a la semana y cómo se reparten por pilar."),
     ("03", "Los cinco pilares", "Cada pilar y todas sus formas de contarlo, en reel y en post."),
-    ("04", "Identidad", "Paleta y tipografía."),
+    ("04", "Identidad", "Paleta, tipografía, fotografía, feed y destacados."),
     ("05", "Cómo vamos a trabajar", "Seis principios para ganar coherencia."),
     ("06", "Producción", "Rodaje, edición, copys y llamadas a la acción."),
     ("07", "Proceso y medición", "Calendario, validaciones, qué necesitamos y qué medimos."),
@@ -1009,6 +1009,21 @@ tp += etiqueta("Reglas", 1010, 368)
 tp += lista(reglas, 1010, 410, 780, 23, gap=18)
 add("tipografia", "Tipografía", sec(
     eyebrow("04 · Identidad") + titulo("Dos letras, <i>tres niveles</i>.", 128, 190) + tp + pie()))
+
+# ── Identidad · Del brief visual ──────────────────────────────────────────
+# Las diapositivas propias del brief visual (scripts/build-skin-laundry-visual.py)
+# entran aquí para que haya un solo enlace de briefing. Se ejecuta ese script
+# sin escribir su salida y se toman sus diapositivas con el número sin poner.
+_vsrc = (Path(__file__).resolve().parent / "build-skin-laundry-visual.py").read_text()
+_vsrc = _vsrc[: _vsrc.index("out = Path(__file__)")].replace(
+    'html.replace("§N§", f"{len(D) + 1:02d}")', "html")
+_vns = {"__file__": str(Path(__file__).resolve().parent / "build-skin-laundry-visual.py"), "__name__": "visual"}
+exec(compile(_vsrc, "build-skin-laundry-visual.py", "exec"), _vns)
+_vis = {d["id"]: d for d in _vns["D"]}
+for _vid in ["mantener-afinar", "fotografia", "anatomia", "feed", "destacados", "destacado-dentro", "storyboard"]:
+    _d = _vis[_vid]
+    add(f"visual-{_vid}", _d["titulo"],
+        _d["html"].replace("All About Management × Skin Laundry · Brief visual", PIE))
 
 # ── Cómo vamos a trabajar (6 principios, en dos diapositivas) ─────────────
 PRINCIPIOS = [
