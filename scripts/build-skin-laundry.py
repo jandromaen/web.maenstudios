@@ -506,38 +506,51 @@ add(
     ),
 )
 
-# 14 · Oportunidades
+# 14 · Objetivos y KPIs
 ops = [
-    ("Definir el foco", "Entender qué tratamientos, servicios y objetivos queremos priorizar en la comunicación."),
-    ("Una sola identidad", "Unificar la estética de las publicaciones para reforzar el universo premium de Skin Laundry."),
-    ("Dar voz al equipo médico", "Potenciar la presencia de las doctoras para transmitir confianza y conocimiento, y dar una voz propia a la cuenta."),
-    ("Más conversación", "Explorar contenidos y llamadas a la acción que inviten a participar y faciliten el contacto."),
-    ("Reforzar la diferenciación", "Comunicar mejor qué hace único a Skin Laundry frente a otras clínicas y tratamientos."),
-    ("Destacados en formato catálogo", "Rehacer los destacados como un catálogo con las distintas categorías de tratamiento: qué es, para quién y cómo reservar."),
-    ("Conectar con el target", "Que las caras visibles del contenido sean del público al que nos dirigimos, con creadoras y perfiles afines a la marca."),
-    ("Medir para evolucionar", "Identificar qué contenidos generan interés, interacción, consultas y reservas."),
+    ("Una identidad reconocible", "Que cada publicación, también las ofertas, se reconozca como Skin Laundry al primer vistazo.",
+     ["Visitas al perfil", "Nuevos seguidores"]),
+    ("Las doctoras, voz de la marca", "Caras propias y recurrentes que transmitan confianza y conocimiento.",
+     ["Reproducciones", "Guardados"]),
+    ("Una comunidad que conversa", "Contenidos y llamadas a la acción que inviten a preguntar y a escribir.",
+     ["Comentarios", "Mensajes directos"]),
+    ("Lo que solo hay aquí", "Contar el método, la tecnología y la experiencia que hacen única a Skin Laundry.",
+     ["Compartidos", "Alcance a no seguidores"]),
+    ("Un perfil que orienta", "Destacados en formato catálogo: qué es cada tratamiento, para quién y cómo reservar.",
+     ["Clics en el enlace", "Vistas de destacados"]),
+    ("Caras que conectan", "Creadoras y perfiles afines al público al que nos dirigimos.",
+     ["Alcance de las colabs", "Seguidores afines"]),
+    ("Del contenido a la reserva", "Cada mes, saber qué piezas traen consultas y reservas, y crecer a partir de ahí.",
+     ["Consultas por WhatsApp", "Reservas"]),
 ]
-Y0, RH = 352, 76
-og = (
-    texto("Oportunidad", 228, 330, 500, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
-    + texto("Enfoque", 820, 330, 500, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
+Y0, RH = 372, 82
+og = "".join(
+    texto(t, x, 336, 500, 18, SOFT, 600, extra="letter-spacing:2px;text-transform:uppercase")
+    for t, x in [("Objetivo", 228), ("Cómo llegamos", 760), ("Qué medimos", 1350)]
 )
-for i, (t, d) in enumerate(ops):
+for i, (t, d, kpis) in enumerate(ops):
     y = Y0 + i * RH
+    pills = "".join(
+        f'<span style="padding:7px 16px;border-radius:999px;font-size:18px;font-weight:600;white-space:nowrap;'
+        f'background:{LIME if k == 0 else "transparent"};border:1.5px solid {LIME if k == 0 else INK};color:{INK}">{kp}</span>'
+        for k, kp in enumerate(kpis)
+    )
     og += (
         linea(128, y, 1664)
-        + f'<p style="{pos(128, y + 24)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
-        + f'<p style="{pos(228, y + 16)}width:580px;font-family:{SERIF};font-size:34px;font-weight:300;line-height:1.1">{t}</p>'
-        # Una línea centrada en la fila; si pasa de una línea, sube para caber entera
-        + texto(d, 820, y + (20 if len(d) < 98 else 8), 972, 22, SOFT)
+        + f'<p style="{pos(128, y + 28)}font-size:20px;font-weight:600;letter-spacing:2px;color:{CARAMEL}">0{i + 1}</p>'
+        + f'<p style="{pos(228, y + 20)}width:510px;font-family:{SERIF};font-size:34px;font-weight:300;line-height:1.1">{t}</p>'
+        + texto(d, 760, y + 14, 540, 20, SOFT)
+        + f'<div style="{pos(1350, y + 21)}width:442px;display:flex;gap:10px;flex-wrap:nowrap">{pills}</div>'
     )
 og += linea(128, Y0 + len(ops) * RH, 1664)
 add(
     "oportunidades",
-    "Por dónde podemos empezar",
+    "Hacia dónde vamos",
     sec(
-        eyebrow("Por dónde podemos empezar", 128, 128)
-        + titulo("Ocho oportunidades para <i>explorar juntos</i>.", 128, 200, 1600, 80)
+        eyebrow("Hacia dónde vamos · Objetivos y KPIs", 128, 128)
+        + titulo("Siete objetivos <i>para crecer juntos</i>.", 128, 200, 1200, 80)
+        + texto("Fijamos el punto de partida el primer mes y seguimos la evolución en el informe mensual.",
+                1360, 214, 432, 21, SOFT, extra="text-align:right")
         + og
         + pie(0),
     ),
