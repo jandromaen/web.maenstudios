@@ -501,39 +501,6 @@ a{color:inherit;text-decoration:none}
 .hours{flex-wrap:nowrap;gap:6px}
 .hours .chip{font-size:9.5px;padding:6px 8px;white-space:nowrap}
 .hours .eyebrow{margin-right:2px;font-size:9px;white-space:nowrap}
-
-/* ==== REELS estilo Instagram (vista de reel a pantalla completa) ==== */
-.post-frame.is-reel{width:228px}
-.reel-ig{position:relative;width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#000;color:#fff;box-shadow:0 14px 34px rgba(26,19,18,.28);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;cursor:pointer;user-select:none}
-.reel-ig video,.reel-ig img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.reel-ig .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.32) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 62%,rgba(0,0,0,.55) 100%);pointer-events:none}
-.reel-ig .top{position:absolute;top:10px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:15px;letter-spacing:-.01em}
-.reel-ig svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
-.reel-ig .rail{position:absolute;right:8px;bottom:14px;display:flex;flex-direction:column;align-items:center;gap:15px}
-.reel-ig .rail .dots svg{width:18px;height:18px;fill:#fff;stroke:none}
-.reel-ig .rail .aud{width:22px;height:22px;border-radius:5px;border:2px solid #fff;overflow:hidden;background:#fff}
-.reel-ig .rail .aud img{width:100%;height:100%;object-fit:cover;display:block}
-.reel-ig .info{position:absolute;left:11px;right:46px;bottom:14px;font-size:10.5px;line-height:1.35;text-shadow:0 1px 2px rgba(0,0,0,.35)}
-.reel-ig .who{display:flex;align-items:center;gap:7px;font-weight:600;font-size:11px;margin-bottom:6px}
-.reel-ig .who i{width:24px;height:24px;border-radius:50%;overflow:hidden;background:#fff;flex:none;display:block}
-.reel-ig .who i img{width:100%;height:100%;object-fit:cover;display:block}
-.reel-ig .who .seg{border:1px solid rgba(255,255,255,.9);border-radius:7px;padding:2px 8px;font-size:10px;font-weight:600}
-.reel-ig .cap{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.reel-ig .cap b{font-weight:400;color:rgba(255,255,255,.75)}
-.reel-ig .song{display:flex;align-items:center;gap:5px;margin-top:6px;font-size:9.5px;opacity:.95;white-space:nowrap;overflow:hidden}
-.reel-ig .song svg{width:11px;height:11px;stroke-width:2.2}
-.reel-ig .mute{position:absolute;right:10px;top:10px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.45);display:grid;place-items:center}
-.reel-ig .mute svg{width:13px;height:13px;stroke-width:2.2}
-.reel-ig .mute .on{display:none}.reel-ig.sound .mute .on{display:block}.reel-ig.sound .mute .off{display:none}
-.reel-ig .paused{position:absolute;inset:0;display:none;place-items:center;pointer-events:none}
-.reel-ig.is-paused .paused{display:grid}
-.reel-ig .paused span{width:54px;height:54px;border-radius:50%;background:rgba(0,0,0,.4);display:grid;place-items:center}
-.reel-ig .paused svg{width:24px;height:24px;fill:#fff;stroke:none}
-.reel-ig .guion{position:absolute;inset:0;background:#3C201D;padding:40px 52px 100px 16px;display:flex;flex-direction:column;justify-content:center;gap:8px;font-family:var(--sans,inherit);color:#F6EDE4}
-.reel-ig .guion span{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#CDF765}
-.reel-ig .guion ol{margin:0;padding-left:16px;font-size:10.5px;line-height:1.45}
-.reel-ig .guion em{font-style:normal;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-top:6px}
-/* ==== fin REELS estilo Instagram ==== */
 </style>
 </head>
 <body>
@@ -755,13 +722,13 @@ Nuestros médicos resolverán tus dudas en persona.
 
 #Ultraformer #TensadoSinCirugia #OpenDay #SkinLaundryBarcelona` },
 
-{ d:22, formato:"Carrusel", cubo:"Láser", tema:"Rosácea y acné", hora:"11:00h",
+{ d:22, formato:"Carrusel", storyImg:"/pitch/skin-laundry-calendario/noviembre/img/drive-d22_story.jpg", cubo:"Láser", tema:"Rosácea y acné", hora:"11:00h",
   pieza:"Rojeces o granitos: no son lo mismo",
   base:"Material del cliente (4 slides) · promo Mesotox 350 € + tóner de regalo", cta:"Reserva tu valoración",
   nota:"Promo Mesotox 350 € + tóner de regalo: confirmar vigencia · Blemiderm no aparece en la carta",
   media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d22_1.jpg", slides:["/pitch/skin-laundry-calendario/noviembre/img/drive-d22_1.jpg","/pitch/skin-laundry-calendario/noviembre/img/drive-d22_2.jpg","/pitch/skin-laundry-calendario/noviembre/img/drive-d22_3.jpg","/pitch/skin-laundry-calendario/noviembre/img/drive-d22_4.jpg"],
   idea:["1 · Rojeces o granitos: no son lo mismo","2 · Se parecen, pero no se tratan igual (tabla rosácea vs. acné)","3 · Cómo lo tratamos: Collagen, Calm & Clear, Mesotox / Carbon Peel, Brightening, Blemiderm","4 · Promo del mes: Mesotox 350 € + tóner de regalo"],
-  story:["Slide 1 con sticker «Desliza»","Encuesta: ¿rojeces o granitos?","Slide 4 con enlace: reserva tu valoración"],
+  story:["Nuevo post: Rojeces o granitos · sticker «Desliza»","Encuesta: ¿rojeces o granitos?","Mesotox 350 € con enlace: reserva tu valoración"],
   copy:`Rojeces o granitos: no son lo mismo.
 
 Rosácea y acné se parecen, pero no se tratan igual.
@@ -836,8 +803,7 @@ Desliza para reconocer la tuya y saber qué tratamiento tiene sentido. Spotless,
 
 #Manchas #Melasma #LaserFacial #SkinLaundryBarcelona` },
 
-{ d:28, formato:"Reel", media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d28.mp4", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d28_poster.jpg", estado:"listo",
-  nota:"Reel montado por Maen · provisional: el plano de Hydrafacial es aplicación de gel y el de láser es peeling de carbón (sustituir por vídeo real de Hydrafacial e IMG_3402) · precio 380 € pendiente de confirmar",  cubo:"Promociones", tema:"Power Glow", hora:"11:00h",
+{ d:28, formato:"Reel",  cubo:"Promociones", tema:"Power Glow", hora:"11:00h",
   pieza:"Power Glow Duo: Hydrafacial + láser",
   base:"Excel 2025: Power Glow · carta 380 €", cta:"Reserva antes de que acabe",
   idea:["Gancho: «Dos tratamientos, una sola cita»","Plano 1: Hydrafacial (limpieza e hidratación)","Plano 2: Brightening Laser (luminosidad)","Cierre: el combo para llegar con la piel lista a diciembre"],
@@ -1002,59 +968,12 @@ const ASSET = {
 
 
 
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
 const mediaTag = (u, poster) => isVid(u) ? `<video src="${esc(u)}" ${poster ? `poster="${esc(poster)}"` : ""} controls loop playsinline preload="metadata"></video>` : `<img src="${esc(u)}" alt="">`;
 const fk = f => (f||"").toLowerCase();
-/* ==== REELS estilo Instagram: tarjeta de reel ==== */
-const RI = {
-  cam:'<svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="14" rx="3.5"/><path d="M8.5 6l1.6-2.5h3.8L15.5 6"/><circle cx="12" cy="13" r="3.6"/></svg>',
-  heart:'<svg viewBox="0 0 24 24"><path d="M12 20.3s-7.6-4.5-9.4-9.4C1.3 7.4 3.6 4.3 7 4.3c2.1 0 3.7 1.2 5 3 1.3-1.8 2.9-3 5-3 3.4 0 5.7 3.1 4.4 6.6-1.8 4.9-9.4 9.4-9.4 9.4z"/></svg>',
-  com:'<svg viewBox="0 0 24 24"><path d="M20.7 16.4A9 9 0 1 0 17 20.2l4.5 1.3z"/></svg>',
-  rep:'<svg viewBox="0 0 24 24"><path d="M16.5 3l3 3-3 3"/><path d="M4.5 11.5V10a4 4 0 0 1 4-4h11"/><path d="M7.5 21l-3-3 3-3"/><path d="M19.5 12.5V14a4 4 0 0 1-4 4h-11"/></svg>',
-  send:'<svg viewBox="0 0 24 24"><path d="M21.5 2.5 10.2 13.8"/><path d="M21.5 2.5 14.6 21l-4.4-7.2L3 9.4z"/></svg>',
-  dots:'<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>',
-  note:'<svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>',
-  off:'<svg class="off" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>',
-  on:'<svg class="on" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
-  play:'<svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>'
-};
-function reelCard(p) {
-  const av = `<img src="${ASSET.fav}" alt="" onerror="this.remove()">`;
-  const cap = esc((p.copy || "").split("\n")[0]);
-  const vid = p.media && isVid(p.media);
-  const bg = !p.media ? `<div class="guion"><span>Guion</span><ol>${(p.idea || []).map(x => `<li>${esc(x)}</li>`).join("")}</ol><em>Vídeo pendiente</em></div>`
-    : vid ? `<video src="${esc(p.media)}" ${p.poster ? `poster="${esc(p.poster)}"` : ""} muted loop playsinline autoplay preload="metadata"></video>`
-    : `<img class="bg" src="${esc(p.media)}" alt="">`;
-  return `<div class="reel-ig${vid ? "" : " is-static"}" ${vid ? `onclick="reelTap(event,this)"` : ""}>
-    ${bg}<div class="shade"></div>
-    ${vid ? `<div class="mute">${RI.off}${RI.on}</div><div class="paused"><span>${RI.play}</span></div>` : ""}
-    <div class="rail">${RI.heart}${RI.com}${RI.rep}${RI.send}<span class="dots">${RI.dots}</span><span class="aud">${av}</span></div>
-    <div class="info">
-      <div class="who"><i>${av}</i>${esc(HANDLE.replace(/^@/, ""))}<span class="seg">Seguir</span></div>
-      <div class="cap">${cap} <b>… más</b></div>
-      <div class="song">${RI.note}${esc(HANDLE.replace(/^@/, ""))} · Audio original</div>
-    </div>
-  </div>`;
-}
-function reelTap(e, el) {
-  const v = el.querySelector("video"); if (!v) return;
-  if (e.target.closest(".mute")) { v.muted = !v.muted; el.classList.toggle("sound", !v.muted); if (!v.muted && v.paused) v.play(); return; }
-  if (v.paused) { v.play(); el.classList.remove("is-paused"); } else { v.pause(); el.classList.add("is-paused"); }
-}
-/* Solo suena/avanza el reel de la diapositiva visible */
-setInterval(() => {
-  document.querySelectorAll(".reel-ig video").forEach(v => {
-    const r = v.getBoundingClientRect();
-    const vis = r.width > 0 && r.right > 0 && r.left < innerWidth && r.bottom > 0 && r.top < innerHeight;
-    const card = v.closest(".reel-ig");
-    if (!vis && !v.paused) { v.pause(); v.muted = true; card.classList.remove("sound"); }
-    else if (vis && v.paused && !card.classList.contains("is-paused")) v.play().catch(() => {});
-  });
-}, 400);
-/* ==== fin REELS estilo Instagram ==== */
-
 const pad = n => String(n).padStart(2,"0");
 const FMT_COLOR = { reel:"var(--choc)", carrusel:"var(--black)", post:"var(--tan)", stories:"var(--cream-2)" };
 const dayName = d => DOW[new Date(YEAR, MONTH, d).getDay()];
@@ -1331,7 +1250,7 @@ dayPlan.forEach(item => {
   <div class="day-right">
     <div class="post-frame ${isReel ? "is-reel" : ""}">
       <div class="col-lbl">${esc(p.formato)} · propuesta de pieza</div>
-      ${isReel ? reelCard(p) : ""}<div class="ig-card" ${isReel ? 'style="display:none"' : ""}>
+      <div class="ig-card">
         <div class="hd"><i>${avatar}</i>skinlaundry_es</div>
         <div class="media pf m-${f} ${p.media ? "has-media" : ""}">
           ${p.media ? `${mediaTag(p.media, p.poster)}${isReel && !isVid(p.media) ? `<span class="play">▶</span>` : f === "carrusel" ? `<span class="pages">1/${p.slides ? p.slides.length : Math.max(3, p.idea.length)}</span>` : ""}<div class="idea over"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>` : `<div class="idea"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>`}
@@ -1435,77 +1354,5 @@ let start = 1; try { start = parseInt(location.hash.slice(1)) || 1; } catch (e) 
 go(start - 1, false);
 
 </script>
-
-<!-- ==== CARRUSEL estilo Instagram ==== -->
-<style>
-.car-ig{position:absolute;inset:0;overflow:hidden;touch-action:pan-y}
-.car-ig .trk{display:flex;height:100%;transition:transform .32s cubic-bezier(.25,.8,.25,1)}
-.car-ig .trk img{position:static!important;flex:0 0 100%;width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none}
-.car-ig .nav{position:absolute;top:50%;width:26px;height:26px;margin-top:-13px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.88);box-shadow:0 1px 4px rgba(0,0,0,.25);display:grid;place-items:center;cursor:pointer;z-index:3;transition:opacity .2s}
-.car-ig .nav svg{width:12px;height:12px;fill:none;stroke:#262626;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.car-ig .nav.nx{right:9px}.car-ig .nav.pv{left:9px}
-.car-ig .nav[hidden]{display:none}
-.car-ig .cnt{position:absolute;top:10px;right:10px;z-index:3;background:rgba(18,18,18,.72);color:#fff;font:600 10px/1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;padding:5px 8px;border-radius:12px}
-.media.pf.is-car>img,.media.pf.is-car>.pages{display:none!important}
-.ig-card .ft{position:relative}
-.ig-card .ft .car-dots{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:4px}
-.ig-card .ft .car-dots i{width:6px;height:6px;border-radius:50%;background:#c7c7c7;transition:background .2s}
-.ig-card .ft .car-dots i.on{background:#0095f6}
-.slides div{cursor:pointer}
-.slides div.on{outline:2px solid #0095f6;outline-offset:1px}
-</style>
-<script>
-(function () {
-  const CH = d => `<svg viewBox="0 0 24 24"><path d="${d}"/></svg>`;
-  function build(frame) {
-    const thumbs = [...frame.querySelectorAll(".slides img")];
-    const media = frame.querySelector(".media.pf");
-    if (thumbs.length < 2 || !media || media.querySelector(".car-ig")) return;
-    const srcs = thumbs.map(t => t.getAttribute("src"));
-    media.classList.add("is-car");
-    const car = document.createElement("div");
-    car.className = "car-ig";
-    car.innerHTML = `<div class="trk">${srcs.map(u => `<img src="${u}" alt="" draggable="false">`).join("")}</div>
-      <span class="cnt">1/${srcs.length}</span>
-      <button class="nav pv" aria-label="Anterior" hidden>${CH("M15 5l-7 7 7 7")}</button>
-      <button class="nav nx" aria-label="Siguiente">${CH("M9 5l7 7-7 7")}</button>`;
-    media.prepend(car);
-    const ft = frame.querySelector(".ig-card .ft");
-    const dots = document.createElement("span");
-    dots.className = "car-dots";
-    dots.innerHTML = srcs.map(() => "<i></i>").join("");
-    if (ft) ft.appendChild(dots);
-    const trk = car.querySelector(".trk"), cnt = car.querySelector(".cnt");
-    const pv = car.querySelector(".pv"), nx = car.querySelector(".nx");
-    const tw = [...frame.querySelectorAll(".slides div")];
-    let i = 0;
-    const show = k => {
-      i = Math.max(0, Math.min(srcs.length - 1, k));
-      trk.style.transform = `translateX(${-100 * i}%)`;
-      cnt.textContent = `${i + 1}/${srcs.length}`;
-      pv.hidden = i === 0; nx.hidden = i === srcs.length - 1;
-      [...dots.children].forEach((d, j) => d.classList.toggle("on", j === i));
-      tw.forEach((d, j) => d.classList.toggle("on", j === i));
-    };
-    const stop = e => { e.stopPropagation(); e.preventDefault(); };
-    nx.addEventListener("click", e => { stop(e); show(i + 1); });
-    pv.addEventListener("click", e => { stop(e); show(i - 1); });
-    tw.forEach((d, j) => d.addEventListener("click", e => { stop(e); show(j); }));
-    let x0 = null;
-    car.addEventListener("pointerdown", e => { x0 = e.clientX; });
-    car.addEventListener("pointerup", e => {
-      if (x0 === null) return;
-      const dx = e.clientX - x0; x0 = null;
-      if (Math.abs(dx) > 30) { show(i + (dx < 0 ? 1 : -1)); }
-    });
-    ["touchstart", "touchend", "touchmove"].forEach(t => car.addEventListener(t, e => e.stopPropagation(), { passive: true }));
-    show(0);
-  }
-  const run = () => document.querySelectorAll(".post-frame").forEach(build);
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
-  new MutationObserver(run).observe(document.getElementById("stage") || document.body, { childList: true, subtree: false });
-})();
-</script>
-<!-- ==== fin CARRUSEL estilo Instagram ==== -->
 </body>
 </html>
