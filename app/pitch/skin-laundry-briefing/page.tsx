@@ -4,7 +4,8 @@ import { DIAPOS } from "./diapos";
 import "../skin-laundry/skin-laundry.css";
 
 /**
- * Briefing de contenido de Instagram para Skin Laundry, a partir del análisis
+ * Briefing de contenido de Instagram para Skin Laundry (versión detallada: cada
+ * pilar con todas sus formas de contarlo en reel y en post), a partir del análisis
  * de /pitch/skin-laundry. Misma identidad y visor.
  *
  * Oculta como el resto de /pitch: noindex aquí, /pitch/ bloqueado en
