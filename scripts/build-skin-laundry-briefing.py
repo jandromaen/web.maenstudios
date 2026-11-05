@@ -720,11 +720,13 @@ indice = [
     ("05", "Cómo vamos a trabajar", "Seis principios para ganar coherencia."),
     ("06", "Producción", "Rodaje, edición, copys y llamadas a la acción."),
     ("07", "Proceso y medición", "Calendario, validaciones, qué necesitamos y qué medimos."),
+    ("08", "Diciembre", "Vuestro calendario frente a nuestra propuesta y las 18 publicaciones del mes."),
+    ("09", "Preproducción", "Calendario de producción, horario del rodaje, casting y qué necesitamos."),
 ]
 ix = ""
 for i, (n, t, d) in enumerate(indice):
-    col, row = i // 4, i % 4
-    x, y = 128 + col * 840, 360 + row * 150
+    col, row = i // 5, i % 5
+    x, y = 128 + col * 840, 330 + row * 128
     ix += (linea_ := f'<div style="{pos(x, y)}width:760px;height:1px;background:{INK};opacity:.16"></div>')
     ix += f'<p style="{pos(x, y + 26)}font-size:20px;font-weight:700;letter-spacing:2px;color:{TOPO}">{n}</p>'
     ix += f'<p style="{pos(x + 80, y + 14)}font-family:{SERIF};font-weight:300;font-size:44px;line-height:1.1">{t}</p>'
@@ -1186,6 +1188,353 @@ md += texto("Punto de partida: 2 comentarios por publicación y el 59 % sin ning
             168, 892, 1580, 22, CREAM)
 add("medicion", "Qué medimos", sec(
     eyebrow("07 · Proceso y medición") + titulo("Qué medimos, <i>pilar a pilar</i>.", 128, 190) + md + pie()))
+
+# ── 08 · Diciembre y 09 · Preproducción ───────────────────────────────
+# Comparativa con el calendario de diciembre de la clínica (calendario_v7) y
+# preproducción del rodaje que cubre todo el mes.
+CARAMEL = TOPO
+PEACH = "#E7B48F"
+
+
+def linea(left, top, w, color=INK, alpha=0.16):
+    return f'<div style="{pos(left, top)}width:{w}px;height:1px;background:{color};opacity:{alpha}"></div>'
+
+
+def etiqueta_t(t, left, top):
+    return etiqueta(t, left, top)
+
+
+def pie_izq(dark=True):
+    c = SOFT_D if dark else SOFT
+    return (f'<p style="position:absolute;left:128px;width:900px;bottom:52px;display:flex;justify-content:space-between;'
+            f'font-size:17px;letter-spacing:2px;text-transform:uppercase;color:{c}"><span>{PIE}</span><span>§N§</span></p>')
+
+
+# ── Diciembre ─────────────────────────────────────────────────────────────
+def tarjetas(items, top=360, h=560, dark_idx=None, title_size=38, txt=20):
+    """Columnas de tarjetas: (etiqueta, título, [líneas])."""
+    n = len(items)
+    gap = 26
+    w = (1664 - gap * (n - 1)) // n
+    out = ""
+    for i, (tag, t, lineas) in enumerate(items):
+        x = 128 + i * (w + gap)
+        dark = i == dark_idx
+        bg, fg, sub, ac = (INK, CREAM, SOFT_D, LIME) if dark else (SAND, INK, SOFT, CARAMEL)
+        li = "".join(
+            f'<li style="margin-bottom:14px;padding-left:22px;position:relative">'
+            f'<span style="position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:9px;background:{ac}"></span>{l}</li>'
+            for l in lineas
+        )
+        out += (
+            f'<div style="{pos(x, top)}width:{w}px;height:{h}px;border-radius:22px;background:{bg}"></div>'
+            + f'<p style="{pos(x + 36, top + 34)}font-size:18px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:{ac}">{tag}</p>'
+            + f'<p style="{pos(x + 36, top + 70)}width:{w - 72}px;font-family:{SERIF};font-size:{title_size}px;font-weight:300;line-height:1.05;color:{fg}">{t}</p>'
+            + f'<ul style="{pos(x + 36, top + 190)}width:{w - 72}px;list-style:none;padding:0;font-size:{txt}px;line-height:1.38;color:{sub}">{li}</ul>'
+        )
+    return out
+
+
+add(
+    "su-plan-y-el-nuestro",
+    "Vuestro calendario y nuestra propuesta",
+    sec(
+        eyebrow("08 · Diciembre · Vuestro calendario y nuestra propuesta", 128, 128)
+        + titulo("Vuestros temas, <i>con nuestro enfoque</i>.", 128, 200, 1600, 80)
+        + tarjetas([
+            ("Ya lo planteábamos", "Coincide con los pilares", [
+                "Ojeras, labios, neuromoduladores y mantenimiento láser → Informativo.",
+                "Glow express y primera consulta → Tratamientos en vivo.",
+                "Gift cards, Power Glow Duo y membresía → Ofertas.",
+                "Equipo y «Pregúntale a tu CC» → Equipo médico.",
+                "Antes y después del láser.",
+            ]),
+            ("Lo incorporamos", "De vuestro calendario", [
+                "Calendario de adviento con sorteo.",
+                "Resumen del año: 3 millones de faciales.",
+                "Lo que viene en enero.",
+                "Influencers y pack de 3 stories a la semana, fuera del feed.",
+                "Fotos del rodaje para las dos newsletters.",
+            ]),
+            ("Lo añadimos", "Lo que no estaba", [
+                "Las doctoras a cámara como voz fija.",
+                "Antes y después contado como caso y por sesiones.",
+                "«Ven conmigo» con una creadora UGC.",
+                "CTA de conversación: «Comenta INFO».",
+                "El sistema visual y los destacados en catálogo.",
+            ], ),
+            ("Lo ajustamos", "Para que sea asumible", [
+                "De 22 a 18 publicaciones: 2 reels y 2 carruseles o posts a la semana.",
+                "Los resúmenes de influencers pasan a stories y destacado.",
+                "Glow season y láser antes de fiestas, en una sola pieza.",
+                "El cierre del pack melasma pasa a enero.",
+            ]),
+        ], dark_idx=2, h=600)
+        + pie(),
+    ),
+)
+
+# (fecha, formato, pilar, pieza, origen, rodaje)
+DIC = [
+    ("Mar 1", "Post", "Ofertas", "Gift cards de Navidad", "V", "Bloque 5"),
+    ("Jue 3", "Reel", "Tratamientos en vivo", "Glow express: la sesión de láser en 15 minutos", "V", "Bloque 1"),
+    ("Vie 4", "Carrusel", "Informativo", "Ojeras: cuál es la tuya y cómo se trata", "V", "Bloque 2"),
+    ("Dom 6", "Reel", "Ofertas", "Power Glow Duo, el regalo de Navidad", "V", "Bloque 5"),
+    ("Lun 7", "Carrusel", "Ofertas", "Calendario de adviento con sorteo", "V", "Bloque 5 + gráfica"),
+    ("Mié 9", "Reel", "Equipo médico", "«La doctora responde»: labios sin migraciones", "V+", "Bloque 2"),
+    ("Vie 11", "Reel", "Antes y después", "El caso contado por la doctora", "N", "Bloque 2 + fotos clínica"),
+    ("Sáb 12", "Carrusel", "Equipo médico", "El tratamiento favorito del equipo", "V", "Bloque 3"),
+    ("Lun 14", "Reel", "Tratamientos en vivo", "«Ven conmigo»: mi primera consulta", "V+", "Bloque 4"),
+    ("Mar 15", "Post", "Ofertas", "Regala la membresía", "V", "Bloque 5"),
+    ("Jue 17", "Carrusel", "Informativo", "Mantenimiento láser: cada cuánto repetir", "V", "Bloque 1"),
+    ("Vie 18", "Reel", "Informativo", "Tres mitos del láser antes de las fiestas", "N", "Bloque 2"),
+    ("Lun 21", "Reel", "Antes y después", "La evolución: primera, tercera y quinta sesión", "V+", "Bloque 2 + fotos clínica"),
+    ("Mié 23", "Carrusel", "Informativo", "Neuromoduladores: cuándo, antes de las fiestas", "V", "Bloque 2"),
+    ("Jue 24", "Reel", "Equipo médico", "Pregúntale a tu CC", "V", "Bloque 3"),
+    ("Sáb 26", "Carrusel", "Marca", "Resumen del año: 3 millones de faciales", "V", "Fotos de toda la jornada"),
+    ("Mar 29", "Reel", "Ofertas", "Lo que viene en enero: tu primera vez", "V", "Bloque 5"),
+    ("Jue 31", "Post", "Ofertas", "Gift card de último minuto", "V", "Gráfica"),
+]
+ORIGEN = {
+    "V": ("Vuestro calendario", SAND, INK),
+    "V+": ("Vuestro tema, nuevo enfoque", PEACH, INK),
+    "N": ("Nuevo", LIME, INK),
+}
+
+
+def tabla_dic(filas, top=350):
+    cols = [(128, "Fecha"), (300, "Formato"), (480, "Pilar"), (790, "Pieza"), (1440, "Rodaje")]
+    h = "".join(etiqueta_t(t, x, top) for x, t in cols)
+    rh = 64
+    for i, (f, fmt, pil, pieza, org, rod) in enumerate(filas):
+        y = top + 48 + i * rh
+        _, bgc, fgc = ORIGEN[org]
+        dark_fmt = fmt == "Reel"
+        h += (
+            linea(128, y, 1664)
+            + texto(f, 128, y + 16, 160, 24, INK, 600)
+            + f'<p style="{pos(300, y + 13)}padding:5px 16px;border-radius:999px;font-size:18px;font-weight:600;'
+              f'background:{INK if dark_fmt else "transparent"};color:{CREAM if dark_fmt else INK};'
+              f'border:1.5px solid {INK}">{fmt}</p>'
+            + texto(pil, 480, y + 17, 290, 21, SOFT)
+            + f'<span style="{pos(790, y + 25)}width:12px;height:12px;border-radius:9px;background:{bgc};'
+              f'box-shadow:0 0 0 1.5px {CARAMEL if org == "V" else bgc}"></span>'
+            + texto(pieza, 818, y + 14, 600, 25, INK)
+            + texto(rod, 1440, y + 17, 352, 20, SOFT)
+        )
+    h += linea(128, top + 48 + len(filas) * rh, 1664)
+    return h
+
+
+def leyenda(top, x=128):
+    items = ""
+    for k in ["V", "V+", "N"]:
+        t, bgc, _ = ORIGEN[k]
+        items += (
+            f'<span style="display:inline-flex;align-items:center;gap:12px">'
+            f'<span style="width:14px;height:14px;border-radius:9px;background:{bgc};'
+            f'box-shadow:0 0 0 1.5px {CARAMEL if k == "V" else bgc}"></span>{t}</span>'
+        )
+    return (f'<div style="{pos(x, top)}width:{1792 - x}px;display:flex;justify-content:flex-end;gap:40px;'
+            f'font-size:20px;color:{SOFT};white-space:nowrap">{items}</div>')
+
+
+for parte, (a, b, rango) in enumerate([(0, 9, "1 – 15 de diciembre"), (9, 18, "16 – 31 de diciembre")]):
+    add(
+        f"diciembre-{parte + 1}",
+        f"Diciembre · {rango}",
+        sec(
+            eyebrow(f"08 · Diciembre · {rango} · 2 reels y 2 carruseles o posts a la semana", 128, 128)
+            + titulo("18 publicaciones, <i>una sola jornada</i>." if parte == 0 else "Fiestas, <i>balance y enero</i>.",
+                     128, 200, 1300, 72)
+            + leyenda(236, 1100)
+            + tabla_dic(DIC[a:b], 316)
+            + pie(),
+        ),
+    )
+
+add(
+    "fuera-del-feed",
+    "Fuera del feed",
+    sec(
+        eyebrow("08 · Diciembre · Fuera del feed", 128, 128)
+        + titulo("Lo que sale del rodaje <i>y no va al feed</i>.", 128, 200, 1600, 80)
+        + tarjetas([
+            ("Stories", "3 a la semana", [
+                "Making of del rodaje y detrás de las cámaras.",
+                "Recordatorio con enlace de cada publicación.",
+                "Cuenta atrás de las gift cards y del adviento.",
+            ]),
+            ("Influencers", "En stories, no en el feed", [
+                "Reposts en el momento en que publican.",
+                "Un destacado propio en lugar del carrusel de cada quincena.",
+            ]),
+            ("Newsletters", "Con imágenes del rodaje", [
+                "1 de diciembre · Gift cards de Navidad.",
+                "10 de diciembre · Glow season.",
+                "Mismas fotos y misma línea que el feed.",
+            ]),
+            ("Destacados", "Formato catálogo", [
+                "Portadas nuevas con la paleta de la marca.",
+                "Uno por tratamiento, con precios y reserva.",
+                "Navidad y gift cards fijos durante el mes.",
+            ]),
+        ], dark_idx=None, h=440)
+        + pie(),
+    ),
+)
+
+# ── Preproducción ─────────────────────────────────────────────────────────
+add(
+    "preproduccion",
+    "Preproducción",
+    sec(
+        foto("laser-vertical.jpg", "Sesión de láser en Skin Laundry", 1100, 0, 820, 1080, opos="60% 40%")
+        + eyebrow("09 · Preproducción", 128, 330, CREAM)
+        + titulo("Un día de rodaje<br><i>para todo diciembre</i>.", 128, 400, 900, 96, CREAM)
+        + texto("Calendario de producción, horario de la jornada, casting y lo que necesitamos de la clínica.",
+                128, 680, 760, 28, SOFT_D)
+        + pie_izq(),
+        bg=INK, color=CREAM,
+    ),
+)
+
+hitos = [
+    ("9 – 11 nov", "Aprobación", "Briefing y plan de diciembre validados con la clínica."),
+    ("12 – 13 nov", "Guiones", "Escaletas de los 9 reels y textos de los carruseles."),
+    ("16 nov", "Casting cerrado", "Modelos, creadora, doctoras, CC y casos de antes y después confirmados."),
+    ("18 nov", "Prueba de luz", "Visita de una hora a la clínica: cabina, luz y encuadres."),
+    ("19 nov", "Rodaje", "Jornada completa, de 08:30 a 18:00."),
+    ("20 – 25 nov", "Edición y diseño", "Montaje de reels, retoque y carruseles."),
+    ("26 nov", "Primera entrega", "Todas las piezas de diciembre para revisar."),
+    ("27 – 30 nov", "Cambios", "Una ronda de cambios y calendario cerrado."),
+    ("1 dic", "Primera publicación", "Gift cards de Navidad."),
+]
+tl = linea(128, 560, 1664, INK, 0.25)
+step = 1664 / len(hitos)
+for i, (f, t, d) in enumerate(hitos):
+    x = round(128 + i * step)
+    key = t == "Rodaje"
+    tl += (
+        f'<span style="{pos(x, 550)}width:20px;height:20px;border-radius:20px;background:{LIME if key else CARAMEL};'
+        f'{"box-shadow:0 0 0 6px " + INK + ";" if key else ""}"></span>'
+        + texto(f, x, 400, round(step) - 16, 22, INK, 600)
+        + f'<p style="{pos(x, 448)}width:{round(step) - 16}px;font-family:{SERIF};font-size:32px;font-weight:300;line-height:1.05">{t}</p>'
+        + texto(d, x, 610, round(step) - 22, 19, SOFT)
+    )
+add(
+    "calendario-produccion",
+    "Calendario de producción",
+    sec(
+        eyebrow("09 · Preproducción · Calendario", 128, 128)
+        + titulo("Del sí al primer post, <i>en tres semanas</i>.", 128, 200, 1600, 80)
+        + tl
+        + texto("Rodaje propuesto el jueves 19 de noviembre, con el viernes 20 como alternativa. "
+                "Si encaja, grabamos recursos extra en el open day de Ultraformer del 25.",
+                128, 860, 1300, 24, SOFT)
+        + pie(),
+    ),
+)
+
+horario = [
+    ("08:30", "Montaje", "Luz cálida en cabina, set crema y fondo neutro para las entrevistas.", "Equipo Maen", ""),
+    ("09:15", "Recursos de la clínica", "Recepción, cabinas, tecnología y detalles, en foto y vídeo, con la clínica vacía.", "Equipo Maen", "16 · Stories"),
+    ("10:00", "Bloque 1 · Tratamientos en vivo", "Sesión de láser completa, de principio a fin, y fotos paso a paso.", "Modelo 1 · Terapeuta", "2 · 11"),
+    ("11:30", "Bloque 2 · Doctoras a cámara", "La doctora responde, ojeras, neuromoduladores, mitos y la voz de los antes y después.", "Doctora(s)", "3 · 6 · 7 · 12 · 13 · 14"),
+    ("13:30", "Comida", "", "", ""),
+    ("14:15", "Bloque 3 · Equipo", "El tratamiento favorito, «Pregúntale a tu CC» y retratos del equipo.", "CC · Equipo de la clínica", "8 · 15"),
+    ("15:15", "Bloque 4 · «Ven conmigo»", "Llegada, recepción, valoración con la doctora y cabina, contado por la creadora.", "Creadora UGC · CC · Doctora", "9"),
+    ("16:30", "Bloque 5 · Navidad y ofertas", "Gift card, Power Glow Duo, membresía, adviento y enero, con un detalle navideño en la paleta.", "Modelos 1 y 2", "1 · 4 · 5 · 10 · 17"),
+    ("17:30", "Stories y cierre", "Making of, recursos para newsletters y recogida.", "Equipo Maen", "Stories"),
+]
+hh = (etiqueta_t("Hora", 128, 312) + etiqueta_t("Bloque", 300, 312) + etiqueta_t("Quién", 1220, 312)
+      + etiqueta_t("Nº en el plan", 1560, 312))
+for i, (t, b, d, q, pz) in enumerate(horario):
+    y = 352 + i * 68
+    key = b.startswith("Bloque")
+    hh += (
+        linea(128, y, 1664)
+        + texto(t, 128, y + 18, 150, 26, INK, 600)
+        + texto(b, 300, y + 8, 880, 25, INK, 600 if key else 400)
+        + texto(d, 300, y + 38, 880, 18, SOFT)
+        + texto(q, 1220, y + 20, 320, 20, INK)
+        + texto(pz, 1560, y + 20, 232, 20, CARAMEL, 600)
+    )
+hh += linea(128, 352 + len(horario) * 68, 1664)
+add(
+    "horario-rodaje",
+    "Horario del rodaje",
+    sec(
+        eyebrow("09 · Preproducción · Jueves 19 de noviembre", 128, 128)
+        + titulo("La jornada, <i>bloque a bloque</i>.", 128, 200, 1300, 80)
+        + texto("08:30 – 18:00 · Una cabina reservada todo el día", 1392, 226, 400, 22, SOFT, extra="text-align:right")
+        + hh
+        + pie(),
+    ),
+)
+
+casting = [
+    ("Modelo 1", "Mujer de 30 a 40 años",
+     ["Piel real, con algo de textura o manchas leves.", "Se hace la sesión de láser de verdad.",
+      "Bloques 1 y 5 · 10:00 – 11:30 y 16:30 – 17:30."]),
+    ("Modelo 2", "Mujer de 40 a 50 años",
+     ["Perfil de membresía y de regalo.", "Natural, sin maquillaje marcado.",
+      "Bloque 5 · 16:30 – 17:30."]),
+    ("Creadora UGC", "De 25 a 35 años, habla a cámara",
+     ["Cuenta su primera consulta en primera persona.", "Cercana al público de la clínica; si publica en colab, mejor.",
+      "Bloque 4 · 15:15 – 16:30."]),
+    ("Opcional", "Hombre de 30 a 45 años",
+     ["Para el regalo para él y la membresía.", "Solo si la clínica quiere abrir este público en diciembre.",
+      "Bloque 5 · 16:30 – 17:30."]),
+]
+add(
+    "casting",
+    "Casting",
+    sec(
+        eyebrow("09 · Preproducción · Casting", 128, 128)
+        + titulo("Tres perfiles externos, <i>y uno opcional</i>.", 128, 200, 1600, 80)
+        + tarjetas(casting, top=340, h=420, dark_idx=2, title_size=34)
+        + etiqueta_t("De la clínica", 128, 810)
+        + texto("1 o 2 doctoras · 11:30 – 13:30 y 15:15 – 16:30", 128, 850, 520, 22, INK)
+        + texto("CC · 14:15 – 16:30 &nbsp;·&nbsp; Terapeuta de láser · 10:00 – 11:30", 128, 890, 720, 22, INK)
+        + etiqueta_t("Antes y después", 900, 810)
+        + texto("2 o 3 casos reales con fotos y consentimiento firmado. No hace falta que vengan.", 900, 850, 420, 22, INK)
+        + etiqueta_t("Equipo Maen", 1420, 810)
+        + texto("Dirección y brand manager, cámara de vídeo y foto.", 1420, 850, 372, 22, INK)
+        + pie(),
+    ),
+)
+
+add(
+    "necesitamos-rodaje",
+    "Qué necesitamos para el rodaje",
+    sec(
+        eyebrow("09 · Preproducción · Qué necesitamos para el rodaje", 128, 128)
+        + titulo("Para llegar al 19 <i>con todo cerrado</i>.", 128, 200, 1600, 80)
+        + tarjetas([
+            ("Espacio", "El día de rodaje", [
+                "Una cabina reservada de 08:30 a 18:00.",
+                "Una sala o rincón tranquilo para las entrevistas.",
+                "Poder grabar la recepción antes de abrir.",
+            ]),
+            ("Personas", "Agendas confirmadas", [
+                "Doctoras y CC en sus franjas.",
+                "Terapeuta de láser para el bloque 1.",
+                "Consentimientos de imagen de modelos y casos.",
+            ]),
+            ("Contenido", "Antes del 12 de noviembre", [
+                "Fotos de 2 o 3 casos de antes y después.",
+                "Precios y fechas de gift cards, Power Glow Duo y membresía.",
+                "Bases y premio del sorteo de adviento.",
+            ]),
+            ("Material", "Para el bloque de Navidad", [
+                "Gift cards físicas y producto Power Glow Duo.",
+                "El detalle navideño lo proponemos nosotros, en la paleta.",
+            ]),
+        ], dark_idx=0, h=440)
+        + pie(),
+    ),
+)
 
 # ── Cierre ────────────────────────────────────────────────────────────────
 add("cierre", "Cierre", sec(
