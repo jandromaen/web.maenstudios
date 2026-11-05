@@ -528,7 +528,8 @@ const FECHAS = {
 };
 
 const PIEZAS = [
-{ d:9, formato:"Reel",  cubo:"Láser", tema:"Brightening", hora:"18:30h",
+{ d:9, formato:"Reel", media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09.mp4", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09_poster.jpg", estado:"listo",
+  nota:"Reel de ejemplo montado por Maen · planos de láser como foto: sustituir por el vídeo original",  cubo:"Láser", tema:"Brightening", hora:"18:30h",
   pieza:"Brightening Laser Facial: cómo funciona",
   base:"Carta: Láser (Signature 250 €)", cta:"Reserva tu valoración",
   idea:["Gancho: «Lo que pasa en tu piel en 30 minutos»","Paso a paso real de la sesión en cabina","Texto en pantalla: manchas, marcas de acné y tono apagado","Cierre: piel luminosa al salir, sin tiempo de recuperación"],
@@ -900,10 +901,14 @@ const ASSET = {
 
 
 
+
+
+
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const isVid = u => /\.(mp4|webm|mov)(\?|$)/i.test(u);
-const mediaTag = u => isVid(u) ? `<video src="${esc(u)}" muted loop autoplay playsinline></video>` : `<img src="${esc(u)}" alt="">`;
+const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
+const mediaTag = (u, poster) => isVid(u) ? `<video src="${esc(u)}" ${poster ? `poster="${esc(poster)}"` : ""} controls loop playsinline preload="metadata"></video>` : `<img src="${esc(u)}" alt="">`;
 const fk = f => (f||"").toLowerCase();
 const pad = n => String(n).padStart(2,"0");
 const FMT_COLOR = { reel:"var(--choc)", carrusel:"var(--black)", post:"var(--tan)", stories:"var(--cream-2)" };
@@ -1005,8 +1010,8 @@ const igIcon = t => t === "reel" ? `<i class="gi">▶</i>` : t === "carrusel" ? 
 const igPhone = (cls = "") => {
   const nov = [...PIEZAS].sort((a,b) => b.d - a.d || PIEZAS.indexOf(b) - PIEZAS.indexOf(a));
   const tile = (src, tipo, extra = "") => `<div class="t">${src ? `<img src="${esc(src)}" alt="">` : ""}${igIcon(tipo)}${extra}</div>`;
-  const novTile = p => p.media && !isVid(p.media)
-    ? tile(p.media, fk(p.formato), `<span class="dd">${p.d} nov</span>`)
+  const novTile = p => (p.poster || (p.media && !isVid(p.media)))
+    ? tile(p.poster || p.media, fk(p.formato), `<span class="dd">${p.d} nov</span>`)
     : `<div class="t pend m-${fk(p.formato)}"><b>${p.d}</b><em>${esc(p.formato)}</em><small>Pendiente</small>${igIcon(fk(p.formato))}</div>`;
   const pins = PERFIL.fijadas.map(s => tile(s, "", `<i class="gi pin">📌</i>`)).join("");
   const total = PERFIL.publicaciones + PIEZAS.length;
@@ -1184,7 +1189,7 @@ dayPlan.forEach(item => {
       <div class="ig-card">
         <div class="hd"><i>${avatar}</i>skinlaundry_es</div>
         <div class="media pf m-${f} ${p.media ? "has-media" : ""}">
-          ${p.media ? `${mediaTag(p.media)}${isReel ? `<span class="play">▶</span>` : f === "carrusel" ? `<span class="pages">1/${Math.max(3, p.idea.length)}</span>` : ""}<div class="idea over"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>` : `<div class="idea"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>`}
+          ${p.media ? `${mediaTag(p.media, p.poster)}${isReel && !isVid(p.media) ? `<span class="play">▶</span>` : f === "carrusel" ? `<span class="pages">1/${Math.max(3, p.idea.length)}</span>` : ""}<div class="idea over"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>` : `<div class="idea"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>`}
         </div>
         <div class="ft"><span>♡</span><span>◯</span><span>➤</span><span style="margin-left:auto">⌑</span></div>
       </div>
@@ -1193,7 +1198,7 @@ dayPlan.forEach(item => {
     </div>
     <div class="story-frame" style="left:330px">
       <div class="col-lbl">Story de apoyo</div>
-      ${tplStory(p.slides ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
+      ${tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
     </div>
     <div class="hours"><span class="eyebrow">Hora (propuesta)</span><span class="chip">${esc(p.formato)} · ${esc(p.hora)}</span><span class="chip">Story · 1h después</span>${nlChip}</div>
