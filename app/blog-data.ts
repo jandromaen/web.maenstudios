@@ -115,6 +115,7 @@ export const posts: Post[] = [
       "La anatomía de un Reel que la gente termina de ver: gancho, desarrollo y cierre. Errores frecuentes y cómo mejorar la retención en Instagram y TikTok.",
     category: "Estrategia",
     date: "2026-06-18",
+    updated: "2026-11-05",
     readingMinutes: 7,
     keywords: [
       "cómo hacer reels que funcionan",
@@ -124,10 +125,18 @@ export const posts: Post[] = [
     ],
     excerpt:
       "El 80% del rendimiento de un Reel se decide en los 3 primeros segundos. Esta es la estructura que usamos para que la gente no haga scroll.",
+    relatedLanding: {
+      href: "/agencia-de-reels-barcelona",
+      label: "Ver agencia de Reels y TikTok",
+    },
     content: [
       {
         type: "p",
         text: "Un buen Reel no es cuestión de suerte ni de que la cámara sea cara. Es estructura. Cuando entiendes cómo funciona la retención, dejas de publicar a ciegas y empiezas a diseñar piezas pensadas para que la gente se quede.",
+      },
+      {
+        type: "p",
+        text: "La respuesta corta es siempre la misma: un Reel que funciona tiene gancho (los primeros 3 segundos, para que nadie haga scroll), desarrollo (ritmo sin caídas, para que nadie se vaya a mitad) y cierre (una llamada a la acción, para que el algoritmo premie la pieza). Vamos parte por parte.",
       },
       { type: "h2", text: "El gancho: los primeros 3 segundos" },
       {
@@ -165,6 +174,24 @@ export const posts: Post[] = [
       {
         type: "p",
         text: "En Maen Studios diseñamos cada Reel con esta estructura desde el guion. ¿Quieres contenido pensado para retener y no solo para rellenar el feed? Cuéntanos tu proyecto.",
+      },
+    ],
+    faq: [
+      {
+        q: "¿Cuál es la estructura de un Reel que funciona?",
+        a: "Gancho, desarrollo y cierre. El gancho ocupa los primeros 3 segundos y decide si la persona sigue o hace scroll; el desarrollo mantiene el ritmo con cortes ágiles, cambios de plano y subtítulos para que nadie se caiga a mitad del vídeo; el cierre invita a interactuar (una pregunta, un «guárdalo para luego», un bucle) para que el algoritmo premie la pieza.",
+      },
+      {
+        q: "¿Cuánto debe durar el gancho de un Reel?",
+        a: "Los primeros 3 segundos son los que deciden si la persona sigue viendo o hace scroll, así que el gancho tiene que entrar ahí: con un plano potente, una frase que interpele o texto en pantalla que resuma la promesa del vídeo.",
+      },
+      {
+        q: "¿Por qué la gente deja de ver un Reel a mitad?",
+        a: "Normalmente porque el ritmo de montaje se cae: faltan cortes, cambios de plano o subtítulos, y cada segundo sin una razón para seguir viendo es un punto de fuga. Ahí es donde se pierde la mayoría de la audiencia, no en el gancho.",
+      },
+      {
+        q: "¿Qué tiene que tener el cierre de un Reel para que funcione?",
+        a: "Una llamada a la acción que invite a interactuar: una pregunta, un «guárdalo para luego» o un bucle que reinicia el vídeo. El algoritmo premia la interacción y el tiempo de visionado, así que el cierre importa tanto como el gancho.",
       },
     ],
   },
