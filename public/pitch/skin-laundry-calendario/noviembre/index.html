@@ -303,6 +303,7 @@ a{color:inherit;text-decoration:none}
 .idea.over ol{font-size:10px;line-height:1.35}
 .idea.over li{margin-bottom:3px}
 .media .play{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:rgba(26,19,18,.55);color:#fff;font-size:10px;display:grid;place-items:center;z-index:2}
+.media .car{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.media .car::-webkit-scrollbar{display:none}.media .car img{position:relative!important;inset:auto!important;flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start}
 .media .pages{position:absolute;top:10px;right:10px;background:rgba(26,19,18,.6);color:#fff;font-size:9px;padding:3px 7px;border-radius:10px;z-index:2}
 .src{margin-top:7px;font-size:9.5px;color:var(--tan);line-height:1.3}
 .src b{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:8.5px;margin-right:5px;color:var(--choc)}
@@ -559,21 +560,26 @@ Además: 50 % en complementos, 20 % en productos y otros láseres, 10 % en medic
 #TheLaundryClub #SkinLaundryBarcelona #Membresia #LaserFacial`,
   nota:"Datos del folleto de membresía. Permanencia mínima: 4 meses" },
 
-{ d:12, formato:"Reel",  cubo:"Med. estética", tema:"Neuromoduladores", hora:"18:30h",
-  pieza:"Zonas, verdades y mentiras",
-  base:"Carta: inyectables", cta:"Consulta previa con nuestros médicos",
-  idea:["Formato «verdad o mentira» con la doctora a cámara","3 mitos: cara congelada, solo para arrugas, cuanto antes peor","Zonas: tercio superior, bruxismo, sonrisa gingival","Cierre: cada tratamiento empieza con una consulta médica"],
-  story:["Quiz: ¿verdad o mentira? (3 stories)","Enlace al reel"],
-  copy:`¿Te deja la cara congelada? ¿Solo sirve para las arrugas? ¿Cuanto antes, peor? 🤔
+{ d:12, formato:"Carrusel",  cubo:"Med. estética", tema:"Contorno de ojos", hora:"11:00h",
+  pieza:"Lo que pasa cuando tu mirada se cansa",
+  base:"Material de la clínica · antes/después cortesía de BTL Exion", cta:"Reserva tu valoración",
+  media:"img/d12-1.jpg", slides:["img/d12-1.jpg","img/d12-2.jpg","img/d12-3.jpg"],
+  idea:["1 · Lo que pasa cuando tu mirada se cansa","2 · Antes y después: radiofrecuencia fraccionada con microagujas","3 · Oferta de noviembre: 3 sesiones por 720 € + polinucleótidos tópicos de regalo"],
+  story:["Portada del carrusel con enlace","Antes/después con sticker «Desliza»","Encuesta: ¿se te nota la mirada cansada?"],
+  copy:`Párpados con menos firmeza, líneas finas que se marcan y una mirada que parece cansada aunque hayas dormido bien. Es lo que pasa cuando baja el colágeno en la zona más fina de la cara 👁️
 
-Nuestra doctora desmonta los mitos más repetidos sobre los neuromoduladores y te explica en qué zonas se usan: frente y entrecejo, bruxismo, sonrisa gingival o sudoración excesiva.
+Lo tratamos con radiofrecuencia fraccionada con microagujas: estimula el colágeno desde dentro para tensar el párpado, suavizar las líneas finas y mejorar la textura del contorno.
 
-El objetivo nunca es cambiar tu expresión, sino suavizarla. Por eso todo empieza con una consulta médica previa.
+Este mes, contorno de ojos:
+✨ 3 sesiones por 720 €
+🎁 Con polinucleótidos tópicos de regalo
 
-📍 Diagonal 610, Barcelona
-👉 Pide tu consulta previa con nuestros médicos desde la bio.
+Cada piel es distinta, por eso empezamos siempre con una valoración. Desliza para ver el cambio 👉
 
-#Neuromoduladores #MedicinaEsteticaBarcelona #SkinLaundryBarcelona #Bruxismo #BabyBotox` },
+📍 Av. Diagonal 610, Barcelona
+👉 Reserva tu valoración desde el enlace de la bio.
+
+#ContornoDeOjos #Radiofrecuencia #Microagujas #MedicinaEsteticaBarcelona #SkinLaundryBarcelona` },
 
 { d:14, formato:"Carrusel",  cubo:"Med. estética", tema:"Hialurónico", hora:"11:00h",
   pieza:"Hialurónico vs. bioestimuladores",
@@ -1166,8 +1172,8 @@ dayPlan.forEach(item => {
       <div class="col-lbl">${esc(p.formato)} · propuesta de pieza</div>
       <div class="ig-card">
         <div class="hd"><i>${avatar}</i>skinlaundry_es</div>
-        <div class="media pf m-${f}">
-          ${p.media ? `${mediaTag(p.media)}${isReel ? `<span class="play">▶</span>` : f === "carrusel" ? `<span class="pages">1/${Math.max(3, p.idea.length)}</span>` : ""}<div class="idea over"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>` : `<div class="idea"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>`}
+        <div class="media pf m-${f}"${p.slides ? ` style="aspect-ratio:4/5"` : ""}>
+          ${p.slides ? `<div class="car" onscroll="this.nextElementSibling.textContent=(Math.round(this.scrollLeft/this.clientWidth)+1)+'/${p.slides.length}'">${p.slides.map(u => `<img src="${esc(u)}" alt="">`).join("")}</div><span class="pages">1/${p.slides.length}</span>` : p.media ? `${mediaTag(p.media)}${isReel ? `<span class="play">▶</span>` : f === "carrusel" ? `<span class="pages">1/${Math.max(3, p.idea.length)}</span>` : ""}<div class="idea over"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>` : `<div class="idea"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>`}
         </div>
         <div class="ft"><span>♡</span><span>◯</span><span>➤</span><span style="margin-left:auto">⌑</span></div>
       </div>
