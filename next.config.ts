@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        /* Calendarios en HTML estático bajo /pitch: ocultos como el resto. */
+        source: "/pitch/skin-laundry-calendario/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
         /* Vídeos y fotos de /public. Next les pone por defecto
            `max-age=0, must-revalidate`, así que el navegador vuelve a preguntar
            al servidor por cada reel en cada visita: en móvil eso es una ida y
@@ -21,6 +26,18 @@ const nextConfig: NextConfig = {
             value: "public, max-age=86400, stale-while-revalidate=604800",
           },
         ],
+      },
+    ];
+  },
+
+  async rewrites() {
+    return [
+      /* Calendario de Skin Laundry: un HTML autocontenido (fotos, logos y
+         tipografías incrustados) en /public. La URL limpia sirve el index.html
+         de cada mes; el siguiente va en public/pitch/skin-laundry-calendario/<mes>/. */
+      {
+        source: "/pitch/skin-laundry-calendario/:mes",
+        destination: "/pitch/skin-laundry-calendario/:mes/index.html",
       },
     ];
   },
