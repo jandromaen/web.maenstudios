@@ -875,8 +875,93 @@ def diapo_formato(p, tipo, k, n_total, f):
     return sec(h)
 
 
+# ── Referencia visual: Santé Clinics ──────────────────────────────────────
+# Imágenes de @sante.clinics descargadas con el consentimiento del cliente,
+# solo como referencia interna en esta presentación privada.
+S = "sante"
+SANTE = {
+    "equipo-medico": {
+        "piezas": [
+            ("em-doctor-cabina.jpg", "Reel · El doctor explica mientras trata", "Nombre en la bata, el logo de la clínica al fondo y un plano medio limpio."),
+            ("em-doctora-tratando.jpg", "Reel · La doctora resuelve una duda", "La explicación va sobre el tratamiento real, sin rótulos encima de la cara."),
+            ("em-equipo.jpg", "Reel · El equipo", "Uniforme beige y la cabina como escenario: cercanía sin perder lo médico."),
+        ],
+        "toma": ["Doctoras con nombre visible, en la bata y en el rótulo.", "Portadas de reel limpias, sin texto sobre la cara.",
+                 "Luz natural y fondos claros de la propia clínica."],
+    },
+    "antes-despues": {
+        "piezas": [
+            ("ad-neuromoduladores.jpg", "Post · Antes y después", "Antes arriba y después abajo, mismo encuadre y fondo neutro. Solo el logo en el centro."),
+            ("ad-labios.jpg", "Post · Antes y después de detalle", "Plano cerrado de la zona tratada, con la misma luz en las dos fotos."),
+            ("ad-consulta.jpg", "Reel · El caso empieza en la consulta", "Su reel de neuromoduladores abre con la doctora y la paciente, no con el resultado."),
+        ],
+        "toma": ["Plantilla mínima: dos fotos y el logo.", "Mismo encuadre, fondo y luz en el antes y el después.",
+                 "La historia empieza en la consulta."],
+    },
+    "informativo": {
+        "piezas": [
+            ("inf-plasma-gel.jpg", "Carrusel · ¿Qué es…?", "Portada con una foto de detalle editorial; la explicación va dentro."),
+            ("inf-ojeras.jpg", "Carrusel · Protocolo por problema", "El protocolo para ojeras, presentado con una imagen limpia del tratamiento."),
+            ("inf-consulta.jpg", "Reel · Un error habitual", "Gancho con una duda real sobre la rutina y la consulta como imagen."),
+        ],
+        "toma": ["Fotos de detalle en lugar de plantillas cargadas de texto.", "Una duda por pieza.",
+                 "Protocolos con nombre propio."],
+    },
+    "tratamientos": {
+        "piezas": [
+            ("tr-tfbd.jpg", "Carrusel · Paso a paso", "La terapia fotobiodinámica, explicada paso a paso con fotos en cabina."),
+            ("tr-microneedling.jpg", "Reel · La experiencia", "Limpieza y microneedling contados como una experiencia de 60 minutos."),
+            ("tr-indiba.jpg", "Reel · La tecnología en uso", "La máquina al fondo y el tratamiento en primer plano."),
+        ],
+        "toma": ["Planos cerrados de manos, piel y tecnología.", "Toallas, bandas y uniformes en tonos neutros: todo dentro de la paleta.",
+                 "La tecnología siempre en uso, con una persona."],
+    },
+    "ofertas": {
+        "piezas": [
+            ("of-regalo.jpg", "Reel · Tarjeta regalo", "San Valentín contado con una imagen de experiencia, no con un cartel de oferta."),
+            ("of-lifestyle.jpg", "Reel · Programa a medida", "Su plan de 8 semanas, presentado con estilo de vida y la clínica de fondo."),
+        ],
+        "toma": ["La oferta se cuenta desde la experiencia.", "Imágenes de marca también en campaña.",
+                 "Su punto débil es la poca llamada a reservar: ahí sumamos el precio y el CTA de Skin Laundry."],
+    },
+}
+
+
+def diapo_sante(p):
+    ref = SANTE[p["id"]]
+    h = eyebrow(f'{p["nombre"]} · Referencia visual')
+    h += titulo("Así lo hace <i>Santé</i>.", 128, 182, 1200, 72)
+    w, hh, gap = 380, 475, 32
+    for j, (img, t, d) in enumerate(ref["piezas"]):
+        x = 128 + j * (w + gap)
+        h += f'<img src="{A}/{S}/{img}" alt="Publicación de Santé Clinics: {t}" style="{pos(x, 300)}width:{w}px;height:{hh}px;object-fit:cover;border-radius:16px;box-shadow:0 18px 40px rgba(61,32,29,.16)">'
+        h += etiqueta(t, x, 800, TOPO, width=w)
+        h += texto(d, x, 866, w, 19, SOFT)
+    h += caja(1400, 300, 392, 640, INK)
+    h += etiqueta("Qué tomamos", 1436, 336, LIME)
+    h += lista(ref["toma"], 1436, 380, 324, 22, color=CREAM, gap=18, marca_color=LIME)
+    h += texto("Imágenes de @sante.clinics, solo como referencia interna.", 1436, 870, 330, 16, SOFT_D)
+    h += pie()
+    return sec(h)
+
+
+# Referencia general antes de entrar en los pilares
+rg = f'<img src="{A}/{S}/feed.jpg" alt="Feed de Instagram de Santé Clinics" style="{pos(128, 300)}width:932px;height:620px;object-fit:cover;object-position:50% 0%;border-radius:16px">'
+rg += texto("Perfil de @sante.clinics, consultado el 5 de noviembre de 2026.", 128, 936, 900, 17, SOFT)
+rg += etiqueta("Por qué Santé", 1180, 300)
+rg += texto("Está en la misma Diagonal (en el 384) y es la cuenta del sector que mejor resuelve lo visual: editorial, coherente y con conversación sin pedirla (unos 31 comentarios por publicación).",
+            1180, 340, 612, 22)
+rg += etiqueta("Qué tomamos", 1180, 560)
+rg += lista(["Mucho aire y la clínica como escenario.", "Luz natural, fondos blancos y beige.",
+             "Caras reales: equipo médico y pacientes.", "Portadas limpias, sin rótulos sobre la cara.",
+             "Una sola línea en todas las piezas."], 1180, 600, 612, 22, gap=10)
+add("referencia-sante", "Referencia visual: Santé", sec(
+    eyebrow("03 · Los cinco pilares · Referencia visual") + titulo("Nuestra referencia: <i>Santé</i>.", 128, 182, 1600, 72)
+    + rg + pie()))
+
 for i, p in enumerate(PILARES):
     add(f'{p["id"]}', p["nombre"], portada_pilar(i, p))
+    add(f'{p["id"]}-sante', f'{p["nombre"]} · Referencia Santé', diapo_sante(p))
     for k, f in enumerate(p["reels"]):
         add(f'{p["id"]}-reel-{k + 1}', f'{p["nombre"]} · Reel · {f["n"]}', diapo_formato(p, "reel", k, len(p["reels"]), f))
     for k, f in enumerate(p["posts"]):
