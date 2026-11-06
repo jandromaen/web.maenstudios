@@ -540,6 +540,36 @@ a{color:inherit;text-decoration:none}
 .copy .txt{column-count:2;column-gap:22px;column-rule:1px solid var(--line);line-height:1.45!important}
 /* Franja inferior de la columna derecha: alineada con el final de la columna izquierda, separada por una línea */
 .day-right .hours{bottom:0!important;padding-top:12px;border-top:1px solid var(--line)}
+/* Story de repost del reel */
+.tpl.repost{background:#1A1312}
+.tpl.repost .rp-bg{position:absolute;inset:-20px;background:center/cover;filter:blur(14px) brightness(.55) saturate(1.1)}
+.tpl.repost .rp-bg.plain{background:linear-gradient(160deg,#88583B,#3C201D)}
+.tpl.repost .tpl-top{z-index:3;color:#fff}
+.tpl.repost .rp-card{position:absolute;left:50%;top:13%;width:60%;transform:translateX(-50%) rotate(-2deg);background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.45);z-index:2}
+.tpl.repost .rp-hd{display:flex;align-items:center;gap:5px;padding:5px 7px;font-size:7.5px;font-weight:700;color:#111}
+.tpl.repost .rp-hd i{width:13px;height:13px;border-radius:50%;overflow:hidden;display:block}
+.tpl.repost .rp-hd i img{width:100%;height:100%;object-fit:cover;display:block}
+.tpl.repost .rp-media{position:relative;aspect-ratio:9/16;background:#000}
+.tpl.repost .rp-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:pointer;display:block}
+.tpl.repost .rp-play{position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:rgba(0,0,0,.45);display:grid;place-items:center;pointer-events:none}
+.tpl.repost .rp-play svg{width:13px;height:13px;fill:#fff;stroke:none}
+.tpl.repost .rp-media.playing .rp-play{display:none}
+.tpl.repost .rp-pend{position:absolute;inset:0;background:#3C201D;color:#F6EDE4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:8px;text-align:center;padding:10px}
+.tpl.repost .rp-pend span{font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:#CDF765}
+.tpl.repost.two .rp-card{width:50%;top:11%}
+.tpl.repost .rp-st{position:absolute;left:8%;right:8%;bottom:7%;display:flex;flex-direction:column;align-items:center;gap:6px;z-index:3}
+.tpl.repost .rp-link{background:#fff;color:#1A1312;font-size:8.5px;font-weight:700;padding:5px 10px;border-radius:7px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tpl.repost .rp-poll{background:#fff;border-radius:10px;padding:7px;width:86%;display:flex;flex-direction:column;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tpl.repost .rp-poll b{font-size:8.5px;color:#111;text-align:center}
+.tpl.repost .rp-poll span{background:#f1f1f1;color:#111;border-radius:6px;padding:4px;font-size:8px;font-weight:600;text-align:center}
+.tpl.repost .rp-slider{background:#fff;border-radius:10px;padding:7px 9px;width:86%;color:#111;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tpl.repost .rp-slider b{font-size:8.5px;display:block;margin-bottom:6px}
+.tpl.repost .rp-slider i{display:block;height:4px;border-radius:2px;background:linear-gradient(90deg,#CDF765 55%,#e5e5e5 55%);position:relative}
+.tpl.repost .rp-slider em{position:absolute;left:55%;top:50%;transform:translate(-50%,-50%);font-style:normal;font-size:13px}
+.tpl.repost .rp-slider small{display:block;font-size:7px;color:#666;margin-top:7px}
+.tpl.repost .rp-q{background:#fff;border-radius:10px;width:86%;overflow:hidden;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tpl.repost .rp-q b{display:block;background:#88583B;color:#fff;font-size:8.5px;padding:6px}
+.tpl.repost .rp-q span{display:block;font-size:7.5px;color:#999;padding:7px}
 </style>
 </head>
 <body>
@@ -579,7 +609,7 @@ const FECHAS = {
 };
 
 const PIEZAS = [
-{ d:9, formato:"Reel", media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09.mp4", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09_poster.jpg", estado:"listo",
+{ d:9, formato:"Reel", repost:[{t:"poll",q:"¿Lo has probado?",o:["Sí","Aún no"]},{t:"link",txt:"Reserva tu valoración"}], media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09.mp4", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09_poster.jpg", estado:"listo",
   nota:"Confirmar con la clínica que el láser grabado es Brightening · planos de láser como foto: sustituir por el vídeo original",  cubo:"Láser", tema:"Brightening", hora:"18:30h",
   pieza:"Brightening Laser Facial: cómo funciona",
   base:"Carta: Láser (Signature 250 €)", cta:"Reserva tu valoración",
@@ -690,7 +720,7 @@ Desliza para ver la ficha del caso 👉
 Imagen cortesía de BTL Exion · Resultados individuales.
 
 #AntesYDespues #TheSkinReport #ExionFace #Firmeza #SkinLaundryBarcelona` },
-{ d:17, formato:"Reel",
+{ d:17, formato:"Reel", repost:[{t:"slider",q:"¿Glass skin?",e:"😍",txt:"Sí, por favor"}],
   nota:"Pendiente de grabar: no hay vídeo real de Glowtox (el montaje anterior usaba microneedling y se ha retirado)",  cubo:"Med. estética", tema:"Glowtox", hora:"18:30h",
   pieza:"Glowtox: Korean Skin Effect",
   base:"Excel 2025: Glowtox · carta 350 €", cta:"Consulta previa con nuestros médicos",
@@ -786,7 +816,7 @@ Desliza para descubrir cuál es la tuya 👉
 👉 Reserva tu valoración desde el enlace de la bio.
 
 #Rosacea #Acne #PielReactiva #LaserFacial #Mesotox #SkinLaundryBarcelona` },
-{ d:23, formato:"Reel",  cubo:"Branding", tema:"Equipo", hora:"18:30h",
+{ d:23, formato:"Reel", repost:[{t:"question",q:"Pregúntale a nuestra CC"}],  cubo:"Branding", tema:"Equipo", hora:"18:30h",
   pieza:"Tu CC te explica",
   base:"Excel 2025: CC", cta:"Descubre el centro", nota:"Confirmar nombre de la CC",
   idea:["La CC a cámara en recepción","Responde: ¿cómo es mi primera visita?","Recorrido rápido: recepción → valoración → cabina","Cierre: te esperamos en Diagonal 610"],
@@ -849,7 +879,7 @@ Este Black Friday, empieza por saber qué mancha tienes.
 
 #Manchas #Melasma #LaserFacial #BlackFriday #SkinLaundryBarcelona` },
 
-{ d:28, formato:"Reel", media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d28.mp4", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d28_poster.jpg", estado:"listo",
+{ d:28, formato:"Reel", repost:[{t:"link",txt:"Reserva antes de que acabe"}], media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d28.mp4", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d28_poster.jpg", estado:"listo",
   nota:"Reel montado por la agencia · provisional: el plano de Hydrafacial es aplicación de gel y el de láser es peeling de carbón (sustituir por vídeo real de Hydrafacial e IMG_3402) · precio 380 € pendiente de confirmar",  cubo:"Promociones", tema:"Power Glow", hora:"11:00h",
   pieza:"Power Glow Duo: Hydrafacial + láser",
   base:"Excel 2025: Power Glow · carta 380 €", cta:"Reserva antes de que acabe",
@@ -1052,6 +1082,8 @@ const ASSET = {
 
 
 
+
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1086,6 +1118,25 @@ setInterval(() => {
     if (!vis && !v.paused) v.pause();
   });
 }, 400);
+/* Story de repost: lo que se verá de verdad en la story (el reel compartido + los stickers) */
+function repostStory(p) {
+  const vid = p.media && isVid(p.media);
+  const bgImg = p.poster || (!vid && p.media) || "";
+  const inner = vid
+    ? `<video src="${esc(p.media)}" ${p.poster ? `poster="${esc(p.poster)}"` : ""} playsinline preload="metadata" onclick="event.stopPropagation();this.paused?this.play():this.pause();this.parentNode.classList.toggle('playing',!this.paused)" onended="this.parentNode.classList.remove('playing')"></video><span class="rp-play">${RI.play}</span>`
+    : `<div class="rp-pend"><span>Reel</span>Vídeo pendiente de grabar</div>`;
+  const st = (p.repost || []).map(s =>
+      s.t === "link" ? `<span class="rp-link">🔗 ${esc(s.txt)}</span>`
+    : s.t === "poll" ? `<div class="rp-poll"><b>${esc(s.q)}</b>${s.o.map(o => `<span>${esc(o)}</span>`).join("")}</div>`
+    : s.t === "slider" ? `<div class="rp-slider"><b>${esc(s.q)}</b><i><em>${s.e}</em></i><small>${esc(s.txt)}</small></div>`
+    : s.t === "question" ? `<div class="rp-q"><b>${esc(s.q)}</b><span>Escribe algo…</span></div>` : "").join("");
+  return `<div class="tpl sm repost${(p.repost || []).length > 1 ? " two" : ""}">
+    ${bgImg ? `<div class="rp-bg" style="background-image:url('${esc(bgImg)}')"></div>` : `<div class="rp-bg plain"></div>`}
+    <div class="tpl-top"><i><img src="${PERFIL.avatar}" alt=""></i>skinlaundry_es</div>
+    <div class="rp-card"><div class="rp-hd"><i><img src="${PERFIL.avatar}" alt=""></i>skinlaundry_es</div><div class="rp-media">${inner}</div></div>
+    <div class="rp-st">${st}</div>
+  </div>`;
+}
 /* ==== fin REELS estilo Instagram ==== */
 
 const pad = n => String(n).padStart(2,"0");
@@ -1352,7 +1403,7 @@ dayPlan.forEach(item => {
     </div>
     <div class="story-frame" style="left:330px">
       <div class="col-lbl">Story de apoyo</div>
-      ${p.storyImgs ? `<div class="tpl sm" style="cursor:pointer" title="Toca para ver la siguiente story" onclick="const im=this.querySelectorAll('img');let i=[...im].findIndex(x=>x.style.opacity!=='0');im[i].style.opacity=0;i=(i+1)%im.length;im[i].style.opacity=1;this.querySelector('b').textContent=(i+1)+' / '+im.length">${p.storyImgs.map((x,i) => `<img src="${esc(x)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .25s;opacity:${i ? 0 : 1}">`).join("")}<b style="position:absolute;top:8px;right:8px;background:rgba(26,19,18,.65);color:#F6EDE4;font:600 10px/1 sans-serif;padding:4px 7px;border-radius:10px">1 / ${p.storyImgs.length}</b></div>` : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
+      ${p.repost ? repostStory(p) : p.storyImgs ? `<div class="tpl sm" style="cursor:pointer" title="Toca para ver la siguiente story" onclick="const im=this.querySelectorAll('img');let i=[...im].findIndex(x=>x.style.opacity!=='0');im[i].style.opacity=0;i=(i+1)%im.length;im[i].style.opacity=1;this.querySelector('b').textContent=(i+1)+' / '+im.length">${p.storyImgs.map((x,i) => `<img src="${esc(x)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .25s;opacity:${i ? 0 : 1}">`).join("")}<b style="position:absolute;top:8px;right:8px;background:rgba(26,19,18,.65);color:#F6EDE4;font:600 10px/1 sans-serif;padding:4px 7px;border-radius:10px">1 / ${p.storyImgs.length}</b></div>` : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
     </div>
     <div class="hours"><span class="eyebrow">Hora (propuesta)</span><span class="chip">${esc(p.formato)} · ${esc(p.hora)}</span><span class="chip">Story · 1h después</span>${nlChip}</div>
