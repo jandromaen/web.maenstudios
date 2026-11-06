@@ -210,10 +210,6 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-15-3.webp",
-        "tipo": "imagen"
-      },
-      {
         "url": "/pitch/donlay-calendario/noviembre/dom-15-2.webp",
         "tipo": "imagen"
       }
