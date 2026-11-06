@@ -538,6 +538,8 @@ a{color:inherit;text-decoration:none}
 /* ==== fin REELS estilo Instagram ==== */
 .copy{overflow:hidden!important}
 .copy .txt{column-count:2;column-gap:22px;column-rule:1px solid var(--line);line-height:1.45!important}
+/* Franja inferior de la columna derecha: alineada con el final de la columna izquierda, separada por una línea */
+.day-right .hours{bottom:0!important;padding-top:12px;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -1046,6 +1048,8 @@ const ASSET = {
 
 
 
+
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1350,7 +1354,6 @@ dayPlan.forEach(item => {
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
     </div>
     <div class="hours"><span class="eyebrow">Hora (propuesta)</span><span class="chip">${esc(p.formato)} · ${esc(p.hora)}</span><span class="chip">Story · 1h después</span>${nlChip}</div>
-    <a class="drive ${p.drive ? "" : "disabled"}" href="${p.drive ? esc(p.drive) : "#"}" target="_blank" rel="noopener">Ver material en Drive →</a>
   </div>
   ${foot(n)}
 </section>`;
@@ -1376,7 +1379,6 @@ dayPlan.forEach(item => {
     </div>
     ${DESTACADO_STORY[d] ? `<div class="hl-chip st"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === DESTACADO_STORY[d]) || {}).cover}')"></span>Guardar en el destacado <b>${esc(DESTACADO_STORY[d])}</b></div>` : ""}
     <div class="hours"><span class="eyebrow">Hora (propuesta)</span><span class="chip">Stories · ${esc(s.hora)}</span>${nlChip}</div>
-    <a class="drive ${s.drive ? "" : "disabled"}" href="${s.drive ? esc(s.drive) : "#"}" target="_blank" rel="noopener">Ver material en Drive →</a>
   </div>
   ${foot(n)}
 </section>`;
