@@ -1015,7 +1015,7 @@ add("tipografia", "Tipografía", sec(
 # entran aquí para que haya un solo enlace de briefing. Se ejecuta ese script
 # sin escribir su salida y se toman sus diapositivas con el número sin poner.
 _vsrc = (Path(__file__).resolve().parent / "build-skin-laundry-visual.py").read_text()
-_vsrc = _vsrc[: _vsrc.index("out = Path(__file__)")].replace(
+_vsrc = _vsrc[: _vsrc.index("\nout = Path(")].replace(
     'html.replace("§N§", f"{len(D) + 1:02d}")', "html")
 _vns = {"__file__": str(Path(__file__).resolve().parent / "build-skin-laundry-visual.py"), "__name__": "visual"}
 exec(compile(_vsrc, "build-skin-laundry-visual.py", "exec"), _vns)
@@ -1452,15 +1452,15 @@ add(
 )
 
 horario = [
-    ("08:30", "Montaje", "Luz cálida en cabina, set crema y fondo neutro para las entrevistas.", "Equipo Maen", ""),
-    ("09:15", "Recursos de la clínica", "Recepción, cabinas, tecnología y detalles, en foto y vídeo, con la clínica vacía.", "Equipo Maen", "16 · Stories"),
+    ("08:30", "Montaje", "Luz cálida en cabina, set crema y fondo neutro para las entrevistas.", "Equipo de producción", ""),
+    ("09:15", "Recursos de la clínica", "Recepción, cabinas, tecnología y detalles, en foto y vídeo, con la clínica vacía.", "Equipo de producción", "16 · Stories"),
     ("10:00", "Bloque 1 · Tratamientos en vivo", "Sesión de láser completa, de principio a fin, y fotos paso a paso.", "Modelo 1 · Terapeuta", "2 · 11"),
     ("11:30", "Bloque 2 · Doctoras a cámara", "La doctora responde, ojeras, neuromoduladores, mitos y la voz de los antes y después.", "Doctora(s)", "3 · 6 · 7 · 12 · 13 · 14"),
     ("13:30", "Comida", "", "", ""),
     ("14:15", "Bloque 3 · Equipo", "El tratamiento favorito, «Pregúntale a tu CC» y retratos del equipo.", "CC · Equipo de la clínica", "8 · 15"),
     ("15:15", "Bloque 4 · «Ven conmigo»", "Llegada, recepción, valoración con la doctora y cabina, contado por la creadora.", "Creadora UGC · CC · Doctora", "9"),
     ("16:30", "Bloque 5 · Navidad y ofertas", "Gift card, Power Glow Duo, membresía, adviento y enero, con un detalle navideño en la paleta.", "Modelos 1 y 2", "1 · 4 · 5 · 10 · 17"),
-    ("17:30", "Stories y cierre", "Making of, recursos para newsletters y recogida.", "Equipo Maen", "Stories"),
+    ("17:30", "Stories y cierre", "Making of, recursos para newsletters y recogida.", "Equipo de producción", "Stories"),
 ]
 hh = (etiqueta_t("Hora", 128, 312) + etiqueta_t("Bloque", 300, 312) + etiqueta_t("Quién", 1220, 312)
       + etiqueta_t("Nº en el plan", 1560, 312))
@@ -1514,7 +1514,7 @@ add(
         + texto("CC · 14:15 – 16:30 &nbsp;·&nbsp; Terapeuta de láser · 10:00 – 11:30", 128, 890, 720, 22, INK)
         + etiqueta_t("Antes y después", 900, 810)
         + texto("2 o 3 casos reales con fotos y consentimiento firmado. No hace falta que vengan.", 900, 850, 420, 22, INK)
-        + etiqueta_t("Equipo Maen", 1420, 810)
+        + etiqueta_t("Equipo de producción", 1420, 810)
         + texto("Dirección y brand manager, cámara de vídeo y foto.", 1420, 850, 372, 22, INK)
         + pie(),
     ),
