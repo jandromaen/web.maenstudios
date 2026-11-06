@@ -6,7 +6,7 @@ import type { Metadata } from "next";
  * sitio aparezca Maen Studios: las presentaciones van firmadas por All About
  * Management × Skin Laundry.
  */
-export function metaSkinLaundry(titulo: string, descripcion: string, ruta: string): Metadata {
+export function metaSkinLaundry(titulo: string, descripcion: string, _ruta?: string): Metadata {
   const imagen = { url: "/pitch/skin-laundry/og.jpg", width: 1200, height: 630, alt: "Skin Laundry Barcelona" };
   return {
     title: { absolute: titulo },
@@ -18,7 +18,8 @@ export function metaSkinLaundry(titulo: string, descripcion: string, ruta: strin
     publisher: "All About Management",
     category: undefined,
     robots: { index: false, follow: false },
-    alternates: { canonical: ruta },
+    // Sin canonical ni URL: se sirven también desde un dominio propio sin la marca de Maen.
+    alternates: {},
     icons: {
       icon: [{ url: "/pitch/skin-laundry/icon.png", type: "image/png" }],
       apple: [{ url: "/pitch/skin-laundry/apple-icon.png", type: "image/png" }],
@@ -26,7 +27,6 @@ export function metaSkinLaundry(titulo: string, descripcion: string, ruta: strin
     openGraph: {
       title: titulo,
       description: descripcion,
-      url: ruta,
       siteName: "Skin Laundry",
       locale: "es_ES",
       type: "website",

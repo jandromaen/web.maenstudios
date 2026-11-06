@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 import { clients } from "./app/clients";
 
+/**
+ * Dominio propio de las presentaciones de Skin Laundry, sin la marca de Maen.
+ * Se añade en Vercel (Settings › Domains) como alias gratuito *.vercel.app.
+ * En ese dominio solo se ven las tres presentaciones, con rutas cortas; todo lo
+ * demás lleva al análisis para que nadie aterrice en la web de Maen.
+ */
+const SL_HOST = "skinlaundry-bcn.vercel.app";
+const slHost = [{ type: "host" as const, value: SL_HOST }];
+
 const nextConfig: NextConfig = {
   async headers() {
     return [
@@ -31,7 +40,17 @@ const nextConfig: NextConfig = {
   },
 
   async rewrites() {
-    return [
+    return {
+      beforeFiles: [
+        { source: "/analisis", has: slHost, destination: "/pitch/skin-laundry" },
+        { source: "/briefing", has: slHost, destination: "/pitch/skin-laundry-briefing" },
+        {
+          source: "/calendario",
+          has: slHost,
+          destination: "/pitch/skin-laundry-calendario/noviembre/index.html",
+        },
+      ],
+      afterFiles: [
       /* Calendario de Skin Laundry: un HTML autocontenido (fotos, logos y
          tipografías incrustados) en /public. La URL limpia sirve el index.html
          de cada mes; el siguiente va en public/pitch/skin-laundry-calendario/<mes>/. */
@@ -39,11 +58,22 @@ const nextConfig: NextConfig = {
         source: "/pitch/skin-laundry-calendario/:mes",
         destination: "/pitch/skin-laundry-calendario/:mes/index.html",
       },
-    ];
+      ],
+      fallback: [],
+    };
   },
 
   async redirects() {
     return [
+      /* Dominio de Skin Laundry: la raíz y cualquier ruta que no sea de las
+         presentaciones (o sus recursos) van al análisis. */
+      { source: "/", has: slHost, destination: "/analisis", permanent: false },
+      {
+        source: "/:ruta((?!analisis|briefing|calendario|pitch/skin-laundry|_next|_vercel).*)",
+        has: slHost,
+        destination: "/analisis",
+        permanent: false,
+      },
       // Fichas retiradas del portfolio. Estaban indexadas, así que se redirigen
       // en vez de dejar 404 sueltos.
       {
