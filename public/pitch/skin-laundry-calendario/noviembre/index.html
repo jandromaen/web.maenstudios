@@ -536,6 +536,8 @@ a{color:inherit;text-decoration:none}
 .reel-ig .guion ol{margin:0;padding-left:16px;font-size:10.5px;line-height:1.45}
 .reel-ig .guion em{font-style:normal;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-top:6px}
 /* ==== fin REELS estilo Instagram ==== */
+.copy{overflow:hidden!important}
+.copy .txt{column-count:2;column-gap:22px;column-rule:1px solid var(--line);line-height:1.45!important}
 </style>
 </head>
 <body>
@@ -1043,6 +1045,7 @@ const ASSET = {
 
 
 
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1420,6 +1423,18 @@ slides.push(() => `
 const stage = document.getElementById("stage");
 stage.innerHTML = slides.map((fn, i) => fn(i + 1)).join("");
 stage.querySelectorAll(".iph.scrolled .feed-scroll").forEach(el => { requestAnimationFrame(() => { const g = el.querySelector(".igrid"); el.scrollTop = g.offsetTop + g.children[0].offsetHeight * 2 + 4; }); });
+/* Copys: siempre a dos columnas y con el mismo cuerpo de letra en todo el calendario;
+   si alguno no cabe, se reduce el cuerpo en todos por igual para que ninguno se corte */
+function fitCopys() {
+  const boxes = [...stage.querySelectorAll(".copy")].filter(c => c.querySelector(".txt"));
+  let size = 11;
+  const over = () => boxes.some(c => c.scrollHeight > c.clientHeight + 1);
+  const apply = s => boxes.forEach(c => c.querySelector(".txt").style.fontSize = s + "px");
+  apply(size);
+  while (over() && size > 8.5) { size = Math.round((size - 0.25) * 100) / 100; apply(size); }
+}
+fitCopys();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCopys);
 const els = [...stage.querySelectorAll(".slide")];
 const N = els.length;
 let cur = 0;
