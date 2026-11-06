@@ -45,7 +45,7 @@ export const CONTENIDO: Contenido = {
   "dom-15-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-15-reservas.jpg",
+        "url": "/pitch/donlay-calendario/noviembre/dom-15-dsel.webp",
         "tipo": "imagen"
       }
     ]
@@ -53,7 +53,7 @@ export const CONTENIDO: Contenido = {
   "mar-17-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-17-reservas.jpg",
+        "url": "/pitch/donlay-calendario/noviembre/mar-17-navidad.webp",
         "tipo": "imagen"
       }
     ]
@@ -61,7 +61,7 @@ export const CONTENIDO: Contenido = {
   "jue-19-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/jue-19-reservas.jpg",
+        "url": "/pitch/donlay-calendario/noviembre/jue-19-navidad.webp",
         "tipo": "imagen"
       }
     ]
@@ -69,7 +69,11 @@ export const CONTENIDO: Contenido = {
   "sab-21": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/sab-21-reservas.jpg",
+        "url": "/pitch/donlay-calendario/noviembre/sab-21-dsel.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-21-navidad.webp",
         "tipo": "imagen"
       }
     ]
@@ -77,7 +81,11 @@ export const CONTENIDO: Contenido = {
   "dom-22-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-22-reservas.jpg",
+        "url": "/pitch/donlay-calendario/noviembre/dom-22-dsel.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/dom-22-grupos.webp",
         "tipo": "imagen"
       }
     ]
@@ -85,7 +93,7 @@ export const CONTENIDO: Contenido = {
   "mar-24-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-24-reservas.jpg",
+        "url": "/pitch/donlay-calendario/noviembre/mar-24-grupos.webp",
         "tipo": "imagen"
       }
     ]
@@ -93,7 +101,7 @@ export const CONTENIDO: Contenido = {
   "sab-28": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/sab-28-reservas.jpg",
+        "url": "/pitch/donlay-calendario/noviembre/sab-28-dsel.webp",
         "tipo": "imagen"
       },
       {
@@ -106,6 +114,10 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/dom-29-reservas.jpg",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/dom-29-navidad.webp",
         "tipo": "imagen"
       }
     ]
@@ -123,13 +135,17 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/sab-07-1.jpg",
         "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-07-dsel.webp",
+        "tipo": "imagen"
       }
     ]
   },
   "jue-26-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/jue-26-stories-1.jpg",
+        "url": "/pitch/donlay-calendario/noviembre/jue-26-thanksgiving.webp",
         "tipo": "imagen"
       }
     ]
@@ -342,7 +358,7 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/lun-16-story-1.webp",
+        "url": "/pitch/donlay-calendario/noviembre/lun-16-grupos.webp",
         "tipo": "imagen"
       }
     ]
@@ -354,7 +370,7 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-18-story-1.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-18-grupos.webp",
         "tipo": "imagen"
       }
     ]
@@ -366,7 +382,7 @@ export const CONTENIDO: Contenido = {
         "tipo": "video"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/vie-20-story-1.webp",
+        "url": "/pitch/donlay-calendario/noviembre/vie-20-grupos.webp",
         "tipo": "imagen"
       }
     ]
@@ -378,7 +394,7 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/lun-23-story-1.webp",
+        "url": "/pitch/donlay-calendario/noviembre/lun-23-navidad.webp",
         "tipo": "imagen"
       }
     ]
@@ -390,7 +406,7 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-25-story-1.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-25-thanksgiving.webp",
         "tipo": "imagen"
       }
     ]
@@ -402,7 +418,7 @@ export const CONTENIDO: Contenido = {
         "tipo": "video"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/vie-27-story-1.webp",
+        "url": "/pitch/donlay-calendario/noviembre/vie-27-navidad.webp",
         "tipo": "imagen"
       }
     ]
@@ -414,7 +430,7 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/lun-30-story-1.webp",
+        "url": "/pitch/donlay-calendario/noviembre/lun-30-navidad.webp",
         "tipo": "imagen"
       }
     ]
