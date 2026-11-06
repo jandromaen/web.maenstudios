@@ -1035,6 +1035,7 @@ const ASSET = {
 
 
 
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1295,30 +1296,6 @@ slides.push(n => {
 </section>`;
 });
 
-/* 4 · Newsletters */
-slides.push(n => `
-<section class="slide light">
-  ${topBar()}
-  <div class="nl-head">
-    <div class="eyebrow">Email marketing</div>
-    <h2 class="h-serif">Newsletters de <em>noviembre</em></h2>
-    <p>Una newsletter temática y una de promociones al mes, para que la comunidad sepa que siempre hay algo.</p>
-  </div>
-  <div class="nl-photo" style="background-image:url('${ASSET.group}')"><span>Treat. Glow. Repeat.</span></div>
-  <div class="nl-cards">
-    ${NEWSLETTERS.map(x => `
-    <div class="nl-card ${fk(x.tipo) === "promo" ? "promo-card" : ""}">
-      <div class="nl-top"><span class="nl-type">${esc(x.tipo)}</span><span class="nl-date">${dayName(x.d)} ${x.d} nov</span></div>
-      <div class="nl-name h-serif">${esc(x.nombre)}</div>
-      <div class="nl-row"><span>Asunto A</span>${esc(x.asuntoA)}</div>
-      <div class="nl-row"><span>Asunto B</span>${esc(x.asuntoB)}</div>
-      <div class="nl-row"><span>Contenido</span>${esc(x.contenido)}</div>
-      <div class="nl-foot"><span class="chip">CTA · ${esc(x.cta)}</span><span class="chip">Público · ${esc(x.publico)}</span></div>
-    </div>`).join("")}
-  </div>
-  ${foot(n)}
-</section>`);
-
 /* Diapositivas por día */
 const ph = txt => `<div class="ph-media"><div class="plus">+</div><span>${txt}</span></div>`;
 const tagsFor = (d, fmtHtml, extra = "") => {
@@ -1412,6 +1389,30 @@ dayPlan.forEach(item => {
 </section>`;
   });
 });
+
+/* Newsletters (al final, tras el calendario de redes) */
+slides.push(n => `
+<section class="slide light">
+  ${topBar()}
+  <div class="nl-head">
+    <div class="eyebrow">Email marketing</div>
+    <h2 class="h-serif">Newsletters de <em>noviembre</em></h2>
+    <p>Una newsletter temática y una de promociones al mes, para que la comunidad sepa que siempre hay algo.</p>
+  </div>
+  <div class="nl-photo" style="background-image:url('${ASSET.group}')"><span>Treat. Glow. Repeat.</span></div>
+  <div class="nl-cards">
+    ${NEWSLETTERS.map(x => `
+    <div class="nl-card ${fk(x.tipo) === "promo" ? "promo-card" : ""}">
+      <div class="nl-top"><span class="nl-type">${esc(x.tipo)}</span><span class="nl-date">${dayName(x.d)} ${x.d} nov</span></div>
+      <div class="nl-name h-serif">${esc(x.nombre)}</div>
+      <div class="nl-row"><span>Asunto A</span>${esc(x.asuntoA)}</div>
+      <div class="nl-row"><span>Asunto B</span>${esc(x.asuntoB)}</div>
+      <div class="nl-row"><span>Contenido</span>${esc(x.contenido)}</div>
+      <div class="nl-foot"><span class="chip">CTA · ${esc(x.cta)}</span><span class="chip">Público · ${esc(x.publico)}</span></div>
+    </div>`).join("")}
+  </div>
+  ${foot(n)}
+</section>`);
 
 /* Cierre */
 slides.push(() => `
