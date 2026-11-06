@@ -1050,6 +1050,7 @@ const ASSET = {
 
 
 
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1249,7 +1250,7 @@ slides.push(n => `
     <div class="hl-grid">${DESTACADOS.map((h,i) => `
       <div class="hl-card">
         <div class="hl big"><span style="background-image:url('${h.cover}')"></span></div>
-        <div><b>${pad(i+1)} · ${esc(h.nombre)}</b><small>${esc(h.contenido)}</small><i>${h.antes === "Nuevo" ? "Nuevo" : "Antes: " + esc(h.antes)}</i></div>
+        <div><b>${esc(h.nombre)}</b><small>${esc(h.contenido)}</small><i>${h.antes === "Nuevo" ? "Nuevo" : "Antes: " + esc(h.antes)}</i></div>
       </div>`).join("")}</div>
   </div>
   ${foot(n)}
