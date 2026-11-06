@@ -289,7 +289,8 @@ a{color:inherit;text-decoration:none}
 /* ---------- v3: paleta oficial y material del Drive ---------- */
 .cell.f-reel,.ig-grid .t-reel,.media.m-reel,.tag.fmt.reel{background:var(--tan)!important;border-color:var(--tan)!important;color:var(--cream)}
 .cell.f-post,.ig-grid .t-post,.media.m-post,.tag.fmt.post{background:var(--rust)!important;border-color:var(--rust)!important;color:var(--cream)}
-.cell.f-carrusel,.ig-grid .t-carrusel,.media.m-carrusel{background:var(--ink)!important;border-color:var(--ink)!important;color:var(--cream)}
+.ig-grid .t-carrusel,.media.m-carrusel{background:var(--ink)!important;border-color:var(--ink)!important;color:var(--cream)}
+.cell.f-carrusel{background:var(--choc)!important;border-color:var(--choc)!important;color:var(--cream)}
 .cell.f-stories{background:var(--cream-2);border-color:var(--cream-3)}
 .cell.f-stories .lbl{color:var(--choc)}
 .tag.fmt.stories-tag,.tag.plus{background:var(--cream-2);color:var(--choc)}
@@ -1036,6 +1037,7 @@ const ASSET = {
 
 
 
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1090,7 +1092,7 @@ setInterval(() => {
 /* ==== fin REELS estilo Instagram ==== */
 
 const pad = n => String(n).padStart(2,"0");
-const FMT_COLOR = { reel:"var(--choc)", carrusel:"var(--black)", post:"var(--tan)", stories:"var(--cream-2)" };
+const FMT_COLOR = { reel:"var(--tan)", carrusel:"var(--choc)", post:"var(--rust)", stories:"var(--cream-2)" };
 const dayName = d => DOW[new Date(YEAR, MONTH, d).getDay()];
 const piezasDe = d => PIEZAS.filter(p => p.d === d);
 const nlDe = d => NEWSLETTERS.find(n => n.d === d);
@@ -1171,7 +1173,7 @@ slides.push(n => {
     <div class="eyebrow">Instagram</div>
     <div class="legend">
       <div><span class="sw" style="background:var(--tan)"></span><b>Reel</b>&nbsp;· ${nR}</div>
-      <div><span class="sw" style="background:var(--black)"></span><b>Carrusel</b>&nbsp;· ${nC}</div>
+      <div><span class="sw" style="background:var(--choc)"></span><b>Carrusel</b>&nbsp;· ${nC}</div>
       <div><span class="sw" style="background:var(--rust)"></span><b>Post</b>&nbsp;· ${nP}</div>
       <div><span class="sw" style="background:var(--cream-2);border:1px solid var(--cream-3)"></span><b>Stories</b>&nbsp;· pack semanal + reposts</div>
     </div>
