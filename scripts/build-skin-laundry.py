@@ -392,21 +392,24 @@ add(
 
 # 09 · Pilares
 pilares = [
-    ("Antes y después", "De lo más presente. Funciona como prueba, pero repetido en la misma plantilla crema acaba pasando desapercibido."),
-    ("Promociones", "Primer láser por 75 €, Summer Glow, Halloween… Cada campaña con estética propia."),
-    ("Educación", "Mitos del láser, piel seca o deshidratada, manchas tras el verano. Buen fondo, casi siempre en carrusel."),
     ("Equipo médico", "La Dra. Nataly Revelo y la Dra. Farah Anani aparecen de vez en cuando. Son la mejor credencial de la clínica."),
-    ("Tratamientos", "Exion, GlowTox, exosomas, Regeneye: novedades presentadas como ficha de producto."),
-    ("Comunidad", "Reseñas, «Skin Laundry Friends», el aniversario. Lo más humano, lo menos frecuente."),
+    ("Antes y después", "De lo más presente. Funciona como prueba, pero repetido en la misma plantilla crema acaba pasando desapercibido."),
+    ("Educacional", "Mitos del láser, piel seca o deshidratada, manchas tras el verano. Buen fondo, casi siempre en carrusel."),
+    ("Tratamientos en vivo|UGC y experiencias reales", "Exion, GlowTox, exosomas, Regeneye y las colaboraciones con creadoras. Lo que mejor ha funcionado, aunque las novedades salen como ficha de producto."),
+    ("Ofertas y membresía", "Primer láser por 75 €, Summer Glow, Halloween, la membresía… Cada campaña con estética propia."),
 ]
 pg = ""
+CW, GAP = 312, 26
 for i, (t, d) in enumerate(pilares):
-    col, row = i % 3, i // 3
-    x, y = 128 + col * 568, 400 + row * 270
+    x = 128 + i * (CW + GAP)
+    nom, _, sub = t.partition("|")
     pg += (
-        f'<div style="{pos(x, y)}width:536px;height:240px;border-radius:20px;background:{SAND}"></div>'
-        f'<p style="{pos(x + 36, y + 32)}font-family:{SERIF};font-size:44px;font-weight:300;line-height:1">{t}</p>'
-        + texto(d, x + 36, y + 100, 464, 22, SOFT)
+        f'<div style="{pos(x, 380)}width:{CW}px;height:540px;border-radius:20px;background:{SAND}"></div>'
+        f'<div style="{pos(x + 32, 420)}width:40px;height:4px;border-radius:2px;background:{CARAMEL}"></div>'
+        f'<p style="{pos(x + 32, 452)}width:{CW - 64}px;font-family:{SERIF};font-size:40px;font-weight:300;line-height:1.05">{nom}'
+        + (f'<span style="display:block;font-size:18px;line-height:1.4;margin-top:4px;color:{SOFT}">{sub}</span>' if sub else "")
+        + '</p>'
+        + texto(d, x + 32, 600, CW - 60, 21, SOFT)
     )
 add(
     "pilares",
