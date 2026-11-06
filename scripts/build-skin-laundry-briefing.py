@@ -417,7 +417,7 @@ PILARES = [
     },
     {
         "id": "informativo",
-        "nombre": "Informativo",
+        "nombre": "Educacional",
         "objetivo": "Resolver dudas reales. Es el contenido que más se guarda y el que trae a quien todavía no conoce la clínica.",
         "porque": "La educación tiene buen fondo en la cuenta (mitos del láser, piel seca o deshidratada), pero casi siempre va en carrusel, y un reel recibe cuatro veces más comentarios que un carrusel. El reel «Korean Skin», que respondía a una curiosidad concreta, sumó 18 comentarios.",
         "foto": ("dos-mujeres.jpg", "60% 50%"),
@@ -511,7 +511,7 @@ PILARES = [
     },
     {
         "id": "tratamientos",
-        "nombre": "Tratamientos en vivo",
+        "nombre": "Tratamientos en vivo (UGC y experiencias reales)",
         "objetivo": "Quitar el miedo a la primera vez y enseñar la tecnología. Es la experiencia Skin Laundry contada desde dentro.",
         "porque": "Las novedades (Exion, GlowTox, exosomas, Regeneye) se han presentado como ficha de producto. Lo que funcionó fue la curiosidad: el reel que presentaba Exion con un gancho conocido sumó 23 comentarios, el máximo del semestre junto a la colaboración con una creadora.",
         "foto": ("laser-beige.jpg", "78% 40%"),
@@ -782,13 +782,22 @@ add("ritmo", "El ritmo", sec(
     eyebrow("02 · Ritmo y reparto") + titulo("Cuatro piezas <i>a la semana</i>.", 128, 190) + rt + pie()))
 
 # ── 05 · Reparto por pilar ────────────────────────────────────────────────
-reparto = [("Equipo médico", 2, 1), ("Antes y después", 2, 2), ("Informativo", 1, 3),
-           ("Tratamientos en vivo", 2, 1), ("Ofertas y membresía", 1, 1)]
+# Nombre del pilar en dos niveles: el paréntesis va debajo, más pequeño, para
+# que «Tratamientos en vivo (UGC y experiencias reales)» quepa en títulos y tarjetas.
+def nombre_2n(n, rel=0.5):
+    if " (" not in n:
+        return n
+    a, b = n.split(" (", 1)
+    return f'{a}<span style="display:block;font-size:{rel}em;letter-spacing:0;line-height:1.35">{b.rstrip(")")}</span>'
+
+
+reparto = [("Equipo médico", 2, 1), ("Antes y después", 2, 2), ("Educacional", 1, 3),
+           ("Tratamientos en vivo (UGC y experiencias reales)", 2, 1), ("Ofertas y membresía", 1, 1)]
 rp = ""
 unit = 150
 for i, (n, r, p) in enumerate(reparto):
     y = 380 + i * 104
-    rp += f'<p style="{pos(128, y + 12)}width:440px;font-family:{SERIF};font-weight:300;font-size:38px">{n}</p>'
+    rp += f'<p style="{pos(128, y + (2 if " (" in n else 12))}width:440px;font-family:{SERIF};font-weight:300;font-size:38px;line-height:1">{nombre_2n(n, 0.55)}</p>'
     x = 600
     for k in range(r):
         rp += f'<div style="{pos(x, y)}width:{unit - 10}px;height:70px;border-radius:12px;background:{INK};color:{CREAM};display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;letter-spacing:1px">REEL</div>'
@@ -811,7 +820,7 @@ for i, p in enumerate(PILARES):
     x = 128 + i * (cw + gap)
     cards += caja(x, 360, cw, 560)
     cards += f'<div style="{pos(x + 32, 400)}width:40px;height:4px;border-radius:2px;background:{TOPO}"></div>'
-    cards += f'<p style="{pos(x + 32, 432)}width:{cw - 64}px;font-family:{SERIF};font-size:40px;font-weight:300;line-height:1.05">{p["nombre"]}</p>'
+    cards += f'<p style="{pos(x + 32, 432)}width:{cw - 64}px;font-family:{SERIF};font-size:40px;font-weight:300;line-height:1.05">{nombre_2n(p["nombre"], 0.45)}</p>'
     cards += texto(p["objetivo"], x + 32, 560, cw - 60, 20, SOFT)
     cards += etiqueta(f'{len(p["reels"])} reels · {len(p["posts"])} posts', x + 32, 860, TOPO)
 add("pilares", "Los cinco pilares", sec(
@@ -832,8 +841,8 @@ def portada_pilar(i, p):
     else:
         h = foto(img, p["nombre"], 0, 0, 700, 1080, opos=op)
     h += eyebrow(f"Pilar {i + 1} de 5", 800, 128)
-    h += titulo(p["nombre"], 800, 186, 1000, 88)
-    h += texto(p["objetivo"], 800, 300, 980, 28)
+    h += titulo(nombre_2n(p["nombre"], 0.36), 800, 186, 1000, 88)
+    h += texto(p["objetivo"], 800, 300 + (36 if " (" in p["nombre"] else 0), 980, 28)
     h += caja(800, 430, 992, 170, SAND)
     h += etiqueta("Por qué, según el análisis", 832, 456)
     h += texto(p["porque"], 832, 490, 930, 19, SOFT)
@@ -1175,7 +1184,7 @@ add("proceso", "Proceso", sec(
 nec = [
     ("Doctoras", "Disponibilidad en cada rodaje y una persona de referencia para validar los textos médicos."),
     ("Casos reales", "Pacientes dispuestas a participar, con consentimiento, y fotos de antes y después con el protocolo."),
-    ("Dudas frecuentes", "Las preguntas que llegan por WhatsApp, teléfono y recepción: son la materia prima del pilar informativo."),
+    ("Dudas frecuentes", "Las preguntas que llegan por WhatsApp, teléfono y recepción: son la materia prima del pilar educacional."),
     ("Ofertas y precios", "Promociones, membresías y condiciones de cada mes, con antelación."),
     ("Novedades", "Tratamientos y tecnologías nuevas antes de su lanzamiento."),
     ("Acceso", "Horarios con menos pacientes para grabar y acceso a las estadísticas de la cuenta."),
@@ -1258,9 +1267,9 @@ add(
         + titulo("Vuestros temas, <i>con nuestro enfoque</i>.", 128, 200, 1600, 80)
         + tarjetas([
             ("Ya lo planteábamos", "Coincide con los pilares", [
-                "Ojeras, labios, neuromoduladores y mantenimiento láser → Informativo.",
-                "Glow express y primera consulta → Tratamientos en vivo.",
-                "Gift cards, Power Glow Duo y membresía → Ofertas.",
+                "Ojeras, labios, neuromoduladores y mantenimiento láser → Educacional.",
+                "Glow express y primera consulta → Tratamientos en vivo (UGC y experiencias reales).",
+                "Gift cards, Power Glow Duo y membresía → Ofertas y membresía.",
                 "Equipo y «Pregúntale a tu CC» → Equipo médico.",
                 "Antes y después del láser.",
             ]),
@@ -1291,24 +1300,24 @@ add(
 
 # (fecha, formato, pilar, pieza, origen, rodaje)
 DIC = [
-    ("Mar 1", "Post", "Ofertas", "Gift cards de Navidad", "V", "Bloque 5"),
-    ("Jue 3", "Reel", "Tratamientos en vivo", "Glow express: la sesión de láser en 15 minutos", "V", "Bloque 1"),
-    ("Vie 4", "Carrusel", "Informativo", "Ojeras: cuál es la tuya y cómo se trata", "V", "Bloque 2"),
-    ("Dom 6", "Reel", "Ofertas", "Power Glow Duo, el regalo de Navidad", "V", "Bloque 5"),
-    ("Lun 7", "Carrusel", "Ofertas", "Calendario de adviento con sorteo", "V", "Bloque 5 + gráfica"),
+    ("Mar 1", "Post", "Ofertas y membresía", "Gift cards de Navidad", "V", "Bloque 5"),
+    ("Jue 3", "Reel", "Tratamientos en vivo (UGC)", "Glow express: la sesión de láser en 15 minutos", "V", "Bloque 1"),
+    ("Vie 4", "Carrusel", "Educacional", "Ojeras: cuál es la tuya y cómo se trata", "V", "Bloque 2"),
+    ("Dom 6", "Reel", "Ofertas y membresía", "Power Glow Duo, el regalo de Navidad", "V", "Bloque 5"),
+    ("Lun 7", "Carrusel", "Ofertas y membresía", "Calendario de adviento con sorteo", "V", "Bloque 5 + gráfica"),
     ("Mié 9", "Reel", "Equipo médico", "«La doctora responde»: labios sin migraciones", "V+", "Bloque 2"),
     ("Vie 11", "Reel", "Antes y después", "El caso contado por la doctora", "N", "Bloque 2 + fotos clínica"),
     ("Sáb 12", "Carrusel", "Equipo médico", "El tratamiento favorito del equipo", "V", "Bloque 3"),
-    ("Lun 14", "Reel", "Tratamientos en vivo", "«Ven conmigo»: mi primera consulta", "V+", "Bloque 4"),
-    ("Mar 15", "Post", "Ofertas", "Regala la membresía", "V", "Bloque 5"),
-    ("Jue 17", "Carrusel", "Informativo", "Mantenimiento láser: cada cuánto repetir", "V", "Bloque 1"),
-    ("Vie 18", "Reel", "Informativo", "Tres mitos del láser antes de las fiestas", "N", "Bloque 2"),
+    ("Lun 14", "Reel", "Tratamientos en vivo (UGC)", "«Ven conmigo»: mi primera consulta", "V+", "Bloque 4"),
+    ("Mar 15", "Post", "Ofertas y membresía", "Regala la membresía", "V", "Bloque 5"),
+    ("Jue 17", "Carrusel", "Educacional", "Mantenimiento láser: cada cuánto repetir", "V", "Bloque 1"),
+    ("Vie 18", "Reel", "Educacional", "Tres mitos del láser antes de las fiestas", "N", "Bloque 2"),
     ("Lun 21", "Reel", "Antes y después", "La evolución: primera, tercera y quinta sesión", "V+", "Bloque 2 + fotos clínica"),
-    ("Mié 23", "Carrusel", "Informativo", "Neuromoduladores: cuándo, antes de las fiestas", "V", "Bloque 2"),
+    ("Mié 23", "Carrusel", "Educacional", "Neuromoduladores: cuándo, antes de las fiestas", "V", "Bloque 2"),
     ("Jue 24", "Reel", "Equipo médico", "Pregúntale a tu CC", "V", "Bloque 3"),
     ("Sáb 26", "Carrusel", "Marca", "Resumen del año: 3 millones de faciales", "V", "Fotos de toda la jornada"),
-    ("Mar 29", "Reel", "Ofertas", "Lo que viene en enero: tu primera vez", "V", "Bloque 5"),
-    ("Jue 31", "Post", "Ofertas", "Gift card de último minuto", "V", "Gráfica"),
+    ("Mar 29", "Reel", "Ofertas y membresía", "Lo que viene en enero: tu primera vez", "V", "Bloque 5"),
+    ("Jue 31", "Post", "Ofertas y membresía", "Gift card de último minuto", "V", "Gráfica"),
 ]
 ORIGEN = {
     "V": ("Vuestro calendario", SAND, INK),
