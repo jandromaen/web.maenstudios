@@ -545,19 +545,18 @@ a{color:inherit;text-decoration:none}
 .tpl.repost .rp-bg{position:absolute;inset:-20px;background:center/cover;filter:blur(14px) brightness(.55) saturate(1.1)}
 .tpl.repost .rp-bg.plain{background:linear-gradient(160deg,#88583B,#3C201D)}
 .tpl.repost .tpl-top{z-index:3;color:#fff}
-.tpl.repost .rp-card{position:absolute;inset:0;z-index:1}
-.tpl.repost .rp-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0,rgba(0,0,0,0) 18%,rgba(0,0,0,0) 62%,rgba(0,0,0,.45) 100%);pointer-events:none}
-.tpl.repost .rp-hd{position:absolute;left:8%;bottom:20%;z-index:2;display:flex;align-items:center;gap:5px;padding:4px 8px 4px 4px;border-radius:999px;background:rgba(255,255,255,.92);font-size:7.5px;font-weight:700;color:#111}
+.tpl.repost .rp-card{position:absolute;left:50%;top:13%;width:60%;transform:translateX(-50%) rotate(-2deg);background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.45);z-index:2}
+.tpl.repost .rp-hd{display:flex;align-items:center;gap:5px;padding:5px 7px;font-size:7.5px;font-weight:700;color:#111}
 .tpl.repost .rp-hd i{width:13px;height:13px;border-radius:50%;overflow:hidden;display:block}
 .tpl.repost .rp-hd i img{width:100%;height:100%;object-fit:cover;display:block}
-.tpl.repost .rp-media{position:absolute;inset:0;background:#000}
+.tpl.repost .rp-media{position:relative;aspect-ratio:9/16;background:#000}
 .tpl.repost .rp-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:pointer;display:block}
 .tpl.repost .rp-play{position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:rgba(0,0,0,.45);display:grid;place-items:center;pointer-events:none}
 .tpl.repost .rp-play svg{width:13px;height:13px;fill:#fff;stroke:none}
 .tpl.repost .rp-media.playing .rp-play{display:none}
 .tpl.repost .rp-pend{position:absolute;inset:0;background:#3C201D;color:#F6EDE4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:8px;text-align:center;padding:10px}
 .tpl.repost .rp-pend span{font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:#CDF765}
-
+.tpl.repost.two .rp-card{width:50%;top:11%}
 .tpl.repost .rp-st{position:absolute;left:8%;right:8%;bottom:7%;display:flex;flex-direction:column;align-items:center;gap:6px;z-index:3}
 .tpl.repost .rp-link{background:#fff;color:#1A1312;font-size:8.5px;font-weight:700;padding:5px 10px;border-radius:7px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .tpl.repost .rp-poll{background:#fff;border-radius:10px;padding:7px;width:86%;display:flex;flex-direction:column;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
@@ -571,6 +570,10 @@ a{color:inherit;text-decoration:none}
 .tpl.repost .rp-q{background:#fff;border-radius:10px;width:86%;overflow:hidden;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .tpl.repost .rp-q b{display:block;background:#88583B;color:#fff;font-size:8.5px;padding:6px}
 .tpl.repost .rp-q span{display:block;font-size:7.5px;color:#999;padding:7px}
+/* Posts: formato 4:5 real de los diseños (nada se recorta arriba ni abajo) */
+.post-frame:not(.is-reel){width:252px}
+.post-frame:not(.is-reel) .media.pf{aspect-ratio:4/5}
+.car-ig .cnt,.media.pf .pages{display:none!important} /* el contador tapaba la cabecera de los diseños; los puntos ya indican la posición */
 </style>
 </head>
 <body>
@@ -610,12 +613,12 @@ const FECHAS = {
 };
 
 const PIEZAS = [
-{ d:9, formato:"Reel", repost:[{t:"link",txt:"Reserva tu valoración"}], media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09.mp4", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09_poster.jpg", estado:"listo",
+{ d:9, formato:"Reel", repost:[{t:"poll",q:"¿Lo has probado?",o:["Sí","Aún no"]},{t:"link",txt:"Reserva tu valoración"}], media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09.mp4", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d09_poster.jpg", estado:"listo",
   nota:"Confirmar con la clínica que el láser grabado es Brightening · planos de láser como foto: sustituir por el vídeo original",  cubo:"Láser", tema:"Brightening", hora:"18:30h",
   pieza:"Brightening Laser Facial: cómo funciona",
   base:"Carta: Láser (Signature 250 €)", cta:"Reserva tu valoración",
   idea:["Gancho: «Lo que pasa en tu piel en 15 minutos»","Paso a paso real de la sesión en cabina","Texto en pantalla: manchas, marcas de acné y tono apagado","Cierre: piel luminosa al salir, sin tiempo de recuperación"],
-  story:["Repost del reel a pantalla completa con sticker de enlace"],
+  story:["Repost del reel con sticker de enlace","Encuesta: ¿lo has probado? Sí / Aún no"],
   copy:`Luz, calor controlado y 15 minutos. Así funciona el Brightening Laser Facial ✨
 
 Trabaja la pigmentación desde dentro para unificar el tono, suavizar las marcas de acné y devolverle la luminosidad a la piel apagada. Sin tiempo de recuperación: sales de cabina y sigues con tu día.
@@ -656,7 +659,7 @@ Desliza para ver cómo funciona 👉
   nota:"Sustituye a «Neuromoduladores» del Excel · precio 720 € a confirmar",
   media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d12_1.jpg", slides:["/pitch/skin-laundry-calendario/noviembre/img/drive-d12_1.jpg","/pitch/skin-laundry-calendario/noviembre/img/drive-d12_2.jpg","/pitch/skin-laundry-calendario/noviembre/img/drive-d12_3.jpg"],
   idea:["1 · Lo que pasa cuando tu mirada se cansa","2 · Antes / después: una mirada más firme y descansada","3 · Contorno de ojos · 720 € · 3 sesiones + polinucleótidos de regalo"],
-  story:["Lo que pasa cuando tu mirada se cansa · sticker «Desliza para ver el cambio»","Encuesta: ¿se te cansa la mirada? Sí / A veces"],
+  story:["Lo que pasa cuando tu mirada se cansa · sticker «Desliza para ver el cambio»","Encuesta: ¿se te cansa la mirada? Sí / A veces","Promo 720 € con enlace: reserva tu valoración"],
   copy:`Lo que pasa cuando tu mirada se cansa 👁️
 
 Con los años baja el colágeno, el párpado pierde firmeza y se marcan las líneas finas. El resultado: una mirada que se ve cansada aunque hayas dormido bien.
@@ -724,7 +727,7 @@ Resultados individuales.
   pieza:"Glowtox: Korean Skin Effect",
   base:"Excel 2025: Glowtox · carta 350 €", cta:"Consulta previa con nuestros médicos",
   idea:["Gancho: «El efecto glass skin, sin filtro»","Microinyecciones en cabina, primer plano de textura","Beneficios en pantalla: poro, brillo, luminosidad","Cierre: Glowtox «el original», solo en Skin Laundry"],
-  story:["Repost del reel a pantalla completa","Sticker deslizante: ¿glass skin? Sí, por favor"],
+  story:["Repost del reel","Sticker: ¿glass skin? Sí, por favor"],
   copy:`El efecto glass skin, sin filtro ✨
 
 Glowtox, nuestro Korean Skin Effect «el original», reduce el tamaño del poro, controla el brillo y deja la piel más uniforme y luminosa. Microinyecciones superficiales, sin cambiar tu expresión.
@@ -796,7 +799,7 @@ Nuestros médicos resolverán tus dudas en persona.
   nota:"Promo Mesotox 350 € + tóner de regalo: confirmar vigencia · Blemiderm no aparece en la carta",
   media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d22_1.jpg", slides:["/pitch/skin-laundry-calendario/noviembre/img/drive-d22_1.jpg","/pitch/skin-laundry-calendario/noviembre/img/drive-d22_2.jpg","/pitch/skin-laundry-calendario/noviembre/img/drive-d22_3.jpg","/pitch/skin-laundry-calendario/noviembre/img/drive-d22_4.jpg"],
   idea:["1 · Rojeces o granitos: no son lo mismo","2 · Se parecen, pero no se tratan igual (tabla rosácea vs. acné)","3 · Cómo lo tratamos: Collagen, Calm & Clear, Mesotox / Carbon Peel, Brightening, Blemiderm","4 · Promo del mes: Mesotox 350 € + tóner de regalo"],
-  story:["Nuevo post: Rojeces o granitos · sticker «Desliza»","Encuesta: ¿rojeces o granitos?"],
+  story:["Nuevo post: Rojeces o granitos · sticker «Desliza»","Encuesta: ¿rojeces o granitos?","Mesotox 350 € con enlace: reserva tu valoración"],
   copy:`Rojeces o granitos: no son lo mismo.
 
 Rosácea y acné se parecen, pero no se tratan igual.
@@ -819,7 +822,7 @@ Desliza para descubrir cuál es la tuya 👉
   pieza:"Tu CC te explica",
   base:"Excel 2025: CC", cta:"Descubre el centro", nota:"Confirmar nombre de la CC",
   idea:["La CC a cámara en recepción","Responde: ¿cómo es mi primera visita?","Recorrido rápido: recepción → valoración → cabina","Cierre: te esperamos en Diagonal 610"],
-  story:["Repost del reel a pantalla completa","Caja de preguntas para la CC"],
+  story:["Repost del reel","Caja de preguntas para la CC"],
   copy:`¿Es tu primera vez en Skin Laundry? Te lo explica [nombre], nuestra CC 🤍
 
 Qué pasa cuando llegas, cómo es la valoración y qué tratamiento encaja con tu piel. Todo, antes de tumbarte en la cabina.
@@ -883,7 +886,7 @@ Este Black Friday, empieza por saber qué mancha tienes.
   pieza:"Power Glow Duo: Hydrafacial + láser",
   base:"Excel 2025: Power Glow · carta 380 €", cta:"Reserva antes de que acabe",
   idea:["Gancho: «Dos tratamientos, una sola cita»","Plano 1: Hydrafacial (limpieza e hidratación)","Plano 2: Brightening Laser (luminosidad)","Cierre: el combo para llegar con la piel lista a diciembre"],
-  story:["Repost del reel a pantalla completa","Sticker de enlace: reserva"],
+  story:["Repost del reel","Sticker: reserva con enlace"],
   copy:`Dos tratamientos, una sola cita: Power Glow Duo ✨
 
 Primero, Hydrafacial para limpiar, exfoliar e hidratar en profundidad. Después, Brightening Laser para unificar el tono y potenciar la luminosidad.
@@ -1088,6 +1091,8 @@ const ASSET = {
 
 
 
+
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1129,13 +1134,12 @@ function repostStory(p) {
   const inner = vid
     ? `<video src="${esc(p.media)}" ${p.poster ? `poster="${esc(p.poster)}"` : ""} playsinline preload="metadata" onclick="event.stopPropagation();this.paused?this.play():this.pause();this.parentNode.classList.toggle('playing',!this.paused)" onended="this.parentNode.classList.remove('playing')"></video><span class="rp-play">${RI.play}</span>`
     : `<div class="rp-pend"><span>Reel</span>${esc(p.pieza)}</div>`;
-  /* Un solo elemento interactivo por story: encuesta, enlace o pregunta, nunca dos. */
-  const st = (p.repost || []).slice(0, 1).map(s =>
+  const st = (p.repost || []).map(s =>
       s.t === "link" ? `<span class="rp-link">🔗 ${esc(s.txt)}</span>`
     : s.t === "poll" ? `<div class="rp-poll"><b>${esc(s.q)}</b>${s.o.map(o => `<span>${esc(o)}</span>`).join("")}</div>`
     : s.t === "slider" ? `<div class="rp-slider"><b>${esc(s.q)}</b><i><em>${s.e}</em></i><small>${esc(s.txt)}</small></div>`
     : s.t === "question" ? `<div class="rp-q"><b>${esc(s.q)}</b><span>Escribe algo…</span></div>` : "").join("");
-  return `<div class="tpl sm repost">
+  return `<div class="tpl sm repost${(p.repost || []).length > 1 ? " two" : ""}">
     ${bgImg ? `<div class="rp-bg" style="background-image:url('${esc(bgImg)}')"></div>` : `<div class="rp-bg plain"></div>`}
     <div class="tpl-top"><i><img src="${PERFIL.avatar}" alt=""></i>skinlaundry_es</div>
     <div class="rp-card"><div class="rp-hd"><i><img src="${PERFIL.avatar}" alt=""></i>skinlaundry_es</div><div class="rp-media">${inner}</div></div>
