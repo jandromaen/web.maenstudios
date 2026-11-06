@@ -528,6 +528,9 @@ a{color:inherit;text-decoration:none}
 .reel-ig.is-paused .paused{display:grid}
 .reel-ig .paused span{width:54px;height:54px;border-radius:50%;background:rgba(0,0,0,.4);display:grid;place-items:center}
 .reel-ig .paused svg{width:24px;height:24px;fill:#fff;stroke:none}
+.reel-ig.plain{cursor:default}
+.reel-ig.plain video{object-fit:contain;background:#000}
+.reel-ig.plain .guion{padding:40px 22px}
 .reel-ig .guion{position:absolute;inset:0;background:#3C201D;padding:40px 52px 100px 16px;display:flex;flex-direction:column;justify-content:center;gap:8px;font-family:var(--sans,inherit);color:#F6EDE4}
 .reel-ig .guion span{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#CDF765}
 .reel-ig .guion ol{margin:0;padding-left:16px;font-size:10.5px;line-height:1.45}
@@ -737,7 +740,7 @@ Gracias a [@creadora1], [@creadora2] y [@creadora3] por venir a conocernos y con
 
 #SkinLaundryBarcelona #LaserFacial #BarcelonaBeauty` },
 
-{ d:20, formato:"Reel", media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d20.mp4?v=2", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d20_poster.jpg?v=2", estado:"listo",
+{ d:20, formato:"Reel", media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d20.mp4", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d20_poster.jpg", estado:"listo",
   nota:"Solo planos del centro: no se muestra ningún tratamiento · añadir horario del open day",  cubo:"Med. estética", tema:"Ultraformer", hora:"18:30h",
   pieza:"Invitación al open day del 25 de noviembre",
   base:"Doc §1", cta:"Consulta previa con nuestros médicos",
@@ -1038,6 +1041,8 @@ const ASSET = {
 
 
 
+
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1057,36 +1062,19 @@ const RI = {
   play:'<svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>'
 };
 function reelCard(p) {
-  const av = `<img src="${ASSET.fav}" alt="" onerror="this.remove()">`;
-  const cap = esc((p.copy || "").split("\n")[0]);
+  /* Vídeo en formato normal: sin interfaz de Instagram encima, solo se reproduce al darle al play */
   const vid = p.media && isVid(p.media);
   const bg = !p.media ? `<div class="guion"><span>Guion</span><ol>${(p.idea || []).map(x => `<li>${esc(x)}</li>`).join("")}</ol><em>Vídeo pendiente</em></div>`
-    : vid ? `<video src="${esc(p.media)}" ${p.poster ? `poster="${esc(p.poster)}"` : ""} muted loop playsinline autoplay preload="metadata"></video>`
+    : vid ? `<video src="${esc(p.media)}" ${p.poster ? `poster="${esc(p.poster)}"` : ""} controls playsinline preload="metadata"></video>`
     : `<img class="bg" src="${esc(p.media)}" alt="">`;
-  return `<div class="reel-ig${vid ? "" : " is-static"}" ${vid ? `onclick="reelTap(event,this)"` : ""}>
-    ${bg}<div class="shade"></div>
-    ${vid ? `<div class="mute">${RI.off}${RI.on}</div><div class="paused"><span>${RI.play}</span></div>` : ""}
-    <div class="rail">${RI.heart}${RI.com}${RI.rep}${RI.send}<span class="dots">${RI.dots}</span><span class="aud">${av}</span></div>
-    <div class="info">
-      <div class="who"><i>${av}</i>${esc(HANDLE.replace(/^@/, ""))}<span class="seg">Seguir</span></div>
-      <div class="cap">${cap} <b>… más</b></div>
-      <div class="song">${RI.note}${esc(HANDLE.replace(/^@/, ""))} · Audio original</div>
-    </div>
-  </div>`;
+  return `<div class="reel-ig plain${vid ? "" : " is-static"}">${bg}</div>`;
 }
-function reelTap(e, el) {
-  const v = el.querySelector("video"); if (!v) return;
-  if (e.target.closest(".mute")) { v.muted = !v.muted; el.classList.toggle("sound", !v.muted); if (!v.muted && v.paused) v.play(); return; }
-  if (v.paused) { v.play(); el.classList.remove("is-paused"); } else { v.pause(); el.classList.add("is-paused"); }
-}
-/* Solo suena/avanza el reel de la diapositiva visible */
+/* Al cambiar de diapositiva, el vídeo que deja de verse se pausa */
 setInterval(() => {
   document.querySelectorAll(".reel-ig video").forEach(v => {
     const r = v.getBoundingClientRect();
     const vis = r.width > 0 && r.right > 0 && r.left < innerWidth && r.bottom > 0 && r.top < innerHeight;
-    const card = v.closest(".reel-ig");
-    if (!vis && !v.paused) { v.pause(); v.muted = true; card.classList.remove("sound"); }
-    else if (vis && v.paused && !card.classList.contains("is-paused")) v.play().catch(() => {});
+    if (!vis && !v.paused) v.pause();
   });
 }, 400);
 /* ==== fin REELS estilo Instagram ==== */
@@ -1443,7 +1431,7 @@ function go(i, push = true) {
   countEl.textContent = `${pad(cur + 1)} / ${pad(N)}`;
   prog.style.width = `${((cur + 1) / N) * 100}%`;
   prevB.disabled = cur === 0; nextB.disabled = cur === N - 1;
-  els.forEach((s, k) => s.querySelectorAll("video").forEach(v => k === cur ? v.play().catch(()=>{}) : v.pause()));
+  els.forEach((s, k) => s.querySelectorAll("video").forEach(v => { if (k !== cur) v.pause(); }));
   if (push) { try { history.replaceState(null, "", `#${cur + 1}`); } catch (e) {} }
 }
 function fit() {
