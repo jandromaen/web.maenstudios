@@ -1086,6 +1086,7 @@ const ASSET = {
 
 
 
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1155,7 +1156,8 @@ const foot = n => `<div class="foot"><span>${HANDLE}</span><span>${pad(n)}</span
 const nR = PIEZAS.filter(p=>fk(p.formato)==="reel").length;
 const nC = PIEZAS.filter(p=>fk(p.formato)==="carrusel").length;
 const nP = PIEZAS.filter(p=>fk(p.formato)==="post").length;
-const resumen = `${PIEZAS.length} publicaciones · ${nR} reels, ${nC} carruseles y ${nP} posts · ${NEWSLETTERS.length} newsletters · stories a diario del ${START} al ${END}`;
+const fmtLista = nP ? `${nR} reels, ${nC} carruseles y ${nP} posts` : `${nR} reels y ${nC} carruseles`;
+const resumen = `${PIEZAS.length} publicaciones · ${fmtLista} · ${NEWSLETTERS.length} newsletters · stories a diario del ${START} al ${END}`;
 
 /* Orden de diapositivas por día (un día con 2 piezas = 2 diapositivas) */
 const FIXED = 6;                       // portada, calendario, feed, destacados, stories, newsletters
@@ -1224,13 +1226,13 @@ slides.push(n => {
     <div class="legend">
       <div><span class="sw" style="background:var(--tan)"></span><b>Reel</b>&nbsp;· ${nR}</div>
       <div><span class="sw" style="background:var(--choc)"></span><b>Carrusel</b>&nbsp;· ${nC}</div>
-      <div><span class="sw" style="background:var(--rust)"></span><b>Post</b>&nbsp;· ${nP}</div>
+      ${nP ? `<div><span class="sw" style="background:var(--rust)"></span><b>Post</b>&nbsp;· ${nP}</div>` : ""}
       <div><span class="sw" style="background:var(--cream-2);border:1px solid var(--cream-3)"></span><b>Stories</b>&nbsp;· pack semanal + reposts</div>
     </div>
     <div class="dates"><span class="flag">+</span><b>Fechas señaladas</b> · ${fechas}<br><span class="flag nlf">✉</span><b>Newsletters</b> · ${nls}</div>
     <div class="big">${PIEZAS.length}</div>
     <div class="big-sub">publicaciones</div>
-    <div class="big-note">${nR} reels, ${nC} carruseles y ${nP} posts del ${START} al ${END} de noviembre, con stories de apoyo cada día.</div>
+    <div class="big-note">${fmtLista} del ${START} al ${END} de noviembre, con stories de apoyo cada día.</div>
   </aside>
   ${foot(n)}
 </section>`;
