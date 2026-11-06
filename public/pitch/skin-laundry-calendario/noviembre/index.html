@@ -1086,6 +1086,7 @@ const ASSET = {
 
 
 
+
 const DOW = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid = u => /^data:video\/|\.(mp4|webm|mov)(\?|$)/i.test(u || "");
@@ -1107,7 +1108,7 @@ const RI = {
 function reelCard(p) {
   /* Vídeo en formato normal: sin interfaz de Instagram encima, solo se reproduce al darle al play */
   const vid = p.media && isVid(p.media);
-  const bg = !p.media ? `<div class="guion"><span>Guion</span><ol>${(p.idea || []).map(x => `<li>${esc(x)}</li>`).join("")}</ol><em>Vídeo pendiente</em></div>`
+  const bg = !p.media ? `<div class="guion"><span>Guion</span><ol>${(p.idea || []).map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>`
     : vid ? `<video src="${esc(p.media)}" ${p.poster ? `poster="${esc(p.poster)}"` : ""} controls playsinline preload="metadata"></video>`
     : `<img class="bg" src="${esc(p.media)}" alt="">`;
   return `<div class="reel-ig plain${vid ? "" : " is-static"}">${bg}</div>`;
@@ -1126,7 +1127,7 @@ function repostStory(p) {
   const bgImg = p.poster || (!vid && p.media) || "";
   const inner = vid
     ? `<video src="${esc(p.media)}" ${p.poster ? `poster="${esc(p.poster)}"` : ""} playsinline preload="metadata" onclick="event.stopPropagation();this.paused?this.play():this.pause();this.parentNode.classList.toggle('playing',!this.paused)" onended="this.parentNode.classList.remove('playing')"></video><span class="rp-play">${RI.play}</span>`
-    : `<div class="rp-pend"><span>Reel</span>Vídeo pendiente de grabar</div>`;
+    : `<div class="rp-pend"><span>Reel</span>${esc(p.pieza)}</div>`;
   const st = (p.repost || []).map(s =>
       s.t === "link" ? `<span class="rp-link">🔗 ${esc(s.txt)}</span>`
     : s.t === "poll" ? `<div class="rp-poll"><b>${esc(s.q)}</b>${s.o.map(o => `<span>${esc(o)}</span>`).join("")}</div>`
@@ -1243,7 +1244,7 @@ const igPhone = (cls = "") => {
   const tile = (src, tipo, extra = "") => `<div class="t">${src ? `<img src="${esc(src)}" alt="">` : ""}${igIcon(tipo)}${extra}</div>`;
   const novTile = p => (p.poster || (p.media && !isVid(p.media)))
     ? tile(p.poster || p.media, fk(p.formato), `<span class="dd">${p.d} nov</span>`)
-    : `<div class="t pend m-${fk(p.formato)}"><b>${p.d}</b><em>${esc(p.formato)}</em><small>Pendiente</small>${igIcon(fk(p.formato))}</div>`;
+    : `<div class="t pend m-${fk(p.formato)}"><b>${p.d}</b><em>${esc(p.formato)}</em>${igIcon(fk(p.formato))}</div>`;
   const pins = PERFIL.fijadas.map(s => tile(s, "", `<i class="gi pin">📌</i>`)).join("");
   const total = PERFIL.publicaciones + PIEZAS.length;
   const hl = DESTACADOS.map(h => `<div class="h"><span style="background-image:url('${h.cover}')"></span><em>${esc(h.nombre)}</em></div>`).join("");
@@ -1276,7 +1277,7 @@ slides.push(n => {
     <div class="eyebrow">${HANDLE}</div>
     <h2 class="h-serif">Feed de <em>noviembre</em></h2>
     <p>Así quedará el perfil a 30 de noviembre: las 3 fijadas actuales arriba y, debajo, las ${PIEZAS.length} piezas del mes en cuadrícula 3:4, la más reciente primero. Detrás siguen las publicaciones que ya existen.</p>
-    <p>El móvil se puede desplazar para ver el mes entero. Cada hueco queda pendiente hasta que nos paséis el material de ese día.</p>
+    <p>El móvil se puede desplazar para ver el mes entero.</p>
     <div class="feed-stats"><div><b>${PERFIL.publicaciones}</b><span>hoy</span></div><div class="arrow">→</div><div><b>${total}</b><span>a 30 nov</span></div><div><b>+${PIEZAS.length}</b><span>en noviembre</span></div></div>
   </div>
   <div class="iph-wrap" style="left:600px"><span class="iph-lbl">Perfil</span>${igPhone()}</div>
@@ -1300,7 +1301,7 @@ slides.push(n => `
     <p class="hl-note">Colores planos, «Friends V» y «Friends I» duplicados, «You» poco claro y sin destacados de tratamientos.</p>
   </div>
   <div class="hl-new">
-    <span class="eyebrow">Propuesta</span>
+    <span class="eyebrow">Nuevos destacados</span>
     <div class="hl-grid">${DESTACADOS.map((h,i) => `
       <div class="hl-card">
         <div class="hl big"><span style="background-image:url('${h.cover}')"></span></div>
@@ -1313,7 +1314,7 @@ slides.push(n => `
 /* 5 · Sistema de stories */
 const tplStory = (bg, inner, cls = "") => `
   <div class="tpl ${cls} ${bg ? "" : "empty"}">
-    ${bg ? `<img src="${bg}" alt=""><div class="veil"></div>` : `<div class="tpl-ph"><span>+</span>Material pendiente</div>`}
+    ${bg ? `<img src="${bg}" alt=""><div class="veil"></div>` : ""}
     <div class="tpl-top"><i><img src="${PERFIL.avatar}" alt=""></i>skinlaundry_es</div>
     <div class="tpl-in">${inner}</div>
     <img class="tpl-logo" src="${ASSET.logoLight}" alt="">
@@ -1380,19 +1381,17 @@ dayPlan.forEach(item => {
     ${tagsFor(d, `<span class="tag fmt ${f === "reel" ? "reel" : f === "post" ? "post" : ""}">${esc(p.formato)} de Instagram</span>`, `<span class="tag plus">+ Stories</span>`)}
     <div class="pieza">${esc(p.pieza)}</div>
     <div class="copy">
-      <div class="copy-h"><span class="eyebrow">Copy</span><span class="state ${ready ? "done" : ""}">${ready ? "● Listo" : "● Propuesta · pendiente de validar"}</span></div>
+      <div class="copy-h"><span class="eyebrow">Copy</span></div>
       <div class="txt">${esc(p.copy)}</div>
     </div>
     <div class="meta-row">
       <span><b>CTA</b>${esc(p.cta)}</span>
       <span><b>Base</b>${esc(p.base)}</span>
-      ${precio ? `<span class="warn">Precio a confirmar</span>` : ""}
-      ${p.nota ? `<span class="warn note">${esc(p.nota)}</span>` : ""}
     </div>
   </div>
   <div class="day-right">
     <div class="post-frame ${isReel ? "is-reel" : ""}">
-      <div class="col-lbl">${esc(p.formato)} · propuesta de pieza</div>
+      <div class="col-lbl">${esc(p.formato)}</div>
       ${isReel ? reelCard(p) : ""}<div class="ig-card" ${isReel ? 'style="display:none"' : ""}>
         <div class="hd"><i>${avatar}</i>skinlaundry_es</div>
         <div class="media pf m-${f} ${p.media ? "has-media" : ""}">
@@ -1408,7 +1407,7 @@ dayPlan.forEach(item => {
       ${p.repost ? repostStory(p) : p.storyImgs ? `<div class="tpl sm" style="cursor:pointer" title="Toca para ver la siguiente story" onclick="const im=this.querySelectorAll('img');let i=[...im].findIndex(x=>x.style.opacity!=='0');im[i].style.opacity=0;i=(i+1)%im.length;im[i].style.opacity=1;this.querySelector('b').textContent=(i+1)+' / '+im.length">${p.storyImgs.map((x,i) => `<img src="${esc(x)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .25s;opacity:${i ? 0 : 1}">`).join("")}<b style="position:absolute;top:8px;right:8px;background:rgba(26,19,18,.65);color:#F6EDE4;font:600 10px/1 sans-serif;padding:4px 7px;border-radius:10px">1 / ${p.storyImgs.length}</b></div>` : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
     </div>
-    <div class="hours"><span class="eyebrow">Hora (propuesta)</span><span class="chip">${esc(p.formato)} · ${esc(p.hora)}</span><span class="chip">Story · 1h después</span>${nlChip}</div>
+    <div class="hours"><span class="eyebrow">Hora</span><span class="chip">${esc(p.formato)} · ${esc(p.hora)}</span><span class="chip">Story · 1h después</span>${nlChip}</div>
   </div>
   ${foot(n)}
 </section>`;
@@ -1422,7 +1421,7 @@ dayPlan.forEach(item => {
     ${tagsFor(d, `<span class="tag fmt stories-tag">Stories de Instagram</span>`)}
     <div class="pieza">${esc(s.titulo)}</div>
     <div class="copy">
-      <div class="copy-h"><span class="eyebrow">Secuencia</span><span class="state ${s.estado === "listo" ? "done" : ""}">${s.estado === "listo" ? "● Listo" : "● Propuesta · pendiente de validar"}</span></div>
+      <div class="copy-h"><span class="eyebrow">Secuencia</span></div>
       <ol class="seq">${s.items.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
       <div class="ph-note">Día sin publicación en el feed: las stories mantienen la presencia y empujan a las piezas de la semana.</div>
     </div>
@@ -1433,7 +1432,7 @@ dayPlan.forEach(item => {
       ${s.imgs ? s.imgs.map(x => `<div class="tpl sm3"><img src="${esc(x)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>`).join("") : s.items.map((x, i) => tplStory(s.media, `<span class="num">${pad(i + 1)}</span><h4>${esc(x.toUpperCase())}</h4>${i === s.items.length - 1 ? `<span class="sticker">🔗 Reserva</span>` : ""}`, "sm3")).join("")}
     </div>
     ${DESTACADO_STORY[d] ? `<div class="hl-chip st"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === DESTACADO_STORY[d]) || {}).cover}')"></span>Guardar en el destacado <b>${esc(DESTACADO_STORY[d])}</b></div>` : ""}
-    <div class="hours"><span class="eyebrow">Hora (propuesta)</span><span class="chip">Stories · ${esc(s.hora)}</span>${nlChip}</div>
+    <div class="hours"><span class="eyebrow">Hora</span><span class="chip">Stories · ${esc(s.hora)}</span>${nlChip}</div>
   </div>
   ${foot(n)}
 </section>`;
