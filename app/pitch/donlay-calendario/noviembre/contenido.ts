@@ -262,19 +262,15 @@ export const CONTENIDO: Contenido = {
   "dom-22": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-29-1.webp",
+        "url": "/pitch/donlay-calendario/noviembre/dom-22-carrusel-1.webp",
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-29-2.webp",
+        "url": "/pitch/donlay-calendario/noviembre/dom-22-carrusel-2.webp",
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-29-3.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/dom-29-4.webp",
+        "url": "/pitch/donlay-calendario/noviembre/dom-22-carrusel-3.webp",
         "tipo": "imagen"
       }
     ]
