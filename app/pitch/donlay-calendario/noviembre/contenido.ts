@@ -222,11 +222,7 @@ export const CONTENIDO: Contenido = {
   "mar-10": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-15-4.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/dom-15-2.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mar-10-cordero.webp",
         "tipo": "imagen"
       }
     ]
