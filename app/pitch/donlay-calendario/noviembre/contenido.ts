@@ -14,30 +14,10 @@ export const CONTENIDO: Contenido = {
       }
     ]
   },
-  "mar-10-stories": {
-    "medios": [
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-reservas.jpg",
-        "tipo": "imagen"
-      }
-    ]
-  },
-  "jue-12-stories": {
-    "medios": [
-      {
-        "url": "/pitch/donlay-calendario/noviembre/jue-12-reservas.jpg",
-        "tipo": "imagen"
-      }
-    ]
-  },
   "sab-14": {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/sab-14-reservas.jpg",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/sab-14-story-1.webp",
         "tipo": "imagen"
       }
     ]
@@ -71,10 +51,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/sab-21-dsel.webp",
         "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/sab-21-navidad.webp",
-        "tipo": "imagen"
       }
     ]
   },
@@ -103,10 +79,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/sab-28-dsel.webp",
         "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/sab-28-story-1.webp",
-        "tipo": "imagen"
       }
     ]
   },
@@ -134,10 +106,6 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/sab-07-1.jpg",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/sab-07-dsel.webp",
         "tipo": "imagen"
       }
     ]
@@ -316,10 +284,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/vie-06-repost.mp4",
         "tipo": "video"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/vie-06-story-1.webp",
-        "tipo": "imagen"
       }
     ]
   },
@@ -327,10 +291,6 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/lun-09-repost.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/lun-09-story-1.webp",
         "tipo": "imagen"
       }
     ]
@@ -340,10 +300,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/mie-11-repost.webp",
         "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mie-11-story-1.webp",
-        "tipo": "imagen"
       }
     ]
   },
@@ -351,10 +307,6 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/lun-16-repost.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/lun-16-grupos.webp",
         "tipo": "imagen"
       }
     ]
@@ -364,15 +316,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/mie-18-repost.webp",
         "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mie-18-grupos.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mie-18-cordero.mp4",
-        "tipo": "video",
-        "portada": "/pitch/donlay-calendario/noviembre/mie-18-cordero-portada.webp"
       }
     ]
   },
@@ -381,10 +324,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/vie-20-repost.mp4",
         "tipo": "video"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/vie-20-grupos.webp",
-        "tipo": "imagen"
       }
     ]
   },
@@ -392,10 +331,6 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/lun-23-repost.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/lun-23-navidad.webp",
         "tipo": "imagen"
       }
     ]
@@ -405,10 +340,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/mie-25-repost.webp",
         "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mie-25-thanksgiving.webp",
-        "tipo": "imagen"
       }
     ]
   },
@@ -417,10 +348,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/vie-27-repost.mp4",
         "tipo": "video"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/vie-27-navidad.webp",
-        "tipo": "imagen"
       }
     ]
   },
@@ -428,10 +355,6 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/lun-30-repost.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/lun-30-navidad.webp",
         "tipo": "imagen"
       }
     ]
@@ -441,10 +364,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/vie-13-repost.mp4",
         "tipo": "video"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/vie-13-story-1.webp",
-        "tipo": "imagen"
       }
     ]
   },
@@ -454,6 +373,135 @@ export const CONTENIDO: Contenido = {
         "url": "/pitch/donlay-calendario/noviembre/jue-12-1.mp4",
         "tipo": "video",
         "portada": "/pitch/donlay-calendario/noviembre/jue-12-portada.webp"
+      }
+    ]
+  },
+  "vie-06-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/vie-06-story-1.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "sab-07-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-07-dsel.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "lun-09-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-09-story-1.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mie-11-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-11-story-1.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "vie-13-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/vie-13-story-1.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "sab-14-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-14-story-1.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "lun-16-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-16-grupos.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mie-18-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-18-grupos.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mie-18-3": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-18-cordero.mp4",
+        "tipo": "video",
+        "portada": "/pitch/donlay-calendario/noviembre/mie-18-cordero-portada.webp"
+      }
+    ]
+  },
+  "vie-20-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/vie-20-grupos.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "sab-21-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-21-navidad.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "lun-23-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-23-navidad.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mie-25-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-25-thanksgiving.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "vie-27-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/vie-27-navidad.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "sab-28-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/sab-28-story-1.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "lun-30-2": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/lun-30-navidad.webp",
+        "tipo": "imagen"
       }
     ]
   }
