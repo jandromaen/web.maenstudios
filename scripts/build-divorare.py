@@ -1547,6 +1547,54 @@ add("navidad-premios", "Premios y reglas", sec(
     + pie(n()),
 ))
 
+# C7b · landing del Club Devorador
+_campos = "".join(
+    f'<div style="border:3px solid {TINTA};border-radius:10px;padding:10px 12px;margin-top:10px;font-size:15px;font-weight:700;color:{GRIS};background:#fff">{c}</div>'
+    for c in ["Nombre", "Email", "Nº de décimo · 17 048", "Tu local · Malasaña"]
+)
+landing = movil(1340, 160,
+    f'<div style="position:absolute;inset:0;background:{CREMA} url({A}/doodles.jpg) 0 0/260px auto"></div>'
+    f'<div style="position:absolute;left:0;right:0;top:0;height:230px;background:{TINTA} url({A}/foto-focaccias-oscuro.jpg) center/cover"></div>'
+    f'<div style="position:absolute;left:0;right:0;top:0;height:230px;background:rgba(0,0,0,.45)"></div>'
+    f'<p class="marker" style="position:absolute;left:18px;top:70px;font-size:26px;color:{LIMA};transform:rotate(-6deg)">¡Únete al</p>'
+    f'<p class="anton" style="position:absolute;left:18px;top:110px;font-size:44px;color:#fff;line-height:.95">Club<br>Devorador</p>'
+    f'<div style="position:absolute;left:16px;right:16px;top:246px">'
+    f'<p style="font-size:15px;font-weight:800;line-height:1.3">Registra tu décimo, juega al Gordo y entra en el club.</p>'
+    f'{_campos}'
+    f'<div style="margin-top:14px;background:{ROJO};color:#fff;border-radius:10px;padding:12px;text-align:center;font-family:{ANTON};font-size:22px;text-transform:uppercase">Quiero devorar</div>'
+    f'<p style="font-size:11px;color:{GRIS};margin-top:8px">Acepto las bases y la política de privacidad.</p></div>',
+    3, 340, 700)
+add("navidad-landing", "Landing del Club Devorador", sec(
+    texto("NUEVO · LO CREAMOS NOSOTROS", 120, 56, 900, 20, ROJO, 800, "letter-spacing:4px")
+    + marker("La landing del Club Devorador", 120, 90, 78, TINTA, -3)
+    + brocha(100, 186, 1100, 32, LIMA, -2, seed=82)
+    + texto("Creamos desde cero el Club Devorador y su landing page: la puerta de entrada para que la gente se una al club. "
+            "La campaña de Navidad es su lanzamiento: cada décimo registrado es un socio fundador.", 120, 250, 1120, 26, "#222", 600)
+    + carta(120, 400, 540, 520,
+            f'<p style="font-family:{ANTON};font-size:44px;line-height:1;text-transform:uppercase">Qué incluye</p>'
+            + bullets([
+                "Diseño y desarrollo de la landing con la identidad de Divorare, pensada para móvil.",
+                "Formulario de alta: nombre, email, local favorito y nº de décimo.",
+                "Acceso directo desde el QR del décimo, la bio de Instagram y TikTok.",
+                "Base de datos propia de Divorare, con consentimiento RGPD.",
+                "Email de bienvenida automático para cada nuevo socio.",
+            ], 21, 14),
+            -1.5, 36)
+    + carta(720, 400, 540, 520,
+            f'<p style="font-family:{ANTON};font-size:44px;line-height:1;text-transform:uppercase">Y después de Navidad</p>'
+            + bullets([
+                "La landing se queda como página permanente del club.",
+                "Lanzamientos y productos nuevos antes que nadie.",
+                "Devorador del mes y premios que se canjean en local.",
+                "Dinámicas exclusivas para socios en cada temporada.",
+                "Datos para conocer a vuestros clientes por ciudad y local.",
+            ], 21, 14),
+            1.5, 36)
+    + landing
+    + texto("Incluida en la campaña de Navidad (8.900 €). Dominio y alojamiento a cargo de Divorare.", 120, 960, 1150, 19, GRIS, 700)
+    + logo_esquina(),
+))
+
 # C8–C10 · las tres ideas de contenido, cada una con su versión para Instagram y TikTok
 IDEAS = [
     {
@@ -1728,7 +1776,7 @@ add("navidad-plazos", "Plazos y presupuesto", sec(
             + bullets([
                 "Concepto final, bases y guiones.",
                 "Diseño del décimo, cartel, display, pegatina y plantillas.",
-                "Landing de registro y base de datos del Club.",
+                "Landing page del Club Devorador, base de datos y email de bienvenida.",
                 "3 jornadas de rodaje extra y cobertura en directo del 22.",
                 "9 vídeos, 4 carruseles, stories y LIVE.",
                 "Informe de resultados en enero.",
