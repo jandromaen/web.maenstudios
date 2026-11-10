@@ -119,7 +119,7 @@ def adaptar(html: str) -> str:
         '<hr style="width:120px;border:none;border-top:2px solid #175F51;margin:0">',
     )
     html = re.sub(
-        r'<img src="' + PUBLICO + r'([a-z]+-v\d)\.jpg" alt="([^"]*)" style="([^"]*)">\s*'
+        r'<img src="' + PUBLICO + r'([a-z]+-[a-z]+\d)\.jpg" alt="([^"]*)" style="([^"]*)">\s*'
         r'<div style="position:absolute;left:calc\(50% - \d+px\)[^"]*">.*?</div>',
         video,
         html,
