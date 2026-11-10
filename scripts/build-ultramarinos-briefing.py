@@ -73,6 +73,20 @@ def icono_play(m: re.Match) -> str:
     )
 
 
+def video(m: re.Match) -> str:
+    """La portada de un reel de referencia pasa a ser el reel, si ya está en /public.
+
+    Mientras no haya vídeo se queda la portada con el botón de play encima."""
+    nombre, alt, estilo = m.groups()
+    if not (RAIZ / "public" / PUBLICO.strip("/") / f"{nombre}.mp4").exists():
+        return m.group(0)
+    return (
+        f'<video src="{PUBLICO}{nombre}.mp4" poster="{PUBLICO}{nombre}.jpg" '
+        f'aria-label="{alt}" autoplay muted loop playsinline preload="metadata" '
+        f'style="{estilo}"></video>'
+    )
+
+
 def adaptar(html: str) -> str:
     def blob(m: re.Match) -> str:
         nombre = BLOBS.get(m.group(1))
@@ -86,6 +100,13 @@ def adaptar(html: str) -> str:
     html = html.replace(
         '<hr style="width:120px;border-top:2px solid #175F51">',
         '<hr style="width:120px;border:none;border-top:2px solid #175F51;margin:0">',
+    )
+    html = re.sub(
+        r'<img src="' + PUBLICO + r'([a-z]+-v\d)\.jpg" alt="([^"]*)" style="([^"]*)">\s*'
+        r'<div style="position:absolute;left:calc\(50% - \d+px\)[^"]*">.*?</div>',
+        video,
+        html,
+        flags=re.S,
     )
     if "<x-" in html:
         sys.exit("Queda un elemento del formato de diapositivas sin traducir")
