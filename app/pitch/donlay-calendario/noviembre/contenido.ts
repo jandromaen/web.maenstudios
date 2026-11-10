@@ -73,7 +73,7 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-24-cazuela.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mar-24-sopa-cordero.webp",
         "tipo": "imagen"
       }
     ]
@@ -194,7 +194,7 @@ export const CONTENIDO: Contenido = {
   "mar-10": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-cordero.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mar-10-sopa-cordero.webp",
         "tipo": "imagen"
       }
     ]
@@ -334,7 +334,7 @@ export const CONTENIDO: Contenido = {
   "lun-23": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/lun-23-repost.webp",
+        "url": "/pitch/donlay-calendario/noviembre/lun-23-repost-v2.webp",
         "tipo": "imagen"
       }
     ]
@@ -366,7 +366,7 @@ export const CONTENIDO: Contenido = {
   "vie-13": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/vie-13-repost.mp4",
+        "url": "/pitch/donlay-calendario/noviembre/vie-13-repost-v2.mp4",
         "tipo": "video"
       }
     ]
@@ -407,9 +407,9 @@ export const CONTENIDO: Contenido = {
   "mie-11-2": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-18-cordero.mp4",
+        "url": "/pitch/donlay-calendario/noviembre/mie-11-cordero-diseno.mp4",
         "tipo": "video",
-        "portada": "/pitch/donlay-calendario/noviembre/mie-18-cordero-portada.webp"
+        "portada": "/pitch/donlay-calendario/noviembre/mie-11-cordero-diseno-portada.webp"
       }
     ]
   },
@@ -504,7 +504,7 @@ export const CONTENIDO: Contenido = {
   "jue-12-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/jue-12-cordero.webp",
+        "url": "/pitch/donlay-calendario/noviembre/jue-12-cordero-v2.webp",
         "tipo": "imagen"
       }
     ]
@@ -512,7 +512,7 @@ export const CONTENIDO: Contenido = {
   "mar-10-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-11-repost.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-11-repost-sopa.webp",
         "tipo": "imagen"
       }
     ]
