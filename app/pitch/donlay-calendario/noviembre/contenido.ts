@@ -504,5 +504,13 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       }
     ]
+  },
+  "jue-12-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/jue-12-cordero.webp",
+        "tipo": "imagen"
+      }
+    ]
   }
 };
