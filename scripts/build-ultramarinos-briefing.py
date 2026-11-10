@@ -57,6 +57,22 @@ BLOBS = {
     "888585ff45c9d5d50134c918293c4faa": "carne-f7.jpg",
     "db010dfda9fcee0fa409c0801e11588e": "carne-f8.jpg",
     "907d43da4072460ab44da470dff7b441": "carne-f9.jpg",
+    "f2d3b938082b99c570f5f1b8cc24dde3": "gastro-a1.jpg",
+    "9c93335415d9bb78e388befe53a4ee72": "gastro-a2.jpg",
+    "802cc425ec29a001ef6b9b2bcc4ac2dd": "gastro-a3.jpg",
+    "b5b6099ba2a224d251cc7f02743a667b": "gastro-a4.jpg",
+    "85a4ce1fd8ce30b4817097462ff9e793": "gastro-b1.jpg",
+    "777647d4a2ed651636da6ec4d300b0ef": "gastro-b2.jpg",
+    "9bd31ec17cc71a16e811af1c6393f4b7": "gastro-b3.jpg",
+    "a41d4fba1129563081b8c8ea226d674b": "gastro-b4.jpg",
+    "137b4cf23703d9377d3cb781ded1d702": "gastro-b5.jpg",
+    "afc3d1eaf5ea15e49b2ac7131b3c6c1b": "gastro-b6.jpg",
+    "4e723bcf9301b83dffa0c5a4aab96851": "espacio-v1.jpg",
+    "966820dd57d7543a771ad1c870d18227": "espacio-v2.jpg",
+    "e34d199aa0788a9b3f81a78bc7105763": "espacio-f1.jpg",
+    "cd0546c88d561ad5f5903555a524a571": "espacio-f2.jpg",
+    "1c0e46af7f6d16f16e1b50d8f8e97e92": "espacio-f3.jpg",
+    "ce4da412d43a28b3ddb9ecdcde018065": "espacio-f4.jpg",
 }
 
 
