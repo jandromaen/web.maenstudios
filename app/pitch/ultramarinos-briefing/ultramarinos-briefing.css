@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Briefings de producción de Ultramarinos Marín Madrid
+
+   Usa el visor del briefing de Barkita (.bk) con el tema .bk--ultramarinos:
+   azul marino #0B2A47 y verde #175F51 del logotipo, crema de fondo.
+   Tipografías: Barlow Condensed (titulares) y Newsreader (texto), de Google
+   Fonts; las enlaza page.tsx.
+   ========================================================================== */
+
+.bk.bk--ultramarinos {
+  background: #071d33;
+  color: #f3ede1;
+}
+
+.bk--ultramarinos .bk-hud {
+  font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bk--ultramarinos .bk-marco {
+  border-radius: 4px;
+}
+
+.bk--ultramarinos .bk-hud-nav button {
+  border-color: rgba(243, 237, 225, 0.3);
+}
+
+.bk--ultramarinos .bk-progreso span {
+  background: #7fb5a6;
+}
+
+/* Las listas de preguntas llevan su sangría propia */
+.bk--ultramarinos .bk-lienzo ol {
+  margin: 0;
+  padding-left: 40px;
+}
