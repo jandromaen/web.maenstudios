@@ -1565,11 +1565,11 @@ landing = movil(1340, 160,
     f'<p style="font-size:11px;color:{GRIS};margin-top:8px">Acepto las bases y la política de privacidad.</p></div>',
     3, 340, 700)
 add("navidad-landing", "Landing del Club Devorador", sec(
-    texto("NUEVO · LO CREAMOS NOSOTROS", 120, 56, 900, 20, ROJO, 800, "letter-spacing:4px")
+    texto("CLUB DEVORADOR · SU PUERTA DE ENTRADA", 120, 56, 900, 20, ROJO, 800, "letter-spacing:4px")
     + marker("La landing del Club Devorador", 120, 90, 78, TINTA, -3)
     + brocha(100, 186, 1100, 32, LIMA, -2, seed=82)
-    + texto("Creamos desde cero el Club Devorador y su landing page: la puerta de entrada para que la gente se una al club. "
-            "La campaña de Navidad es su lanzamiento: cada décimo registrado es un socio fundador.", 120, 250, 1120, 26, "#222", 600)
+    + texto("Le damos al Club Devorador su landing page: la puerta de entrada para que la gente se una al club. "
+            "La campaña de Navidad es el gran empujón: cada décimo registrado es un nuevo socio del club.", 120, 250, 1120, 26, "#222", 600)
     + carta(120, 400, 540, 520,
             f'<p style="font-family:{ANTON};font-size:44px;line-height:1;text-transform:uppercase">Qué incluye</p>'
             + bullets([
