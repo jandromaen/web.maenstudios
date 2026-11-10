@@ -71,6 +71,10 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/mar-24-grupos.webp",
         "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mar-24-cazuela.webp",
+        "tipo": "imagen"
       }
     ]
   },
