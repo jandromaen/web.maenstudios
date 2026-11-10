@@ -302,7 +302,7 @@ export const CONTENIDO: Contenido = {
   "mie-11": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-11-repost.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-11-story-1.webp",
         "tipo": "imagen"
       }
     ]
@@ -407,8 +407,9 @@ export const CONTENIDO: Contenido = {
   "mie-11-2": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-11-story-1.webp",
-        "tipo": "imagen"
+        "url": "/pitch/donlay-calendario/noviembre/mie-18-cordero.mp4",
+        "tipo": "video",
+        "portada": "/pitch/donlay-calendario/noviembre/mie-18-cordero-portada.webp"
       }
     ]
   },
@@ -441,15 +442,6 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/mie-18-grupos.webp",
         "tipo": "imagen"
-      }
-    ]
-  },
-  "mie-18-3": {
-    "medios": [
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mie-18-cordero.mp4",
-        "tipo": "video",
-        "portada": "/pitch/donlay-calendario/noviembre/mie-18-cordero-portada.webp"
       }
     ]
   },
@@ -513,6 +505,14 @@ export const CONTENIDO: Contenido = {
     "medios": [
       {
         "url": "/pitch/donlay-calendario/noviembre/jue-12-cordero.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mar-10-stories": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-11-repost.webp",
         "tipo": "imagen"
       }
     ]
