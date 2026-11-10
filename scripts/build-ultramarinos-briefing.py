@@ -47,6 +47,7 @@ BLOBS = {
     "97f2bb2cfd54b57bbb293dfef1df038c": "carne-v1.jpg",
     "6e9a2d36405b458f8362d2675de37083": "carne-v2.jpg",
     "6175c179e85ec92b3d52a9a99f10993f": "carne-v3.jpg",
+    "5d27656f599064e4c954072b33b1710c": "carne-v4.jpg",
     "38f10f1bcfabbe43e449123285695d07": "carne-f1.jpg",
     "f878febf11e0609b33fd156d7ba55153": "carne-f2.jpg",
     "41875638a072c2d57af61e40e9157bfd": "carne-f3.jpg",
