@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
       {
+        source: "/pitch/ultramarinos-briefing/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
         /* Vídeos y fotos de /public. Next les pone por defecto
            `max-age=0, must-revalidate`, así que el navegador vuelve a preguntar
            al servidor por cada reel en cada visita: en móvil eso es una ida y
@@ -57,6 +61,12 @@ const nextConfig: NextConfig = {
       {
         source: "/pitch/skin-laundry-calendario/:mes",
         destination: "/pitch/skin-laundry-calendario/:mes/index.html",
+      },
+      /* Briefing de producción de Ultramarinos Marín Madrid: mismo patrón, un
+         HTML estático por mes en public/pitch/ultramarinos-briefing/<mes>/. */
+      {
+        source: "/pitch/ultramarinos-briefing/:mes",
+        destination: "/pitch/ultramarinos-briefing/:mes/index.html",
       },
       ],
       fallback: [],
