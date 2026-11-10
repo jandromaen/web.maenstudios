@@ -832,8 +832,8 @@ add("comunidad", "Comunidad y fidelización", sec(
 ))
 
 niveles = [
-    ("Creadores de referencia", "1 por trimestre", "Perfiles gastronómicos y urbanos del tipo de Jack Dining Room, para lanzamientos y aperturas grandes."),
-    ("Microcreadores locales", "2–4 al mes", "Cuentas de cada ciudad con comunidad real. Visitas honestas que llenan el local de su barrio."),
+    ("Creadores de referencia", "3 al año · según temporada", "Perfiles gastronómicos y urbanos del tipo de Jack Dining Room, para los grandes momentos de cada temporada."),
+    ("Microinfluencers locales", "5–10 al mes", "Cuentas de cada ciudad con comunidad real. Visitas honestas que llenan el local de su barrio."),
     ("UGC de Maen Talents", "Bajo demanda", "Creadores de nuestra cantera que graban piezas para vuestra cuenta y para anuncios."),
 ]
 c = ""
@@ -1147,8 +1147,8 @@ ENTREGABLES = [
      "Comunidad 7 días · Club Devorador"),
     ("Influencers & colaboraciones",
      "No incluido (opcional)",
-     "2 creadores al mes coordinados",
-     "4 creadores al mes + 1 artista por temporada"),
+     "5–10 microinfluencers al mes + 3 creadores de referencia al año",
+     "10 microinfluencers al mes + 3 creadores de referencia al año + 1 artista por temporada"),
     ("Análisis & optimización",
      "Informe mensual",
      "Informe + experimentos + revisión trimestral",
