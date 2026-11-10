@@ -1476,7 +1476,7 @@ s5 = movil(1500, 300,
     f'<div style="position:absolute;inset:0;background:{ROJO}"></div>'
     + f'<p style="position:absolute;left:20px;top:70px;font-size:14px;font-weight:900;color:#fff;letter-spacing:2px">ENERO 2027</p>'
     + f'<p class="anton" style="position:absolute;left:20px;top:100px;font-size:48px;color:#fff;line-height:.95">Tu décimo<br>aún tiene<br>premio</p>'
-    + f'<p class="marker" style="position:absolute;left:20px;top:270px;width:250px;font-size:30px;color:{LIMA};transform:rotate(-3deg)">¿Acaba en 8? Bebida gratis</p>'
+    + f'<p class="marker" style="position:absolute;left:20px;top:270px;width:250px;font-size:30px;color:{LIMA};transform:rotate(-3deg)">¿Acaba en 8? Focaccia gratis</p>'
     + f'<div style="position:absolute;left:20px;right:20px;bottom:40px;background:#fff;border-radius:14px;padding:12px;text-align:center">'
     f'<p style="font-size:15px;font-weight:900">CANJÉALO EN TU LOCAL</p><p style="font-size:13px;font-weight:600;color:{GRIS}">Hasta el 31 de enero</p></div>', -2)
 labels = [("Teaser", "24–30 nov"), ("Encuesta", "2–21 dic"), ("Cuenta atrás", "15–21 dic"), ("TikTok lanzamiento", "1 dic"), ("Reintegro", "enero")]
@@ -1526,7 +1526,7 @@ add("navidad-mecanica", "La mecánica", sec(
 premios = [
     ("El Gordo", "1 ganador", "Una focaccia a la semana durante todo 2027: 52 focaccias. Va para el décimo registrado más cercano al número del Gordo.", ROJO),
     ("La pedrea", "17 ganadores", "Uno por local: una focaccia al mes durante 2027 para el décimo de esa serie más cercano al Gordo.", TINTA),
-    ("El reintegro", "1 de cada 10", "Si tu décimo acaba en la misma cifra que el Gordo, bebida gratis en enero. Para volver al local en la cuesta de enero.", "#8a7400"),
+    ("El reintegro", "1 de cada 10", "Si tu décimo acaba en la misma cifra que el Gordo, una focaccia gratis en enero. Para volver al local en la cuesta de enero.", "#8a7400"),
 ]
 c = ""
 for i, (tt, q, d, col_) in enumerate(premios):
@@ -1620,7 +1620,7 @@ fases = [
     ("2–21 dic", "Sostenimiento", "¿Qué harías si te toca el Gordo?, cuenta atrás, reposts de décimos y «el décimo de cada ciudad».", "4 episodios · 2 carruseles · stories diarias"),
     ("22 dic", "Sorteo", "La tele del bar: directo desde los locales, LIVE en TikTok y número premiado.", "LIVE · stories · 1 post"),
     ("23–31 dic", "Resaca", "Entrega del Gordo al ganador, reacciones de los 17 locales y resumen de la campaña.", "1 reel · 1 TikTok"),
-    ("Enero", "Reintegro", "Recordatorio para canjear la bebida gratis y bienvenida a los nuevos del Club.", "Stories · 1 post"),
+    ("Enero", "Reintegro", "Recordatorio para canjear la focaccia gratis y bienvenida a los nuevos del Club.", "Stories · 1 post"),
 ]
 c = ""
 for i, (f_, tt, d, piezas) in enumerate(fases):
