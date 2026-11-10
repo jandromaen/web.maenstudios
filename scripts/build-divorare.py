@@ -1413,7 +1413,7 @@ p1 = ig_post(150, 250, 430,
     fondo("foto-focaccias-oscuro.jpg", 0.45)
     + f'<p class="anton" style="position:absolute;left:26px;top:30px;font-size:78px;color:#fff">El Gordo</p>'
     + f'<p class="marker" style="position:absolute;left:40px;top:110px;font-size:62px;color:{ROJO};transform:rotate(-4deg)">se devora</p>'
-    + mini_decimo(40, 330, 390, -6)
+    + mini_decimo(30, 260, 360, -6)
     + f'<p style="position:absolute;left:26px;bottom:20px;font-size:17px;font-weight:800;color:{LIMA}">DEL 1 AL 21 DE DICIEMBRE · 17 LOCALES</p>',
     "Este año no hace falta hacer cola en Doña Manolita 🎟️🔥 Cada focaccia lleva su décimo. #ElGordoSeDevora", -2)
 p2 = ig_post(745, 235, 430,
@@ -1431,7 +1431,7 @@ p3 = ig_post(1340, 250, 430,
     + f'<p class="anton" style="position:absolute;left:24px;top:90px;font-size:150px;color:{TINTA}">17 048</p>'
     + f'<p class="marker" style="position:absolute;left:30px;top:270px;font-size:48px;color:{ROJO};transform:rotate(-3deg)">¡Ha caído en Malasaña!</p>'
     + f'<p style="position:absolute;left:28px;top:370px;width:400px;font-size:22px;font-weight:700;line-height:1.35">52 focaccias para todo 2027. Mira tu décimo: si acaba en 8, tienes reintegro en enero.</p>'
-    + f'<img src="{A}/logo-llama.webp" alt="" style="position:absolute;right:20px;bottom:18px;width:90px">',
+    + f'<img src="{A}/logo-llama.webp" alt="" style="position:absolute;right:16px;bottom:12px;width:64px">',
     "¡Enhorabuena, Lucía! 🏆 Y a los 17 de la pedrea, pasad por vuestro local 🔥", -1.5)
 add("navidad-feed", "Así se ve en el feed", sec(
     marker("Así se ve en el feed", 120, 90, 80, TINTA, -3)
