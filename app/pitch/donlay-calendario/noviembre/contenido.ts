@@ -372,6 +372,11 @@ export const CONTENIDO: Contenido = {
       {
         "url": "/pitch/donlay-calendario/noviembre/mie-18-grupos.webp",
         "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-18-cordero.mp4",
+        "tipo": "video",
+        "portada": "/pitch/donlay-calendario/noviembre/mie-18-cordero-portada.webp"
       }
     ]
   },
