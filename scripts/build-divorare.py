@@ -1359,6 +1359,139 @@ add("navidad-identidad", "Identidad de campaña", sec(
     + pie(n()),
 ))
 
+# C5b · maquetas de posts y stories
+def ig_post(left, top, w, cuerpo, caption, rot=0):
+    h = int(w * 1.25)
+    return (
+        f'<div style="{pos(left, top, f"width:{w}px;transform:rotate({rot}deg);background:#fff;border-radius:14px;box-shadow:0 18px 34px rgba(0,0,0,.22);overflow:hidden")}">'
+        f'<div style="display:flex;align-items:center;gap:10px;padding:10px 14px">'
+        f'<span style="width:34px;height:34px;border-radius:99px;background:{ROJO} url({A}/logo-llama.webp) center/80% no-repeat;border:2px solid {LIMA}"></span>'
+        f'<span style="font-size:16px;font-weight:800">divorare</span><span style="margin-left:auto;font-weight:900">···</span></div>'
+        f'<div style="position:relative;width:{w}px;height:{h}px;overflow:hidden">{cuerpo}</div>'
+        f'<div style="padding:10px 14px 4px;font-size:22px;letter-spacing:6px">♡ ◯ ➤</div>'
+        f'<p style="padding:0 14px 14px;font-size:15px;line-height:1.35"><b>divorare</b> {caption}</p></div>'
+    )
+
+
+def movil(left, top, cuerpo, rot=0, w=300, h=560, tiktok=False):
+    ui = ""
+    if tiktok:
+        ui = (
+            f'<div style="position:absolute;right:10px;bottom:120px;display:flex;flex-direction:column;gap:16px;align-items:center">'
+            + "".join(f'<span style="width:36px;height:36px;border-radius:99px;background:rgba(255,255,255,.85);display:block"></span>' for _ in range(4))
+            + "</div>"
+        )
+    else:
+        ui = (
+            '<div style="position:absolute;left:10px;right:10px;top:10px;display:flex;gap:4px">'
+            + "".join(f'<span style="flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,{.95 if k == 0 else .4})"></span>' for k in range(4))
+            + "</div>"
+            f'<div style="position:absolute;left:12px;top:22px;display:flex;align-items:center;gap:8px">'
+            f'<span style="width:26px;height:26px;border-radius:99px;background:{ROJO} url({A}/logo-llama.webp) center/80% no-repeat;border:2px solid #fff"></span>'
+            f'<span style="font-size:13px;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)">divorare</span></div>'
+        )
+    return (
+        f'<div style="{pos(left, top, f"width:{w}px;height:{h}px;transform:rotate({rot}deg);filter:drop-shadow(0 18px 28px rgba(0,0,0,.3))")}">'
+        f'<div style="position:relative;width:100%;height:100%;border-radius:30px;border:8px solid {TINTA};overflow:hidden;background:{TINTA}">'
+        f'{cuerpo}{ui}</div></div>'
+    )
+
+
+def fondo(img, op=0.55):
+    return (
+        f'<img src="{A}/{img}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">'
+        f'<div style="position:absolute;inset:0;background:rgba(0,0,0,{op})"></div>'
+    )
+
+
+def mini_decimo(left, top, w, rot=-6, numero="17 048"):
+    return f'<div style="position:absolute;left:{left}px;top:{top}px;transform:scale({w/760:.3f});transform-origin:0 0;width:760px">{decimo(0, 0, 760, rot, numero)}</div>'
+
+
+# Feed: tres posts
+p1 = ig_post(150, 250, 430,
+    fondo("foto-focaccias-oscuro.jpg", 0.45)
+    + f'<p class="anton" style="position:absolute;left:26px;top:30px;font-size:78px;color:#fff">El Gordo</p>'
+    + f'<p class="marker" style="position:absolute;left:40px;top:110px;font-size:62px;color:{ROJO};transform:rotate(-4deg)">se devora</p>'
+    + mini_decimo(40, 330, 390, -6)
+    + f'<p style="position:absolute;left:26px;bottom:20px;font-size:17px;font-weight:800;color:{LIMA}">DEL 1 AL 21 DE DICIEMBRE · 17 LOCALES</p>',
+    "Este año no hace falta hacer cola en Doña Manolita 🎟️🔥 Cada focaccia lleva su décimo. #ElGordoSeDevora", -2)
+p2 = ig_post(745, 235, 430,
+    f'<div style="position:absolute;inset:0;background:{ROJO}"></div>'
+    + f'<p class="anton" style="position:absolute;left:30px;top:30px;font-size:64px;color:#fff;line-height:.95">¿Cómo se<br>juega?</p>'
+    + "".join(
+        f'<p class="marker" style="position:absolute;left:30px;top:{200 + k*112}px;font-size:56px;color:{LIMA}">{k+1}</p>'
+        f'<p style="position:absolute;left:92px;top:{208 + k*112}px;width:330px;font-size:23px;line-height:1.25;font-weight:800;color:#fff">{tx}</p>'
+        for k, tx in enumerate(["Pide tu focaccia y llévate tu décimo", "Escanea el QR y regístralo", "El 22 cruzamos tu número con el Gordo"]))
+    + f'<p style="position:absolute;right:20px;bottom:18px;font-size:16px;font-weight:800;color:#fff">1/5 →</p>',
+    "Guárdatelo: así se juega al Gordo más rico del año 👇", 1.5)
+p3 = ig_post(1340, 250, 430,
+    f'<div style="position:absolute;inset:0;background:{LIMA}"></div>'
+    + f'<p style="position:absolute;left:28px;top:34px;font-size:20px;font-weight:900;letter-spacing:3px">22 DIC · YA TENEMOS GORDO</p>'
+    + f'<p class="anton" style="position:absolute;left:24px;top:90px;font-size:150px;color:{TINTA}">17 048</p>'
+    + f'<p class="marker" style="position:absolute;left:30px;top:270px;font-size:48px;color:{ROJO};transform:rotate(-3deg)">¡Ha caído en Malasaña!</p>'
+    + f'<p style="position:absolute;left:28px;top:370px;width:400px;font-size:22px;font-weight:700;line-height:1.35">52 focaccias para todo 2027. Mira tu décimo: si acaba en 8, tienes reintegro en enero.</p>'
+    + f'<img src="{A}/logo-llama.webp" alt="" style="position:absolute;right:20px;bottom:18px;width:90px">',
+    "¡Enhorabuena, Lucía! 🏆 Y a los 17 de la pedrea, pasad por vuestro local 🔥", -1.5)
+add("navidad-feed", "Así se ve en el feed", sec(
+    marker("Así se ve en el feed", 120, 90, 80, TINTA, -3)
+    + brocha(100, 186, 760, 32, LIMA, -2, seed=80)
+    + p1 + p2 + p3
+    + texto("Lanzamiento · 1 dic", 130, 1010, 470, 20, ROJO, 800, "text-align:center;letter-spacing:2px;text-transform:uppercase")
+    + texto("Carrusel «Cómo jugar» · 1 dic", 725, 1010, 470, 20, ROJO, 800, "text-align:center;letter-spacing:2px;text-transform:uppercase")
+    + texto("Número premiado · 22 dic", 1320, 1010, 470, 20, ROJO, 800, "text-align:center;letter-spacing:2px;text-transform:uppercase")
+    + logo_esquina(),
+))
+
+# Stories y TikTok
+s1 = movil(120, 300,
+    f'<div style="position:absolute;inset:0;background:{TINTA} url({A}/asfalto.jpg) center/cover"></div>'
+    + f'<div style="position:absolute;left:-60px;top:150px;filter:blur(7px)">{mini_decimo(0, 0, 400, -10, "?? ???")}</div>'
+    + f'<p class="anton" style="position:absolute;left:20px;top:330px;font-size:44px;color:#fff;line-height:.95">Algo gordo<br>se acerca…</p>'
+    + f'<p class="marker" style="position:absolute;left:22px;top:440px;font-size:28px;color:{LIMA}">1 de diciembre</p>', -2)
+s2 = movil(465, 280,
+    fondo("foto-salamanca-1.jpg", 0.3)
+    + f'<p class="marker" style="position:absolute;left:18px;top:80px;width:250px;font-size:30px;color:#fff;transform:rotate(-3deg);text-shadow:0 2px 6px rgba(0,0,0,.6)">¿Qué harías si te toca el Gordo?</p>'
+    + f'<div style="position:absolute;left:24px;right:24px;top:300px;background:#fff;border-radius:14px;padding:12px">'
+    f'<p style="font-size:14px;font-weight:900;text-align:center;margin-bottom:8px">ENCUESTA</p>'
+    f'<p style="font-size:16px;font-weight:800;background:{LIMA};border-radius:8px;padding:8px 10px;margin-bottom:6px">Dejar el curro · 61 %</p>'
+    f'<p style="font-size:16px;font-weight:800;background:#eee;border-radius:8px;padding:8px 10px">Invitar a toda la cola · 39 %</p></div>', 2)
+s3 = movil(810, 300,
+    fondo("foto-focaccias-oscuro.jpg", 0.35)
+    + f'<p class="anton" style="position:absolute;left:20px;top:60px;font-size:30px;color:#fff">Faltan</p>'
+    + f'<p class="anton" style="position:absolute;left:20px;top:95px;font-size:150px;color:{LIMA};line-height:1">7</p>'
+    + f'<p class="anton" style="position:absolute;left:20px;top:250px;font-size:30px;color:#fff">días para el gordo</p>'
+    + f'<div style="position:absolute;left:20px;top:330px;background:#fff;border-radius:12px;padding:10px 14px;transform:rotate(-3deg)">'
+    f'<p style="font-size:13px;font-weight:900;color:{GRIS}">CUENTA ATRÁS</p><p class="anton" style="font-size:26px">EL GORDO · 22 DIC</p></div>'
+    + f'<p style="position:absolute;left:20px;bottom:24px;font-size:15px;font-weight:800;color:{LIMA}">#ELGORDOSEDEVORA</p>', -1.5)
+s4 = movil(1155, 280,
+    fondo("equipo.webp", 0.2)
+    + f'<p style="position:absolute;left:14px;top:20px;font-size:14px;font-weight:800;color:#fff">Siguiendo · <b>Para ti</b></p>'
+    + f'<p class="marker" style="position:absolute;left:16px;top:120px;width:230px;font-size:30px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.7);transform:rotate(-3deg)">🎶 Cuarenta y ocho mil doscientos…</p>'
+    + f'<p class="anton" style="position:absolute;left:16px;top:250px;width:230px;font-size:40px;color:{LIMA};text-shadow:0 2px 6px rgba(0,0,0,.7)">¡Mortadella e pistacchio!</p>'
+    + f'<p style="position:absolute;left:14px;bottom:56px;font-size:15px;font-weight:800;color:#fff">@divorare</p>'
+    + f'<p style="position:absolute;left:14px;bottom:24px;width:230px;font-size:13px;color:#fff">Los niños de San Divorare 🎟️ #ElGordoSeDevora</p>',
+    2, tiktok=True)
+s5 = movil(1500, 300,
+    f'<div style="position:absolute;inset:0;background:{ROJO}"></div>'
+    + f'<p style="position:absolute;left:20px;top:70px;font-size:14px;font-weight:900;color:#fff;letter-spacing:2px">ENERO 2027</p>'
+    + f'<p class="anton" style="position:absolute;left:20px;top:100px;font-size:48px;color:#fff;line-height:.95">Tu décimo<br>aún tiene<br>premio</p>'
+    + f'<p class="marker" style="position:absolute;left:20px;top:270px;width:250px;font-size:30px;color:{LIMA};transform:rotate(-3deg)">¿Acaba en 8? Bebida gratis</p>'
+    + f'<div style="position:absolute;left:20px;right:20px;bottom:40px;background:#fff;border-radius:14px;padding:12px;text-align:center">'
+    f'<p style="font-size:15px;font-weight:900">CANJÉALO EN TU LOCAL</p><p style="font-size:13px;font-weight:600;color:{GRIS}">Hasta el 31 de enero</p></div>', -2)
+labels = [("Teaser", "24–30 nov"), ("Encuesta", "2–21 dic"), ("Cuenta atrás", "15–21 dic"), ("TikTok lanzamiento", "1 dic"), ("Reintegro", "enero")]
+lab = "".join(
+    texto(f"<b>{a}</b> · {b}", 120 + k * 345, 885, 300, 19, ROJO if k != 3 else TINTA, 700, "text-align:center;text-transform:uppercase;letter-spacing:1px")
+    for k, (a, b) in enumerate(labels)
+)
+add("navidad-stories", "Stories y TikTok", sec(
+    marker("Stories y TikTok, de principio a fin", 120, 90, 76, TINTA, -3)
+    + brocha(100, 182, 1240, 32, LIMA, -2, seed=81)
+    + s1 + s2 + s3 + s4 + s5 + lab
+    + texto("Maquetas orientativas para visualizar la campaña: el diseño final se cierra con vuestro equipo.", 120, 960, 1500, 18, GRIS, 600)
+    + logo_esquina(),
+))
+
 # C6 · mecánica
 pasos = [
     ("Compras", "Del 1 al 21 de diciembre, cada focaccia en cualquiera de los 17 locales lleva su décimo."),
