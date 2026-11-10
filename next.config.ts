@@ -69,7 +69,7 @@ const nextConfig: NextConfig = {
          presentaciones (o sus recursos) van al análisis. */
       { source: "/", has: slHost, destination: "/analisis", permanent: false },
       {
-        source: "/:ruta((?!analisis|briefing|calendario|pitch/skin-laundry|_next|_vercel).*)",
+        source: "/:ruta((?!analisis|briefing|calendario|pitch/skin-laundry|api/calendario-notas|_next|_vercel).*)",
         has: slHost,
         destination: "/analisis",
         permanent: false,
