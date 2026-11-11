@@ -21,8 +21,8 @@ export function metaSkinLaundry(titulo: string, descripcion: string, _ruta?: str
     // Sin canonical ni URL: se sirven también desde un dominio propio sin la marca de Maen.
     alternates: {},
     icons: {
-      icon: [{ url: "/pitch/skin-laundry/icon.png", type: "image/png" }],
-      apple: [{ url: "/pitch/skin-laundry/apple-icon.png", type: "image/png" }],
+      icon: [{ url: "/pitch/skin-laundry/icon-ig.png", type: "image/png" }],
+      apple: [{ url: "/pitch/skin-laundry/apple-icon-ig.png", type: "image/png" }],
     },
     openGraph: {
       title: titulo,
