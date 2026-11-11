@@ -1338,7 +1338,9 @@ const tplStory = (bg, inner, cls = "") => `
     <div class="tpl-in">${inner}</div>
     <img class="tpl-logo" src="${ASSET.logoLight}" alt="">
   </div>`;
-slides.push(n => {
+/* Oculta por ahora (11 nov): «Stories · sistema visual». Para volver a mostrarla,
+   cambiar «const sistemaVisualOculta =» por «slides.push(». */
+const sistemaVisualOculta = (n => {
   const P = d => ({ 9: ASSET.laser, 30: ASSET.cover, 12: ASSET.glow, 10: ASSET.group })[d] || ASSET.cover;
   return `
 <section class="slide light">
