@@ -1198,7 +1198,6 @@ slides.push(n => {
 <section class="slide light">
   ${topBar()}
   <div class="feed-text">
-    <div class="eyebrow">${HANDLE}</div>
     <h2 class="h-serif">Feed de <em>noviembre</em></h2>
     <p>Así quedará el perfil a 30 de noviembre: las 3 fijadas actuales arriba y, debajo, las ${PIEZAS.length} piezas del mes en cuadrícula 3:4, la más reciente primero. Detrás siguen las publicaciones que ya existen.</p>
     <p>El móvil se puede desplazar para ver el mes entero.</p>
@@ -1286,11 +1285,10 @@ const tagsFor = (d, fmtHtml, extra = "") => {
 };
 const headFor = (d, pill, sub = "") => `
     <div class="day-meta">
-      <span class="eyebrow">${HANDLE}</span>
-      ${pill}
+      <span style="margin-left:auto">${pill}</span>
     </div>
     <h2 class="h-serif">${dayName(d)} ${d}</h2>
-    <div class="sub">${dayName(d).toLowerCase()} ${d} de noviembre de ${YEAR}${sub}</div>
+    ${sub ? `<div class="sub">${sub.replace(/^\s*·\s*/, "").replace(/^p/, "P")}</div>` : ""}
     ${FECHAS[d] ? `<div class="special"><span class="flag">+</span>Fecha señalada · <b>${esc(FECHAS[d])}</b></div>` : ""}`;
 
 dayPlan.forEach(item => {
