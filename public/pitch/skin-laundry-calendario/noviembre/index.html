@@ -1464,6 +1464,10 @@ go(start - 1, false);
 .ig-card .ft .car-dots{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:4px}
 .ig-card .ft .car-dots i{width:6px;height:6px;border-radius:50%;background:#c7c7c7;transition:background .2s}
 .ig-card .ft .car-dots i.on{background:#0095f6}
+/* Posts sin el marco de la app: solo la pieza */
+.ig-card{background:transparent!important;border:0!important;box-shadow:none!important}
+.ig-card .hd,.ig-card .ft{display:none!important}
+.ig-card .media{border-radius:6px;overflow:hidden;box-shadow:0 10px 30px rgba(60,32,30,.10)}
 .slides div{cursor:pointer}
 .slides div.on{outline:2px solid #0095f6;outline-offset:1px}
 </style>
