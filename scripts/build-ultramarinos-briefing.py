@@ -73,6 +73,9 @@ BLOBS = {
     "cd0546c88d561ad5f5903555a524a571": "espacio-f2.jpg",
     "1c0e46af7f6d16f16e1b50d8f8e97e92": "espacio-f3.jpg",
     "ce4da412d43a28b3ddb9ecdcde018065": "espacio-f4.jpg",
+    "a49d2632ca38c686643901a89ab7ab58": "story-fachada.jpg",
+    "b0f2502787e7b7d491a80f6c25b06d31": "story-puerta.jpg",
+    "24878f92c76675e0521ca2967c094ccd": "story-carta.jpg",
 }
 
 
