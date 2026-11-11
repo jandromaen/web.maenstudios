@@ -45,6 +45,19 @@
 #nt-panel .send{border:0;border-radius:22px;padding:11px;background:#1A1312;color:#F6EDE4;font:inherit;font-weight:600;cursor:pointer}
 #nt-panel .send:disabled{opacity:.5;cursor:default}
 #nt-panel .err{color:#a23a2a;font-size:12px}
+
+.nt-pins{position:absolute;right:14px;top:92px;width:236px;z-index:40;display:flex;flex-direction:column;gap:9px;font-family:inherit}
+.nt-pins .nt-pin{position:relative;background:#FFF1A6;color:#1A1312;border-radius:3px;padding:10px 12px 11px;box-shadow:0 6px 16px rgba(26,19,18,.22),0 1px 2px rgba(26,19,18,.2);font-size:11.5px;line-height:1.4;cursor:pointer;transform:rotate(-.8deg)}
+.nt-pins .nt-pin:nth-child(even){transform:rotate(.9deg);background:#E9F5B4}
+.nt-pins .nt-pin:hover{transform:none}
+.nt-pins .nt-pin::before{content:"";position:absolute;top:-6px;left:50%;width:46px;height:12px;margin-left:-23px;background:rgba(255,255,255,.55);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.nt-pins .nt-m{display:flex;justify-content:space-between;gap:6px;font-size:10px;color:#6b5a4e;margin-bottom:3px}
+.nt-pins .nt-m b{color:#1A1312}
+.nt-pins .nt-t{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-wrap;word-wrap:break-word}
+.nt-pins .nt-img{display:inline-block;margin-top:5px;font-size:9.5px;padding:1px 6px;border-radius:8px;background:rgba(26,19,18,.08)}
+.nt-pins .nt-more,.nt-pins .nt-hide{align-self:flex-end;border:0;border-radius:12px;background:#1A1312;color:#F6EDE4;font:inherit;font-size:10.5px;padding:4px 10px;cursor:pointer}
+.nt-pins.min .nt-pin,.nt-pins.min .nt-more{display:none}
+.nt-pins .nt-hide{opacity:.85}
 `;
   const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
@@ -84,6 +97,31 @@
   // que escribir o deslizar dentro del panel no pase de diapositiva
   ["keydown", "touchstart", "touchend", "click"].forEach(t => pn.addEventListener(t, e => e.stopPropagation()));
 
+
+  // notas abiertas pegadas en cada diapositiva, como post-its
+  let ocultas = ls("nt-ocultas") === "1";
+  function paint() {
+    slides().forEach((el, i) => {
+      const inf = info(el, i);
+      const abiertas = notas.filter(n => n.clave === inf.clave && !n.resuelta);
+      let box = el.querySelector(":scope > .nt-pins");
+      if (!abiertas.length) { if (box) box.remove(); return; }
+      if (!box) {
+        box = document.createElement("div"); box.className = "nt-pins"; el.appendChild(box);
+        ["click", "touchstart", "touchend", "keydown"].forEach(t => box.addEventListener(t, e => e.stopPropagation()));
+        box.addEventListener("click", e => {
+          if (e.target.closest(".nt-hide")) { ocultas = !ocultas; ls("nt-ocultas", ocultas ? "1" : "0"); paint(); return; }
+          vista = "esta"; pn.classList.add("open"); render();
+        });
+      }
+      box.classList.toggle("min", ocultas);
+      const vis = abiertas.slice(-3).reverse();
+      box.innerHTML = vis.map(n => `<div class="nt-pin" title="Ver notas"><div class="nt-m"><span><b>${esc(n.autor)}</b></span><span>${esc(fecha(n.fecha))}</span></div><div class="nt-t">${esc(n.texto)}</div>${n.imagen ? `<span class="nt-img">${esc(n.imagen)}</span>` : ""}</div>`).join("")
+        + (abiertas.length > 3 ? `<button class="nt-more" type="button">+${abiertas.length - 3} notas más</button>` : "")
+        + `<button class="nt-hide" type="button">${ocultas ? `Mostrar notas (${abiertas.length})` : "Ocultar notas"}</button>`;
+    });
+  }
+
   function render() {
     const { el, i } = actual(); const inf = info(el, i); const im = imagenes(el);
     const abiertas = notas.filter(n => !n.resuelta);
@@ -91,6 +129,7 @@
     const lista = vista === "esta" ? deAqui : notas;
     const b = btn.querySelector("b"); const k = deAqui.filter(n => !n.resuelta).length;
     b.textContent = k; b.classList.toggle("on", k > 0);
+    paint();
     btn.title = `${abiertas.length} notas abiertas en todo el calendario`;
     if (!pn.classList.contains("open")) return;
     const draft = pn.querySelector("textarea") ? pn.querySelector("textarea").value : "";
