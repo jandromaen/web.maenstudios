@@ -409,6 +409,14 @@ a{color:inherit;text-decoration:none}
 .hl-chip{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:10.5px;color:var(--choc)}
 .hl-chip span{width:26px;height:26px;border-radius:50%;background:center/cover;box-shadow:0 0 0 2px #fff,0 0 0 3px #dbdbdb;flex:none}
 .hl-chip.st{margin-top:14px}
+/* Días solo de stories: sin caja de texto, stories grandes y centradas */
+.sonly .day-left{width:340px}
+.sonly .day-right{left:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:58px}
+.sonly .day-right .col-lbl{align-self:center;margin-bottom:12px}
+.sonly .story-row{gap:22px;justify-content:center}
+.sonly .story-row .tpl.sm3{width:246px}
+.sonly .story-row .tpl.sm3 h4{font-size:14px}
+.sonly .hl-chip.st{margin-top:16px;align-self:center}
 
 .tpl-row{top:196px;gap:14px}
 .tpl-col{width:214px}
@@ -1331,17 +1339,12 @@ dayPlan.forEach(item => {
     }
     const s = item.s || { titulo: "Stories", items: [], hora: "" };
     return `
-<section class="slide light">
+<section class="slide light sonly">
   ${topBar()}
   <div class="day-left">
     ${headFor(d, `<span class="pill"><b>Stories</b>${esc(s.titulo)}</span>`)}
     ${tagsFor(d, `<span class="tag fmt stories-tag">Stories de Instagram</span>`)}
     <div class="pieza">${esc(s.titulo)}</div>
-    <div class="copy">
-      <div class="copy-h"><span class="eyebrow">Secuencia</span></div>
-      <ol class="seq">${s.items.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
-      <div class="ph-note">Hoy no hay publicación en el feed. Las stories mantienen la cuenta activa y recuerdan lo que se ha publicado esta semana.</div>
-    </div>
   </div>
   <div class="day-right">
     <div class="col-lbl">Stories del día</div>
