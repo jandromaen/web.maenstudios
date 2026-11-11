@@ -848,20 +848,7 @@ Reserva la tuya desde el enlace de la bio.
 ];
 
 /* Pack de 3 stories/semana + reposts de influencers (propuesta) */
-const STORIES = {
-  11: { titulo:"Pack semanal · semana 1", hora:"12:00h", estado:"listo",
-        imgs:["/pitch/skin-laundry-calendario/noviembre/img/drive-s11_1.jpg?v=11120010","/pitch/skin-laundry-calendario/noviembre/img/drive-s11_2.jpg?v=11120010","/pitch/skin-laundry-calendario/noviembre/img/drive-s11_3.jpg?v=11120010"],
-        items:["Encuesta: ¿qué te preocupa más este otoño? Manchas / Textura / Flacidez","Caja de preguntas: pregúntale a nuestra doctora sobre manchas, textura o flacidez","Recordatorio Laundry Club: la clave es la constancia · hazte miembro, link en bio"] },
-  13: { titulo:"Reposts de influencers", hora:"12:00h",
-        items:["Reposts de las creadoras de la semana","Detrás de cámaras en Diagonal 610","Recordatorio: reserva tu valoración"] },
-  19: { titulo:"Open day Ultraformer", hora:"12:00h", estado:"listo",
-        imgs:["/pitch/skin-laundry-calendario/noviembre/img/drive-s19_1.jpg?v=11120010","/pitch/skin-laundry-calendario/noviembre/img/drive-s19_2.jpg?v=11120010","/pitch/skin-laundry-calendario/noviembre/img/drive-s19_3.jpg?v=11120010"],
-        items:["¡Mañana open day! Cuenta atrás + enlace «Reserva tu plaza»","Cómo llegar a Diagonal 610: ubicación + enlace a Google Maps","Respuestas sobre Ultraformer + caja de preguntas"] },
-  21: { titulo:"Reposts de influencers", hora:"12:00h",
-        items:["Reposts de las creadoras de la quincena","Enlace al carrusel resumen","Recordatorio: tarjetas Black Friday"] },
-  24: { titulo:"Pack semanal · semana 3", hora:"12:00h",
-        items:["¡Mañana open day! Cuenta atrás","Cómo llegar a Diagonal 610","Respuestas sobre Ultraformer"] },
-};
+const STORIES = {};   /* el Excel no asigna stories a días sin publicación */
 
 const NEWSLETTERS = [
   { d:10, tipo:"Temática", nombre:"Ultraformer en SKL",
@@ -1118,7 +1105,7 @@ slides.push(n => {
       cells += `<div class="cell${go} f-${fk(ps[0].formato)}" style="${bg}" data-go="${dayIndex[d]}">${d}${flag}${nlTag}<span class="lbl">${lbl}<em>${tema}</em></span></div>`;
     } else {
       cells += STORIES[d] ? `<div class="cell${go} f-stories" data-go="${dayIndex[d]}">${d}${flag}${nlTag}<span class="lbl">Stories<em>${esc(STORIES[d].titulo)}</em></span></div>`
-        : `<div class="cell">${d}${flag}${nlTag}</div>`;
+        : `<div class="cell out">${d}${flag}${nlTag}</div>`;
     }
   }
   const fechas = Object.entries(FECHAS).map(([d,t]) => `<b>${d}</b> ${esc(t)}`).join(" · ");
@@ -1138,7 +1125,7 @@ slides.push(n => {
       <div><span class="sw" style="background:var(--tan)"></span><b>Reel</b>&nbsp;· ${nR}</div>
       <div><span class="sw" style="background:var(--choc)"></span><b>Carrusel</b>&nbsp;· ${nC}</div>
       ${nP ? `<div><span class="sw" style="background:var(--rust)"></span><b>Post</b>&nbsp;· ${nP}</div>` : ""}
-      <div><span class="sw" style="background:var(--cream-2);border:1px solid var(--cream-3)"></span><b>Stories</b>&nbsp;· pack semanal + reposts</div>
+      <div><span class="sw" style="background:var(--cream-2);border:1px solid var(--cream-3)"></span><b>Stories</b>&nbsp;· de apoyo en cada publicación</div>
     </div>
     <div class="dates"><span class="flag">+</span><b>Fechas señaladas</b> · ${fechas}<br><span class="flag nlf">✉</span><b>Newsletters</b> · ${nls}</div>
     <div class="big">${PIEZAS.length}</div>
