@@ -1178,10 +1178,13 @@ const fmtLista = nP ? `${nR} reels, ${nC} carruseles y ${nP} posts` : `${nR} ree
 const resumen = `${PIEZAS.length} publicaciones · ${fmtLista} · ${NEWSLETTERS.length} newsletters · stories a diario del ${START} al ${END}`;
 
 /* Orden de diapositivas por día (un día con 2 piezas = 2 diapositivas) */
-const FIXED = 6;                       // portada, calendario, feed, destacados, stories, newsletters
+const FIXED = 4;                       // portada, calendario, feed y destacados (stories · sistema visual, oculta)
+/* Días ocultos por ahora: no tienen diapositiva y su casilla del calendario no enlaza. */
+const DIAS_OCULTOS = new Set([9, 10]);
 const dayIndex = {}; let cursor = FIXED;
 const dayPlan = [];
 for (let d = START; d <= END; d++) {
+  if (DIAS_OCULTOS.has(d)) continue;
   const ps = piezasDe(d);
   dayIndex[d] = cursor + 1;
   if (ps.length) ps.forEach((p, i) => { dayPlan.push({ d, p, i, of: ps.length }); cursor++; });
@@ -1216,6 +1219,7 @@ slides.push(n => {
     if (d < 1 || d > days) { cells += `<div class="cell out">${d<1 ? prevDays + d : d - days}</div>`; continue; }
     if (d < START) { cells += `<div class="cell out">${d}</div>`; continue; }
     const ps = piezasDe(d), nl = nlDe(d);
+    const go = DIAS_OCULTOS.has(d) ? "" : " go";
     const flag = FECHAS[d] ? `<span class="flag" title="${esc(FECHAS[d])}">+</span>` : "";
     const nlTag = nl ? `<span class="nl" title="Newsletter">✉</span>` : "";
     if (ps.length) {
@@ -1223,9 +1227,9 @@ slides.push(n => {
       const bg = cols.length > 1 ? `background:linear-gradient(135deg,${cols[0]} 50%,${cols[1]} 50%);border-color:${cols[0]}` : "";
       const lbl = ps.map(p => esc(p.formato)).join(" + ");
       const tema = ps.map(p => esc(p.tema)).join(" · ");
-      cells += `<div class="cell go f-${fk(ps[0].formato)}" style="${bg}" data-go="${dayIndex[d]}">${d}${flag}${nlTag}<span class="lbl">${lbl}<em>${tema}</em></span></div>`;
+      cells += `<div class="cell${go} f-${fk(ps[0].formato)}" style="${bg}" data-go="${dayIndex[d]}">${d}${flag}${nlTag}<span class="lbl">${lbl}<em>${tema}</em></span></div>`;
     } else {
-      cells += `<div class="cell go f-stories" data-go="${dayIndex[d]}">${d}${flag}${nlTag}<span class="lbl">Stories<em>${esc(STORIES[d]?.titulo || "")}</em></span></div>`;
+      cells += `<div class="cell${go} f-stories" data-go="${dayIndex[d]}">${d}${flag}${nlTag}<span class="lbl">Stories<em>${esc(STORIES[d]?.titulo || "")}</em></span></div>`;
     }
   }
   const fechas = Object.entries(FECHAS).map(([d,t]) => `<b>${d}</b> ${esc(t)}`).join(" · ");
