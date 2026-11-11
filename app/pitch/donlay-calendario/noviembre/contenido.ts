@@ -125,15 +125,7 @@ export const CONTENIDO: Contenido = {
   "dom-15": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-04-1.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mie-04-2.webp",
-        "tipo": "imagen"
-      },
-      {
-        "url": "/pitch/donlay-calendario/noviembre/mie-04-3.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mar-10-sopa-cordero.webp",
         "tipo": "imagen"
       }
     ]
@@ -194,7 +186,15 @@ export const CONTENIDO: Contenido = {
   "mar-10": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-10-sopa-cordero.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-04-1.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-04-2.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/noviembre/mie-04-3.webp",
         "tipo": "imagen"
       }
     ]
@@ -310,7 +310,7 @@ export const CONTENIDO: Contenido = {
   "lun-16": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/lun-16-repost.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-11-repost-sopa.webp",
         "tipo": "imagen"
       }
     ]
@@ -512,7 +512,7 @@ export const CONTENIDO: Contenido = {
   "mar-10-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-11-repost-sopa.webp",
+        "url": "/pitch/donlay-calendario/noviembre/lun-16-repost.webp",
         "tipo": "imagen"
       }
     ]
