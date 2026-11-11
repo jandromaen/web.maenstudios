@@ -67,15 +67,15 @@ a{color:inherit;text-decoration:none}
 /* ---------- Portada ---------- */
 .cover{background:#cbb7a2}
 .cover .photo{position:absolute;inset:0;background:#cbb7a2 center right/cover no-repeat}
-.cover .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(60,32,30,.38) 0%,rgba(60,32,30,.12) 45%,rgba(60,32,30,0) 65%)}
-.cover .side{position:absolute;left:0;top:0;bottom:0;width:640px;color:var(--white);padding:110px 72px 64px;display:flex;flex-direction:column}
+.cover .shade{position:absolute;inset:0;background:linear-gradient(90deg,#EADFD3 0%,#EADFD3 40%,rgba(234,223,211,.85) 50%,rgba(234,223,211,0) 66%)}
+.cover .side{position:absolute;left:0;top:0;bottom:0;width:640px;color:var(--choc);padding:110px 72px 64px;display:flex;flex-direction:column}
 .cover .side .logo{width:250px}
-.cover .side .eyebrow{color:var(--white);margin-top:auto;opacity:.9}
-.cover h1{font-size:80px;margin-top:18px;color:var(--white)}
+.cover .side .eyebrow{color:var(--choc);margin-top:auto;opacity:.9}
+.cover h1{font-size:80px;margin-top:18px;color:var(--choc)}
 .cover .rule{width:96px;height:3px;background:var(--lime);margin:30px 0 26px}
-.cover .month{font-family:var(--serif);font-size:44px;font-weight:300;color:var(--white)}
-.cover .meta{margin-top:auto;font-size:15px;line-height:1.5;color:var(--white);font-weight:300;opacity:.92}
-.cover .cta{display:inline-block;align-self:flex-start;margin-top:22px;background:var(--white);color:var(--black);font-size:13px;padding:11px 18px;border-radius:3px}
+.cover .month{font-family:var(--serif);font-size:44px;font-weight:300;color:var(--tan)}
+.cover .meta{margin-top:auto;font-size:15px;line-height:1.5;color:var(--choc);font-weight:300;opacity:.92}
+.cover .cta{display:inline-block;align-self:flex-start;margin-top:22px;background:var(--choc);color:var(--cream);font-size:13px;padding:11px 18px;border-radius:3px}
 .promo{position:absolute;left:0;right:0;top:0;height:30px;background:var(--lime);color:var(--black);display:flex;align-items:center;justify-content:center;font-size:12px;z-index:3}
 .slide.light .top{top:46px}
 
@@ -1086,7 +1086,7 @@ slides.push(() => `
   <div class="photo" style="background-image:url('${ASSET.cover}')"></div>
   <div class="shade"></div>
   <div class="side">
-    <img class="logo" src="${ASSET.logoLight}" alt="Skin Laundry">
+    <img class="logo" src="${ASSET.logo}" alt="Skin Laundry">
     <div class="eyebrow">Instagram · ${HANDLE}</div>
     <h1 class="h-serif">Calendario de publicaciones</h1>
     <div class="rule"></div>
