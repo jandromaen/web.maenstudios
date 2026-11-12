@@ -866,6 +866,7 @@ Reserva la tuya desde el enlace de la bio.
 /* Pack de 3 stories/semana + reposts de influencers (propuesta) */
 /* Carpeta de Drive con el contenido de cada día (Skin Laundry · Calendario de contenidos › Noviembre 2026) */
 const DRIVE = {
+  13:"https://drive.google.com/drive/folders/1l_GVBIDYjEUn43b0CXUKUciFYpPov0qX",
   9:"https://drive.google.com/drive/folders/1mqMRkpBAgqMckviYZjJbe-2380BgZ7pF",
   10:"https://drive.google.com/drive/folders/1rdutTe2t8_mndH0Mw9giDOHZy4AS-HQA",
   12:"https://drive.google.com/drive/folders/1dxFGzv2GBImoC79I4VVMA6MPKktOYHql",
@@ -1377,7 +1378,7 @@ dayPlan.forEach(item => {
       ${s.imgs ? s.imgs.map((x, i) => x ? `<div class="tpl sm3"><img src="${esc(x)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory(s.media, `<span class="num">${pad(i + 1)}</span><h4>${esc((s.items[i] || "").toUpperCase())}</h4>`, "sm3")).join("") : s.items.map((x, i) => tplStory(s.media, `<span class="num">${pad(i + 1)}</span><h4>${esc(x.toUpperCase())}</h4>${i === s.items.length - 1 ? `<span class="sticker">🔗 Reserva</span>` : ""}`, "sm3")).join("")}
     </div>
     ${DESTACADO_STORY[d] ? `<div class="hl-chip st"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === DESTACADO_STORY[d]) || {}).cover}')"></span>Guardar en el destacado <b>${esc(DESTACADO_STORY[d])}</b></div>` : ""}
-    <div class="hours"><span class="eyebrow">Hora</span><span class="chip">Stories · ${esc(s.hora)}</span>${nlChip}</div>
+    <div class="hours"><span class="eyebrow">Hora</span><span class="chip">Stories · ${esc(s.hora)}</span>${nlChip}${DRIVE[d] ? `<a class="drv" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--choc);background:var(--lime);font-size:10px;padding:4px 8px;font-weight:500" href="${DRIVE[d]}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b style="font-size:8.5px;letter-spacing:.14em">DRIVE</b>Descargar contenido ↗</a>` : ""}</div>
   </div>
   ${foot(n)}
 </section>`;
