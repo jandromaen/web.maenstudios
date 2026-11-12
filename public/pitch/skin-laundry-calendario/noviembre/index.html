@@ -884,7 +884,12 @@ const DRIVE = {
 };
 /* Stories ocultas por ahora: cambiar a true para volver a mostrarlas */
 const MOSTRAR_STORIES = false;
-const STORIES = {};   /* el Excel no asigna stories a días sin publicación */
+const STORIES = {
+  /* Pack que iba a salir el miércoles 11 y no se publicó: pasa al viernes 13 */
+  13: { titulo:"Pack de stories", hora:"12:00h", estado:"listo",
+        imgs:["/pitch/skin-laundry-calendario/noviembre/img/drive-s11_1.jpg?v=11120010","/pitch/skin-laundry-calendario/noviembre/img/drive-s11_2.jpg?v=11120010","/pitch/skin-laundry-calendario/noviembre/img/drive-s11_3.jpg?v=11120010"],
+        items:["Encuesta: ¿qué te preocupa más este otoño? Manchas / Textura / Flacidez","Caja de preguntas: pregúntale a nuestra doctora sobre manchas, textura o flacidez","Recordatorio Laundry Club: la clave es la constancia · hazte miembro, link en bio"] }
+};
 
 const NEWSLETTERS = [
   { d:10, tipo:"Temática", nombre:"Ultraformer en SKL",
@@ -917,7 +922,7 @@ const DESTACADOS = [
   { nombre:"Visítanos",   cover:"/pitch/skin-laundry-calendario/noviembre/img/ig-h10.jpg", antes:"Nuevo",                 contenido:"Diagonal 610, horario Lun–Sáb, cómo llegar" }
 ];
 /* Destacado en el que se guarda cada story del mes */
-const DESTACADO_STORY = { 11:"FAQ", 13:"Friends", 19:"Visítanos", 21:"Friends", 24:"Visítanos" };
+const DESTACADO_STORY = { 13:"FAQ" };
 const destacadoDe = p => ({
   "Brightening":"Láser","Rosácea y acné":"Láser","Manchas":"Láser","Antes/después":"Resultados",
   "Neuromoduladores":"Inyectables","Contorno de ojos":"Glow Deals","Hialurónico":"Inyectables","Glowtox":"Inyectables","Ultraformer":"Faciales",
