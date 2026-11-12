@@ -1505,6 +1505,14 @@ go(start - 1, false);
 .ig-card .media{border-radius:6px;overflow:hidden;box-shadow:0 10px 30px rgba(60,32,30,.10)}
 .slides div{cursor:pointer}
 .slides div.on{outline:2px solid #0095f6;outline-offset:1px}
+/* Presentación: posts más grandes, sin flechas, miniaturas a la derecha */
+.car-ig .nav{display:none!important}
+.post-frame:not(.is-reel){width:340px!important}
+.post-frame.is-reel{width:250px!important}
+.post-frame .slides{position:absolute;left:calc(100% + 22px);top:22px;margin-top:0!important;flex-direction:column;gap:8px}
+.post-frame .slides div{width:60px}
+.opts figure{width:330px}
+.opts img{width:330px;height:412px}
 </style>
 <script>
 (function () {
