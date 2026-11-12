@@ -700,7 +700,7 @@ Reserva desde el enlace de la bio.
 📍 Av. Diagonal 610, Barcelona
 #AcidoHialuronico #Bioestimuladores #CalidadDePiel #MedicinaEsteticaBarcelona #SkinLaundryBarcelona` },
 
-{ d:15, formato:"Carrusel", estado:"pendiente", storyImg:"/pitch/skin-laundry-calendario/noviembre/img/st_15.jpg?v=11120146", cubo:"Láser", tema:"Antes/después", hora:"11:00h",
+{ d:15, formato:"Carrusel", estado:"pendiente", sinDiseno:true, storyImg:"/pitch/skin-laundry-calendario/noviembre/img/st_15.jpg?v=11120146", cubo:"Láser", tema:"Antes/después", hora:"11:00h",
   pieza:"Resultado láser con permiso de la paciente",
   base:"Caso Marta Rey (correo de All About, 19/10) · consentimiento para publicar el rostro", cta:"Reserva tu valoración",
   nota:"Diseños a la espera: el equipo de All About nos enviará los que ya tienen aprobados",
@@ -1342,7 +1342,7 @@ dayPlan.forEach(item => {
   ${p.externo ? `<div class="day-right"><div class="ext-box"><span class="eyebrow">${esc(p.formato)} · ${esc(p.tema)}</span><b>Lo publica el equipo de influencers de All About</b><span>Temática: ${esc(p.pieza)}</span></div></div>` : ""}
   <div class="day-right" ${p.externo ? 'style="display:none"' : ""}>
     ${p.opciones ? `<div class="opts"><div class="col-lbl">${esc(p.formato)} · dos opciones de diseño</div><div class="opts-row">${p.slides.map((x,i) => `<figure><img src="${esc(x)}" alt=""><figcaption>Opción ${i+1}</figcaption></figure>`).join("")}</div></div>` : ""}
-    <div class="post-frame ${isReel ? "is-reel" : ""}" ${p.opciones ? 'style="display:none"' : ""}>
+    <div class="post-frame ${isReel ? "is-reel" : ""}" ${(p.opciones || p.sinDiseno) ? 'style="display:none"' : ""}>
       <div class="col-lbl">${esc(p.formato)}</div>
       ${isReel ? reelCard(p) : ""}<div class="ig-card" ${isReel ? 'style="display:none"' : ""}>
         <div class="hd"><i>${avatar}</i>skinlaundry_es</div>
