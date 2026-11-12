@@ -1188,8 +1188,8 @@ const igPhone = (cls = "") => {
   const nov = [...PIEZAS].sort((a,b) => b.d - a.d || PIEZAS.indexOf(b) - PIEZAS.indexOf(a));
   const tile = (src, tipo, extra = "") => `<div class="t">${src ? `<img src="${esc(src)}" alt="">` : ""}${igIcon(tipo)}${extra}</div>`;
   const novTile = p => (p.poster || (p.media && !isVid(p.media)))
-    ? tile(p.poster || p.media, fk(p.formato), `<span class="dd">${p.d} nov</span>`)
-    : `<div class="t pend m-${fk(p.formato)}"><b>${p.d}</b><em>${esc(p.formato)}</em>${igIcon(fk(p.formato))}</div>`;
+    ? tile(p.poster || p.media, fk(p.formato))
+    : `<div class="t pend m-${fk(p.formato)}"><em>${esc(p.formato)}</em>${igIcon(fk(p.formato))}</div>`;
   const pins = PERFIL.fijadas.map(s => tile(s, "", `<i class="gi pin">📌</i>`)).join("");
   const total = PERFIL.publicaciones + PIEZAS.length;
   const hl = DESTACADOS.map(h => `<div class="h"><span style="background-image:url('${h.cover}')"></span><em>${esc(h.nombre)}</em></div>`).join("");
