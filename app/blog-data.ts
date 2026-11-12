@@ -207,6 +207,7 @@ export const posts: Post[] = [
       "Cómo usar Reels y TikTok para atraer clientes a tu restaurante: tipos de contenido, frecuencia y errores que hacen que tus vídeos no lleguen a nadie.",
     category: "Sectores",
     date: "2026-06-25",
+    updated: "2026-11-12",
     readingMinutes: 6,
     keywords: [
       "contenido para restaurantes",
@@ -251,6 +252,20 @@ export const posts: Post[] = [
       {
         type: "p",
         text: "El objetivo no es acumular visualizaciones, es llenar el local. Por eso cada pieza debe tener intención: dar hambre, mostrar el ambiente y facilitar la reserva. En Maen Studios producimos el contenido de restaurantes y bares de Barcelona de principio a fin. Si quieres que tu local no pare de sonar, hablemos.",
+      },
+    ],
+    faq: [
+      {
+        q: "¿Con qué frecuencia hay que publicar Reels para que funcione?",
+        a: "Más que la cantidad, importa la constancia: es mejor publicar 3 Reels buenos a la semana de forma sostenida que 10 una semana y nada al mes siguiente. El algoritmo premia a las cuentas activas y la comunidad necesita verte con regularidad para acordarse de ti a la hora de reservar.",
+      },
+      {
+        q: "¿Qué tipo de contenido funciona mejor para un restaurante en redes?",
+        a: "El plato estrella en primer plano, el proceso en cocina o detrás de la barra, el ambiente del local, las personas del equipo y las novedades de temporada. Son los cinco tipos de pieza que mejor convierten visualizaciones en reservas.",
+      },
+      {
+        q: "¿Qué errores hacen que los Reels de un restaurante no funcionen?",
+        a: "Los más habituales son grabar en horizontal o con mala luz, hacer vídeos largos sin un gancho inicial, no usar la ubicación ni los hashtags locales y no responder a los comentarios, que es donde está buena parte del alcance.",
       },
     ],
   },
