@@ -62,6 +62,8 @@ BLOBS = {
     "48253023de4d94e9ed389addf4653fe1": "charcu-3.jpg",
     "008d06027ce4385505176452e990c7af": "charcu-4.jpg",
     "a3251efb7d03c41fad07b805e56c6392": "charcu-5.jpg",
+    "c73713e14e3078b56740e2468401abd0": "charcu-6.jpg",
+    "149ccc29af68607fb32764dada142dea": "charcu-7.jpg",
     "f2d3b938082b99c570f5f1b8cc24dde3": "gastro-a1.jpg",
     "9c93335415d9bb78e388befe53a4ee72": "gastro-a2.jpg",
     "802cc425ec29a001ef6b9b2bcc4ac2dd": "gastro-a3.jpg",
