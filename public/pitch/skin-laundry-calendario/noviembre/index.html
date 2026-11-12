@@ -143,7 +143,7 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- Día ---------- */
 .day-left{position:absolute;left:56px;top:112px;width:470px;bottom:62px;display:flex;flex-direction:column}
-.day-meta{display:flex;justify-content:space-between;align-items:center}
+.day-meta{display:flex;justify-content:flex-start;align-items:center;margin-bottom:14px}
 .pill{font-size:10px;letter-spacing:.06em;border:1px solid var(--choc);color:var(--choc);padding:5px 9px;border-radius:2px}
 .pill b{font-weight:400;letter-spacing:.14em;text-transform:uppercase;margin-right:4px;font-size:9px}
 .day-left h2{font-size:68px;margin-top:12px}
@@ -1306,7 +1306,7 @@ const tagsFor = (d, fmtHtml, extra = "") => {
 };
 const headFor = (d, pill, sub = "") => `
     <div class="day-meta">
-      <span style="margin-left:auto">${pill}</span>
+      <span>${pill}</span>
     </div>
     <h2 class="h-serif">${dayName(d)} ${d}</h2>
     ${sub ? `<div class="sub">${sub.replace(/^\s*·\s*/, "").replace(/^p/, "P")}</div>` : ""}
