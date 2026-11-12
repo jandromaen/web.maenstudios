@@ -589,6 +589,9 @@ a{color:inherit;text-decoration:none}
 .car-ig .cnt,.media.pf .pages{display:none!important} /* el contador tapaba la cabecera de los diseños; los puntos ya indican la posición */
 .tpl-col>em.dest{display:block;margin-top:5px;font-style:normal;font-size:9.5px;font-weight:600;color:var(--choc);background:var(--cream-2);border-left:2px solid var(--lime);padding:3px 6px}
 .tpl-rules .tpl-extra{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:10.5px;line-height:1.5;color:var(--choc)}
+.meta-row a.drv{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--choc);background:var(--lime);border:1px solid var(--lime);font-size:10px;padding:4px 8px;font-weight:500}
+.meta-row a.drv b{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase}
+.meta-row a.drv:hover{filter:brightness(.95)}
 </style>
 </head>
 <body>
@@ -852,6 +855,24 @@ Reserva la tuya desde el enlace de la bio.
 ];
 
 /* Pack de 3 stories/semana + reposts de influencers (propuesta) */
+/* Carpeta de Drive con el contenido de cada día (Skin Laundry · Calendario de contenidos › Noviembre 2026) */
+const DRIVE = {
+  9:"https://drive.google.com/drive/folders/1mqMRkpBAgqMckviYZjJbe-2380BgZ7pF",
+  10:"https://drive.google.com/drive/folders/1rdutTe2t8_mndH0Mw9giDOHZy4AS-HQA",
+  12:"https://drive.google.com/drive/folders/1dxFGzv2GBImoC79I4VVMA6MPKktOYHql",
+  14:"https://drive.google.com/drive/folders/1tf_pF5jbEz7CQXTU2I454L2tsE_g7wqG",
+  15:"https://drive.google.com/drive/folders/1O2qNKj5db99OcM9jpXvPAvEKrZkMytiU",
+  17:"https://drive.google.com/drive/folders/1CjCYEdaTI2zf6DiUnX_oYQpBrZ7XQwx9",
+  18:"https://drive.google.com/drive/folders/1mXV57mrYYq7dWXlkzzip17i8SG3gtxlV",
+  20:"https://drive.google.com/drive/folders/1Rsb6Qx5ZqHXs4U6tbaTJJhTnf3AInWQs",
+  22:"https://drive.google.com/drive/folders/1GT-Uz3iW6iFaMUO4HgRuzAym5aSdrcqZ",
+  23:"https://drive.google.com/drive/folders/1Im_KvJZU-yM-HLU6wLYcnzvPln7-G1Zu",
+  25:"https://drive.google.com/drive/folders/1UdNl_N89fRo1ZEk2qncd1_7Cvlk1gddD",
+  27:"https://drive.google.com/drive/folders/1OyOIVdVmQAOjqLj6A1CJXtOHEQugQeVT",
+  28:"https://drive.google.com/drive/folders/1YQOt_2uQcCuXLNJZCktFLFAPqCDTF1yD",
+  29:"https://drive.google.com/drive/folders/1Kxy_yH_P8bEFQare8W22umWi5QDHj25s",
+  30:"https://drive.google.com/drive/folders/1FpJKfaDUML2VGMIo5E1hOStq4XxtLAnY"
+};
 const STORIES = {};   /* el Excel no asigna stories a días sin publicación */
 
 const NEWSLETTERS = [
@@ -1293,6 +1314,7 @@ dayPlan.forEach(item => {
     <div class="meta-row">
       <span><b>CTA</b>${esc(p.cta)}</span>
       <span><b>Base</b>${esc(p.base)}</span>
+      ${DRIVE[d] ? `<a class="drv" href="${DRIVE[d]}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>Drive</b>Descargar contenido ↗</a>` : ""}
     </div>
   </div>
   <div class="day-right">
