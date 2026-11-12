@@ -632,7 +632,9 @@ a{color:inherit;text-decoration:none}
    ===================================================================== */
 const HANDLE = "@skinlaundry_es";
 const MONTH = 10, YEAR = 2026;            // noviembre 2026 (mes 0-indexado)
-const START = 9, END = 30;
+/* Presentación hasta el día HASTA: los días posteriores quedan ocultos (poner 30 para mostrar el mes entero) */
+const HASTA = 20;
+const START = 9, END = HASTA;
 
 const FECHAS = {
   25: "Open day Ultraformer",
@@ -1068,6 +1070,10 @@ function repostStory(p) {
 }
 /* ==== fin REELS estilo Instagram ==== */
 
+/* Ocultar piezas y fechas posteriores a HASTA */
+for (let i = PIEZAS.length - 1; i >= 0; i--) if (PIEZAS[i].d > HASTA) PIEZAS.splice(i, 1);
+Object.keys(FECHAS).forEach(k => { if (+k > HASTA) delete FECHAS[k]; });
+for (let i = NEWSLETTERS.length - 1; i >= 0; i--) if (NEWSLETTERS[i].d > HASTA) NEWSLETTERS.splice(i, 1);
 const pad = n => String(n).padStart(2,"0");
 const FMT_COLOR = { reel:"var(--tan)", carrusel:"var(--choc)", post:"var(--rust)", stories:"var(--cream-2)" };
 const dayName = d => DOW[new Date(YEAR, MONTH, d).getDay()];
