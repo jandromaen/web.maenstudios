@@ -721,9 +721,9 @@ Siempre empieza con una consulta previa con nuestros médicos. Puedes pedirla de
 { d:18, formato:"Post", repost:[{t:"link",txt:"Reserva antes de que acabe"}], cubo:"Promociones", tema:"Black Friday", hora:"19:30h",
   pieza:"Tarjetas regalo con valor extra",
   base:"Excel 2025: Black Friday · actualización de Carlota (30/10): tramos, venta del 16 al 30/11 y validez hasta el 28/02", cta:"Reserva antes de que acabe",
-  nota:"Foto de modelo: confirmar que es de Canto o del shooting con derechos",
-  media:"/pitch/skin-laundry-calendario/noviembre/img/d18_bf.jpg?v=11120133",
-  idea:["Foto de modelo a sangre · Black Friday 16–30 nov · cuatro tramos de tarjeta · válidas hasta el 28 de febrero"],
+  nota:"Dos opciones de diseño (A y B): elegir una, es un post · Foto de modelo: confirmar que es de Canto o del shooting con derechos",
+  media:"/pitch/skin-laundry-calendario/noviembre/img/d18_bf_A.jpg?v=11120134", opciones:true, slides:["/pitch/skin-laundry-calendario/noviembre/img/d18_bf_A.jpg?v=11120134","/pitch/skin-laundry-calendario/noviembre/img/d18_bf_B.jpg?v=11120134"],
+  idea:["Opción A · foto a sangre, titular serif y tramos en línea","Opción B · estilo promo de la marca: panel crema, píldora chocolate con precios en lima y sello «hasta +50% de saldo»"],
   story:["Recordatorio + enlace a la pieza"],
   copy:`Este Black Friday, las tarjetas regalo vienen con saldo extra.
 Pagas 300 € y tienes 400 €.
@@ -1330,7 +1330,7 @@ dayPlan.forEach(item => {
         </div>
         <div class="ft"><span>♡</span><span>◯</span><span>➤</span><span style="margin-left:auto">⌑</span></div>
       </div>
-      ${p.slides ? `<div class="slides">${p.slides.map((x,i) => `<div><img src="${esc(x)}" alt=""><span>${i+1}</span></div>`).join("")}</div>` : ""}
+      ${p.slides ? `<div class="slides">${p.slides.map((x,i) => `<div><img src="${esc(x)}" alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
       ${p.fuente ? `<div class="src"><b>Material</b>${esc(p.fuente)}</div>` : ""}
     </div>
     <div class="story-frame" style="left:330px">
