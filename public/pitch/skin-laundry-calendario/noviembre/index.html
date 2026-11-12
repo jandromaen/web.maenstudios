@@ -1335,7 +1335,7 @@ dayPlan.forEach(item => {
     <div class="meta-row" ${p.externo ? 'style="display:none"' : ""}>
       <span><b>CTA</b>${esc(p.cta)}</span>
       <span><b>Base</b>${esc(p.base)}</span>
-      ${DRIVE[d] ? `<a class="drv" href="${DRIVE[d]}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>Drive</b>Descargar contenido ↗</a>` : ""}
+
     </div>
   </div>
   ${p.externo ? `<div class="day-right"><div class="ext-box"><span class="eyebrow">${esc(p.formato)} · ${esc(p.tema)}</span><b>Lo publica el equipo de influencers de All About</b><span>Temática: ${esc(p.pieza)}</span></div></div>` : ""}
@@ -1358,7 +1358,7 @@ dayPlan.forEach(item => {
       ${p.repost ? repostStory(p) : p.storyImgs ? `<div class="tpl sm" style="cursor:pointer" title="Toca para ver la siguiente story" onclick="const im=this.querySelectorAll('img');let i=[...im].findIndex(x=>x.style.opacity!=='0');im[i].style.opacity=0;i=(i+1)%im.length;im[i].style.opacity=1;this.querySelector('b').textContent=(i+1)+' / '+im.length">${p.storyImgs.map((x,i) => `<img src="${esc(x)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .25s;opacity:${i ? 0 : 1}">`).join("")}<b style="position:absolute;top:8px;right:8px;background:rgba(26,19,18,.65);color:#F6EDE4;font:600 10px/1 sans-serif;padding:4px 7px;border-radius:10px">1 / ${p.storyImgs.length}</b></div>` : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
     </div>
-    <div class="hours"><span class="eyebrow">Hora</span><span class="chip">${esc(p.formato)} · ${esc(p.hora)}</span>${MOSTRAR_STORIES ? `<span class="chip">Story · 1h después</span>` : ""}${nlChip}</div>
+    <div class="hours">${DRIVE[d] ? `<a class="drv" href="${DRIVE[d]}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>Drive</b>Descargar contenido ↗</a>` : ""}</div>
   </div>
   ${foot(n)}
 </section>`;
@@ -1378,7 +1378,7 @@ dayPlan.forEach(item => {
       ${s.imgs ? s.imgs.map((x, i) => x ? `<div class="tpl sm3"><img src="${esc(x)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory(s.media, `<span class="num">${pad(i + 1)}</span><h4>${esc((s.items[i] || "").toUpperCase())}</h4>`, "sm3")).join("") : s.items.map((x, i) => tplStory(s.media, `<span class="num">${pad(i + 1)}</span><h4>${esc(x.toUpperCase())}</h4>${i === s.items.length - 1 ? `<span class="sticker">🔗 Reserva</span>` : ""}`, "sm3")).join("")}
     </div>
     ${DESTACADO_STORY[d] ? `<div class="hl-chip st"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === DESTACADO_STORY[d]) || {}).cover}')"></span>Guardar en el destacado <b>${esc(DESTACADO_STORY[d])}</b></div>` : ""}
-    <div class="hours"><span class="eyebrow">Hora</span><span class="chip">Stories · ${esc(s.hora)}</span>${nlChip}${DRIVE[d] ? `<a class="drv" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--choc);background:var(--lime);font-size:10px;padding:4px 8px;font-weight:500" href="${DRIVE[d]}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b style="font-size:8.5px;letter-spacing:.14em">DRIVE</b>Descargar contenido ↗</a>` : ""}</div>
+    <div class="hours">${DRIVE[d] ? `<a class="drv" href="${DRIVE[d]}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>Drive</b>Descargar contenido ↗</a>` : ""}</div>
   </div>
   ${foot(n)}
 </section>`;
@@ -1514,6 +1514,10 @@ go(start - 1, false);
 .post-frame .slides div{width:60px}
 .opts figure{width:330px}
 .opts img{width:330px;height:412px}
+.hours a.drv{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--choc);background:var(--lime);font-size:12px;padding:7px 12px;font-weight:500}
+.hours a.drv b{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase}
+.hours a.drv:hover{filter:brightness(.95)}
+.hours:empty{display:none}
 </style>
 <script>
 (function () {
