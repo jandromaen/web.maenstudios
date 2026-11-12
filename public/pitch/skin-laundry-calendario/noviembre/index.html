@@ -732,8 +732,8 @@ Siempre empieza con una consulta previa con nuestros médicos. Puedes pedirla de
   pieza:"Tarjetas regalo con valor extra",
   base:"Excel 2025: Black Friday · actualización de Carlota (30/10): tramos, venta del 16 al 30/11 y validez hasta el 28/02", cta:"Reserva antes de que acabe",
   nota:"Foto de modelo: confirmar que es de Canto o del shooting con derechos",
-  media:"/pitch/skin-laundry-calendario/noviembre/img/d18_bf_B.jpg?v=11121345",
-  idea:["Estilo promo de la marca: panel crema con etiqueta chocolate «Black Friday», titular más grande, píldora chocolate con precios en lima y círculo lima «hasta +50% de saldo»"],
+  media:"/pitch/skin-laundry-calendario/noviembre/img/d18_bf_opA.jpg?v=11121400", opciones:true, slides:["/pitch/skin-laundry-calendario/noviembre/img/d18_bf_opA.jpg?v=11121400","/pitch/skin-laundry-calendario/noviembre/img/d18_bf_opB.jpg?v=11121400"],
+  idea:["Estilo promo de la marca: panel crema con etiqueta chocolate «Black Friday», píldora chocolate de precios y sello redondo lima «hasta +50% de saldo»","Opción A: destaca lo que recibes (400 €… pagando 300 €)","Opción B: destaca lo que pagas (300 €… y tienes 400 €)"],
   story:["Story de diseño propio","Enlace a añadir desde Instagram: Reserva antes de que acabe"],
   copy:`Este Black Friday, las tarjetas regalo vienen con saldo extra.
 Pagas 300 € y tienes 400 €.
@@ -1341,7 +1341,7 @@ dayPlan.forEach(item => {
   </div>
   ${p.externo ? `<div class="day-right"><div class="ext-box"><span class="eyebrow">${esc(p.formato)} · ${esc(p.tema)}</span><b>Lo publica el equipo de influencers de All About</b><span>Temática: ${esc(p.pieza)}</span></div></div>` : ""}
   <div class="day-right" ${p.externo ? 'style="display:none"' : ""}>
-    ${p.opciones ? `<div class="opts"><div class="col-lbl">${esc(p.formato)} · dos opciones de diseño</div><div class="opts-row">${p.slides.map((x,i) => `<figure><img src="${esc(x)}" alt=""><figcaption>Opción ${i+1}</figcaption></figure>`).join("")}</div></div>` : ""}
+    ${p.opciones ? `<div class="opts"><div class="col-lbl">${esc(p.formato)} · dos opciones de diseño</div><div class="opts-row">${p.slides.map((x,i) => `<figure><img src="${esc(x)}" alt=""><figcaption>Opción ${"AB"[i]}</figcaption></figure>`).join("")}</div></div>` : ""}
     <div class="post-frame ${isReel ? "is-reel" : ""}" ${(p.opciones || p.sinDiseno) ? 'style="display:none"' : ""}>
       <div class="col-lbl">${esc(p.formato)}</div>
       ${isReel ? reelCard(p) : ""}<div class="ig-card" ${isReel ? 'style="display:none"' : ""}>
