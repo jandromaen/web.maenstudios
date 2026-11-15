@@ -25,7 +25,7 @@ export const CONTENIDO: Contenido = {
   "dom-15-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/dom-15-dsel.webp",
+        "url": "/pitch/donlay-calendario/noviembre/dom-15-dsel-v2.webp",
         "tipo": "imagen"
       }
     ]
