@@ -407,7 +407,7 @@ export const CONTENIDO: Contenido = {
   "mie-11-2": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/story-shuizhu-black-angus.mp4",
+        "url": "/pitch/donlay-calendario/noviembre/story-shuizhu-black-angus-v2.mp4",
         "tipo": "video",
         "portada": "/pitch/donlay-calendario/noviembre/story-shuizhu-black-angus-portada.webp"
       }
