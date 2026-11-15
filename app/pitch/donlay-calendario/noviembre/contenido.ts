@@ -407,9 +407,9 @@ export const CONTENIDO: Contenido = {
   "mie-11-2": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-11-cordero-diseno.mp4",
+        "url": "/pitch/donlay-calendario/noviembre/story-shuizhu-black-angus.mp4",
         "tipo": "video",
-        "portada": "/pitch/donlay-calendario/noviembre/mie-11-cordero-diseno-portada.webp"
+        "portada": "/pitch/donlay-calendario/noviembre/story-shuizhu-black-angus-portada.webp"
       }
     ]
   },
