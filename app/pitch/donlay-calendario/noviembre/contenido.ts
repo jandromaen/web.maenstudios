@@ -432,7 +432,7 @@ export const CONTENIDO: Contenido = {
   "lun-16-2": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/lun-16-grupos-v6.webp",
+        "url": "/pitch/donlay-calendario/noviembre/lun-16-grupos-v7.webp",
         "tipo": "imagen"
       }
     ]
