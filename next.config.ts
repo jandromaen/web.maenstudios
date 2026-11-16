@@ -4,7 +4,8 @@ import { clients } from "./app/clients";
 /**
  * Dominio propio de las presentaciones de Skin Laundry, sin la marca de Maen.
  * Se añade en Vercel (Settings › Domains) como alias gratuito *.vercel.app.
- * En ese dominio solo se ven las tres presentaciones, con rutas cortas; todo lo
+ * En ese dominio solo se ven las presentaciones (análisis, briefing, calendario
+ * y escaleta de rodaje), con rutas cortas; todo lo
  * demás lleva al análisis para que nadie aterrice en la web de Maen.
  */
 const SL_HOST = "skinlaundry-bcn.vercel.app";
@@ -16,6 +17,10 @@ const nextConfig: NextConfig = {
       {
         /* Calendarios en HTML estático bajo /pitch: ocultos como el resto. */
         source: "/pitch/skin-laundry-calendario/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/pitch/skin-laundry-escaleta/:path*",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
       {
@@ -45,6 +50,11 @@ const nextConfig: NextConfig = {
         { source: "/analisis", has: slHost, destination: "/pitch/skin-laundry" },
         { source: "/briefing", has: slHost, destination: "/pitch/skin-laundry-briefing" },
         {
+          source: "/escaleta",
+          has: slHost,
+          destination: "/pitch/skin-laundry-escaleta/index.html",
+        },
+        {
           source: "/calendario",
           has: slHost,
           destination: "/pitch/skin-laundry-calendario/noviembre/index.html",
@@ -69,7 +79,7 @@ const nextConfig: NextConfig = {
          presentaciones (o sus recursos) van al análisis. */
       { source: "/", has: slHost, destination: "/analisis", permanent: false },
       {
-        source: "/:ruta((?!analisis|briefing|calendario|pitch/skin-laundry|api/calendario-notas|_next|_vercel).*)",
+        source: "/:ruta((?!analisis|briefing|calendario|escaleta|pitch/skin-laundry|api/calendario-notas|_next|_vercel).*)",
         has: slHost,
         destination: "/analisis",
         permanent: false,
