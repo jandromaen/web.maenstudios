@@ -21,7 +21,7 @@ INK = "#151515"
 ACENTO = "#E2552E"
 MARCA = "Maen Studios × KONG"
 
-HOY = date(2026, 11, 12)
+HOY = date(2026, 11, 16)
 DIA_A = date(2027, 3, 1)
 
 
@@ -95,15 +95,15 @@ add("portada", "KONG · Plan de acción", sec(
     'style="left:128px;top:330px;width:760px;--d:1">'
     + p("De la obra a la apertura.", 128, 640, 820, size=40, d=2, cls="",
         extra="font-weight:800;")
-    + p("Noviembre 2026 → marzo 2027 · El Born, Barcelona", 128, 710, 820, size=28, d=3)
+    + p("Apertura prevista: febrero–marzo 2027 · El Born, Barcelona", 128, 710, 820, size=28, d=3)
 ))
 
 # ── 2. Punto de partida ───────────────────────────────────────────────────
 n += 1
 datos = [
-    ("Hoy", "12 nov", "El local está en obras."),
-    ("Día A", "1 mar", "Fecha de trabajo para la apertura. Se ajusta cuando esté confirmada."),
-    ("Margen", f"{semanas} sem.", "Para llegar a la apertura con todo montado."),
+    ("Hoy", "16 nov", "El local está en obras."),
+    ("Día A · hipótesis", "1 mar", "Fecha de trabajo, aún sin confirmar. Todo el calendario se mueve con ella."),
+    ("Margen aprox.", f"{semanas} sem.", "Hasta esa apertura hipotética, para llegar con todo montado."),
 ]
 dh = ""
 for i, (k, v, s_) in enumerate(datos):
@@ -171,10 +171,11 @@ xa = X(DIA_A)
 gh += (f'<div class="abs a" style="left:{xa:.0f}px;top:300px;width:0;height:{ROWH * 9 + 20}px;'
        f'border-left:3px dashed var(--rosa);--d:4"></div>'
        f'<p class="abs a rosa" style="left:{xa + 12:.0f}px;top:{ROW0 + ROWH * 9 + 6}px;font-size:22px;'
-       f'font-weight:800;--d:4">Día A · 1 mar</p>')
+       f'font-weight:800;--d:4">Día A · 1 mar (hipótesis)</p>')
 add("hoja-de-ruta", "Hoja de ruta", sec(
     eyebrow("Hoja de ruta")
     + titulo("Nueve fases, de la obra a los 90 días", size=60)
+    + p("Fechas orientativas sobre una apertura hipotética el 1 de marzo. Se recalculan con la fecha real.", 128, 905, 470, size=20, d=4, cls="muted")
     + gh + foot(n),
 ))
 
