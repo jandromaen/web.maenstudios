@@ -90,6 +90,8 @@ BLOBS = {
     "3e2faaedc7893e9bf833fcbdf6588ba1": "charcu-ref3.jpg",
     "5739331ccc9fbaaeba1d7dbab61ecd42": "garum-ref1.jpg",
     "e32a7c499a42db3f92adf33a4e064b5c": "camiseta-ref1.jpg",
+    "665d1f3dbee46c41c8f40ec39fbae42a": "camiseta-ref2.jpg",
+    "033cb89d4d45abaa4930580ec2a7f02e": "charcu-ref4.jpg",
     "f2d3b938082b99c570f5f1b8cc24dde3": "gastro-a1.jpg",
     "9c93335415d9bb78e388befe53a4ee72": "gastro-a2.jpg",
     "802cc425ec29a001ef6b9b2bcc4ac2dd": "gastro-a3.jpg",
