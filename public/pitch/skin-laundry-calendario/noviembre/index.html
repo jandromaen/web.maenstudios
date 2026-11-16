@@ -415,6 +415,7 @@ a{color:inherit;text-decoration:none}
 .sonly .day-right .col-lbl{align-self:center;margin-bottom:12px}
 .sonly .story-row{gap:22px;justify-content:center}
 .sonly .story-row .tpl.sm3{width:246px}
+.sonly .story-row.n4 .tpl.sm3{width:196px}
 .sonly .story-row .tpl.sm3 h4{font-size:14px}
 .sonly .hl-chip.st{margin-top:16px;align-self:center}
 
@@ -882,6 +883,10 @@ const DRIVE = {
 /* Stories ocultas por ahora: cambiar a true para volver a mostrarlas */
 const MOSTRAR_STORIES = false;
 const STORIES = {
+  /* Pedidas por el cliente el mismo día: hype del arranque del Black Friday */
+  16: { titulo:"Stories Black Friday", hora:"Hoy", estado:"listo",
+        imgs:["/pitch/skin-laundry-calendario/noviembre/img/s16_1.jpg?v=11161140","/pitch/skin-laundry-calendario/noviembre/img/s16_2.jpg?v=11161140","/pitch/skin-laundry-calendario/noviembre/img/s16_3.jpg?v=11161140","/pitch/skin-laundry-calendario/noviembre/img/s16_4.jpg?v=11161140"],
+        items:["Empieza hoy · sticker de cuenta atrás: «Black Friday termina en» (30/11, 23:59)","Pagas menos, tienes más: 300 → 400 €, 500 → 650 €, 750 → 1.000 €, 1.000 → 1.500 €","Encuesta: la tarjeta, ¿para quién? Para mí / Para regalar","Solo hasta el 30 de noviembre · sticker de enlace: Reserva antes de que acabe"] },
   /* Pack que iba a salir el miércoles 11 y no se publicó: pasa al viernes 13 */
   13: { titulo:"Pack de stories", hora:"12:00h", estado:"listo",
         imgs:["/pitch/skin-laundry-calendario/noviembre/img/s13_1.jpg?v=11120220","/pitch/skin-laundry-calendario/noviembre/img/s13_2.jpg?v=11120220","/pitch/skin-laundry-calendario/noviembre/img/s13_3.jpg?v=11121312"],
@@ -1372,7 +1377,7 @@ dayPlan.forEach(item => {
   </div>
   <div class="day-right">
     <div class="col-lbl">Stories del día</div>
-    <div class="story-row">
+    <div class="story-row${s.imgs && s.imgs.length > 3 ? " n4" : ""}">
       ${s.imgs ? s.imgs.map((x, i) => x ? `<div class="tpl sm3"><img src="${esc(x)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory(s.media, `<span class="num">${pad(i + 1)}</span><h4>${esc((s.items[i] || "").toUpperCase())}</h4>`, "sm3")).join("") : s.items.map((x, i) => tplStory(s.media, `<span class="num">${pad(i + 1)}</span><h4>${esc(x.toUpperCase())}</h4>${i === s.items.length - 1 ? `<span class="sticker">🔗 Reserva</span>` : ""}`, "sm3")).join("")}
     </div>
     ${DESTACADO_STORY[d] ? `<div class="hl-chip st"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === DESTACADO_STORY[d]) || {}).cover}')"></span>Guardar en el destacado <b>${esc(DESTACADO_STORY[d])}</b></div>` : ""}
