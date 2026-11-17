@@ -119,24 +119,52 @@ add("partida", "Punto de partida", sec(
     eyebrow("Punto de partida")
     + titulo("Abrir con todo listo, no a medias", size=64)
     + dh
-    + p("Al abrir, KONG tiene que tener el nombre asegurado, marca, web, comunidad en Instagram, "
-        "contenido grabado y prensa avisada.", 128, 800, 1600, size=28, d=5, cls="",
-        extra="color:#E4E2DE;")
+    + p("Al abrir, KONG tiene que tener el nombre asegurado, la web publicada y las redes activadas.",
+        128, 800, 1600, size=28, d=5, cls="", extra="color:#E4E2DE;")
     + foot(n),
+))
+
+# ── Alcance de Maen ──────────────────────────────────────────────────────
+n += 1
+bloques = [
+    ("Web", "1.200 €", " + IVA",
+     ["Captación de dominios", "Diseño web", "SEO y copywriting", "Programación y publicación"]),
+    ("Mantenimiento", "100 €", " / mes",
+     ["Mantenimiento de la web", "Newsletter mensual"]),
+    ("Redes sociales", "Activación", "",
+     ["Briefing creativo mensual", "Rodaje mensual", "Postproducción",
+      "Calendario a un mes vista", "Publicación y reporte mensual"]),
+]
+bh = ""
+for i, (k, v, suf, lst) in enumerate(bloques):
+    x = 128 + i * 560
+    big = 54 if len(v) > 8 else 76
+    lis = "".join(f'<p style="margin:0 0 12px">{t}</p>' for t in lst)
+    bh += (
+        f'<div class="abs pm-card pop" style="left:{x}px;top:330px;width:528px;height:600px;--d:{i}"></div>'
+        f'<p class="abs a rosa" style="left:{x + 40}px;top:370px;font-size:22px;font-weight:700;'
+        f'letter-spacing:.08em;text-transform:uppercase;--d:{i + 1}">{k}</p>'
+        f'<p class="abs a disp" style="left:{x + 40}px;top:420px;font-size:{big}px;line-height:1;--d:{i + 1}">{v}'
+        f'<span style="font-size:24px;letter-spacing:.04em">{suf}</span></p>'
+        f'<div class="abs a" style="left:{x + 40}px;top:560px;width:450px;font-size:26px;line-height:1.35;'
+        f'color:#E4E2DE;--d:{i + 2}">{lis}</div>'
+    )
+add("alcance", "Nuestra parte", sec(
+    eyebrow("Alcance de Maen")
+    + titulo("Web, mantenimiento y redes", size=64)
+    + bh + foot(n),
 ))
 
 # ── 3. Hoja de ruta (cronograma) ─────────────────────────────────────────
 n += 1
 fases = [
-    ("0", "Kick-off y alcance", date(2026, 11, 12), date(2026, 11, 30)),
-    ("1", "Dominios y perfiles", date(2026, 11, 17), date(2026, 12, 5)),
+    ("1", "Captación de dominios", date(2026, 11, 17), date(2026, 11, 30)),
     ("2", "Conceptualización y branding", date(2026, 11, 17), date(2026, 12, 1)),
-    ("3", "Web", date(2026, 12, 1), date(2027, 2, 15)),
-    ("4", "Contenido de obra", date(2026, 12, 1), date(2027, 2, 15)),
-    ("5", "Producción pre-apertura", date(2027, 2, 1), date(2027, 2, 20)),
-    ("6", "Teasing, PR y lista de espera", date(2027, 2, 1), date(2027, 3, 1)),
-    ("7", "Apertura", date(2027, 2, 22), date(2027, 3, 8)),
-    ("8", "Primeros 90 días", date(2027, 3, 1), date(2027, 5, 31)),
+    ("3", "Diseño web", date(2026, 12, 1), date(2026, 12, 22)),
+    ("4", "SEO y copywriting", date(2026, 12, 1), date(2027, 1, 15)),
+    ("5", "Programación y publicación", date(2027, 1, 8), date(2027, 2, 15)),
+    ("6", "Mantenimiento y newsletter", date(2027, 2, 15), date(2027, 5, 31)),
+    ("7", "Activación en redes sociales", date(2027, 2, 1), date(2027, 5, 31)),
 ]
 ini, fin = date(2026, 11, 1), date(2027, 6, 1)
 X0, X1 = 640, 1792
@@ -174,95 +202,60 @@ gh += (f'<div class="abs a" style="left:{xa:.0f}px;top:300px;width:0;height:{ROW
        f'font-weight:800;--d:4">Día A · 1 mar (hipótesis)</p>')
 add("hoja-de-ruta", "Hoja de ruta", sec(
     eyebrow("Hoja de ruta")
-    + titulo("Nueve fases, de la obra a los 90 días", size=60)
+    + titulo("Siete fases, de los dominios a las redes", size=46)
     + p("Fechas orientativas sobre una apertura hipotética el 1 de marzo. Se recalculan con la fecha real.", 128, 905, 470, size=20, d=4, cls="muted")
     + gh + foot(n),
 ))
 
 # ── 5-13. Fases ───────────────────────────────────────────────────────────
 FASES = [
-    ("0", "Kick-off y alcance", "Semana del 17 de noviembre",
-     "Cerrar qué hacemos, por cuánto y con qué accesos. El hueco de marketing de la presentación de KONG es el nuestro.",
-     [("Reunión de kick-off con el encargado", "Jandro"),
-      ("Confirmar fecha de apertura y soft opening", "Jandro"),
-      ("Cerrar alcance: diseño, web, Instagram, Google, estrategia, PR y teasing", "Jandro"),
-      ("Propuesta y presupuesto", "Jandro + Richi"),
-      ("Contrato firmado", "Jandro"),
-      ("Material de marca: logo vectorial, tipografías, renders y carta provisional", "Brand Manager"),
-      ("Cómo convive KONG con Ikibana Born en comunicación", "Jandro")]),
-    ("1", "Dominios, perfiles y activos digitales", "17 – 30 de noviembre",
+    ("1", "Captación de dominios", "17 – 30 de noviembre",
      "Asegurar el nombre antes de que nos lo quiten. Todo a nombre de KONG, con Maen como administrador.",
      [("Elegir el nombre para dominio y redes, sin macrón", "Jandro + Richi"),
-      ("Registrar dominio y variantes (.com, .es, .barcelona, .cat)", "Brand Manager"),
-      ("Correo corporativo: hola@, reservas@, prensa@", "Brand Manager"),
-      ("Instagram de empresa, sin publicar hasta el teasing", "CM"),
-      ("El mismo handle en TikTok, Facebook, YouTube, Threads, Pinterest y Spotify", "CM"),
-      ("Meta Business: portfolio, cuenta publicitaria y píxel", "Brand Manager"),
-      ("Google Business Profile con fecha de apertura (desde diciembre)", "Brand Manager"),
-      ("Plataforma de reservas (CoverManager, TheFork…)", "KONG"),
-      ("Registro de marca en OEPM o EUIPO, clase 43", "KONG")]),
+      ("Registrar el dominio principal", "Maen"),
+      ("Registrar variantes (.com, .es, .barcelona, .cat) y redirigirlas", "Maen"),
+      ("Reservar el mismo handle en Instagram, TikTok y Facebook", "CM"),
+      ("Titularidad a nombre de KONG y accesos documentados", "Maen")]),
     ("2", "Conceptualización y branding", "17 de noviembre – 1 de diciembre",
-     "Decidir cómo habla KONG antes de existir. Los pilares ya están en el nombre: Kaizen, Omakase, Noren y Gohan.",
-     [("Auditoría de referentes y de la competencia en El Born", "Brand Manager"),
-      ("Estrategia: público, objetivos y KPIs de apertura", "Jandro + Brand Manager"),
-      ("Tono de voz y pilares de contenido", "Richi"),
-      ("Sistema gráfico de redes y web, alineado con el interiorismo", "Richi"),
-      ("Piezas básicas: avatar, portadas y highlights", "Richi"),
-      ("Concepto creativo del lanzamiento", "Richi"),
-      ("Plan SEO local y GEO", "Brand Manager"),
+     "Decidir cómo habla y cómo se ve KONG en la web y en redes. Los pilares ya están en el nombre: Kaizen, Omakase, Noren y Gohan.",
+     [("Concepto y tono de voz", "Richi"),
+      ("Pilares de contenido", "Richi + Brand Manager"),
+      ("Sistema gráfico para web y redes a partir del logo", "Richi"),
+      ("Referentes y competencia en El Born", "Brand Manager"),
       ("Validación del concepto con KONG, antes del 1/12", "Jandro")]),
-    ("3", "Web", "Diciembre – febrero",
-     "En dos tiempos: en diciembre, una landing que capta lista de espera. En febrero, la web completa con reservas.",
-     [("Landing con cuenta atrás y lista de espera, antes del 15/12", "Maen"),
-      ("Email marketing conectado a la lista de espera", "Brand Manager"),
-      ("Arquitectura: Record Bar, Sala y Omakase, Carta, Equipo, Eventos, Grupos y Prensa", "Brand Manager"),
-      ("Diseño de la web", "Richi · enero"),
-      ("Desarrollo en ES, EN y CA, con reservas integradas", "Maen · ene–feb"),
-      ("SEO técnico y ficha de Google enlazada", "Brand Manager"),
-      ("Fotos y vídeos reales del local (fase 5)", "Mati + Víctor"),
-      ("Web completa publicada, antes del 15/02", "Maen")]),
-    ("4", "Contenido de obra", "Diciembre – febrero",
-     "La obra es la historia, y solo se puede grabar ahora. Es el contenido que después vende la apertura.",
-     [("Plan de rodaje: una visita cada 2 o 3 semanas", "Mati"),
-      ("El local en bruto, el «antes» (diciembre)", "Mati + Víctor"),
-      ("Hitos: barra, noren, cabina de vinilo y sala", "Mati + Víctor"),
-      ("Entrevistas a Franco Dorosario y Jere", "Mati + Richi"),
-      ("Pruebas de cocina y coctelería", "Mati + Víctor"),
-      ("Serie «Construyendo KONG» para el teasing", "Go"),
-      ("Banco de contenido ordenado por pilar", "Go")]),
-    ("5", "Producción pre-apertura", "Febrero",
-     "El rodaje grande, con el local terminado y la carta cerrada. De aquí salen la web, el teasing y los primeros meses.",
-     [("Briefing y guion del rodaje", "Richi + Brand Manager"),
-      ("El espacio: Record Bar, noren, sala y barra de sushi, de día y de noche", "Mati + Víctor"),
-      ("Producto: platos, Omakase, KONG table y cócteles", "Mati + Víctor"),
-      ("Retratos del equipo y de los DJs", "Víctor"),
-      ("Edición: vídeo de marca, reels de lanzamiento y fotos", "Go"),
-      ("Dossier de prensa", "Brand Manager"),
-      ("Calendario del teasing y los 30 primeros días", "CM")]),
-    ("6", "Teasing, PR y lista de espera", "1 de febrero → día A",
-     "Llegar a la apertura con lista de espera, prensa avisada y conserjes de hotel que ya conozcan KONG.",
-     [("Instagram en abierto con un grid de lanzamiento", "CM · 1/02"),
-      ("Cuenta atrás y presentación de Franco y Jere", "CM"),
-      ("Campaña en Meta para captar lista de espera", "Brand Manager"),
-      ("Dossier a medios: Time Out, Barcelona Secreta, Metrópoli y prensa gastronómica", "Brand Manager"),
-      ("Conserjes de hoteles de 5 estrellas y agencias", "Jandro"),
-      ("Creadores de gastronomía y nightlife para la apertura", "CM"),
-      ("Emails a la lista de espera: fecha y reserva anticipada", "Brand Manager"),
-      ("Friends & family y soft opening", "Jandro + Mati")]),
-    ("7", "Apertura", "Semana del día A",
-     "Cubrirlo todo en directo y que cada visita deje contenido y una reseña.",
-     [("Evento de apertura con prensa, creadores y DJ en vinilo", "Mati + Víctor + CM"),
-      ("Stories en directo y aftermovie en 48 horas", "Go"),
-      ("Google Business activo: fotos, horario, carta y reservas", "Brand Manager"),
-      ("Campaña de apertura dirigida a reservas", "Brand Manager"),
-      ("Equipo de sala preparado para pedir reseñas", "Jandro + KONG")]),
-    ("8", "Primeros 90 días", "Marzo – mayo",
-     "Pasar del lanzamiento a la operativa mensual y medir qué llena el local.",
-     [("Calendario mensual y un rodaje fijo al mes", "CM + Mati"),
-      ("Agenda de DJs y eventos del Record Bar como contenido", "CM"),
-      ("Informe mensual: alcance, reservas, reseñas y Google", "Brand Manager"),
-      ("Revisión con KONG a los 30 y a los 90 días", "Jandro"),
-      ("Camino a 50 Best: prensa, críticos y guías", "Jandro")]),
+    ("3", "Diseño web", "Diciembre",
+     "Una web que transmita el paso del Record Bar a la sala, y que lleve a reservar.",
+     [("Arquitectura: Record Bar, Sala y Omakase, Carta, Equipo, Eventos y Contacto", "Brand Manager"),
+      ("Diseño de la home y de las páginas interiores", "Richi"),
+      ("Versión móvil", "Richi"),
+      ("Revisión y validación con KONG", "Jandro")]),
+    ("4", "SEO y copywriting", "Diciembre – mediados de enero",
+     "Que KONG aparezca cuando alguien busca dónde cenar japonés en El Born, y que los textos vendan la experiencia.",
+     [("Estudio de palabras clave: japonés Born, omakase Barcelona, cocktail bar Born", "Brand Manager"),
+      ("Textos de todas las páginas", "Brand Manager"),
+      ("Títulos y descripciones para Google", "Brand Manager"),
+      ("Revisión y validación de los textos con KONG", "Jandro")]),
+    ("5", "Programación y publicación", "Enero – 15 de febrero",
+     "Web programada, probada y publicada antes de que empiece el teasing.",
+     [("Programación de la web", "Maen"),
+      ("Integración con la plataforma de reservas", "Maen"),
+      ("Carta fácil de actualizar", "Maen"),
+      ("SEO técnico: velocidad y datos estructurados de restaurante", "Maen"),
+      ("Pruebas en móvil y ordenador", "Maen"),
+      ("Publicación, antes del 15/02", "Maen")]),
+    ("6", "Mantenimiento web y newsletter", "Desde la publicación · mensual",
+     "La web siempre al día y una newsletter al mes para mantener el contacto con los clientes. 100 € al mes.",
+     [("Actualizaciones de carta, horarios y eventos", "Maen"),
+      ("Revisión técnica y copias de seguridad", "Maen"),
+      ("Newsletter mensual: contenido, diseño y envío", "Brand Manager")]),
+    ("7", "Activación en redes sociales", "Desde la pre-apertura · ciclo mensual",
+     "Con nuestro planning de trabajo: cada mes, del briefing al reporte, con el calendario siempre a un mes vista.",
+     [("Briefing creativo mensual", "Richi + Brand Manager"),
+      ("Rodaje mensual en el local", "Mati + Víctor"),
+      ("Postproducción de las piezas", "Go"),
+      ("Calendario editorial a un mes vista", "CM"),
+      ("Publicación en los perfiles", "CM"),
+      ("Reporte mensual de resultados", "Brand Manager")]),
 ]
 
 for num, nom, cuando, obj, items in FASES:
@@ -276,16 +269,6 @@ for num, nom, cuando, obj, items in FASES:
             '<p class="abs a" style="left:160px;top:830px;width:560px;font-size:23px;line-height:1.55;'
             'color:#E4E2DE;--d:5">kongbarcelona.com · kong.barcelona · kongborn.com<br>'
             '@kongbarcelona · @kong.bcn · @kong.born</p>'
-        )
-    if num == "3":
-        extra = (
-            '<div class="abs pm-card a" style="left:128px;top:740px;width:620px;height:210px;--d:4"></div>'
-            '<p class="abs a rosa" style="left:160px;top:768px;font-size:18px;font-weight:700;'
-            'letter-spacing:.08em;text-transform:uppercase;--d:4">Inversión</p>'
-            '<p class="abs a disp" style="left:160px;top:806px;font-size:44px;line-height:1;--d:5">1.200 €'
-            '<span style="font-family:inherit;font-size:22px;letter-spacing:.04em"> + IVA</span></p>'
-            '<p class="abs a" style="left:160px;top:872px;width:560px;font-size:23px;line-height:1.4;'
-            'color:#E4E2DE;--d:5">Diseño y desarrollo de la web<br>Mantenimiento: 100 € al mes</p>'
         )
     size = 27 if len(items) > 8 else 30
     add(f"fase-{num}", f"Fase {num} · {nom}", sec(
@@ -302,15 +285,15 @@ for num, nom, cuando, obj, items in FASES:
 # ── 14. Pendientes de KONG ───────────────────────────────────────────────
 n += 1
 pend = [
-    "Fecha exacta de apertura y de soft opening",
-    "Dirección de interiorismo definitiva (renders cuando estén)",
+    "Fecha exacta de apertura",
     "Interlocutor y firmante por parte de KONG",
-    "Quién es titular y paga dominios, Meta Ads y Google",
+    "Quién es titular y paga los dominios",
+    "Logo en vectorial y tipografías",
     "Si hay manual de marca más allá del logo",
-    "Si la web es nuestra o de un proveedor del grupo",
-    "Cómo contar la relación con Ikibana y la reforma de Ikibana Born",
-    "Presupuesto de paid media para teasing y apertura",
-    "Calendario de obra, para planificar las visitas de rodaje",
+    "Plataforma de reservas que vais a usar",
+    "Idiomas de la web",
+    "Renders del interiorismo cuando estén",
+    "Acceso al local para los rodajes",
 ]
 add("pendientes", "Pendientes de KONG", sec(
     eyebrow("Para arrancar")
@@ -325,8 +308,8 @@ n += 1
 add("cierre", "Próximo paso", sec(
     img("/pitch/kong/cierre.jpg", 1220, 140, 560, 800, d=1)
     + eyebrow("Próximo paso")
-    + titulo("Kick-off con<br>el encargado", top=260, width=960, size=80)
-    + p("Propuesta: la semana del 17 de noviembre. Ahí cerramos alcance, fecha y accesos, y arrancamos con dominios y perfiles.", 128, 500, 900, size=30, d=2)
+    + titulo("Arrancamos<br>esta semana", top=260, width=960, size=80)
+    + p("Empezamos por la captación de dominios y la conceptualización, para tener el concepto validado el 1 de diciembre.", 128, 500, 900, size=30, d=2)
     + '<div class="abs a" style="left:128px;top:720px;font-size:28px;line-height:1.5;--d:3">'
     '<p style="font-weight:800">Jandro Martín · Maen Studios</p>'
     '<p><a href="mailto:jandro@maenstudios.com" style="color:inherit">jandro@maenstudios.com</a> · +34 688 629 688</p>'
