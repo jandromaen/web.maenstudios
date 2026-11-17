@@ -211,30 +211,30 @@ add("hoja-de-ruta", "Hoja de ruta", sec(
 FASES = [
     ("1", "Captación de dominios", "17 – 30 de noviembre",
      "Asegurar el nombre antes de que nos lo quiten. Todo a nombre de KONG, con Maen como administrador.",
-     [("Elegir el nombre para dominio y redes, sin macrón", "Jandro + Richi"),
+     [("Elegir el nombre para dominio y redes, sin macrón", "Dirección de cuentas y creativa"),
       ("Registrar el dominio principal", "Maen"),
       ("Registrar variantes (.com, .es, .barcelona, .cat) y redirigirlas", "Maen"),
       ("Reservar el mismo handle en Instagram, TikTok y Facebook", "CM"),
       ("Titularidad a nombre de KONG y accesos documentados", "Maen")]),
     ("2", "Conceptualización y branding", "17 de noviembre – 1 de diciembre",
      "Decidir cómo habla y cómo se ve KONG en la web y en redes. Los pilares ya están en el nombre: Kaizen, Omakase, Noren y Gohan.",
-     [("Concepto y tono de voz", "Richi"),
-      ("Pilares de contenido", "Richi + Brand Manager"),
-      ("Sistema gráfico para web y redes a partir del logo", "Richi"),
+     [("Concepto y tono de voz", "Dirección creativa"),
+      ("Pilares de contenido", "Dirección creativa + Brand Manager"),
+      ("Sistema gráfico para web y redes a partir del logo", "Dirección creativa"),
       ("Referentes y competencia en El Born", "Brand Manager"),
-      ("Validación del concepto con KONG, antes del 1/12", "Jandro")]),
+      ("Validación del concepto con KONG, antes del 1/12", "Dirección de cuentas")]),
     ("3", "Diseño web", "Diciembre",
      "Una web que transmita el paso del Record Bar a la sala, y que lleve a reservar.",
      [("Arquitectura: Record Bar, Sala y Omakase, Carta, Equipo, Eventos y Contacto", "Brand Manager"),
-      ("Diseño de la home y de las páginas interiores", "Richi"),
-      ("Versión móvil", "Richi"),
-      ("Revisión y validación con KONG", "Jandro")]),
+      ("Diseño de la home y de las páginas interiores", "Dirección creativa"),
+      ("Versión móvil", "Dirección creativa"),
+      ("Revisión y validación con KONG", "Dirección de cuentas")]),
     ("4", "SEO y copywriting", "Diciembre – mediados de enero",
      "Que KONG aparezca cuando alguien busca dónde cenar japonés en El Born, y que los textos vendan la experiencia.",
      [("Estudio de palabras clave: japonés Born, omakase Barcelona, cocktail bar Born", "Brand Manager"),
       ("Textos de todas las páginas", "Brand Manager"),
       ("Títulos y descripciones para Google", "Brand Manager"),
-      ("Revisión y validación de los textos con KONG", "Jandro")]),
+      ("Revisión y validación de los textos con KONG", "Dirección de cuentas")]),
     ("5", "Programación y publicación", "Enero – 15 de febrero",
      "Web programada, probada y publicada antes de que empiece el teasing.",
      [("Programación de la web", "Maen"),
@@ -250,7 +250,7 @@ FASES = [
       ("Newsletter mensual: contenido, diseño y envío", "Brand Manager")]),
     ("7", "Activación en redes sociales", "Desde la pre-apertura · ciclo mensual",
      "Con nuestro planning de trabajo: cada mes, del briefing al reporte, con el calendario siempre a un mes vista.",
-     [("Briefing creativo mensual", "Richi + Brand Manager"),
+     [("Briefing creativo mensual", "Dirección creativa + Brand Manager"),
       ("Rodaje mensual en el local", "Mati + Víctor"),
       ("Postproducción de las piezas", "Go"),
       ("Calendario editorial a un mes vista", "CM"),
@@ -311,7 +311,7 @@ add("cierre", "Próximo paso", sec(
     + titulo("Arrancamos<br>esta semana", top=260, width=960, size=80)
     + p("Empezamos por la captación de dominios y la conceptualización, para tener el concepto validado el 1 de diciembre.", 128, 500, 900, size=30, d=2)
     + '<div class="abs a" style="left:128px;top:720px;font-size:28px;line-height:1.5;--d:3">'
-    '<p style="font-weight:800">Jandro Martín · Maen Studios</p>'
+    '<p style="font-weight:800">Maen Studios</p>'
     '<p><a href="mailto:jandro@maenstudios.com" style="color:inherit">jandro@maenstudios.com</a> · +34 688 629 688</p>'
     "</div>"
     + foot(n),
