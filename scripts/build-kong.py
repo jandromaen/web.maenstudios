@@ -21,7 +21,7 @@ INK = "#151515"
 ACENTO = "#E2552E"
 MARCA = "Maen Studios × KONG"
 
-HOY = date(2026, 11, 16)
+HOY = date(2026, 11, 17)
 DIA_A = date(2027, 3, 1)
 
 
@@ -101,7 +101,7 @@ add("portada", "KONG · Plan de acción", sec(
 # ── 2. Punto de partida ───────────────────────────────────────────────────
 n += 1
 datos = [
-    ("Hoy", "16 nov", "El local está en obras."),
+    ("Hoy", "17 nov", "El local está en obras."),
     ("Día A · hipótesis", "1 mar", "Fecha de trabajo, aún sin confirmar. Todo el calendario se mueve con ella."),
     ("Margen aprox.", f"{semanas} sem.", "Hasta esa apertura hipotética, para llegar con todo montado."),
 ]
