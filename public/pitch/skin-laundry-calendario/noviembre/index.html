@@ -728,7 +728,7 @@ Siempre empieza con una consulta previa con nuestros médicos. Puedes pedirla de
 
 { d:18, formato:"Carrusel", estado:"listo", cubo:"Branding", tema:"Influencers", hora:"13:30h",
   etiqueta:"Etiquetar a cada una en su imagen",
-  media:"/pitch/skin-laundry-calendario/noviembre/img/d20_inf_1.jpg?v=11171600", slides:["/pitch/skin-laundry-calendario/noviembre/img/d20_inf_1.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_2.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_3.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_4.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_5.mp4?v=11171600"],
+  media:"/pitch/skin-laundry-calendario/noviembre/img/d20_inf_1.jpg?v=11171600", slides:["/pitch/skin-laundry-calendario/noviembre/img/d20_inf_1.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_2.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_3.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_4.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_5.mp4?v=11171605"],
   pieza:"Resumen de influencers de la quincena",
   base:"Reposts de influencers", cta:"Reserva desde la bio",
   nota:"Al publicar, etiquetar a cada influencer en su propia imagen del carrusel (tag sobre la foto) · la slide 5 es vídeo",
@@ -1547,7 +1547,7 @@ go(start - 1, false);
     media.classList.add("is-car");
     const car = document.createElement("div");
     car.className = "car-ig";
-    car.innerHTML = `<div class="trk">${srcs.map((u, i) => vids[i] ? `<video src="${vids[i]}" poster="${u}" muted loop playsinline autoplay controls></video>` : `<img src="${u}" alt="" draggable="false">`).join("")}</div>
+    car.innerHTML = `<div class="trk">${srcs.map((u, i) => vids[i] ? `<video src="${vids[i]}" poster="${u}" loop playsinline controls preload="metadata"></video>` : `<img src="${u}" alt="" draggable="false">`).join("")}</div>
       <span class="cnt">1/${srcs.length}</span>
       <button class="nav pv" aria-label="Anterior" hidden>${CH("M15 5l-7 7 7 7")}</button>
       <button class="nav nx" aria-label="Siguiente">${CH("M9 5l7 7-7 7")}</button>`;
