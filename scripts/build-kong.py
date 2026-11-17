@@ -277,6 +277,16 @@ for num, nom, cuando, obj, items in FASES:
             'color:#E4E2DE;--d:5">kongbarcelona.com · kong.barcelona · kongborn.com<br>'
             '@kongbarcelona · @kong.bcn · @kong.born</p>'
         )
+    if num == "3":
+        extra = (
+            '<div class="abs pm-card a" style="left:128px;top:740px;width:620px;height:210px;--d:4"></div>'
+            '<p class="abs a rosa" style="left:160px;top:768px;font-size:18px;font-weight:700;'
+            'letter-spacing:.08em;text-transform:uppercase;--d:4">Inversión</p>'
+            '<p class="abs a disp" style="left:160px;top:806px;font-size:44px;line-height:1;--d:5">1.200 €'
+            '<span style="font-family:inherit;font-size:22px;letter-spacing:.04em"> + IVA</span></p>'
+            '<p class="abs a" style="left:160px;top:872px;width:560px;font-size:23px;line-height:1.4;'
+            'color:#E4E2DE;--d:5">Diseño y desarrollo de la web<br>Mantenimiento: 100 € al mes</p>'
+        )
     size = 27 if len(items) > 8 else 30
     add(f"fase-{num}", f"Fase {num} · {nom}", sec(
         f'<p class="abs a disp outline" style="left:120px;top:110px;font-size:180px;line-height:1;--d:0">{num.zfill(2)}</p>'
