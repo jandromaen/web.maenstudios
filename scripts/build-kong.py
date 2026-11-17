@@ -234,9 +234,8 @@ FASES = [
       ("Reporte mensual de resultados", "Brand Manager")]),
 ]
 
-WEB = ("Parte del proyecto web", "1.800 €", "+ IVA, total de la web")
 PRECIOS = {
-    "1": WEB, "3": WEB, "4": WEB, "5": WEB,
+    "5": ("Web completa · dominios, diseño, SEO, copy y programación", "1.800 €", "+ IVA"),
     "6": ("Mantenimiento y newsletter", "100 €", "al mes + IVA"),
     "7": ("Rodaje de pre-apertura", "1.500 €", "+ IVA"),
     "8": ("Redes sociales", "2.500 €", "al mes + IVA"),
