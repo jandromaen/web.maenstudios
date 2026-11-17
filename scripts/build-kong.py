@@ -127,26 +127,29 @@ add("partida", "Punto de partida", sec(
 # ── Alcance de Maen ──────────────────────────────────────────────────────
 n += 1
 bloques = [
-    ("Web", "1.200 €", " + IVA",
+    ("Web", "1.800 €", "+ IVA · pago único",
      ["Captación de dominios", "Diseño web", "SEO y copywriting", "Programación y publicación"]),
-    ("Mantenimiento", "100 €", " / mes",
+    ("Mantenimiento", "100 €", "al mes + IVA",
      ["Mantenimiento de la web", "Newsletter mensual"]),
-    ("Redes sociales", "Activación", "",
+    ("Pre-apertura", "1.500 €", "+ IVA · rodaje",
+     ["Rodaje documentando el proceso", "Postproducción de las piezas", "Contenido para el teasing"]),
+    ("Redes · desde apertura", "2.500 €", "al mes + IVA",
      ["Briefing creativo mensual", "Rodaje mensual", "Postproducción",
-      "Calendario a un mes vista", "Publicación y reporte mensual"]),
+      "Calendario a un mes vista", "Publicación y reporte"]),
 ]
 bh = ""
+CW, GAP = 392, 32
 for i, (k, v, suf, lst) in enumerate(bloques):
-    x = 128 + i * 560
-    big = 54 if len(v) > 8 else 76
+    x = 128 + i * (CW + GAP)
     lis = "".join(f'<p style="margin:0 0 12px">{t}</p>' for t in lst)
     bh += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:330px;width:528px;height:600px;--d:{i}"></div>'
-        f'<p class="abs a rosa" style="left:{x + 40}px;top:370px;font-size:22px;font-weight:700;'
+        f'<div class="abs pm-card pop" style="left:{x}px;top:310px;width:{CW}px;height:640px;--d:{i}"></div>'
+        f'<p class="abs a rosa" style="left:{x + 32}px;top:348px;font-size:19px;font-weight:700;'
         f'letter-spacing:.08em;text-transform:uppercase;--d:{i + 1}">{k}</p>'
-        f'<p class="abs a disp" style="left:{x + 40}px;top:420px;font-size:{big}px;line-height:1;--d:{i + 1}">{v}'
-        f'<span style="font-size:24px;letter-spacing:.04em">{suf}</span></p>'
-        f'<div class="abs a" style="left:{x + 40}px;top:560px;width:450px;font-size:26px;line-height:1.35;'
+        f'<p class="abs a disp" style="left:{x + 32}px;top:396px;font-size:58px;line-height:1;--d:{i + 1}">{v}</p>'
+        f'<p class="abs a soft" style="left:{x + 32}px;top:470px;font-size:21px;font-weight:700;'
+        f'letter-spacing:.04em;--d:{i + 1}">{suf}</p>'
+        f'<div class="abs a" style="left:{x + 32}px;top:550px;width:{CW - 64}px;font-size:24px;line-height:1.35;'
         f'color:#E4E2DE;--d:{i + 2}">{lis}</div>'
     )
 add("alcance", "Nuestra parte", sec(
@@ -164,7 +167,8 @@ fases = [
     ("4", "SEO y copywriting", date(2026, 12, 1), date(2027, 1, 15)),
     ("5", "Programación y publicación", date(2027, 1, 8), date(2027, 2, 15)),
     ("6", "Mantenimiento y newsletter", date(2027, 2, 15), date(2027, 5, 31)),
-    ("7", "Activación en redes sociales", date(2027, 2, 1), date(2027, 5, 31)),
+    ("7", "Rodaje de pre-apertura", date(2027, 2, 1), date(2027, 2, 28)),
+    ("8", "Redes sociales desde la apertura", date(2027, 3, 1), date(2027, 5, 31)),
 ]
 ini, fin = date(2026, 11, 1), date(2027, 6, 1)
 X0, X1 = 640, 1792
@@ -202,7 +206,7 @@ gh += (f'<div class="abs a" style="left:{xa:.0f}px;top:300px;width:0;height:{ROW
        f'font-weight:800;--d:4">Día A · 1 mar (hipótesis)</p>')
 add("hoja-de-ruta", "Hoja de ruta", sec(
     eyebrow("Hoja de ruta")
-    + titulo("Siete fases, de los dominios a las redes", size=46)
+    + titulo("Ocho fases, de los dominios a las redes", size=46)
     + p("Fechas orientativas sobre una apertura hipotética el 1 de marzo. Se recalculan con la fecha real.", 128, 905, 470, size=20, d=4, cls="muted")
     + gh + foot(n),
 ))
@@ -244,12 +248,18 @@ FASES = [
       ("Pruebas en móvil y ordenador", "Maen"),
       ("Publicación, antes del 15/02", "Maen")]),
     ("6", "Mantenimiento web y newsletter", "Desde la publicación · mensual",
-     "La web siempre al día y una newsletter al mes para mantener el contacto con los clientes. 100 € al mes.",
+     "La web siempre al día y una newsletter al mes para mantener el contacto con los clientes. 100 € al mes + IVA.",
      [("Actualizaciones de carta, horarios y eventos", "Maen"),
       ("Revisión técnica y copias de seguridad", "Maen"),
       ("Newsletter mensual: contenido, diseño y envío", "Brand Manager")]),
-    ("7", "Activación en redes sociales", "Desde la pre-apertura · ciclo mensual",
-     "Con nuestro planning de trabajo: cada mes, del briefing al reporte, con el calendario siempre a un mes vista.",
+    ("7", "Rodaje de pre-apertura", "Pre-apertura · fecha a definir",
+     "Un primer rodaje que documenta el proceso hasta la apertura. Es el contenido del teasing. 1.500 € + IVA.",
+     [("Briefing del rodaje", "Dirección creativa + Brand Manager"),
+      ("Rodaje documentando el proceso: obra, equipo, cocina y coctelería", "Mati + Víctor"),
+      ("Postproducción de las piezas", "Go"),
+      ("Calendario y publicación del teasing", "CM")]),
+    ("8", "Redes sociales desde la apertura", "Desde la apertura · ciclo mensual",
+     "El workflow completo de Maen: cada mes, del briefing al reporte, con el calendario siempre a un mes vista. 2.500 € al mes + IVA.",
      [("Briefing creativo mensual", "Dirección creativa + Brand Manager"),
       ("Rodaje mensual en el local", "Mati + Víctor"),
       ("Postproducción de las piezas", "Go"),
