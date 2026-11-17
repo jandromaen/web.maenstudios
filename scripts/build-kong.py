@@ -124,40 +124,6 @@ add("partida", "Punto de partida", sec(
     + foot(n),
 ))
 
-# ── Alcance de Maen ──────────────────────────────────────────────────────
-n += 1
-bloques = [
-    ("Web", "1.800 €", "+ IVA · pago único",
-     ["Captación de dominios", "Diseño web", "SEO y copywriting", "Programación y publicación"]),
-    ("Mantenimiento", "100 €", "al mes + IVA",
-     ["Mantenimiento de la web", "Newsletter mensual"]),
-    ("Pre-apertura", "1.500 €", "+ IVA · rodaje",
-     ["Rodaje documentando el proceso", "Postproducción de las piezas", "Contenido para el teasing"]),
-    ("Redes · desde apertura", "2.500 €", "al mes + IVA",
-     ["Briefing creativo mensual", "Rodaje mensual", "Postproducción",
-      "Calendario a un mes vista", "Publicación y reporte"]),
-]
-bh = ""
-CW, GAP = 392, 32
-for i, (k, v, suf, lst) in enumerate(bloques):
-    x = 128 + i * (CW + GAP)
-    lis = "".join(f'<p style="margin:0 0 12px">{t}</p>' for t in lst)
-    bh += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:310px;width:{CW}px;height:640px;--d:{i}"></div>'
-        f'<p class="abs a rosa" style="left:{x + 32}px;top:348px;font-size:19px;font-weight:700;'
-        f'letter-spacing:.08em;text-transform:uppercase;--d:{i + 1}">{k}</p>'
-        f'<p class="abs a disp" style="left:{x + 32}px;top:396px;font-size:58px;line-height:1;--d:{i + 1}">{v}</p>'
-        f'<p class="abs a soft" style="left:{x + 32}px;top:470px;font-size:21px;font-weight:700;'
-        f'letter-spacing:.04em;--d:{i + 1}">{suf}</p>'
-        f'<div class="abs a" style="left:{x + 32}px;top:550px;width:{CW - 64}px;font-size:24px;line-height:1.35;'
-        f'color:#E4E2DE;--d:{i + 2}">{lis}</div>'
-    )
-add("alcance", "Nuestra parte", sec(
-    eyebrow("Alcance de Maen")
-    + titulo("Web, mantenimiento y redes", size=64)
-    + bh + foot(n),
-))
-
 # ── 3. Hoja de ruta (cronograma) ─────────────────────────────────────────
 n += 1
 fases = [
@@ -248,18 +214,18 @@ FASES = [
       ("Pruebas en móvil y ordenador", "Maen"),
       ("Publicación, antes del 15/02", "Maen")]),
     ("6", "Mantenimiento web y newsletter", "Desde la publicación · mensual",
-     "La web siempre al día y una newsletter al mes para mantener el contacto con los clientes. 100 € al mes + IVA.",
+     "La web siempre al día y una newsletter al mes para mantener el contacto con los clientes.",
      [("Actualizaciones de carta, horarios y eventos", "Maen"),
       ("Revisión técnica y copias de seguridad", "Maen"),
       ("Newsletter mensual: contenido, diseño y envío", "Brand Manager")]),
     ("7", "Rodaje de pre-apertura", "Pre-apertura · fecha a definir",
-     "Un primer rodaje que documenta el proceso hasta la apertura. Es el contenido del teasing. 1.500 € + IVA.",
+     "Un primer rodaje que documenta el proceso hasta la apertura. Es el contenido del teasing.",
      [("Briefing del rodaje", "Dirección creativa + Brand Manager"),
       ("Rodaje documentando el proceso: obra, equipo, cocina y coctelería", "Mati + Víctor"),
       ("Postproducción de las piezas", "Go"),
       ("Calendario y publicación del teasing", "CM")]),
     ("8", "Redes sociales desde la apertura", "Desde la apertura · ciclo mensual",
-     "El workflow completo de Maen: cada mes, del briefing al reporte, con el calendario siempre a un mes vista. 2.500 € al mes + IVA.",
+     "El workflow completo de Maen: cada mes, del briefing al reporte, con el calendario siempre a un mes vista.",
      [("Briefing creativo mensual", "Dirección creativa + Brand Manager"),
       ("Rodaje mensual en el local", "Mati + Víctor"),
       ("Postproducción de las piezas", "Go"),
@@ -268,11 +234,29 @@ FASES = [
       ("Reporte mensual de resultados", "Brand Manager")]),
 ]
 
+WEB = ("Parte del proyecto web", "1.800 €", "+ IVA, total de la web")
+PRECIOS = {
+    "1": WEB, "3": WEB, "4": WEB, "5": WEB,
+    "6": ("Mantenimiento y newsletter", "100 €", "al mes + IVA"),
+    "7": ("Rodaje de pre-apertura", "1.500 €", "+ IVA"),
+    "8": ("Redes sociales", "2.500 €", "al mes + IVA"),
+}
+
 for num, nom, cuando, obj, items in FASES:
     n += 1
     extra = ""
+    pr = PRECIOS.get(num)
+    if pr:
+        etq, val, suf = pr
+        extra += (
+            '<div class="abs pm-card a" style="left:880px;top:790px;width:910px;height:150px;--d:4"></div>'
+            f'<p class="abs a rosa" style="left:920px;top:818px;font-size:18px;font-weight:700;'
+            f'letter-spacing:.08em;text-transform:uppercase;--d:4">{etq}</p>'
+            f'<p class="abs a disp" style="left:920px;top:858px;font-size:44px;line-height:1;--d:5">{val}'
+            f'<span style="font-size:22px;letter-spacing:.04em"> {suf}</span></p>'
+        )
     if num == "1":
-        extra = (
+        extra += (
             '<div class="abs pm-card a" style="left:128px;top:760px;width:620px;height:190px;--d:4"></div>'
             '<p class="abs a rosa" style="left:160px;top:788px;font-size:18px;font-weight:700;'
             'letter-spacing:.08em;text-transform:uppercase;--d:4">Opciones a validar</p>'
@@ -311,6 +295,40 @@ add("pendientes", "Pendientes de KONG", sec(
     + tareas(pend[:5], 128, 360, 780, size=32, d=2)
     + tareas(pend[5:], 1010, 360, 780, size=32, d=3)
     + foot(n),
+))
+
+# ── Resumen del presupuesto (al final, a propósito) ──────────────────────────────────────────────────────
+n += 1
+bloques = [
+    ("Web", "1.800 €", "+ IVA · pago único",
+     ["Captación de dominios", "Diseño web", "SEO y copywriting", "Programación y publicación"]),
+    ("Mantenimiento", "100 €", "al mes + IVA",
+     ["Mantenimiento de la web", "Newsletter mensual"]),
+    ("Pre-apertura", "1.500 €", "+ IVA · rodaje",
+     ["Rodaje documentando el proceso", "Postproducción de las piezas", "Contenido para el teasing"]),
+    ("Redes · desde apertura", "2.500 €", "al mes + IVA",
+     ["Briefing creativo mensual", "Rodaje mensual", "Postproducción",
+      "Calendario a un mes vista", "Publicación y reporte"]),
+]
+bh = ""
+CW, GAP = 392, 32
+for i, (k, v, suf, lst) in enumerate(bloques):
+    x = 128 + i * (CW + GAP)
+    lis = "".join(f'<p style="margin:0 0 12px">{t}</p>' for t in lst)
+    bh += (
+        f'<div class="abs pm-card pop" style="left:{x}px;top:310px;width:{CW}px;height:640px;--d:{i}"></div>'
+        f'<p class="abs a rosa" style="left:{x + 32}px;top:348px;font-size:19px;font-weight:700;'
+        f'letter-spacing:.08em;text-transform:uppercase;--d:{i + 1}">{k}</p>'
+        f'<p class="abs a disp" style="left:{x + 32}px;top:396px;font-size:58px;line-height:1;--d:{i + 1}">{v}</p>'
+        f'<p class="abs a soft" style="left:{x + 32}px;top:470px;font-size:21px;font-weight:700;'
+        f'letter-spacing:.04em;--d:{i + 1}">{suf}</p>'
+        f'<div class="abs a" style="left:{x + 32}px;top:550px;width:{CW - 64}px;font-size:24px;line-height:1.35;'
+        f'color:#E4E2DE;--d:{i + 2}">{lis}</div>'
+    )
+add("presupuesto", "Presupuesto", sec(
+    eyebrow("Presupuesto")
+    + titulo("Resumen del presupuesto", size=64)
+    + bh + foot(n),
 ))
 
 # ── 15. Cierre ───────────────────────────────────────────────────────────
