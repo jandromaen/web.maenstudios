@@ -33,7 +33,7 @@ export const CONTENIDO: Contenido = {
   "mar-17-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-17-navidad.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mar-17-navidad-v2.webp",
         "tipo": "imagen"
       }
     ]
