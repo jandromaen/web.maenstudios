@@ -374,7 +374,7 @@ export const CONTENIDO: Contenido = {
   "jue-12": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/jue-12-1.mp4",
+        "url": "/pitch/donlay-calendario/noviembre/jue-12-reel-v2.mp4",
         "tipo": "video",
         "portada": "/pitch/donlay-calendario/noviembre/jue-12-portada.webp"
       }
