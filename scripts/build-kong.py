@@ -179,33 +179,6 @@ add("hoja-de-ruta", "Hoja de ruta", sec(
     + gh + foot(n),
 ))
 
-# ── 4. Dirección visual ───────────────────────────────────────────────────
-n += 1
-moods = [
-    ("Mood 1", "Ámbar y madera", "Madera acanalada, ónice retroiluminado, lámparas de papel y poca luz.",
-     "Fotos cálidas y oscuras, mucho detalle de material. Encaja con el Omakase."),
-    ("Mood 2", "Rojo nocturno", "Rojo profundo, lámparas rojas, DJ ante un dragón retroiluminado.",
-     "El Record Bar de protagonista: vinilo, cócteles, vídeo con ritmo."),
-    ("Mood 3", "Tokio pop", "Neón, murales de carpas koi, arte urbano y kanji.",
-     "Más color y más viral, con un punto más desenfadado."),
-]
-mh = ""
-for i, (k, nom, que, cont) in enumerate(moods):
-    x = 128 + i * 576
-    mh += (
-        img(f"/pitch/kong/mood-{i + 1}.jpg", x, 300, 536, 380, d=i + 1)
-        + f'<p class="abs a rosa" style="left:{x}px;top:705px;font-size:20px;font-weight:700;'
-        f'letter-spacing:.08em;text-transform:uppercase;--d:{i + 2}">{k}</p>'
-        + f'<p class="abs a" style="left:{x}px;top:740px;font-size:34px;font-weight:800;--d:{i + 2}">{nom}</p>'
-        + p(que, x, 795, 520, size=22, d=i + 3)
-        + p(cont, x, 880, 520, size=22, d=i + 3, cls="", extra="color:#E4E2DE;font-weight:600;")
-    )
-add("direccion-visual", "Dirección visual", sec(
-    eyebrow("Dirección visual · Interiorismo de Marabunta")
-    + titulo("El mood marca todo el contenido", size=56)
-    + mh + foot(n),
-))
-
 # ── 5-13. Fases ───────────────────────────────────────────────────────────
 FASES = [
     ("0", "Kick-off y alcance", "Semana del 17 de noviembre",
@@ -233,7 +206,7 @@ FASES = [
      [("Auditoría de referentes y de la competencia en El Born", "Brand Manager"),
       ("Estrategia: público, objetivos y KPIs de apertura", "Jandro + Brand Manager"),
       ("Tono de voz y pilares de contenido", "Richi"),
-      ("Sistema gráfico de redes y web según el mood elegido", "Richi"),
+      ("Sistema gráfico de redes y web, alineado con el interiorismo", "Richi"),
       ("Piezas básicas: avatar, portadas y highlights", "Richi"),
       ("Concepto creativo del lanzamiento", "Richi"),
       ("Plan SEO local y GEO", "Brand Manager"),
@@ -320,7 +293,7 @@ for num, nom, cuando, obj, items in FASES:
 n += 1
 pend = [
     "Fecha exacta de apertura y de soft opening",
-    "Qué mood eligen, o qué mezcla",
+    "Dirección de interiorismo definitiva (renders cuando estén)",
     "Interlocutor y firmante por parte de KONG",
     "Quién es titular y paga dominios, Meta Ads y Google",
     "Si hay manual de marca más allá del logo",
