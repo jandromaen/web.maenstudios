@@ -63,7 +63,7 @@ def tareas(items, x, top, width, size=25, d=2):
     lis = ""
     for it in items:
         txt, quien = it if isinstance(it, tuple) else (it, "")
-        q = f' <span class="muted" style="white-space:nowrap">· {quien}</span>' if quien else ""
+        q = ""  # sin responsables: la presentación es para el cliente
         lis += (
             f'<p style="margin:0 0 24px;padding-left:44px;text-indent:-44px">'
             f'<span style="display:inline-block;width:22px;height:22px;margin-right:22px;'
