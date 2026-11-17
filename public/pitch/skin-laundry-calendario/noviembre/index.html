@@ -743,11 +743,21 @@ Las tarjetas físicas las tienes en la clínica. Reserva antes de que acabe desd
 📍 Av. Diagonal 610, Barcelona
 #BlackFriday #TarjetaRegalo #GiftCard #SkinLaundryBarcelona` },
 
-{ d:20, formato:"Carrusel", externo:true, cubo:"Branding", tema:"Influencers", hora:"13:30h",
+{ d:20, formato:"Carrusel", estado:"listo", cubo:"Branding", tema:"Influencers", hora:"13:30h",
+  etiqueta:"Etiquetar a cada una en su imagen",
+  media:"/pitch/skin-laundry-calendario/noviembre/img/d20_inf_1.jpg?v=11171600", slides:["/pitch/skin-laundry-calendario/noviembre/img/d20_inf_1.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_2.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_3.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_4.jpg?v=11171600","/pitch/skin-laundry-calendario/noviembre/img/d20_inf_5.mp4?v=11171600"],
   pieza:"Resumen de influencers de la quincena",
-  base:"Reposts de influencers", cta:"Descubre el centro",
-  idea:[], story:[],
-  copy:`` },
+  base:"Reposts de influencers", cta:"Reserva desde la bio",
+  nota:"Al publicar, etiquetar a cada influencer en su propia imagen del carrusel (tag sobre la foto) · la slide 5 es vídeo",
+  idea:["1 · Portada: tres visitas y logo","2 · Tres momentos en cabina","3 · Tres visitas más","4 · La clínica y una visita en el espejo","5 · Vídeo de una visita completa"], story:[],
+  copy:`Estas semanas han pasado por la clínica caras muy conocidas 🤍
+
+Unas vinieron a por su láser, otras a por un facial antes de un evento y alguna simplemente a desconectar un rato en cabina. Gracias a todas por venir y por contarlo tal cual.
+
+¿Quieres probarlo tú? Reserva desde el enlace de la bio.
+📍 Av. Diagonal 610, Barcelona
+
+#SkinLaundryBarcelona #FacialLaser #CuidadoFacial #Skincare #Barcelona` },
 
 { d:20, formato:"Reel", repost:[{t:"link",txt:"Consulta previa con nuestros médicos"}], media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d20.mp4?v=11171542", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d20_poster.jpg?v=11171542", estado:"listo",
   nota:"Editado con el estilo del reel de referencia de la marca: texto lima palabra a palabra, píldoras granate, pantallazos de color a golpe de beat y cierre en crema · planos del vídeo 1 año SKL que no se usan en ningún otro reel (las píldoras tapan sus textos) · house nuevo a 126 BPM · hay versión sin música · añadir horario del open day si lo confirman",  cubo:"Med. estética", tema:"Ultraformer", hora:"18:30h",
@@ -1331,7 +1341,7 @@ dayPlan.forEach(item => {
   ${topBar()}
   <div class="day-left">
     ${headFor(d, `<span class="pill"><b>${esc(p.cubo)}</b>${esc(p.tema)}</span>`, item.of > 1 ? ` · pieza ${item.i + 1} de ${item.of}` : "")}
-    ${tagsFor(d, `<span class="tag fmt ${f === "reel" ? "reel" : f === "post" ? "post" : ""}">${esc(p.formato)} de Instagram</span>`, (p.externo || !MOSTRAR_STORIES) ? "" : `<span class="tag plus">+ Stories</span>`)}
+    ${tagsFor(d, `<span class="tag fmt ${f === "reel" ? "reel" : f === "post" ? "post" : ""}">${esc(p.formato)} de Instagram</span>`, (p.etiqueta ? `<span class="tag plus">${esc(p.etiqueta)}</span>` : "") + ((p.externo || !MOSTRAR_STORIES) ? "" : `<span class="tag plus">+ Stories</span>`))}
     <div class="pieza">${esc(p.pieza)}</div>
     ${p.externo ? "" : `<div class="copy">
       <div class="copy-h"><span class="eyebrow">Copy</span></div>
@@ -1355,7 +1365,7 @@ dayPlan.forEach(item => {
         </div>
         <div class="ft"><span>♡</span><span>◯</span><span>➤</span><span style="margin-left:auto">⌑</span></div>
       </div>
-      ${p.slides ? `<div class="slides">${p.slides.map((x,i) => `<div><img src="${esc(x)}" alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
+      ${p.slides ? `<div class="slides">${p.slides.map((x,i) => `<div><img src="${esc(isVid(x) ? x.replace(/\.mp4(\?|$)/, "_poster.jpg$1") : x)}" ${isVid(x) ? `data-vid="${esc(x)}"` : ""} alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
       ${p.fuente ? `<div class="src"><b>Material</b>${esc(p.fuente)}</div>` : ""}
     </div>
     <div class="story-frame" style="left:330px${MOSTRAR_STORIES ? "" : ";display:none"}">
@@ -1494,6 +1504,7 @@ go(start - 1, false);
 <style>
 .car-ig{position:absolute;inset:0;overflow:hidden;touch-action:pan-y}
 .car-ig .trk{display:flex;height:100%;transition:transform .32s cubic-bezier(.25,.8,.25,1)}
+.car-ig .trk video{position:static!important;flex:0 0 100%;width:100%;height:100%;object-fit:cover;display:block;background:#000}
 .car-ig .trk img{position:static!important;flex:0 0 100%;width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none}
 .car-ig .nav{position:absolute;top:50%;width:26px;height:26px;margin-top:-13px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.88);box-shadow:0 1px 4px rgba(0,0,0,.25);display:grid;place-items:center;cursor:pointer;z-index:3;transition:opacity .2s}
 .car-ig .nav svg{width:12px;height:12px;fill:none;stroke:#262626;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
@@ -1532,10 +1543,11 @@ go(start - 1, false);
     const media = frame.querySelector(".media.pf");
     if (thumbs.length < 2 || !media || media.querySelector(".car-ig")) return;
     const srcs = thumbs.map(t => t.getAttribute("src"));
+    const vids = thumbs.map(t => t.getAttribute("data-vid"));
     media.classList.add("is-car");
     const car = document.createElement("div");
     car.className = "car-ig";
-    car.innerHTML = `<div class="trk">${srcs.map(u => `<img src="${u}" alt="" draggable="false">`).join("")}</div>
+    car.innerHTML = `<div class="trk">${srcs.map((u, i) => vids[i] ? `<video src="${vids[i]}" poster="${u}" muted loop playsinline autoplay controls></video>` : `<img src="${u}" alt="" draggable="false">`).join("")}</div>
       <span class="cnt">1/${srcs.length}</span>
       <button class="nav pv" aria-label="Anterior" hidden>${CH("M15 5l-7 7 7 7")}</button>
       <button class="nav nx" aria-label="Siguiente">${CH("M9 5l7 7-7 7")}</button>`;
