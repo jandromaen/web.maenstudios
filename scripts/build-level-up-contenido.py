@@ -144,6 +144,34 @@ add("portada", "Auditoría de contenido", sec(
     + foot(n),
 ))
 
+# ── 1b. Publicaciones en 2026 ────────────────────────────────────────────
+n += 1
+meses26 = [("Ene", 1), ("Feb", 2), ("Mar", 2), ("Abr", 3), ("May", 6), ("Jun", 4), ("Jul", 2), ("Ago", 5), ("Sep", 4), ("Oct", 6), ("Nov*", 3)]
+base, alto, maxv = 830, 420, 7
+ch = ""
+for i, (m, v) in enumerate(meses26):
+    x = 128 + i * 120
+    hh = round(v / maxv * alto)
+    ch += (
+        f'<div class="abs gy" style="left:{x}px;top:{base - hh}px;width:84px;height:{hh}px;border-radius:10px 10px 0 0;background:{ACENTO if m.startswith("May") else "#5A5D5C"};--d:{i}"></div>'
+        f'<p class="abs a" style="left:{x}px;top:{base - hh - 44}px;width:84px;text-align:center;font-size:28px;font-weight:800;--d:{i + 1}">{v}</p>'
+        f'<p class="abs a muted" style="left:{x - 8}px;top:{base + 14}px;width:100px;text-align:center;font-size:20px;--d:{i}">{m}</p>'
+    )
+ch = ch.replace(f'background:{ACENTO}', 'background:#5A5D5C')  # todas iguales
+ch += f'<div class="abs line-h" style="left:128px;top:{base}px;width:1310px"></div>'
+add("publicaciones2026", "Tus publicaciones en 2026", sec(
+    eyebrow("Punto de partida")
+    + titulo("Lo que has publicado en 2026", size=56)
+    + p("Publicaciones al mes", 128, 300, 600, size=20, d=1, cls="muted", extra="letter-spacing:.1em;text-transform:uppercase;")
+    + ch
+    + kpi(1500, 330, 292, "38", "publicaciones en lo que va de año", 3, size=64)
+    + kpi(1500, 530, 292, "3,5", "al mes de media, menos de una a la semana", 4, size=64)
+    + kpi(1500, 730, 292, "8", "entre enero y abril, los meses previos al lanzamiento de Level Up", 5, size=64, color=ACENTO)
+    + p("*Noviembre, hasta el día 18. Enero–abril y noviembre: tu perfil a 18 de noviembre. Mayo–octubre: tu informe, que incluye algunas publicaciones que ya no aparecen en el perfil.",
+        128, 920, 1310, size=17, d=9, cls="muted", extra="line-height:1.3;")
+    + foot(n),
+))
+
 # ── 2. El objetivo de hoy ────────────────────────────────────────────────
 n += 1
 add("objetivo", "El objetivo de hoy", sec(
@@ -227,7 +255,7 @@ add("picos", "Tus tres picos", sec(
 
 # ── 19b. Frecuencia ──────────────────────────────────────────────────────
 n += 1
-meses = [("May", 6), ("Jun", 4), ("Jul", 2), ("Ago", 5), ("Sep", 4), ("Oct", 6), ("Nov*", 2)]
+meses = [("May", 6), ("Jun", 4), ("Jul", 2), ("Ago", 5), ("Sep", 4), ("Oct", 6), ("Nov*", 3)]
 base, alto, maxv = 860, 470, 13
 fq = ""
 for i, (m, v) in enumerate(meses):
