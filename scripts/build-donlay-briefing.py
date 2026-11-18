@@ -50,6 +50,7 @@ BLOBS = {
     "1cbca70ef06f3b1761414c34f4b24eb5": "dimsum-video.jpg",
     "04c79407a3a1a2a5ad3d9c12972dfbd7": "wok-ref.jpg",
     "c5f485762135e06e9c63c97a95815fa6": "pato-ref.jpg",
+    "227a1b2f819a93eb218a4a7ce44b7e2b": "dimsum-ref.jpg",
 }
 
 
