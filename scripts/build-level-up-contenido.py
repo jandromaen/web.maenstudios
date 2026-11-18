@@ -792,16 +792,22 @@ REFS = [
 ]
 
 def reel_ref(x, y, w, h, cuenta, code, d=0):
+    """Reel del referente alojado en maenstudios.com, se reproduce en la diapositiva."""
     b = 96
     return (
-        f'<a class="abs pop" href="https://www.instagram.com/reel/{code}/" target="_blank" rel="noopener" title="Ver el reel en Instagram" '
-        f'style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:20px;overflow:hidden;display:block;'
-        f'background:#222 url(/pitch/level-up/refs/{cuenta}.jpg) center/cover no-repeat;box-shadow:0 14px 40px rgba(0,0,0,.45);--d:{d}">'
-        f'<span style="position:absolute;left:50%;top:50%;width:{b}px;height:{b}px;margin:-{b // 2}px 0 0 -{b // 2}px;border-radius:50%;'
-        f'background:rgba(255,255,255,.85);box-shadow:0 6px 20px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center">'
+        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:20px;overflow:hidden;'
+        f'background:#000;box-shadow:0 14px 40px rgba(0,0,0,.25);--d:{d}">'
+        f'<video data-manual src="/pitch/level-up/refs/{cuenta}.mp4" poster="/pitch/level-up/refs/{cuenta}.jpg" '
+        f'playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block" '
+        f'onclick="if(this.paused){{this.play()}}else{{this.pause()}}" '
+        f'onplay="this.nextElementSibling.style.display=\'none\'" onpause="this.nextElementSibling.style.display=\'flex\'"></video>'
+        f'<button type="button" aria-label="Reproducir" onclick="this.previousElementSibling.play()" '
+        f'style="position:absolute;left:50%;top:50%;width:{b}px;height:{b}px;margin:-{b // 2}px 0 0 -{b // 2}px;border:0;border-radius:50%;cursor:pointer;'
+        f'background:rgba(255,255,255,.85);box-shadow:0 6px 20px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:0">'
         f'<span style="width:0;height:0;margin-left:8px;border-style:solid;border-width:19px 0 19px 31px;'
-        f'border-color:transparent transparent transparent #151515"></span></span></a>'
+        f'border-color:transparent transparent transparent #151515"></span></button></div>'
     )
+
 
 for i, (cuenta, sub, code, vistas, titulo_reel, porque, items, tuya) in enumerate(REFS):
     n += 1
@@ -816,7 +822,7 @@ for i, (cuenta, sub, code, vistas, titulo_reel, porque, items, tuya) in enumerat
           f'<div style="font-size:18px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#3A2F2F">Tu versión</div>'
           f'<div style="font-size:28px;font-weight:800;color:{INK};margin-top:6px;line-height:1.25">{tuya}</div></div>'
         + reel_ref(1380, 150, 412, 660, cuenta, code, d=3)
-        + p(f"{titulo_reel}<br><span style=\"opacity:.7\">{vistas} reproducciones · toca para verlo</span>", 1380, 830, 412, size=19, d=5, cls="soft")
+        + p(f"{titulo_reel}<br><span style=\"opacity:.7\">{vistas} reproducciones · <a href=\"https://www.instagram.com/reel/{code}/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">ver en Instagram</a></span>", 1380, 830, 412, size=19, d=5, cls="soft")
         + foot(n),
     ))
 
