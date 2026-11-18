@@ -48,6 +48,8 @@ BLOBS = {
     "99314c4615aa12c92e4a08d0f4d1cd70": "pato-mesa.jpg",
     "a9072b55ad8c3d82ec8380a16d4dfcd6": "pato-video.jpg",
     "1cbca70ef06f3b1761414c34f4b24eb5": "dimsum-video.jpg",
+    "04c79407a3a1a2a5ad3d9c12972dfbd7": "wok-ref.jpg",
+    "c5f485762135e06e9c63c97a95815fa6": "pato-ref.jpg",
 }
 
 
