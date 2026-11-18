@@ -100,13 +100,14 @@ n += 1
 add("portada", "Kick-off", sec(
     foto("cuatro-latas.jpg", 1060, 0, 860, 1080, "50% 40%", alt="Cuatro latas de Libertine Blends")
     + f'<img src="{IMG}/logo-negro.png" alt="Libertine Blends" style="position:absolute;left:128px;top:120px;width:520px;height:auto">'
-    + f'<p style="position:absolute;left:128px;top:330px;{WIDE};font-size:26px;font-weight:700;letter-spacing:6px">× MAEN STUDIOS</p>'
+    + f'<div style="position:absolute;left:128px;top:318px;display:flex;align-items:center;gap:18px">'
+    f'<span style="{COND};font-size:60px;font-weight:500;line-height:1">×</span>'
+    f'<img src="/pitch/libertine-blends/maen-logo-negro.png" alt="maen studios" style="height:34px;width:auto"></div>'
     + f'<h1 style="position:absolute;left:120px;top:400px;{COND};font-size:250px;font-weight:700;line-height:.9;letter-spacing:4px">KICK-OFF</h1>'
     + f'<p style="position:absolute;left:128px;top:650px;width:820px;font-size:38px;line-height:1.3">'
     "Cómo vamos a trabajar juntos como vuestro equipo social y creativo en Instagram y TikTok.</p>"
     + f'<p style="position:absolute;left:128px;top:850px;padding:14px 30px;{WIDE};font-size:24px;font-weight:700;'
     f'letter-spacing:4px;color:{AMARILLO};background:{INK};border-radius:999px">18 · 11 · 2026</p>'
-    + f'<img src="/pitch/libertine-blends/maen-logo-negro.png" alt="maen studios" style="position:absolute;left:128px;top:990px;height:26px;width:auto">'
 ))
 
 # ── 2. Hoy ─────────────────────────────────────────────────────────────────
@@ -271,10 +272,10 @@ def persona(x, y, nombre, rol, color, w=500):
 
 add("equipo", "Quién es quién", sec(
     eyebrow("04 · QUIÉN ES QUIÉN") + h("Quién es quién")
-    + f'<p style="position:absolute;left:128px;top:330px;{WIDE};font-size:20px;font-weight:700;letter-spacing:4px">LIBERTINE BLENDS</p>'
+    + f'<img src="{IMG}/logo-h-negro.png" alt="Libertine Blends" style="position:absolute;left:128px;top:336px;height:22px;width:auto">'
     + persona(128, 390, "Sofía", "CEO · Valida briefings y calendarios", AMARILLO, 640)
     + persona(128, 530, "No Idea", "Agencia de growth en Londres · Paid en UK", CREMA2, 640)
-    + f'<p style="position:absolute;left:900px;top:330px;{WIDE};font-size:20px;font-weight:700;letter-spacing:4px">MAEN STUDIOS</p>'
+    + f'<img src="/pitch/libertine-blends/maen-logo-negro.png" alt="maen studios" style="position:absolute;left:900px;top:333px;height:26px;width:auto">'
     + persona(900, 390, "Jandro Martín", "Dirección de cuentas", LILA, 430)
     + persona(1362, 390, "Richi", "Dirección creativa", LILA, 430)
     + persona(900, 530, "Helen", "Brand manager · Briefings y rodajes", MELOCOTON, 430)
@@ -330,7 +331,9 @@ add("cierre", "Cheers", sec(
     foto("cuatro-latas.jpg", 0, 0, 1920, 1080, "50% 40%", alt="Latas de Libertine Blends")
     + '<div style="position:absolute;left:0;top:0;width:1920px;height:1080px;background:rgba(21,21,21,.55)"></div>'
     + f'<img src="{IMG}/logo-crema.png" alt="Libertine Blends" style="position:absolute;left:560px;top:330px;width:800px;height:auto">'
-    + f'<p style="position:absolute;left:0;top:620px;width:1920px;text-align:center;{WIDE};font-size:30px;font-weight:700;letter-spacing:8px;color:{CREMA}">× MAEN STUDIOS</p>'
+    + f'<div style="position:absolute;left:0;top:610px;width:1920px;display:flex;justify-content:center;align-items:center;gap:22px">'
+    f'<span style="{COND};font-size:70px;font-weight:500;line-height:1;color:{CREMA}">×</span>'
+    f'<img src="/maen-logo.png" alt="maen studios" style="height:42px;width:auto"></div>'
     ,
     bg=INK, color=CREMA))
 
