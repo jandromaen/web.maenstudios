@@ -278,7 +278,7 @@ add("equipo", "Quién es quién", sec(
     + persona(900, 390, "Jandro Martín", "Dirección de cuentas", LILA, 430)
     + persona(1362, 390, "Richi", "Dirección creativa", LILA, 430)
     + persona(900, 530, "Helen", "Brand manager · Briefings y rodajes", MELOCOTON, 430)
-    + persona(1362, 530, "Community manager", "Calendario y publicación", MELOCOTON, 430)
+    + persona(1362, 530, "Blanca", "Community manager · Publicación", MELOCOTON, 430)
     + persona(900, 670, "Equipo audiovisual", "Cámara, foto y edición", MELOCOTON, 892)
     + foot(n)))
 
