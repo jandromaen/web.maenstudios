@@ -681,10 +681,85 @@ add("referentes", "Lo que hacen tus referentes", sec(
     eyebrow("Referencias")
     + titulo("Qué hacen tus referentes", size=56)
     + rh
-    + p("También nos dijiste que te gusta cómo comunican @drablancal, @isabelvina y @cescescola, y que no te convence el contenido muy guionizado. En las tres que hemos analizado se ve claro qué venden, sin que parezca publicidad.",
+    + p("También nos dijiste que te gusta cómo comunican @drablancal, @isabelvina y @cescescola, y que no te convence el contenido muy guionizado. Ahora las vemos una a una, cada una con un reel suyo que te sirve de referencia.",
         128, 850, 1664, size=25, d=6, cls="soft")
     + foot(n),
 ))
+
+# ── 19b. Una diapositiva por referente, con su reel ──────────────────────
+REFS = [
+    ("pau_inspirafit", "159K seguidores · su método de fuerza (Phi)", "Dd4dAuZCpth", "29,5 mil",
+     "«3 cosas para conservar mi masa muscular»",
+     "Enseña fuerza para mujeres desde su vida real: su cocina, su ropa de entrenar, su batido. No parece una clase, parece una amiga que sabe mucho.",
+     ["<b>Educa sin plató</b>: lo cuenta en casa, con naturalidad.",
+      "<b>El mismo estilo de portada</b> en todos los reels: título elegante, se reconoce en el feed.",
+      "<b>«3 cosas…»</b>: un formato que se puede repetir cada semana."],
+     "«3 cosas que hago para no perder músculo a partir de los 35»"),
+    ("holacuore", "314K seguidores · INEF y fundadora de una marca", "DfQGQKZR8at", "63,6 mil",
+     "«Cocinando sopa de canelones»",
+     "Su día a día es el contenido. La marca aparece sola, sin anunciarla, y la gente vuelve porque le cae bien ella.",
+     ["<b>Momentos normales</b> grabados con cuidado: cocinar, vestirse, salir.",
+      "<b>Casi sin texto</b>: un rótulo pequeño y la imagen hace el resto.",
+      "<b>Tu vida como puente</b>: el kite, Cardedeu, tus rutinas, y Level Up dentro."],
+     "«Un martes normal: entreno de 20 min antes de irme al agua»"),
+    ("deliciousmartha", "2,4M seguidores · recetas fáciles y su app", "DfwnbUChbqk", "420 mil",
+     "«Cookie XXL en airfryer»",
+     "Siempre el mismo formato: plano cenital, rótulo pequeño y el resultado apetecible en el primer segundo. La gente sabe qué va a ver antes de darle al play.",
+     ["<b>El resultado en el primer segundo</b>, no al final.",
+      "<b>Un formato fijo</b> que la gente reconoce y espera.",
+      "<b>Todo lleva a su app</b>, igual que lo tuyo debe llevar a Level Up."],
+     "Serie «Nivel 0»: misma luz, mismo encuadre y la sesión terminada en el primer plano"),
+    ("drablancal", "78K seguidores · medicina estética", "DfXK5Kps7Re", "78,7 mil",
+     "Humor de su profesión con texto en pantalla",
+     "Hace humor de cosas que solo entiende su nicho. Un texto y una situación, sin guion largo, y los comentarios se llenan de gente que se siente identificada.",
+     ["<b>Humor de tu oficio</b>: lo que viven tus clientas y tú como entrenadora.",
+      "<b>Texto + una escena</b>: se graba en 5 minutos.",
+      "<b>Se comparte entre colegas</b> y eso le da alcance fuera de sus seguidoras."],
+     "«Cuando una clienta me dice que no tiene tiempo y luego me enseña su tiempo de pantalla»"),
+    ("isabelvina", "475K seguidores · médico y divulgadora", "DfnPrEkv12p", "91,5 mil",
+     "«¿Entrenas y tu analítica parece la de alguien “enfermo”?»",
+     "Abre con una pregunta grande en pantalla que rompe una creencia. Luego lo explica a cámara, en casa, con datos y sin producción.",
+     ["<b>Gancho en forma de pregunta</b>, en grande y en las primeras palabras.",
+      "<b>A cámara y en casa</b>: credibilidad sin montaje.",
+      "<b>Un dato que sorprende</b> y te posiciona como la que sabe."],
+     "Serie «Mitos 35+»: «¿Haces mucho cardio y no bajas? Esto es lo que falla»"),
+    ("cescescola", "350K seguidores · preparador físico", "DfsJ4f5t6ZN", "422 mil",
+     "«Top 5 ejercicios abdominales con fitball»",
+     "Rutinas cortas y útiles que la gente guarda para hacerlas luego. Siempre en su terraza, con buena luz y un título cuidado.",
+     ["<b>Contenido que se guarda</b>: una rutina que se puede hacer en casa.",
+      "<b>Un sitio fijo para grabar</b>: se convierte en tu plató.",
+      "<b>Comunica cercano</b>, con humor y sin parecer anuncio."],
+     "«5 ejercicios de glúteo con una banda», en tu rincón de siempre"),
+]
+
+def reel_ref(x, y, w, h, cuenta, code, d=0):
+    b = 96
+    return (
+        f'<a class="abs pop" href="https://www.instagram.com/reel/{code}/" target="_blank" rel="noopener" title="Ver el reel en Instagram" '
+        f'style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:20px;overflow:hidden;display:block;'
+        f'background:#222 url(/pitch/level-up/refs/{cuenta}.jpg) center/cover no-repeat;box-shadow:0 14px 40px rgba(0,0,0,.45);--d:{d}">'
+        f'<span style="position:absolute;left:50%;top:50%;width:{b}px;height:{b}px;margin:-{b // 2}px 0 0 -{b // 2}px;border-radius:50%;'
+        f'background:rgba(255,255,255,.85);box-shadow:0 6px 20px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center">'
+        f'<span style="width:0;height:0;margin-left:8px;border-style:solid;border-width:19px 0 19px 31px;'
+        f'border-color:transparent transparent transparent #151515"></span></span></a>'
+    )
+
+for i, (cuenta, sub, code, vistas, titulo_reel, porque, items, tuya) in enumerate(REFS):
+    n += 1
+    add(f"ref-{cuenta.replace('_', '-')}", f"@{cuenta}", sec(
+        eyebrow(f"Referente {i + 1} de {len(REFS)}")
+        + titulo(f"@{cuenta}", size=72)
+        + p(sub, 128, 280, 1100, size=24, d=2, cls="rosa", extra="font-weight:700;")
+        + p(porque, 128, 340, 1100, size=27, d=3, cls="soft")
+        + label("Qué te llevas para Level Up", 128, 500, d=4)
+        + lista(items, 128, 548, 1100, size=24, d=5, gap=14)
+        + f'<div class="abs pop" style="left:128px;top:800px;width:1100px;padding:26px 32px;border-radius:20px;background:{ACENTO};--d:7">'
+          f'<div style="font-size:18px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#3A2F2F">Tu versión</div>'
+          f'<div style="font-size:28px;font-weight:800;color:{INK};margin-top:6px;line-height:1.25">{tuya}</div></div>'
+        + reel_ref(1380, 150, 412, 660, cuenta, code, d=3)
+        + p(f"{titulo_reel}<br><span style=\"opacity:.7\">{vistas} reproducciones · toca para verlo</span>", 1380, 830, 412, size=19, d=5, cls="soft")
+        + foot(n),
+    ))
 
 # ── 20. Tu semana con 2-3 horas ──────────────────────────────────────────
 n += 1
