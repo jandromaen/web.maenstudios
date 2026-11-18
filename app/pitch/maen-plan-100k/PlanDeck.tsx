@@ -102,7 +102,7 @@ export default function PlanDeck({
   }, [siguiente, anterior, ir, total, pantallaCompleta]);
 
   const alPulsarLienzo = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLElement).closest("a, video")) return;
+    if ((e.target as HTMLElement).closest("a, video, button")) return;
     const caja = e.currentTarget.getBoundingClientRect();
     if (e.clientX - caja.left < caja.width / 2) anterior();
     else siguiente();

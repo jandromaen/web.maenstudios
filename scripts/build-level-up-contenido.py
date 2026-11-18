@@ -83,13 +83,21 @@ def reel(x, y, w, nombre, vistas, d=0):
     """Portada real de un reel de Lucía con sus reproducciones y un botón de play
     que abre el vídeo en Instagram (su cuenta no permite insertarlos)."""
     h = round(w * 596 / 335)
+    b = max(36, round(w * 0.2))  # diámetro del botón de play
     if Path(f"public/pitch/level-up/reels/{nombre}.mp4").exists():
         # Vídeo alojado en maenstudios.com: se reproduce en la propia diapositiva.
         return (
             f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:16px;overflow:hidden;'
             f'background:#000;box-shadow:0 10px 30px rgba(0,0,0,.35);--d:{d}">'
             f'<video data-manual src="/pitch/level-up/reels/{nombre}.mp4" poster="/pitch/level-up/reels/{nombre}.jpg" '
-            f'controls playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"></video>'
+            f'playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block" '
+            f'onclick="if(this.paused){{this.play()}}else{{this.pause()}}" '
+            f'onplay="this.nextElementSibling.style.display=\'none\'" onpause="this.nextElementSibling.style.display=\'flex\'"></video>'
+            f'<button type="button" aria-label="Reproducir" onclick="this.previousElementSibling.play()" '
+            f'style="position:absolute;left:50%;top:50%;width:{b}px;height:{b}px;margin:-{b // 2}px 0 0 -{b // 2}px;border:0;border-radius:50%;cursor:pointer;'
+            f'background:rgba(255,255,255,.85);box-shadow:0 6px 20px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:0">'
+            f'<span style="width:0;height:0;margin-left:{round(b * .08)}px;border-style:solid;'
+            f'border-width:{round(b * .2)}px 0 {round(b * .2)}px {round(b * .32)}px;border-color:transparent transparent transparent #151515"></span></button>'
             f'<span style="position:absolute;left:10px;top:10px;padding:3px 10px;border-radius:999px;background:rgba(0,0,0,.65);'
             f'font-size:{16 if w < 180 else 18}px;font-weight:800;color:#fff;pointer-events:none">{vistas}</span></div>'
         )
