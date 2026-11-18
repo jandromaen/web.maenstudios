@@ -289,7 +289,7 @@ items = [
     ("Marca", "Logo y tipografías: ya los tenemos", True),
     ("Fechas", "Lanzamientos, eventos y fechas clave de los próximos meses", False),
     ("Validación", "Sofía valida briefings y calendarios", True),
-    ("Producto", "Latas para el primer rodaje", False),
+    ("Rodajes", "Productos y espacios para grabar", False),
 ]
 it = ""
 for i, (k, s, ok) in enumerate(items):
