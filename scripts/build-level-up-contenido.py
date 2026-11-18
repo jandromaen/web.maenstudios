@@ -306,7 +306,12 @@ add("bancofotos", "Tu banco de fotos", sec(
         "Destacados con una imagen coherente.",
         "Historias con enlace a la prueba.",
         "Carruseles de «Mitos 35+».",
-    ], 1530, 420, 262, size=20, d=5, gap=14)
+    ], 1530, 380, 262, size=19, d=5, gap=10)
+    + p("Y además:", 1530, 640, 262, size=22, d=6, cls="", extra="font-weight:800;")
+    + lista([
+        "El vídeo de kite y las fotos de la boda que no has publicado.",
+        "TikTok (@lucia_pt): subir los mismos reels, sin trabajo extra.",
+    ], 1530, 690, 262, size=19, d=7, gap=10)
     + foot(n),
 ))
 
@@ -366,6 +371,31 @@ add("parte2", "Parte 2 · La redirección", sec(
     bg=ACENTO, color=INK,
 ))
 
+# ── 12b. Lo que nos contaste ─────────────────────────────────────────────
+n += 1
+dijo = [
+    ("«Puedo dedicar aproximadamente 2-3 horas a la semana a grabar»", "Grabación por lotes los lunes y viernes por la mañana, con formatos que se repiten."),
+    ("Cardedeu: jardín y campo, «el problema es que no sé qué grabar»", "Serie «Entrena donde estés»: rutinas cortas al aire libre."),
+    ("«No tengo un calendario de ideas… me van surgiendo sobre la marcha»", "Formatos fijos y una lista de ideas para cada sesión de grabación."),
+    ("«Muchas veces funcionan mejor los vídeos más espontáneos y de humor»", "Mantener el humor, con situaciones de tu clienta y un final que lleve a Level Up."),
+    ("Promociones en Meta: visitas a la web, pero ni compras ni suscripciones", "Antes de volver a invertir: palabra clave, landing con testimonios y emails."),
+    ("Lo que no te convence: lo «muy guionizado»", "Contenido natural, grabado por ti y con tu forma de hablar."),
+]
+dh = (p("Lo que nos contaste", 128, 280, 760, size=20, d=1, cls="rosa", extra="font-weight:700;letter-spacing:.14em;text-transform:uppercase;")
+      + p("Cómo lo planteamos", 1000, 280, 760, size=20, d=1, cls="rosa", extra="font-weight:700;letter-spacing:.14em;text-transform:uppercase;"))
+for i, (a_, b_) in enumerate(dijo):
+    y = 330 + i * 100
+    dh += (
+        p(a_, 128, y, 820, size=24, d=i + 2, cls="", extra="font-weight:700;line-height:1.3;")
+        + p(b_, 1000, y, 792, size=23, d=i + 3)
+        + f'<div class="abs line-h" style="left:128px;top:{y + 80}px;width:1664px;background:#2E3130"></div>'
+    )
+add("tucorreo", "Lo que nos contaste", sec(
+    eyebrow("Tu correo del 9 de noviembre")
+    + titulo("Partimos de lo que nos contaste", size=56)
+    + dh + foot(n),
+))
+
 # ── 13. Posicionamiento ──────────────────────────────────────────────────
 n += 1
 add("posicionamiento", "Tu posicionamiento", sec(
@@ -419,7 +449,7 @@ series = [
     ("¿Te ha pasado?", "Atraer", "#3E6FA8", "Humor de situaciones de mujeres que intentan entrenar: la pereza de las 15:00, el niño encima, la lavadora.", "Les Angles (748K), pero con tu público"),
     ("No hay viento", "Conectar", "#2F8A6A", "Días sin kite: entreno en casa para seguir haciendo lo que te gusta.", "No hay viento… (12,2K)"),
     ("Mitos 35+", "Enseñar", ACENTO, "Grasa abdominal, flacidez, huesos, cambios hormonales. Tu formación como argumento.", "Adiós flacidez (33,3K)"),
-    ("Dentro de Level Up", "Convertir", AZUL, "Un nivel por dentro, una sesión real, el progreso de una alumna, las dudas más comunes.", "Supérate con cada nivel (41,9K)"),
+    ("Dentro de Level Up", "Convertir", AZUL, "Pre-Entreno, cuándo entran bandas y pesas, recetas de la nutricionista, seguimiento con fotos y dudas comunes.", "Supérate con cada nivel (41,9K)"),
 ]
 sh = ""
 fotos_series = ["mat", "salto", "risa", "pared", "libros", "puente"]
@@ -518,7 +548,7 @@ add("conversion", "El camino a clienta", sec(
         "<b>Palabra clave + mensaje automático</b> (ManyChat o similar).",
         "<b>Historias con enlace</b> 2-3 veces por semana: «hoy he hecho esta sesión del Nivel 2, puedes probarla gratis».",
         "<b>Bio y destacado «Empieza aquí»</b>: ya has puesto «Entrena online» el primero.",
-        "<b>Email antes del cobro y pregunta al darse de baja.</b>",
+        "<b>Email antes del cobro y pregunta al darse de baja</b>, con una herramienta sencilla como MailerLite (ahora no tienes ninguna).",
     ], 128, 590, 1664, size=24, d=7, gap=16)
     + foot(n),
 ))
@@ -543,7 +573,7 @@ add("referentes", "Lo que hacen tus referentes", sec(
     eyebrow("Referencias")
     + titulo("Qué hacen tus referentes", size=56)
     + rh
-    + p("En las tres se ve claro qué venden, sin que su contenido parezca publicidad.",
+    + p("También nos dijiste que te gusta cómo comunican @drablancal, @isabelvina y @cescescola, y que no te convence el contenido muy guionizado. En las tres que hemos analizado se ve claro qué venden, sin que parezca publicidad.",
         128, 850, 1664, size=25, d=6, cls="soft")
     + foot(n),
 ))
@@ -574,7 +604,7 @@ add("semana", "Tu semana tipo", sec(
     eyebrow("Organización · 2-3 horas a la semana")
     + titulo("Tu semana tipo", size=56)
     + dh
-    + p("La edición, por las noches como ahora, con InShot o Edits.",
+    + p("La edición, por las noches como ahora, con InShot o Edits. Lo programas todo desde Meta Business Suite.",
         128, 920, 1664, size=22, d=8, cls="muted")
     + foot(n),
 ))
@@ -585,12 +615,12 @@ ideas = [
     ("Nivel 0", "Si llevas años sin entrenar, empieza por estos 3 ejercicios"),
     ("Nivel 0", "Tu primera sentadilla bien hecha (con una silla)"),
     ("Entrena donde estés", "10 minutos en el jardín: cero material, cero excusas"),
-    ("Entrena donde estés", "Rutina de hotel / de vacaciones de Navidad"),
+    ("Entrena donde estés", "Cardedeu: circuito en el jardín con una silla y una banda"),
     ("¿Te ha pasado?", "Yo planeando entrenar a las 7:00 vs. yo a las 19:00"),
     ("¿Te ha pasado?", "Cuando tu hijo decide que la esterilla es suya"),
-    ("No hay viento", "Lo que entreno para aguantar una sesión de kite"),
+    ("No hay viento", "Tu vídeo de kite sin publicar + el entreno de los días sin viento"),
     ("Mitos 35+", "¿Por qué la grasa abdominal cuesta más a partir de los 40?"),
-    ("Dentro de Level Up", "Así es el Pre-Entreno por dentro: tu primera semana"),
+    ("Dentro de Level Up", "Pre-Entreno: 8 sesiones de 20 minutos con esterilla y silla"),
     ("Dentro de Level Up", "Tus dudas: ¿y si nunca he entrenado? ¿Y si no tengo tiempo?"),
 ]
 ih = ""
@@ -639,7 +669,7 @@ acc = [
     ("Bio y enlace", "Nueva bio con la promesa y un único enlace a la prueba gratis."),
     ("Palabra clave", "Activar NIVEL0 con respuesta automática."),
     ("Primer lote", "Grabar el lunes 4 piezas de la lista de ideas."),
-    ("Testimonios", "Pedir 3 valoraciones a clientas presenciales que hayan probado Level Up."),
+    ("Testimonios", "Pedir 3 valoraciones a tus 18 clientas presenciales, sobre todo a las que han probado Level Up."),
     ("Accesos", "Que Maen pueda ver las estadísticas en Meta, para medir desde ya."),
 ]
 ah = ""
