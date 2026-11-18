@@ -1368,7 +1368,7 @@ dayPlan.forEach(item => {
         </div>
         <div class="ft"><span>♡</span><span>◯</span><span>➤</span><span style="margin-left:auto">⌑</span></div>
       </div>
-      ${p.slides ? `<div class="slides">${p.slides.map((x,i) => `<div><img src="${esc(isVid(x) ? x.replace(/\.mp4(\?|$)/, "_poster.jpg$1") : x)}" ${isVid(x) ? `data-vid="${esc(x)}"` : ""} alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
+      ${p.slides ? `<div class="slides${p.slides.length > 6 ? " two" : ""}" style="--rows:${Math.ceil(p.slides.length / 2)}">${p.slides.map((x,i) => `<div><img src="${esc(isVid(x) ? x.replace(/\.mp4(\?|$)/, "_poster.jpg$1") : x)}" ${isVid(x) ? `data-vid="${esc(x)}"` : ""} alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
       ${p.fuente ? `<div class="src"><b>Material</b>${esc(p.fuente)}</div>` : ""}
     </div>
     <div class="story-frame" style="left:330px${MOSTRAR_STORIES ? "" : ";display:none"}">
@@ -1531,6 +1531,7 @@ go(start - 1, false);
 .post-frame.is-reel{width:250px!important}
 .post-frame .slides{position:absolute;left:calc(100% + 22px);top:22px;margin-top:0!important;flex-direction:column;gap:8px}
 .post-frame .slides div{width:60px}
+.post-frame .slides.two{display:grid;grid-template-rows:repeat(var(--rows),auto);grid-auto-flow:column;gap:8px}
 .opts figure{width:330px}
 .opts img{width:330px;height:412px}
 .hours a.drv{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--choc);background:var(--lime);font-size:12px;padding:7px 12px;font-weight:500}
