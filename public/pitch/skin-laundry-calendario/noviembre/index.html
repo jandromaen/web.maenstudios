@@ -714,15 +714,15 @@ Reserva la tuya desde el enlace de la bio.
 📍 Av. Diagonal 610, Barcelona
 #AntesYDespues #AcidoHialuronico #Neuromoduladores #Ojeras #MedicinaEsteticaBarcelona #SkinLaundryBarcelona` },
 
-{ d:18, formato:"Carrusel", estado:"listo", cubo:"Branding", tema:"Skin Laundry × Lapso", hora:"19:00h",
-  storyVisible:true, storyLbl:"Stories del día",
-  storyImgs:["/pitch/skin-laundry-calendario/noviembre/img/st_18_sorteo.jpg?v=11181538","/pitch/skin-laundry-calendario/noviembre/img/st_18_recap.mp4?v=11181102"], story:["Story 1: ganadora del sorteo · añadir la mención de la ganadora en la caja pequeña, a la altura de las rodillas","Story 2: recap en vídeo con música · etiquetar a Lapso Studios centrado en el medio"],
+{ d:18, formato:"Reel", estado:"listo", cubo:"Branding", tema:"Skin Laundry × Lapso", hora:"19:00h",
+  portada:"/pitch/skin-laundry-calendario/noviembre/img/portada_18.jpg?v=11181555", media:"/pitch/skin-laundry-calendario/noviembre/img/reel_18_lapso.mp4?v=11181555", poster:"/pitch/skin-laundry-calendario/noviembre/img/portada_18.jpg?v=11181555",
   etiqueta:"Colaboración con Lapso",
-  media:"/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_05.jpg?v=11180950", slides:["/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_05.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_02.mp4?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_03.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_04.mp4?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_01.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_06.mp4?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_07.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_08.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_09.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_10.jpg?v=11180950"],
-  pieza:"Glow after the Burn: así fue el evento con Lapso",
-  base:"Fotos y vídeos del evento", cta:"Primer láser a 75 € con código",
-  nota:"Story 2 (recap): etiquetar a Lapso Studios desde Instagram · Publicar como colaboración con la cuenta de Lapso y etiquetarla · las slides 2, 4 y 6 son vídeo con su sonido · confirmar que el código LapsoCalenton se puede compartir en abierto",
-  idea:["1 · El equipo de Skin Laundry","2 · Vídeo: pantalla The Calentón","3 · Nuestro Vanity Area","4 · Vídeo: la clase de spinning","5 · Entrada: cubos Treat · Glow · Repeat","6 · Vídeo: análisis de piel en el stand","7 · Vitrina de producto","8 · Las asistentes en el stand","9 · El flyer de la promo","10 · Equipo en el stand"],
+  storyVisible:true, storyLbl:"Story · sorteo", st2Left:458,
+  storyImgs:["/pitch/skin-laundry-calendario/noviembre/img/st_18_sorteo.jpg?v=11181538"], story:["Story: ganadora del sorteo · añadir la mención de la ganadora en la caja pequeña, a la altura de las rodillas"],
+  pieza:"Glow after the Burn: recap del evento con Lapso",
+  base:"Vídeos del evento", cta:"Primer láser a 75 € con código",
+  nota:"Publicar como colaboración con la cuenta de Lapso Studios y etiquetarla · confirmar que el código LapsoCalenton se puede compartir en abierto",
+  idea:[],
   copy:`Glow after the Burn 🔥
 
 Así fue The Calentón con Lapso: una clase de spinning a tope y, al bajar de la bici, nuestro Vanity Area con análisis de piel, producto y mucho glow.
@@ -1085,6 +1085,7 @@ const pad = n => String(n).padStart(2,"0");
 const FMT_COLOR = { reel:"var(--tan)", carrusel:"var(--choc)", post:"var(--rust)", stories:"var(--cream-2)" };
 const dayName = d => DOW[new Date(YEAR, MONTH, d).getDay()];
 const piezasDe = d => PIEZAS.filter(p => p.d === d);
+const storiesBox = p => `<div class="tpl sm">${p.storyImgs.map((x,i) => `<div class="it" style="position:absolute;inset:0;transition:opacity .25s;opacity:${i ? 0 : 1};pointer-events:${i ? "none" : "auto"}">${isVid(x) ? `<video src="${esc(x)}" poster="${esc(x.replace(/\.mp4(\?|$)/, "_poster.jpg$1"))}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;background:#000"></video>` : `<img src="${esc(x)}" alt="" style="width:100%;height:100%;object-fit:cover;display:block">`}</div>`).join("")}${p.storyImgs.length > 1 ? `<b style="position:absolute;top:8px;right:8px;background:rgba(26,19,18,.65);color:#F6EDE4;font:600 10px/1 sans-serif;padding:4px 7px;border-radius:10px;z-index:3">1 / ${p.storyImgs.length}</b>` : ""}${p.storyImgs.length > 1 ? `<button class="nv nv-l" onclick="storyNav(this,-1)" aria-label="Story anterior" style="visibility:hidden">‹</button><button class="nv nv-r" onclick="storyNav(this,1)" aria-label="Siguiente story">›</button>` : ""}</div>`;
 const MOSTRAR_NEWSLETTERS = false; /* etiquetas de newsletter ocultas */
 const nlDe = d => MOSTRAR_NEWSLETTERS ? NEWSLETTERS.find(n => n.d === d) : undefined;
 const avatar = `<img src="${ASSET.fav}" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.remove()">`;
@@ -1358,11 +1359,12 @@ dayPlan.forEach(item => {
       ${p.slides ? `<div class="slides${p.slides.length > 6 ? " two" : ""}" style="--rows:${Math.ceil(p.slides.length / 2)}">${p.slides.map((x,i) => `<div><img src="${esc(isVid(x) ? x.replace(/\.mp4(\?|$)/, "_poster.jpg$1") : x)}" ${isVid(x) ? `data-vid="${esc(x)}"` : ""} alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
       ${p.fuente ? `<div class="src"><b>Material</b>${esc(p.fuente)}</div>` : ""}
     </div>
-    <div class="story-frame" style="left:${p.slides && p.slides.length > 6 ? (p.storyVisible ? 440 : 470) : 330}px${(MOSTRAR_STORIES || p.storyVisible || p.portada) ? "" : ";display:none"}">
+    <div class="story-frame${(p.portada && p.storyImgs) ? " cmp" : ""}" style="left:${p.slides && p.slides.length > 6 ? (p.storyVisible ? 440 : 470) : 330}px${(MOSTRAR_STORIES || p.storyVisible || p.portada) ? "" : ";display:none"}">
       <div class="col-lbl">${esc(p.portada ? "Portada del reel" : (p.storyLbl || "Story de apoyo"))}</div>
-      ${p.portada ? `<div class="tpl sm"><img src="${esc(p.portada)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : p.repost ? repostStory(p) : p.storyImgs ? `<div class="tpl sm">${p.storyImgs.map((x,i) => `<div class="it" style="position:absolute;inset:0;transition:opacity .25s;opacity:${i ? 0 : 1};pointer-events:${i ? "none" : "auto"}">${isVid(x) ? `<video src="${esc(x)}" poster="${esc(x.replace(/\.mp4(\?|$)/, "_poster.jpg$1"))}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;background:#000"></video>` : `<img src="${esc(x)}" alt="" style="width:100%;height:100%;object-fit:cover;display:block">`}</div>`).join("")}<b style="position:absolute;top:8px;right:8px;background:rgba(26,19,18,.65);color:#F6EDE4;font:600 10px/1 sans-serif;padding:4px 7px;border-radius:10px;z-index:3">1 / ${p.storyImgs.length}</b>${p.storyImgs.length > 1 ? `<button class="nv nv-l" onclick="storyNav(this,-1)" aria-label="Story anterior" style="visibility:hidden">‹</button><button class="nv nv-r" onclick="storyNav(this,1)" aria-label="Siguiente story">›</button>` : ""}</div>` : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
+      ${p.portada ? `<div class="tpl sm"><img src="${esc(p.portada)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : p.repost ? repostStory(p) : p.storyImgs ? storiesBox(p) : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
     </div>
+    ${(p.portada && p.storyImgs) ? `<div class="story-frame cmp" style="left:${p.st2Left || 470}px!important;width:180px"><div class="col-lbl">${esc(p.storyLbl || "Stories del día")}</div>${storiesBox(p)}</div>` : ""}
     <div class="hours">${DRIVE[d] ? `<a class="drv" href="${DRIVE[d]}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>Drive</b>Descargar contenido ↗</a>` : ""}</div>
   </div>
   ${foot(n)}
@@ -1531,6 +1533,7 @@ go(start - 1, false);
 .post-frame.compact{width:280px!important}
 .post-frame.compact .slides{left:calc(100% + 18px)}
 .post-frame.compact .slides div{width:52px}
+.story-frame.cmp{width:180px}.story-frame.cmp .tpl.sm{width:180px}
 .story-frame .nv{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:28px;height:28px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#3C201D;font:600 20px/26px Georgia,serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);padding:0}
 .story-frame .nv-l{left:6px}.story-frame .nv-r{right:6px}
 .post-frame .slides.two{display:grid;grid-template-rows:repeat(var(--rows),auto);grid-auto-flow:column;gap:8px}
