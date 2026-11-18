@@ -76,6 +76,15 @@ def tareas(items, x, top, width, size=25, d=2):
     )
 
 
+def tachado(precio, size):
+    """Precio anterior en gris, tachado con una línea blanca (oferta)."""
+    return (
+        f'<span style="position:relative;display:inline-block;color:#8A8885;font-size:{size}px;'
+        f'margin-right:.45em">{precio}<span style="position:absolute;left:-4%;right:-4%;top:50%;'
+        f'height:{max(3, size // 12)}px;background:#fff;transform:translateY(-50%) rotate(-6deg)"></span></span>'
+    )
+
+
 slides = []
 n = 0
 
@@ -235,10 +244,11 @@ FASES = [
 ]
 
 PRECIOS = {
-    "5": ("Web completa · dominios, diseño, SEO, copy y programación", "1.800 €", "+ IVA"),
-    "6": ("Mantenimiento y newsletter", "100 €", "al mes + IVA"),
-    "7": ("Rodaje de pre-apertura", "1.500 €", "+ IVA"),
-    "8": ("Redes sociales", "2.500 €", "al mes + IVA"),
+    # (etiqueta, precio anterior tachado o None, precio, sufijo)
+    "5": ("Web completa · dominios, diseño, SEO, copy y programación", "1.800 €", "1.300 €", "+ IVA"),
+    "6": ("Mantenimiento y newsletter", None, "100 €", "al mes + IVA"),
+    "7": ("Rodaje de pre-apertura", "1.500 €", "1.250 €", "+ IVA"),
+    "8": ("Redes sociales · los 6 primeros meses", "2.500 €", "1.800 €", "al mes + IVA"),
 }
 
 for num, nom, cuando, obj, items in FASES:
@@ -246,13 +256,20 @@ for num, nom, cuando, obj, items in FASES:
     extra = ""
     pr = PRECIOS.get(num)
     if pr:
-        etq, val, suf = pr
+        etq, antes, val, suf = pr
+        nota = ""
+        if num == "8":
+            nota = ('<p class="abs a soft" style="left:920px;top:915px;font-size:19px;--d:5">'
+                    'Después, a revisar por ambas partes.</p>')
         extra += (
-            '<div class="abs pm-card a" style="left:880px;top:790px;width:910px;height:150px;--d:4"></div>'
-            f'<p class="abs a rosa" style="left:920px;top:818px;font-size:18px;font-weight:700;'
+            f'<div class="abs pm-card a" style="left:880px;top:{770 if nota else 790}px;width:910px;'
+            f'height:{180 if nota else 150}px;--d:4"></div>'
+            f'<p class="abs a rosa" style="left:920px;top:{798 if nota else 818}px;font-size:18px;font-weight:700;'
             f'letter-spacing:.08em;text-transform:uppercase;--d:4">{etq}</p>'
-            f'<p class="abs a disp" style="left:920px;top:858px;font-size:44px;line-height:1;--d:5">{val}'
+            f'<p class="abs a disp" style="left:920px;top:{838 if nota else 858}px;font-size:44px;line-height:1;--d:5">'
+            f'{tachado(antes, 32) if antes else ""}{val}'
             f'<span style="font-size:22px;letter-spacing:.04em"> {suf}</span></p>'
+            + nota
         )
     if num == "1":
         extra += (
@@ -299,33 +316,35 @@ add("pendientes", "Pendientes de KONG", sec(
 # ── Resumen del presupuesto (al final, a propósito) ──────────────────────────────────────────────────────
 n += 1
 bloques = [
-    ("Web", "1.800 €", "+ IVA · pago único",
+    ("Web", "1.800 €", "1.300 €", "+ IVA · pago único",
      ["Captación de dominios", "Diseño web", "SEO y copywriting", "Programación y publicación"]),
-    ("Mantenimiento", "100 €", "al mes + IVA",
+    ("Mantenimiento", None, "100 €", "al mes + IVA",
      ["Mantenimiento de la web", "Newsletter mensual"]),
-    ("Pre-apertura", "1.500 €", "+ IVA · rodaje",
+    ("Pre-apertura", "1.500 €", "1.250 €", "+ IVA · rodaje",
      ["Rodaje documentando el proceso", "Postproducción de las piezas", "Contenido para el teasing"]),
-    ("Redes · desde apertura", "2.500 €", "al mes + IVA",
+    ("Redes · desde apertura", "2.500 €", "1.800 €", "al mes + IVA · 6 primeros meses",
      ["Briefing creativo mensual", "Rodaje mensual", "Postproducción",
-      "Calendario a un mes vista", "Publicación y reporte"]),
+      "Calendario a un mes vista", "Publicación y reporte", "Después, a revisar por ambas partes"]),
 ]
 bh = ""
 CW, GAP = 392, 32
-for i, (k, v, suf, lst) in enumerate(bloques):
+for i, (k, antes, v, suf, lst) in enumerate(bloques):
     x = 128 + i * (CW + GAP)
     lis = "".join(f'<p style="margin:0 0 12px">{t}</p>' for t in lst)
     bh += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:310px;width:{CW}px;height:640px;--d:{i}"></div>'
-        f'<p class="abs a rosa" style="left:{x + 32}px;top:348px;font-size:19px;font-weight:700;'
+        f'<div class="abs pm-card pop" style="left:{x}px;top:290px;width:{CW}px;height:680px;--d:{i}"></div>'
+        f'<p class="abs a rosa" style="left:{x + 32}px;top:326px;font-size:19px;font-weight:700;'
         f'letter-spacing:.08em;text-transform:uppercase;--d:{i + 1}">{k}</p>'
-        f'<p class="abs a disp" style="left:{x + 32}px;top:396px;font-size:58px;line-height:1;--d:{i + 1}">{v}</p>'
-        f'<p class="abs a soft" style="left:{x + 32}px;top:470px;font-size:21px;font-weight:700;'
-        f'letter-spacing:.04em;--d:{i + 1}">{suf}</p>'
-        f'<div class="abs a" style="left:{x + 32}px;top:550px;width:{CW - 64}px;font-size:24px;line-height:1.35;'
+        + (f'<p class="abs a disp" style="left:{x + 32}px;top:372px;line-height:1;--d:{i + 1}">{tachado(antes, 32)}</p>'
+           if antes else "")
+        + f'<p class="abs a disp" style="left:{x + 32}px;top:420px;font-size:58px;line-height:1;--d:{i + 1}">{v}</p>'
+        f'<p class="abs a soft" style="left:{x + 32}px;top:492px;width:{CW - 64}px;font-size:20px;font-weight:700;'
+        f'line-height:1.3;letter-spacing:.04em;--d:{i + 1}">{suf}</p>'
+        f'<div class="abs a" style="left:{x + 32}px;top:580px;width:{CW - 64}px;font-size:23px;line-height:1.35;'
         f'color:#E4E2DE;--d:{i + 2}">{lis}</div>'
     )
 add("presupuesto", "Presupuesto", sec(
-    eyebrow("Presupuesto")
+    eyebrow("Presupuesto · Oferta para KONG")
     + titulo("Resumen del presupuesto", size=64)
     + bh + foot(n),
 ))
