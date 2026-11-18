@@ -47,6 +47,7 @@ BLOBS = {
     "b28b8fe0670f4d6a6e29783b4a8c746e": "pato-maestro.jpg",
     "99314c4615aa12c92e4a08d0f4d1cd70": "pato-mesa.jpg",
     "a9072b55ad8c3d82ec8380a16d4dfcd6": "pato-video.jpg",
+    "1cbca70ef06f3b1761414c34f4b24eb5": "dimsum-video.jpg",
 }
 
 
