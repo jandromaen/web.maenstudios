@@ -88,7 +88,7 @@ add("portada", "Kick-off", sec(
 # ── 2. Hoy ─────────────────────────────────────────────────────────────────
 n += 1
 agenda = [
-    ("Lo que hemos acordado", AMARILLO),
+    ("Planning", AMARILLO),
     ("Cómo trabajamos cada mes", LILA),
     ("Paso a paso", MELOCOTON),
     ("Quién es quién", LIMA),
@@ -118,8 +118,8 @@ for i, (c, k, t, s) in enumerate(cards):
            f'<p style="position:absolute;left:{x + 36}px;top:396px;width:330px;{WIDE};font-size:17px;font-weight:700;letter-spacing:3px">{k}</p>'
            f'<p style="position:absolute;left:{x + 36}px;top:470px;{COND};font-size:84px;font-weight:700;line-height:.95;text-transform:uppercase">{t}</p>'
            f'<p style="position:absolute;left:{x + 36}px;top:700px;width:320px;font-size:26px;line-height:1.35">{s}</p>')
-add("acordado", "Lo que hemos acordado", sec(
-    eyebrow("01 · LO QUE HEMOS ACORDADO") + h("Planning mixto")
+add("acordado", "Planning", sec(
+    eyebrow("01 · PLANNING") + h("Planning mixto")
     + cc
     + f'<p style="position:absolute;left:128px;top:900px;font-size:26px;line-height:1.4;color:#5a5048">'
     "No incluye el soporte en eventos y lanzamientos. El paid en UK lo sigue llevando No Idea.</p>"
