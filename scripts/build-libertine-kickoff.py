@@ -69,6 +69,30 @@ def foto(src, x, y, w, hh, pos="50% 50%", radius=0, alt=""):
             f'width:{w}px;height:{hh}px;object-fit:cover;object-position:{pos};border-radius:{radius}px">')
 
 
+def caja(x, y, w, hh, bg, partes, color=INK, pad=40, radius=28, gap=18):
+    """Cajón con el contenido dentro, centrado en vertical."""
+    return (f'<div style="position:absolute;left:{x}px;top:{y}px;width:{w}px;height:{hh}px;background:{bg};'
+            f'border-radius:{radius}px;color:{color};padding:0 {pad}px;display:flex;flex-direction:column;'
+            f'justify-content:center;gap:{gap}px">{"".join(partes)}</div>')
+
+
+def k_(t, color=None, size=17):
+    c = f";color:{color}" if color else ""
+    return f'<p style="{WIDE};font-size:{size}px;font-weight:700;letter-spacing:3px;line-height:1.3{c}">{t}</p>'
+
+
+def t_(t, size=84, color=None):
+    c = f";color:{color}" if color else ""
+    return (f'<p style="{COND};font-size:{size}px;font-weight:700;line-height:.95;'
+            f'text-transform:uppercase{c}">{t}</p>')
+
+
+def s_(t, size=26, color=None):
+    c = f";color:{color}" if color else ""
+    return f'<p style="font-size:{size}px;line-height:1.35{c}">{t}</p>'
+
+
+
 n = 0
 
 # ── 1. Portada ─────────────────────────────────────────────────────────────
@@ -113,10 +137,7 @@ cards = [
 cc = ""
 x = 128
 for c, k, t, sub, w in cards:
-    cc += (f'<div style="position:absolute;left:{x}px;top:360px;width:{w}px;height:500px;background:{c};border-radius:28px"></div>'
-           f'<p style="position:absolute;left:{x + 36}px;top:396px;width:{w - 72}px;{WIDE};font-size:17px;font-weight:700;letter-spacing:3px">{k}</p>'
-           f'<p style="position:absolute;left:{x + 36}px;top:470px;width:{w - 60}px;{COND};font-size:84px;font-weight:700;line-height:.95;text-transform:uppercase">{t}</p>'
-           f'<p style="position:absolute;left:{x + 36}px;top:700px;width:{min(w - 72, 520)}px;font-size:26px;line-height:1.35">{sub}</p>')
+    cc += caja(x, 360, w, 500, c, [k_(k), t_(t, 72), s_(sub)], gap=26)
     x += w + 32
 add("acordado", "Planning", sec(
     eyebrow("01 · PLANNING") + h("Planning mixto")
@@ -157,13 +178,9 @@ add("mes-vista", "Siempre a un mes vista", sec(
     + f'<p style="position:absolute;left:128px;top:420px;width:860px;font-size:32px;line-height:1.4">'
     "Preparamos y producimos un mes antes de que se publique. Así vosotros tenéis tiempo de revisarlo todo, y nada se hace con prisas.</p>"
     # línea de tiempo
-    + f'<div style="position:absolute;left:128px;top:660px;width:400px;height:150px;background:{AMARILLO};border-radius:24px"></div>'
-    f'<p style="position:absolute;left:164px;top:680px;{WIDE};font-size:17px;font-weight:700;letter-spacing:3px">ESTE MES</p>'
-    f'<p style="position:absolute;left:164px;top:720px;width:340px;{COND};font-size:46px;font-weight:700;line-height:1;text-transform:uppercase">Briefing, rodaje y edición</p>'
-    + f'<p style="position:absolute;left:548px;top:695px;{COND};font-size:80px;font-weight:700">→</p>'
-    + f'<div style="position:absolute;left:640px;top:660px;width:340px;height:150px;background:{LILA};border-radius:24px"></div>'
-    f'<p style="position:absolute;left:676px;top:680px;{WIDE};font-size:17px;font-weight:700;letter-spacing:3px">EL MES QUE VIENE</p>'
-    f'<p style="position:absolute;left:676px;top:720px;width:280px;{COND};font-size:46px;font-weight:700;line-height:1;text-transform:uppercase">Se publica</p>'
+    + caja(128, 640, 430, 180, AMARILLO, [k_("ESTE MES"), t_("Briefing, rodaje<br>y edición", 46)], pad=36, radius=24, gap=14)
+    + f'<p style="position:absolute;left:578px;top:678px;{COND};font-size:80px;font-weight:700;line-height:1">→</p>'
+    + caja(670, 640, 380, 180, LILA, [k_("EL MES QUE VIENE"), t_("Se publica", 46)], pad=36, radius=24, gap=14)
     + f'<p style="position:absolute;left:128px;top:860px;width:850px;font-size:26px;line-height:1.4;color:#5a5048">'
     "Ejemplo: en diciembre grabamos y montamos el contenido de enero.</p>"
     + foto("latas-hielo.jpg", 1100, 0, 820, 1080, "40% 50%", alt="Latas de Libertine Blends con hielo")
@@ -235,16 +252,16 @@ add("publicacion-reporte", "Publicación y reporte", paso(
 n += 1
 add("creators-paid", "Creators y paid", sec(
     eyebrow("03 · PASO A PASO") + h("Creators y paid")
-    + f'<div style="position:absolute;left:128px;top:360px;width:812px;height:560px;background:{LIMA};border-radius:28px"></div>'
-    f'<p style="position:absolute;left:176px;top:404px;{WIDE};font-size:18px;font-weight:700;letter-spacing:3px">CREATORS Y COLABORACIONES</p>'
-    f'<p style="position:absolute;left:176px;top:470px;width:720px;{COND};font-size:72px;font-weight:700;line-height:.95;text-transform:uppercase">Objetivo:<br>5 creators al mes</p>'
-    f'<p style="position:absolute;left:176px;top:700px;width:710px;font-size:28px;line-height:1.4">'
-    "Cada mes proponemos perfiles y colaboraciones y cerramos 5 creators. Entran en el briefing, para que formen parte del plan y no vayan sueltos.</p>"
-    + f'<div style="position:absolute;left:980px;top:360px;width:812px;height:560px;background:{INK};border-radius:28px"></div>'
-    f'<p style="position:absolute;left:1028px;top:404px;{WIDE};font-size:18px;font-weight:700;letter-spacing:3px;color:{AMARILLO}">CREATIVOS PARA PAID</p>'
-    f'<p style="position:absolute;left:1028px;top:470px;width:720px;{COND};font-size:72px;font-weight:700;line-height:.95;text-transform:uppercase;color:{CREMA}">Sus guiones,<br>nuestra creatividad.</p>'
-    f'<p style="position:absolute;left:1028px;top:700px;width:710px;font-size:28px;line-height:1.4;color:{CREMA}">'
-    "No Idea nos pasa los guiones de paid y nosotros los creativizamos. Ellos siguen llevando el paid en UK.</p>"
+    + caja(128, 360, 812, 560, LIMA, [
+        k_("CREATORS Y COLABORACIONES", size=18),
+        t_("Objetivo:<br>5 creators al mes", 72),
+        s_("Cada mes proponemos perfiles y colaboraciones y cerramos 5 creators. Entran en el briefing, para que formen parte del plan y no vayan sueltos.", 28)],
+        pad=48, gap=28)
+    + caja(980, 360, 812, 560, INK, [
+        k_("CREATIVOS PARA PAID", AMARILLO, 18),
+        t_("Sus guiones,<br>nuestra creatividad.", 72, CREMA),
+        s_("No Idea nos pasa los guiones de paid y nosotros los creativizamos. Ellos siguen llevando el paid en UK.", 28, CREMA)],
+        color=CREMA, pad=48, gap=28)
     + foot(n)))
 
 # ── 11. Quién es quién ────────────────────────────────────────────────────
@@ -252,10 +269,7 @@ n += 1
 
 
 def persona(x, y, nombre, rol, color, w=500):
-    return (f'<div style="position:absolute;left:{x}px;top:{y}px;width:{w}px;height:118px;border-radius:20px;background:{color}"></div>'
-            f'<p style="position:absolute;left:{x + 32}px;top:{y + 18}px;{COND};font-size:46px;font-weight:700;letter-spacing:1px;text-transform:uppercase">{nombre}</p>'
-            f'<p style="position:absolute;left:{x + 32}px;top:{y + 72}px;font-size:22px">{rol}</p>')
-
+    return caja(x, y, w, 118, color, [t_(nombre, 46), s_(rol, 22)], pad=32, radius=20, gap=6)
 
 add("equipo", "Quién es quién", sec(
     eyebrow("04 · QUIÉN ES QUIÉN") + h("Quién es quién")
@@ -263,7 +277,7 @@ add("equipo", "Quién es quién", sec(
     + persona(128, 390, "Sofía", "CEO · Valida briefings y calendarios", AMARILLO, 640)
     + persona(128, 530, "No Idea", "Agencia de growth en Londres · Paid en UK", CREMA2, 640)
     + f'<p style="position:absolute;left:900px;top:330px;{WIDE};font-size:20px;font-weight:700;letter-spacing:4px">MAEN STUDIOS</p>'
-    + persona(900, 390, "Jandro Martín", "Dirección de cuentas · Vuestro contacto", LILA, 430)
+    + persona(900, 390, "Jandro Martín", "Dirección de cuentas", LILA, 430)
     + persona(1362, 390, "Richi", "Dirección creativa", LILA, 430)
     + persona(900, 530, "Brand manager", "Briefings y rodajes", MELOCOTON, 430)
     + persona(1362, 530, "Community manager", "Calendario y publicación", MELOCOTON, 430)
@@ -300,23 +314,17 @@ n += 1
 pp = [
     ("Accesos y materiales", "Nos pasáis lo de la diapositiva anterior", AMARILLO),
     ("Briefing del primer mes", "Os lo presentamos y lo validáis", LILA),
-    ("Primer rodaje", "Una jornada de 4 h", NARANJA),
+    ("Primer<br>rodaje", "Una jornada de 4 h", NARANJA),
     ("Primer calendario", "Para vuestra revisión, antes de que empiece el mes", LIMA),
 ]
 ps = ""
-for i, (t, s, c) in enumerate(pp):
+for i, (t, sub, c) in enumerate(pp):
     x = 128 + i * 424
-    ps += (f'<div style="position:absolute;left:{x}px;top:380px;width:392px;height:420px;border-radius:28px;background:{c}"></div>'
-           f'<p style="position:absolute;color:#151515;left:{x + 36}px;top:410px;{COND};font-size:110px;font-weight:700;line-height:1">{i + 1}</p>'
-           f'<p style="position:absolute;color:#151515;left:{x + 36}px;top:560px;width:330px;{COND};font-size:52px;font-weight:700;line-height:1;text-transform:uppercase">{t}</p>'
-           f'<p style="position:absolute;color:#151515;left:{x + 36}px;top:690px;width:320px;font-size:24px;line-height:1.35">{s}</p>')
+    ps += caja(x, 380, 392, 420, c, [t_(str(i + 1), 110), t_(t, 52), s_(sub, 24)], pad=36, gap=22)
 add("siguientes", "Próximos pasos", sec(
     eyebrow("PRÓXIMOS PASOS", color=AMARILLO) + h("Y empezamos", color=CREMA)
     + ps
     + foot(n, True), bg=INK, color=CREMA))
-# las tarjetas de color llevan texto oscuro
-slides[-1]["html"] = slides[-1]["html"].replace(
-    'border-radius:28px;background:', 'border-radius:28px;color:#151515;background:')
 
 # ── 14. Cierre ────────────────────────────────────────────────────────────
 n += 1
