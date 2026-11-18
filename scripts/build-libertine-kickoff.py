@@ -241,8 +241,7 @@ n += 1
 add("publicacion-reporte", "Publicación y reporte", paso(
     "publicacion-reporte", "05 + 06", "Publicación<br>y reporte", AZUL, "cuatro-latas.jpg", "50% 45%",
     ["Publicamos en Instagram y TikTok según el calendario",
-     "Stories del día a día",
-     "Respondemos comentarios y mensajes",
+     "Stories semanales",
      "Reporte mensual: qué ha funcionado y qué cambiamos"],
     ["Acceso a las cuentas de Instagram y TikTok",
      "Avisarnos de lo que pase en el día a día (novedades, puntos de venta, prensa)"], n))
