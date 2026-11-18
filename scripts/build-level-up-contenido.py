@@ -68,6 +68,17 @@ def foto(x, y, w, h, k, d=0, pos="center", radius=24, extra=""):
     )
 
 
+def reel(x, y, w, nombre, vistas, d=0):
+    """Portada real de un reel de Lucía (capturada de su perfil) con sus reproducciones."""
+    h = round(w * 596 / 335)
+    return (
+        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:16px;overflow:hidden;'
+        f'background:#222 url(/pitch/level-up/reels/{nombre}.jpg) center/cover no-repeat;box-shadow:0 10px 30px rgba(0,0,0,.35);--d:{d}">'
+        f'<p style="position:absolute;left:10px;bottom:10px;padding:3px 10px;border-radius:999px;background:rgba(0,0,0,.65);'
+        f'font-size:{16 if w < 180 else 18}px;font-weight:800;color:#fff">▶ {vistas}</p></div>'
+    )
+
+
 def portada_reel(x, y, texto, vistas, color, d=0, w=230, sub=""):
     """Mini portada vertical 9:16 con el texto de la portada y las reproducciones."""
     h = round(w * 16 / 9)
@@ -153,18 +164,18 @@ add("parte1", "Parte 1 · Lo que has hecho", sec(
 # ── 5. Tus tres picos ────────────────────────────────────────────────────
 n += 1
 picos = [
-    ("¿Te ha pasado?", "748K", "#3E6FA8", "Les Angles · marzo 2026", "Humor de situación en la nieve. 10.700 me gusta. Comentarios de esquiadores, chicos, gente de Andorra… <b>casi nadie de tu público.</b>"),
-    ("Entrena en el agua", "104K", "#2E8FA0", "Piscina · agosto 2026", "Rutina útil en un escenario inesperado. 1.690 guardados y 511 seguidoras: <b>el mejor captador de clientas potenciales del año.</b>"),
-    ("Mis pensamientos intrusivos", "70,2K", "#2F8A6A", "Kite · 2026", "Humor con el kite de fondo. Se comparte muchísimo, pero atrae a gente del kite, <b>no a quien quiere empezar a entrenar.</b>"),
+    ("les-angles", "748K", "#3E6FA8", "Les Angles · marzo 2026", "Humor de situación en la nieve. 10.700 me gusta. Comentarios de esquiadores, chicos, gente de Andorra… <b>casi nadie de tu público.</b>"),
+    ("agua-gluteos", "104K", "#2E8FA0", "Piscina · agosto 2026", "Rutina útil en un escenario inesperado. 1.690 guardados y 511 seguidoras: <b>el mejor captador de clientas potenciales del año.</b>"),
+    ("pensamientos-intrusivos", "70,2K", "#2F8A6A", "Kite · 2026", "Humor con el kite de fondo. Se comparte muchísimo, pero atrae a gente del kite, <b>no a quien quiere empezar a entrenar.</b>"),
 ]
 ph = ""
 for i, (t, v, c, cuando, txt) in enumerate(picos):
     x = 128 + i * 580
     ph += (
-        portada_reel(x, 300, t, v, c, d=i, w=200)
-        + p(cuando, x + 230, 300, 320, size=20, d=i + 1, cls="rosa", extra="font-weight:700;")
-        + f'<p class="abs a disp" style="left:{x + 230}px;top:340px;font-size:64px;--d:{i + 1}">{v}</p>'
-        + p(txt, x + 230, 440, 320, size=22, d=i + 2)
+        reel(x, 290, 250, t, v, d=i)
+        + p(cuando, x + 275, 300, 290, size=20, d=i + 1, cls="rosa", extra="font-weight:700;")
+        + f'<p class="abs a disp" style="left:{x + 275}px;top:340px;font-size:56px;--d:{i + 1}">{v}</p>'
+        + p(txt, x + 275, 430, 285, size=21, d=i + 2)
     )
 add("picos", "Tus tres picos", sec(
     eyebrow("Análisis")
@@ -217,28 +228,23 @@ add("mapa", "Alcance y conversión", sec(
 n += 1
 form = [
     ("Escenario inesperado + rutina útil", "Un sitio que llama la atención y una rutina que se puede guardar.",
-     [("Entrena en el agua · glúteos", "104K"), ("Entrena en 10 min (campo)", "17,4K"), ("Entrena en el agua · brazos", "12K")]),
+     [("agua-gluteos", "104K"), ("entrena-10-min", "17,4K"), ("agua-brazos", "12K")]),
     ("Promesa concreta en la portada", "Un resultado concreto que tu público quiere.",
-     [("Adiós flacidez, hola firmeza", "33,3K"), ("Glúteos al siguiente nivel", "19,8K"), ("Si no eres constante, mira esto", "19,7K")]),
+     [("adios-flacidez", "33,3K"), ("gluteos-siguiente-nivel", "19,8K"), ("si-no-eres-constante", "19,7K")]),
     ("Situación con la que se identifican", "Humor o situaciones del día a día.",
-     [("Corro cada semana… y no hay manera", "48,5K"), ("Las 15:00 y ya no sé qué hacer", "14,5K"), ("No hay viento… pero hay que practicar", "12,2K")]),
+     [("corro-cada-semana", "48,5K"), ("las-15", "14,5K"), ("no-hay-viento", "12,2K")]),
 ]
 fh = ""
 for i, (t, s_, ej) in enumerate(form):
     x = 128 + i * 566
     fh += (
-        card(x, 290, 530, 620, d=i)
+        card(x, 290, 530, 650, d=i)
         + f'<p class="abs a disp rosa" style="left:{x + 36}px;top:326px;font-size:44px;--d:{i + 1}">0{i + 1}</p>'
         + p(t, x + 36, 396, 460, size=29, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
-        + p(s_, x + 36, 500, 460, size=22, d=i + 2)
+        + p(s_, x + 36, 500, 460, size=21, d=i + 2)
     )
     for j, (tt, vv) in enumerate(ej):
-        y = 650 + j * 76
-        fh += (
-            f'<div class="abs line-h" style="left:{x + 36}px;top:{y - 12}px;width:458px;background:#3A3D3C"></div>'
-            + p(tt, x + 36, y, 330, size=20, d=i + 3, cls="soft")
-            + p(vv, x + 380, y - 2, 114, size=24, d=i + 3, cls="rosa", extra="font-weight:800;text-align:right;")
-        )
+        fh += reel(x + 36 + j * 156, 600, 142, tt, vv, d=i + j)
 add("formulas", "Lo que funciona", sec(
     eyebrow("Análisis")
     + titulo("Lo que mejor te funciona", size=56)
@@ -248,19 +254,19 @@ add("formulas", "Lo que funciona", sec(
 # ── 8. Lo que no funciona ────────────────────────────────────────────────
 n += 1
 no = [
-    ("Consejos abstractos", "«¿Motivación o disciplina?» 2.360 · «Agosto: trabajes o descanses» 2.633 · «¿Milagros antes de vacaciones?» 3.505", "No hay un resultado concreto ni un ejercicio que guardar."),
-    ("Temas fuera de tu terreno", "Beauty tip 5.171 · Mi suplemento 3.342 · Café 4.747", "No tienen relación con el entrenamiento y despistan sobre de qué va tu cuenta."),
-    ("Kite técnico", "«Quien algo quiere algo le cuesta» 2.242 · «Algunas normas» 6.291", "Solo interesa a quien hace kite. Funciona mejor como parte de tu vida que como tema."),
-    ("Repetir sin cambiar el gancho", "Movilidad resubida: 548 frente a 9.674 · «Más pensamientos intrusivos» (nov) 4.136 frente a 70,2K", "Las segundas partes necesitan un enfoque distinto."),
+    ("Consejos abstractos", "motivacion-disciplina", "2.360", "También «Agosto: trabajes o descanses» (2.633) y «¿Milagros antes de vacaciones?» (3.505).", "No hay un resultado concreto ni un ejercicio que guardar."),
+    ("Temas fuera de tu terreno", "beauty-tip", "5.171", "También «Mi suplemento» (3.342) y el del café (4.747).", "No tienen relación con el entrenamiento."),
+    ("Kite técnico", "quien-algo-quiere", "2.242", "También «Kitesurf: algunas normas» (6.291).", "Solo interesa a quien hace kite."),
+    ("Segundas partes", "mas-pensamientos", "4.136", "Noviembre, frente a los 70,2K de «Mis pensamientos intrusivos».", "Repetir la idea sin un enfoque nuevo no funciona."),
 ]
 nh = ""
-for i, (t, ej, lec) in enumerate(no):
-    y = 290 + i * 152
+for i, (t, img, v, ej, lec) in enumerate(no):
+    x = 128 + i * 424
     nh += (
-        p(t, 128, y, 460, size=30, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
-        + p(ej, 620, y + 2, 600, size=21, d=i + 2, cls="muted")
-        + p(lec, 1260, y + 2, 532, size=22, d=i + 3)
-        + f'<div class="abs line-h" style="left:128px;top:{y + 124}px;width:1664px;background:#2E3130"></div>'
+        reel(x, 270, 230, img, v, d=i)
+        + p(t, x + 246, 280, 150, size=24, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
+        + p(lec, x + 246, 380, 150, size=19, d=i + 2)
+        + p(ej, x, 700, 380, size=19, d=i + 3, cls="muted")
     )
 add("nofunciona", "Lo que no funciona", sec(
     eyebrow("Análisis")
@@ -273,9 +279,9 @@ n += 1
 add("portadas", "Tus portadas", sec(
     eyebrow("Análisis")
     + titulo("Portadas", size=56)
-    + portada_reel(128, 300, "Adiós flacidez,<br>hola firmeza", "33,3K", "#6E6A63", d=0, w=200)
-    + portada_reel(352, 300, "Mis pensamientos intrusivos", "70,2K", "#2F8A6A", d=1, w=200)
-    + portada_reel(576, 300, "Supérate con cada nivel", "41,9K", "#8A8070", d=2, w=200)
+    + reel(128, 290, 210, "adios-flacidez", "33,3K", d=0)
+    + reel(352, 290, 210, "las-15", "14,5K", d=1)
+    + reel(576, 290, 210, "superate-cada-nivel", "41,9K", d=2)
     + label("Lo bueno", 860, 300)
     + lista([
         "Titular grande, legible y con un estilo constante.",
@@ -320,14 +326,15 @@ n += 1
 add("copies", "Copies y llamadas a la acción", sec(
     eyebrow("Análisis")
     + titulo("Textos y llamadas a la acción", size=56)
-    + card(128, 300, 812, 600)
-    + label("Noviembre · «Aumenta tu gasto calórico sin entrenar más»", 168, 336, 740)
-    + p("«…Y esto también forma parte de la filosofía de mi metodología Level Up Workout…»", 168, 400, 740, size=28, d=2, cls="", extra="font-weight:800;line-height:1.3;font-style:italic;")
+    + card(128, 300, 812, 620)
+    + reel(168, 336, 190, "gasto-calorico", "2.933", d=1)
+    + label("Noviembre", 390, 340, 500)
+    + p("«…Y esto también forma parte de la filosofía de mi metodología Level Up Workout…»", 390, 390, 510, size=25, d=2, cls="", extra="font-weight:800;line-height:1.3;font-style:italic;")
     + lista([
         "Bien: el contenido ya menciona Level Up.",
-        "2.933 reproducciones y 68 me gusta. El enlace está al final de un texto largo.",
+        "68 me gusta. El enlace está al final de un texto largo.",
         "La portada habla de «gasto calórico», que no es lo que diferencia a tu método.",
-    ], 168, 560, 740, size=23, d=3, gap=14)
+    ], 168, 700, 740, size=21, d=3, gap=10)
     + label("Lo que cambiamos", 1020, 300)
     + lista([
         "<b>La llamada a la acción va en el vídeo</b>, no solo en el texto: dicha por ti o en pantalla.",
@@ -445,21 +452,21 @@ add("pilares", "Cuatro pilares", sec(
 n += 1
 series = [
     ("Nivel 0", "Enseñar", ACENTO, "Un ejercicio o una rutina para quien nunca ha entrenado. Con silla y esterilla, como el Pre-Entreno.", "6 ejercicios para empezar desde 0 (11,3K)"),
-    ("Entrena donde estés", "Atraer", "#3E6FA8", "Rutina de 10 minutos en un sitio inesperado: el jardín de Cardedeu, la piscina, un hotel, la nieve.", "Entrena en el agua (104K)"),
-    ("¿Te ha pasado?", "Atraer", "#3E6FA8", "Humor de situaciones de mujeres que intentan entrenar: la pereza de las 15:00, el niño encima, la lavadora.", "Les Angles (748K), pero con tu público"),
+    ("Entrena donde estés", "Atraer", "#3E6FA8", "Rutina de 10 minutos en un sitio inesperado: el jardín de Cardedeu, la piscina, un hotel, la nieve.", "Entrena en el agua (104K y 12K)"),
+    ("¿Te ha pasado?", "Atraer", "#3E6FA8", "Humor de situaciones de mujeres que intentan entrenar: la pereza de las 15:00, el niño encima, la lavadora.", "Las 15:00 y ya no sé qué hacer (14,5K)"),
     ("No hay viento", "Conectar", "#2F8A6A", "Días sin kite: entreno en casa para seguir haciendo lo que te gusta.", "No hay viento… (12,2K)"),
-    ("Mitos 35+", "Enseñar", ACENTO, "Grasa abdominal, flacidez, huesos, cambios hormonales. Tu formación como argumento.", "Adiós flacidez (33,3K)"),
+    ("Mitos 35+", "Enseñar", ACENTO, "Grasa abdominal, flacidez, huesos, cambios hormonales. Tu formación como argumento.", "Grasa abdominal (18,7K)"),
     ("Dentro de Level Up", "Convertir", AZUL, "Pre-Entreno, cuándo entran bandas y pesas, recetas de la nutricionista, seguimiento con fotos y dudas comunes.", "Supérate con cada nivel (41,9K)"),
 ]
 sh = ""
-fotos_series = ["mat", "salto", "risa", "pared", "libros", "puente"]
+reels_series = [("6-ejercicios", "11,3K"), ("agua-brazos", "12K"), ("las-15", "14,5K"), ("no-hay-viento", "12,2K"), ("grasa-abdominal", "18,7K"), ("superate-cada-nivel", "41,9K")]
 for i, (t, pil_, c, txt, prueba) in enumerate(series):
     col, fila = i % 3, i // 3
     x = 128 + col * 566
     y = 290 + fila * 330
     sh += (
         card(x, y, 530, 300, d=i)
-        + foto(x, y, 180, 300, fotos_series[i], d=i, pos="center", extra="border-radius:24px 0 0 24px;")
+        + reel(x + 8, y + 8, 160, reels_series[i][0], reels_series[i][1], d=i)
         + f'<div class="abs a" style="left:{x + 206}px;top:{y + 26}px;padding:4px 12px;border-radius:999px;background:{c};color:{INK};font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;--d:{i}">{pil_}</div>'
         + p(t, x + 206, y + 66, 300, size=27, d=i + 1, cls="", extra="font-weight:800;line-height:1.1;")
         + p(txt, x + 206, y + 112, 300, size=18, d=i + 2, extra="line-height:1.3;")
@@ -477,9 +484,10 @@ add("humor", "El humor que vende", sec(
     eyebrow("Propuesta")
     + titulo("Humor: ejemplos", size=56)
     + card(128, 300, 812, 600)
-    + label("Hasta ahora", 168, 340, color=MUTED)
-    + p("«En mi defensa diré que no recordaba que llevaba más forfaits en el bolsillo»", 168, 390, 740, size=30, d=2, cls="", extra="font-weight:800;line-height:1.25;font-style:italic;")
-    + p("748.000 reproducciones, pero es un chiste de esquí. No tiene relación con Level Up.", 168, 560, 740, size=24, d=3)
+    + reel(168, 340, 220, "les-angles", "748K", d=1)
+    + label("Hasta ahora", 420, 340, 480, color=MUTED)
+    + p("«En mi defensa diré que no recordaba que llevaba más forfaits en el bolsillo»", 420, 390, 480, size=26, d=2, cls="", extra="font-weight:800;line-height:1.25;font-style:italic;")
+    + p("Es un chiste de esquí. No tiene relación con Level Up.", 420, 620, 480, size=23, d=3)
     + card(980, 300, 812, 600, d=1, cls="pm-card-r")
     + label("Propuesta", 1020, 340, color=NAVY, d=2)
     + lista([
