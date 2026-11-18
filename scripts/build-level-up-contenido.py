@@ -37,6 +37,29 @@ def label(t, x, y, w=700, color=None, d=1):
              extra=c + "font-weight:700;letter-spacing:.14em;text-transform:uppercase;")
 
 
+WEB = "https://levelup.luciaentrenadorapersonal.com/wp-content/uploads/"
+FOTOS = {  # fotos de su propia web (enlazadas desde allí)
+    "mat": "2025/01/IMG_6844-scaled.jpg",            # tumbada en la esterilla, top amarillo
+    "zancada": "2025/01/Portada.jpg",                 # B/N, zancada (portada web)
+    "puente": "2025/03/Sobre-Lucia-scaled.jpg",       # B/N, puente de glúteo
+    "clienta": "2025/03/mi-primer-contacto.-1-scaled.jpg",  # entrenando con una clienta en casa
+    "libros": "2025/03/mi-primer-contacto.-2-e1742473349662.jpg",  # libros y apuntes
+    "pared": "2025/03/despues-de-muchos-anos-como.jpg",   # sentadilla en pared, salón
+    "salto": "2025/03/me-considero-una-persona-scaled.jpg",  # saltando de alegría en el salón
+    "risa": "2025/03/porque-levelU-es-xra-ti-copia-scaled.jpg",  # riendo en la esterilla
+    "minibanda": "2025/11/mini-band-final-scaled.jpg",
+    "banda": "2025/11/banda-larga-fin-scaled.jpg",
+    "mancuernas": "2025/11/MANUERNAS.jpg",
+}
+
+
+def foto(x, y, w, h, k, d=0, pos="center", radius=24, extra=""):
+    return (
+        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:{radius}px;'
+        f'background:#222 url({WEB}{FOTOS[k]}) {pos}/cover no-repeat;{extra}--d:{d}"></div>'
+    )
+
+
 def portada_reel(x, y, texto, vistas, color, d=0, w=230, sub=""):
     """Mini portada vertical 9:16 con el texto de la portada y las reproducciones."""
     h = round(w * 16 / 9)
@@ -54,15 +77,15 @@ def portada_reel(x, y, texto, vistas, color, d=0, w=230, sub=""):
 # ── 1. Portada ───────────────────────────────────────────────────────────
 n += 1
 add("portada", "Auditoría de contenido", sec(
-    '<div class="abs deco f" style="left:1180px;top:-120px;width:900px;height:1320px;'
-    f'background:{ACENTO};transform:rotate(14deg);border-radius:60px;--d:0"></div>'
-    + portada_reel(1330, 200, "Tu contenido", "748K", NAVY, d=2, w=300, sub="rediseñado")
+    foto(1060, 0, 860, 1080, "risa", d=0, pos="center 30%", radius=0)
+    + f'<div class="abs" style="left:1060px;top:0;width:260px;height:1080px;background:linear-gradient(90deg,{INK},rgba(21,21,21,0))"></div>'
+    + f'<div class="abs gy" style="left:1040px;top:0;width:20px;height:1080px;background:{ACENTO};--d:1"></div>'
     + eyebrow("Sesión de contenido · 18 nov 2026", top=150)
     + '<h1 class="abs a disp" style="left:128px;top:290px;font-size:104px;line-height:1;--d:1">Más alcance.</h1>'
     '<h1 class="abs a disp outline" style="left:128px;top:404px;font-size:104px;line-height:1;--d:2">Más clientas.</h1>'
     + p("Auditoría de todo tu contenido y la redirección para que cada vídeo, además de gustar, lleve a Level Up.",
-        128, 580, 940, size=32, d=3, cls="", extra="font-weight:800;line-height:1.3;")
-    + p("Preparado por Maen Studios para Lucía · @lucia_entrenadorapersonal", 128, 800, 900, size=22, d=4)
+        128, 580, 860, size=32, d=3, cls="", extra="font-weight:800;line-height:1.3;")
+    + p("Preparado por Maen Studios para Lucía · @lucia_entrenadorapersonal", 128, 800, 860, size=22, d=4)
     + foot(n),
 ))
 
@@ -112,8 +135,9 @@ add("fuentes", "Qué hemos analizado", sec(
 n += 1
 add("parte1", "Parte 1 · Lo que has hecho", sec(
     eyebrow("Parte 1", k=True)
+    + foto(1100, 0, 820, 1080, "zancada", d=1, pos="70% center", radius=0)
     + '<h2 class="abs a disp" style="left:128px;top:330px;font-size:120px;line-height:1;color:#151515;--d:1">Lo que<br>has hecho</h2>'
-    + p("Dos años de contenido, mirados con lupa.", 128, 640, 1200, size=36, d=2, cls="", extra="color:#151515;font-weight:800;")
+    + p("Dos años de contenido, mirados con lupa.", 128, 640, 900, size=36, d=2, cls="", extra="color:#151515;font-weight:800;")
     + foot(n, k=True),
     bg=ACENTO, color=INK,
 ))
@@ -257,6 +281,27 @@ add("portadas", "Tus portadas", sec(
     + foot(n),
 ))
 
+# ── 9b. Banco de fotos ───────────────────────────────────────────────────
+n += 1
+add("bancofotos", "Tu banco de fotos", sec(
+    eyebrow("Lo que ya tienes y no usas")
+    + titulo("Tienes una sesión de fotos profesional<br>que tu Instagram casi no ve", size=50)
+    + foto(128, 330, 400, 590, "risa", d=0)
+    + foto(548, 330, 300, 285, "zancada", d=1, pos="65% center")
+    + foto(548, 635, 300, 285, "puente", d=2)
+    + foto(868, 330, 300, 590, "pared", d=3)
+    + foto(1188, 330, 300, 285, "minibanda", d=4)
+    + foto(1188, 635, 300, 285, "banda", d=5)
+    + p("Están en tu web. Son tu mejor material para:", 1530, 330, 262, size=22, d=4, cls="", extra="font-weight:800;")
+    + lista([
+        "Portadas de la serie Dentro de Level Up.",
+        "Destacados con una imagen coherente.",
+        "Historias con enlace a la prueba.",
+        "Carruseles de «Mitos 35+».",
+    ], 1530, 420, 262, size=20, d=5, gap=14)
+    + foot(n),
+))
+
 # ── 10. Copies y CTAs ────────────────────────────────────────────────────
 n += 1
 add("copies", "Copies y llamadas a la acción", sec(
@@ -285,19 +330,20 @@ n += 1
 add("audiencia", "Para quién publicas", sec(
     eyebrow("La pregunta clave")
     + titulo("¿Para quién publicas?", size=56)
-    + card(128, 300, 812, 600)
-    + label("Quien te encuentra hoy", 168, 340)
+    + card(128, 300, 560, 600)
+    + label("Quien te encuentra hoy", 168, 340, 480)
     + lista([
         "Gente del kite y del esquí.",
         "Quien busca humor rápido y se va.",
         "Deportistas que ya entrenan.",
         "Gente de Barcelona que busca entrenadora presencial.",
-    ], 168, 396, 740, size=27, d=2, gap=18)
-    + card(980, 300, 812, 600, d=1, cls="pm-card-r")
-    + label("Quien necesita Level Up", 1020, 340, color=NAVY, d=2)
+    ], 168, 396, 480, size=26, d=2, gap=18)
+    + foto(728, 300, 440, 600, "pared", d=1, pos="center")
+    + card(1208, 300, 584, 600, d=1, cls="pm-card-r")
+    + label("Quien necesita Level Up", 1248, 340, 500, color=NAVY, d=2)
     + p("Mujer de 35 a 55 años que lleva tiempo sin entrenar o nunca lo ha hecho. Poco tiempo, quizá con hijos. Le da vergüenza el gimnasio y no sabe por dónde empezar.",
-        1020, 396, 730, size=30, d=3, cls="", extra=f"color:{INK};font-weight:800;line-height:1.3;")
-    + p("No busca rendimiento. Busca empezar, no hacerse daño y verse capaz.", 1020, 720, 730, size=25, d=4, cls="", extra="color:#3A2F2F;")
+        1248, 396, 504, size=27, d=3, cls="", extra=f"color:{INK};font-weight:800;line-height:1.3;")
+    + p("No busca rendimiento. Busca empezar, no hacerse daño y verse capaz.", 1248, 760, 504, size=23, d=4, cls="", extra="color:#3A2F2F;")
     + foot(n),
 ))
 
@@ -305,8 +351,9 @@ add("audiencia", "Para quién publicas", sec(
 n += 1
 add("parte2", "Parte 2 · La redirección", sec(
     eyebrow("Parte 2", k=True)
-    + '<h2 class="abs a disp" style="left:128px;top:330px;font-size:120px;line-height:1;color:#151515;--d:1">La<br>redirección</h2>'
-    + p("Mismo talento, otro destino: que cada vídeo acerque a alguien a su Nivel 0.", 128, 640, 1400, size=36, d=2, cls="", extra="color:#151515;font-weight:800;")
+    + foto(1100, 0, 820, 1080, "salto", d=1, pos="center", radius=0)
+    + '<h2 class="abs a disp" style="left:128px;top:330px;font-size:110px;line-height:1;color:#151515;--d:1">La<br>redirección</h2>'
+    + p("Mismo talento, otro destino: que cada vídeo acerque a alguien a su Nivel 0.", 128, 640, 900, size=36, d=2, cls="", extra="color:#151515;font-weight:800;")
     + foot(n, k=True),
     bg=ACENTO, color=INK,
 ))
@@ -316,37 +363,39 @@ n += 1
 add("posicionamiento", "Tu posicionamiento", sec(
     eyebrow("La idea que lo ordena todo")
     + titulo("De «entrenadora que hace kite»<br>a «la que te enseña a empezar»", size=52)
-    + card(128, 380, 1664, 250, d=1, cls="pm-card-r")
+    + foto(1300, 300, 492, 620, "clienta", d=2, pos="35% center")
+    + card(128, 330, 1120, 300, d=1, cls="pm-card-r")
     + p("«Te enseño a empezar a entrenar desde cero, en casa y en 20 minutos. Y a no dejarlo.»",
-        176, 440, 1560, size=46, d=2, cls="", extra=f"color:{INK};font-weight:800;line-height:1.2;")
-    + label("Por qué funciona", 128, 690)
+        176, 380, 1030, size=44, d=2, cls="", extra=f"color:{INK};font-weight:800;line-height:1.2;")
+    + label("Por qué funciona", 128, 680)
     + lista([
         "Es exactamente lo que vende Level Up. Cada vídeo es un anuncio que no lo parece.",
         "Tu historia lo respalda: llevas años entrenando a mujeres que empezaban de cero, y en tus redes ya se ve tu día a día como madre y como deportista.",
         "Lo personal (kite, maternidad, humor) deja de competir con lo profesional y pasa a demostrarlo.",
-    ], 128, 740, 1664, size=25, d=3, gap=14)
+    ], 128, 730, 1120, size=24, d=3, gap=12)
     + foot(n),
 ))
 
 # ── 14. Cuatro pilares con trabajo ───────────────────────────────────────
 n += 1
 pil = [
-    ("Atraer", "30 %", "Humor y escenarios inesperados, siempre con situaciones de TU público.", "Que te descubran las que todavía no te siguen.", "#3E6FA8"),
-    ("Enseñar", "35 %", "Rutinas y ejercicios guardables para empezar desde cero.", "Que te guarden, te sigan y confíen en ti.", ACENTO),
-    ("Conectar", "15 %", "Kite, maternidad, tu vida. Con un puente hacia el «yo también puedo».", "Que te quieran y se queden.", "#2F8A6A"),
-    ("Convertir", "20 %", "Level Up por dentro, alumnas, prueba gratis, dudas frecuentes.", "Que se apunten.", AZUL),
+    ("Atraer", "30 %", "Humor y escenarios inesperados, siempre con situaciones de TU público.", "Que te descubran las que todavía no te siguen.", "#3E6FA8", "risa"),
+    ("Enseñar", "35 %", "Rutinas y ejercicios guardables para empezar desde cero.", "Que te guarden, te sigan y confíen en ti.", ACENTO, "mat"),
+    ("Conectar", "15 %", "Kite, maternidad, tu vida. Con un puente hacia el «yo también puedo».", "Que te quieran y se queden.", "#2F8A6A", "salto"),
+    ("Convertir", "20 %", "Level Up por dentro, alumnas, prueba gratis, dudas frecuentes.", "Que se apunten.", AZUL, "minibanda"),
 ]
 ph = ""
-for i, (t, pct, que, para, c) in enumerate(pil):
+for i, (t, pct, que, para, c, ft) in enumerate(pil):
     x = 128 + i * 424
     ph += (
-        card(x, 300, 396, 600, d=i)
-        + f'<div class="abs gx" style="left:{x}px;top:300px;width:396px;height:12px;border-radius:16px 16px 0 0;background:{c};--d:{i}"></div>'
-        + f'<p class="abs a disp" style="left:{x + 36}px;top:350px;font-size:64px;color:{c};--d:{i + 1}">{pct}</p>'
-        + p(t, x + 36, 440, 330, size=36, d=i + 1, cls="", extra="font-weight:800;")
-        + p(que, x + 36, 510, 330, size=23, d=i + 2)
-        + label("Para qué", x + 36, 700, 330, color=c, d=i + 2)
-        + p(para, x + 36, 740, 330, size=23, d=i + 3, cls="", extra="font-weight:700;")
+        card(x, 290, 396, 650, d=i)
+        + foto(x, 290, 396, 200, ft, d=i, pos="center 35%", radius=24, extra="border-radius:24px 24px 0 0;")
+        + f'<div class="abs gx" style="left:{x}px;top:490px;width:396px;height:8px;background:{c};--d:{i}"></div>'
+        + f'<p class="abs a disp" style="left:{x + 32}px;top:520px;font-size:48px;color:{c};--d:{i + 1}">{pct}</p>'
+        + p(t, x + 32, 590, 340, size=32, d=i + 1, cls="", extra="font-weight:800;")
+        + p(que, x + 32, 648, 340, size=21, d=i + 2)
+        + label("Para qué", x + 32, 790, 340, color=c, d=i + 2)
+        + p(para, x + 32, 826, 340, size=21, d=i + 3, cls="", extra="font-weight:700;")
     )
 add("pilares", "Cuatro pilares", sec(
     eyebrow("El nuevo reparto")
@@ -365,16 +414,18 @@ series = [
     ("Dentro de Level Up", "Convertir", AZUL, "Un nivel por dentro, una sesión real, el progreso de una alumna, las dudas más comunes.", "Supérate con cada nivel (41,9K)"),
 ]
 sh = ""
+fotos_series = ["mat", "salto", "risa", "pared", "libros", "puente"]
 for i, (t, pil_, c, txt, prueba) in enumerate(series):
     col, fila = i % 3, i // 3
     x = 128 + col * 566
     y = 290 + fila * 330
     sh += (
         card(x, y, 530, 300, d=i)
-        + f'<div class="abs a" style="left:{x + 36}px;top:{y + 34}px;padding:4px 12px;border-radius:999px;background:{c};color:{INK};font-size:16px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;--d:{i}">{pil_}</div>'
-        + p(t, x + 36, y + 80, 460, size=32, d=i + 1, cls="", extra="font-weight:800;")
-        + p(txt, x + 36, y + 134, 460, size=21, d=i + 2)
-        + p(f"Ya probado: {prueba}", x + 36, y + 244, 460, size=18, d=i + 2, cls="muted")
+        + foto(x, y, 180, 300, fotos_series[i], d=i, pos="center", extra="border-radius:24px 0 0 24px;")
+        + f'<div class="abs a" style="left:{x + 206}px;top:{y + 26}px;padding:4px 12px;border-radius:999px;background:{c};color:{INK};font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;--d:{i}">{pil_}</div>'
+        + p(t, x + 206, y + 66, 300, size=27, d=i + 1, cls="", extra="font-weight:800;line-height:1.1;")
+        + p(txt, x + 206, y + 112, 300, size=18, d=i + 2, extra="line-height:1.3;")
+        + p(f"Ya probado: {prueba}", x + 206, y + 252, 300, size=15, d=i + 2, cls="muted")
     )
 add("series", "Seis series fijas", sec(
     eyebrow("Formatos que se repiten")
@@ -424,10 +475,11 @@ add("anatomia", "Anatomía de un reel", sec(
     eyebrow("La fórmula")
     + titulo("Anatomía de un reel que atrae y convierte", size=56)
     + ah
-    + card(128, 720, 1664, 180, d=5)
-    + label("Ejemplo · serie Entrena donde estés", 168, 750)
+    + card(128, 690, 1664, 230, d=5)
+    + foto(128, 690, 300, 230, "pared", d=5, pos="center 30%", extra="border-radius:24px 0 0 24px;")
+    + label("Ejemplo · serie Entrena donde estés", 470, 720, 1200)
     + p("Jardín de Cardedeu. Portada: «10 minutos, una silla y cero excusas». Rutina de 4 ejercicios del Pre-Entreno. Cierre: «Esto es el Nivel 0 de Level Up. Comenta NIVEL0 y empieza gratis».",
-        168, 795, 1580, size=23, d=6)
+        470, 765, 1280, size=24, d=6)
     + foot(n),
 ))
 
@@ -599,10 +651,10 @@ add("semana1", "Esta semana", sec(
 # ── 24. Cierre ───────────────────────────────────────────────────────────
 n += 1
 add("cierre", "Cierre", sec(
-    '<div class="abs deco f" style="left:1260px;top:-160px;width:900px;height:1400px;'
-    f'background:{ACENTO};transform:rotate(14deg);border-radius:60px;--d:0"></div>'
+    foto(1180, 0, 740, 1080, "mat", d=0, pos="center", radius=0)
+    + f'<div class="abs" style="left:1180px;top:0;width:220px;height:1080px;background:linear-gradient(90deg,{INK},rgba(21,21,21,0))"></div>'
     + eyebrow("Para terminar")
-    + titulo("Ya sabes hacerte ver.<br>Ahora, que te vean<br>las que te necesitan.", top=280, size=62, width=1100)
+    + titulo("Ya sabes hacerte ver.<br>Ahora, que te vean<br>las que te necesitan.", top=280, size=58, width=1040)
     + '<div class="abs a" style="left:128px;top:760px;font-size:28px;line-height:1.5;--d:3">'
     '<p style="font-weight:800">Jandro Martín · Maen Studios</p>'
     '<p><a href="mailto:jandro@maenstudios.com" style="color:inherit">jandro@maenstudios.com</a> · +34 688 629 688</p>'
