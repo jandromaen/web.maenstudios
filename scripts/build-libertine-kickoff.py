@@ -288,7 +288,7 @@ items = [
     ("Accesos", "Instagram y TikTok", False),
     ("Marca", "Logo y tipografías: ya los tenemos", True),
     ("Fechas", "Lanzamientos, eventos y fechas clave de los próximos meses", False),
-    ("Validación", "Quién valida y en cuánto tiempo nos responde", False),
+    ("Validación", "Sofía valida briefings y calendarios", True),
     ("Producto", "Latas para el primer rodaje", False),
 ]
 it = ""
