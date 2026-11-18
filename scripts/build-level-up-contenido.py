@@ -700,27 +700,95 @@ add("medimos", "Qué medimos", sec(
     + kh + foot(n),
 ))
 
-# ── 23. Esta semana ──────────────────────────────────────────────────────
-n += 1
-acc = [
-    ("Bio y enlace", "Nueva bio con la promesa y un único enlace a la prueba gratis."),
-    ("Palabra clave", "Activar NIVEL0 con respuesta automática."),
-    ("Primer lote", "Grabar el lunes 4 piezas de la lista de ideas."),
-    ("Testimonios", "Pedir 3 valoraciones a tus 18 clientas presenciales, sobre todo a las que han probado Level Up."),
-    ("Accesos", "Que Maen pueda ver las estadísticas en Meta, para medir desde ya."),
-]
-ah = ""
-for i, (t, s_) in enumerate(acc):
-    y = 300 + i * 116
-    ah += (
-        f'<div class="abs pop" style="left:128px;top:{y}px;width:44px;height:44px;border-radius:12px;border:3px solid {ACENTO};--d:{i}"></div>'
-        + p(t, 210, y + 2, 460, size=32, d=i + 1, cls="", extra="font-weight:800;")
-        + p(s_, 700, y + 6, 1090, size=25, d=i + 2)
+# ── 23. Plan de acción ───────────────────────────────────────────────────
+QUIEN = {"Lucía": ACENTO, "Maen": AZUL, "Web": VERDE}
+
+
+def tarea(x, y, w, texto, quien, d):
+    c = QUIEN[quien]
+    return (
+        f'<div class="abs a" style="left:{x}px;top:{y}px;width:{w}px;font-size:19px;line-height:1.3;color:#E4E2DE;--d:{d}">'
+        f'<span style="display:inline-block;margin-right:8px;padding:1px 9px;border-radius:999px;background:{c};color:{INK};'
+        f'font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:2px">{quien}</span>{texto}</div>'
     )
-add("semana1", "Esta semana", sec(
-    eyebrow("Próximos pasos")
-    + titulo("Esta semana", size=56)
-    + ah + foot(n),
+
+
+fases = [
+    ("Semana 1", "18–22 nov", "Base", [
+        ("Bio nueva y un único enlace a la prueba gratis.", "Lucía"),
+        ("Destacados: de 14 a 5, con «Empieza aquí» el primero.", "Lucía"),
+        ("Palabra clave NIVEL0 con respuesta automática.", "Maen"),
+        ("Pedir 3 testimonios a clientas presenciales.", "Lucía"),
+        ("Accesos a Meta para medir.", "Lucía"),
+    ]),
+    ("Semana 2", "23–29 nov", "Primer lote", [
+        ("Guiones de las 4 primeras piezas.", "Maen"),
+        ("Lunes 23: grabar el lote.", "Lucía"),
+        ("Plantillas de portada por formato.", "Maen"),
+        ("Publicar martes, jueves y sábado.", "Lucía"),
+        ("Historias diarias, 2-3 con enlace.", "Lucía"),
+    ]),
+    ("Semanas 3-4", "30 nov–13 dic", "Sistema", [
+        ("Email de bienvenida, aviso antes del cobro y pregunta al darse de baja.", "Web"),
+        ("Landing: testimonios y vídeo tuyo.", "Web"),
+        ("Google Analytics y píxel de Meta.", "Web"),
+        ("Calendario de diciembre.", "Maen"),
+    ]),
+    ("Mediados de dic.", "Revisión", "Ajustes", [
+        ("Revisión de métricas del primer mes.", "Maen"),
+        ("Qué formatos se quedan y cuáles cambian.", "Maen"),
+        ("Plan de enero.", "Maen"),
+    ]),
+]
+ph = ""
+for i, (cuando, fecha, nombre, tareas) in enumerate(fases):
+    x = 128 + i * 424
+    ph += (
+        card(x, 300, 396, 640, d=i)
+        + p(cuando, x + 30, 328, 340, size=20, d=i + 1, cls="rosa", extra="font-weight:700;letter-spacing:.1em;text-transform:uppercase;")
+        + p(fecha, x + 30, 362, 340, size=19, d=i + 1, cls="muted")
+        + p(nombre, x + 30, 392, 340, size=32, d=i + 1, cls="", extra="font-weight:800;")
+    )
+    y = 450
+    for k, (t, q) in enumerate(tareas):
+        ph += tarea(x + 30, y, 336, t, q, i + 2)
+        y += 108 if len(t) > 64 else (84 if len(t) > 30 else 60)
+leyenda = "".join(
+    f'<span style="display:inline-block;margin-right:24px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:{c};margin-right:8px;vertical-align:-1px"></span>{"Su cuñado (web)" if k == "Web" else k}</span>'
+    for k, c in QUIEN.items()
+)
+n += 1
+add("plan", "Plan de acción", sec(
+    eyebrow("Plan de acción")
+    + titulo("De hoy a mediados de diciembre", size=56)
+    + f'<div class="abs a muted" style="left:128px;top:252px;font-size:18px;--d:2">{leyenda}</div>'
+    + ph + foot(n),
+))
+
+# ── 23b. Objetivos del primer mes ────────────────────────────────────────
+n += 1
+obj = [
+    ("12", "reels publicados", "Hoy: 4,5 al mes"),
+    ("30", "comentarios con NIVEL0", "Hoy: 0"),
+    ("6", "seguidoras por cada 1.000 reproducciones", "Hoy: 4,3"),
+    ("5", "pruebas gratis reales en diciembre", "Hoy: 1,25 al mes"),
+]
+oh = ""
+for i, (v, t, hoy) in enumerate(obj):
+    x = 128 + i * 424
+    oh += (
+        card(x, 330, 396, 420, d=i)
+        + f'<p class="abs a disp rosa" style="left:{x + 36}px;top:370px;font-size:96px;--d:{i + 1}">{v}</p>'
+        + p(t, x + 36, 500, 330, size=28, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
+        + p(hoy, x + 36, 660, 330, size=22, d=i + 2, cls="muted")
+    )
+add("objetivos", "Objetivos del primer mes", sec(
+    eyebrow("Plan de acción")
+    + titulo("Objetivos del primer mes", size=56)
+    + oh
+    + p("Propuesta para cerrar juntos. La revisamos a mediados de diciembre con los datos de Meta.",
+        128, 800, 1664, size=24, d=6, cls="soft")
+    + foot(n),
 ))
 
 # ── 24. Cierre ───────────────────────────────────────────────────────────
