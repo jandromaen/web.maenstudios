@@ -105,7 +105,7 @@ add("portada", "Kick-off", sec(
     f'<img src="/pitch/libertine-blends/maen-logo-negro.png" alt="maen studios" style="height:34px;width:auto"></div>'
     + f'<h1 style="position:absolute;left:120px;top:400px;{COND};font-size:250px;font-weight:700;line-height:.9;letter-spacing:4px">KICK-OFF</h1>'
     + f'<p style="position:absolute;left:128px;top:650px;width:820px;font-size:38px;line-height:1.3">'
-    "Cómo vamos a trabajar juntos como vuestro equipo social y creativo en Instagram y TikTok.</p>"
+    "Cómo vamos a trabajar juntos como vuestro equipo social y creativo en Social Media.</p>"
     + f'<p style="position:absolute;left:128px;top:850px;padding:14px 30px;{WIDE};font-size:24px;font-weight:700;'
     f'letter-spacing:4px;color:{AMARILLO};background:{INK};border-radius:999px">18 · 11 · 2026</p>'
 ))
