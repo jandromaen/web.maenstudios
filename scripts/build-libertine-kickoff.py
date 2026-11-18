@@ -234,7 +234,7 @@ add("post-calendario", "Postproducción y calendario", paso(
     ["Edición en 9:16 y 4:5",
      "Con vuestro logo y vuestra línea gráfica",
      "Calendario del mes en Canva: cada día con su pieza, su copy y el enlace a Drive"],
-    ["Revisar el calendario y darnos feedback en una sola ronda",
+    ["Revisar el calendario y darnos feedback",
      "Aprobarlo antes de que empiece el mes"], n))
 
 n += 1
