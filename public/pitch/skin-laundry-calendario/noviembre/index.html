@@ -715,12 +715,14 @@ Reserva la tuya desde el enlace de la bio.
 #AntesYDespues #AcidoHialuronico #Neuromoduladores #Ojeras #MedicinaEsteticaBarcelona #SkinLaundryBarcelona` },
 
 { d:18, formato:"Carrusel", estado:"listo", cubo:"Branding", tema:"Skin Laundry × Lapso", hora:"19:00h",
+  storyVisible:true, storyLbl:"Story · ganadora del sorteo",
+  storyImg:"/pitch/skin-laundry-calendario/noviembre/img/st_18_sorteo.jpg?v=11181005", story:["Story: ganadora del sorteo","Añadir desde Instagram el sticker de mención con la ganadora en la caja pequeña"],
   etiqueta:"Colaboración con Lapso",
   media:"/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_05.jpg?v=11180950", slides:["/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_05.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_02.mp4?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_03.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_04.mp4?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_01.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_06.mp4?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_07.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_08.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_09.jpg?v=11180950","/pitch/skin-laundry-calendario/noviembre/img/d18_lapso_10.jpg?v=11180950"],
   pieza:"Glow after the Burn: así fue el evento con Lapso",
   base:"Fotos y vídeos del evento", cta:"Primer láser a 75 € con código",
   nota:"Publicar como colaboración con la cuenta de Lapso y etiquetarla · las slides 2, 4 y 6 son vídeo con su sonido · confirmar que el código LapsoCalenton se puede compartir en abierto",
-  idea:["1 · El equipo de Skin Laundry","2 · Vídeo: pantalla The Calentón","3 · Nuestro Vanity Area","4 · Vídeo: la clase de spinning","5 · Entrada: cubos Treat · Glow · Repeat","6 · Vídeo: análisis de piel en el stand","7 · Vitrina de producto","8 · Las asistentes en el stand","9 · El flyer de la promo","10 · Equipo en el stand"], story:[],
+  idea:["1 · El equipo de Skin Laundry","2 · Vídeo: pantalla The Calentón","3 · Nuestro Vanity Area","4 · Vídeo: la clase de spinning","5 · Entrada: cubos Treat · Glow · Repeat","6 · Vídeo: análisis de piel en el stand","7 · Vitrina de producto","8 · Las asistentes en el stand","9 · El flyer de la promo","10 · Equipo en el stand"],
   copy:`Glow after the Burn 🔥
 
 Así fue The Calentón con Lapso: una clase de spinning a tope y, al bajar de la bici, nuestro Vanity Area con análisis de piel, producto y mucho glow.
@@ -1359,7 +1361,7 @@ dayPlan.forEach(item => {
   ${p.externo ? `<div class="day-right"><div class="ext-box"><span class="eyebrow">${esc(p.formato)} · ${esc(p.tema)}</span><b>Lo publica el equipo de influencers de All About</b><span>Temática: ${esc(p.pieza)}</span></div></div>` : ""}
   <div class="day-right" ${p.externo ? 'style="display:none"' : ""}>
     ${p.opciones ? `<div class="opts"><div class="col-lbl">${esc(p.formato)} · dos opciones de diseño</div><div class="opts-row">${p.slides.map((x,i) => `<figure><img src="${esc(x)}" alt=""><figcaption>Opción ${"AB"[i]}</figcaption></figure>`).join("")}</div></div>` : ""}
-    <div class="post-frame ${isReel ? "is-reel" : ""}" ${(p.opciones || p.sinDiseno) ? 'style="display:none"' : ""}>
+    <div class="post-frame ${isReel ? "is-reel" : ""}${(p.storyVisible && p.slides && p.slides.length > 6) ? " compact" : ""}" ${(p.opciones || p.sinDiseno) ? 'style="display:none"' : ""}>
       <div class="col-lbl">${esc(p.formato)}</div>
       ${isReel ? reelCard(p) : ""}<div class="ig-card" ${isReel ? 'style="display:none"' : ""}>
         <div class="hd"><i>${avatar}</i>skinlaundry_es</div>
@@ -1371,8 +1373,8 @@ dayPlan.forEach(item => {
       ${p.slides ? `<div class="slides${p.slides.length > 6 ? " two" : ""}" style="--rows:${Math.ceil(p.slides.length / 2)}">${p.slides.map((x,i) => `<div><img src="${esc(isVid(x) ? x.replace(/\.mp4(\?|$)/, "_poster.jpg$1") : x)}" ${isVid(x) ? `data-vid="${esc(x)}"` : ""} alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
       ${p.fuente ? `<div class="src"><b>Material</b>${esc(p.fuente)}</div>` : ""}
     </div>
-    <div class="story-frame" style="left:330px${MOSTRAR_STORIES ? "" : ";display:none"}">
-      <div class="col-lbl">Story de apoyo</div>
+    <div class="story-frame" style="left:${p.slides && p.slides.length > 6 ? (p.storyVisible ? 440 : 470) : 330}px${(MOSTRAR_STORIES || p.storyVisible) ? "" : ";display:none"}">
+      <div class="col-lbl">${esc(p.storyLbl || "Story de apoyo")}</div>
       ${p.repost ? repostStory(p) : p.storyImgs ? `<div class="tpl sm" style="cursor:pointer" title="Toca para ver la siguiente story" onclick="const im=this.querySelectorAll('img');let i=[...im].findIndex(x=>x.style.opacity!=='0');im[i].style.opacity=0;i=(i+1)%im.length;im[i].style.opacity=1;this.querySelector('b').textContent=(i+1)+' / '+im.length">${p.storyImgs.map((x,i) => `<img src="${esc(x)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .25s;opacity:${i ? 0 : 1}">`).join("")}<b style="position:absolute;top:8px;right:8px;background:rgba(26,19,18,.65);color:#F6EDE4;font:600 10px/1 sans-serif;padding:4px 7px;border-radius:10px">1 / ${p.storyImgs.length}</b></div>` : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
     </div>
@@ -1531,6 +1533,9 @@ go(start - 1, false);
 .post-frame.is-reel{width:250px!important}
 .post-frame .slides{position:absolute;left:calc(100% + 22px);top:22px;margin-top:0!important;flex-direction:column;gap:8px}
 .post-frame .slides div{width:60px}
+.post-frame.compact{width:280px!important}
+.post-frame.compact .slides{left:calc(100% + 18px)}
+.post-frame.compact .slides div{width:52px}
 .post-frame .slides.two{display:grid;grid-template-rows:repeat(var(--rows),auto);grid-auto-flow:column;gap:8px}
 .opts figure{width:330px}
 .opts img{width:330px;height:412px}
