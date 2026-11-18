@@ -136,27 +136,30 @@ add("portada", "Auditoría de contenido", sec(
     foto(1060, 0, 860, 1080, "risa", d=0, pos="center 30%", radius=0)
     + f'<div class="abs" style="left:1060px;top:0;width:260px;height:1080px;background:linear-gradient(90deg,{INK},rgba(21,21,21,0))"></div>'
     + eyebrow("Auditoría de contenido · Instagram", top=150)
-    + '<h1 class="abs a disp" style="left:128px;top:290px;font-size:104px;line-height:1;--d:1">Más alcance.</h1>'
-    '<h1 class="abs a disp outline" style="left:128px;top:404px;font-size:104px;line-height:1;--d:2">Más clientas.</h1>'
-    + p("Análisis de tu contenido en Instagram y propuesta de cambios para llevar más gente a Level Up.",
+    + '<h1 class="abs a disp" style="left:128px;top:290px;font-size:104px;line-height:1;--d:1">De 1 a 3</h1>'
+    '<h1 class="abs a disp outline" style="left:128px;top:404px;font-size:84px;line-height:1;--d:2">reels por semana</h1>'
+    + p("Auditoría de tu contenido en Instagram y el plan para triplicar lo que publicas y llevar más gente a Level Up.",
         128, 580, 860, size=32, d=3, cls="", extra="font-weight:800;line-height:1.3;")
     + p("Maen Studios · 18 de noviembre de 2026", 128, 800, 860, size=22, d=4)
     + foot(n),
 ))
 
-# ── 2. La pregunta de hoy ────────────────────────────────────────────────
+# ── 2. El objetivo de hoy ────────────────────────────────────────────────
 n += 1
-add("pregunta", "La pregunta de hoy", sec(
-    eyebrow("Objetivo")
-    + titulo("¿Cómo llegas a más gente<br>y conviertes más visitas en clientas?", size=60)
-    + card(128, 390, 812, 500)
-    + label("Alcance", 168, 430)
-    + p("Que te vea más gente de tu público: mujeres que quieren empezar a entrenar y no saben cómo.", 168, 480, 730, size=32, d=2, cls="", extra="font-weight:800;line-height:1.25;")
-    + p("Situación actual: has tenido reels de 748.000, 104.000 y 70.000 reproducciones.", 168, 700, 730, size=25, d=3)
-    + card(980, 390, 812, 500, d=1, cls="pm-card-r")
-    + label("Conversión", 1020, 430, color=NAVY, d=2)
-    + p("Que quien te ve dé el siguiente paso: te siga, entre en la web y empiece la prueba gratis.", 1020, 480, 730, size=32, d=3, cls="", extra=f"color:{INK};font-weight:800;line-height:1.25;")
-    + p("Situación actual: 5 pruebas gratis reales en 4 meses.", 1020, 700, 730, size=25, d=4, cls="", extra="color:#3A2F2F;")
+add("objetivo", "El objetivo de hoy", sec(
+    eyebrow("El objetivo de hoy")
+    + titulo("Triplicar tu contenido", size=72)
+    + card(128, 330, 640, 580, d=1, cls="pm-card-r")
+    + f'<p class="abs a disp" style="left:176px;top:370px;font-size:180px;line-height:1;color:{INK};--d:2">×3</p>'
+    + p("De 1 a 3 reels por semana.", 176, 600, 560, size=40, d=3, cls="", extra=f"color:{INK};font-weight:800;line-height:1.15;")
+    + p("De 4,5 a unos 12 al mes.", 176, 710, 560, size=28, d=4, cls="", extra="color:#3A2F2F;font-weight:700;")
+    + label("Por qué", 840, 330, 900)
+    + lista([
+        "<b>Hoy publicas una vez a la semana de media</b>, y 8 de las 27 semanas entre mayo y octubre no publicaste nada.",
+        "<b>No se sabe qué vídeo va a funcionar.</b> 3 de tus 27 vídeos se llevaron el 59 % de las reproducciones y casi la mitad de las seguidoras nuevas. 12 no llegaron a 5.000. Cuantos más publiques, más oportunidades.",
+        "<b>Hace falta espacio para Level Up.</b> Con 12 vídeos al mes puedes hablar del método 2-3 veces sin que tu cuenta parezca un anuncio.",
+        "<b>Cabe en tus 2-3 horas</b> si grabas por lotes, con formatos fijos e ideas preparadas.",
+    ], 840, 384, 952, size=24, d=3, gap=22)
     + foot(n),
 ))
 
@@ -219,6 +222,39 @@ add("picos", "Tus tres picos", sec(
     + ph
     + p("Los tres se vieron mucho, pero solo el de la piscina llegó a tu público y trajo seguidoras que pueden acabar en Level Up.",
         128, 880, 1664, size=28, d=6, cls="soft", extra="line-height:1.3;")
+    + foot(n),
+))
+
+# ── 19b. Frecuencia ──────────────────────────────────────────────────────
+n += 1
+meses = [("May", 6), ("Jun", 4), ("Jul", 2), ("Ago", 5), ("Sep", 4), ("Oct", 6), ("Nov*", 2)]
+base, alto, maxv = 860, 470, 13
+fq = ""
+for i, (m, v) in enumerate(meses):
+    x = 128 + i * 150
+    hh = round(v / maxv * alto)
+    fq += (
+        f'<div class="abs gy" style="left:{x}px;top:{base - hh}px;width:100px;height:{hh}px;border-radius:10px 10px 0 0;background:#5A5D5C;--d:{i}"></div>'
+        f'<p class="abs a" style="left:{x}px;top:{base - hh - 44}px;width:100px;text-align:center;font-size:28px;font-weight:800;--d:{i + 1}">{v}</p>'
+        f'<p class="abs a muted" style="left:{x}px;top:{base + 14}px;width:100px;text-align:center;font-size:20px;--d:{i}">{m}</p>'
+    )
+x = 128 + 7 * 150 + 40
+hh = round(12 / maxv * alto)
+fq += (
+    f'<div class="abs gy" style="left:{x}px;top:{base - hh}px;width:130px;height:{hh}px;border-radius:10px 10px 0 0;background:{ACENTO};--d:8"></div>'
+    f'<p class="abs a disp rosa" style="left:{x - 10}px;top:{base - hh - 54}px;width:150px;text-align:center;font-size:36px;--d:9">12</p>'
+    f'<p class="abs a rosa" style="left:{x - 20}px;top:{base + 14}px;width:170px;text-align:center;font-size:20px;font-weight:800;--d:8">Objetivo</p>'
+    f'<div class="abs line-h" style="left:128px;top:{base}px;width:1220px"></div>'
+)
+add("frecuencia", "Frecuencia", sec(
+    eyebrow("Análisis · Frecuencia")
+    + titulo("Triplicar las publicaciones", size=56)
+    + p("Publicaciones al mes", 128, 290, 600, size=20, d=1, cls="muted", extra="letter-spacing:.1em;text-transform:uppercase;")
+    + fq
+    + p("*Noviembre, hasta el día 18.", 128, 930, 600, size=18, d=9, cls="muted")
+    + kpi(1440, 330, 352, "≈ 1", "reel a la semana de media entre mayo y octubre", 3, size=64)
+    + kpi(1440, 530, 352, "8 de 27", "semanas sin ninguna publicación; el parón más largo, 20 días (julio)", 4, size=56)
+    + kpi(1440, 730, 352, "3", "reels a la semana a partir de ahora (≈ 12 al mes)", 5, size=64, color=ACENTO)
     + foot(n),
 ))
 
@@ -622,39 +658,6 @@ add("referentes", "Lo que hacen tus referentes", sec(
     + foot(n),
 ))
 
-# ── 19b. Frecuencia ──────────────────────────────────────────────────────
-n += 1
-meses = [("May", 6), ("Jun", 4), ("Jul", 2), ("Ago", 5), ("Sep", 4), ("Oct", 6), ("Nov*", 2)]
-base, alto, maxv = 860, 470, 13
-fq = ""
-for i, (m, v) in enumerate(meses):
-    x = 128 + i * 150
-    hh = round(v / maxv * alto)
-    fq += (
-        f'<div class="abs gy" style="left:{x}px;top:{base - hh}px;width:100px;height:{hh}px;border-radius:10px 10px 0 0;background:#5A5D5C;--d:{i}"></div>'
-        f'<p class="abs a" style="left:{x}px;top:{base - hh - 44}px;width:100px;text-align:center;font-size:28px;font-weight:800;--d:{i + 1}">{v}</p>'
-        f'<p class="abs a muted" style="left:{x}px;top:{base + 14}px;width:100px;text-align:center;font-size:20px;--d:{i}">{m}</p>'
-    )
-x = 128 + 7 * 150 + 40
-hh = round(12 / maxv * alto)
-fq += (
-    f'<div class="abs gy" style="left:{x}px;top:{base - hh}px;width:130px;height:{hh}px;border-radius:10px 10px 0 0;background:{ACENTO};--d:8"></div>'
-    f'<p class="abs a disp rosa" style="left:{x - 10}px;top:{base - hh - 54}px;width:150px;text-align:center;font-size:36px;--d:9">12</p>'
-    f'<p class="abs a rosa" style="left:{x - 20}px;top:{base + 14}px;width:170px;text-align:center;font-size:20px;font-weight:800;--d:8">Objetivo</p>'
-    f'<div class="abs line-h" style="left:128px;top:{base}px;width:1220px"></div>'
-)
-add("frecuencia", "Frecuencia", sec(
-    eyebrow("Propuesta · Frecuencia")
-    + titulo("Triplicar las publicaciones", size=56)
-    + p("Publicaciones al mes", 128, 290, 600, size=20, d=1, cls="muted", extra="letter-spacing:.1em;text-transform:uppercase;")
-    + fq
-    + p("*Noviembre, hasta el día 18.", 128, 930, 600, size=18, d=9, cls="muted")
-    + kpi(1440, 330, 352, "≈ 1", "reel a la semana de media entre mayo y octubre", 3, size=64)
-    + kpi(1440, 530, 352, "8 de 27", "semanas sin ninguna publicación; el parón más largo, 20 días (julio)", 4, size=56)
-    + kpi(1440, 730, 352, "3", "reels a la semana a partir de ahora (≈ 12 al mes)", 5, size=64, color=ACENTO)
-    + foot(n),
-))
-
 # ── 20. Tu semana con 2-3 horas ──────────────────────────────────────────
 n += 1
 dias = [
@@ -836,7 +839,8 @@ n += 1
 add("cierre", "Cierre", sec(
     foto(1180, 0, 740, 1080, "mat", d=0, pos="center", radius=0)
     + f'<div class="abs" style="left:1180px;top:0;width:220px;height:1080px;background:linear-gradient(90deg,{INK},rgba(21,21,21,0))"></div>'
-    + titulo("Gracias, Lucía", top=380, size=96, width=1040)
+    + titulo("Gracias, Lucía", top=330, size=96, width=1040)
+    + p("Lo que nos llevamos de hoy: <b>de 1 a 3 reels por semana.</b>", 128, 480, 1000, size=34, d=2, cls="rosa", extra="line-height:1.3;")
     + '<div class="abs a" style="left:128px;top:760px;font-size:28px;line-height:1.5;--d:3">'
     '<p style="font-weight:800">Jandro Martín · Maen Studios</p>'
     '<p><a href="mailto:jandro@maenstudios.com" style="color:inherit">jandro@maenstudios.com</a> · +34 688 629 688</p>'
