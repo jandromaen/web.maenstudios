@@ -1031,6 +1031,40 @@ add("objetivosmes", "Objetivos de este mes", sec(
     + foot(n),
 ))
 
+# ── 23d. Próximos pasos ──────────────────────────────────────────────────
+n += 1
+pasos = [
+    ("Esta semana", "Antes del lunes 23", ACENTO, [
+        "<b>Estética</b>: 2-3 colores, 1-2 tipografías, estilo de subtítulos y una plantilla de portada por formato. Me la pasas y la revisamos.",
+        "<b>Biografía</b>: founder de Level Up Workout, a quién ayudas y un único enlace a la prueba gratis. Me la pasas antes de publicarla.",
+        "<b>Guiones de las 2 primeras semanas</b>: 6 vídeos con gancho, idea y cierre, a partir de las 10 ideas.",
+        "<b>Calendario</b>: martes, jueves y sábado, con las 2 primeras semanas planificadas.",
+    ]),
+    ("Desde el lunes 23", "Cada semana", "#F4F1EC", [
+        "<b>Grabar de una sentada</b> los 3 reels de la semana y clips para historias.",
+        "<b>Publicar 3 reels por semana</b>, programados con 2 semanas de antelación.",
+    ]),
+    ("Próxima sesión", "Principios de diciembre", "#F4F1EC", [
+        "<b>Traer los primeros 6 reels publicados</b> para ver juntos qué ha funcionado.",
+        "Y empezamos con la siguiente parte: <b>de seguidora a clienta</b>.",
+    ]),
+]
+xs = [(128, 700), (868, 450), (1358, 434)]
+pp = ""
+for i, ((t, cuando, c, items), (x, w)) in enumerate(zip(pasos, xs)):
+    tinta = f"color:{INK};"
+    pp += (
+        f'<div class="abs pop" style="left:{x}px;top:290px;width:{w}px;height:540px;border-radius:28px;background:{c};--d:{i}"></div>'
+        + p(t, x + 36, 324, w - 72, size=32, d=i + 1, cls="", extra="font-weight:800;" + tinta)
+        + p(cuando, x + 36, 372, w - 72, size=20, d=i + 1, cls="", extra="font-weight:700;letter-spacing:.1em;text-transform:uppercase;" + ("color:#6B5A4C;" if c == ACENTO else f"color:{ACENTO_TXT};"))
+        + lista(items, x + 36, 430, w - 72, size=21, d=i + 2, gap=18, color=INK, mcolor=(INK if c == ACENTO else "var(--rosa)"))
+    )
+add("pasos", "Próximos pasos", sec(
+    eyebrow("Al salir de hoy")
+    + titulo("Próximos pasos", size=56)
+    + pp + foot(n),
+))
+
 # ── 24. Cierre ───────────────────────────────────────────────────────────
 n += 1
 add("cierre", "Cierre", sec(
