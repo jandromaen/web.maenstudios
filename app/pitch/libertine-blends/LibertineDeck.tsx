@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { DIAPOS } from "./diapos";
+import { DIAPOS, type DiapoHtml } from "./diapos";
 
 const ANCHO = 1920;
 const ALTO = 1080;
@@ -17,12 +17,18 @@ const ALTO = 1080;
  * diapositiva (mitad izquierda, atrás; mitad derecha, adelante). Pulsar un
  * vídeo lo pausa o lo reanuda en vez de pasar de diapositiva.
  */
-export default function LibertineDeck() {
+export default function LibertineDeck({
+  diapos = DIAPOS,
+  marca = "Maen Studios × Libertine Blends",
+}: {
+  diapos?: DiapoHtml[];
+  marca?: string;
+} = {}) {
   const [indice, setIndice] = useState(0);
   const [escala, setEscala] = useState(0);
   const escena = useRef<HTMLDivElement>(null);
   const deck = useRef<HTMLDivElement>(null);
-  const total = DIAPOS.length;
+  const total = diapos.length;
 
   const ir = useCallback(
     (i: number) => setIndice(Math.max(0, Math.min(total - 1, i))),
@@ -98,7 +104,7 @@ export default function LibertineDeck() {
     else siguiente();
   };
 
-  const diapo = DIAPOS[indice];
+  const diapo = diapos[indice];
 
   return (
     <div className="lb" ref={deck}>
@@ -118,7 +124,7 @@ export default function LibertineDeck() {
       </div>
 
       <div className="lb-hud">
-        <span className="lb-hud-marca">Maen Studios × Libertine Blends</span>
+        <span className="lb-hud-marca">{marca}</span>
         <div className="lb-hud-nav">
           <button onClick={anterior} disabled={indice === 0} aria-label="Anterior">
             ‹
