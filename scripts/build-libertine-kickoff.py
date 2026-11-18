@@ -223,11 +223,10 @@ n += 1
 add("rodaje", "Rodaje", paso(
     "rodaje", "02", "Rodaje", NARANJA, "latas-hielo.jpg", "55% 50%",
     ["Una jornada de 4 h al mes, con dirección, foto y vídeo",
-     "Todo lo del mes sale de esa jornada",
+     "Modelos y actores: todos mayores de 25 y con la cesión de imagen firmada",
      "Grabaciones extra: 100 €/h en horario laboral, 150 €/h fuera (+ IVA)"],
     ["Producto para grabar",
-     "Espacio, si grabamos en vuestras localizaciones",
-     "Quien salga, mayor de 25 años y con la cesión de imagen firmada"], n))
+     "Espacio, si grabamos en vuestras localizaciones"], n))
 
 n += 1
 add("post-calendario", "Postproducción y calendario", paso(
