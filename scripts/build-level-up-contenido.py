@@ -136,11 +136,11 @@ add("portada", "Auditoría de contenido", sec(
     foto(1060, 0, 860, 1080, "risa", d=0, pos="center 30%", radius=0)
     + f'<div class="abs" style="left:1060px;top:0;width:260px;height:1080px;background:linear-gradient(90deg,{INK},rgba(21,21,21,0))"></div>'
     + eyebrow("Auditoría de contenido · Instagram", top=150)
-    + '<h1 class="abs a disp" style="left:128px;top:290px;font-size:104px;line-height:1;--d:1">De 1 a 3</h1>'
-    '<h1 class="abs a disp outline" style="left:128px;top:404px;font-size:84px;line-height:1;--d:2">reels por semana</h1>'
+    + '<h1 class="abs a disp" style="left:128px;top:250px;font-size:104px;line-height:1;--d:1">Sesión 1</h1>'
+    '<h1 class="abs a disp outline" style="left:128px;top:372px;font-size:60px;line-height:1.12;--d:2">para transformar<br>a Lucía</h1>'
     + p("Auditoría de tu contenido en Instagram y el plan para triplicar lo que publicas y llevar más gente a Level Up.",
-        128, 580, 860, size=32, d=3, cls="", extra="font-weight:800;line-height:1.3;")
-    + p("Maen Studios · 18 de noviembre de 2026", 128, 800, 860, size=22, d=4)
+        128, 590, 860, size=32, d=3, cls="", extra="font-weight:800;line-height:1.3;")
+    + p("Jandro Martín · 18 de noviembre de 2026", 128, 800, 860, size=22, d=4)
     + foot(n),
 ))
 
@@ -191,7 +191,7 @@ add("objetivo", "El objetivo de hoy", sec(
     + foot(n),
 ))
 
-# ── 3. Qué hemos analizado ───────────────────────────────────────────────
+# ── 3. Qué he analizado ───────────────────────────────────────────────
 n += 1
 fuentes = [
     ("≈ 80", "reels", "Todo lo publicado desde diciembre de 2024 hasta hoy: tema, portada y reproducciones."),
@@ -208,9 +208,9 @@ for i, (num, tit, desc) in enumerate(fuentes):
         + p(tit, x + 36, 480, 330, size=30, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
         + p(desc, x + 36, 590, 330, size=23, d=i + 2)
     )
-add("fuentes", "Qué hemos analizado", sec(
+add("fuentes", "Qué he analizado", sec(
     eyebrow("Datos")
-    + titulo("Qué hemos analizado", size=56)
+    + titulo("Qué he analizado", size=56)
     + fh
     + p("Reproducciones: datos públicos de Instagram. Guardados, compartidos y seguidoras: tu informe de mayo a octubre.",
         128, 890, 1664, size=21, d=6, cls="muted")
@@ -435,7 +435,7 @@ add("copies", "Copies y llamadas a la acción", sec(
         "68 me gusta. El enlace está al final de un texto largo.",
         "La portada habla de «gasto calórico», que no es lo que diferencia a tu método.",
     ], 168, 700, 740, size=21, d=3, gap=10)
-    + label("Lo que cambiamos", 1020, 300)
+    + label("Lo que cambiaría", 1020, 300)
     + lista([
         "<b>La llamada a la acción va en el vídeo</b>, no solo en el texto: dicha por ti o en pantalla.",
         "<b>Palabra clave en comentarios:</b> «comenta NIVEL0 y te mando la prueba gratis». Con KITE tuviste 86 comentarios.",
@@ -478,7 +478,7 @@ add("parte2", "Parte 2 · La redirección", sec(
     bg=ACENTO, color=INK,
 ))
 
-# ── 12b. Lo que nos contaste ─────────────────────────────────────────────
+# ── 12b. Lo que me contaste ─────────────────────────────────────────────
 n += 1
 dijo = [
     ("«Puedo dedicar aproximadamente 2-3 horas a la semana a grabar»", "Grabación por lotes los lunes y viernes por la mañana, con formatos que se repiten."),
@@ -488,8 +488,8 @@ dijo = [
     ("Promociones en Meta: visitas a la web, pero ni compras ni suscripciones", "Antes de volver a invertir: palabra clave, landing con testimonios y emails."),
     ("Lo que no te convence: lo «muy guionizado»", "Contenido natural, grabado por ti y con tu forma de hablar."),
 ]
-dh = (p("Lo que nos contaste", 128, 280, 760, size=20, d=1, cls="rosa", extra="font-weight:700;letter-spacing:.14em;text-transform:uppercase;")
-      + p("Cómo lo planteamos", 1000, 280, 760, size=20, d=1, cls="rosa", extra="font-weight:700;letter-spacing:.14em;text-transform:uppercase;"))
+dh = (p("Lo que me contaste", 128, 280, 760, size=20, d=1, cls="rosa", extra="font-weight:700;letter-spacing:.14em;text-transform:uppercase;")
+      + p("Cómo lo planteo", 1000, 280, 760, size=20, d=1, cls="rosa", extra="font-weight:700;letter-spacing:.14em;text-transform:uppercase;"))
 for i, (a_, b_) in enumerate(dijo):
     y = 330 + i * 100
     dh += (
@@ -497,9 +497,9 @@ for i, (a_, b_) in enumerate(dijo):
         + p(b_, 1000, y, 792, size=23, d=i + 3)
         + f'<div class="abs line-h" style="left:128px;top:{y + 80}px;width:1664px;background:#2E3130"></div>'
     )
-add("tucorreo", "Lo que nos contaste", sec(
+add("tucorreo", "Lo que me contaste", sec(
     eyebrow("Tu correo del 9 de noviembre")
-    + titulo("Partimos de lo que nos contaste", size=56)
+    + titulo("Parto de lo que me contaste", size=56)
     + dh + foot(n),
 ))
 
@@ -681,7 +681,7 @@ add("referentes", "Lo que hacen tus referentes", sec(
     eyebrow("Referencias")
     + titulo("Qué hacen tus referentes", size=56)
     + rh
-    + p("También nos dijiste que te gusta cómo comunican @drablancal, @isabelvina y @cescescola, y que no te convence el contenido muy guionizado. Ahora las vemos una a una, cada una con un reel suyo que te sirve de referencia.",
+    + p("También me dijiste que te gusta cómo comunican @drablancal, @isabelvina y @cescescola, y que no te convence el contenido muy guionizado. Ahora te las enseño una a una, cada una con un reel suyo que te sirve de referencia.",
         128, 850, 1664, size=25, d=6, cls="soft")
     + foot(n),
 ))
@@ -828,7 +828,7 @@ kp = [
     ("Seguidoras por cada 1.000 reproducciones", "Hoy: 4,3 de media", "Si el alcance trae seguidoras."),
     ("Guardados por reel", "Hoy: 105 de media", "Si el contenido es útil."),
     ("Comentarios con la palabra clave", "Hoy: 0", "Interés real en Level Up."),
-    ("Clics en el enlace de la bio", "Hoy: sin medir", "Lo vemos en cuanto tengamos acceso a Meta."),
+    ("Clics en el enlace de la bio", "Hoy: sin medir", "Lo veré en cuanto tenga acceso a Meta."),
     ("Pruebas gratis al mes", "Hoy: 1,25", "El objetivo final."),
 ]
 kh = ""
@@ -840,14 +840,14 @@ for i, (t, hoy, por) in enumerate(kp):
         + p(por, 1290, y + 4, 500, size=22, d=i + 2)
         + f'<div class="abs line-h" style="left:128px;top:{y + 84}px;width:1664px;background:#2E3130"></div>'
     )
-add("medimos", "Qué medimos", sec(
+add("medimos", "Qué voy a medir", sec(
     eyebrow("Seguimiento")
-    + titulo("Lo que medimos cada semana", size=56)
+    + titulo("Lo que voy a medir cada semana", size=56)
     + kh + foot(n),
 ))
 
 # ── 23. Plan de acción ───────────────────────────────────────────────────
-QUIEN = {"Lucía": ACENTO, "Maen": AZUL, "Web": VERDE}
+QUIEN = {"Lucía": ACENTO, "Jandro": AZUL, "Web": VERDE}
 
 
 def tarea(x, y, w, texto, quien, d):
@@ -863,14 +863,14 @@ fases = [
     ("Semana 1", "18–22 nov", "Base", [
         ("Bio nueva y un único enlace a la prueba gratis.", "Lucía"),
         ("Destacados: de 14 a 5, con «Empieza aquí» el primero.", "Lucía"),
-        ("Palabra clave NIVEL0 con respuesta automática.", "Maen"),
+        ("Palabra clave NIVEL0 con respuesta automática.", "Jandro"),
         ("Pedir 3 testimonios a clientas presenciales.", "Lucía"),
         ("Accesos a Meta para medir.", "Lucía"),
     ]),
     ("Semana 2", "23–29 nov", "Primer lote", [
-        ("Guiones de las 4 primeras piezas.", "Maen"),
+        ("Guiones de las 4 primeras piezas.", "Jandro"),
         ("Lunes 23: grabar el lote.", "Lucía"),
-        ("Plantillas de portada por formato.", "Maen"),
+        ("Plantillas de portada por formato.", "Jandro"),
         ("Publicar martes, jueves y sábado.", "Lucía"),
         ("Historias diarias, 2-3 con enlace.", "Lucía"),
     ]),
@@ -878,12 +878,12 @@ fases = [
         ("Email de bienvenida, aviso antes del cobro y pregunta al darse de baja.", "Web"),
         ("Landing: testimonios y vídeo tuyo.", "Web"),
         ("Google Analytics y píxel de Meta.", "Web"),
-        ("Calendario de diciembre.", "Maen"),
+        ("Calendario de diciembre.", "Jandro"),
     ]),
     ("Mediados de dic.", "Revisión", "Ajustes", [
-        ("Revisión de métricas del primer mes.", "Maen"),
-        ("Qué formatos se quedan y cuáles cambian.", "Maen"),
-        ("Plan de enero.", "Maen"),
+        ("Revisión de métricas del primer mes.", "Jandro"),
+        ("Qué formatos se quedan y cuáles cambian.", "Jandro"),
+        ("Plan de enero.", "Jandro"),
     ]),
 ]
 ph = ""
