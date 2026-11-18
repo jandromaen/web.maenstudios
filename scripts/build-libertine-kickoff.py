@@ -277,7 +277,7 @@ add("equipo", "Quién es quién", sec(
     + f'<p style="position:absolute;left:900px;top:330px;{WIDE};font-size:20px;font-weight:700;letter-spacing:4px">MAEN STUDIOS</p>'
     + persona(900, 390, "Jandro Martín", "Dirección de cuentas", LILA, 430)
     + persona(1362, 390, "Richi", "Dirección creativa", LILA, 430)
-    + persona(900, 530, "Brand manager", "Briefings y rodajes", MELOCOTON, 430)
+    + persona(900, 530, "Helen", "Brand manager · Briefings y rodajes", MELOCOTON, 430)
     + persona(1362, 530, "Community manager", "Calendario y publicación", MELOCOTON, 430)
     + persona(900, 670, "Equipo audiovisual", "Cámara, foto y edición", MELOCOTON, 892)
     + foot(n)))
