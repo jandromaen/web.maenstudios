@@ -44,6 +44,9 @@ BLOBS = {
     "8312c32fe45d24aa5f9ce75b52a06a82": "carrusel-3.jpg",
     "79b8dfb4dccc2efa2e84c98a6ccb4a21": "carrusel-4.jpg",
     "4b1ce6e2f8ca54e26d63bc971e3bfb47": "carrusel-video.jpg",
+    "b28b8fe0670f4d6a6e29783b4a8c746e": "pato-maestro.jpg",
+    "99314c4615aa12c92e4a08d0f4d1cd70": "pato-mesa.jpg",
+    "a9072b55ad8c3d82ec8380a16d4dfcd6": "pato-video.jpg",
 }
 
 
