@@ -622,6 +622,39 @@ add("referentes", "Lo que hacen tus referentes", sec(
     + foot(n),
 ))
 
+# ── 19b. Frecuencia ──────────────────────────────────────────────────────
+n += 1
+meses = [("May", 6), ("Jun", 4), ("Jul", 2), ("Ago", 5), ("Sep", 4), ("Oct", 6), ("Nov*", 2)]
+base, alto, maxv = 860, 470, 13
+fq = ""
+for i, (m, v) in enumerate(meses):
+    x = 128 + i * 150
+    hh = round(v / maxv * alto)
+    fq += (
+        f'<div class="abs gy" style="left:{x}px;top:{base - hh}px;width:100px;height:{hh}px;border-radius:10px 10px 0 0;background:#5A5D5C;--d:{i}"></div>'
+        f'<p class="abs a" style="left:{x}px;top:{base - hh - 44}px;width:100px;text-align:center;font-size:28px;font-weight:800;--d:{i + 1}">{v}</p>'
+        f'<p class="abs a muted" style="left:{x}px;top:{base + 14}px;width:100px;text-align:center;font-size:20px;--d:{i}">{m}</p>'
+    )
+x = 128 + 7 * 150 + 40
+hh = round(12 / maxv * alto)
+fq += (
+    f'<div class="abs gy" style="left:{x}px;top:{base - hh}px;width:130px;height:{hh}px;border-radius:10px 10px 0 0;background:{ACENTO};--d:8"></div>'
+    f'<p class="abs a disp rosa" style="left:{x - 10}px;top:{base - hh - 54}px;width:150px;text-align:center;font-size:36px;--d:9">12</p>'
+    f'<p class="abs a rosa" style="left:{x - 20}px;top:{base + 14}px;width:170px;text-align:center;font-size:20px;font-weight:800;--d:8">Objetivo</p>'
+    f'<div class="abs line-h" style="left:128px;top:{base}px;width:1220px"></div>'
+)
+add("frecuencia", "Frecuencia", sec(
+    eyebrow("Propuesta · Frecuencia")
+    + titulo("Triplicar las publicaciones", size=56)
+    + p("Publicaciones al mes", 128, 290, 600, size=20, d=1, cls="muted", extra="letter-spacing:.1em;text-transform:uppercase;")
+    + fq
+    + p("*Noviembre, hasta el día 18.", 128, 930, 600, size=18, d=9, cls="muted")
+    + kpi(1440, 330, 352, "≈ 1", "reel a la semana de media entre mayo y octubre", 3, size=64)
+    + kpi(1440, 530, 352, "8 de 27", "semanas sin ninguna publicación; el parón más largo, 20 días (julio)", 4, size=56)
+    + kpi(1440, 730, 352, "3", "reels a la semana a partir de ahora (≈ 12 al mes)", 5, size=64, color=ACENTO)
+    + foot(n),
+))
+
 # ── 20. Tu semana con 2-3 horas ──────────────────────────────────────────
 n += 1
 dias = [
