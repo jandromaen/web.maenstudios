@@ -68,14 +68,33 @@ def foto(x, y, w, h, k, d=0, pos="center", radius=24, extra=""):
     )
 
 
+REELS_IG = {  # código de cada reel en Instagram (instagram.com/reel/<código>/)
+    "les-angles": "DVeXgSPjH6w", "agua-gluteos": "DbxqDbNMJBp", "pensamientos-intrusivos": "DdJ8HBLsEgA",
+    "entrena-10-min": "DcnngSosAx3", "agua-brazos": "DcBK4vcspzE", "no-hay-viento": "DfPkVfksG2O",
+    "gasto-calorico": "Dfpj4rzsQKF", "mas-pensamientos": "DfUZkYkslJI", "las-15": "DZ2mmi3sWyj",
+    "superate-cada-nivel": "DYOi25LMpNs", "corro-cada-semana": "DXyumgMMLLT", "6-ejercicios": "DXmvMMRjAko",
+    "si-no-eres-constante": "DXXRmOlDMRm", "quien-algo-quiere": "DQmV1arjNoS", "motivacion-disciplina": "DOto2L_jGfN",
+    "beauty-tip": "DMGSPx9ow1H", "grasa-abdominal": "DKxWV73I6t9", "gluteos-siguiente-nivel": "DJdx0sHo1hn",
+    "adios-flacidez": "DFtCsc-IdEc", "kite-normas": "DaiFFIBMpnC",
+}
+
+
 def reel(x, y, w, nombre, vistas, d=0):
-    """Portada real de un reel de Lucía (capturada de su perfil) con sus reproducciones."""
+    """Portada real de un reel de Lucía con sus reproducciones y un botón de play
+    que abre el vídeo en Instagram (su cuenta no permite insertarlos)."""
     h = round(w * 596 / 335)
+    b = max(36, round(w * 0.2))  # diámetro del botón
+    url = f"https://www.instagram.com/reel/{REELS_IG[nombre]}/"
     return (
-        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:16px;overflow:hidden;'
+        f'<a class="abs pop" href="{url}" target="_blank" rel="noopener" title="Ver el vídeo en Instagram" '
+        f'style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:16px;overflow:hidden;display:block;'
         f'background:#222 url(/pitch/level-up/reels/{nombre}.jpg) center/cover no-repeat;box-shadow:0 10px 30px rgba(0,0,0,.35);--d:{d}">'
-        f'<p style="position:absolute;left:10px;bottom:10px;padding:3px 10px;border-radius:999px;background:rgba(0,0,0,.65);'
-        f'font-size:{16 if w < 180 else 18}px;font-weight:800;color:#fff">▶ {vistas}</p></div>'
+        f'<span style="position:absolute;left:50%;top:50%;width:{b}px;height:{b}px;margin:-{b // 2}px 0 0 -{b // 2}px;border-radius:50%;'
+        f'background:rgba(255,255,255,.8);box-shadow:0 6px 20px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center">'
+        f'<span style="width:0;height:0;margin-left:{round(b * .08)}px;border-style:solid;'
+        f'border-width:{round(b * .2)}px 0 {round(b * .2)}px {round(b * .32)}px;border-color:transparent transparent transparent #151515"></span></span>'
+        f'<span style="position:absolute;left:10px;bottom:10px;padding:3px 10px;border-radius:999px;background:rgba(0,0,0,.65);'
+        f'font-size:{16 if w < 180 else 18}px;font-weight:800;color:#fff">{vistas}</span></a>'
     )
 
 
