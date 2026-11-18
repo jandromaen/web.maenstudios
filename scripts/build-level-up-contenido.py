@@ -64,7 +64,7 @@ def sec(body, bg=None, color=INK):
 
 OMITIR = {"fuentes", "parte1", "frecuencia", "mapa", "formulas", "nofunciona", "portadas", "bancofotos",
           "copies", "audiencia", "parte2", "posicionamiento", "pilares", "humor", "anatomia",
-          "referentes", "medimos", "objetivos"}
+          "referentes", "medimos", "objetivos", "plan"}
 
 
 def add(id_, tit, html):
@@ -1002,6 +1002,32 @@ add("objetivos", "Objetivos del primer mes", sec(
     + oh
     + p("Propuesta para cerrar juntos. La revisamos a mediados de diciembre con los datos de Meta.",
         128, 800, 1664, size=24, d=6, cls="soft")
+    + foot(n),
+))
+
+# ── 23c. Objetivos de este mes ───────────────────────────────────────────
+n += 1
+objs = [
+    ("Una estética clara", "Colores, tipografías, estilo de subtítulos y una plantilla de portada por formato. Que tus vídeos se reconozcan en el feed."),
+    ("Una biografía que venda", "Presentarte como founder de Level Up Workout, decir a quién ayudas y dejar un único enlace a la prueba gratis."),
+    ("Guionizar la mayor parte del contenido", "Saber antes de grabar el gancho, la idea y el cierre de cada vídeo. Sigue sonando a ti, pero no improvisas."),
+    ("Triplicar el contenido", "De 1 a 3 reels por semana: unos 12 al mes."),
+    ("Un calendario a 2 semanas vista", "Días fijos de publicación y todo programado con, como mínimo, dos semanas de antelación."),
+]
+oh = ""
+for i, (t, txt) in enumerate(objs):
+    y = 300 + i * 124
+    oh += (
+        f'<p class="abs a disp outline" style="left:128px;top:{y + 4}px;font-size:52px;line-height:1;--d:{i + 1}">{i + 1:02d}</p>'
+        + p(t, 300, y + 8, 620, size=30, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
+        + p(txt, 960, y + 6, 832, size=22, d=i + 2, extra="line-height:1.35;")
+        + (f'<div class="abs line-h" style="left:128px;top:{y + 104}px;width:1664px;background:#E7E2DB"></div>' if i < 4 else "")
+    )
+add("objetivosmes", "Objetivos de este mes", sec(
+    eyebrow("Plan de acción · hasta mediados de diciembre")
+    + titulo("Objetivos de este mes", size=56)
+    + oh
+    + p("Tú lo ejecutas; yo te asesoro y reviso cada punto contigo hasta tenerlo cerrado.", 128, 930, 1664, size=22, d=8, cls="muted")
     + foot(n),
 ))
 
