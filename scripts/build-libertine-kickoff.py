@@ -106,18 +106,18 @@ add("hoy", "Hoy", sec(eyebrow("HOY", color=AMARILLO) + h("De qué vamos a hablar
 # ── 3. Lo acordado ────────────────────────────────────────────────────────
 n += 1
 cards = [
-    (AMARILLO, "CANALES", "Instagram<br>+ TikTok", "Con un lenguaje propio en cada uno."),
-    (LILA, "CADA SEMANA, POR CANAL", "2 + 2", "2 reels y 2 carruseles o posts, en Instagram y en TikTok."),
-    (MELOCOTON, "CADA MES", "1 rodaje<br>de 4 h", "Producción, foto y vídeo para todo el mes."),
-    (LIMA, "TAMBIÉN INCLUYE", "Creators<br>y paid", "Objetivo de 5 creators al mes. Y creativizamos los guiones de paid de No Idea."),
+    (AMARILLO, "CADA SEMANA", "Instagram + TikTok<br>2 reels + 2 carruseles", "O posts, según lo que pida la idea.", 816),
+    (MELOCOTON, "CADA MES", "1 rodaje<br>de 4 h", "Producción, foto y vídeo para todo el mes.", 392),
+    (LIMA, "TAMBIÉN INCLUYE", "Creators<br>y paid", "Objetivo de 5 creators al mes. Y creativizamos los guiones de paid de No Idea.", 392),
 ]
 cc = ""
-for i, (c, k, t, s) in enumerate(cards):
-    x = 128 + i * 424
-    cc += (f'<div style="position:absolute;left:{x}px;top:360px;width:392px;height:500px;background:{c};border-radius:28px"></div>'
-           f'<p style="position:absolute;left:{x + 36}px;top:396px;width:330px;{WIDE};font-size:17px;font-weight:700;letter-spacing:3px">{k}</p>'
-           f'<p style="position:absolute;left:{x + 36}px;top:470px;{COND};font-size:84px;font-weight:700;line-height:.95;text-transform:uppercase">{t}</p>'
-           f'<p style="position:absolute;left:{x + 36}px;top:700px;width:320px;font-size:26px;line-height:1.35">{s}</p>')
+x = 128
+for c, k, t, sub, w in cards:
+    cc += (f'<div style="position:absolute;left:{x}px;top:360px;width:{w}px;height:500px;background:{c};border-radius:28px"></div>'
+           f'<p style="position:absolute;left:{x + 36}px;top:396px;width:{w - 72}px;{WIDE};font-size:17px;font-weight:700;letter-spacing:3px">{k}</p>'
+           f'<p style="position:absolute;left:{x + 36}px;top:470px;width:{w - 60}px;{COND};font-size:84px;font-weight:700;line-height:.95;text-transform:uppercase">{t}</p>'
+           f'<p style="position:absolute;left:{x + 36}px;top:700px;width:{min(w - 72, 520)}px;font-size:26px;line-height:1.35">{sub}</p>')
+    x += w + 32
 add("acordado", "Planning", sec(
     eyebrow("01 · PLANNING") + h("Planning mixto")
     + cc
@@ -130,7 +130,7 @@ n += 1
 pasos = [
     ("Briefing", "Qué contamos este mes", AMARILLO),
     ("Rodaje", "Una jornada de 4 h", NARANJA),
-    ("Postproducción", "Edición para cada canal", LILA),
+    ("Postproducción", "Edición del mes", LILA),
     ("Calendario", "Todo el mes, para validar", LIMA),
     ("Publicación", "Y community management", AZUL),
     ("Reporte", "Qué ha funcionado", TURQUESA),
@@ -216,7 +216,7 @@ add("rodaje", "Rodaje", paso(
 n += 1
 add("post-calendario", "Postproducción y calendario", paso(
     "post-calendario", "03 + 04", "Postproducción<br>y calendario", LILA, "bolsillo.jpg", "45% 50%",
-    ["Edición pensada para cada canal, en 9:16 y 4:5",
+    ["Edición en 9:16 y 4:5",
      "Con vuestro logo y vuestra línea gráfica",
      "Calendario del mes en Canva: cada día con su pieza, su copy y el enlace a Drive"],
     ["Revisar el calendario y darnos feedback en una sola ronda",
