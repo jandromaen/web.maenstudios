@@ -331,7 +331,7 @@ add("cierre", "Cheers", sec(
     + '<div style="position:absolute;left:0;top:0;width:1920px;height:1080px;background:rgba(21,21,21,.55)"></div>'
     + f'<img src="{IMG}/logo-crema.png" alt="Libertine Blends" style="position:absolute;left:560px;top:330px;width:800px;height:auto">'
     + f'<p style="position:absolute;left:0;top:620px;width:1920px;text-align:center;{WIDE};font-size:30px;font-weight:700;letter-spacing:8px;color:{CREMA}">× MAEN STUDIOS</p>'
-    + f'<p style="position:absolute;left:0;top:740px;width:1920px;text-align:center;{COND};font-size:64px;font-weight:700;letter-spacing:4px;color:{AMARILLO}">¿EMPEZAMOS?</p>',
+    ,
     bg=INK, color=CREMA))
 
 out = Path(__file__).resolve().parent.parent / "app/pitch/libertine-kickoff/diapos.ts"
