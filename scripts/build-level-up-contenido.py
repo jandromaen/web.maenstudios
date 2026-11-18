@@ -135,7 +135,6 @@ n += 1
 add("portada", "Auditoría de contenido", sec(
     foto(1060, 0, 860, 1080, "risa", d=0, pos="center 30%", radius=0)
     + f'<div class="abs" style="left:1060px;top:0;width:260px;height:1080px;background:linear-gradient(90deg,{INK},rgba(21,21,21,0))"></div>'
-    + f'<div class="abs gy" style="left:1040px;top:0;width:20px;height:1080px;background:{ACENTO};--d:1"></div>'
     + eyebrow("Auditoría de contenido · Instagram", top=150)
     + '<h1 class="abs a disp" style="left:128px;top:290px;font-size:104px;line-height:1;--d:1">Más alcance.</h1>'
     '<h1 class="abs a disp outline" style="left:128px;top:404px;font-size:104px;line-height:1;--d:2">Más clientas.</h1>'
