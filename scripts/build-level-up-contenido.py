@@ -381,7 +381,7 @@ add("portadas", "Tus portadas", sec(
     + titulo("Portadas", size=56)
     + reel(128, 290, 210, "adios-flacidez", "33,3K", d=0)
     + reel(352, 290, 210, "las-15", "14,5K", d=1)
-    + reel(576, 290, 210, "superate-cada-nivel", "41,9K", d=2)
+    + reel(576, 290, 210, "grasa-abdominal", "18,7K", d=2)
     + label("Lo bueno", 860, 300)
     + lista([
         "Titular grande, legible y con un estilo constante.",
@@ -556,10 +556,10 @@ series = [
     ("¿Te ha pasado?", "Atraer", "#3E6FA8", "Humor de situaciones de mujeres que intentan entrenar: la pereza de las 15:00, el niño encima, la lavadora.", "Las 15:00 y ya no sé qué hacer (14,5K)"),
     ("No hay viento", "Conectar", "#2F8A6A", "Días sin kite: entreno en casa para seguir haciendo lo que te gusta.", "No hay viento… (12,2K)"),
     ("Mitos 35+", "Enseñar", ACENTO, "Grasa abdominal, flacidez, huesos, cambios hormonales. Tu formación como argumento.", "Grasa abdominal (18,7K)"),
-    ("Dentro de Level Up", "Convertir", AZUL, "Pre-Entreno, cuándo entran bandas y pesas, recetas de la nutricionista, seguimiento con fotos y dudas comunes.", "Supérate con cada nivel (41,9K)"),
+    ("Dentro de Level Up", "Convertir", AZUL, "Pre-Entreno, cuándo entran bandas y pesas, recetas de la nutricionista, seguimiento con fotos y dudas comunes.", "Supérate con cada nivel (sus vistas vienen de la publicidad)"),
 ]
 sh = ""
-reels_series = [("6-ejercicios", "11,3K"), ("agua-brazos", "12K"), ("las-15", "14,5K"), ("no-hay-viento", "12,2K"), ("grasa-abdominal", "18,7K"), ("superate-cada-nivel", "41,9K")]
+reels_series = [("6-ejercicios", "11,3K"), ("agua-brazos", "12K"), ("las-15", "14,5K"), ("no-hay-viento", "12,2K"), ("grasa-abdominal", "18,7K"), ("superate-cada-nivel", "41,9K · publi")]
 for i, (t, pil_, c, txt, prueba) in enumerate(series):
     col, fila = i % 3, i // 3
     x = 128 + col * 566
