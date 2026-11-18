@@ -35,7 +35,36 @@ slides = []
 n = 0
 
 
+# ── Modo claro ───────────────────────────────────────────────────────────
+BLANCO = "#FFFFFF"
+ACENTO_TXT = "#C8661F"  # el melocotón de la marca, oscurecido para que se lea sobre blanco
+CLARO = {
+    "#2A2D2C": "#F4F1EC",   # tarjetas
+    "#2E3130": "#E7E2DB",   # líneas
+    "#3A3D3C": "#E2DDD6",
+    "#5A5D5C": "#D3CDC5",   # barras neutras
+    "#C9C7C3": "#4A4744",   # texto secundario
+    "#E4E2DE": "#2B2A28",
+    "color:#F4F4F4": f"color:{INK}",
+    "linear-gradient(90deg,#151515,rgba(21,21,21,0))": "linear-gradient(90deg,#FFFFFF,rgba(255,255,255,0))",
+}
+_CSS_CLARO = (
+    "<style>.pm .pm-lienzo .lu-claro .pm-card-r,.pm .pm-lienzo .lu-claro .pill-r{background:%s}"
+    ".pm .pm-lienzo .lu-claro .pm-card{box-shadow:0 2px 14px rgba(0,0,0,.04)}</style>" % ACENTO
+)
+
+
+def sec(body, bg=None, color=INK):
+    if bg is None or bg == INK:
+        bg = BLANCO
+    vars_ = (f"--rosa:{ACENTO_TXT};--paper:{INK};--muted:#8A8580;--soft:#4A4744;--g1:#F4F1EC;--line:#E7E2DB"
+             if bg == BLANCO else f"--rosa:{ACENTO_TXT};--paper:{INK};--muted:#6B5A4C;--soft:#3A2F2F")
+    return f'<section class="lu-claro" style="background:{bg};color:{color};{vars_}">{_CSS_CLARO}{body}</section>'
+
+
 def add(id_, tit, html):
+    for a, b in CLARO.items():
+        html = html.replace(a, b)
     slides.append({"id": id_, "titulo": tit, "html": html})
 
 
@@ -166,7 +195,7 @@ add("publicaciones2026", "Tus publicaciones en 2026", sec(
     + ch
     + kpi(1500, 330, 292, "38", "publicaciones en lo que va de año", 3, size=64)
     + kpi(1500, 530, 292, "3,5", "al mes de media, menos de una a la semana", 4, size=64)
-    + kpi(1500, 730, 292, "8", "entre enero y abril, los meses previos al lanzamiento de Level Up", 5, size=64, color=ACENTO)
+    + kpi(1500, 730, 292, "8", "entre enero y abril, los meses previos al lanzamiento de Level Up", 5, size=64, color=ACENTO_TXT)
     + p("*Noviembre, hasta el día 18. Enero–abril y noviembre: tu perfil a 18 de noviembre. Mayo–octubre: tu informe, que incluye algunas publicaciones que ya no aparecen en el perfil.",
         128, 920, 1310, size=17, d=9, cls="muted", extra="line-height:1.3;")
     + foot(n),
@@ -282,7 +311,7 @@ add("frecuencia", "Frecuencia", sec(
     + p("*Noviembre, hasta el día 18.", 128, 930, 600, size=18, d=9, cls="muted")
     + kpi(1440, 330, 352, "≈ 1", "reel a la semana de media entre mayo y octubre", 3, size=64)
     + kpi(1440, 530, 352, "8 de 27", "semanas sin ninguna publicación; el parón más largo, 20 días (julio)", 4, size=56)
-    + kpi(1440, 730, 352, "3", "reels a la semana a partir de ahora (≈ 12 al mes)", 5, size=64, color=ACENTO)
+    + kpi(1440, 730, 352, "3", "reels a la semana a partir de ahora (≈ 12 al mes)", 5, size=64, color=ACENTO_TXT)
     + foot(n),
 ))
 
@@ -525,9 +554,9 @@ add("posicionamiento", "Tu posicionamiento", sec(
 n += 1
 pil = [
     ("Atraer", "30 %", "Humor y escenarios inesperados, siempre con situaciones de TU público.", "Que te descubran las que todavía no te siguen.", "#3E6FA8", "risa"),
-    ("Enseñar", "35 %", "Rutinas y ejercicios guardables para empezar desde cero.", "Que te guarden, te sigan y confíen en ti.", ACENTO, "mat"),
+    ("Enseñar", "35 %", "Rutinas y ejercicios guardables para empezar desde cero.", "Que te guarden, te sigan y confíen en ti.", ACENTO_TXT, "mat"),
     ("Conectar", "15 %", "Kite, maternidad, tu vida. Con un puente hacia el «yo también puedo».", "Que te quieran y se queden.", "#2F8A6A", "salto"),
-    ("Convertir", "20 %", "Level Up por dentro, alumnas, prueba gratis, dudas frecuentes.", "Que se apunten.", AZUL, "minibanda"),
+    ("Convertir", "20 %", "Level Up por dentro, alumnas, prueba gratis, dudas frecuentes.", "Que se apunten.", "#3D63C9", "minibanda"),
 ]
 ph = ""
 for i, (t, pct, que, para, c, ft) in enumerate(pil):
@@ -646,7 +675,7 @@ for i, (t, s_) in enumerate(camino):
         f'<div class="abs pop" style="left:{x}px;top:340px;width:250px;height:180px;border-radius:20px;background:{ACENTO if i in (0, 5) else "#2A2D2C"};--d:{i}"></div>'
         + p(t, x + 22, 372, 210, size=26, d=i + 1, cls="", extra="font-weight:800;" + (f"color:{INK};" if i in (0, 5) else ""))
         + p(s_, x + 22, 430, 210, size=19, d=i + 1, cls="", extra=(f"color:{INK};" if i in (0, 5) else "color:#C9C7C3;"))
-        + (f'<p class="abs a" style="left:{x + 252}px;top:400px;font-size:26px;color:{ACENTO};--d:{i + 1}">→</p>' if i < 5 else "")
+        + (f'<p class="abs a" style="left:{x + 252}px;top:400px;font-size:26px;color:{ACENTO_TXT};--d:{i + 1}">→</p>' if i < 5 else "")
     )
 add("conversion", "El camino a clienta", sec(
     eyebrow("Propuesta")
