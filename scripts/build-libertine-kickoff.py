@@ -122,7 +122,7 @@ add("acordado", "Planning", sec(
     eyebrow("01 · PLANNING") + h("Planning mixto")
     + cc
     + f'<p style="position:absolute;left:128px;top:900px;font-size:26px;line-height:1.4;color:#5a5048">'
-    "No incluye el soporte en eventos y lanzamientos. El paid en UK lo sigue llevando No Idea.</p>"
+    "El paid en UK lo sigue llevando No Idea.</p>"
     + foot(n)))
 
 # ── 4. El ciclo ────────────────────────────────────────────────────────────
