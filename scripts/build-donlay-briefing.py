@@ -11,6 +11,7 @@ app/pitch/donlay-briefing/donlay-briefing.css, con el tema .bk--donlay-briefing.
 Lo que adapta para el visor de Barkita (.bk):
   - las imágenes subidas al deck (/_blob/<id>) pasan a /pitch/donlay-briefing/<fichero>
   - las notas del orador (<aside>) se quitan
+  - la portada de un clip (<nombre>-video.jpg) pasa a ser el vídeo, si su .mp4 está en /public
 """
 
 import json
@@ -38,7 +39,24 @@ BLOBS = {
     "7de3c33b379da29870ea36f812036572": "ref-pliegue.jpg",
     "b6124f0d9574660f771487790de2314c": "ref-sala.jpg",
     "76b0128e11fa425945f1cb2747a422b0": "ref-servicio.jpg",
+    "7508e8cc375623e22f557e29052a9f87": "carrusel-1.jpg",
+    "a54dacd8c2bd82d0c223a5ef785557e7": "carrusel-2.jpg",
+    "8312c32fe45d24aa5f9ce75b52a06a82": "carrusel-3.jpg",
+    "79b8dfb4dccc2efa2e84c98a6ccb4a21": "carrusel-4.jpg",
+    "4b1ce6e2f8ca54e26d63bc971e3bfb47": "carrusel-video.jpg",
 }
+
+
+def video(m: re.Match) -> str:
+    """La portada del clip de referencia pasa a ser el clip, si ya está en /public."""
+    nombre, alt, estilo = m.groups()
+    if not (RAIZ / "public" / PUBLICO.strip("/") / f"{nombre}.mp4").exists():
+        return m.group(0)
+    return (
+        f'<video src="{PUBLICO}{nombre}.mp4" poster="{PUBLICO}{nombre}.jpg" '
+        f'aria-label="{alt}" autoplay muted loop playsinline preload="metadata" '
+        f'style="{estilo};object-fit:cover"></video>'
+    )
 
 
 def adaptar(html: str) -> str:
@@ -50,6 +68,11 @@ def adaptar(html: str) -> str:
 
     html = re.sub(r"/_blob/([0-9a-f]{32})", blob, html)
     html = re.sub(r"\s*<aside>.*?</aside>", "", html, flags=re.S)
+    html = re.sub(
+        r'<img class="photo" src="' + PUBLICO + r'([a-z-]+-video)\.jpg" alt="([^"]*)" style="([^"]*)">',
+        video,
+        html,
+    )
     if "<x-" in html:
         sys.exit("Queda un elemento del formato de diapositivas sin traducir")
     return html.strip()
