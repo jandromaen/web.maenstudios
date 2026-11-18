@@ -138,8 +138,9 @@ pasos = [
 cy = ""
 for i, (t, s, c) in enumerate(pasos):
     x = 128 + i * 280
-    cy += (f'<div style="position:absolute;left:{x}px;top:420px;width:200px;height:200px;border-radius:50%;background:{c}"></div>'
-           f'<p style="position:absolute;left:{x}px;top:470px;width:200px;text-align:center;{COND};font-size:96px;font-weight:700;color:{INK}">{i + 1:02d}</p>')
+    cy += (f'<div style="position:absolute;left:{x}px;top:420px;width:200px;height:200px;border-radius:50%;background:{c};'
+           f'display:flex;align-items:center;justify-content:center">'
+           f'<p style="{COND};font-size:96px;font-weight:700;line-height:1;transform:translateY(-4px);color:{INK}">{i + 1:02d}</p></div>')
     if i < 5:
         cy += (f'<div style="position:absolute;left:{x + 212}px;top:519px;width:56px;height:2px;background:{CREMA};opacity:.5"></div>')
     cy += (f'<p style="position:absolute;left:{x - 20}px;top:660px;width:240px;text-align:center;{COND};font-size:36px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">{t}</p>'
@@ -147,8 +148,6 @@ for i, (t, s, c) in enumerate(pasos):
 add("ciclo", "Cada mes, el mismo ciclo", sec(
     eyebrow("02 · CÓMO TRABAJAMOS", color=AMARILLO) + h("Cada mes, el mismo ciclo", color=CREMA)
     + cy
-    + f'<p style="position:absolute;left:128px;top:860px;width:1664px;font-size:30px;line-height:1.4;color:{CREMA}">'
-    "Lo repetimos todos los meses. Así cada mes sale mejor que el anterior.</p>"
     + foot(n, True), bg=INK, color=CREMA))
 
 # ── 5. Un mes vista ───────────────────────────────────────────────────────
