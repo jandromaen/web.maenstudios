@@ -34,6 +34,7 @@ export default function BarkitaDeck({
   const escena = useRef<HTMLDivElement>(null);
   const raiz = useRef<HTMLDivElement>(null);
   const total = diapos.length;
+  const diapoId = diapos[Math.max(0, Math.min(total - 1, indice))]?.id;
 
   const ir = useCallback(
     (i: number) => setIndice(Math.max(0, Math.min(total - 1, i))),
@@ -96,6 +97,32 @@ export default function BarkitaDeck({
     window.addEventListener("keydown", alPulsar);
     return () => window.removeEventListener("keydown", alPulsar);
   }, [siguiente, anterior, ir, total, pantallaCompleta]);
+
+  /* Botón de play encima de cada vídeo (los que no arrancan solos) para que
+     se entienda que se puede pulsar; desaparece mientras se reproduce. */
+  useEffect(() => {
+    const el = lienzo.current;
+    if (!el) return;
+    const limpiar: (() => void)[] = [];
+    el.querySelectorAll("video").forEach((video) => {
+      const caja = video.parentElement;
+      if (!caja || video.autoplay || caja.querySelector(":scope > .bk-play")) return;
+      if (getComputedStyle(caja).position === "static") return;
+      const boton = document.createElement("span");
+      boton.className = "bk-play";
+      boton.setAttribute("aria-hidden", "true");
+      caja.appendChild(boton);
+      const marcar = () => caja.classList.toggle("bk-reproduciendo", !video.paused);
+      video.addEventListener("play", marcar);
+      video.addEventListener("pause", marcar);
+      marcar();
+      limpiar.push(() => {
+        video.removeEventListener("play", marcar);
+        video.removeEventListener("pause", marcar);
+      });
+    });
+    return () => limpiar.forEach((f) => f());
+  }, [diapoId]);
 
   const alPulsarLienzo = (e: React.MouseEvent<HTMLDivElement>) => {
     /* Un enlace de la diapositiva (p. ej. el vídeo en Drive) se abre sin pasar de diapositiva */
