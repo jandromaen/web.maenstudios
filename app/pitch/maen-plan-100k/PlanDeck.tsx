@@ -65,7 +65,7 @@ export default function PlanDeck({
   /* El HTML entra con innerHTML, así que React no fija `muted` como propiedad
      y algunos navegadores no arrancan el autoplay. Se fuerza al cambiar. */
   useEffect(() => {
-    lienzo.current?.querySelectorAll("video").forEach((v) => {
+    lienzo.current?.querySelectorAll<HTMLVideoElement>("video:not([data-manual])").forEach((v) => {
       v.muted = true;
       v.play().catch(() => {});
     });
@@ -102,7 +102,7 @@ export default function PlanDeck({
   }, [siguiente, anterior, ir, total, pantallaCompleta]);
 
   const alPulsarLienzo = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLElement).closest("a")) return;
+    if ((e.target as HTMLElement).closest("a, video")) return;
     const caja = e.currentTarget.getBoundingClientRect();
     if (e.clientX - caja.left < caja.width / 2) anterior();
     else siguiente();

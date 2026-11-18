@@ -83,6 +83,16 @@ def reel(x, y, w, nombre, vistas, d=0):
     """Portada real de un reel de Lucía con sus reproducciones y un botón de play
     que abre el vídeo en Instagram (su cuenta no permite insertarlos)."""
     h = round(w * 596 / 335)
+    if Path(f"public/pitch/level-up/reels/{nombre}.mp4").exists():
+        # Vídeo alojado en maenstudios.com: se reproduce en la propia diapositiva.
+        return (
+            f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:16px;overflow:hidden;'
+            f'background:#000;box-shadow:0 10px 30px rgba(0,0,0,.35);--d:{d}">'
+            f'<video data-manual src="/pitch/level-up/reels/{nombre}.mp4" poster="/pitch/level-up/reels/{nombre}.jpg" '
+            f'controls playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block"></video>'
+            f'<span style="position:absolute;left:10px;top:10px;padding:3px 10px;border-radius:999px;background:rgba(0,0,0,.65);'
+            f'font-size:{16 if w < 180 else 18}px;font-weight:800;color:#fff;pointer-events:none">{vistas}</span></div>'
+        )
     b = max(36, round(w * 0.2))  # diámetro del botón
     url = f"https://www.instagram.com/reel/{REELS_IG[nombre]}/"
     return (
