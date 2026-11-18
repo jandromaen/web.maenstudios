@@ -109,7 +109,7 @@ cards = [
     (AMARILLO, "CANALES", "Instagram<br>+ TikTok", "Con un lenguaje propio en cada uno."),
     (LILA, "CADA SEMANA, POR CANAL", "2 + 2", "2 reels y 2 carruseles o posts, en Instagram y en TikTok."),
     (MELOCOTON, "CADA MES", "1 rodaje<br>de 4 h", "Producción, foto y vídeo para todo el mes."),
-    (LIMA, "TAMBIÉN INCLUYE", "Creators<br>y paid", "Creators y colaboraciones, y creatividad para el paid de No Idea."),
+    (LIMA, "TAMBIÉN INCLUYE", "Creators<br>y paid", "Objetivo de 5 creators al mes. Y creativizamos los guiones de paid de No Idea."),
 ]
 cc = ""
 for i, (c, k, t, s) in enumerate(cards):
@@ -199,7 +199,7 @@ add("briefing", "Briefing", paso(
     "briefing", "01", "Briefing", AMARILLO, "caja-bellini.jpg", "40% 60%",
     ["Ideas y formatos para el mes: qué contamos y cómo",
      "Qué piezas salen y qué grabamos para cada una",
-     "Dónde entran los creators y la creatividad para paid"],
+     "Los creators del mes y los guiones de paid que vamos a creativizar"],
     ["Lanzamientos, fechas clave y prioridades del mes",
      "Vuestro OK al briefing antes del rodaje"], n))
 
@@ -238,14 +238,14 @@ add("creators-paid", "Creators y paid", sec(
     eyebrow("03 · PASO A PASO") + h("Creators y paid")
     + f'<div style="position:absolute;left:128px;top:360px;width:812px;height:560px;background:{LIMA};border-radius:28px"></div>'
     f'<p style="position:absolute;left:176px;top:404px;{WIDE};font-size:18px;font-weight:700;letter-spacing:3px">CREATORS Y COLABORACIONES</p>'
-    f'<p style="position:absolute;left:176px;top:470px;width:720px;{COND};font-size:72px;font-weight:700;line-height:.95;text-transform:uppercase">Gente interesante alrededor de la marca</p>'
+    f'<p style="position:absolute;left:176px;top:470px;width:720px;{COND};font-size:72px;font-weight:700;line-height:.95;text-transform:uppercase">Objetivo:<br>5 creators al mes</p>'
     f'<p style="position:absolute;left:176px;top:700px;width:710px;font-size:28px;line-height:1.4">'
-    "Proponemos perfiles y colaboraciones cada mes y los metemos en el briefing, para que formen parte del plan y no vayan sueltos.</p>"
+    "Cada mes proponemos perfiles y colaboraciones y cerramos 5 creators. Entran en el briefing, para que formen parte del plan y no vayan sueltos.</p>"
     + f'<div style="position:absolute;left:980px;top:360px;width:812px;height:560px;background:{INK};border-radius:28px"></div>'
-    f'<p style="position:absolute;left:1028px;top:404px;{WIDE};font-size:18px;font-weight:700;letter-spacing:3px;color:{AMARILLO}">PAID CON NO IDEA</p>'
-    f'<p style="position:absolute;left:1028px;top:470px;width:720px;{COND};font-size:72px;font-weight:700;line-height:.95;text-transform:uppercase;color:{CREMA}">Nosotros, la idea.<br>Ellos, el paid.</p>'
+    f'<p style="position:absolute;left:1028px;top:404px;{WIDE};font-size:18px;font-weight:700;letter-spacing:3px;color:{AMARILLO}">CREATIVOS PARA PAID</p>'
+    f'<p style="position:absolute;left:1028px;top:470px;width:720px;{COND};font-size:72px;font-weight:700;line-height:.95;text-transform:uppercase;color:{CREMA}">Sus guiones,<br>nuestra creatividad.</p>'
     f'<p style="position:absolute;left:1028px;top:700px;width:710px;font-size:28px;line-height:1.4;color:{CREMA}">'
-    "Sacamos de cada rodaje las piezas para ads y se las pasamos a No Idea, que sigue llevando el paid en UK.</p>"
+    "No Idea nos pasa los guiones de paid y nosotros los creativizamos. Ellos siguen llevando el paid en UK.</p>"
     + foot(n)))
 
 # ── 11. Quién es quién ────────────────────────────────────────────────────
