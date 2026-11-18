@@ -51,6 +51,8 @@ BLOBS = {
     "04c79407a3a1a2a5ad3d9c12972dfbd7": "wok-ref.jpg",
     "c5f485762135e06e9c63c97a95815fa6": "pato-ref.jpg",
     "227a1b2f819a93eb218a4a7ce44b7e2b": "dimsum-ref.jpg",
+    "2418178f5dcdeb65fae63a44f1c1aa94": "pieza-1.jpg",
+    "50d920291511b149871f2a420eea4d6f": "pieza-2.jpg",
 }
 
 
