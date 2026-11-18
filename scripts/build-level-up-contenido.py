@@ -62,7 +62,16 @@ def sec(body, bg=None, color=INK):
     return f'<section class="lu-claro" style="background:{bg};color:{color};{vars_}">{_CSS_CLARO}{body}</section>'
 
 
+OMITIR = {"fuentes", "parte1", "frecuencia", "mapa", "formulas", "nofunciona", "portadas", "bancofotos",
+          "copies", "audiencia", "parte2", "posicionamiento", "pilares", "humor", "anatomia",
+          "referentes", "medimos", "objetivos"}
+
+
 def add(id_, tit, html):
+    if id_ in OMITIR:
+        return
+    import re as _re
+    html = _re.sub(r'<span class="n">\d+</span>', f'<span class="n">{len(slides) + 1:02d}</span>', html)
     for a, b in CLARO.items():
         html = html.replace(a, b)
     slides.append({"id": id_, "titulo": tit, "html": html})
@@ -403,6 +412,27 @@ add("nofunciona", "Lo que no funciona", sec(
     + nh + foot(n),
 ))
 
+# ── 8b. Funciona / no funciona (una sola diapositiva) ───────────────────
+fn = (label("Lo que funciona", 128, 280, color="#2F8A6A")
+      + label("Lo que no funciona", 1000, 280, color=ROJO))
+for i, (t, s_, ej) in enumerate(form):
+    y = 330 + i * 215
+    fn += (reel(128, y, 108, ej[0][0], ej[0][1], d=i)
+           + p(t, 264, y + 30, 600, size=27, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
+           + p(s_, 264, y + 110, 600, size=21, d=i + 1))
+for i, (t, img, v, ej, lec) in enumerate(no):
+    col, fila = i % 2, i // 2
+    x, y = 1000 + col * 400, 330 + fila * 250
+    fn += (reel(x, y, 108, img, v, d=i)
+           + p(t, x + 128, y + 20, 250, size=24, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
+           + p(lec, x + 128, y + 110, 250, size=19, d=i + 2))
+fn += f'<div class="abs line-v" style="left:940px;top:290px;height:650px;background:#E7E2DB"></div>'
+add("funciona", "Qué funciona y qué no", sec(
+    eyebrow("Análisis")
+    + titulo("Qué funciona y qué no", size=56)
+    + fn + foot(n),
+))
+
 # ── 9. Portadas ──────────────────────────────────────────────────────────
 n += 1
 add("portadas", "Tus portadas", sec(
@@ -510,7 +540,7 @@ add("parte2", "Parte 2 · La redirección", sec(
 # ── 12b. Lo que me contaste ─────────────────────────────────────────────
 n += 1
 dijo = [
-    ("«Puedo dedicar aproximadamente 2-3 horas a la semana a grabar»", "Grabación por lotes los lunes y viernes por la mañana, con formatos que se repiten."),
+    ("«Puedo dedicar aproximadamente 2-3 horas a la semana a grabar»", "Una sola sesión de grabación a la semana, con formatos que se repiten."),
     ("Cardedeu: jardín y campo, «el problema es que no sé qué grabar»", "Serie «Entrena donde estés»: rutinas cortas al aire libre."),
     ("«No tengo un calendario de ideas… me van surgiendo sobre la marcha»", "Formatos fijos y una lista de ideas para cada sesión de grabación."),
     ("«Muchas veces funcionan mejor los vídeos más espontáneos y de humor»", "Mantener el humor, con situaciones de tu clienta y un final que lleve a Level Up."),
@@ -793,12 +823,12 @@ for i, (cuenta, sub, code, vistas, titulo_reel, porque, items, tuya) in enumerat
 # ── 20. Tu semana con 2-3 horas ──────────────────────────────────────────
 n += 1
 dias = [
-    ("Lunes", "Grabar · 2 h", "4 piezas de una sentada: 2 de Nivel 0, 1 de Mitos 35+ y 1 de Dentro de Level Up. Misma ropa, mismo sitio.", ACENTO),
+    ("Lunes", "Grabar · 2-2,5 h", "Una sola sesión: los 3 reels de la semana y un banco de clips para historias. Misma ropa, mismo sitio.", ACENTO),
     ("Martes", "Publicar", "Nivel 0 + historias con enlace.", "#2A2D2C"),
     ("Jueves", "Publicar", "Mitos 35+ o Dentro de Level Up.", "#2A2D2C"),
-    ("Viernes", "Grabar · 30 min", "Lo espontáneo: ¿Te ha pasado? y No hay viento. Banco de historias.", ACENTO),
-    ("Sábado", "Publicar", "Entrena donde estés (Cardedeu) o humor.", "#2A2D2C"),
+    ("Sábado", "Publicar", "Entrena donde estés (Cardedeu), ¿Te ha pasado? o No hay viento.", "#2A2D2C"),
     ("Cada día", "Historias · 10 min", "3 historias: algo real, una encuesta o pregunta, y 2-3 veces por semana el enlace.", "#2A2D2C"),
+    ("Por las noches", "Editar", "Como ahora, con InShot o Edits. Lo programas todo desde Meta Business Suite.", "#2A2D2C"),
 ]
 dh = ""
 for i, (d, t, txt, c) in enumerate(dias):
@@ -816,8 +846,6 @@ add("semana", "Tu semana tipo", sec(
     eyebrow("Organización · 2-3 horas a la semana")
     + titulo("Tu semana tipo", size=56)
     + dh
-    + p("La edición, por las noches como ahora, con InShot o Edits. Lo programas todo desde Meta Business Suite.",
-        128, 920, 1664, size=22, d=8, cls="muted")
     + foot(n),
 ))
 
@@ -897,8 +925,8 @@ fases = [
         ("Accesos a Meta para medir.", "Lucía"),
     ]),
     ("Semana 2", "23–29 nov", "Primer lote", [
-        ("Guiones de las 4 primeras piezas.", "Jandro"),
-        ("Lunes 23: grabar el lote.", "Lucía"),
+        ("Guiones de los 3 primeros reels.", "Jandro"),
+        ("Lunes 23: grabar los 3 de una sentada.", "Lucía"),
         ("Plantillas de portada por formato.", "Jandro"),
         ("Publicar martes, jueves y sábado.", "Lucía"),
         ("Historias diarias, 2-3 con enlace.", "Lucía"),
@@ -907,12 +935,7 @@ fases = [
         ("Email de bienvenida, aviso antes del cobro y pregunta al darse de baja.", "Web"),
         ("Landing: testimonios y vídeo tuyo.", "Web"),
         ("Google Analytics y píxel de Meta.", "Web"),
-        ("Calendario de diciembre.", "Jandro"),
-    ]),
-    ("Mediados de dic.", "Revisión", "Ajustes", [
-        ("Revisión de métricas del primer mes.", "Jandro"),
-        ("Qué formatos se quedan y cuáles cambian.", "Jandro"),
-        ("Plan de enero.", "Jandro"),
+        ("Calendario de diciembre y plan de enero.", "Jandro"),
     ]),
 ]
 ph = ""
@@ -932,6 +955,16 @@ leyenda = "".join(
     f'<span style="display:inline-block;margin-right:24px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:{c};margin-right:8px;vertical-align:-1px"></span>{"Su cuñado (web)" if k == "Web" else k}</span>'
     for k, c in QUIEN.items()
 )
+x = 128 + 3 * 424
+ph += (card(x, 300, 396, 640, d=3, cls="pm-card-r")
+       + p("Mediados de dic.", x + 30, 328, 340, size=20, d=4, cls="", extra="font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3A2F2F;")
+       + p("Revisión", x + 30, 362, 340, size=19, d=4, cls="", extra="color:#6B5A4C;")
+       + p("Objetivos", x + 30, 392, 340, size=32, d=4, cls="", extra=f"font-weight:800;color:{INK};"))
+for k, (v, t, hoy) in enumerate([("12", "reels al mes", "hoy 4,5"), ("30", "comentarios con NIVEL0", "hoy 0"),
+                                 ("6", "seguidoras por cada 1.000 reproducciones", "hoy 4,3"), ("5", "pruebas gratis reales", "hoy 1,25 al mes")]):
+    y = 462 + k * 116
+    ph += (f'<p class="abs a disp" style="left:{x + 30}px;top:{y}px;font-size:48px;color:{INK};--d:{k + 5}">{v}</p>'
+           + p(f"{t}<br><span style='color:#6B5A4C;font-weight:400'>{hoy}</span>", x + 130, y - 2, 240, size=19, d=k + 5, cls="", extra=f"color:{INK};font-weight:700;line-height:1.3;"))
 n += 1
 add("plan", "Plan de acción", sec(
     eyebrow("Plan de acción")
