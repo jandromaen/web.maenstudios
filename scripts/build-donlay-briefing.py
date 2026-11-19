@@ -80,6 +80,12 @@ BLOBS = {
     "5ba4974b0c6f3c9408580f06ec03e728": "donlay-sala-reservado.jpg",
     "9d1ca64a5b6ac8359ab711125ee09406": "donlay-sala-lamparas.jpg",
     "cc398e4520f20ba5b56e371509fd9f72": "donlay-wok-fuego.jpg",
+    "d37457bef66faa69e7e2136f63e74e78": "icono-dong.png",
+    "d3cadbea42b8e4123f8ac87a22613b83": "icono-lai.png",
+    "afb7ed891013a845a3498469416e76aa": "icono-chuan.png",
+    "f84ef4623acc8d4dcc4a0d95a62de823": "icono-jia.png",
+    "ee151cd695dec47b9d35fa38222f3fa9": "icono-yi.png",
+    "ab37247166386f1f6605285d846a70a1": "icono-yue.png",
 }
 
 
