@@ -53,6 +53,9 @@ BLOBS = {
     "227a1b2f819a93eb218a4a7ce44b7e2b": "dimsum-ref.jpg",
     "2418178f5dcdeb65fae63a44f1c1aa94": "pieza-1.jpg",
     "50d920291511b149871f2a420eea4d6f": "pieza-2.jpg",
+    "b4de30eb5834d46acfcbf7163cc13878": "dossier-pescado.jpg",
+    "1038ae184ff15de3ff3af7a276553c51": "dossier-dimsum.jpg",
+    "fe6cc725d7342b318dbeb84ca780d442": "dossier-marisco.jpg",
 }
 
 
