@@ -113,7 +113,8 @@ export default function TalentsPage() {
               <p className="lead">
                 Conectamos marcas con creadores que encajan con su voz:
                 descubrimiento, negociación, producción y gestión de campañas
-                con influencers, microinfluencers y UGC.
+                con influencers, microinfluencers y{" "}
+                <Link href="/blog/que-es-ugc-como-usarlo">UGC</Link>.
               </p>
               <div className="hero-actions">
                 {/* El catálogo primero: una marca que llega buscando creadores

@@ -277,6 +277,7 @@ export const posts: Post[] = [
       "UGC (contenido generado por creadores): qué es, por qué funciona mejor que la publicidad tradicional y cómo integrarlo en la estrategia de tu marca.",
     category: "UGC",
     date: "2026-07-01",
+    updated: "2026-11-19",
     readingMinutes: 5,
     keywords: [
       "qué es el ugc",
@@ -286,6 +287,10 @@ export const posts: Post[] = [
     ],
     excerpt:
       "El UGC parece contenido de un amigo, no un anuncio. Por eso convierte tanto. Te explicamos qué es y cómo aprovecharlo.",
+    relatedLanding: {
+      href: "/talents",
+      label: "Ver red de creadores UGC",
+    },
     content: [
       {
         type: "p",
@@ -315,6 +320,20 @@ export const posts: Post[] = [
       {
         type: "p",
         text: "Lo ideal es trabajar con creadores que encajen con la voz de tu marca y producir piezas pensadas para tus objetivos. En Maen Studios conectamos marcas con talento y producimos campañas de UGC de principio a fin. Si quieres contenido que genere confianza y venda, escríbenos.",
+      },
+    ],
+    faq: [
+      {
+        q: "¿Quién es el dueño del vídeo, la marca o el creador?",
+        a: "Se acuerda como parte de la colaboración con el creador: lo habitual es cerrar los derechos de uso para que la marca pueda publicar el contenido en su perfil y en campañas de Ads, que es como gestionamos cada campaña de UGC en Maen Studios.",
+      },
+      {
+        q: "¿Dónde se usa el contenido UGC?",
+        a: "En dos sitios sobre todo: el perfil de la marca y los anuncios (Ads). Ahí es donde más se nota la diferencia con un anuncio tradicional, porque se integra en el feed en vez de interrumpirlo.",
+      },
+      {
+        q: "¿Cuánto cuesta un vídeo de UGC?",
+        a: "Depende del creador, la duración de la pieza y los derechos de uso que necesites. Explicamos qué mueve el precio de un vídeo de este tipo en nuestra guía de cuánto cuesta un Reel.",
       },
     ],
   },
