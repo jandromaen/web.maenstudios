@@ -63,6 +63,8 @@ BLOBS = {
     "23e5fcad60fd3acd083867db518c281f": "mimi-antes.jpg",
     "43991ad628d214fa392b08d09b1e9dba": "mimi-durante.jpg",
     "45478ae2833e7bedf92ab66574e24cfb": "navidad-video.jpg",
+    "4a55d2d56214706c4f743f2263d03946": "individual-1.jpg",
+    "480a9747b2790594d973d4c25f6fbd92": "individual-2.jpg",
 }
 
 
