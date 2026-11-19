@@ -787,7 +787,7 @@ Si te queda alguna duda, déjala en comentarios y te contestamos.
 📍 Av. Diagonal 610, Barcelona
 #SkinLaundryBarcelona #PrimeraVisita #LaserFacial #Equipo` },
 
-{ d:25, formato:"Post", estado:"listo", media:"/pitch/skin-laundry-calendario/noviembre/img/d25_post.jpg?v=11191228", cubo:"Med. estética", tema:"Ultraformer", hora:"08:30h",
+{ d:25, formato:"Post", estado:"listo", storyLeft:425, storyVisible:true, storyLbl:"Story", storyImgs:["/pitch/skin-laundry-calendario/noviembre/img/st_25_openday.jpg?v=11191416"], media:"/pitch/skin-laundry-calendario/noviembre/img/d25_post.jpg?v=11191228", cubo:"Med. estética", tema:"Ultraformer", hora:"08:30h",
   pieza:"Open day: ven a verlo",
   base:"Doc §1", cta:"Consulta previa con nuestros médicos",
   nota:"Publicar a primera hora de la mañana (08:30h), antes de que abra el open day · confirmar el horario del evento para completar el copy y si hace falta inscribirse",
@@ -1359,7 +1359,7 @@ dayPlan.forEach(item => {
       ${p.slides ? `<div class="slides${p.slides.length >= 6 ? " two" : ""}" style="--rows:${Math.ceil(p.slides.length / 2)}">${p.slides.map((x,i) => `<div><img src="${esc(isVid(x) ? x.replace(/\.mp4(\?|$)/, "_poster.jpg$1") : x)}" ${isVid(x) ? `data-vid="${esc(x)}"` : ""} alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
       ${p.fuente ? `<div class="src"><b>Material</b>${esc(p.fuente)}</div>` : ""}
     </div>
-    <div class="story-frame${(p.portada && p.storyImgs) ? " cmp" : ""}" style="left:${p.slides && p.slides.length >= 6 ? (p.storyVisible ? 440 : 470) : 330}px${(MOSTRAR_STORIES || p.storyVisible || p.portada || (p.vacio && isReel)) ? "" : ";display:none"}">
+    <div class="story-frame${(p.portada && p.storyImgs) ? " cmp" : ""}" style="left:${p.storyLeft ? p.storyLeft : p.slides && p.slides.length >= 6 ? (p.storyVisible ? 440 : 470) : 330}px${(MOSTRAR_STORIES || p.storyVisible || p.portada || (p.vacio && isReel)) ? "" : ";display:none"}">
       <div class="col-lbl">${esc((p.portada || (p.vacio && isReel)) ? "Portada del reel" : (p.storyLbl || "Story de apoyo"))}</div>
       ${(p.vacio && isReel && !p.portada) ? `<div class="tpl sm empty"><div class="tpl-ph"><span>+</span>Portada pendiente</div></div>` : p.portada ? `<div class="tpl sm"><img src="${esc(p.portada)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : p.repost ? repostStory(p) : p.storyImgs ? storiesBox(p) : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
