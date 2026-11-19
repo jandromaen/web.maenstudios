@@ -65,6 +65,11 @@ BLOBS = {
     "45478ae2833e7bedf92ab66574e24cfb": "navidad-video.jpg",
     "4a55d2d56214706c4f743f2263d03946": "individual-1.jpg",
     "480a9747b2790594d973d4c25f6fbd92": "individual-2.jpg",
+    "3f3fed0034dcbe3eb939226d35f30288": "wok-paso-1.jpg",
+    "bcb85c915c34518d9af87efb50f20847": "wok-paso-2.jpg",
+    "8b9a4956cf21e9b6ac376243fc9bfa3a": "retrato-1.jpg",
+    "2becb7d37dcbffedba23de7c07896e1e": "retrato-2.jpg",
+    "b71fcf0af414f15ef50d1e918f31449d": "retrato-3.jpg",
 }
 
 
