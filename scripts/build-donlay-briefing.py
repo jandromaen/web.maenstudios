@@ -70,6 +70,10 @@ BLOBS = {
     "8b9a4956cf21e9b6ac376243fc9bfa3a": "retrato-1.jpg",
     "2becb7d37dcbffedba23de7c07896e1e": "retrato-2.jpg",
     "b71fcf0af414f15ef50d1e918f31449d": "retrato-3.jpg",
+    "12a33f19f30391299ca3b70c06a780ae": "wok-paso-3.jpg",
+    "c56082d056dd05fc8f247367444916a4": "wok-paso-4.jpg",
+    "4bb5b104483d3c4f5614912972ea11e4": "wok-paso-5.jpg",
+    "9e5e8cf1153d692e936265868bd1c415": "wok-paso-6.jpg",
 }
 
 
