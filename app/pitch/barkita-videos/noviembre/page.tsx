@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function VideosNoviembre() {
-  return <BarkitaDeck diapos={DIAPOS} marca="Barkita · Vídeos noviembre" />;
+  return <BarkitaDeck diapos={DIAPOS} marca="Barkita · Vídeos noviembre" notas="barkita-videos-nov" />;
 }

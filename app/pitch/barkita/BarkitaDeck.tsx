@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { DIAPOS, type DiapoHtml } from "./diapos";
 import { CapaMedios, type Contenido } from "../medios/Medios";
+import { BotonNotas, PanelNotas, PostIts, useNotas } from "./Notas";
 
 const ANCHO = 1920;
 const ALTO = 1080;
@@ -20,13 +21,22 @@ const ALTO = 1080;
  */
 /* contenido: fotos y vídeos de cada día (carruseles y reels) que se pintan
    dentro de las diapositivas marcadas con data-slot / data-feed. */
-type Props = { diapos?: DiapoHtml[]; marca?: string; tema?: string; contenido?: Contenido };
+/* notas: clave con la que se guardan las notas del cliente (p. ej.
+   "barkita-noviembre"); sin ella el deck no muestra el botón de notas. */
+type Props = {
+  diapos?: DiapoHtml[];
+  marca?: string;
+  tema?: string;
+  contenido?: Contenido;
+  notas?: string;
+};
 
 export default function BarkitaDeck({
   diapos = DIAPOS,
   marca = "Maen Studios × Barkita",
   tema,
   contenido,
+  notas,
 }: Props) {
   const lienzo = useRef<HTMLDivElement>(null);
   const [indice, setIndice] = useState(0);
@@ -35,6 +45,8 @@ export default function BarkitaDeck({
   const raiz = useRef<HTMLDivElement>(null);
   const total = diapos.length;
   const diapoId = diapos[Math.max(0, Math.min(total - 1, indice))]?.id;
+  const estadoNotas = useNotas(notas);
+  const [notasAbiertas, setNotasAbiertas] = useState(false);
 
   const ir = useCallback(
     (i: number) => setIndice(Math.max(0, Math.min(total - 1, i))),
@@ -70,6 +82,9 @@ export default function BarkitaDeck({
 
   useEffect(() => {
     const alPulsar = (e: KeyboardEvent) => {
+      /* Escribiendo una nota no se pasa de diapositiva */
+      const t = e.target as HTMLElement | null;
+      if (t && t.closest("input, textarea, select, [contenteditable]")) return;
       switch (e.key) {
         case "ArrowRight":
         case " ":
@@ -164,6 +179,12 @@ export default function BarkitaDeck({
             onClick={alPulsarLienzo}
             dangerouslySetInnerHTML={{ __html: diapo.html }}
           />
+          {notas && (
+            <PostIts
+              notas={estadoNotas.notas.filter((n) => n.clave === diapo.id && !n.resuelta)}
+              onAbrir={() => setNotasAbiertas(true)}
+            />
+          )}
         </div>
       </div>
 
@@ -172,6 +193,13 @@ export default function BarkitaDeck({
       <div className="bk-hud">
         <span className="bk-hud-marca">{marca}</span>
         <div className="bk-hud-nav">
+          {notas && (
+            <BotonNotas
+              abiertas={estadoNotas.notas.filter((n) => n.clave === diapo.id && !n.resuelta).length}
+              total={estadoNotas.notas.filter((n) => !n.resuelta).length}
+              onClick={() => setNotasAbiertas(!notasAbiertas)}
+            />
+          )}
           <button onClick={anterior} disabled={indice === 0} aria-label="Anterior">
             ‹
           </button>
@@ -194,6 +222,18 @@ export default function BarkitaDeck({
           </button>
         </div>
       </div>
+
+      {notas && (
+        <PanelNotas
+          mes={notas}
+          diapos={diapos}
+          indice={indice}
+          ir={ir}
+          abierto={notasAbiertas}
+          setAbierto={setNotasAbiertas}
+          estado={estadoNotas}
+        />
+      )}
 
       <div className="bk-progreso" aria-hidden="true">
         <span style={{ width: `${((indice + 1) / total) * 100}%` }} />
