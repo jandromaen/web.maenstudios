@@ -183,6 +183,9 @@ a{color:inherit;text-decoration:none}
 .ig-card .ft{display:flex;gap:10px;padding:8px 10px;font-size:13px;color:#222}
 .ph-media{display:grid;justify-items:center;gap:8px;text-align:center;color:var(--tan);padding:20px}
 .ph-media .plus{width:42px;height:42px;border-radius:50%;border:1px dashed var(--tan);display:grid;place-items:center;font-size:20px;font-weight:200}
+.media.pf.vac,.media.m-post.vac,.media.m-carrusel.vac{background:var(--cream-2)!important;border-color:var(--cream-2)!important;color:var(--tan)!important;display:grid;place-items:center}
+.media.vac>*:not(.pages){position:static}
+.reel-ig.vac{display:grid;place-items:center;background:var(--cream-2)}
 .ph-media span{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase}
 .story{width:210px;aspect-ratio:9/16;border-radius:16px;background:var(--cream-2);overflow:hidden;position:relative;display:grid;place-items:center;box-shadow:0 10px 30px rgba(60,32,30,.1)}
 .story img,.story video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -634,7 +637,7 @@ a{color:inherit;text-decoration:none}
 const HANDLE = "@skinlaundry_es";
 const MONTH = 10, YEAR = 2026;            // noviembre 2026 (mes 0-indexado)
 /* Presentación hasta el día HASTA: los días posteriores quedan ocultos (poner 30 para mostrar el mes entero) */
-const HASTA = 22;
+const HASTA = 30;
 const START = 18, END = HASTA;   /* días anteriores ya publicados: fuera */
 
 const FECHAS = {
@@ -774,7 +777,7 @@ Unas vinieron a por su láser, otras a por un facial antes de un evento y alguna
 
 #SkinLaundryBarcelona #FacialLaser #CuidadoFacial #Skincare #Barcelona` },
 
-{ d:23, formato:"Reel", repost:[{t:"link",txt:"Descubre el centro"}],  cubo:"Branding", tema:"Equipo", hora:"18:30h",
+{ vacio:true, d:23, formato:"Reel", cubo:"Branding", tema:"Equipo", hora:"18:30h",
   pieza:"Tu CC te explica",
   base:"Excel 2025: CC", cta:"Descubre el centro", nota:"Pendiente de grabar · confirmar nombre de la CC",
   idea:["La CC a cámara en recepción","Responde: ¿cómo es mi primera visita?","Recorrido rápido: recepción → valoración → cabina","Cierre: descubre el centro"],
@@ -784,7 +787,7 @@ Si te queda alguna duda, déjala en comentarios y te contestamos.
 📍 Av. Diagonal 610, Barcelona
 #SkinLaundryBarcelona #PrimeraVisita #LaserFacial #Equipo` },
 
-{ d:25, formato:"Post", storyImg:"/pitch/skin-laundry-calendario/noviembre/img/st_25.jpg?v=11120146", cubo:"Med. estética", tema:"Ultraformer", hora:"10:00h",
+{ vacio:true, d:25, formato:"Post", cubo:"Med. estética", tema:"Ultraformer", hora:"10:00h",
   pieza:"Open day: ven a verlo",
   base:"Doc §1", cta:"Consulta previa con nuestros médicos",
   nota:"Pendiente de diseñar · confirmar que el open day sigue en pie y su horario",
@@ -797,10 +800,9 @@ Si hoy no puedes venir, pide tu consulta previa desde el enlace de la bio.
 📍 Av. Diagonal 610, Barcelona
 #Ultraformer #OpenDay #TensadoSinCirugia #SkinLaundryBarcelona` },
 
-{ d:27, formato:"Carrusel", storyImg:"/pitch/skin-laundry-calendario/noviembre/img/st_27.jpg?v=11120146", cubo:"Láser", tema:"Manchas", hora:"13:30h",
+{ vacio:true, d:27, formato:"Carrusel", cubo:"Láser", tema:"Manchas", hora:"13:30h",
   pieza:"Tipos de manchas y qué hay", base:"Doc §3 (ampliar)", cta:"Reserva tu valoración",
-  nota:"Slide 4: quitar «Este Black Friday…» y confirmar el «desde 600 €» del plan combinado, que no está en la carta",
-  media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d27_1.jpg?v=11101627", slides:["/pitch/skin-laundry-calendario/noviembre/img/drive-d27_1.jpg?v=11101627","/pitch/skin-laundry-calendario/noviembre/img/drive-d27_2.jpg?v=11101627","/pitch/skin-laundry-calendario/noviembre/img/drive-d27_3.jpg?v=11101627","/pitch/skin-laundry-calendario/noviembre/img/drive-d27_4.jpg?v=11101627"],
+  nota:"Pendiente de diseñar · confirmar el «desde 600 €» del plan combinado, que no está en la carta",
   idea:["Portada: «No todas las manchas son iguales»","Solares y seniles: cómo son, dónde, qué hay","Melasma y marcas de acné: las que más confunden","Spotless, Brightening o plan combinado + Reserva tu valoración"],
   story:["Story de diseño propio","Enlace a añadir desde Instagram: Reserva tu valoración"],
   copy:`No todas las manchas son iguales, ni se tratan igual. Estas son las más habituales:
@@ -813,8 +815,7 @@ Reserva la tuya desde el enlace de la bio.
 📍 Av. Diagonal 610, Barcelona
 #Manchas #Melasma #LaserFacial #SkinLaundryBarcelona` },
 
-{ d:28, formato:"Reel", repost:[{t:"link",txt:"Reserva antes de que acabe"}], media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d28.mp4?v=11111055", poster:"/pitch/skin-laundry-calendario/noviembre/img/drive-d28_poster.jpg?v=11111055", estado:"listo",
-  nota:"Provisional: el plano de Hydrafacial es aplicación de gel y el de láser es peeling de carbón (sustituir por vídeo real) · precio Black Friday 200 € (antes 380 €), venta 16–30/11, válido hasta el 28/02 (Carlota, 30/10)",  cubo:"Promociones", tema:"Power Glow", hora:"11:00h",
+{ vacio:true, d:28, formato:"Reel", nota:"Pendiente de montar · precio Black Friday 200 € (antes 380 €), venta 16–30/11, válido hasta el 28/02 (Carlota, 30/10)",  cubo:"Promociones", tema:"Power Glow", hora:"11:00h",
   pieza:"Power Glow Duo: Hydrafacial + láser",
   base:"Excel 2025: Power Glow", cta:"Reserva antes de que acabe",
   idea:["Gancho: «Dos tratamientos, una sola cita»","Plano 1: Hydrafacial (limpieza e hidratación)","Plano 2: Brightening Laser (luminosidad)","Cierre: reserva antes de que acabe"],
@@ -826,11 +827,10 @@ Reserva antes de que acabe desde el enlace de la bio.
 📍 Av. Diagonal 610, Barcelona
 #PowerGlow #Hydrafacial #LaserFacial #SkinLaundryBarcelona` },
 
-{ d:29, formato:"Post", storyImg:"/pitch/skin-laundry-calendario/noviembre/img/st_29.jpg?v=11120146", cubo:"Branding", tema:"Así somos", hora:"11:00h",
+{ vacio:true, d:29, formato:"Post", cubo:"Branding", tema:"Así somos", hora:"11:00h",
   pieza:"60 clínicas, 3 millones de faciales, 20.000 miembros",
   base:"Doc §6", cta:"Descubre el centro",
-  nota:"Validar cifras: el diseño dice 60 clínicas y 3M faciales; el folleto dice 70+ y 2,8M",
-  media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d29_2.jpg?v=11101627",
+  nota:"Pendiente de diseñar · validar cifras: 60 clínicas y 3M faciales (el folleto dice 70+ y 2,8M)",
   idea:["60 clínicas · 3M faciales · 20.000 miembros"],
   story:["Story de diseño propio","Enlace a añadir desde Instagram: Descubre el centro"],
   copy:`60 clínicas en todo el mundo. Más de 3 millones de faciales. Más de 20.000 miembros que cuidan su piel con nosotras.
@@ -840,9 +840,8 @@ Ven a conocernos. Tienes toda la información en el enlace de la bio.
 Treat. Glow. Repeat.
 #SkinLaundry #SkinLaundryBarcelona #LaserFacial #TreatGlowRepeat` },
 
-{ d:30, formato:"Post", storyImg:"/pitch/skin-laundry-calendario/noviembre/img/st_30.jpg?v=11120146", cubo:"Láser", tema:"Manchas", hora:"19:30h",
-  pieza:"Manchas en otoño: cuándo empezar a tratarlas", base:"Doc §3", cta:"Reserva tu valoración",
-  media:"/pitch/skin-laundry-calendario/noviembre/img/drive-d30_1.jpg?v=11101627",
+{ vacio:true, d:30, formato:"Post", cubo:"Láser", tema:"Manchas", hora:"19:30h",
+  nota:"Pendiente de diseñar", pieza:"Manchas en otoño: cuándo empezar a tratarlas", base:"Doc §3", cta:"Reserva tu valoración",
   idea:["Portada: «Manchas en otoño: cuándo empezar a tratarlas»"],
   story:["Story de diseño propio","Enlace a añadir desde Instagram: Reserva tu valoración"],
   copy:`Las manchas del verano se tratan mejor ahora, cuando hay menos sol.
@@ -1040,6 +1039,7 @@ const RI = {
   play:'<svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>'
 };
 function reelCard(p) {
+  if (p.vacio) return `<div class="reel-ig plain is-static vac">${ph("Reel pendiente de montar")}</div>`;
   /* Vídeo en formato normal: sin interfaz de Instagram encima, solo se reproduce al darle al play */
   const vid = p.media && isVid(p.media);
   const bg = !p.media ? `<div class="guion"><span>Guion</span><ol>${(p.idea || []).map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>`
@@ -1351,17 +1351,17 @@ dayPlan.forEach(item => {
       <div class="col-lbl">${esc(p.formato)}</div>
       ${isReel ? reelCard(p) : ""}<div class="ig-card" ${isReel ? 'style="display:none"' : ""}>
         <div class="hd"><i>${avatar}</i>skinlaundry_es</div>
-        <div class="media pf m-${f} ${p.media ? "has-media" : ""}">
-          ${p.media ? `${mediaTag(p.media, p.poster)}${isReel && !isVid(p.media) ? `<span class="play">▶</span>` : f === "carrusel" ? `<span class="pages">1/${p.slides ? p.slides.length : Math.max(3, p.idea.length)}</span>` : ""}<div class="idea over"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>` : `<div class="idea"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>`}
+        <div class="media pf m-${f} ${p.media ? "has-media" : ""}${p.vacio ? " vac" : ""}">
+          ${p.vacio ? `${ph(f === "carrusel" ? "Carrusel pendiente de diseñar" : "Post pendiente de diseñar")}${f === "carrusel" ? `<span class="pages">1/${p.idea.length}</span>` : ""}` : p.media ? `${mediaTag(p.media, p.poster)}${isReel && !isVid(p.media) ? `<span class="play">▶</span>` : f === "carrusel" ? `<span class="pages">1/${p.slides ? p.slides.length : Math.max(3, p.idea.length)}</span>` : ""}<div class="idea over"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>` : `<div class="idea"><span>${isReel ? "Guion" : f === "carrusel" ? "Slides" : "Visual"}</span><ol>${p.idea.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>`}
         </div>
         <div class="ft"><span>♡</span><span>◯</span><span>➤</span><span style="margin-left:auto">⌑</span></div>
       </div>
       ${p.slides ? `<div class="slides${p.slides.length > 6 ? " two" : ""}" style="--rows:${Math.ceil(p.slides.length / 2)}">${p.slides.map((x,i) => `<div><img src="${esc(isVid(x) ? x.replace(/\.mp4(\?|$)/, "_poster.jpg$1") : x)}" ${isVid(x) ? `data-vid="${esc(x)}"` : ""} alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
       ${p.fuente ? `<div class="src"><b>Material</b>${esc(p.fuente)}</div>` : ""}
     </div>
-    <div class="story-frame${(p.portada && p.storyImgs) ? " cmp" : ""}" style="left:${p.slides && p.slides.length > 6 ? (p.storyVisible ? 440 : 470) : 330}px${(MOSTRAR_STORIES || p.storyVisible || p.portada) ? "" : ";display:none"}">
-      <div class="col-lbl">${esc(p.portada ? "Portada del reel" : (p.storyLbl || "Story de apoyo"))}</div>
-      ${p.portada ? `<div class="tpl sm"><img src="${esc(p.portada)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : p.repost ? repostStory(p) : p.storyImgs ? storiesBox(p) : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
+    <div class="story-frame${(p.portada && p.storyImgs) ? " cmp" : ""}" style="left:${p.slides && p.slides.length > 6 ? (p.storyVisible ? 440 : 470) : 330}px${(MOSTRAR_STORIES || p.storyVisible || p.portada || (p.vacio && isReel)) ? "" : ";display:none"}">
+      <div class="col-lbl">${esc((p.portada || (p.vacio && isReel)) ? "Portada del reel" : (p.storyLbl || "Story de apoyo"))}</div>
+      ${(p.vacio && isReel && !p.portada) ? `<div class="tpl sm empty"><div class="tpl-ph"><span>+</span>Portada pendiente</div></div>` : p.portada ? `<div class="tpl sm"><img src="${esc(p.portada)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : p.repost ? repostStory(p) : p.storyImgs ? storiesBox(p) : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
     </div>
     ${(p.portada && p.storyImgs) ? `<div class="story-frame cmp" style="left:${p.st2Left || 470}px!important;width:180px"><div class="col-lbl">${esc(p.storyLbl || "Stories del día")}</div>${storiesBox(p)}</div>` : ""}
