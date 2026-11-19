@@ -86,6 +86,14 @@ BLOBS = {
     "f84ef4623acc8d4dcc4a0d95a62de823": "icono-jia.png",
     "ee151cd695dec47b9d35fa38222f3fa9": "icono-yi.png",
     "ab37247166386f1f6605285d846a70a1": "icono-yue.png",
+    "286149eef8eba680f309adc678281d80": "eci-pack-1.jpg",
+    "e26caa53985a2b8167406db2781613d6": "eci-pack-2.jpg",
+    "df300a5cb17e20c7b38f6776eed202cd": "eci-pack-3.jpg",
+    "0ada2368d6cffa982dcc013eaf11de8d": "eci-pack-4.jpg",
+    "36ae4b9aa3e5490ad39b71ef01169ea6": "eci-bodegon-1.jpg",
+    "93971f73883811e7c1e249266cbaf464": "eci-bodegon-2.jpg",
+    "851c0179a91dec0d0413c37433407323": "eci-bodegon-3.jpg",
+    "2c18e9e851b32e0a11321c7f6c9bffca": "eci-bodegon-4.jpg",
 }
 
 
