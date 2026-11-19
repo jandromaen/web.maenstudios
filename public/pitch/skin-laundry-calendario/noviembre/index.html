@@ -1347,7 +1347,7 @@ dayPlan.forEach(item => {
   ${p.externo ? `<div class="day-right"><div class="ext-box"><span class="eyebrow">${esc(p.formato)} · ${esc(p.tema)}</span><b>Lo publica el equipo de influencers de All About</b><span>Temática: ${esc(p.pieza)}</span></div></div>` : ""}
   <div class="day-right" ${p.externo ? 'style="display:none"' : ""}>
     ${p.opciones ? `<div class="opts"><div class="col-lbl">${esc(p.formato)} · dos opciones de diseño</div><div class="opts-row">${p.slides.map((x,i) => `<figure><img src="${esc(x)}" alt=""><figcaption>Opción ${"AB"[i]}</figcaption></figure>`).join("")}</div></div>` : ""}
-    <div class="post-frame ${isReel ? "is-reel" : ""}${(p.storyVisible && p.slides && p.slides.length > 6) ? " compact" : ""}" ${(p.opciones || p.sinDiseno) ? 'style="display:none"' : ""}>
+    <div class="post-frame ${isReel ? "is-reel" : ""}${(p.storyVisible && p.slides && p.slides.length >= 6) ? " compact" : ""}" ${(p.opciones || p.sinDiseno) ? 'style="display:none"' : ""}>
       <div class="col-lbl">${esc(p.formato)}</div>
       ${isReel ? reelCard(p) : ""}<div class="ig-card" ${isReel ? 'style="display:none"' : ""}>
         <div class="hd"><i>${avatar}</i>skinlaundry_es</div>
@@ -1356,10 +1356,10 @@ dayPlan.forEach(item => {
         </div>
         <div class="ft"><span>♡</span><span>◯</span><span>➤</span><span style="margin-left:auto">⌑</span></div>
       </div>
-      ${p.slides ? `<div class="slides${p.slides.length > 6 ? " two" : ""}" style="--rows:${Math.ceil(p.slides.length / 2)}">${p.slides.map((x,i) => `<div><img src="${esc(isVid(x) ? x.replace(/\.mp4(\?|$)/, "_poster.jpg$1") : x)}" ${isVid(x) ? `data-vid="${esc(x)}"` : ""} alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
+      ${p.slides ? `<div class="slides${p.slides.length >= 6 ? " two" : ""}" style="--rows:${Math.ceil(p.slides.length / 2)}">${p.slides.map((x,i) => `<div><img src="${esc(isVid(x) ? x.replace(/\.mp4(\?|$)/, "_poster.jpg$1") : x)}" ${isVid(x) ? `data-vid="${esc(x)}"` : ""} alt=""><span>${p.opciones ? "Opción " + "AB"[i] : i+1}</span></div>`).join("")}</div>` : ""}
       ${p.fuente ? `<div class="src"><b>Material</b>${esc(p.fuente)}</div>` : ""}
     </div>
-    <div class="story-frame${(p.portada && p.storyImgs) ? " cmp" : ""}" style="left:${p.slides && p.slides.length > 6 ? (p.storyVisible ? 440 : 470) : 330}px${(MOSTRAR_STORIES || p.storyVisible || p.portada || (p.vacio && isReel)) ? "" : ";display:none"}">
+    <div class="story-frame${(p.portada && p.storyImgs) ? " cmp" : ""}" style="left:${p.slides && p.slides.length >= 6 ? (p.storyVisible ? 440 : 470) : 330}px${(MOSTRAR_STORIES || p.storyVisible || p.portada || (p.vacio && isReel)) ? "" : ";display:none"}">
       <div class="col-lbl">${esc((p.portada || (p.vacio && isReel)) ? "Portada del reel" : (p.storyLbl || "Story de apoyo"))}</div>
       ${(p.vacio && isReel && !p.portada) ? `<div class="tpl sm empty"><div class="tpl-ph"><span>+</span>Portada pendiente</div></div>` : p.portada ? `<div class="tpl sm"><img src="${esc(p.portada)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : p.repost ? repostStory(p) : p.storyImgs ? storiesBox(p) : p.storyImg ? `<div class="tpl sm"><img src="${esc(p.storyImg)}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>` : tplStory((p.slides || p.poster) ? "" : p.media, `<h4>${esc(p.tema.toUpperCase())}</h4><div class="pills">${p.story.map(x => `<span>${esc(x)}</span>`).join("")}</div><span class="sticker">🔗 Ver publicación</span>`, "sm")}
       ${destacadoDe(p) ? `<div class="hl-chip"><span style="background-image:url('${(DESTACADOS.find(h => h.nombre === destacadoDe(p)) || {}).cover}')"></span>Guardar en <b>${esc(destacadoDe(p))}</b></div>` : ""}
