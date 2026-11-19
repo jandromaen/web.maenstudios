@@ -74,6 +74,12 @@ BLOBS = {
     "c56082d056dd05fc8f247367444916a4": "wok-paso-4.jpg",
     "4bb5b104483d3c4f5614912972ea11e4": "wok-paso-5.jpg",
     "9e5e8cf1153d692e936265868bd1c415": "wok-paso-6.jpg",
+    "37d75efbe7fbb5d77eb2bf8f79446f78": "donlay-arbol-rojo.jpg",
+    "384303a3b42989f3788469f0e1181b92": "donlay-bar-arbol.jpg",
+    "9e6a60fc04bddfec4c5bffd582931ff2": "donlay-dimsum-cesta.jpg",
+    "5ba4974b0c6f3c9408580f06ec03e728": "donlay-sala-reservado.jpg",
+    "9d1ca64a5b6ac8359ab711125ee09406": "donlay-sala-lamparas.jpg",
+    "cc398e4520f20ba5b56e371509fd9f72": "donlay-wok-fuego.jpg",
 }
 
 
