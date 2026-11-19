@@ -62,6 +62,7 @@ BLOBS = {
     "6c80cc0f73603d855135a16fe0c082f2": "compartir-4.jpg",
     "23e5fcad60fd3acd083867db518c281f": "mimi-antes.jpg",
     "43991ad628d214fa392b08d09b1e9dba": "mimi-durante.jpg",
+    "45478ae2833e7bedf92ab66574e24cfb": "navidad-video.jpg",
 }
 
 
