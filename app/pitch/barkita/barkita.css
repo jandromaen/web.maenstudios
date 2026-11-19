@@ -319,7 +319,7 @@ body.deck-abierto .theme-toggle {
 }
 .bk-scrub-t {
   display: block;
-  margin-bottom: 12px;
+  padding-bottom: 12px;
   font: 600 20px/1 system-ui, sans-serif;
   color: #fff;
   font-variant-numeric: tabular-nums;
@@ -354,7 +354,7 @@ body.deck-abierto .theme-toggle {
   top: 50%;
   width: 28px;
   height: 28px;
-  margin: -14px 0 0 -14px;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
