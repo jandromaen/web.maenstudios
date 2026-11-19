@@ -56,6 +56,12 @@ BLOBS = {
     "b4de30eb5834d46acfcbf7163cc13878": "dossier-pescado.jpg",
     "1038ae184ff15de3ff3af7a276553c51": "dossier-dimsum.jpg",
     "fe6cc725d7342b318dbeb84ca780d442": "dossier-marisco.jpg",
+    "f967b442a6264ac91568b00c12f9dde3": "compartir-1.jpg",
+    "1bec1005d153e8d99b5df4fe016f83ed": "compartir-2.jpg",
+    "4c12db0a1694795b27c1184bc191d4c6": "compartir-3.jpg",
+    "6c80cc0f73603d855135a16fe0c082f2": "compartir-4.jpg",
+    "23e5fcad60fd3acd083867db518c281f": "mimi-antes.jpg",
+    "43991ad628d214fa392b08d09b1e9dba": "mimi-durante.jpg",
 }
 
 
