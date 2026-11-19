@@ -94,6 +94,10 @@ BLOBS = {
     "93971f73883811e7c1e249266cbaf464": "eci-bodegon-2.jpg",
     "851c0179a91dec0d0413c37433407323": "eci-bodegon-3.jpg",
     "2c18e9e851b32e0a11321c7f6c9bffca": "eci-bodegon-4.jpg",
+    "6b87c756a4e8362d48ee1e8464ab625b": "navidad-centro.jpg",
+    "df8e72c074c9d4f3e190c6f635dcf800": "navidad-velas.jpg",
+    "92f23131f83763d8bce2d154251c9a5d": "navidad-camino.jpg",
+    "ad8cee54403e3057aa2f142ca131020b": "navidad-plato.jpg",
 }
 
 
