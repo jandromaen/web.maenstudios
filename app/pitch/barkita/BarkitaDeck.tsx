@@ -31,6 +31,100 @@ type Props = {
   notas?: string;
 };
 
+const mmss = (s: number) =>
+  !isFinite(s) ? "0:00" : `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+
+/**
+ * Barra de progreso que aparece al pasar el cursor por encima de un vídeo:
+ * línea con lo reproducido, lo ya cargado y un punto que se arrastra (o se
+ * pulsa en cualquier sitio de la línea) para ir al segundo que se quiera.
+ * Devuelve la función que la quita.
+ */
+function barraDeTiempo(caja: HTMLElement, video: HTMLVideoElement) {
+  const barra = document.createElement("div");
+  barra.className = "bk-scrub";
+  barra.setAttribute("data-no-nav", "");
+  barra.innerHTML =
+    '<span class="bk-scrub-t"></span><div class="bk-scrub-pista"><i class="bk-scrub-carga"></i><i class="bk-scrub-hecho"></i><b class="bk-scrub-punto"></b></div>';
+  caja.appendChild(barra);
+  const pista = barra.querySelector<HTMLElement>(".bk-scrub-pista")!;
+  const carga = barra.querySelector<HTMLElement>(".bk-scrub-carga")!;
+  const hecho = barra.querySelector<HTMLElement>(".bk-scrub-hecho")!;
+  const punto = barra.querySelector<HTMLElement>(".bk-scrub-punto")!;
+  const texto = barra.querySelector<HTMLElement>(".bk-scrub-t")!;
+
+  let arrastrando = false;
+  let raf = 0;
+  const pintar = (t = video.currentTime) => {
+    const d = video.duration || 0;
+    const p = d ? Math.min(1, Math.max(0, t / d)) : 0;
+    hecho.style.width = `${p * 100}%`;
+    punto.style.left = `${p * 100}%`;
+    texto.textContent = `${mmss(t)} / ${mmss(d)}`;
+    const b = video.buffered;
+    carga.style.width = d && b.length ? `${(b.end(b.length - 1) / d) * 100}%` : "0%";
+  };
+  const bucle = () => {
+    if (!arrastrando) pintar();
+    raf = video.paused ? 0 : requestAnimationFrame(bucle);
+  };
+  const alPlay = () => {
+    if (!raf) raf = requestAnimationFrame(bucle);
+  };
+  const alActualizar = () => {
+    if (!arrastrando) pintar();
+  };
+  const tiempoEn = (x: number) => {
+    const r = pista.getBoundingClientRect();
+    return Math.min(1, Math.max(0, (x - r.left) / r.width)) * (video.duration || 0);
+  };
+  const mover = (e: PointerEvent) => {
+    if (!arrastrando) return;
+    const t = tiempoEn(e.clientX);
+    pintar(t);
+    video.currentTime = t;
+  };
+  const soltar = (e: PointerEvent) => {
+    if (!arrastrando) return;
+    arrastrando = false;
+    barra.classList.remove("activa");
+    video.currentTime = tiempoEn(e.clientX);
+    pintar();
+  };
+  const bajar = (e: PointerEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    arrastrando = true;
+    barra.classList.add("activa");
+    barra.setPointerCapture?.(e.pointerId);
+    mover(e);
+  };
+  /* que pulsar la barra no pause el vídeo ni pase de diapositiva */
+  const parar = (e: Event) => e.stopPropagation();
+
+  barra.addEventListener("pointerdown", bajar);
+  barra.addEventListener("pointermove", mover);
+  barra.addEventListener("pointerup", soltar);
+  barra.addEventListener("pointercancel", soltar);
+  barra.addEventListener("click", parar);
+  video.addEventListener("loadedmetadata", alActualizar);
+  video.addEventListener("timeupdate", alActualizar);
+  video.addEventListener("progress", alActualizar);
+  video.addEventListener("seeked", alActualizar);
+  video.addEventListener("play", alPlay);
+  pintar();
+
+  return () => {
+    cancelAnimationFrame(raf);
+    video.removeEventListener("loadedmetadata", alActualizar);
+    video.removeEventListener("timeupdate", alActualizar);
+    video.removeEventListener("progress", alActualizar);
+    video.removeEventListener("seeked", alActualizar);
+    video.removeEventListener("play", alPlay);
+    barra.remove();
+  };
+}
+
 export default function BarkitaDeck({
   diapos = DIAPOS,
   marca = "Maen Studios × Barkita",
@@ -135,6 +229,7 @@ export default function BarkitaDeck({
         video.removeEventListener("play", marcar);
         video.removeEventListener("pause", marcar);
       });
+      limpiar.push(barraDeTiempo(caja, video));
     });
     return () => limpiar.forEach((f) => f());
   }, [diapoId]);

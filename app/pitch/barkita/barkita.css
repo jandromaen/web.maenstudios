@@ -298,3 +298,64 @@ body.deck-abierto .theme-toggle {
 .bk-nt-img { display: inline-block; margin-top: 5px; font-size: 9.5px; padding: 1px 6px; border-radius: 8px; background: rgba(33,23,20,.08); }
 .bk-nt-more, .bk-nt-hide { align-self: flex-end; border: 0; border-radius: 12px; background: #211714; color: #FAF6EE; font: inherit; font-size: 10.5px; padding: 4px 10px; cursor: pointer; }
 .bk-nt-hide { opacity: .85; }
+
+/* ---------- Barra de tiempo de los vídeos (al pasar el cursor) ---------- */
+.bk-lienzo .bk-scrub {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 44px 22px 22px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  touch-action: none;
+  z-index: 2;
+}
+.bk-lienzo *:hover > .bk-scrub,
+.bk-lienzo .bk-scrub.activa {
+  opacity: 1;
+}
+.bk-scrub-t {
+  display: block;
+  margin-bottom: 12px;
+  font: 600 20px/1 system-ui, sans-serif;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.bk-scrub-pista {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.3);
+}
+.bk-scrub:hover .bk-scrub-pista,
+.bk-scrub.activa .bk-scrub-pista {
+  height: 10px;
+}
+.bk-scrub-carga,
+.bk-scrub-hecho {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: inherit;
+}
+.bk-scrub-carga {
+  background: rgba(255, 255, 255, 0.35);
+}
+.bk-scrub-hecho {
+  background: #fff;
+}
+.bk-scrub-punto {
+  position: absolute;
+  top: 50%;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
