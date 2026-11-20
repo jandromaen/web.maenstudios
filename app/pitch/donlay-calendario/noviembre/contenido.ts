@@ -326,7 +326,7 @@ export const CONTENIDO: Contenido = {
   "vie-20": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/vie-20-repost.mp4",
+        "url": "/pitch/donlay-calendario/noviembre/vie-20-repost-v2.mp4",
         "tipo": "video"
       }
     ]
