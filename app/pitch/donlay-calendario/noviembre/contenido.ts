@@ -448,7 +448,7 @@ export const CONTENIDO: Contenido = {
   "vie-20-2": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/vie-20-grupos-v2.webp",
+        "url": "/pitch/donlay-calendario/noviembre/vie-20-grupos-v3.webp",
         "tipo": "imagen"
       }
     ]
