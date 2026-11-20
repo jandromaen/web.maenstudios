@@ -894,6 +894,10 @@ const DRIVE = {
 /* Stories ocultas por ahora: cambiar a true para volver a mostrarlas */
 const MOSTRAR_STORIES = false;
 const STORIES = {
+  /* Black Friday: tarjetas regalo con saldo extra (datos del post del 18) · día sin publicación en el feed */
+  26: { titulo:"Black Friday · tarjetas regalo", hora:"12:00h", estado:"listo",
+        imgs:["/pitch/skin-laundry-calendario/noviembre/img/s26_1.jpg?v=11201430","/pitch/skin-laundry-calendario/noviembre/img/s26_2.jpg?v=11201430","/pitch/skin-laundry-calendario/noviembre/img/s26_3.jpg?v=11201430","/pitch/skin-laundry-calendario/noviembre/img/s26_4.jpg?v=11201430"],
+        items:["Regala(te) belleza estas fiestas","Tarjetas regalo con saldo extra · del 16 al 30 de noviembre","Tú pagas · tú tienes: 300€→400€, 500€→650€, 750€→1.000€, 1.000€→1.500€","Válidas hasta el 28 de febrero"] },
   /* Pedidas por el cliente el mismo día: teaser del Black Friday (sin enseñar la oferta, que se desvela el 18) */
   16: { titulo:"Teaser Black Friday", hora:"Hoy", estado:"listo",
         imgs:["/pitch/skin-laundry-calendario/noviembre/img/s16_1.jpg?v=11161450","/pitch/skin-laundry-calendario/noviembre/img/s16_2.jpg?v=11161445","/pitch/skin-laundry-calendario/noviembre/img/s16_3.jpg?v=11161445"],
@@ -935,7 +939,7 @@ const DESTACADOS = [
   { nombre:"Visítanos",   cover:"/pitch/skin-laundry-calendario/noviembre/img/ig-h10.jpg", antes:"Nuevo",                 contenido:"Diagonal 610, horario Lun–Sáb, cómo llegar" }
 ];
 /* Destacado en el que se guarda cada story del mes */
-const DESTACADO_STORY = { 13:"FAQ" };
+const DESTACADO_STORY = { 13:"FAQ", 26:"Glow Deals" };
 const destacadoDe = p => ({
   "Brightening":"Láser","Rosácea y acné":"Láser","Manchas":"Láser","Antes/después":"Resultados",
   "Neuromoduladores":"Inyectables","Contorno de ojos":"Glow Deals","Hialurónico":"Inyectables","Glowtox":"Inyectables","Ultraformer":"Faciales",
