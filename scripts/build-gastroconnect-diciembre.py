@@ -27,7 +27,7 @@ LINEAS = {
 
 # (día, línea, pieza, detalle)
 PUBLICACIONES = [
-    (3, "podcast", "Episodio", "Papalote, completo en YouTube y Spotify"),
+    (3, "podcast", "YouTube y Spotify", "Episodio completo con Papalote"),
     (3, "podcast", "Reel 1", "Tráiler del episodio"),
     (4, "app", "Reel 1", "Cenas de empresa: reserva tu grupo en gastroconnect.es"),
     (7, "lunes", "Carrusel", "Restaurantes para la cena de empresa"),
@@ -140,11 +140,17 @@ for d in range(1, 32):
     if fest:
         cal += (f'<p class="abs a rosa" style="left:{x + 56}px;top:{y + 14}px;width:{cw - 66}px;font-size:16px;'
                 f'font-weight:700;text-align:right;--d:2">{fest}</p>')
-    for k, (l, pz) in enumerate(por_dia.get(d, [])):
+    yy = y + 48
+    for l, pz in por_dia.get(d, []):
         nombre, color = LINEAS[l]
-        etiqueta = "Episodio" if pz == "Episodio" else nombre
-        cal += (f'<p class="abs a" style="left:{x + 14}px;top:{y + 50 + k * 30}px;width:{cw - 24}px;font-size:17px;'
-                f'line-height:1.2;white-space:nowrap;overflow:hidden;--d:3">{punto(color, 11)}{etiqueta}</p>')
+        if l == "podcast":
+            etiqueta = "Podcast en YouTube y Spotify" if pz == "YouTube y Spotify" else "Reel podcast"
+        else:
+            etiqueta = nombre
+        lineas = 2 if len(etiqueta) > 20 else 1
+        cal += (f'<p class="abs a" style="left:{x + 14}px;top:{yy}px;width:{cw - 24}px;font-size:16px;'
+                f'line-height:1.15;padding-left:21px;text-indent:-21px;--d:3">{punto(color, 11)}{etiqueta}</p>')
+        yy += 19 * lineas + 8
 ley = ('<div class="abs a" style="left:560px;top:212px;width:1232px;display:flex;justify-content:flex-end;'
        'gap:34px;font-size:21px;--d:1">'
        + "".join(f'<span>{punto(color, 13)}{nombre}</span>' for nombre, color in LINEAS.values())
