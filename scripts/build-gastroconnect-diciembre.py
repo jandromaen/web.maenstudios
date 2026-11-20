@@ -4,8 +4,8 @@ de diciembre 2026 de Gastroconnect, con el visor y los estilos de la propuesta
 
 Contenidos fijados al mes (acuerdo con Quique, nov 2026): 1 episodio en
 YouTube y Spotify, 6 reels del episodio, 2 reels de la app de reservas, la
-guía foodie (reel + reel de receta), la guía de los lunes y 1 post semanal en
-LinkedIn. Todo el mes se define en PUBLICACIONES; se ejecuta desde la raíz:
+guía foodie (reel + reel de receta), la guía de los lunes (LinkedIn fuera del
+acuerdo final). Todo el mes se define en PUBLICACIONES; se ejecuta desde la raíz:
 
     python3 scripts/build-gastroconnect-diciembre.py
 """
@@ -23,31 +23,25 @@ LINEAS = {
     "app": ("App de reservas", "#7FD1AE"),
     "foodie": ("Guía foodie", "#F08A5D"),
     "lunes": ("Guía de los lunes", "#C8BCE9"),
-    "linkedin": ("LinkedIn", "#6FA8DC"),
 }
 
 # (día, línea, pieza, detalle)
 PUBLICACIONES = [
-    (2, "linkedin", "Post", "Estreno del episodio con Papalote: el lado negocio"),
     (3, "podcast", "Episodio", "Papalote, completo en YouTube y Spotify"),
     (3, "podcast", "Reel 1", "Tráiler del episodio"),
     (4, "app", "Reel 1", "Cenas de empresa: reserva tu grupo en gastroconnect.es"),
     (7, "lunes", "Carrusel", "Restaurantes para la cena de empresa"),
     (9, "podcast", "Reel 2", "Clip del episodio"),
-    (9, "linkedin", "Post", "Lo que cuenta Papalote sobre abrir en Barcelona"),
     (11, "app", "Reel 2", "Grupos de Navidad: reserva sin llamadas"),
     (12, "foodie", "Reel", "Visita del mes con Richi o Jandro"),
     (14, "lunes", "Carrusel", "Dónde encargar la comida de Navidad"),
     (15, "podcast", "Reel 3", "Clip del episodio"),
-    (16, "linkedin", "Post", "Diciembre en sala: grupos y cenas de empresa"),
     (17, "podcast", "Reel 4", "Clip del episodio"),
     (19, "foodie", "Reel receta", "Receta de Navidad con el restaurante de la visita"),
     (21, "lunes", "Carrusel", "Restaurantes abiertos el 24, el 25 y Sant Esteve"),
     (22, "podcast", "Reel 5", "Clip del episodio"),
-    (23, "linkedin", "Post", "La receta del mes y el restaurante detrás"),
     (28, "lunes", "Carrusel", "Nochevieja y el primer brunch del año"),
     (29, "podcast", "Reel 6", "Clip del episodio"),
-    (30, "linkedin", "Post", "El año de Gastroconnect"),
 ]
 
 FESTIVOS = {
@@ -109,7 +103,6 @@ def add(id_, tit, html):
 
 reels = sum(1 for _, l, pz, _ in PUBLICACIONES if pz.startswith("Reel"))
 carruseles = sum(1 for _, l, _, _ in PUBLICACIONES if l == "lunes")
-posts_li = sum(1 for _, l, _, _ in PUBLICACIONES if l == "linkedin")
 
 # ── 1. Portada ────────────────────────────────────────────────────────────
 n += 1
@@ -117,7 +110,7 @@ add("portada", "Planning de diciembre", sec(
     eyebrow("Gastroconnect · @gastroconnect_", top=150)
     + '<h1 class="abs a disp" style="left:128px;top:300px;font-size:120px;line-height:1;--d:1">Planning</h1>'
     '<h1 class="abs a disp outline" style="left:128px;top:430px;font-size:120px;line-height:1;--d:2">diciembre</h1>'
-    + p(f"1 episodio con Papalote · {reels} reels · {carruseles} guías de los lunes · {posts_li} posts en LinkedIn",
+    + p(f"1 episodio con Papalote · {reels} reels · {carruseles} guías de los lunes",
         128, 620, 1300, size=32, d=3, cls="", extra="font-weight:700;")
     + p("Con las fechas de Navidad en el centro: cenas de empresa, encargos, festivos y Nochevieja.",
         128, 690, 1300, size=28, d=4)
