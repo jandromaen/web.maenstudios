@@ -98,6 +98,9 @@ BLOBS = {
     "df8e72c074c9d4f3e190c6f635dcf800": "navidad-velas.jpg",
     "92f23131f83763d8bce2d154251c9a5d": "navidad-camino.jpg",
     "ad8cee54403e3057aa2f142ca131020b": "navidad-plato.jpg",
+    "5219d3f71b5f6a1a05d84d38e1574345": "mimi-retrato-ref.jpg",
+    "4eefe0f8cd7ee12b76ed91f56199aeb4": "sala-mesa-redonda.jpg",
+    "a0483770e1fdb577355ea72b45b730fe": "sala-servicio.jpg",
 }
 
 
