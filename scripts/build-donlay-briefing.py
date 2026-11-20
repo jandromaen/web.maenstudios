@@ -101,6 +101,11 @@ BLOBS = {
     "5219d3f71b5f6a1a05d84d38e1574345": "mimi-retrato-ref.jpg",
     "4eefe0f8cd7ee12b76ed91f56199aeb4": "sala-mesa-redonda.jpg",
     "a0483770e1fdb577355ea72b45b730fe": "sala-servicio.jpg",
+    "e8c28fdf032ad04076350423f6e08a5e": "eci-gyoza-envase.jpg",
+    "5657e223d75499c0deec351c062b3415": "eci-gyoza-mesa-roja.jpg",
+    "723fcb4023a9098b5a87fe1d961f6d51": "eci-gyoza-gesto.jpg",
+    "dddc05cc96db4427e24b869c7c243773": "eci-gyoza-emplatado.jpg",
+    "3d23133f87c5e5f13f5222e8acbf48aa": "eci-gyoza-atrezo.jpg",
 }
 
 
