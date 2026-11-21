@@ -101,22 +101,21 @@ n += 1
 movs = [
     ("Autoridad", "Podcast", "Los que mandan en la restauración de Barcelona pasan por el micro. 1 episodio al mes en YouTube y Spotify."),
     ("Hábito", "Guía de los lunes", "Una cita fija cada semana: la guía gastronómica de Barcelona por temáticas y fechas (Navidad, San Valentín…)."),
-    ("Sector", "LinkedIn", "Referente para el profesional: 1 post semanal con el lado negocio de la restauración."),
     ("Presencia", "Guía foodie", "Comer en los restaurantes que importan de la ciudad con Richi o Jandro. 1 visita al mes."),
 ]
 mh = ""
 for i, (t, linea, s_) in enumerate(movs):
-    x = 128 + i * 424
+    x = 128 + i * 568
     mh += (
-        f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:396px;height:540px;--d:{i}"></div>'
+        f'<div class="abs pm-card pop" style="left:{x}px;top:340px;width:528px;height:540px;--d:{i}"></div>'
         f'<p class="abs a disp outline" style="left:{x + 36}px;top:380px;font-size:64px;--d:{i + 1}">{i + 1:02d}</p>'
-        f'<p class="abs a" style="left:{x + 36}px;top:490px;width:330px;font-size:38px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
-        f'<p class="abs a rosa" style="left:{x + 36}px;top:545px;width:330px;font-size:22px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;--d:{i + 1}">{linea}</p>'
-        f'<p class="abs a soft" style="left:{x + 36}px;top:600px;width:330px;font-size:25px;line-height:1.4;--d:{i + 2}">{s_}</p>'
+        f'<p class="abs a" style="left:{x + 36}px;top:490px;width:450px;font-size:38px;font-weight:800;line-height:1.15;--d:{i + 1}">{t}</p>'
+        f'<p class="abs a rosa" style="left:{x + 36}px;top:545px;width:450px;font-size:22px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;--d:{i + 1}">{linea}</p>'
+        f'<p class="abs a soft" style="left:{x + 36}px;top:600px;width:450px;font-size:26px;line-height:1.4;--d:{i + 2}">{s_}</p>'
     )
 add("plan", "El plan", sec(
     eyebrow("El plan")
-    + titulo("Cuatro movimientos para ser el nº1", size=64)
+    + titulo("Tres movimientos para ser el nº1", size=64)
     + mh + foot(n),
 ))
 
@@ -127,11 +126,10 @@ contenido = [
     "<b>8 reels del día del podcast:</b> 6 del episodio y 2 de la app de reservas",
     "<b>Guía foodie:</b> 1 restaurante con Richi o Jandro, con su reel y un reel de receta",
     "<b>Guía de los lunes:</b> 1 carrusel semanal",
-    "<b>LinkedIn:</b> 1 post semanal",
 ]
 servicio = [
     "<b>Informe mensual</b> de KPIs",
-    "<b>Calendario, copies y publicación</b> en Instagram, Facebook, LinkedIn, YouTube y Spotify",
+    "<b>Calendario, copies y publicación</b> en Instagram, Facebook, YouTube y Spotify",
     "<b>Llamada a reservar</b> en gastroconnect.es en el contenido",
     "<b>Orden de la cuenta</b> al arrancar",
 ]
