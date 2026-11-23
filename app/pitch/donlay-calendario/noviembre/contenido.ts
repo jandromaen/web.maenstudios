@@ -464,7 +464,7 @@ export const CONTENIDO: Contenido = {
   "lun-23-2": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/lun-23-navidad-v2.webp",
+        "url": "/pitch/donlay-calendario/noviembre/lun-23-navidad-v3.webp",
         "tipo": "imagen"
       }
     ]
