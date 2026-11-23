@@ -5,7 +5,7 @@ import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import { BreadcrumbJsonLd, BlogPostingJsonLd, FaqJsonLd } from "../../components/JsonLd";
 import { posts, getPost, type Post } from "../../blog-data";
-import { createPageMetadata } from "../../seo-config";
+import { createPageMetadata, SITE_URL } from "../../seo-config";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -35,6 +35,22 @@ export async function generateMetadata({
     type: "article",
     publishedTime: post.date,
     modifiedTime: post.updated ?? post.date,
+    /*
+      La imagen social propia del articulo, la que genera opengraph-image.tsx
+      con su titulo.
+
+      Sin esto se colaba la imagen generica de la web: createPageMetadata pone
+      OG_IMAGE por defecto y, al declarar openGraph.images, Next deja de usar
+      el opengraph-image de la ruta. Resultado: compartir cualquiera de los 19
+      articulos en WhatsApp o LinkedIn enseñaba el mismo cartel de Maen en vez
+      del titulo del articulo, que es justo lo que se escribio para eso.
+    */
+    image: {
+      url: `${SITE_URL}/blog/${post.slug}/opengraph-image`,
+      width: 1200,
+      height: 630,
+      alt: post.title,
+    },
   });
 }
 
@@ -114,6 +130,31 @@ export default async function BlogPostPage({
               ) : null}
               <span>· {post.readingMinutes} min</span>
             </div>
+
+            {/*
+              La foto del articulo, cuando la tiene.
+
+              Hasta ahora solo salia en la tarjeta del listado: dentro del
+              articulo no habia una sola imagen en ninguno de los 19, solo el
+              logo de la cabecera. Un texto de 1.500 palabras a pelo se
+              abandona antes.
+
+              Las entradas sin foto no llevan nada aqui a proposito. Su
+              miniatura del listado es la imagen generada con el titulo, y
+              repetir el titulo justo debajo del titulo no aporta nada.
+            */}
+            {post.image ? (
+              <figure className="blog-foto">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  width={1200}
+                  height={900}
+                  fetchPriority="high"
+                />
+              </figure>
+            ) : null}
 
             <div className="blog-body">
               {post.content.map((block, i) => {

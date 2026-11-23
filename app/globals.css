@@ -2438,6 +2438,30 @@ section {
   text-transform: uppercase;
 }
 
+/*
+  La foto que abre el articulo.
+
+  Mismo 4:3 y mismo encuadre que las miniaturas del listado (.post-thumb):
+  son fotogramas verticales de rodaje y en un formato apaisado se recortaban
+  a una franja sin sentido, con las caras fuera.
+*/
+.blog-foto {
+  margin: 36px 0 0;
+  max-width: 42rem;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--charcoal);
+}
+
+.blog-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+}
+
 .blog-body {
   margin-top: 40px;
   max-width: 42rem;
