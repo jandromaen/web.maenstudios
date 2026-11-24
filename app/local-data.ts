@@ -181,13 +181,17 @@ export const localLandings: LocalLanding[] = [
       "Tecnología y startups",
     ],
     clientSlugs: [
-      // Burmet abre la lista: es el único cliente con local en Madrid, así que
-      // la landing deja de ilustrarse solo con trabajo de Barcelona.
+      // Primero los tres que tienen local en Madrid: Burmet en Chamartín,
+      // Arganzuela y Moncloa, Don Lay en Salamanca y Flamenco de Leones junto a
+      // la Puerta de Alcalá. Hasta que entraron los dos últimos, la landing se
+      // ilustraba casi entera con trabajo de Barcelona, que es justo lo que no
+      // convence a quien busca una agencia en Madrid.
       "burmet",
+      "don-lay",
+      "flamenco-de-leones",
       "macala",
       "canallita",
       "jansana",
-      "aluxe",
     ],
     clientsTitle: "El trabajo que traemos a Madrid",
     clientsIntro:

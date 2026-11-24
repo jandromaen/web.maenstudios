@@ -412,21 +412,28 @@ export const clients: Client[] = [
   // El copy de estas seis sale de material propio (decks, briefings, informes y
   // actas de reunión) o de fuente pública verificable, no de suposiciones: lo
   // que no está confirmado se queda fuera.
-  // Flamenco de Leones, Dr. Stravinsky, Parfumerie y Don Lay ya tienen reel, así
-  // que suben a la rejilla de vídeo; Libertine y Tinto salen en el índice de
-  // /clientes y en su ficha hasta que entre su vídeo.
+  // Cinco de las seis ya tienen reel y suben a la rejilla de vídeo. Tinto sigue
+  // en el índice de /clientes hasta que entre el suyo.
+  // Los handles y las webs están sacados de las webs oficiales de cada marca,
+  // no del buscador: el de Parfumerie salía mal escrito en los resultados
+  // («stravisky», sin la n) y grupconfiteria.com lo desmiente.
   // Sin `community` a propósito: los seguidores de cada una están en los KPI
   // del Drive, no verificados aquí, y un número inventado es peor que ninguno.
   {
     slug: "libertine-blends",
     name: "Libertine Blends",
     logo: "/pitch/libertine-kickoff/logo-negro.png",
-    tagline: "Cócteles en lata · ready to drink",
+    instagram: "libertine.blends",
+    previewVideo: "/clients/libertine-blends/preview.mp4",
+    poster: "/clients/libertine-blends/poster.jpg",
+    tagline: "Cócteles en lata · ready to drink · Barcelona",
     description:
-      "Llevamos el social media de Libertine Blends, marca de cócteles ready-to-drink nacida en Barcelona. Instagram y TikTok con dos reels y dos piezas estáticas cada semana, una jornada de rodaje al mes y trabajo con creadores. El rodaje se hace en Casa Bonay y sus alrededores: donde nace la marca, para que la ciudad forme parte del producto.",
-    url: "",
+      "Llevamos el social media de Libertine Blends, marca de cócteles ready-to-drink que nació tras la barra del Libertine, la coctelería de Casa Bonay, y que hoy reúne versiones con alcohol, low-ABV y 0,0 bajo una misma marca. Instagram y TikTok con dos reels y dos piezas estáticas cada semana, una jornada de rodaje al mes y trabajo con creadores. Rodamos en Casa Bonay y sus alrededores —de la calle a la azotea— para que Barcelona forme parte del producto.",
+    url: "https://libertineblends.com/",
     sector: "Bebidas",
-    videos: [],
+    videos: [
+      { src: "/clients/libertine-blends/reel.mp4", title: "Reel Libertine Blends" },
+    ],
     photos: [
       "/pitch/libertine-kickoff/cuatro-latas.jpg",
       "/pitch/libertine-kickoff/latas-hielo.jpg",
@@ -441,10 +448,10 @@ export const clients: Client[] = [
     instagram: "donlayrestaurante",
     previewVideo: "/clients/don-lay/preview.mp4",
     poster: "/clients/don-lay/poster.jpg",
-    tagline: "Cocina china de producto · Barcelona",
+    tagline: "Alta cocina cantonesa · Madrid",
     description:
-      "Contenido para Don Lay, restaurante de cocina china en Barcelona donde la experiencia empieza antes de llegar a la mesa: luz cálida, mesas vestidas y una sala que se cuenta sola. Dim sum, pato laqueado y el fuego del wok grabados en su propio local, con calendario mensual, reels y carruseles, y un informe de rendimiento que decide qué se cuenta el mes siguiente.",
-    url: "",
+      "Contenido para Don Lay, alta cocina cantonesa en Madrid, donde la experiencia empieza antes de llegar a la mesa: luz cálida, mesas vestidas y una sala que se cuenta sola. Los clásicos que hicieron la casa —el pato laqueado y el dim sum—, el fuego del wok y la coctelería de autor, grabados en su propio local, con calendario mensual, reels y carruseles, y un informe de rendimiento que decide qué se cuenta el mes siguiente.",
+    url: "https://donlayrestaurante.es/",
     sector: "Gastronomía",
     videos: [
       { src: "/clients/don-lay/reel.mp4", title: "Reel Don Lay" },
@@ -486,12 +493,13 @@ export const clients: Client[] = [
   {
     slug: "dr-stravinsky",
     name: "Dr. Stravinsky",
+    instagram: "dr.stravinskybcn",
     previewVideo: "/clients/dr-stravinsky/preview.mp4",
     poster: "/clients/dr-stravinsky/poster.jpg",
-    tagline: "Coctelería de autor con alma de perfumería",
+    tagline: "Coctelería de autor en El Born · Barcelona",
     description:
-      "Contenido para Dr. Stravinsky, coctelería construida como una perfumería: cada puerta, cada rincón y cada trago forman parte de la misma historia, la de Grigori Stravinsky, el perfumista que no buscaba el aroma perfecto sino capturar un instante. Rodamos la noche tal como se vive dentro del local, con producción mensual e informe de resultados cada mes.",
-    url: "",
+      "Contenido para Dr. Stravinsky, la coctelería de El Born que desde 2017 funciona como una vieja botica —probetas, destilados y nada de botellas de marca: todo preparación de la casa— y que entró en el número 25 de los World’s 50 Best Bars. Cada puerta, cada rincón y cada trago forman parte de la misma historia, la de Grigori Stravinsky, el perfumista que no buscaba el aroma perfecto sino capturar un instante. Rodamos la noche tal como se vive dentro del local, con producción mensual e informe de resultados cada mes.",
+    url: "https://drstravinsky.com/",
     sector: "Coctelería",
     videos: [
       { src: "/clients/dr-stravinsky/reel.mp4", title: "Reel Dr. Stravinsky" },
@@ -500,12 +508,13 @@ export const clients: Client[] = [
   {
     slug: "parfumerie",
     name: "Parfumerie",
+    instagram: "stravinskysparfumerie",
     previewVideo: "/clients/parfumerie/preview.mp4",
     poster: "/clients/parfumerie/poster.jpg",
-    tagline: "Donde nacen los perfumes de Grigori",
+    tagline: "El club donde el cóctel se vuelve perfume · Barcelona",
     description:
-      "Social media de Parfumerie, el taller donde toman forma los perfumes de Grigori y que comparte universo con Dr. Stravinsky. Contamos el oficio desde dentro —el lugar donde ocurre la magia— con una línea visual que incluye fotografía analógica en carrete Kodak Gold, por el grano y el color que la marca pide. Producción mensual, calendario e informe de KPIs cada mes.",
-    url: "",
+      "Social media de Stravinsky’s Parfumerie, el club de El Born que prolonga el universo de Dr. Stravinsky: se entra por un museo dedicado a Grigori y detrás hay una barra y un Playroom de experimentación, con dieciséis cócteles que se perfuman a elegir entre tres aromas. Contamos el oficio desde dentro —el lugar donde ocurre la magia— con una línea visual que incluye fotografía analógica en carrete Kodak Gold, por el grano y el color que la marca pide. Producción mensual, calendario e informe de KPIs cada mes.",
+    url: "https://drstravinsky.com/parfumerie/",
     sector: "Coctelería",
     videos: [
       { src: "/clients/parfumerie/reel.mp4", title: "Reel Parfumerie" },
