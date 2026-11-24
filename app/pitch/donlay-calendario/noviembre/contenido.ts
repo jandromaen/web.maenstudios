@@ -69,11 +69,11 @@ export const CONTENIDO: Contenido = {
   "mar-24-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-24-grupos.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mar-24-grupos-v2.webp",
         "tipo": "imagen"
       },
       {
-        "url": "/pitch/donlay-calendario/noviembre/mar-24-sopa-cordero.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mar-24-shuizhu.webp",
         "tipo": "imagen"
       }
     ]
