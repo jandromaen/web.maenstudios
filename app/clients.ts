@@ -412,9 +412,9 @@ export const clients: Client[] = [
   // El copy de estas seis sale de material propio (decks, briefings, informes y
   // actas de reunión) o de fuente pública verificable, no de suposiciones: lo
   // que no está confirmado se queda fuera.
-  // Flamenco de Leones, Dr. Stravinsky y Parfumerie ya tienen reel, así que
-  // suben a la rejilla de vídeo; Libertine, Don Lay y Tinto salen en el índice
-  // de /clientes y en su ficha hasta que entre su vídeo.
+  // Flamenco de Leones, Dr. Stravinsky, Parfumerie y Don Lay ya tienen reel, así
+  // que suben a la rejilla de vídeo; Libertine y Tinto salen en el índice de
+  // /clientes y en su ficha hasta que entre su vídeo.
   // Sin `community` a propósito: los seguidores de cada una están en los KPI
   // del Drive, no verificados aquí, y un número inventado es peor que ninguno.
   {
@@ -439,12 +439,16 @@ export const clients: Client[] = [
     name: "Don Lay",
     logo: "/pitch/donlay-calendario/logo-negro.svg",
     instagram: "donlayrestaurante",
+    previewVideo: "/clients/don-lay/preview.mp4",
+    poster: "/clients/don-lay/poster.jpg",
     tagline: "Cocina china de producto · Barcelona",
     description:
-      "Contenido para Don Lay, restaurante de cocina china en Barcelona. Dim sum, pato laqueado y el fuego del wok grabados en su propia sala, con calendario mensual, reels y carruseles, y un informe de rendimiento que decide qué se cuenta el mes siguiente.",
+      "Contenido para Don Lay, restaurante de cocina china en Barcelona donde la experiencia empieza antes de llegar a la mesa: luz cálida, mesas vestidas y una sala que se cuenta sola. Dim sum, pato laqueado y el fuego del wok grabados en su propio local, con calendario mensual, reels y carruseles, y un informe de rendimiento que decide qué se cuenta el mes siguiente.",
     url: "",
     sector: "Gastronomía",
-    videos: [],
+    videos: [
+      { src: "/clients/don-lay/reel.mp4", title: "Reel Don Lay" },
+    ],
     photos: [
       "/pitch/donlay-briefing/donlay-dimsum-cesta.jpg",
       "/pitch/donlay-briefing/donlay-wok-fuego.jpg",
