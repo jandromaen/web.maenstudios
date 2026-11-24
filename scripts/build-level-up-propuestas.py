@@ -1,9 +1,13 @@
-"""Guiones desarrollados e identidad visual para Lucía (Level Up Workout).
+"""Guiones estratégicos e identidad de Instagram para Lucía (Level Up Workout).
 
 Genera app/pitch/level-up-propuestas/diapos.ts. Reutiliza los helpers y el
 modo claro de build-level-up-contenido.py.
 
     python3 scripts/build-level-up-propuestas.py
+
+Todo lo que se afirma sobre cómo funciona Instagram sale de lo que ha dicho
+Instagram (Adam Mosseri, blog de Instagram, cuenta @creators); las fuentes
+están en la diapositiva «De dónde sale todo esto».
 """
 import json
 from pathlib import Path
@@ -15,34 +19,26 @@ OMITIR = set()  # aquí no se omite ninguna diapositiva
 NOCHE = "#151F30"      # azul noche de la web de Level Up
 MELO = "#FFCB9A"       # melocotón de la web
 ROTO = "#F7F3EE"       # blanco roto
-SALVIA = "#6E7552"     # verde de su esterilla
 PILAR = {"Atraer": "#3E6FA8", "Enseñar": ACENTO, "Conectar": "#2F8A6A", "Convertir": AZUL}
 
-FUENTES = (
-    "<style>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800"
-    "&family=Playfair+Display:ital,wght@1,600&display=swap');</style>"
-)
+FUENTES = ("<style>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap');</style>")
 POP = "font-family:'Poppins',sans-serif;"
-PLAY = "font-family:'Playfair Display',serif;font-style:italic;"
 
 
-def movil(x, y, w, k, pos, serie, linea1, linea2, d=0, fondo=None):
-    """Portada de reel con la plantilla propuesta (9:16)."""
+def portada(x, y, w, k, serie, titulo_txt, d=0, fondo=None, pos="center"):
+    """Plantilla minimalista de portada (9:16): foto, serie pequeña y título corto."""
     h = round(w * 16 / 9)
     fondo_css = (f"background:{fondo};" if fondo
                  else f"background:#ddd url({WEB}{FOTOS[k]}) {pos}/cover no-repeat;")
-    f1 = round(w * 0.088)
+    tinta = NOCHE if fondo == ROTO else "#fff"
+    sombra = "" if fondo else "text-shadow:0 2px 14px rgba(0,0,0,.45);"
     return (
-        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:22px;overflow:hidden;'
-        f'{fondo_css}box-shadow:0 18px 44px rgba(21,31,48,.22);--d:{d}">'
-        + ("" if fondo else
-           '<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,31,48,0) 38%,rgba(21,31,48,.78) 82%)"></div>')
-        + f'<div style="position:absolute;left:{round(w*.07)}px;top:{round(h*.2)}px;padding:{round(w*.012)}px {round(w*.03)}px;'
-          f'border-radius:999px;background:{MELO};color:{NOCHE};{POP}font-weight:800;font-size:{round(w*.036)}px;'
-          f'letter-spacing:.08em;text-transform:uppercase">{serie}</div>'
-        + f'<div style="position:absolute;left:{round(w*.07)}px;right:{round(w*.07)}px;top:{round(h*.56)}px;{POP}'
-          f'font-weight:800;font-size:{f1}px;line-height:1.02;color:#fff;text-transform:uppercase;letter-spacing:-.01em">'
-          f'{linea1}<br><span style="color:{MELO}">{linea2}</span></div>'
+        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:20px;overflow:hidden;'
+        f'{fondo_css}box-shadow:0 16px 40px rgba(21,31,48,.18);--d:{d}">'
+        + ("" if fondo else '<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,31,48,0) 45%,rgba(21,31,48,.45) 100%)"></div>')
+        + f'<div style="position:absolute;left:{round(w*.1)}px;right:{round(w*.1)}px;top:{round(h*.58)}px;text-align:center;{POP}{sombra}color:{tinta}">'
+          f'<div style="font-size:{round(w*.034)}px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.85">{serie}</div>'
+          f'<div style="font-size:{round(w*.085)}px;font-weight:700;line-height:1.08;margin-top:{round(w*.03)}px">{titulo_txt}</div></div>'
         + "</div>"
     )
 
@@ -50,6 +46,27 @@ def movil(x, y, w, k, pos, serie, linea1, linea2, d=0, fondo=None):
 def pill(t, x, y, c, d=0):
     return (f'<div class="abs a" style="left:{x}px;top:{y}px;padding:4px 14px;border-radius:999px;background:{c};'
             f'color:{INK};font-size:16px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;--d:{d}">{t}</div>')
+
+
+def tabla(filas, x, y, w, d=0):
+    """Guion por tiempos: (segundos, qué se ve, qué dices, texto en pantalla)."""
+    cab = ("<tr>" + "".join(
+        f'<th style="text-align:left;padding:0 18px 10px 0;font-size:15px;font-weight:800;letter-spacing:.12em;'
+        f'text-transform:uppercase;color:{ACENTO_TXT};width:{a}">{t}</th>'
+        for t, a in (("Tiempo", "8%"), ("Qué se ve", "27%"), ("Qué dices", "40%"), ("Texto en pantalla", "25%"))) + "</tr>")
+    cuerpo = ""
+    for i, (t, ve, dice, txt) in enumerate(filas):
+        fondo = "background:#F7F3EE;" if i == 0 else ""
+        cuerpo += (
+            f'<tr style="{fondo}">'
+            f'<td style="padding:12px 18px 12px 12px;vertical-align:top;font-weight:800;white-space:nowrap">{t}</td>'
+            f'<td style="padding:12px 18px 12px 0;vertical-align:top;color:#4A4744">{ve}</td>'
+            f'<td style="padding:12px 18px 12px 0;vertical-align:top;font-weight:600">{dice}</td>'
+            f'<td style="padding:12px 12px 12px 0;vertical-align:top;color:#4A4744">{txt}</td></tr>'
+        )
+    return (f'<div class="abs a" style="left:{x}px;top:{y}px;width:{w}px;--d:{d}">'
+            f'<table style="width:100%;border-collapse:collapse;font-size:18.5px;line-height:1.35;color:{INK}">'
+            f'{cab}{cuerpo}</table></div>')
 
 
 # ── Portada ──────────────────────────────────────────────────────────────
@@ -60,272 +77,304 @@ add("portada", "Guiones e identidad", sec(
     + '<div class="abs" style="left:1060px;top:0;width:260px;height:1080px;background:linear-gradient(90deg,#FFFFFF,rgba(255,255,255,0))"></div>'
     + eyebrow("Level Up Workout · Contenido", top=200)
     + '<h1 class="abs a disp" style="left:128px;top:250px;font-size:96px;line-height:1;--d:1">19 guiones</h1>'
-    '<h1 class="abs a disp outline" style="left:128px;top:362px;font-size:60px;line-height:1.12;--d:2">y tu nueva<br>identidad</h1>'
-    + p("Tus ideas de reels, desarrolladas para que enganchen en los primeros segundos, y la propuesta de bio, foto de perfil, colores, tipografías, subtítulos y portadas.",
-        128, 560, 860, size=30, d=3, cls="", extra="font-weight:800;line-height:1.3;")
+    '<h1 class="abs a disp outline" style="left:128px;top:362px;font-size:60px;line-height:1.12;--d:2">y tu identidad<br>en Instagram</h1>'
+    + p("Tus ideas convertidas en guiones completos: gancho, lo que dices segundo a segundo, texto en pantalla, cierre y descripción. Y una bio, una foto y una estética que se repiten siempre.",
+        128, 560, 860, size=28, d=3, cls="", extra="font-weight:800;line-height:1.3;")
     + p("Jandro Martín · noviembre de 2026", 128, 820, 700, size=22, d=4, cls="muted")
     + foot(n),
 ))
 
-# ── Cómo he trabajado tus ideas ──────────────────────────────────────────
+# ── De tu idea al guion ──────────────────────────────────────────────────
 n += 1
-cambios = [
-    ("La primera frase es el gancho", "Lo que se dice y se lee en los 2 primeros segundos decide si se quedan. Por eso cada guion empieza por ahí."),
-    ("Cada vídeo tiene un objetivo", "Enseñanza → que lo guarden. Humor → que lo compartan. Conexión → que comenten. Level Up → que escriban NIVEL0."),
-    ("Mini serie «Si notas…, es esto»", "Las ideas 4, 5 y 6 comparten estructura y portada. Tres vídeos seguidos crean costumbre y se ven entre ellos."),
-    ("Tu duda: ¿expectativa vs. realidad está muy visto?", "La versión genérica, sí. Funciona cuando la realidad es la tuya: hijos, kite, viajes. Por eso lo planteo como serie propia."),
+add("deidea", "De tu idea al guion", sec(
+    eyebrow("Cómo he trabajado tus ideas")
+    + titulo("De tu idea al guion", size=56)
+    + label("Lo que me pasaste", 128, 290, d=1, color="#8A8580")
+    + card(128, 330, 700, 470, d=1)
+    + p("<b>4. ¿Haces sentadillas y no notas que trabajen los glúteos?</b>", 168, 368, 620, size=22, d=1, cls="", extra="line-height:1.35;")
+    + p("«Me grabo haciendo una sentadilla con mayor profundidad y explico cómo puede influir en el estímulo del glúteo. Después enseño una alternativa con sentadilla a cajón para quienes tienen limitaciones de movilidad.»",
+        168, 440, 620, size=21, d=2, extra="line-height:1.45;font-style:italic;")
+    + p("Una buena idea: un problema real de tu público y una solución. Falta decidir cómo empieza, qué dices exactamente y qué le pides al final a quien lo ve.",
+        168, 650, 620, size=19, d=3, cls="muted")
+    + label("Lo que te devuelvo", 908, 290, d=2)
+    + lista([
+        "<b>El gancho de los 2 primeros segundos</b>: lo que se ve, lo que dices y el texto en pantalla.",
+        "<b>El guion por tiempos</b>: qué se ve, qué dices palabra por palabra y qué texto aparece.",
+        "<b>El cierre</b>: qué le pides a quien lo ve (guardarlo, enviarlo, comentar o escribir NIVEL0).",
+        "<b>La descripción</b>, con las palabras que la gente busca en Instagram.",
+        "<b>El objetivo de cada vídeo</b> y la métrica en la que tienes que fijarte.",
+        "<b>La portada</b>, con la misma plantilla para todos.",
+    ], 908, 336, 884, size=23, d=3, gap=16)
+    + p("Son tus ideas y tu forma de hablar: cambia las palabras que quieras, pero mantén el orden, el gancho y el cierre.",
+        128, 880, 1664, size=22, d=5, cls="muted")
+    + foot(n),
+))
+
+# ── Anatomía de un guion ─────────────────────────────────────────────────
+n += 1
+an = [
+    ("Gancho", "0-2 s", "Que no pasen de largo. Instagram dice que los primeros segundos «lo deciden todo».", "Tiempo de visionado"),
+    ("Valor", "El cuerpo", "Algo que se aprende o se siente en menos de 30 s: un error corregido, una rutina, una risa.", "Me gusta y guardados"),
+    ("Enviable", "Todo el vídeo", "Que dé ganas de mandárselo a una amiga. Es lo que más pesa para llegar a gente que no te sigue.", "Envíos por alcance"),
+    ("Cierre", "Últimos 3 s", "Una sola petición: guárdalo, mándaselo a…, cuéntame… o comenta NIVEL0.", "Comentarios y NIVEL0"),
+    ("Descripción", "Debajo del vídeo", "La primera frase repite el gancho y usa palabras que la gente busca.", "Búsquedas"),
 ]
-ch = ""
-for i, (t, txt) in enumerate(cambios):
-    col, fila = i % 2, i // 2
-    x, y = 128 + col * 852, 300 + fila * 300
-    ch += (
-        card(x, y, 812, 270, d=i)
-        + f'<p class="abs a disp rosa" style="left:{x + 36}px;top:{y + 32}px;font-size:40px;--d:{i + 1}">0{i + 1}</p>'
-        + p(t, x + 120, y + 36, 650, size=28, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
-        + p(txt, x + 120, y + 100, 650, size=22, d=i + 2)
+ah = ""
+for i, (t, cuando, txt, metr) in enumerate(an):
+    x = 128 + i * 336
+    ah += (
+        card(x, 300, 316, 520, d=i)
+        + p(cuando, x + 28, 330, 270, size=17, d=i + 1, cls="rosa", extra="font-weight:700;letter-spacing:.1em;text-transform:uppercase;")
+        + p(t, x + 28, 362, 270, size=32, d=i + 1, cls="", extra="font-weight:800;")
+        + p(txt, x + 28, 420, 262, size=20, d=i + 2, extra="line-height:1.4;")
+        + f'<div class="abs a" style="left:{x + 28}px;top:720px;width:262px;border-top:2px solid {ACENTO};padding-top:14px;font-size:17px;'
+          f'font-weight:700;color:{INK};--d:{i + 2}">Se mide en:<br><span style="color:{ACENTO_TXT}">{metr}</span></div>'
     )
-add("enfoque", "Cómo he trabajado tus ideas", sec(
-    eyebrow("Tus 19 ideas")
-    + titulo("Lo que he cambiado y por qué", size=56)
-    + ch
-    + p("Son una base: cuando los grabes, dilo con tus palabras. Lo importante es mantener el gancho, el orden y el cierre.",
-        128, 920, 1664, size=22, d=6, cls="muted")
+add("anatomia", "Anatomía de un guion", sec(
+    eyebrow("El método")
+    + titulo("Cada guion tiene estas 5 partes", size=56)
+    + ah
+    + p("Según Instagram, las tres señales que más pesan son el tiempo de visionado, los me gusta por alcance y los envíos por alcance. Fuentes al final.",
+        128, 870, 1664, size=22, d=6, cls="muted")
     + foot(n),
 ))
 
 # ── Los 19 guiones ───────────────────────────────────────────────────────
+# Cada guion: bloque, serie, pilar, objetivo (métrica), portada (foto, título),
+# gancho (lo que dices), filas (tiempo, se ve, dices, texto), cierre, descripción.
 G = [
-    # (bloque, serie, pilar, foto, pos, portada1, portada2, gancho, plano, desarrollo[], cierre, porque, duración)
-    ("Atracción", "Nivel 0", "Atraer", "pared", "center",
-     "¿Espalda cargada?", "3 movimientos",
-     "«Si acabas el día con la espalda así… dame 3 minutos»",
-     "Llegas a casa, sueltas la mochila del trabajo y te llevas la mano a la lumbar. Ese gesto lo reconoce cualquiera.",
-     ["<b>Gato-camello</b>: 8 repeticiones lentas, con el nombre en pantalla.",
-      "<b>Libro abierto</b> (rotación torácica tumbada de lado): 6 por lado.",
-      "<b>Postura del niño con alcance lateral</b>: 20 segundos por lado.",
-      "Un corte por repetición: el vídeo no se para nunca."],
-     "«Guárdalo para esta noche.» Y en el texto: «Si quieres la rutina completa, comenta NIVEL0».",
-     "Un dolor que tu público tiene hoy y la solución en menos de 30 segundos: es lo que más se guarda y se comparte.",
-     "25-30 s"),
-    ("Atracción", "¿Te ha pasado?", "Atraer", "minibanda", "center",
-     "15 minutos", "son suficientes",
-     "«Cuando tienes 15 minutos libres y piensas que no te da tiempo a entrenar»",
-     "En el sofá, miras el móvil: 15:00. Cara de «para qué». Aparece una cuenta atrás en la esquina.",
-     ["Te levantas y el cronómetro empieza en <b>15:00</b>, visible todo el vídeo.",
-      "3 vueltas de <b>sentadilla, flexión inclinada en el sofá y puente de glúteo</b>.",
-      "Acelera el ritmo de los cortes: el reloj baja a la vista."],
-     "Terminas con el reloj en 04:00: «Y aún te sobra para la ducha». Texto: «Mándaselo a quien siempre dice que no tiene tiempo».",
-     "El cronómetro en pantalla hace que la gente se quede hasta el final para ver si llegas. Y pedir que lo compartan te lleva fuera de tus seguidoras.",
-     "20-25 s"),
-    ("Atracción", "Nivel 0", "Atraer", "mancuernas", "center",
-     "Tu entreno de 20'", "no funciona por esto",
-     "«Si entrenas 20 minutos y no ves cambios, es por una de estas 3 cosas»",
-     "A cámara, con tres dedos levantados. Sin introducción: la primera palabra ya es la promesa.",
-     ["<b>1. Ejercicios que trabajen mucho músculo a la vez</b> (sentadilla, peso muerto, flexión), no aislados.",
-      "<b>2. Descansos cortos y medidos</b>: 30-45 segundos, no mirar el móvil.",
-      "<b>3. Subir la dificultad cada semana</b>: más peso, más repeticiones o menos descanso.",
-      "Cada clave con un plano tuyo haciéndolo."],
-     "«¿Quieres un entreno de 20 minutos con estas 3 claves? Comenta NIVEL0 y te lo mando.»",
-     "Decir «no funciona por esto» da más curiosidad que «3 claves». Y la pregunta final de tu idea la convertimos en la palabra clave que lleva a Level Up.",
-     "25-35 s"),
-    ("Enseñanza", "Nivel 0", "Enseñar", "pared", "center",
-     "Sentadilla", "sin notar el glúteo?",
-     "«Si haces sentadillas y solo notas las piernas, es esto»",
-     "Pantalla dividida: a la izquierda tu sentadilla corta con una ✗; a la derecha la buena con un ✓.",
-     ["<b>El error</b>: bajar poco y con la cadera debajo. Lo señalas en el vídeo.",
-      "<b>La corrección</b>: cadera atrás, bajar más y empujar con todo el pie.",
-      "<b>Si te cuesta la movilidad</b>: sentadilla a cajón o a silla, mismo gesto."],
-     "«Pruébalo en tu próximo entreno y dime si lo notas.» Texto: «Guárdalo».",
-     "El ✗/✓ en pantalla dividida es el formato de enseñanza que más se guarda. Primero de la mini serie «Si notas…, es esto».",
-     "20-25 s"),
-    ("Enseñanza", "Nivel 0", "Enseñar", "mat", "center",
-     "Abdominales", "sin dolor de cuello",
-     "«Si haces abdominales y te duele el cuello, para»",
-     "Haces un crunch tirando de la cabeza con las manos. Te frenas en seco y miras a cámara.",
-     ["<b>Por qué pasa</b>: tiras del cuello en lugar de usar el abdomen.",
-      "<b>Cómo corregirlo</b>: mirada al techo, espacio entre mentón y pecho, soltar el aire al subir.",
-      "<b>La alternativa</b>: dead bug, paso a paso, con la lumbar pegada al suelo."],
-     "«Cámbialo hoy y verás la diferencia.» Texto: «Guárdalo».",
-     "«Para» es una orden, y una orden frena el scroll. Segundo de la mini serie, misma portada que el anterior.",
-     "20-30 s"),
-    ("Enseñanza", "Nivel 0", "Enseñar", "puente", "center",
-     "Puente de glúteo", "sin lumbares",
-     "«Si en el puente de glúteo notas las lumbares, es esto»",
-     "Puente con la espalda arqueada y una flecha roja señalando la lumbar.",
-     ["<b>El error</b>: subir arqueando la espalda en lugar de empujar con la cadera.",
-      "<b>La corrección</b>: costillas abajo, pelvis hacia ti y subir menos.",
-      "<b>El truco</b>: aguantar 2 segundos arriba apretando el glúteo."],
-     "«Comenta NIVEL0 y te paso el entreno de glúteo para empezar desde cero.»",
-     "Cierra la mini serie con la palabra clave: quien ha visto los tres ya confía en ti.",
-     "20-25 s"),
-    ("Enseñanza", "Nivel 0", "Enseñar", "clienta", "center",
-     "Tu primera", "flexión",
-     "«Si todavía no puedes hacer una flexión, empieza aquí»",
-     "Intentas una flexión en el suelo y te quedas abajo (de verdad). Risa a cámara.",
-     ["<b>Nivel 1</b>: flexión en la pared.",
-      "<b>Nivel 2</b>: manos en una silla o un banco estable.",
-      "<b>Nivel 3</b>: en el suelo con las rodillas apoyadas.",
-      "<b>Cuándo subir</b>: cuando hagas 12 seguidas bien hechas."],
-     "«¿En qué nivel estás tú? Dímelo en comentarios.»",
-     "Progresar por niveles es exactamente lo que es Level Up. Sin vender nada, ya estás explicando tu método.",
-     "20-30 s"),
-    ("Conexión", "¿Te ha pasado?", "Conectar", "salto", "center",
-     "Día 1", "vs. día 4",
-     "Texto: «Día 1 en el gimnasio»",
-     "Día 1: lo das todo, exagerado, tres máquinas a la vez y cara de motivación máxima.",
-     ["<b>Día 2</b>: bajas las escaleras de lado por las agujetas.",
-      "<b>Día 4</b>: en el sofá, con la bolsa del gimnasio al lado sin abrir.",
-      "<b>Corte a cámara</b>: «No necesitas matarte el primer día. Necesitas 3 entrenos de 30 minutos que puedas mantener»."],
-     "«¿Te ha pasado? Cuéntamelo y te ayudo.»",
-     "Primero la risa, luego el mensaje. La situación es tan común que se comenta y se envía a amigas.",
-     "20-25 s"),
-    ("Conexión", "Mitos 35+", "Conectar", "zancada", "center",
-     "Más fuertes,", "no más pequeñas",
-     "«Nos han enseñado a querer ser más pequeñas, no más fuertes»",
-     "Plano cerrado a cámara, frase dicha con calma. Sin música encima.",
-     ["Lo que nos preocupa: barriga, cartucheras, kilos.",
-      "Lo que nadie nos cuenta: a partir de los 35-40 perdemos músculo cada año si no hacemos nada.",
-      "La fuerza es lo que te mantiene ágil, autónoma y con el cuerpo que buscas."],
-     "«¿Deberíamos hablar más de ganar fuerza y menos de perder kilos? Te leo.»",
-     "Una opinión clara divide y hace que la gente comente y comparta. Es tu posicionamiento en una frase.",
-     "30-40 s"),
-    ("Conexión", "Mitos 35+", "Conectar", "libros", "center",
-     "Lo que me habría", "gustado saber",
-     "«5 cosas que me habría gustado saber cuando empecé a entrenar»",
-     "Número grande en pantalla mientras entrenas, cocinas o sales de casa. Una frase cada 3 segundos.",
-     ["1. No entrenas para compensar lo que comes.",
-      "2. Descansar también es entrenar.",
-      "3. No hace falta machacarse para mejorar.",
-      "4. Poco tiempo varios días es mejor que 2 horas un día.",
-      "5. La clave no es comer menos, es comer de todo."],
-     "«¿Cuál te habría gustado saber a ti?»",
-     "Una lista numerada hace que la gente se quede hasta el 5. Cabe en 25 segundos con texto en pantalla, sin hablar.",
-     "20-25 s"),
-    ("Conexión", "¿Te ha pasado?", "Atraer", "banda", "center",
-     "1 hora", "vs. 20 minutos",
-     "Texto: «Si tienes una amiga que dice que no tiene tiempo para entrenar, mándale esto»",
-     "Pantalla dividida con dos cronómetros: «1 hora sin plan» y «20 minutos con plan».",
-     ["<b>Izquierda</b>: móvil, descansos largos, de máquina en máquina, cronómetro hasta 60:00.",
-      "<b>Derecha</b>: 3 ejercicios en circuito, sin pausas largas, hasta 20:00.",
-      "<b>Final</b>: la de la derecha ya está duchada mientras la otra sigue mirando el móvil."],
-     "Texto: «Etiqueta a esa amiga».",
-     "Sin hablar, solo imagen y texto, para que no se parezca al de los 15 minutos. Pedir que la etiqueten es la forma más directa de llegar a gente nueva.",
-     "15-20 s"),
-    ("Educación", "Mitos 35+", "Enseñar", "mancuernas", "center",
-     "Fuerza", "a partir de los 35",
-     "«A partir de los 35 pierdes músculo cada año. Si no haces nada»",
-     "A cámara con unas mancuernas en la mano. Corte a tus libros y apuntes de la carrera.",
-     ["<b>Músculo</b>: lo que te da fuerza y forma.",
-      "<b>Huesos</b>: el entrenamiento de fuerza los protege, sobre todo al llegar a la menopausia.",
-      "<b>Autonomía</b>: subir escaleras, cargar la compra o levantarte del suelo a los 70.",
-      "<b>La solución</b>: 2-3 días de fuerza a la semana."],
-     "«Si nunca has hecho fuerza, comenta NIVEL0 y te enseño a empezar.»",
-     "Un dato que preocupa y una solución sencilla. Te posiciona como la que sabe, con tu formación como respaldo.",
-     "30-40 s"),
-    ("Educación", "Mitos 35+", "Conectar", "risa", "center",
-     "Entrenar", "embarazada",
-     "«Entrené durante todo mi embarazo. Esto es lo que aprendí»",
-     "Tus vídeos entrenando embarazada, con voz en off.",
-     ["Mantener la condición física y la fuerza para el parto y el posparto.",
-      "Adaptar el entreno a cada trimestre: lo que cambia y lo que no.",
-      "Siempre con el visto bueno de tu ginecóloga y en un embarazo sin complicaciones."],
-     "«¿Entrenaste durante tu embarazo? ¿Qué te dijeron?»",
-     "Tus propios vídeos embarazada son lo más íntimo que puedes enseñar: mucha conexión y te abre a madres jóvenes.",
-     "30-40 s"),
-    ("Educación", "Mitos 35+", "Enseñar", "risa", "center",
-     "¿Cenar hidratos", "engorda?",
-     "«Cenar hidratos no te hace engordar»",
-     "Comiéndote un plato de pasta por la noche, mirando a cámara.",
-     ["Lo que importa es el total del día, no la hora.",
-      "Cantidades, calidad y lo que haces cada día pesan mucho más.",
-      "Ejemplo en pantalla: dos días iguales, uno con hidratos en la cena."],
-     "«¿Qué mito te has creído durante años? Dímelo y hago vídeo.»",
-     "Llevar la contraria en la primera frase genera comentarios. Y la pregunta final te da ideas para los siguientes vídeos.",
-     "20-30 s"),
-    ("Educación", "Nivel 0", "Enseñar", "puente", "center",
-     "Tu glúteo:", "más que estética",
-     "«Tu glúteo no es solo estética: es lo que te levanta de la silla»",
-     "Te levantas de una silla y subes unas escaleras, con el glúteo marcado en pantalla.",
-     ["<b>Levantarte de la silla</b> → sentadilla a silla.",
-      "<b>Subir escaleras</b> → subida a escalón.",
-      "<b>Caminar sin dolor</b> → puente de glúteo.",
-      "Un ejercicio por situación, 5 segundos cada uno."],
-     "Texto: «Guárdalo para tu próximo entreno».",
-     "Une lo que buscan (estética) con lo que necesitan (salud), y cada situación es una escena cotidiana.",
-     "20-25 s"),
-    ("Lifestyle + humor", "Expectativa vs. realidad", "Atraer", "salto", "center",
-     "Expectativa", "vs. realidad",
-     "Texto: «Expectativa: entrenar teniendo hijos»",
-     "La expectativa, perfecta y con música bonita. Corte seco a tu realidad.",
-     ["Serie de 4: <b>entrenar teniendo hijos, organizar un viaje, ir a hacer kite e intentar grabar contenido</b>.",
-      "Cada uno, 8-10 segundos, con el giro al final.",
-      "Misma música, mismo texto y misma portada: se reconoce al instante."],
-     "Texto: «¿Cuál hago la próxima?»",
-     "El formato genérico está muy visto; tu vida no. Ahí está la diferencia, y te deja usar las tonterías que ya tienes grabadas.",
-     "8-10 s cada uno"),
-    ("Lifestyle + humor", "¿Te ha pasado?", "Atraer", "mancuernas", "center",
-     "Mis 20 minutos", "para entrenar",
-     "Texto: «Cuando por fin tengo 20 minutos para entrenar»",
-     "Te preparas con música épica: cascos, esterilla, mancuernas.",
-     ["De fondo: «¡MAMIIII!».",
-      "Dejas las mancuernas, miras a cámara con resignación…",
-      "…y gritas «¡PAPIIII!». Sigues entrenando."],
-     "Texto: «Organización familiar nivel experta». Pide que lo compartan.",
-     "Menos de 10 segundos con un giro al final: se ve dos y tres veces, y eso es lo que más empuja el algoritmo.",
-     "7-9 s"),
-    ("Lifestyle + humor", "¿Te ha pasado?", "Atraer", "zancada", "center",
-     "Mi mayor", "motivación",
-     "Texto: «Mi mayor motivación cuando salgo a correr»",
-     "En la puerta con las zapatillas puestas, dudando. Miras el sofá.",
-     ["De fondo: «¡MAMÁÁÁÁ!».",
-      "Coges la puerta y te vas corriendo.",
-      "Texto final: «30 minutos de silencio garantizados»."],
-     "Que lo compartan madres que se identifican.",
-     "Misma estructura que el anterior: publícalos con al menos 2 semanas de diferencia para que no se pisen.",
-     "6-8 s"),
-    ("Level Up", "Dentro de Level Up", "Convertir", "clienta", "center",
-     "¿Por qué no", "una más barata?",
-     "«Me escribió una chica: “He pagado otra plataforma más barata”»",
-     "Captura del mensaje, sin nombre ni foto. Tú leyéndolo a cámara.",
-     ["Una cosa es tener cientos de entrenos sueltos.",
-      "Otra es una planificación por niveles pensada por mí, que llevo años trabajando con mujeres reales.",
-      "Enseñas 3 segundos de Level Up por dentro: niveles, sesiones y seguimiento.",
-      "«No pagas por mil entrenos. Pagas para que te guíe.»"],
-     "«Pruébalo 5 días gratis: comenta NIVEL0 y te mando el enlace.»",
-     "Responde a la duda del precio sin bajarlo. No nombres la otra plataforma: el mensaje es lo que tú das.",
-     "30-40 s"),
+    dict(bloque="Atracción", serie="Nivel 0", pilar="Atraer", obj="Que lo guarden y lo envíen", foto="pared",
+         port="¿Espalda cargada?",
+         gancho="«Si acabas el día con la espalda así, dame tres minutos»",
+         filas=[
+             ("0-3 s", "Entras en casa, sueltas la mochila del trabajo y te llevas la mano a la lumbar.", "«Si acabas el día con la espalda así, dame tres minutos.»", "¿Espalda cargada al final del día?"),
+             ("3-11 s", "En cuadrupedia: gato-camello, lento.", "«Uno: gato-camello. Redondea y arquea despacio, siguiendo la respiración. Ocho veces.»", "1 · Gato-camello · 8 lentas"),
+             ("11-19 s", "Tumbada de lado, rodillas juntas: libro abierto.", "«Dos: libro abierto. Abre el brazo y sigue la mano con la mirada. Seis por lado.»", "2 · Libro abierto · 6 por lado"),
+             ("19-26 s", "Postura del niño llevando las manos hacia un lado.", "«Tres: postura del niño con las manos a un lado. Respira hacia las costillas, veinte segundos por lado.»", "3 · Niño con alcance · 20 s por lado"),
+         ],
+         cierre="«Guárdalo para esta noche y mándaselo a quien se pasa el día sentada.»",
+         desc="Espalda cargada después de trabajar: 3 ejercicios de movilidad en casa, en 3 minutos. Si el dolor es fuerte o no se va, consulta con un profesional."),
+    dict(bloque="Atracción", serie="¿Te ha pasado?", pilar="Atraer", obj="Que lo envíen", foto="minibanda",
+         port="12 minutos bastan",
+         gancho="«Tengo quince minutos… no me da tiempo a entrenar. ¿Seguro?»",
+         filas=[
+             ("0-3 s", "En el sofá, miras el reloj. Cara de «para qué».", "«Tengo quince minutos… no me da tiempo a entrenar.» (Pausa.) «¿Seguro?»", "Cuando crees que 15 minutos no dan para entrenar"),
+             ("3-6 s", "Te levantas y pones un cronómetro de 12:00, visible en la esquina todo el vídeo.", "«Doce minutos: tres ejercicios, cuarenta segundos de trabajo y veinte de descanso.»", "40 s trabajo · 20 s descanso · 4 vueltas"),
+             ("6-20 s", "Cortes rápidos de sentadilla, flexión con manos en el sofá y puente de glúteo. El reloj baja.", "(Voz en off) «Sentadilla. Flexión inclinada. Puente de glúteo.»", "Sentadilla · Flexión en el sofá · Puente"),
+             ("20-24 s", "El cronómetro llega a 00:00. Te secas la cara y señalas el reloj del móvil.", "«Y aún te quedan tres minutos para la ducha.»", "Hecho. Y sobran 3 minutos."),
+         ],
+         cierre="«Mándaselo a esa amiga que siempre dice que no tiene tiempo.»",
+         desc="Entreno en casa de 12 minutos sin material: 3 ejercicios, 4 vueltas. Para las que creen que no tienen tiempo para entrenar."),
+    dict(bloque="Atracción", serie="Nivel 0", pilar="Atraer", obj="Comentarios con NIVEL0", foto="mancuernas",
+         port="Tu entreno de 20'",
+         gancho="«Si entrenas veinte minutos y no ves cambios, casi siempre es por una de estas tres cosas»",
+         filas=[
+             ("0-3 s", "A cámara, con tres dedos levantados. Sin saludo.", "«Si entrenas veinte minutos y no ves cambios, casi siempre es por una de estas tres cosas.»", "Tu entreno de 20' no funciona por esto"),
+             ("3-11 s", "Sentadilla con mancuerna y remo.", "«Uno: haces ejercicios que mueven poco músculo. Prioriza los que trabajan mucho a la vez: sentadilla, peso muerto, remo, flexión.»", "1 · Ejercicios que trabajen mucho músculo"),
+             ("11-18 s", "Mirando el móvil entre series ✗. Corte a un cronómetro ✓.", "«Dos: descansas sin control. Ponte un cronómetro: entre treinta segundos y un minuto.»", "2 · Descansos medidos"),
+             ("18-27 s", "Coges una mancuerna más pesada.", "«Y tres: haces siempre lo mismo. Si cada semana no subes un poco el peso, las repeticiones o la dificultad, tu cuerpo no tiene motivo para cambiar.»", "3 · Un poco más cada semana"),
+         ],
+         cierre="«Si quieres un entreno de veinte minutos con estas tres claves, comenta NIVEL0 y te lo mando.»",
+         desc="Entreno de 20 minutos que no da resultados: los 3 errores más comunes. Entrenamiento de fuerza para mujeres que empiezan desde cero."),
+    dict(bloque="Enseñanza", serie="Si notas… · 1/3", pilar="Enseñar", obj="Que lo guarden", foto="pared",
+         port="Sentadilla sin glúteo",
+         gancho="«Si haces sentadillas y solo las notas en los cuádriceps, mira esto»",
+         filas=[
+             ("0-3 s", "Pantalla dividida: tu sentadilla corta (✗) y la buena (✓), de perfil.", "«Si haces sentadillas y solo las notas en los cuádriceps, mira esto.»", "¿Sentadillas y no notas el glúteo?"),
+             ("3-10 s", "La sentadilla corta, dos repeticiones.", "«El error más común: bajar poco. Con media sentadilla el glúteo apenas entra.»", "✗ Media sentadilla"),
+             ("10-18 s", "La buena: cadera atrás, bajas más.", "«Lleva la cadera atrás y baja hasta que el muslo quede paralelo al suelo o un poco más, con el peso en todo el pie.»", "✓ Cadera atrás · bajar más"),
+             ("18-24 s", "Sentadilla a una silla.", "«¿Te cuesta bajar? Usa una silla: siéntate sin dejarte caer y levántate empujando el suelo.»", "Si te cuesta: sentadilla a silla"),
+         ],
+         cierre="«Guárdalo y pruébalo en tu próximo entreno. En el siguiente, el error de los abdominales.»",
+         desc="Sentadillas y no notas el glúteo: el error más común y cómo corregirlo. Ejercicios de glúteo para mujeres que empiezan."),
+    dict(bloque="Enseñanza", serie="Si notas… · 2/3", pilar="Enseñar", obj="Que lo guarden", foto="mat",
+         port="Abdominales sin cuello",
+         gancho="«Si al hacer abdominales te duele el cuello, para»",
+         filas=[
+             ("0-3 s", "Haces un crunch tirando de la cabeza. Te frenas en seco y miras a cámara.", "«Si al hacer abdominales te duele el cuello, para.»", "¿Abdominales y te duele el cuello?"),
+             ("3-10 s", "Repites el gesto con una flecha en las manos.", "«No es que tengas el cuello débil: estás tirando de la cabeza con las manos.»", "✗ Tirar del cuello"),
+             ("10-17 s", "Crunch bien hecho.", "«Manos a los lados de la cabeza sin entrelazar, mirada al techo y suelta el aire al subir.»", "✓ Mirada al techo · soltar el aire"),
+             ("17-26 s", "Dead bug, de lado y despacio.", "«Y si aun así lo notas, cámbialo por el dead bug: lumbar pegada al suelo y estira brazo y pierna contrarios.»", "Alternativa: dead bug"),
+         ],
+         cierre="«Guárdalo. En el siguiente: por qué el puente de glúteo te carga las lumbares.»",
+         desc="Abdominales con dolor de cuello: por qué pasa y cómo hacerlos bien. Y una alternativa para trabajar el abdomen sin molestias."),
+    dict(bloque="Enseñanza", serie="Si notas… · 3/3", pilar="Enseñar", obj="Comentarios con NIVEL0", foto="puente",
+         port="Puente sin lumbares",
+         gancho="«Si en el puente de glúteo notas las lumbares, es por esto»",
+         filas=[
+             ("0-3 s", "Puente con la espalda arqueada y una flecha roja en la lumbar.", "«Si en el puente de glúteo notas las lumbares, es por esto.»", "¿Puente de glúteo y te cargan las lumbares?"),
+             ("3-9 s", "Repites el puente arqueado.", "«Estás subiendo arqueando la espalda, no empujando con la cadera.»", "✗ Arquear la espalda"),
+             ("9-17 s", "Antes de subir, bajas las costillas y metes la pelvis.", "«Antes de subir, baja las costillas y lleva el pubis hacia el ombligo.»", "✓ Costillas abajo · pelvis hacia ti"),
+             ("17-25 s", "Puente bien hecho, pausa arriba.", "«Sube solo hasta que hombros, cadera y rodillas queden en línea, y aguanta dos segundos apretando el glúteo.»", "Sube menos · aguanta 2 s"),
+         ],
+         cierre="«Si quieres un entreno de glúteo para empezar desde cero, comenta NIVEL0 y te lo mando.»",
+         desc="Puente de glúteo y dolor lumbar: el error y la corrección. Entrenamiento de glúteo en casa para principiantes."),
+    dict(bloque="Enseñanza", serie="Nivel 0", pilar="Enseñar", obj="Comentarios", foto="clienta",
+         port="Tu primera flexión",
+         gancho="«Si todavía no puedes hacer una flexión, no empieces en el suelo»",
+         filas=[
+             ("0-3 s", "Intentas una flexión en el suelo y te quedas abajo. Risa a cámara.", "«Si todavía no puedes hacer una flexión, no empieces en el suelo.»", "¿Aún no te sale una flexión?"),
+             ("3-10 s", "Flexión en la pared, cuerpo recto.", "«Empieza en la pared, con el cuerpo recto como una tabla. Cuanto más vertical, más fácil.»", "Nivel 1 · Pared"),
+             ("10-17 s", "Manos en una mesa o silla estable.", "«Cuando hagas doce seguidas bien hechas, baja las manos a una mesa o una silla que no se mueva.»", "Nivel 2 · Mesa o silla"),
+             ("17-24 s", "En el suelo con rodillas, luego completa.", "«Después al suelo con las rodillas apoyadas. Y cuando hagas doce… la primera completa.»", "Nivel 3 · Suelo"),
+         ],
+         cierre="«¿En qué nivel estás? Dímelo en comentarios y te digo cuándo subir.»",
+         desc="Cómo hacer tu primera flexión si ahora no te sale ninguna: 3 niveles para progresar en casa."),
+    dict(bloque="Conexión", serie="¿Te ha pasado?", pilar="Conectar", obj="Comentarios y envíos", foto="salto",
+         port="Día 1 vs. día 4",
+         gancho="Texto: «Día 1 en el gimnasio» (sin hablar)",
+         filas=[
+             ("0-4 s", "Lo das todo, exagerado: tres máquinas, cara de motivación máxima.", "—", "Día 1 en el gimnasio"),
+             ("4-7 s", "Bajas las escaleras de lado por las agujetas.", "«Ay. Ay. Ay.»", "Día 2"),
+             ("7-10 s", "En el sofá, con la bolsa del gimnasio sin abrir.", "—", "Día 4"),
+             ("10-20 s", "Corte a cámara, plano cerrado.", "«No necesitas matarte el primer día. Necesitas tres entrenos de treinta minutos que puedas repetir cada semana.»", "La constancia gana a la intensidad"),
+         ],
+         cierre="«¿Te ha pasado? Cuéntamelo y te digo por dónde empezar.»",
+         desc="¿Empiezas a entrenar con muchas ganas y lo dejas a la semana? No es falta de fuerza de voluntad: es empezar demasiado fuerte."),
+    dict(bloque="Conexión", serie="Mitos 35+", pilar="Conectar", obj="Comentarios y envíos", foto="zancada",
+         port="Más fuertes",
+         gancho="«Nos han enseñado a querer ser más pequeñas, no más fuertes»",
+         filas=[
+             ("0-3 s", "Plano cerrado a cámara. Sin música encima.", "«Nos han enseñado a querer ser más pequeñas, no más fuertes.»", "Más fuertes, no más pequeñas"),
+             ("3-10 s", "Sigues a cámara.", "«Barriga, cartucheras, kilos… y casi nadie nos habla de fuerza.»", "—"),
+             ("10-20 s", "Planos tuyos entrenando con peso.", "«A partir de los treinta perdemos músculo poco a poco, y con la menopausia el proceso se acelera.»", "Desde los 30: −3 a 5 % de músculo cada 10 años"),
+             ("20-30 s", "Planos cotidianos: escaleras, niño en brazos, la compra.", "«La fuerza es lo que te deja subir escaleras, coger a tus hijos o cargar la compra. Y también lo que da forma al cuerpo.»", "Fuerza = autonomía"),
+         ],
+         cierre="«¿Deberíamos hablar más de ganar fuerza y menos de perder kilos? Te leo.»",
+         desc="Por qué las mujeres deberíamos hablar más de ganar fuerza y menos de perder peso. Entrenamiento de fuerza para mujeres."),
+    dict(bloque="Conexión", serie="Mitos 35+", pilar="Conectar", obj="Me gusta y comentarios", foto="libros",
+         port="Lo que ojalá hubiera sabido",
+         gancho="Texto: «5 cosas que me habría gustado saber cuando empecé a entrenar»",
+         filas=[
+             ("0-3 s", "Te atas las zapatillas. Número grande en pantalla.", "— (solo música y texto)", "5 cosas que me habría gustado saber cuando empecé a entrenar"),
+             ("3-9 s", "Comiendo con calma / descansando en el sofá.", "—", "1 · No entrenas para compensar lo que comes · 2 · Descansar también es entrenar"),
+             ("9-15 s", "Entreno corto en casa.", "—", "3 · No hace falta machacarse · 4 · Mejor 30 min tres días que 2 horas un día"),
+             ("15-20 s", "Plato variado: proteína, legumbre, verdura.", "—", "5 · La clave no es comer menos: es comer de todo"),
+         ],
+         cierre="Texto: «¿Cuál te habría gustado saber a ti?»",
+         desc="5 cosas que me habría gustado saber cuando empecé a entrenar. Graduada en Ciencias del Deporte y entrenadora de mujeres."),
+    dict(bloque="Conexión", serie="¿Te ha pasado?", pilar="Atraer", obj="Envíos", foto="banda",
+         port="1 hora vs. 20 minutos",
+         gancho="Texto: «Si tienes una amiga que dice que no tiene tiempo para entrenar, mándale esto»",
+         filas=[
+             ("0-3 s", "Pantalla dividida con dos cronómetros.", "—", "Mándale esto a tu amiga que «no tiene tiempo»"),
+             ("3-10 s", "Izquierda: móvil, descansos largos, de máquina en máquina. Derecha: circuito de 3 ejercicios.", "—", "1 hora sin plan · 20 minutos con plan"),
+             ("10-15 s", "Derecha llega a 20:00 y se va a la ducha. Izquierda sigue en 47:00 mirando el móvil.", "—", "Menos tiempo, mejor aprovechado"),
+         ],
+         cierre="Texto: «Etiqueta a esa amiga».",
+         desc="No necesitas una hora para entrenar: 20 minutos con un plan cunden más que una hora sin él."),
+    dict(bloque="Educación", serie="Mitos 35+", pilar="Enseñar", obj="Comentarios con NIVEL0", foto="mancuernas",
+         port="Fuerza después de los 35",
+         gancho="«A partir de los treinta empiezas a perder músculo. Y si no haces nada, no para»",
+         filas=[
+             ("0-3 s", "A cámara, con una mancuerna en la mano.", "«A partir de los treinta empiezas a perder músculo. Y si no haces nada, no para.»", "Fuerza a partir de los 35"),
+             ("3-12 s", "Corte a tus libros y apuntes de la carrera.", "«Hablamos de entre un tres y un cinco por ciento cada diez años. Y en la menopausia, los cambios hormonales lo aceleran.»", "−3 a 5 % de músculo por década"),
+             ("12-22 s", "Entrenando con peso.", "«El entrenamiento de fuerza es lo que lo frena: protege tus músculos, tus huesos y tu autonomía.»", "Músculo · Huesos · Autonomía"),
+             ("22-30 s", "A cámara.", "«La OMS recomienda trabajar la fuerza al menos dos días a la semana. No hace falta más para empezar.»", "Mínimo 2 días a la semana"),
+         ],
+         cierre="«Si nunca has hecho fuerza, comenta NIVEL0 y te enseño a empezar.»",
+         desc="Por qué las mujeres deberíamos entrenar fuerza a partir de los 35: músculo, huesos y menopausia. Empieza desde cero."),
+    dict(bloque="Educación", serie="Mitos 35+", pilar="Conectar", obj="Comentarios", foto="risa",
+         port="Entrenar embarazada",
+         gancho="«Entrené durante todo mi embarazo. Esto es lo que aprendí»",
+         filas=[
+             ("0-3 s", "Un vídeo tuyo entrenando embarazada.", "(Voz en off) «Entrené durante todo mi embarazo. Esto es lo que aprendí.»", "Entrené durante todo mi embarazo"),
+             ("3-12 s", "Más vídeos tuyos embarazada.", "«La OMS recomienda moverse durante el embarazo, si no hay complicaciones: al menos ciento cincuenta minutos a la semana.»", "OMS: 150 min a la semana"),
+             ("12-22 s", "Ejercicios adaptados según el trimestre.", "«No se trata de seguir igual: se adapta según el trimestre y según cómo te sientes cada día.»", "Adaptar, no parar"),
+             ("22-30 s", "A cámara, hoy.", "«Y siempre con el visto bueno de tu ginecóloga o tu matrona.»", "Consulta siempre con tu profesional"),
+         ],
+         cierre="«¿Entrenaste durante tu embarazo? Cuéntame cómo te fue.»",
+         desc="Entrenar durante el embarazo: lo que aprendí y lo que recomienda la OMS. Siempre con el visto bueno de tu ginecóloga o matrona."),
+    dict(bloque="Educación", serie="Mitos 35+", pilar="Enseñar", obj="Comentarios", foto="risa",
+         port="¿Hidratos en la cena?",
+         gancho="«Cenar hidratos no te hace engordar»",
+         filas=[
+             ("0-3 s", "Comiendo un plato de pasta por la noche, mirando a cámara.", "«Cenar hidratos no te hace engordar.»", "¿Cenar hidratos engorda?"),
+             ("3-12 s", "A cámara.", "«Lo que cuenta es lo que comes en todo el día, no la hora a la que lo comes.»", "Cuenta el total del día"),
+             ("12-20 s", "Dos platos del día comparados en pantalla.", "«Las cantidades, la calidad y lo que haces cada día pesan mucho más que si la pasta es a las dos o a las nueve.»", "Cantidad · Calidad · Hábito"),
+         ],
+         cierre="«¿Qué mito te has creído durante años? Dímelo y hago un vídeo.»",
+         desc="¿Cenar hidratos engorda? Lo que de verdad importa en tu alimentación si entrenas."),
+    dict(bloque="Educación", serie="Nivel 0", pilar="Enseñar", obj="Que lo guarden", foto="puente",
+         port="Glúteo: más que estética",
+         gancho="«Tu glúteo no es solo estética: es lo que te levanta de la silla»",
+         filas=[
+             ("0-3 s", "Te levantas de una silla con esfuerzo.", "«Tu glúteo no es solo estética: es lo que te levanta de la silla.»", "Tu glúteo es más que estética"),
+             ("3-10 s", "Subes escaleras con el glúteo marcado en pantalla.", "«Extiende la cadera para subir escaleras y estabiliza la pelvis cuando caminas.»", "Escaleras · Caminar · Levantarte"),
+             ("10-22 s", "Tres ejercicios, 4 segundos cada uno.", "«Por eso estos tres: sentadilla a silla, subida a escalón y puente de glúteo.»", "Sentadilla a silla · Subida a escalón · Puente"),
+         ],
+         cierre="«Guárdalo para tu próximo entreno.»",
+         desc="Para qué sirve el glúteo más allá de la estética, y 3 ejercicios para fortalecerlo en casa."),
+    dict(bloque="Lifestyle + humor", serie="Expectativa vs. realidad", pilar="Atraer", obj="Envíos", foto="salto",
+         port="Expectativa vs. realidad",
+         gancho="Texto: «Expectativa: entrenar teniendo hijos»",
+         filas=[
+             ("0-4 s", "Expectativa: entreno perfecto, luz bonita, música tranquila.", "—", "Expectativa: entrenar teniendo hijos"),
+             ("4-9 s", "Corte seco a la realidad: niño encima, esterilla ocupada, juguetes.", "—", "Realidad"),
+             ("Serie", "Mismo formato con: organizar un viaje, ir a hacer kite e intentar grabar contenido.", "—", "Misma música y mismo texto en todos"),
+         ],
+         cierre="Texto: «¿Cuál hago la próxima?»",
+         desc="Expectativa vs. realidad de entrenar teniendo hijos. Entrenadora y madre."),
+    dict(bloque="Lifestyle + humor", serie="¿Te ha pasado?", pilar="Atraer", obj="Envíos", foto="mancuernas",
+         port="Mis 20 minutos",
+         gancho="Texto: «Cuando por fin tengo 20 minutos para entrenar»",
+         filas=[
+             ("0-4 s", "Te preparas con música épica: cascos, esterilla, mancuernas.", "—", "Cuando por fin tengo 20 minutos para entrenar"),
+             ("4-6 s", "De fondo, una voz de niño.", "(Fuera de plano) «¡MAMIIII!»", "—"),
+             ("6-9 s", "Dejas las mancuernas, miras a cámara con resignación… y gritas.", "«¡PAPIIII!» Y sigues entrenando.", "Organización familiar nivel experta"),
+         ],
+         cierre="Sin petición: el chiste se envía solo. Si acaso, texto final «Etiqueta a otra madre».",
+         desc="Cuando por fin tienes 20 minutos para entrenar… Madres que entrenan, esto va por vosotras."),
+    dict(bloque="Lifestyle + humor", serie="¿Te ha pasado?", pilar="Atraer", obj="Envíos", foto="zancada",
+         port="Mi mayor motivación",
+         gancho="Texto: «Mi mayor motivación cuando salgo a correr»",
+         filas=[
+             ("0-4 s", "En la puerta con las zapatillas puestas, dudando. Miras el sofá.", "—", "Mi mayor motivación cuando salgo a correr"),
+             ("4-6 s", "De fondo, una voz de niño.", "(Fuera de plano) «¡MAMÁÁÁÁ!»", "—"),
+             ("6-8 s", "Coges la puerta y sales corriendo.", "—", "30 minutos de silencio garantizados"),
+         ],
+         cierre="Texto final: «¿Te suena?». Publícalo al menos 2 semanas después del anterior: tienen la misma estructura.",
+         desc="Mi mayor motivación para salir a correr. Si eres madre, lo entiendes."),
+    dict(bloque="Level Up", serie="Dentro de Level Up", pilar="Convertir", obj="Comentarios con NIVEL0", foto="clienta",
+         port="¿Una más barata?",
+         gancho="«Me escribió una chica: “He pagado otra plataforma más barata”»",
+         filas=[
+             ("0-3 s", "Captura del mensaje, sin nombre ni foto. Tú leyéndolo.", "«Me escribió una chica: “He pagado otra plataforma más barata”.»", "«He pagado otra plataforma más barata»"),
+             ("3-12 s", "A cámara.", "«Y lo entiendo. Pero una cosa es tener cientos de entrenos sueltos, y otra una planificación por niveles pensada para ti.»", "Entrenos sueltos ≠ un plan"),
+             ("12-22 s", "3 segundos de Level Up por dentro: niveles, sesiones, seguimiento.", "«Llevo años entrenando a mujeres reales. Sé por dónde empezar y cuándo subir.»", "Niveles · Progresión · Seguimiento"),
+             ("22-28 s", "A cámara.", "«No pagas por mil entrenos. Pagas para que te guíe.»", "No pagas por mil entrenos"),
+         ],
+         cierre="«Pruébalo cinco días gratis: comenta NIVEL0 y te mando el enlace.»",
+         desc="Plataforma de entrenamiento online para mujeres: por qué no es lo mismo tener mil entrenos que un plan por niveles. 5 días gratis."),
 ]
 
-for i, (bloque, serie, pilar, fk, fpos, c1, c2, gancho, plano, dev, cierre, porque, dur) in enumerate(G):
+for i, g in enumerate(G):
     n += 1
     num = i + 1
     add(f"guion-{num:02d}", f"Guion {num:02d}", sec(
         FUENTES
-        + eyebrow(f"Guion {num:02d} de {len(G)} · {bloque}")
-        + pill(pilar, 128, 166, PILAR[pilar], d=0)
-        + p(f"Serie: {serie}", 300, 168, 600, size=20, d=0, cls="muted", extra="font-weight:700;")
-        + p(gancho, 128, 214, 1180, size=40, d=1, cls="", extra="font-weight:800;line-height:1.15;")
-        + label("0-2 s · Lo que se ve", 128, 360, d=2)
-        + p(plano, 128, 394, 1180, size=22, d=2)
-        + label("Desarrollo", 128, 480, d=3)
-        + lista(dev, 128, 516, 1180, size=21, d=3, gap=8)
-        + label("Cierre", 128, 760, d=4)
-        + p(cierre, 128, 794, 1180, size=22, d=4, cls="", extra="font-weight:700;")
-        + f'<div class="abs pop" style="left:128px;top:880px;width:1180px;padding:18px 26px;border-radius:18px;background:{ROTO};'
-          f'border-left:6px solid {ACENTO};--d:5"><span style="font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;'
-          f'color:{ACENTO_TXT}">Por qué funciona</span><br><span style="font-size:20px;line-height:1.35;color:#3A3836">{porque}</span></div>'
-        + movil(1440, 120, 352, fk, fpos, serie, c1, c2, d=2)
-        + p(f"Portada · {dur}", 1440, 760, 352, size=18, d=3, cls="muted", extra="text-align:center;")
+        + eyebrow(f"Guion {num:02d} de {len(G)} · {g['bloque']}")
+        + pill(g["pilar"], 128, 166, PILAR[g["pilar"]], d=0)
+        + p(f"Serie: {g['serie']} · Objetivo: <b>{g['obj']}</b>", 300, 168, 1100, size=20, d=0, cls="muted")
+        + p(g["gancho"], 128, 212, 1380, size=36, d=1, cls="", extra="font-weight:800;line-height:1.15;")
+        + tabla(g["filas"], 128, 330, 1400, d=2)
+        + portada(1592, 128, 200, g["foto"], g["serie"].split(" · ")[0], g["port"], d=1)
+        + p("Portada", 1592, 492, 200, size=15, d=1, cls="muted", extra="text-align:center;")
+        + f'<div class="abs pop" style="left:128px;top:842px;width:800px;padding:18px 24px;border-radius:16px;background:{ACENTO};--d:4">'
+          f'<span style="font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#3A2F2F">Cierre (CTA)</span><br>'
+          f'<span style="font-size:20px;font-weight:700;line-height:1.35;color:{INK}">{g["cierre"]}</span></div>'
+        + f'<div class="abs pop" style="left:960px;top:842px;width:832px;padding:18px 24px;border-radius:16px;background:{ROTO};--d:5">'
+          f'<span style="font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:{ACENTO_TXT}">Descripción</span><br>'
+          f'<span style="font-size:18px;line-height:1.4;color:#3A3836">{g["desc"]}</span></div>'
         + foot(n),
     ))
 
 # ── Laponia ──────────────────────────────────────────────────────────────
 n += 1
 lap = [
-    ("Entrena donde estés: Laponia", "Rutina de 10 minutos en la nieve (o en la puerta de la cabaña) con el paisaje detrás. Tu serie de escenarios inesperados en su mejor versión."),
+    ("Entrena donde estés: Laponia", "Rutina de 10 minutos en la nieve o en la puerta de la cabaña, con el paisaje detrás. Es tu formato de escenario inesperado: el de la piscina es tu reel que más seguidoras te ha traído."),
     ("Expectativa vs. realidad: viajar con niños a Laponia", "El primer capítulo de la serie nueva, grabado allí."),
-    ("Entrenar de viaje en 15 minutos", "3 ejercicios en la habitación, sin material. Útil y guardable para quien viaja en Navidad."),
+    ("Entrenar de viaje en 15 minutos", "3 ejercicios en la habitación, sin material. Útil para quien viaja en Navidad, y fácil de guardar."),
     ("Aquí sí hay viento", "Si hay snowkite, un giro a tu serie de los días sin kite: esta vez el viento sobra."),
 ]
 lh = ""
@@ -350,85 +399,81 @@ add("laponia", "Laponia", sec(
 # ── Orden de publicación ─────────────────────────────────────────────────
 n += 1
 sem = [
-    ("Esta semana", "24-29 nov", [("Jue 26", "04 · Sentadilla sin glúteo"), ("Sáb 28", "17 · Mis 20 minutos (¡MAMIIII!)")]),
-    ("Semana de Laponia", "1-6 dic · programada", [("Mar 1", "05 · Abdominales sin dolor de cuello"), ("Jue 3", "12 · Fuerza a partir de los 35"), ("Sáb 5", "02 · 15 minutos son suficientes")]),
-    ("Vuelta", "8-13 dic", [("Mar 8", "06 · Puente sin lumbares"), ("Jue 10", "Laponia · Entrena donde estés"), ("Sáb 12", "08 · Día 1 vs. día 4")]),
-    ("Antes de Navidad", "15-20 dic", [("Mar 15", "09 · Más fuertes, no más pequeñas"), ("Jue 17", "19 · ¿Por qué no una más barata?"), ("Sáb 19", "18 · Mi mayor motivación")]),
+    ("Esta semana", "24-29 nov", [("Jue 26", "04 · Sentadilla sin glúteo (1/3)"), ("Sáb 28", "17 · Mis 20 minutos (¡MAMIIII!)")]),
+    ("Semana de Laponia", "1-6 dic · programada", [("Mar 1", "05 · Abdominales sin cuello (2/3)"), ("Jue 3", "06 · Puente sin lumbares (3/3)"), ("Sáb 5", "02 · 12 minutos bastan")]),
+    ("Vuelta", "8-13 dic", [("Mar 8", "12 · Fuerza después de los 35"), ("Jue 10", "Laponia · Entrena donde estés"), ("Sáb 12", "08 · Día 1 vs. día 4")]),
+    ("Antes de Navidad", "15-20 dic", [("Mar 15", "09 · Más fuertes"), ("Jue 17", "19 · ¿Una más barata?"), ("Sáb 19", "18 · Mi mayor motivación")]),
 ]
 oh = ""
 for i, (t, f, items) in enumerate(sem):
     x = 128 + i * 424
     oh += (
-        card(x, 290, 396, 560, d=i)
+        card(x, 290, 396, 520, d=i)
         + p(t, x + 30, 320, 340, size=26, d=i + 1, cls="", extra="font-weight:800;")
         + p(f, x + 30, 360, 340, size=18, d=i + 1, cls="rosa", extra="font-weight:700;letter-spacing:.08em;text-transform:uppercase;")
     )
     for k, (dia, g) in enumerate(items):
-        y = 430 + k * 130
+        y = 430 + k * 120
         oh += (p(dia, x + 30, y, 340, size=18, d=i + 2, cls="muted", extra="font-weight:700;")
                + p(g, x + 30, y + 28, 336, size=22, d=i + 2, cls="", extra="font-weight:700;line-height:1.25;"))
 add("orden", "Orden de publicación", sec(
     eyebrow("Calendario · martes, jueves y sábado")
     + titulo("Por dónde empezar", size=56)
     + oh
-    + p("Mezcla siempre enseñanza, humor y conexión en la misma semana. El resto de guiones, a partir de enero.",
-        128, 890, 1664, size=22, d=6, cls="muted")
+    + p("La mini serie «Si notas…» va seguida para que quien vea una busque las otras. Humor, enseñanza y conexión, mezclados cada semana. El resto de guiones, en enero.",
+        128, 850, 1664, size=22, d=6, cls="muted")
     + foot(n),
 ))
 
 # ── Separador identidad ──────────────────────────────────────────────────
 n += 1
 add("identidad", "Tu identidad", sec(
-    FUENTES
-    + eyebrow("Segunda parte", k=True)
+    eyebrow("Segunda parte", k=True)
     + titulo("Tu identidad en Instagram", top=380, size=80, width=1100)
-    + p("Bio, foto de perfil, colores, tipografías, subtítulos y portadas. Todo sale de Level Up: así tu Instagram y tu web parecen lo mismo.",
+    + p("Una bio pensada para que te encuentren y una estética mínima que se repite en todas las portadas y subtítulos. Todo sale de los colores y la tipografía de tu web.",
         128, 560, 1000, size=30, d=2, cls="", extra="color:#3A2F2F;line-height:1.35;")
     + foot(n),
     bg=ACENTO, color=INK,
 ))
 
 
-def perfil(x, y, w, foto_html, nombre, bio_html, d=0):
+def perfil(x, y, w, foto_css, nombre, bio_html, d=0):
     return (
         f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;padding:34px;border-radius:26px;background:#fff;'
         f'border:1px solid #E7E2DB;box-shadow:0 14px 40px rgba(0,0,0,.06);{POP}--d:{d}">'
-        f'<div style="display:flex;gap:26px;align-items:center">{foto_html}'
+        f'<div style="display:flex;gap:26px;align-items:center"><div style="width:120px;height:120px;border-radius:50%;flex:none;{foto_css}"></div>'
         f'<div><div style="font-size:24px;font-weight:600;color:{INK}">lucia_entrenadorapersonal</div>'
         f'<div style="font-size:17px;color:#555;margin-top:6px">517 publicaciones · 26,3 mil seguidores</div></div></div>'
         f'<div style="font-size:19px;font-weight:600;color:{INK};margin-top:22px">{nombre}</div>'
+        f'<div style="font-size:15px;color:#8A8580;margin-top:2px">Entrenador</div>'
         f'<div style="font-size:19px;line-height:1.5;color:{INK};margin-top:6px">{bio_html}</div>'
         f'<div style="font-size:18px;font-weight:600;color:#1E3A8A;margin-top:10px">🔗 levelup.luciaentrenadorapersonal.com</div></div>'
     )
-
-
-def circulo(dia, src_css, d=0):
-    return (f'<div style="width:{dia}px;height:{dia}px;border-radius:50%;flex:none;{src_css}"></div>')
 
 
 FOTO_HOY = "background:url(/pitch/level-up/marca/perfil-actual.png) center/cover no-repeat;"
 FOTO_NUEVA = f"background:#eee url({WEB}{FOTOS['risa']}) -{round(1800*.46) - 60}px -{round(1092*.30) - 74}px/1800px 1092px no-repeat;"
 FOTO_NUEVA_GRANDE = f"background:#eee url({WEB}{FOTOS['risa']}) -{round(2600*.46) - 210}px -{round(1577*.30) - 190}px/2600px 1577px no-repeat;"
 
-# ── Biografía ────────────────────────────────────────────────────────────
+# ── Biografía (SEO) ──────────────────────────────────────────────────────
 n += 1
 bio_hoy = ("🎓 Graduada en Ciencias del Deporte<br>💪 Especializada en entrenamiento femenino<br>"
            "✨ Founder of LEVELUPWORKOUT<br>🏡 Empieza desde cero<br>👇 PRUEBA 5 DÍAS GRATIS 🎁")
-bio_nueva = ("🎓 Graduada en Ciencias del Deporte<br>Te enseño a entrenar fuerza desde cero, en casa y en 20-30'<br>"
+bio_nueva = ("🎓 Graduada en Ciencias del Deporte<br>Entrenamiento de fuerza online, en casa y desde cero<br>"
              "✨ Founder de Level Up Workout<br>👇 Prueba 5 días gratis")
 add("bio", "Biografía", sec(
     FUENTES
-    + eyebrow("Identidad · Biografía")
-    + titulo("Tu bio, más clara", size=56)
+    + eyebrow("Identidad · Biografía y búsqueda")
+    + titulo("Una bio para que te encuentren", size=56)
     + label("Hoy", 128, 280, d=1, color="#8A8580")
-    + perfil(128, 320, 780, circulo(120, FOTO_HOY), "Lucía | Entrenadora Personal", bio_hoy, d=1)
+    + perfil(128, 320, 780, FOTO_HOY, "Lucía | Entrenadora Personal", bio_hoy, d=1)
     + label("Propuesta", 1012, 280, d=2)
-    + perfil(1012, 320, 780, circulo(120, FOTO_NUEVA), "Lucía | Entrenadora de fuerza para mujeres", bio_nueva, d=2)
+    + perfil(1012, 320, 780, FOTO_NUEVA, "Lucía | Entrenadora personal para mujeres", bio_nueva, d=2)
     + lista([
-        "<b>El nombre también se busca</b>: «entrenadora de fuerza para mujeres» te hace aparecer en esas búsquedas.",
-        "<b>Una frase que dice qué consigues</b> en vez de tres etiquetas sueltas. Sin mayúsculas gritando.",
-        "<b>Un solo enlace</b>, directo a la prueba gratis (147 de 150 caracteres).",
-    ], 128, 790, 1664, size=21, d=4, gap=8)
+        "<b>El nombre es lo que más se busca</b>: Instagram empareja la búsqueda con el texto del nombre de usuario y del nombre. «Entrenadora personal para mujeres» es lo que escribe tu clienta (41 de 64 caracteres).",
+        "<b>La bio con palabras clave</b>: fuerza, online, en casa, desde cero. Es lo que Instagram recomienda para salir en búsquedas (140 de 150 caracteres).",
+        "<b>Un solo enlace</b>, directo a la prueba gratis. Y las mismas palabras clave en la descripción de cada reel.",
+    ], 128, 790, 1664, size=20, d=4, gap=8)
     + foot(n),
 ))
 
@@ -440,7 +485,7 @@ add("fotoperfil", "Foto de perfil", sec(
     + f'<div class="abs pop" style="left:128px;top:320px;width:300px;height:300px;border-radius:50%;{FOTO_HOY}--d:1"></div>'
     + p("Hoy", 128, 640, 300, size=22, d=1, cls="muted", extra="text-align:center;font-weight:700;")
     + f'<div class="abs pop" style="left:128px;top:720px;width:60px;height:60px;border-radius:50%;{FOTO_HOY}--d:2"></div>'
-    + p("Así se ve en los comentarios y en historias: no se distingue quién eres.", 210, 724, 330, size=18, d=2, cls="muted")
+    + p("Así se ve en comentarios e historias: no se distingue quién eres.", 210, 724, 330, size=18, d=2, cls="muted")
     + f'<div class="abs pop" style="left:640px;top:280px;width:380px;height:380px;border-radius:50%;{FOTO_NUEVA_GRANDE}--d:2"></div>'
     + p("Ejemplo con una foto de tu web", 640, 680, 380, size=22, d=2, cls="rosa", extra="text-align:center;font-weight:700;")
     + f'<div class="abs pop" style="left:640px;top:720px;width:60px;height:60px;border-radius:50%;{FOTO_NUEVA}background-size:300px 182px;background-position:-{round(300*.46) - 30}px -{round(182*.30) - 32}px;--d:3"></div>'
@@ -456,51 +501,56 @@ add("fotoperfil", "Foto de perfil", sec(
     + foot(n),
 ))
 
-# ── Colores ──────────────────────────────────────────────────────────────
+# ── Estética: colores y tipografía ───────────────────────────────────────
 n += 1
 col = [
-    (NOCHE, "Azul noche", "#151F30", "Títulos, fondos de portada y texto. Es el azul de tu web.", "#fff"),
-    (MELO, "Melocotón", "#FFCB9A", "El acento: la palabra clave del título, etiquetas y detalles.", NOCHE),
-    (ROTO, "Blanco roto", "#F7F3EE", "Fondos limpios y texto sobre fotos oscuras.", NOCHE),
-    (SALVIA, "Salvia", "#6E7552", "El verde de tu esterilla. Para series de calma: movilidad, embarazo.", "#fff"),
+    (NOCHE, "Azul noche", "#151F30", "Texto y fondos sin foto. Es el azul de tu web.", "#fff"),
+    (MELO, "Melocotón", "#FFCB9A", "Solo para destacar: una palabra, un detalle.", NOCHE),
+    (ROTO, "Blanco roto", "#F7F3EE", "Texto sobre fotos y fondos limpios.", NOCHE),
 ]
 cc = ""
 for i, (c, nom, hx, uso, tinta) in enumerate(col):
-    x = 128 + i * 424
+    x = 128 + i * 300
     cc += (
-        f'<div class="abs pop" style="left:{x}px;top:290px;width:396px;height:380px;border-radius:26px;background:{c};'
-        f'border:1px solid #E7E2DB;--d:{i}"></div>'
-        + p(nom, x + 32, 560, 340, size=30, d=i + 1, cls="", extra=f"font-weight:800;color:{tinta};")
-        + p(hx, x + 32, 608, 340, size=20, d=i + 1, cls="", extra=f"color:{tinta};opacity:.8;letter-spacing:.06em;")
-        + p(uso, x + 4, 700, 380, size=21, d=i + 2)
+        f'<div class="abs pop" style="left:{x}px;top:300px;width:272px;height:300px;border-radius:24px;background:{c};border:1px solid #E7E2DB;--d:{i}"></div>'
+        + p(nom, x + 26, 500, 230, size=26, d=i + 1, cls="", extra=f"font-weight:800;color:{tinta};")
+        + p(hx, x + 26, 542, 230, size=18, d=i + 1, cls="", extra=f"color:{tinta};opacity:.8;letter-spacing:.06em;")
+        + p(uso, x + 4, 620, 264, size=19, d=i + 2)
     )
-add("colores", "Colores", sec(
-    eyebrow("Identidad · Colores")
-    + titulo("Cuatro colores, los de Level Up", size=56)
+add("estetica", "Colores y tipografía", sec(
+    FUENTES
+    + eyebrow("Identidad · Estética")
+    + titulo("Tres colores y una tipografía", size=56)
     + cc
-    + p("Regla sencilla: azul noche y blanco roto de base, melocotón solo para destacar. Nada de azules eléctricos ni contornos de colores en las portadas.",
-        128, 880, 1664, size=22, d=6, cls="muted")
+    + card(1060, 300, 732, 460, d=2)
+    + p("Tipografía única", 1100, 334, 660, size=18, d=3, cls="rosa", extra="font-weight:700;letter-spacing:.12em;text-transform:uppercase;")
+    + f'<p class="abs a" style="left:1100px;top:376px;width:660px;{POP}font-weight:700;font-size:96px;line-height:1;color:{NOCHE};--d:3">Poppins</p>'
+    + f'<p class="abs a" style="left:1100px;top:500px;width:660px;{POP}font-size:24px;line-height:1.5;color:{NOCHE};--d:4">'
+      f'<b style="font-weight:700">Bold</b> para títulos de portada<br><span style="font-weight:600">Semibold</span> para subtítulos<br>'
+      f'<span style="font-weight:500">Medium</span> para la etiqueta de la serie</p>'
+    + p("Es la misma de tu web, así Instagram y Level Up se ven como una sola marca. Gratuita (Google Fonts).",
+        1100, 660, 660, size=19, d=4, cls="muted")
+    + p("Fuera: contornos de colores, azules eléctricos, tipografías condensadas y mayúsculas en todo. Menos elementos, más reconocible.",
+        128, 860, 1664, size=22, d=6, cls="", extra="font-weight:700;")
     + foot(n),
 ))
 
-# ── Tipografías ──────────────────────────────────────────────────────────
+# ── Portadas ─────────────────────────────────────────────────────────────
 n += 1
-add("tipografias", "Tipografías", sec(
+add("plantillas", "Portadas", sec(
     FUENTES
-    + eyebrow("Identidad · Tipografías")
-    + titulo("Dos tipografías y ninguna más", size=56)
-    + card(128, 290, 812, 560, d=0)
-    + p("Títulos y subtítulos", 168, 326, 700, size=20, d=1, cls="rosa", extra="font-weight:700;letter-spacing:.12em;text-transform:uppercase;")
-    + f'<p class="abs a" style="left:168px;top:380px;width:740px;{POP}font-weight:800;font-size:92px;line-height:1;color:{NOCHE};--d:1">Poppins</p>'
-    + f'<p class="abs a" style="left:168px;top:500px;width:740px;{POP}font-weight:800;font-size:40px;line-height:1.1;color:{NOCHE};text-transform:uppercase;--d:2">Si no notas el glúteo, es esto</p>'
-    + f'<p class="abs a" style="left:168px;top:610px;width:740px;{POP}font-weight:500;font-size:26px;line-height:1.4;color:#3A3836;--d:2">Extra Bold en mayúsculas para portadas. Medium o Semibold para subtítulos. Es la misma de tu web.</p>'
-    + card(980, 290, 812, 560, d=1)
-    + p("Acento (una palabra como mucho)", 1020, 326, 700, size=20, d=2, cls="rosa", extra="font-weight:700;letter-spacing:.12em;text-transform:uppercase;")
-    + f'<p class="abs a" style="left:1020px;top:372px;width:740px;{PLAY}font-size:92px;line-height:1.05;color:{NOCHE};--d:2">Playfair</p>'
-    + f'<p class="abs a" style="left:1020px;top:500px;width:740px;{POP}font-weight:800;font-size:40px;line-height:1.1;color:{NOCHE};text-transform:uppercase;--d:3">3 cosas <span style="{PLAY}text-transform:none;font-weight:600;color:{ACENTO_TXT}">para</span> empezar</p>'
-    + f'<p class="abs a" style="left:1020px;top:610px;width:740px;{POP}font-weight:500;font-size:26px;line-height:1.4;color:#3A3836;--d:3">Cursiva elegante para una palabra suelta, como hacen @pau_inspirafit o @cescescola. Le quita lo «de gimnasio».</p>'
-    + p("Las dos son gratuitas (Google Fonts). Si tu editor no las tiene, se instalan en el móvil o se usan desde CapCut.",
-        128, 890, 1664, size=22, d=5, cls="muted")
+    + eyebrow("Identidad · Portadas")
+    + titulo("Una sola plantilla de portada", size=56)
+    + portada(128, 280, 290, "pared", "Si notas…", "Sentadilla sin glúteo", d=1)
+    + portada(448, 280, 290, "risa", "Mitos 35+", "¿Hidratos en la cena?", d=2)
+    + portada(768, 280, 290, "clienta", "Dentro de Level Up", "¿Una más barata?", d=3)
+    + portada(1088, 280, 290, None, "¿Te ha pasado?", "Mis 20 minutos", d=4, fondo=ROTO)
+    + lista([
+        "<b>Siempre igual</b>: foto tuya, el nombre de la serie en pequeño y un título de 2-4 palabras.",
+        "<b>Centrado y en la parte baja del recuadro 3:4</b>, que es lo que se ve en tu perfil.",
+        "<b>Poppins Bold en blanco</b>, sin cajas ni contornos.",
+        "<b>Sin foto buena</b>: fondo blanco roto y el texto en azul noche.",
+    ], 1420, 290, 372, size=20, d=5, gap=14)
     + foot(n),
 ))
 
@@ -510,9 +560,9 @@ sub_mock = (
     f'<div class="abs pop" style="left:1300px;top:150px;width:380px;height:676px;border-radius:26px;overflow:hidden;'
     f'background:#ddd url({WEB}{FOTOS["pared"]}) center/cover no-repeat;box-shadow:0 18px 44px rgba(21,31,48,.22);--d:2">'
     f'<div style="position:absolute;left:30px;right:30px;top:430px;text-align:center;{POP}font-weight:600;font-size:27px;line-height:1.25;'
-    f'color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.55)">cadera atrás y <span style="background:{MELO};color:{NOCHE};padding:0 8px;border-radius:6px;text-shadow:none">baja más</span></div>'
+    f'color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.55)">lleva la cadera atrás<br>y <span style="color:{MELO}">baja un poco más</span></div>'
     f'<div style="position:absolute;left:0;right:0;bottom:0;height:120px;background:repeating-linear-gradient(45deg,rgba(255,255,255,.18) 0 10px,rgba(255,255,255,0) 10px 20px)"></div>'
-    f'<div style="position:absolute;left:0;right:0;bottom:126px;text-align:center;font-size:13px;color:#fff;opacity:.85;{POP}">zona que tapa Instagram</div></div>'
+    f'<div style="position:absolute;left:0;right:0;bottom:126px;text-align:center;font-size:13px;color:#fff;opacity:.85;{POP}">zona que tapan los botones</div></div>'
 )
 add("subtitulos", "Subtítulos", sec(
     FUENTES
@@ -520,31 +570,48 @@ add("subtitulos", "Subtítulos", sec(
     + titulo("Tus subtítulos", size=56)
     + lista([
         "<b>Poppins Semibold, blanco</b>, con una sombra suave para que se lea sobre cualquier fondo.",
-        "<b>Una palabra clave por frase en melocotón</b>, con fondo, no en color suelto.",
+        "<b>Las palabras clave en melocotón</b>, sin cajas de fondo.",
         "<b>Máximo 2 líneas y 5-6 palabras por línea</b>, en minúscula.",
         "<b>Centrados, un poco por debajo de la mitad</b>: ni encima de tu cara ni en la zona que tapan los botones de Instagram.",
-        "<b>Siempre</b>: el 80 % ve los reels sin sonido.",
+        "<b>Siempre puestos</b>: así se entiende el vídeo aunque se vea sin sonido.",
     ], 128, 300, 960, size=25, d=2, gap=22)
     + sub_mock
     + foot(n),
 ))
 
-# ── Portadas ─────────────────────────────────────────────────────────────
+# ── Fuentes ──────────────────────────────────────────────────────────────
 n += 1
-add("plantillas", "Portadas", sec(
-    FUENTES
-    + eyebrow("Identidad · Portadas")
-    + titulo("Una portada por serie", size=56)
-    + movil(128, 290, 300, "pared", "center", "Nivel 0", "Sentadilla", "sin glúteo?", d=1)
-    + movil(478, 290, 300, "risa", "center", "Mitos 35+", "¿Cenar hidratos", "engorda?", d=2)
-    + movil(828, 290, 300, "clienta", "center", "Dentro de Level Up", "¿Por qué no", "una más barata?", d=3)
-    + movil(1178, 290, 300, None, "center", "¿Te ha pasado?", "Mis 20 minutos", "para entrenar", d=4, fondo=NOCHE)
-    + lista([
-        "<b>Etiqueta de la serie</b> arriba, siempre en el mismo sitio.",
-        "<b>Título en 2 líneas</b>: la segunda en melocotón.",
-        "<b>Dentro del recuadro central</b>: el perfil recorta la portada a 3:4.",
-        "<b>Foto tuya mirando a cámara</b>, o fondo azul noche si no hay foto buena.",
-    ], 1520, 300, 300, size=20, d=5, gap=14)
+fts = [
+    ("Qué mide Instagram", "Adam Mosseri, responsable de Instagram (2025): las tres señales que más pesan son tiempo de visionado, me gusta por alcance y envíos por alcance. Los envíos, sobre todo para llegar a gente que no te sigue.",
+     "<a href=\"https://www.socialmediatoday.com/news/instagram-shares-algorithm-2025/738034/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">socialmediatoday.com</a> · <a href=\"https://www.searchenginejournal.com/instagram-algorithm-shift-why-sends-matter-more-than-ever/521389/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">searchenginejournal.com</a>"),
+    ("Los primeros segundos", "Guías de Instagram para creadores: los primeros segundos de un vídeo «lo deciden todo». Tutoriales y rutinas, entre 15 y 60 segundos.",
+     "<a href=\"https://socialmediatoday.com/news/instagram-shares-tips-on-video-creation/827172\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">socialmediatoday.com (guía de Instagram)</a> · <a href=\"https://www.socialmediatoday.com/news/instagram-shares-reels-creation-tips-in-new-guide/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">guía de reels</a>"),
+    ("Cuánto publicar", "Investigación interna de Instagram (cuenta @creators): los creadores que más crecen publican más de 10 reels al mes.",
+     "<a href=\"https://buffer.com/resources/instagram-reels-instructions-and-ideas-for-small-businesses/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">buffer.com</a>"),
+    ("Búsqueda", "Blog oficial de Instagram: la búsqueda empareja texto. Recomienda un nombre adecuado y palabras clave en la bio y en las descripciones.",
+     "<a href=\"https://about.instagram.com/blog/announcements/break-down-how-instagram-search-works/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">about.instagram.com · «Breaking Down How Instagram Search Works»</a>"),
+    ("Contenido original", "Instagram premia el contenido original en recomendaciones: el 75 % de lo que recomienda en EE. UU. ya es original (abril de 2026).",
+     "<a href=\"https://creators.instagram.com/blog/rewarding-original-creators-on-instagram\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">creators.instagram.com</a>"),
+    ("Perfil en 3:4", "Desde 2025 el perfil muestra las portadas en vertical 3:4: el título tiene que caber en ese recorte.",
+     "<a href=\"https://petapixel.com/2025/01/23/instagram-swaps-square-profile-grids-for-rectangles/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">petapixel.com</a> · <a href=\"https://www.kapwing.com/resources/instagrams-new-grid-layout-size-and-dimensions-2025/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">kapwing.com</a>"),
+    ("Tus propios datos", "Tu informe de mayo a octubre: el reel de la piscina (104K) es el que más seguidoras trajo (511) y más se guardó (1.690).",
+     "Informe de Instagram que nos pasaste"),
+    ("Datos de los guiones", "Pérdida de músculo desde los 30 (3-5 % por década): Oficina de Salud de la Mujer del Gobierno de EE. UU. Fuerza 2 días a la semana y 150 min en el embarazo: OMS.",
+     "<a href=\"https://www.womenshealth.gov/sarcopenia\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">womenshealth.gov</a> · <a href=\"https://www.paho.org/es/noticias/4-12-2020-elige-vivir-sano-opsoms-chile-presentaron-nuevas-recomendaciones-sobre-actividad\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">OMS</a>"),
+]
+fh = ""
+for i, (t, txt, src) in enumerate(fts):
+    col_, fila = i % 2, i // 2
+    x, y = 128 + col_ * 852, 270 + fila * 176
+    fh += (
+        p(t, x, y, 790, size=22, d=fila + 1, cls="", extra="font-weight:800;")
+        + p(txt, x, y + 34, 790, size=18, d=fila + 1, extra="line-height:1.4;")
+        + p(src, x, y + 116, 790, size=15, d=fila + 1, cls="rosa", extra="font-weight:700;")
+    )
+add("fuentes", "De dónde sale todo esto", sec(
+    eyebrow("Para que no sea humo")
+    + titulo("De dónde sale todo esto", size=56)
+    + fh
     + foot(n),
 ))
 
@@ -554,7 +621,7 @@ add("cierre", "Cierre", sec(
     foto(1180, 0, 740, 1080, "salto", d=0, pos="center", radius=0)
     + '<div class="abs" style="left:1180px;top:0;width:220px;height:1080px;background:linear-gradient(90deg,#FFFFFF,rgba(255,255,255,0))"></div>'
     + titulo("Ahora, a grabar", top=330, size=80, width=1040)
-    + p("Empieza por la bio, la foto y la plantilla de portada. Con eso listo, los guiones de esta semana.",
+    + p("Primero la bio, la foto y la plantilla de portada. Con eso listo, los guiones de esta semana.",
         128, 540, 960, size=30, d=2, cls="rosa", extra="line-height:1.35;font-weight:700;")
     + '<div class="abs a" style="left:128px;top:760px;font-size:28px;line-height:1.5;--d:3">'
     '<p style="font-weight:800">Jandro Martín · Maen Studios</p>'
@@ -566,7 +633,7 @@ add("cierre", "Cierre", sec(
 out = Path("app/pitch/level-up-propuestas/diapos.ts")
 out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(
-    "/**\n * Guiones desarrollados e identidad visual para Level Up Workout (nov 2026).\n"
+    "/**\n * Guiones estratégicos e identidad de Instagram para Level Up Workout (nov 2026).\n"
     " * Generado con scripts/build-level-up-propuestas.py: si cambia el contenido,\n"
     " * se edita el script y se vuelve a ejecutar.\n */\n\n"
     'import type { DiapoHtml } from "../maen-plan-100k/diapos";\n\n'
