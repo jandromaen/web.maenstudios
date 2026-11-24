@@ -5,7 +5,7 @@ import SiteFooter from "./components/SiteFooter";
 import HomeHero from "./components/HomeHero";
 import CasesGrid from "./components/CasesGrid";
 import { FaqJsonLd, ItemListJsonLd, ServiceJsonLd } from "./components/JsonLd";
-import { clients, topByCommunity } from "./clients";
+import { casosDeLaHome, clients } from "./clients";
 import { posts } from "./blog-data";
 import { EMAIL, faqs, marqueeWords } from "./site-data";
 import { createPageMetadata, OFFICES } from "./seo-config";
@@ -31,17 +31,20 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
-/* La home enseña solo las seis marcas con más comunidad: es la carta de
-   presentación, y ahí pesan más los nombres grandes que el catálogo entero.
-   Las mismas seis alimentan las dos secciones, para no mandar señales
-   distintas sobre qué marcas nos representan. */
-const featuredClients = topByCommunity(6, { conReel: true });
+/* Todas las marcas con reel, en el orden editorial de la home: la primera fila
+   y de la séptima en adelante van por comunidad, y la segunda fila está
+   elegida a mano en clients.ts. Se recortan los campos a lo que pinta la
+   tarjeta: mandar la ficha entera de dos docenas de marcas engordaría la
+   página para no usarlo. */
+const casosHome = casosDeLaHome();
 
-/* Todas las marcas con reel, en el mismo orden. Las seis primeras son las de
-   arriba; el resto es lo que descubre el botón de «mostrar más». Se recortan
-   los campos a lo que pinta la tarjeta: mandar la ficha entera de dos docenas
-   de marcas engordaría la página para no usarlo. */
-const casosDeLaRejilla = topByCommunity(100, { conReel: true }).map((c) => ({
+/* La home enseña solo seis marcas como carta de presentación. Son las seis
+   primeras de la rejilla, no una selección aparte: si se tocara el orden de
+   arriba y esto siguiera yendo por comunidad, las dos secciones mandarían
+   señales distintas sobre qué marcas nos representan. */
+const featuredClients = casosHome.slice(0, 6);
+
+const casosDeLaRejilla = casosHome.map((c) => ({
   slug: c.slug,
   name: c.name,
   tagline: c.tagline,

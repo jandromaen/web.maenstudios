@@ -412,8 +412,7 @@ export const clients: Client[] = [
   // El copy de estas seis sale de material propio (decks, briefings, informes y
   // actas de reunión) o de fuente pública verificable, no de suposiciones: lo
   // que no está confirmado se queda fuera.
-  // Cinco de las seis ya tienen reel y suben a la rejilla de vídeo. Tinto sigue
-  // en el índice de /clientes hasta que entre el suyo.
+  // Las seis tienen ya reel, así que todas salen en la rejilla de vídeo.
   // Los handles y las webs están sacados de las webs oficiales de cada marca,
   // no del buscador: el de Parfumerie salía mal escrito en los resultados
   // («stravisky», sin la n) y grupconfiteria.com lo desmiente.
@@ -483,12 +482,14 @@ export const clients: Client[] = [
   {
     slug: "tinto",
     name: "Tinto",
+    previewVideo: "/clients/tinto/preview.mp4",
+    poster: "/clients/tinto/poster.jpg",
     tagline: "Restaurante · Barcelona",
     description:
       "Llevamos la comunicación de Tinto en Barcelona desde antes de que abriera: empezamos a construirle público en septiembre para una apertura en octubre de 2026. Dos reels y dos publicaciones cada semana en Instagram, con producción propia y community management.",
     url: "",
     sector: "Gastronomía",
-    videos: [],
+    videos: [{ src: "/clients/tinto/reel.mp4", title: "Reel Tinto" }],
   },
   {
     slug: "dr-stravinsky",
@@ -547,6 +548,36 @@ export function topByCommunity(n: number, { conReel = false } = {}): Client[] {
     .filter((c) => (conReel ? Boolean(c.previewVideo) : true))
     .sort((a, b) => communitySize(b) - communitySize(a))
     .slice(0, n);
+}
+
+/**
+ * Las tres marcas que ocupan la SEGUNDA fila de la rejilla de la home.
+ *
+ * La rejilla va por comunidad, pero la segunda fila está elegida a mano: son
+ * las que queremos enseñar ahora aunque no sean las de más seguidores. La
+ * primera fila se deja al orden natural —ahí mandan los números grandes— y de
+ * la séptima en adelante se vuelve a la comunidad.
+ *
+ * El orden de esta lista es el orden en que salen, de izquierda a derecha.
+ */
+const SEGUNDA_FILA_HOME = ["gota", "dr-stravinsky", "focacha"];
+
+/**
+ * Casos de la home, ya ordenados: comunidad arriba y abajo, elección nuestra
+ * en medio.
+ *
+ * Si una de las tres fijadas se queda sin reel o sale del portfolio, se la
+ * salta y la fila la completa el orden normal, así que la rejilla nunca queda
+ * coja por una marca que ya no está.
+ */
+export function casosDeLaHome(): Client[] {
+  const porComunidad = topByCommunity(100, { conReel: true });
+  const fijadas = SEGUNDA_FILA_HOME.map((slug) =>
+    porComunidad.find((c) => c.slug === slug),
+  ).filter((c): c is Client => Boolean(c));
+
+  const resto = porComunidad.filter((c) => !fijadas.includes(c));
+  return [...resto.slice(0, 3), ...fijadas, ...resto.slice(3)];
 }
 
 /**
