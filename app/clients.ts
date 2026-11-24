@@ -408,6 +408,97 @@ export const clients: Client[] = [
       "/clients/gota/fotos/4.jpg",
     ],
   },
+  // ── Cuentas de 2026 ───────────────────────────────────────────────────────
+  // El copy de estas seis sale de material propio (decks, briefings, informes y
+  // actas de reunión) o de fuente pública verificable, no de suposiciones: lo
+  // que no está confirmado se queda fuera.
+  // De momento solo Flamenco de Leones tiene reel, así que es la única que sube
+  // a la rejilla de vídeo; las otras cinco salen en el índice de /clientes y en
+  // su ficha hasta que entre su vídeo.
+  // Sin `community` a propósito: los seguidores de cada una están en los KPI
+  // del Drive, no verificados aquí, y un número inventado es peor que ninguno.
+  {
+    slug: "libertine-blends",
+    name: "Libertine Blends",
+    logo: "/pitch/libertine-kickoff/logo-negro.png",
+    tagline: "Cócteles en lata · ready to drink",
+    description:
+      "Llevamos el social media de Libertine Blends, marca de cócteles ready-to-drink nacida en Barcelona. Instagram y TikTok con dos reels y dos piezas estáticas cada semana, una jornada de rodaje al mes y trabajo con creadores. El rodaje se hace en Casa Bonay y sus alrededores: donde nace la marca, para que la ciudad forme parte del producto.",
+    url: "",
+    sector: "Bebidas",
+    videos: [],
+    photos: [
+      "/pitch/libertine-kickoff/cuatro-latas.jpg",
+      "/pitch/libertine-kickoff/latas-hielo.jpg",
+      "/pitch/libertine-kickoff/caja-bellini.jpg",
+      "/pitch/libertine-kickoff/bolsillo.jpg",
+    ],
+  },
+  {
+    slug: "don-lay",
+    name: "Don Lay",
+    logo: "/pitch/donlay-calendario/logo-negro.svg",
+    instagram: "donlayrestaurante",
+    tagline: "Cocina china de producto · Barcelona",
+    description:
+      "Contenido para Don Lay, restaurante de cocina china en Barcelona. Dim sum, pato laqueado y el fuego del wok grabados en su propia sala, con calendario mensual, reels y carruseles, y un informe de rendimiento que decide qué se cuenta el mes siguiente.",
+    url: "",
+    sector: "Gastronomía",
+    videos: [],
+    photos: [
+      "/pitch/donlay-briefing/donlay-dimsum-cesta.jpg",
+      "/pitch/donlay-briefing/donlay-wok-fuego.jpg",
+      "/pitch/donlay-briefing/donlay-sala-lamparas.jpg",
+      "/pitch/donlay-briefing/donlay-sala-reservado.jpg",
+      "/pitch/donlay-briefing/donlay-bar-arbol.jpg",
+      "/pitch/donlay-briefing/donlay-arbol-rojo.jpg",
+    ],
+  },
+  {
+    slug: "flamenco-de-leones",
+    name: "Flamenco de Leones",
+    instagram: "flamencodeleones",
+    previewVideo: "/clients/flamenco-de-leones/preview.mp4",
+    poster: "/clients/flamenco-de-leones/poster.jpg",
+    tagline: "Tablao y cena junto a la Puerta de Alcalá · Madrid",
+    description:
+      "Producimos el contenido de Flamenco de Leones, el tablao de Ramses District junto a la Puerta de Alcalá, que recupera la tradición del café cantante en el centro de Madrid: espectáculo y mesa como una sola experiencia, de martes a sábado. Rodaje mensual con más de una cámara, cuatro o cinco reels y entre ocho y nueve estáticos al mes, calendario a principios de mes e informe del anterior para decidir qué se cuenta.",
+    url: "",
+    sector: "Ocio y espectáculos",
+    videos: [
+      { src: "/clients/flamenco-de-leones/reel.mp4", title: "Reel Flamenco de Leones" },
+    ],
+  },
+  {
+    slug: "tinto",
+    name: "Tinto",
+    tagline: "Restaurante · Barcelona",
+    description:
+      "Llevamos la comunicación de Tinto en Barcelona desde antes de que abriera: empezamos a construirle público en septiembre para una apertura en octubre de 2026. Dos reels y dos publicaciones cada semana en Instagram, con producción propia y community management.",
+    url: "",
+    sector: "Gastronomía",
+    videos: [],
+  },
+  {
+    slug: "dr-stravinsky",
+    name: "Dr. Stravinsky",
+    tagline: "Coctelería de autor con alma de perfumería",
+    description:
+      "Contenido para Dr. Stravinsky, coctelería construida como una perfumería: cada rincón, cada objeto y cada trago forman parte de la misma historia, la del perfumista que no buscaba el aroma perfecto sino capturar un instante. Producción mensual e informe de resultados cada mes.",
+    url: "",
+    sector: "Coctelería",
+    videos: [],
+  },
+  {
+    slug: "parfumerie",
+    name: "Parfumerie",
+    tagline: "Coctelería · fotografía analógica",
+    description:
+      "Social media de Parfumerie, con una línea visual que se rodó en fotografía analógica —carrete Kodak Gold— para darle el grano y el color que la marca pide. Producción mensual, calendario e informe de KPIs cada mes.",
+    url: "",
+    sector: "Coctelería",
+    videos: [],
+  },
 ];
 
 export function getClient(slug: string): Client | undefined {
