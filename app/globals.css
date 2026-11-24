@@ -4385,9 +4385,24 @@ h3,
 }
 
 @media (min-width: 900px) {
+  /* Centrado en su columna y nunca más alto que la ventana.
+     Con `justify-self: end` el reel se pegaba al borde derecho y dejaba un
+     hueco muerto entre el texto y él; y con solo `max-width` un 9/16 de 340px
+     pide 604px de alto, así que en cualquier portátil se salía por debajo del
+     pliegue. El tope va sobre el ANCHO y no sobre el alto a propósito: con
+     `max-height` la caja quedaba en 340×551, que ya no es 9:16, y el `cover`
+     recortaba el reel por arriba y por abajo. Limitando el ancho, el
+     `aspect-ratio` recalcula el alto y la pieza se ve entera y en proporción.
+
+     Los 280px que se descuentan son lo que el reel tiene por encima sin hacer
+     scroll (cabecera, enlace de vuelta y margen de la rejilla: ~253px) más un
+     respiro abajo. En pantallas altas no llega a morder, porque 604px de alto
+     natural caben de sobra; solo actúa en portátiles, que es donde se salía.
+     La línea en `vh` es el repuesto para navegadores sin `svh`. */
   .case-hero-media {
-    max-width: 340px;
-    justify-self: end;
+    width: min(340px, 100%, calc((100vh - 280px) * 9 / 16));
+    width: min(340px, 100%, calc((100svh - 280px) * 9 / 16));
+    justify-self: center;
     position: sticky;
     top: 96px;
   }
