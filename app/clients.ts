@@ -412,9 +412,9 @@ export const clients: Client[] = [
   // El copy de estas seis sale de material propio (decks, briefings, informes y
   // actas de reunión) o de fuente pública verificable, no de suposiciones: lo
   // que no está confirmado se queda fuera.
-  // De momento solo Flamenco de Leones tiene reel, así que es la única que sube
-  // a la rejilla de vídeo; las otras cinco salen en el índice de /clientes y en
-  // su ficha hasta que entre su vídeo.
+  // Flamenco de Leones, Dr. Stravinsky y Parfumerie ya tienen reel, así que
+  // suben a la rejilla de vídeo; Libertine, Don Lay y Tinto salen en el índice
+  // de /clientes y en su ficha hasta que entre su vídeo.
   // Sin `community` a propósito: los seguidores de cada una están en los KPI
   // del Drive, no verificados aquí, y un número inventado es peor que ninguno.
   {
@@ -482,22 +482,30 @@ export const clients: Client[] = [
   {
     slug: "dr-stravinsky",
     name: "Dr. Stravinsky",
+    previewVideo: "/clients/dr-stravinsky/preview.mp4",
+    poster: "/clients/dr-stravinsky/poster.jpg",
     tagline: "Coctelería de autor con alma de perfumería",
     description:
-      "Contenido para Dr. Stravinsky, coctelería construida como una perfumería: cada rincón, cada objeto y cada trago forman parte de la misma historia, la del perfumista que no buscaba el aroma perfecto sino capturar un instante. Producción mensual e informe de resultados cada mes.",
+      "Contenido para Dr. Stravinsky, coctelería construida como una perfumería: cada puerta, cada rincón y cada trago forman parte de la misma historia, la de Grigori Stravinsky, el perfumista que no buscaba el aroma perfecto sino capturar un instante. Rodamos la noche tal como se vive dentro del local, con producción mensual e informe de resultados cada mes.",
     url: "",
     sector: "Coctelería",
-    videos: [],
+    videos: [
+      { src: "/clients/dr-stravinsky/reel.mp4", title: "Reel Dr. Stravinsky" },
+    ],
   },
   {
     slug: "parfumerie",
     name: "Parfumerie",
-    tagline: "Coctelería · fotografía analógica",
+    previewVideo: "/clients/parfumerie/preview.mp4",
+    poster: "/clients/parfumerie/poster.jpg",
+    tagline: "Donde nacen los perfumes de Grigori",
     description:
-      "Social media de Parfumerie, con una línea visual que se rodó en fotografía analógica —carrete Kodak Gold— para darle el grano y el color que la marca pide. Producción mensual, calendario e informe de KPIs cada mes.",
+      "Social media de Parfumerie, el taller donde toman forma los perfumes de Grigori y que comparte universo con Dr. Stravinsky. Contamos el oficio desde dentro —el lugar donde ocurre la magia— con una línea visual que incluye fotografía analógica en carrete Kodak Gold, por el grano y el color que la marca pide. Producción mensual, calendario e informe de KPIs cada mes.",
     url: "",
     sector: "Coctelería",
-    videos: [],
+    videos: [
+      { src: "/clients/parfumerie/reel.mp4", title: "Reel Parfumerie" },
+    ],
   },
 ];
 
