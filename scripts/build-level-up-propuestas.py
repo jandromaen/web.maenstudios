@@ -25,20 +25,26 @@ FUENTES = ("<style>@import url('https://fonts.googleapis.com/css2?family=Poppins
 POP = "font-family:'Poppins',sans-serif;"
 
 
+def img_url(k):
+    """Foto de portada: fotograma de sus reels (gNN) o foto de su web."""
+    return f"/pitch/level-up/portadas-src/{k}.jpg" if k.startswith("g") else f"{WEB}{FOTOS[k]}"
+
+
 def portada(x, y, w, k, serie, titulo_txt, d=0, fondo=None, pos="center"):
-    """Plantilla minimalista de portada (9:16): foto, serie pequeña y título corto."""
+    """Plantilla mínima de portada (9:16): foto en color de Lucía, serie pequeña y
+    título blanco centrado en el centro exacto, para que se vea en el recorte 3:4 del perfil."""
     h = round(w * 16 / 9)
     fondo_css = (f"background:{fondo};" if fondo
-                 else f"background:#ddd url({WEB}{FOTOS[k]}) {pos}/cover no-repeat;")
+                 else f"background:#ddd url({img_url(k)}) {pos}/cover no-repeat;")
     tinta = NOCHE if fondo == ROTO else "#fff"
-    sombra = "" if fondo else "text-shadow:0 2px 14px rgba(0,0,0,.45);"
+    sombra = "" if fondo else "text-shadow:0 2px 16px rgba(0,0,0,.55);"
     return (
         f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:20px;overflow:hidden;'
         f'{fondo_css}box-shadow:0 16px 40px rgba(21,31,48,.18);--d:{d}">'
-        + ("" if fondo else '<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,31,48,0) 45%,rgba(21,31,48,.45) 100%)"></div>')
-        + f'<div style="position:absolute;left:{round(w*.1)}px;right:{round(w*.1)}px;top:{round(h*.58)}px;text-align:center;{POP}{sombra}color:{tinta}">'
-          f'<div style="font-size:{round(w*.034)}px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.85">{serie}</div>'
-          f'<div style="font-size:{round(w*.085)}px;font-weight:700;line-height:1.08;margin-top:{round(w*.03)}px">{titulo_txt}</div></div>'
+        + ("" if fondo else '<div style="position:absolute;inset:0;background:rgba(21,31,48,.18)"></div>')
+        + f'<div style="position:absolute;left:{round(w*.08)}px;right:{round(w*.08)}px;top:50%;transform:translateY(-50%);text-align:center;{POP}{sombra}color:{tinta}">'
+          f'<div style="font-size:{round(w*.034)}px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.9">{serie}</div>'
+          f'<div style="font-size:{round(w*.095)}px;font-weight:700;line-height:1.08;margin-top:{round(w*.03)}px">{titulo_txt}</div></div>'
         + "</div>"
     )
 
@@ -497,6 +503,8 @@ LUG = [
     ("recibidor", "Puerta de madera del recibidor."),
     ("ladrillo", "Porche de ladrillo, el mismo fondo que en Mitos 35+."),
 ]
+for g, im in zip(G, ["g01","g02","g03","pared","g05","g06","g07","g08","g09","g10","g11","g12","mat","risa","g15","g16","g17","g18","clienta"]):
+    g["foto"] = im
 for g, (k, t) in zip(G, LUG):
     g["lugar"], g["lugar_txt"] = k, t
 
@@ -696,14 +704,14 @@ add("plantillas", "Portadas", sec(
     + eyebrow("Identidad · Portadas")
     + titulo("Una sola plantilla de portada", size=56)
     + portada(128, 280, 290, "pared", "Si notas…", "Sentadilla sin glúteo", d=1)
-    + portada(448, 280, 290, "risa", "Mitos 35+", "¿Hidratos en la cena?", d=2)
+    + portada(448, 280, 290, "g12", "Mitos 35+", "Fuerza después de los 35", d=2)
     + portada(768, 280, 290, "clienta", "Dentro de Level Up", "¿Una más barata?", d=3)
-    + portada(1088, 280, 290, None, "¿Te ha pasado?", "Mis 20 minutos", d=4, fondo=ROTO)
+    + portada(1088, 280, 290, "g17", "¿Te ha pasado?", "Mis 20 minutos", d=4)
     + lista([
         "<b>Siempre igual</b>: foto tuya, el nombre de la serie en pequeño y un título de 2-4 palabras.",
-        "<b>Centrado y en la parte baja del recuadro 3:4</b>, que es lo que se ve en tu perfil.",
+        "<b>Título en el centro exacto</b>: así se ve entero en el recorte 3:4 de tu perfil.",
         "<b>Poppins Bold en blanco</b>, sin cajas ni contornos.",
-        "<b>Sin foto buena</b>: fondo blanco roto y el texto en azul noche.",
+        "<b>Siempre una persona</b>: tú, tu cuerpo o una clienta. Fotos en color y nada de imágenes de stock.",
     ], 1420, 290, 372, size=20, d=5, gap=14)
     + foot(n),
 ))
@@ -770,7 +778,7 @@ add("fuentes", "De dónde sale todo esto", sec(
 # ── Cierre ───────────────────────────────────────────────────────────────
 n += 1
 add("cierre", "Cierre", sec(
-    foto(1180, 0, 740, 1080, "salto", d=0, pos="center", radius=0)
+    f'<div class="abs" style="left:1180px;top:0;width:740px;height:1080px;background:url(/pitch/level-up/portadas-src/g16.jpg) center/cover no-repeat"></div>'
     + '<div class="abs" style="left:1180px;top:0;width:220px;height:1080px;background:linear-gradient(90deg,#FFFFFF,rgba(255,255,255,0))"></div>'
     + titulo("Ahora, a grabar", top=330, size=80, width=1040)
     + p("Primero la bio, la foto y la plantilla de portada. Con eso listo, los guiones de esta semana.",
