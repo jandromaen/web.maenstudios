@@ -27,6 +27,8 @@ POP = "font-family:'Poppins',sans-serif;"
 
 def img_url(k):
     """Foto de portada: fotograma de sus reels (gNN) o foto de su web."""
+    if k == "pasta":  # foto de stock (Unsplash, Bruna Branco): solo para la portada de hidratos
+        return "https://images.unsplash.com/photo-1546549032-9571cd6b27df?fm=jpg&q=70&w=900"
     return f"/pitch/level-up/portadas-src/{k}.jpg" if k.startswith("g") else f"{WEB}{FOTOS[k]}"
 
 
@@ -503,7 +505,7 @@ LUG = [
     ("recibidor", "Puerta de madera del recibidor."),
     ("ladrillo", "Porche de ladrillo, el mismo fondo que en Mitos 35+."),
 ]
-for g, im in zip(G, ["g01","g02","g03","pared","g05","g06","g07","g08","g09","g10","g11","g12","mat","risa","g15","g16","g17","g18","clienta"]):
+for g, im in zip(G, ["g01","g02","g03","pared","g05","g06","g07","g08","g09","g10","g11","g12","mat","pasta","g15","g16","g17","g18","clienta"]):
     g["foto"] = im
 for g, (k, t) in zip(G, LUG):
     g["lugar"], g["lugar_txt"] = k, t
