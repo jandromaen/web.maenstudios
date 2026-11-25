@@ -15,7 +15,7 @@ from pathlib import Path
 _src = Path("scripts/build-level-up-contenido.py").read_text(encoding="utf-8")
 exec(_src.split("\n# ── 1. Portada")[0])
 
-OMITIR = set()  # aquí no se omite ninguna diapositiva
+OMITIR = {"bio"}  # la bio antigua la sustituye la diapositiva «bios» del principio
 NOCHE = "#151F30"      # azul noche de la web de Level Up
 MELO = "#FFCB9A"       # melocotón de la web
 ROTO = "#F7F3EE"       # blanco roto
@@ -89,6 +89,46 @@ add("portada", "Guiones e identidad", sec(
     + p("Tus ideas convertidas en guiones completos: gancho, lo que dices segundo a segundo, texto en pantalla, cierre y descripción. Y una bio, una foto y una estética que se repiten siempre.",
         128, 560, 860, size=28, d=3, cls="", extra="font-weight:800;line-height:1.3;")
     + p("Jandro Martín · noviembre de 2026", 128, 820, 700, size=22, d=4, cls="muted")
+    + foot(n),
+))
+
+# ── 4 propuestas de biografía (inspiradas en @marthafit_healthymom) ──────
+n += 1
+BIOS = [
+    ("Calcada a Marta", "Lucía García | Entrenamiento de fuerza para mujeres",
+     "Consigo que mujeres sin tiempo entrenen fuerza en casa, desde cero y en 20-30' 🏡 +[X] años entrenando a mujeres reales<br>👇 Prueba 5 días gratis"),
+    ("Mujeres +35", "Lucía García | Fuerza para mujeres +35",
+     "Entrena fuerza en casa a partir de los 35, aunque nunca lo hayas hecho 💪<br>🎓 Graduada en Ciencias del Deporte<br>👇 5 días gratis en Level Up"),
+    ("Constancia", "Lucía García | Entrenadora personal online",
+     "Para mujeres que siempre empiezan y lo dejan: un plan por niveles para entrenar fuerza en casa y no volver a parar<br>👇 Pruébalo 5 días gratis"),
+    ("Madre y entrenadora", "Lucía García | Entrenamiento de fuerza en casa",
+     "Madre, entrenadora y graduada en Ciencias del Deporte. Te enseño a entrenar fuerza en casa en 20-30'<br>👇 Empieza con 5 días gratis"),
+]
+bh = (
+    f'<div class="abs pop" style="left:128px;top:262px;width:1664px;padding:18px 26px;border-radius:16px;background:{ROTO};--d:1">'
+    f'<span style="font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:{ACENTO_TXT}">La referencia · @marthafit_healthymom · 240K</span><br>'
+    f'<span style="font-size:19px;color:{INK};line-height:1.45"><b>Marta Pérez | Entrenamiento de fuerza. Pérdida de grasa</b> — '
+    f'«Consigo que mujeres estresadas y sin tiempo entrenen fuerza de forma constante, antes de que empiece el caos del día 👩‍💻 +12 años +3000 mujeres 👇 Aquí» + enlace</span><br>'
+    f'<span style="font-size:17px;color:#4A4744">Funciona por tres cosas: el nombre dice lo que haces (y se busca), una sola frase con a quién ayuda y qué consigue, y una prueba con números antes del enlace.</span></div>'
+)
+for i, (tag, nombre, bio) in enumerate(BIOS):
+    col_, fila = i % 2, i // 2
+    x, y = 128 + col_ * 852, 440 + fila * 250
+    bh += (
+        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:812px;height:226px;padding:24px 28px;box-sizing:border-box;border-radius:20px;'
+        f'background:#fff;border:1px solid #E7E2DB;box-shadow:0 10px 30px rgba(0,0,0,.05);{POP}--d:{i + 2}">'
+        f'<div style="font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:{ACENTO_TXT}">0{i + 1} · {tag}</div>'
+        f'<div style="font-size:19px;font-weight:600;color:{INK};margin-top:8px">{nombre}</div>'
+        f'<div style="font-size:18px;line-height:1.45;color:{INK};margin-top:6px">{bio}</div>'
+        f'<div style="font-size:16px;font-weight:600;color:#1E3A8A;margin-top:6px">🔗 levelup.luciaentrenadorapersonal.com</div></div>'
+    )
+add("bios", "4 propuestas de biografía", sec(
+    FUENTES
+    + eyebrow("Lo primero que cambiamos")
+    + titulo("Tu bio: 4 propuestas", size=56)
+    + bh
+    + p("Todas caben en 150 caracteres y el nombre en 64. En la 01, cambia [X] por tus años de experiencia reales. El enlace, directo a la prueba gratis.",
+        128, 950, 1664, size=19, d=7, cls="muted")
     + foot(n),
 ))
 
