@@ -139,6 +139,52 @@ add("anatomia", "Anatomía de un guion", sec(
     + foot(n),
 ))
 
+# ── Tu casa como plató ───────────────────────────────────────────────────
+CASA = {
+    "piscina": "Terraza de la piscina",
+    "ladrillo": "Porche de ladrillo",
+    "porche": "Porche cubierto",
+    "salon": "Salón de la chimenea",
+    "bar": "Salón del bar y comedor",
+    "recibidor": "Recibidor y escalera",
+    "entrada": "Entrada principal",
+    "fachada": "Fachada con el tobogán",
+}
+
+
+def foto_casa(x, y, w, h, k, d=0, r=16):
+    return (f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:{r}px;'
+            f'background:#ddd url(/pitch/level-up/casa/{k}.jpg) center/cover no-repeat;--d:{d}"></div>')
+
+
+n += 1
+esp = [
+    ("piscina", "Enseñanza", "Suelo limpio, luz de día y fondo verde. Tu plató fijo para la mini serie «Si notas…»: siempre el mismo encuadre."),
+    ("ladrillo", "Hablar a cámara", "Fondo cálido y sin distracciones. Para Mitos 35+ y Level Up."),
+    ("porche", "Circuitos", "Espacio amplio y a cubierto: entrenos completos aunque llueva."),
+    ("salon", "Humor e hijos", "La alfombra con juguetes ya es la «realidad» de tus vídeos de madre."),
+    ("bar", "Sofá y cena", "Luz cálida de tarde-noche. Para el sofá y la cena con hidratos."),
+    ("recibidor", "Puerta y escalera", "Para salir a correr, las agujetas y subir escaleras."),
+]
+ch = ""
+for i, (k, uso, txt) in enumerate(esp):
+    col_, fila = i % 3, i // 3
+    x, y = 128 + col_ * 564, 270 + fila * 340
+    ch += (
+        foto_casa(x, y, 240, 300, k, d=i)
+        + p(CASA[k], x + 262, y + 4, 280, size=24, d=i + 1, cls="", extra="font-weight:800;line-height:1.2;")
+        + p(uso, x + 262, y + 72, 280, size=17, d=i + 1, cls="rosa", extra="font-weight:700;letter-spacing:.1em;text-transform:uppercase;")
+        + p(txt, x + 262, y + 104, 280, size=19, d=i + 2, extra="line-height:1.4;")
+    )
+add("casa", "Tu casa como plató", sec(
+    eyebrow("Cardedeu")
+    + titulo("Tu casa como plató", size=56)
+    + ch
+    + p("Evita de fondo las estanterías de cerámica (distraen) y graba de espaldas al sol: en los porches, por la mañana, la luz entra de lado.",
+        128, 950, 1664, size=19, d=8, cls="muted")
+    + foot(n),
+))
+
 # ── Los 19 guiones ───────────────────────────────────────────────────────
 # Cada guion: bloque, serie, pilar, objetivo (métrica), portada (foto, título),
 # gancho (lo que dices), filas (tiempo, se ve, dices, texto), cierre, descripción.
@@ -430,6 +476,30 @@ G[18]["filas"][1:] = [
     ("22-28 s", "A cámara.", "«Esa es la diferencia: no pagas por mil entrenos, pagas para que yo te guíe en tu proceso.»", "No pagas por mil entrenos"),
 ]
 
+LUG = [
+    ("salon", "Gancho en la entrada principal, soltando la mochila. Los movimientos, en la alfombra del salón."),
+    ("bar", "Sofá del salón del bar. El circuito, ahí mismo: la flexión, con las manos en el sofá."),
+    ("porche", "Porche cubierto: espacio para enseñar cada clave entrenando."),
+    ("piscina", "Terraza de la piscina. Mismo encuadre en los 3 de la mini serie."),
+    ("piscina", "Terraza de la piscina, mismo encuadre que el anterior."),
+    ("piscina", "Terraza de la piscina, mismo encuadre que los anteriores."),
+    ("ladrillo", "Porche de ladrillo: la silla y la mesa para la flexión inclinada."),
+    ("recibidor", "Día 1: tu gimnasio. Día 2: la escalera del recibidor. Día 4: el sofá del salón del bar."),
+    ("ladrillo", "Porche de ladrillo, plano cerrado. Los planos cotidianos, en la escalera del recibidor."),
+    ("bar", "Planos de ti por la casa: zapatillas en el recibidor, comida en el comedor, entreno en la terraza."),
+    ("porche", "Lado de 20 minutos: porche cubierto. Lado de 1 hora: tu gimnasio."),
+    ("ladrillo", "Porche de ladrillo, a cámara. Los libros, en el salón."),
+    ("salon", "Tus vídeos antiguos y hoy, a cámara junto a la ventana del salón de la chimenea."),
+    ("bar", "Mesa del comedor junto al bar, por la noche y con las lámparas encendidas."),
+    ("recibidor", "La escalera del recibidor para subir escaleras. Los ejercicios, en la terraza de la piscina."),
+    ("salon", "Realidad: la alfombra del salón con los juguetes. Otra opción: el tobogán de la fachada."),
+    ("salon", "Alfombra del salón de la chimenea, con los juguetes alrededor."),
+    ("recibidor", "Puerta de madera del recibidor."),
+    ("ladrillo", "Porche de ladrillo, el mismo fondo que en Mitos 35+."),
+]
+for g, (k, t) in zip(G, LUG):
+    g["lugar"], g["lugar_txt"] = k, t
+
 for i, g in enumerate(G):
     n += 1
     num = i + 1
@@ -437,11 +507,13 @@ for i, g in enumerate(G):
         FUENTES
         + eyebrow(f"Guion {num:02d} de {len(G)} · {g['bloque']}")
         + pill(g["pilar"], 128, 166, PILAR[g["pilar"]], d=0)
-        + p(f"Serie: {g['serie']} · Objetivo: <b>{g['obj']}</b>", 300, 168, 1100, size=20, d=0, cls="muted")
+        + p(f"Serie: {g['serie']} · Objetivo: <b>{g['obj']}</b> · Dónde: <b>{CASA[g['lugar']]}</b>", 300, 168, 1250, size=20, d=0, cls="muted")
         + p(g["gancho"], 128, 212, 1380, size=36, d=1, cls="", extra="font-weight:800;line-height:1.15;")
         + tabla(g["filas"], 128, 330, 1400, d=2)
         + portada(1592, 128, 200, g["foto"], g["serie"].split(" · ")[0], g["port"], d=1)
         + p("Portada", 1592, 492, 200, size=15, d=1, cls="muted", extra="text-align:center;")
+        + foto_casa(1592, 540, 200, 130, g["lugar"], d=2, r=12)
+        + p(g['lugar_txt'], 1592, 682, 200, size=15, d=2, extra="line-height:1.35;")
         + f'<div class="abs pop" style="left:128px;top:842px;width:800px;padding:18px 24px;border-radius:16px;background:{ACENTO};--d:4">'
           f'<span style="font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#3A2F2F">Cierre (CTA)</span><br>'
           f'<span style="font-size:20px;font-weight:700;line-height:1.35;color:{INK}">{g["cierre"]}</span></div>'
