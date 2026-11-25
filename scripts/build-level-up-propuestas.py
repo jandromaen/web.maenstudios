@@ -81,10 +81,12 @@ def tabla(filas, x, y, w, d=0):
 n += 1
 add("portada", "Guiones e identidad", sec(
     FUENTES
-    + f'<div class="abs" style="left:880px;top:0;width:1040px;height:1080px;background:url(/pitch/level-up/portadas-src/g02.jpg) center 40%/cover no-repeat"></div>'
-    + f'<p class="abs a" style="left:128px;top:430px;{POP}font-size:22px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#8A8580;--d:1">Level Up Workout</p>'
-    + f'<h1 class="abs a" style="left:128px;top:478px;width:700px;{POP}font-size:76px;font-weight:600;line-height:1.05;color:{INK};--d:2">Guiones<br>e identidad</h1>'
-    + f'<p class="abs a" style="left:128px;top:960px;{POP}font-size:18px;color:#8A8580;--d:3">Noviembre 2026</p>',
+    + f'<div class="abs" style="left:0;top:0;width:1920px;height:1080px;background:url({WEB}{FOTOS["risa"]}) 70% center/cover no-repeat"></div>'
+    + '<div class="abs" style="left:0;top:0;width:1920px;height:1080px;background:linear-gradient(90deg,rgba(21,31,48,.78) 0%,rgba(21,31,48,.45) 45%,rgba(21,31,48,0) 75%)"></div>'
+    + f'<p class="abs a" style="left:140px;top:150px;{POP}font-size:20px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#FFCB9A;--d:1">Level Up Workout</p>'
+    + f'<h1 class="abs a" style="left:140px;top:700px;width:900px;{POP}font-size:92px;font-weight:600;line-height:1;letter-spacing:-.02em;color:#fff;--d:2">Guiones<br>e identidad</h1>'
+    + f'<p class="abs a" style="left:140px;top:910px;{POP}font-size:20px;font-weight:400;color:rgba(255,255,255,.75);--d:3">Noviembre 2026</p>',
+    bg="#151F30", color="#fff",
 ))
 
 # ── 4 propuestas de biografía (inspiradas en @marthafit_healthymom) ──────
