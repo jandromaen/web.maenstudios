@@ -26,20 +26,20 @@ LINEAS = {
 
 # (día, línea, pieza, detalle)
 PUBLICACIONES = [
-    (0, "lunes", "Carrusel", "Restaurantes para la cena de empresa"),
     (2, "podcast", "Reel 1", "Tráiler del episodio"),
-    (3, "podcast", "YouTube y Spotify", "Episodio completo con Papalote"),
     (4, "podcast", "Reel 2", "Clip del episodio"),
     (6, "podcast", "Reel 3", "Clip del episodio"),
+    (9, "podcast", "Reel 4", "Clip del episodio"),
+    (11, "podcast", "Reel 5", "Clip del episodio"),
+    (13, "podcast", "Reel 6", "Clip del episodio"),
+    (15, "podcast", "Reel 7", "Clip del episodio"),
+    (16, "podcast", "Reel 8", "Clip del episodio"),
+    (18, "podcast", "Reel 9", "Clip del episodio"),
+    (20, "podcast", "Reel 10", "Clip del episodio (si da el montaje)"),
+    (0, "lunes", "Carrusel", "Restaurantes para la cena de empresa"),
+    (3, "podcast", "YouTube y Spotify", "Episodio completo con Papalote"),
     (7, "lunes", "Carrusel", "Planes gastronómicos para el puente"),
-    (7, "podcast", "Reel 4", "Clip del episodio"),
-    (9, "podcast", "Reel 5", "Clip del episodio"),
-    (11, "podcast", "Reel 6", "Clip del episodio"),
-    (13, "podcast", "Reel 7", "Clip del episodio"),
     (14, "lunes", "Carrusel", "Dónde encargar la comida de Navidad"),
-    (15, "podcast", "Reel 8", "Clip del episodio"),
-    (17, "podcast", "Reel 9", "Clip del episodio"),
-    (19, "podcast", "Reel 10", "Clip del episodio (si da el montaje)"),
     (21, "lunes", "Carrusel", "Restaurantes abiertos el 24, el 25 y Sant Esteve"),
     (28, "lunes", "Carrusel", "Nochevieja y el primer brunch del año"),
     (29, "foodie", "Reel", "Guía foodie en Papalote"),
@@ -204,7 +204,7 @@ semanas = [
 ]
 for k, (nom, rango, lema, a, b) in enumerate(semanas):
     n += 1
-    filas = [x for x in PUBLICACIONES if a <= x[0] <= b]
+    filas = sorted((x for x in PUBLICACIONES if a <= x[0] <= b), key=lambda x: x[0])
     fh = ""
     alto = 86 if len(filas) <= 6 else 76
     for i, (d, l, pz, det) in enumerate(filas):
