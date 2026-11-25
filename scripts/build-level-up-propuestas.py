@@ -105,30 +105,32 @@ BIOS = [
      "Madre, entrenadora y graduada en Ciencias del Deporte. Te enseño a entrenar fuerza en casa en 20-30'<br>👇 Empieza con 5 días gratis"),
 ]
 bh = (
-    f'<div class="abs pop" style="left:128px;top:262px;width:1664px;padding:18px 26px;border-radius:16px;background:{ROTO};--d:1">'
-    f'<span style="font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:{ACENTO_TXT}">La referencia · @marthafit_healthymom · 240K</span><br>'
-    f'<span style="font-size:19px;color:{INK};line-height:1.45"><b>Marta Pérez | Entrenamiento de fuerza. Pérdida de grasa</b> — '
-    f'«Consigo que mujeres estresadas y sin tiempo entrenen fuerza de forma constante, antes de que empiece el caos del día 👩‍💻 +12 años +3000 mujeres 👇 Aquí» + enlace</span><br>'
-    f'<span style="font-size:17px;color:#4A4744">Funciona por tres cosas: el nombre dice lo que haces (y se busca), una sola frase con a quién ayuda y qué consigue, y una prueba con números antes del enlace.</span></div>'
+    label("Tu bio hoy", 128, 262, d=1, color="#8A8580")
+    + f'<div class="abs pop" style="left:128px;top:296px;width:560px;height:239px;border-radius:14px;border:1px solid #E7E2DB;'
+      f'background:#fff url(/pitch/level-up/marca/bio-actual.png) center/contain no-repeat;--d:1"></div>'
+    + f'<div class="abs pop" style="left:728px;top:262px;width:1064px;height:273px;padding:20px 26px;box-sizing:border-box;border-radius:16px;background:{ROTO};--d:2">'
+      f'<span style="font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:{ACENTO_TXT}">La referencia · @marthafit_healthymom · 240K</span><br>'
+      f'<span style="font-size:18px;color:{INK};line-height:1.45"><b>Marta Pérez | Entrenamiento de fuerza. Pérdida de grasa</b><br>'
+      f'«Consigo que mujeres estresadas y sin tiempo entrenen fuerza de forma constante, antes de que empiece el caos del día 👩‍💻 +12 años +3000 mujeres 👇 Aquí»</span><br>'
+      f'<span style="font-size:16px;color:#4A4744;line-height:1.4">Funciona por tres cosas: el nombre dice lo que hace (y se busca), una sola frase con a quién ayuda y qué consigue, y una prueba con números antes del enlace.</span>'
+      f'<div style="margin-top:14px;padding-top:12px;border-top:1px solid #E2DDD6;font-size:17px;line-height:1.4;color:{INK}"><b>La tuya:</b> el nombre solo dice «Entrenadora Personal» y la bio son 5 etiquetas sueltas, sin decir a quién ayudas ni qué consiguen contigo.</div></div>'
 )
 for i, (tag, nombre, bio) in enumerate(BIOS):
     col_, fila = i % 2, i // 2
-    x, y = 128 + col_ * 852, 440 + fila * 250
+    x, y = 128 + col_ * 852, 566 + fila * 210
     bh += (
-        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:812px;height:226px;padding:24px 28px;box-sizing:border-box;border-radius:20px;'
+        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:812px;height:196px;padding:18px 26px;box-sizing:border-box;border-radius:20px;'
         f'background:#fff;border:1px solid #E7E2DB;box-shadow:0 10px 30px rgba(0,0,0,.05);{POP}--d:{i + 2}">'
         f'<div style="font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:{ACENTO_TXT}">0{i + 1} · {tag}</div>'
-        f'<div style="font-size:19px;font-weight:600;color:{INK};margin-top:8px">{nombre}</div>'
-        f'<div style="font-size:18px;line-height:1.45;color:{INK};margin-top:6px">{bio}</div>'
-        f'<div style="font-size:16px;font-weight:600;color:#1E3A8A;margin-top:6px">🔗 levelup.luciaentrenadorapersonal.com</div></div>'
+        f'<div style="font-size:18px;font-weight:600;color:{INK};margin-top:6px">{nombre}</div>'
+        f'<div style="font-size:16.5px;line-height:1.4;color:{INK};margin-top:4px">{bio}</div>'
+        f'</div>'
     )
 add("bios", "4 propuestas de biografía", sec(
     FUENTES
     + eyebrow("Lo primero que cambiamos")
     + titulo("Tu bio: 4 propuestas", size=56)
     + bh
-    + p("Todas caben en 150 caracteres y el nombre en 64. En la 01, cambia [X] por tus años de experiencia reales. El enlace, directo a la prueba gratis.",
-        128, 950, 1664, size=19, d=7, cls="muted")
     + foot(n),
 ))
 
