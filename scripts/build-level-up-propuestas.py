@@ -81,15 +81,10 @@ def tabla(filas, x, y, w, d=0):
 n += 1
 add("portada", "Guiones e identidad", sec(
     FUENTES
-    + foto(1060, 0, 860, 1080, "mat", d=0, pos="center", radius=0)
-    + '<div class="abs" style="left:1060px;top:0;width:260px;height:1080px;background:linear-gradient(90deg,#FFFFFF,rgba(255,255,255,0))"></div>'
-    + eyebrow("Level Up Workout · Contenido", top=200)
-    + '<h1 class="abs a disp" style="left:128px;top:250px;font-size:96px;line-height:1;--d:1">19 guiones</h1>'
-    '<h1 class="abs a disp outline" style="left:128px;top:362px;font-size:60px;line-height:1.12;--d:2">y tu identidad<br>en Instagram</h1>'
-    + p("Tus ideas convertidas en guiones completos: gancho, lo que dices segundo a segundo, texto en pantalla, cierre y descripción. Y una bio, una foto y una estética que se repiten siempre.",
-        128, 560, 860, size=28, d=3, cls="", extra="font-weight:800;line-height:1.3;")
-    + p("Jandro Martín · noviembre de 2026", 128, 820, 700, size=22, d=4, cls="muted")
-    + foot(n),
+    + f'<div class="abs" style="left:880px;top:0;width:1040px;height:1080px;background:url(/pitch/level-up/portadas-src/g02.jpg) center 40%/cover no-repeat"></div>'
+    + f'<p class="abs a" style="left:128px;top:430px;{POP}font-size:22px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#8A8580;--d:1">Level Up Workout</p>'
+    + f'<h1 class="abs a" style="left:128px;top:478px;width:700px;{POP}font-size:76px;font-weight:600;line-height:1.05;color:{INK};--d:2">Guiones<br>e identidad</h1>'
+    + f'<p class="abs a" style="left:128px;top:960px;{POP}font-size:18px;color:#8A8580;--d:3">Noviembre 2026</p>',
 ))
 
 # ── 4 propuestas de biografía (inspiradas en @marthafit_healthymom) ──────
@@ -128,7 +123,7 @@ for i, (tag, nombre, bio) in enumerate(BIOS):
     )
 add("bios", "4 propuestas de biografía", sec(
     FUENTES
-    + eyebrow("Lo primero que cambiamos")
+    + eyebrow("Biografía")
     + titulo("Tu bio: 4 propuestas", size=56)
     + bh
     + foot(n),
@@ -137,7 +132,7 @@ add("bios", "4 propuestas de biografía", sec(
 # ── De tu idea al guion ──────────────────────────────────────────────────
 n += 1
 add("deidea", "De tu idea al guion", sec(
-    eyebrow("Cómo he trabajado tus ideas")
+    eyebrow("Tus ideas")
     + titulo("De tu idea al guion", size=56)
     + label("Lo que me pasaste", 128, 290, d=1, color="#8A8580")
     + card(128, 330, 700, 470, d=1)
@@ -181,7 +176,7 @@ for i, (t, cuando, txt, metr) in enumerate(an):
           f'font-weight:700;color:{INK};--d:{i + 2}">Se mide en:<br><span style="color:{ACENTO_TXT}">{metr}</span></div>'
     )
 add("anatomia", "Anatomía de un guion", sec(
-    eyebrow("El método")
+    eyebrow("Estructura")
     + titulo("Cada guion tiene estas 5 partes", size=56)
     + ah
     + p("Según Instagram, las tres señales que más pesan son el tiempo de visionado, los me gusta por alcance y los envíos por alcance. Fuentes al final.",
@@ -813,7 +808,7 @@ for i, (t, txt, src) in enumerate(fts):
         + p(src, x, y + 116, 790, size=15, d=fila + 1, cls="rosa", extra="font-weight:700;")
     )
 add("fuentes", "De dónde sale todo esto", sec(
-    eyebrow("Para que no sea humo")
+    eyebrow("Fuentes")
     + titulo("De dónde sale todo esto", size=56)
     + fh
     + foot(n),
