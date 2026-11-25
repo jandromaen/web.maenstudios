@@ -558,6 +558,29 @@ G[18]["filas"][1:] = [
     ("22-28 s", "A cámara.", "«Esa es la diferencia: no pagas por mil entrenos, pagas para que yo te guíe en tu proceso.»", "No pagas por mil entrenos"),
 ]
 
+# ── Propuestas técnicas en gris (Lucía las valida o cambia) ─────────────
+def gr(t):
+    return f'<span class="prop" style="color:#A19C96;font-weight:500">{t}</span>'
+
+
+SIN_VOZ = '<span style="color:#8A8580;font-weight:400">Sin voz: música + texto en pantalla</span>'
+G[0]["filas"][1:] = [
+    ("3-11 s", "Movimiento 1 de movilidad torácica.", "«Uno: " + gr("gato-camello. Redondea y arquea despacio, ocho veces.") + "»", gr("1 · Gato-camello")),
+    ("11-19 s", "Movimiento 2 de movilidad torácica.", "«Dos: " + gr("libro abierto. Abre el brazo y síguelo con la mirada, seis por lado.") + "»", gr("2 · Libro abierto")),
+    ("19-26 s", "Movimiento 3 de movilidad lumbar.", "«Tres: " + gr("postura del niño con las manos a un lado, veinte segundos por lado.") + "» Para aliviar la sensación de rigidez.", gr("3 · Postura del niño")),
+]
+G[1]["filas"][2] = ("6-20 s", "Cortes rápidos del circuito. El reloj baja.", "(Voz en off) " + gr("«Sentadilla. Flexión inclinada en el sofá. Puente de glúteo.»"), gr("Sentadilla · Flexión inclinada · Puente"))
+G[2]["filas"][1:] = [
+    ("3-11 s", "Plano tuyo entrenando que ilustre la clave.", "«Uno: " + gr("ejercicios que trabajen mucho músculo a la vez: sentadilla, remo, flexión.") + "»", gr("1 · Ejercicios completos")),
+    ("11-18 s", "Plano que ilustre la segunda.", "«Dos: " + gr("descansos medidos, entre treinta segundos y un minuto.") + "»", gr("2 · Descansos medidos")),
+    ("18-27 s", "Plano que ilustre la tercera.", "«Y tres: " + gr("subir un poco cada semana: peso, repeticiones o dificultad.") + "»", gr("3 · Un poco más cada semana")),
+]
+G[4]["filas"][2] = ("10-17 s", "Abdominal con la posición corregida.", "«" + gr("Manos a los lados de la cabeza, mirada al techo y suelta el aire al subir.") + "»", "✓ Así sí")
+G[5]["filas"][2] = ("9-17 s", "Puente controlando pelvis y costillas.", "«" + gr("Antes de subir, baja las costillas y lleva la pelvis hacia ti.") + "»", "✓ Controla pelvis y costillas")
+G[6]["filas"][2] = ("10-17 s", "Planos de la musculatura implicada.", "«" + gr("Para hacerla necesitas pecho, tríceps y un core que mantenga el cuerpo recto.") + "»", gr("Pecho · Tríceps · Core"))
+for g in G:
+    g["filas"] = [(a, b, (SIN_VOZ if c.startswith("—") else c), d) for a, b, c, d in g["filas"]]
+
 LUG = [
     ("salon", "Gancho en la entrada principal, soltando la mochila. Los movimientos, en la alfombra del salón."),
     ("bar", "Sofá del salón del bar. El circuito, ahí mismo: la flexión, con las manos en el sofá."),
@@ -597,6 +620,7 @@ for i, g in enumerate(G):
         + portada(1592, 128, 200, g["foto"], g["serie"].split(" · ")[0], g["port"], d=1)
         + p("Portada", 1592, 492, 200, size=15, d=1, cls="muted", extra="text-align:center;")
         + foto_casa(1592, 540, 200, 130, g["lugar"], d=2, r=12)
+        + (p("<span style='color:#A19C96'>■</span> En gris: propuesta técnica. Cámbiala si quieres.", 1592, 790, 200, size=14, d=2, extra="line-height:1.35;color:#8A8580;") if 'class="prop"' in "".join(c for f in g["filas"] for c in f) else "")
         + p(g['lugar_txt'], 1592, 682, 200, size=15, d=2, extra="line-height:1.35;")
         + f'<div class="abs pop" style="left:128px;top:842px;width:800px;padding:18px 24px;border-radius:16px;background:{ACENTO};--d:4">'
           f'<span style="font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#3A2F2F">Cierre (CTA)</span><br>'
