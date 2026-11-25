@@ -342,7 +342,7 @@ export const CONTENIDO: Contenido = {
   "mie-25": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/mie-25-repost.webp",
+        "url": "/pitch/donlay-calendario/noviembre/mie-25-repost-v2.webp",
         "tipo": "imagen"
       }
     ]
