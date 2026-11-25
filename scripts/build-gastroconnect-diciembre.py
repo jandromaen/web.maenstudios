@@ -27,10 +27,10 @@ LINEAS = {
 # (día, línea, pieza, detalle)
 PUBLICACIONES = [
     (0, "lunes", "Carrusel", "Restaurantes para la cena de empresa"),
-    (1, "podcast", "YouTube y Spotify", "Episodio completo con Papalote"),
-    (1, "podcast", "Reel 1", "Tráiler del episodio"),
-    (3, "podcast", "Reel 2", "Clip del episodio"),
-    (5, "podcast", "Reel 3", "Clip del episodio"),
+    (2, "podcast", "Reel 1", "Tráiler del episodio"),
+    (3, "podcast", "YouTube y Spotify", "Episodio completo con Papalote"),
+    (4, "podcast", "Reel 2", "Clip del episodio"),
+    (6, "podcast", "Reel 3", "Clip del episodio"),
     (7, "lunes", "Carrusel", "Planes gastronómicos para el puente"),
     (7, "podcast", "Reel 4", "Clip del episodio"),
     (9, "podcast", "Reel 5", "Clip del episodio"),
