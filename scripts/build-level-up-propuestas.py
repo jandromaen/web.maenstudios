@@ -129,6 +129,42 @@ add("bios", "4 propuestas de biografía", sec(
     + foot(n),
 ))
 
+# ── Destacados ───────────────────────────────────────────────────────────
+n += 1
+DEST = [
+    ("empieza", "Empieza aquí", "Qué es Level Up, cómo funciona y la prueba de 5 días con el enlace."),
+    ("opiniones", "Opiniones", "Tus «Mensajitos»: capturas de clientas y sus resultados."),
+    ("nivel0", "Nivel 0", "Ejercicios y rutinas cortas para empezar desde cero."),
+    ("sobremi", "Sobre mí", "Quién eres, tu formación y por qué creaste Level Up."),
+    ("dudas", "Dudas", "Precio, tiempo, material, cancelación: lo que más te preguntan."),
+    ("mivida", "Mi vida", "Kite, viajes y día a día. Une Lifestyle 2025 y 2026 y Kitesurf."),
+]
+dh = ""
+for i, (k, nom, txt) in enumerate(DEST):
+    x = 128 + i * 282
+    dh += (
+        f'<div class="abs pop" style="left:{x + 41}px;top:560px;width:170px;height:170px;border-radius:50%;'
+        f'background:#151F30 url(/pitch/level-up/destacados/{k}.png) center/cover no-repeat;'
+        f'box-shadow:0 0 0 5px #fff,0 0 0 7px #E2DDD6;--d:{i + 2}"></div>'
+        + p(nom, x, 752, 252, size=22, d=i + 2, cls="", extra=f"text-align:center;font-weight:700;{POP}")
+        + p(txt, x + 6, 792, 240, size=17, d=i + 3, extra="text-align:center;line-height:1.4;")
+    )
+add("destacados", "Destacados", sec(
+    FUENTES
+    + eyebrow("Destacados")
+    + titulo("Seis destacados, siempre iguales", size=56)
+    + label("Hoy", 128, 270, d=1, color="#8A8580")
+    + f'<div class="abs pop" style="left:128px;top:306px;width:930px;height:171px;border-radius:14px;border:1px solid #E7E2DB;'
+      f'background:#fff url(/pitch/level-up/marca/destacados-actual.png) center/contain no-repeat;--d:1"></div>'
+    + p("Cada portada con un estilo, años repetidos (2025, 2026) y lo que más vende, las opiniones, en el quinto puesto.",
+        1100, 330, 690, size=21, d=2, extra="line-height:1.45;")
+    + label("Propuesta · en este orden", 128, 516, d=2)
+    + dh
+    + p("Fondo azul noche e icono melocotón, los colores de Level Up. Primero lo que convierte, al final lo personal. Las portadas ya están listas para subir.",
+        128, 950, 1664, size=19, d=8, cls="muted")
+    + foot(n),
+))
+
 # ── De tu idea al guion ──────────────────────────────────────────────────
 n += 1
 add("deidea", "De tu idea al guion", sec(
