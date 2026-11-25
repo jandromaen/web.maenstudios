@@ -20,28 +20,30 @@ MARCA = "Gastroconnect · Planning de diciembre"
 # Línea de contenido → (nombre, color)
 LINEAS = {
     "podcast": ("Podcast", AMARILLO),
-    "app": ("App de reservas", "#7FD1AE"),
     "foodie": ("Guía foodie", "#F08A5D"),
     "lunes": ("Guía de los lunes", "#C8BCE9"),
 }
 
 # (día, línea, pieza, detalle)
 PUBLICACIONES = [
-    (3, "podcast", "YouTube y Spotify", "Episodio completo con Papalote"),
-    (3, "podcast", "Reel 1", "Tráiler del episodio"),
-    (4, "app", "Reel 1", "Cenas de empresa: reserva tu grupo en gastroconnect.es"),
-    (7, "lunes", "Carrusel", "Restaurantes para la cena de empresa"),
-    (9, "podcast", "Reel 2", "Clip del episodio"),
-    (11, "app", "Reel 2", "Grupos de Navidad: reserva sin llamadas"),
-    (12, "foodie", "Reel", "Visita del mes con Richi o Jandro"),
+    (0, "lunes", "Carrusel", "Restaurantes para la cena de empresa"),
+    (1, "podcast", "YouTube y Spotify", "Episodio completo con Papalote"),
+    (1, "podcast", "Reel 1", "Tráiler del episodio"),
+    (3, "podcast", "Reel 2", "Clip del episodio"),
+    (5, "podcast", "Reel 3", "Clip del episodio"),
+    (7, "lunes", "Carrusel", "Planes gastronómicos para el puente"),
+    (7, "podcast", "Reel 4", "Clip del episodio"),
+    (9, "podcast", "Reel 5", "Clip del episodio"),
+    (11, "podcast", "Reel 6", "Clip del episodio"),
+    (13, "podcast", "Reel 7", "Clip del episodio"),
     (14, "lunes", "Carrusel", "Dónde encargar la comida de Navidad"),
-    (15, "podcast", "Reel 3", "Clip del episodio"),
-    (17, "podcast", "Reel 4", "Clip del episodio"),
-    (19, "foodie", "Reel receta", "Receta de Navidad con el restaurante de la visita"),
+    (15, "podcast", "Reel 8", "Clip del episodio"),
+    (17, "podcast", "Reel 9", "Clip del episodio"),
+    (19, "podcast", "Reel 10", "Clip del episodio (si da el montaje)"),
     (21, "lunes", "Carrusel", "Restaurantes abiertos el 24, el 25 y Sant Esteve"),
-    (22, "podcast", "Reel 5", "Clip del episodio"),
     (28, "lunes", "Carrusel", "Nochevieja y el primer brunch del año"),
-    (29, "podcast", "Reel 6", "Clip del episodio"),
+    (29, "foodie", "Reel", "Guía foodie en Papalote"),
+    (30, "foodie", "Reel receta", "Receta de Papalote"),
 ]
 
 FESTIVOS = {
@@ -58,6 +60,11 @@ PRIMER_DIA = 1  # el 1 de diciembre de 2026 es martes (0 = lunes)
 
 def dia_sem(d):
     return DIAS_SEM[(PRIMER_DIA + d - 1) % 7]
+
+
+def fecha(d):
+    """Día del mes; el 0 es el lunes 30 de noviembre."""
+    return "30 nov" if d == 0 else str(d)
 
 
 def sec(body, bg=INK, color="#F4F4F4"):
@@ -101,7 +108,7 @@ def add(id_, tit, html):
     slides.append({"id": id_, "titulo": tit, "html": html})
 
 
-reels = sum(1 for _, l, pz, _ in PUBLICACIONES if pz.startswith("Reel"))
+reels_podcast = sum(1 for _, l, pz, _ in PUBLICACIONES if l == "podcast" and pz.startswith("Reel"))
 carruseles = sum(1 for _, l, _, _ in PUBLICACIONES if l == "lunes")
 
 # ── 1. Portada ────────────────────────────────────────────────────────────
@@ -110,10 +117,10 @@ add("portada", "Planning de diciembre", sec(
     eyebrow("Gastroconnect · @gastroconnect_", top=150)
     + '<h1 class="abs a disp" style="left:128px;top:300px;font-size:120px;line-height:1;--d:1">Planning</h1>'
     '<h1 class="abs a disp outline" style="left:128px;top:430px;font-size:120px;line-height:1;--d:2">diciembre</h1>'
-    + p(f"1 episodio con Papalote · {reels} reels · {carruseles} guías de los lunes",
+    + p(f"Papalote: episodio, {reels_podcast} reels del podcast, guía foodie y receta · {carruseles} guías de los lunes",
         128, 620, 1300, size=32, d=3, cls="", extra="font-weight:700;")
-    + p("Con las fechas de Navidad en el centro: cenas de empresa, encargos, festivos y Nochevieja.",
-        128, 690, 1300, size=28, d=4)
+    + p("Los reels del podcast, en las tres primeras semanas. La guía foodie y la receta, en la última.",
+        128, 730, 1300, size=28, d=4)
     + '<video class="pm-reel f" style="left:1460px;top:200px;width:340px;height:604px;transform:rotate(3deg);--d:2" '
     'src="/clients/gastroconnect/preview.mp4" poster="/clients/gastroconnect/poster.jpg" autoplay muted loop playsinline preload="auto"></video>'
 ))
@@ -128,15 +135,15 @@ cal = ""
 for j, nombre in enumerate(["L", "M", "X", "J", "V", "S", "D"]):
     cal += (f'<p class="abs a muted" style="left:{x0 + j * (cw + gap)}px;top:{y0 - 44}px;width:{cw}px;'
             f'font-size:20px;letter-spacing:.1em;text-align:center;--d:1">{nombre}</p>')
-for d in range(1, 32):
+for d in range(0, 32):
     idx = PRIMER_DIA + d - 1
     col, fila = idx % 7, idx // 7
     x, y = x0 + col * (cw + gap), y0 + fila * (ch + gap)
-    fest = FESTIVOS.get(d)
+    fest = FESTIVOS.get(d) or ("noviembre" if d == 0 else None)
     borde = "1px solid #3A3A3A"
     cal += f'<div class="abs a" style="left:{x}px;top:{y}px;width:{cw}px;height:{ch}px;border:{borde};border-radius:12px;--d:2"></div>'
     cal += (f'<p class="abs a disp" style="left:{x + 14}px;top:{y + 10}px;font-size:26px;line-height:1;'
-            f'{"color:#6B6B6B;" if not por_dia.get(d) else ""}--d:2">{d}</p>')
+            f'{"color:#6B6B6B;" if not por_dia.get(d) else ""}--d:2">{30 if d == 0 else d}</p>')
     if fest:
         cal += (f'<p class="abs a rosa" style="left:{x + 56}px;top:{y + 14}px;width:{cw - 66}px;font-size:16px;'
                 f'font-weight:700;text-align:right;--d:2">{fest}</p>')
@@ -145,6 +152,8 @@ for d in range(1, 32):
         nombre, color = LINEAS[l]
         if l == "podcast":
             etiqueta = "Podcast en YouTube y Spotify" if pz == "YouTube y Spotify" else "Reel podcast"
+        elif l == "foodie" and pz == "Reel receta":
+            etiqueta = "Receta foodie"
         else:
             etiqueta = nombre
         lineas = 2 if len(etiqueta) > 20 else 1
@@ -164,9 +173,9 @@ add("calendario", "Calendario", sec(
 # ── 3. Producción ─────────────────────────────────────────────────────────
 n += 1
 rodajes = [
-    ("Grabado", "Podcast con Papalote", "Episodio de diciembre y sus 6 reels."),
-    ("1–4 dic", "Guía foodie", "Visita con Richi o Jandro: reel + reel de la receta de Navidad."),
-    ("14–18 dic", "Podcast de enero", "Episodio + 6 reels + 2 reels de la app, antes de las fiestas."),
+    ("Grabado", "Podcast con Papalote", "Episodio de diciembre y sus 9–10 reels."),
+    ("Antes del 22", "Guía foodie en Papalote", "Visita con Richi o Jandro: reel + reel de receta."),
+    ("14–18 dic", "Podcast de enero", "Episodio y reels del mes, antes de las fiestas."),
 ]
 rh = ""
 for i, (cuando, t, s_) in enumerate(rodajes):
@@ -188,10 +197,10 @@ add("produccion", "Producción", sec(
 
 # ── 4–7. Semanas ──────────────────────────────────────────────────────────
 semanas = [
-    ("Semana 1", "1–6 dic", "Estreno del episodio y arranque de las cenas de empresa", 1, 6),
-    ("Semana 2", "7–13 dic", "Puente de la Inmaculada y visita foodie", 7, 13),
-    ("Semana 3", "14–20 dic", "Encargos de Navidad y receta", 14, 20),
-    ("Semanas 4 y 5", "21–31 dic", "Navidad y fin de año, con pausa del 24 al 26 y el 31", 21, 31),
+    ("Semana 1", "30 nov–6 dic", "Arranca la guía de los lunes y se estrena Papalote", 0, 6),
+    ("Semana 2", "7–13 dic", "Reels del podcast", 7, 13),
+    ("Semana 3", "14–20 dic", "Últimos reels del podcast", 14, 20),
+    ("Semanas 4 y 5", "21–31 dic", "Guía foodie y receta con Papalote", 21, 31),
 ]
 for k, (nom, rango, lema, a, b) in enumerate(semanas):
     n += 1
@@ -203,7 +212,7 @@ for k, (nom, rango, lema, a, b) in enumerate(semanas):
         nombre, color = LINEAS[l]
         fh += (
             f'<div class="abs a deco" style="left:128px;top:{y - 22}px;width:1664px;height:1px;background:#3A3A3A;--d:{i + 1}"></div>'
-            f'<p class="abs a" style="left:128px;top:{y}px;width:300px;font-size:26px;font-weight:800;--d:{i + 2}">{dia_sem(d)} {d}</p>'
+            f'<p class="abs a" style="left:128px;top:{y}px;width:300px;font-size:26px;font-weight:800;--d:{i + 2}">{dia_sem(d)} {fecha(d)}</p>'
             f'<p class="abs a" style="left:460px;top:{y}px;width:420px;font-size:24px;--d:{i + 2}">{punto(color)}{nombre} · {pz}</p>'
             f'<p class="abs a soft" style="left:920px;top:{y}px;width:870px;font-size:26px;line-height:1.3;--d:{i + 2}">{det}</p>'
         )
@@ -220,7 +229,7 @@ for k, (nom, rango, lema, a, b) in enumerate(semanas):
 # ── 8. Pendiente ──────────────────────────────────────────────────────────
 n += 1
 pend = [
-    "Restaurante de la guía foodie de diciembre y su receta de Navidad.",
+    "Día para grabar la guía foodie y la receta en Papalote (antes del 22).",
     "Fecha exacta del rodaje del podcast de enero (semana del 14).",
     "Restaurantes de cada guía de los lunes.",
 ]
