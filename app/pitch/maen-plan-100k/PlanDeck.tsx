@@ -101,18 +101,28 @@ export default function PlanDeck({
     return () => window.removeEventListener("keydown", alPulsar);
   }, [siguiente, anterior, ir, total, pantallaCompleta]);
 
-  const alPulsarLienzo = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLElement).closest("a, video, button")) return;
-    const caja = e.currentTarget.getBoundingClientRect();
-    if (e.clientX - caja.left < caja.width / 2) anterior();
-    else siguiente();
+  // Solo se pasa de página al pulsar en los márgenes laterales (fuera de la
+  // diapositiva o en su franja vacía de los lados). Pulsar en el contenido,
+  // seleccionar o copiar texto no cambia de página.
+  const MARGEN = 110 / ANCHO;
+  const alPulsarLateral = (e: React.MouseEvent<HTMLElement>) => {
+    if ((e.target as HTMLElement).closest("a, video, button, .pm-hud")) return;
+    if (window.getSelection()?.toString()) return;
+    const marco = e.currentTarget.querySelector(".pm-marco") as HTMLElement | null;
+    if (!marco) return;
+    const caja = marco.getBoundingClientRect();
+    const x = e.clientX;
+    const dentro = x >= caja.left && x <= caja.right && e.clientY >= caja.top && e.clientY <= caja.bottom;
+    const borde = caja.width * MARGEN;
+    if (x < caja.left || (dentro && x < caja.left + borde)) anterior();
+    else if (x > caja.right || (dentro && x > caja.right - borde)) siguiente();
   };
 
   const diapo = diapos[indice];
 
   return (
     <div className="pm" ref={deck}>
-      <div className="pm-escena" ref={escena}>
+      <div className="pm-escena" ref={escena} onClick={alPulsarLateral}>
         <div
           className="pm-marco"
           style={{ width: ANCHO * escala, height: ALTO * escala }}
@@ -122,7 +132,6 @@ export default function PlanDeck({
             ref={lienzo}
             className="pm-lienzo"
             style={{ transform: `scale(${escala})` }}
-            onClick={alPulsarLienzo}
             dangerouslySetInnerHTML={{ __html: diapo.html }}
           />
         </div>
