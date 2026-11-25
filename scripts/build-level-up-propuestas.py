@@ -95,14 +95,14 @@ add("portada", "Guiones e identidad", sec(
 # ── 4 propuestas de biografía (inspiradas en @marthafit_healthymom) ──────
 n += 1
 BIOS = [
-    ("Calcada a Marta", "Lucía García | Entrenamiento de fuerza para mujeres",
-     "Consigo que mujeres sin tiempo entrenen fuerza en casa, desde cero y en 20-30' 🏡 +[X] años entrenando a mujeres reales<br>👇 Prueba 5 días gratis"),
-    ("Mujeres +35", "Lucía García | Fuerza para mujeres +35",
-     "Entrena fuerza en casa a partir de los 35, aunque nunca lo hayas hecho 💪<br>🎓 Graduada en Ciencias del Deporte<br>👇 5 días gratis en Level Up"),
+    ("Calcada a Marta", "Lucía García | Entrenadora personal para mujeres",
+     "Consigo que mujeres sin tiempo entrenen en casa, desde cero y en 20-30' 🏡 +[X] años entrenando a mujeres reales<br>👇 Prueba 5 días gratis"),
+    ("Mujeres +35", "Lucía García | Entrenamiento para mujeres +35",
+     "Empieza a entrenar en casa a partir de los 35, aunque nunca lo hayas hecho 💪<br>🎓 Graduada en Ciencias del Deporte<br>👇 5 días gratis en Level Up"),
     ("Constancia", "Lucía García | Entrenadora personal online",
-     "Para mujeres que siempre empiezan y lo dejan: un plan por niveles para entrenar fuerza en casa y no volver a parar<br>👇 Pruébalo 5 días gratis"),
-    ("Madre y entrenadora", "Lucía García | Entrenamiento de fuerza en casa",
-     "Madre, entrenadora y graduada en Ciencias del Deporte. Te enseño a entrenar fuerza en casa en 20-30'<br>👇 Empieza con 5 días gratis"),
+     "Para mujeres que siempre empiezan y lo dejan: un plan por niveles para entrenar en casa y no volver a parar<br>👇 Pruébalo 5 días gratis"),
+    ("Madre y entrenadora", "Lucía García | Entrenamiento femenino en casa",
+     "Madre, entrenadora y graduada en Ciencias del Deporte. Te enseño a entrenar en casa en 20-30'<br>👇 Empieza con 5 días gratis"),
 ]
 bh = (
     label("Tu bio hoy", 128, 262, d=1, color="#8A8580")
@@ -271,7 +271,7 @@ G = [
              ("18-27 s", "Coges una mancuerna más pesada.", "«Y tres: haces siempre lo mismo. Si cada semana no subes un poco el peso, las repeticiones o la dificultad, tu cuerpo no tiene motivo para cambiar.»", "3 · Un poco más cada semana"),
          ],
          cierre="«Si quieres un entreno de veinte minutos con estas tres claves, comenta NIVEL0 y te lo mando.»",
-         desc="Entreno de 20 minutos que no da resultados: los 3 errores más comunes. Entrenamiento de fuerza para mujeres que empiezan desde cero."),
+         desc="Entreno de 20 minutos que no da resultados: los 3 errores más comunes. Entrenamiento para mujeres que empiezan desde cero."),
     dict(bloque="Enseñanza", serie="Si notas… · 1/3", pilar="Enseñar", obj="Que lo guarden", foto="pared",
          port="Sentadilla sin glúteo",
          gancho="«Si haces sentadillas y solo las notas en los cuádriceps, mira esto»",
@@ -337,7 +337,7 @@ G = [
              ("20-30 s", "Planos cotidianos: escaleras, niño en brazos, la compra.", "«La fuerza es lo que te deja subir escaleras, coger a tus hijos o cargar la compra. Y también lo que da forma al cuerpo.»", "Fuerza = autonomía"),
          ],
          cierre="«¿Deberíamos hablar más de ganar fuerza y menos de perder kilos? Te leo.»",
-         desc="Por qué las mujeres deberíamos hablar más de ganar fuerza y menos de perder peso. Entrenamiento de fuerza para mujeres."),
+         desc="Por qué las mujeres deberíamos hablar más de ganar fuerza y menos de perder peso. Entrenamiento para mujeres."),
     dict(bloque="Conexión", serie="Mitos 35+", pilar="Conectar", obj="Me gusta y comentarios", foto="libros",
          port="Lo que ojalá hubiera sabido",
          gancho="Texto: «5 cosas que me habría gustado saber cuando empecé a entrenar»",
@@ -466,7 +466,7 @@ G[2]["filas"][1:] = [
     ("18-27 s", "Plano que ilustre la tercera.", f"«Y tres: …» {T}", "3 · Tu tercera clave"),
 ]
 G[2]["cierre"] = "«¿Quieres un ejemplo de entreno así? Comenta NIVEL0 y te lo mando.»"
-G[2]["desc"] = "Las 3 claves para que tu entreno de 20 minutos sea efectivo. Entrenamiento de fuerza para mujeres que empiezan desde cero."
+G[2]["desc"] = "Las 3 claves para que tu entreno de 20 minutos sea efectivo. Entrenamiento para mujeres que empiezan desde cero."
 G[3]["filas"][1:] = [
     ("3-14 s", "Sentadilla con mayor profundidad, de perfil.", "«Baja más.» Explicas cómo la profundidad puede influir en el estímulo del glúteo.", "✓ Más profundidad"),
     ("14-24 s", "Sentadilla a cajón.", "«Si tienes limitaciones de movilidad, prueba la sentadilla a cajón.»", "Alternativa: sentadilla a cajón"),
@@ -665,7 +665,7 @@ FOTO_NUEVA_GRANDE = f"background:#eee url({WEB}{FOTOS['risa']}) -{round(2600*.46
 n += 1
 bio_hoy = ("🎓 Graduada en Ciencias del Deporte<br>💪 Especializada en entrenamiento femenino<br>"
            "✨ Founder of LEVELUPWORKOUT<br>🏡 Empieza desde cero<br>👇 PRUEBA 5 DÍAS GRATIS 🎁")
-bio_nueva = ("🎓 Graduada en Ciencias del Deporte<br>Entrenamiento de fuerza online, en casa y desde cero<br>"
+bio_nueva = ("🎓 Graduada en Ciencias del Deporte<br>Entrenamiento para mujeres online, en casa y desde cero<br>"
              "✨ Founder de Level Up Workout<br>👇 Prueba 5 días gratis")
 add("bio", "Biografía", sec(
     FUENTES
@@ -677,7 +677,7 @@ add("bio", "Biografía", sec(
     + perfil(1012, 320, 780, FOTO_NUEVA, "Lucía | Entrenadora personal para mujeres", bio_nueva, d=2)
     + lista([
         "<b>El nombre es lo que más se busca</b>: Instagram empareja la búsqueda con el texto del nombre de usuario y del nombre. «Entrenadora personal para mujeres» es lo que escribe tu clienta (41 de 64 caracteres).",
-        "<b>La bio con palabras clave</b>: fuerza, online, en casa, desde cero. Es lo que Instagram recomienda para salir en búsquedas (140 de 150 caracteres).",
+        "<b>La bio con palabras clave</b>: mujeres, online, en casa, desde cero. Es lo que Instagram recomienda para salir en búsquedas (140 de 150 caracteres).",
         "<b>Un solo enlace</b>, directo a la prueba gratis. Y las mismas palabras clave en la descripción de cada reel.",
     ], 128, 790, 1664, size=20, d=4, gap=8)
     + foot(n),
