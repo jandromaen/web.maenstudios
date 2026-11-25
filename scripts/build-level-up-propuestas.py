@@ -348,6 +348,88 @@ G = [
          desc="Plataforma de entrenamiento online para mujeres: por qué no es lo mismo tener mil entrenos que un plan por niveles. 5 días gratis."),
 ]
 
+# ── Contenido técnico: el de Lucía, tal cual lo describió ─────────────────
+# Lo técnico (ejercicios, explicaciones, datos) no se toca: sale de su
+# documento «PLAN DE CONTENIDOS». Donde ella no concretó, se deja a su elección.
+T = "<i>(tú eliges)</i>"
+G[0]["filas"][1:] = [
+    ("3-11 s", "Movimiento 1 de movilidad torácica.", f"«Uno: …» Explicas el primer movimiento {T}.", "1 · Nombre del movimiento"),
+    ("11-19 s", "Movimiento 2 de movilidad torácica o lumbar.", f"«Dos: …» {T}", "2 · Nombre del movimiento"),
+    ("19-26 s", "Movimiento 3 de movilidad lumbar.", f"«Tres: …» Para aliviar la sensación de rigidez. {T}", "3 · Nombre del movimiento"),
+]
+G[1]["port"] = "15 minutos bastan"
+G[1]["filas"][1:] = [
+    ("3-6 s", "Te levantas y pones un cronómetro visible en la esquina todo el vídeo.", "«Tres ejercicios, entre diez y quince minutos.»", "3 ejercicios · 10-15 minutos"),
+    ("6-20 s", f"Cortes rápidos del circuito {T}. El reloj baja.", "(Voz en off) El nombre de cada ejercicio.", "Ejercicio 1 · 2 · 3"),
+    ("20-24 s", "El cronómetro llega a cero. Te secas la cara y señalas el reloj del móvil.", "«Y aún te sobra tiempo para la ducha.»", "Hecho."),
+]
+G[1]["desc"] = "Entreno en casa de 10-15 minutos: un circuito de 3 ejercicios. Para las que creen que no tienen tiempo para entrenar."
+G[2]["filas"][1:] = [
+    ("3-11 s", "Plano tuyo entrenando que ilustre la clave.", f"«Uno: …» La primera de tus 3 claves {T}.", "1 · Tu primera clave"),
+    ("11-18 s", "Plano que ilustre la segunda.", f"«Dos: …» {T}", "2 · Tu segunda clave"),
+    ("18-27 s", "Plano que ilustre la tercera.", f"«Y tres: …» {T}", "3 · Tu tercera clave"),
+]
+G[2]["cierre"] = "«¿Quieres un ejemplo de entreno así? Comenta NIVEL0 y te lo mando.»"
+G[2]["desc"] = "Las 3 claves para que tu entreno de 20 minutos sea efectivo. Entrenamiento de fuerza para mujeres que empiezan desde cero."
+G[3]["filas"][1:] = [
+    ("3-14 s", "Sentadilla con mayor profundidad, de perfil.", "«Baja más.» Explicas cómo la profundidad puede influir en el estímulo del glúteo.", "✓ Más profundidad"),
+    ("14-24 s", "Sentadilla a cajón.", "«Si tienes limitaciones de movilidad, prueba la sentadilla a cajón.»", "Alternativa: sentadilla a cajón"),
+]
+G[3]["desc"] = "Sentadillas y no notas el glúteo: cómo influye la profundidad, y una alternativa si tienes limitaciones de movilidad."
+G[4]["filas"][1:] = [
+    ("3-10 s", "Repites el error.", "«Este es el error que podemos cometer al hacer abdominales.»", "✗ El error"),
+    ("10-17 s", "Abdominal con la posición corregida.", "Explicas cómo corregir la posición.", "✓ Así sí"),
+    ("17-26 s", "Dead bug.", "«Y como alternativa: el dead bug.»", "Alternativa: dead bug"),
+]
+G[4]["desc"] = "Abdominales y solo notas el cuello: el error, cómo corregir la posición y el dead bug como alternativa."
+G[5]["filas"][1:] = [
+    ("3-9 s", "Repites el puente arqueando demasiado.", "«El error: arquear demasiado la espalda.»", "✗ Arquear demasiado"),
+    ("9-17 s", "Puente controlando pelvis y costillas.", "Explicas cómo controlar la pelvis y las costillas.", "✓ Controla pelvis y costillas"),
+    ("17-25 s", "Puente con un recorrido más corto.", "«Y si aun así lo notas: recorrido más corto.»", "Alternativa: recorrido más corto"),
+]
+G[5]["desc"] = "Puente de glúteo y notas las lumbares: el error, cómo controlar pelvis y costillas y una alternativa con recorrido más corto."
+G[6]["gancho"] = "«¿Todavía no puedes hacer una flexión? Empieza por aquí»"
+G[6]["filas"] = [
+    ("0-3 s", "Intentas una flexión y te quedas abajo. Risa a cámara.", "«¿Todavía no puedes hacer una flexión? Empieza por aquí.»", "¿Aún no te sale una flexión?"),
+    ("3-10 s", "Una flexión convencional bien hecha.", "«Esta es una flexión convencional.»", "La flexión convencional"),
+    ("10-17 s", "Planos de la musculatura implicada.", "Explicas qué musculatura necesitas trabajar.", "Qué tienes que trabajar"),
+    ("17-25 s", "Flexión inclinada con las manos en una silla o un banco estable.", "«Para empezar: flexiones inclinadas, con las manos en una silla o un banco estable.»", "Empieza inclinada"),
+]
+G[6]["cierre"] = "«¿Ya te sale una flexión o aún no? Dímelo en comentarios.»"
+G[6]["desc"] = "¿Todavía no puedes hacer una flexión? Qué tienes que trabajar y cómo empezar con flexiones inclinadas."
+G[7]["filas"][3] = ("10-20 s", "Corte a cámara, plano cerrado.", "«¿No sería mejor tener tres entrenos adaptados, realmente efectivos, de treinta minutos?»", "3 entrenos de 30' que puedas mantener")
+G[8]["filas"][1:] = [
+    ("3-12 s", "Sigues a cámara.", "«Nos obsesiona perder barriga, cartucheras o peso…»", "Barriga · Cartucheras · Kilos"),
+    ("12-22 s", "Planos tuyos entrenando con peso.", "«…y se nos olvida lo importante que es ganar fuerza.»", "¿Y la fuerza?"),
+    ("22-32 s", "Planos cotidianos: escaleras, niño en brazos, la compra.", "«Mantener nuestras capacidades físicas mejora nuestro físico y nuestra salud.»", "Más fuerza = más salud"),
+]
+G[9]["filas"][3] = ("15-20 s", "Plato variado: proteína, legumbre, verdura y fruta.", "—", "5 · La clave no es comer menos: es comer de todo (y dejar menos sitio a la comida basura)")
+G[11]["gancho"] = "«¿Por qué es tan importante que las mujeres entrenemos fuerza?»"
+G[11]["filas"] = [
+    ("0-3 s", "A cámara, con una mancuerna en la mano.", "«¿Por qué es tan importante que las mujeres entrenemos fuerza?»", "Fuerza a partir de los 35"),
+    ("3-12 s", "Corte a tus libros y apuntes de la carrera.", "«Para mantener la masa muscular…»", "1 · Masa muscular"),
+    ("12-20 s", "Entrenando con peso.", "«…mejorar la salud ósea…»", "2 · Salud ósea"),
+    ("20-30 s", "A cámara.", "«…y conservar nuestra autonomía. Sobre todo a partir de los 35-40 y en la transición a la menopausia.»", "3 · Autonomía"),
+]
+G[12]["filas"][1:] = [
+    ("3-12 s", "Más vídeos tuyos embarazada.", "«En un embarazo sin complicaciones, el ejercicio ayuda a mantener la condición física, trabajar la fuerza y sentirte mejor.»", "Condición física · Fuerza · Bienestar"),
+    ("12-22 s", "Ejercicios adaptados.", "«Lo importante es adaptar el entrenamiento a cada etapa y a cada situación.»", "Adaptar a cada etapa"),
+]
+G[12]["desc"] = "¿Por qué entrenar durante el embarazo? Lo que aprendí entrenando en el mío. Siempre con el visto bueno de tu ginecóloga o matrona."
+G[13]["filas"][1:] = [
+    ("3-12 s", "A cámara.", "«Importa mucho más el conjunto de tu alimentación.»", "Importa el conjunto"),
+    ("12-20 s", "Dos platos del día comparados en pantalla.", "«Las cantidades, la calidad nutricional y los hábitos que mantienes.»", "Cantidad · Calidad · Hábitos"),
+]
+G[14]["filas"][1:] = [
+    ("3-12 s", "Subes escaleras, caminas, te levantas de una silla.", "«El glúteo extiende la cadera, estabiliza la pelvis y te ayuda a moverte.»", "Extensión de cadera · Pelvis · Movimiento"),
+    ("12-22 s", "Las tres situaciones, una tras otra.", "«Por eso lo usas para subir escaleras, caminar o levantarte de una silla.»", "Escaleras · Caminar · Levantarte"),
+]
+G[18]["filas"][1:] = [
+    ("3-12 s", "A cámara.", "«El problema es que estaba comparando dos plataformas que no tienen nada que ver.»", "No es lo mismo"),
+    ("12-22 s", "3 segundos de Level Up por dentro.", "«Una cosa es tener acceso a cientos de entrenamientos sueltos, y otra muy distinta tener una planificación bien ordenadita pensada por mí, que llevo años formándome y trabajando con mujeres reales.»", "Entrenos sueltos ≠ un plan"),
+    ("22-28 s", "A cámara.", "«Esa es la diferencia: no pagas por mil entrenos, pagas para que yo te guíe en tu proceso.»", "No pagas por mil entrenos"),
+]
+
 for i, g in enumerate(G):
     n += 1
     num = i + 1
@@ -596,8 +678,6 @@ fts = [
      "<a href=\"https://petapixel.com/2025/01/23/instagram-swaps-square-profile-grids-for-rectangles/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">petapixel.com</a> · <a href=\"https://www.kapwing.com/resources/instagrams-new-grid-layout-size-and-dimensions-2025/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">kapwing.com</a>"),
     ("Tus propios datos", "Tu informe de mayo a octubre: el reel de la piscina (104K) es el que más seguidoras trajo (511) y más se guardó (1.690).",
      "Informe de Instagram que nos pasaste"),
-    ("Datos de los guiones", "Pérdida de músculo desde los 30 (3-5 % por década): Oficina de Salud de la Mujer del Gobierno de EE. UU. Fuerza 2 días a la semana y 150 min en el embarazo: OMS.",
-     "<a href=\"https://www.womenshealth.gov/sarcopenia\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">womenshealth.gov</a> · <a href=\"https://www.paho.org/es/noticias/4-12-2020-elige-vivir-sano-opsoms-chile-presentaron-nuevas-recomendaciones-sobre-actividad\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">OMS</a>"),
 ]
 fh = ""
 for i, (t, txt, src) in enumerate(fts):
