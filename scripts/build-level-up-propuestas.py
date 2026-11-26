@@ -615,8 +615,13 @@ LUG = [
 SIN_VOZ_ = SIN_VOZ
 # 01 · Espalda
 G[0]["gancho"] = "«¿Te duele aquí cuando acabas el día?»"
-G[0]["filas"][0] = ("0-2 s", "En el salón: sueltas la mochila (o dejas los juguetes), te llevas la mano a la lumbar y haces una mueca.",
-                    "«¿Te duele aquí cuando acabas el día?» Y sin pausa: «Haz esto antes de cenar.»", "¿Te duele aquí al acabar el día?")
+G[0]["filas"][0] = ("0-2 s",
+                    "En el salón: sueltas la mochila de trabajar, te llevas la mano a la lumbar y haces una mueca. "
+                    "<b>Graba este plano dos veces</b>, una con cada gancho: así sacamos dos versiones del vídeo y vemos cuál funciona mejor.",
+                    "<b>Versión A (nuestra):</b> «¿Te duele aquí cuando acabas el día?»<br>"
+                    "<b>Versión B (la tuya):</b> «¿Terminas el día con dolor de espalda?»<br>"
+                    "En las dos, sin pausa: «Haz esto antes de cenar.»",
+                    "¿Te duele aquí al acabar el día?")
 G[0]["desc"] = "Dolor de espalda después de trabajar o de un día con niños: 3 movimientos de movilidad para hacer en casa antes de cenar. Si el dolor es fuerte o no se va, consulta con un profesional."
 G[0]["port"] = "¿Te duele aquí?"
 # 02 · 15 minutos: hora de inicio y de fin en vez de cronómetro fijo
