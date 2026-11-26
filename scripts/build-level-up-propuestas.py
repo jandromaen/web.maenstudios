@@ -746,6 +746,16 @@ G[10]["filas"] = [
     ("10-15 s", "Derecha: entreno terminado, te vas a la ducha. Izquierda: sigues eligiendo vídeo.", SIN_VOZ_, "El tiempo lo tenías. Te faltaba el plan."),
 ]
 G[10]["desc"] = "No te falta tiempo para entrenar en casa: te falta un plan. 20 minutos con plan cunden más que una hora buscando qué hacer."
+G[10]["filas"] = [
+    ("0-3 s", "En el salón, a cámara. Plano fijo con el móvil apoyado.",
+     "<b>(A cámara)</b> «Si tienes una amiga que siempre dice que no tiene tiempo para entrenar, mándale esto.»", ""),
+    ("3-10 s", "Sentada en el sofá, pasando vídeos en el móvil. Plano fijo.",
+     "<b>(Voz en off)</b> «Una hora buscando qué entreno hacer, cambiando de idea a cada vídeo…»", ""),
+    ("10-18 s", "Entrenando en la esterilla del salón. Plano fijo, el mismo encuadre.",
+     "<b>(Voz en off)</b> «…o veinte minutos con un plan: sabes lo que toca y lo haces.»", ""),
+    ("18-22 s", "A cámara, plano cerrado.", "<b>(A cámara)</b> «No te falta tiempo. Te falta un plan.»", ""),
+]
+G[10]["cierre"] = "<b>(A cámara)</b> «Mándaselo y que empiece hoy.»"
 # 13 · Embarazo: montaje con tu material del Drive
 G[12]["filas"] = [(a, b.replace("Un vídeo tuyo", "Vídeo tuyo del Drive").replace("Más vídeos tuyos", "Más vídeos tuyos del Drive").replace("Ejercicios adaptados.", "Planos del Drive, entrenando embarazada."), c, d) for a, b, c, d in G[12]["filas"]]
 G[12]["filas"] = [(a, b, ("(Voz en off) " + c if not c.startswith("(Voz") else c), d) for a, b, c, d in G[12]["filas"]]
@@ -768,6 +778,7 @@ for g, im in zip(G, ["g01","g02","g03","pared","g05","g06","g07","g08","g09","g1
 for g, (k, t) in zip(G, LUG):
     g["lugar"], g["lugar_txt"] = k, t
 G[8]["lugar_txt"] = "Porche de ladrillo, plano cerrado a cámara."
+G[10]["lugar_txt"] = "Todo en el salón, con el móvil fijo. Planos sencillos: sofá, esterilla y a cámara."
 
 # 06 y 07 · dos versiones del hook
 G[5]["hooks"] = [
