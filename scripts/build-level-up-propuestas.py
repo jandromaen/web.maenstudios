@@ -812,6 +812,11 @@ G[13]["ctas"] = [
     ("A cámara.", "<b>(A cámara)</b> «¿Qué mito te has creído durante años? Dímelo y hago un vídeo.»"),
     ("El mismo cierre, grabado aparte, a cámara.", "<b>(A cámara)</b> «Hay muchos mitos sobre la alimentación. ¿Cuál te gustaría que comentase?»"),
 ]
+G[14]["hooks"] = [
+    ("Te levantas de una silla con esfuerzo.", "«Tu glúteo no es solo estética: es lo que te levanta de la silla.»"),
+    ("Grabado aparte: a cámara, plano cerrado.", "<b>(A cámara)</b> «¿Por qué entrenar los glúteos es importante más allá de lo estético?»"),
+]
+G[14]["cierre"] = "«Guarda este vídeo para tu próximo entreno.»"
 
 # 06 y 07 · dos versiones del hook
 G[5]["hooks"] = [
