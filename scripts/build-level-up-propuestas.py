@@ -79,7 +79,7 @@ def tabla(filas, x, y, w, d=0, cierre=None):
             f'<td style="padding:12px 18px 12px 12px;vertical-align:top;font-weight:800;white-space:nowrap">{t}{etiqueta}</td>'
             f'<td style="padding:12px 18px 12px 12px;vertical-align:top">{ve}</td>'
             f'<td style="padding:12px 18px 12px 12px;vertical-align:top">{dice}</td>'
-            f'<td style="padding:12px 12px 12px 12px;vertical-align:top">{txt}</td></tr>'
+            f'<td style="padding:12px 12px 12px 12px;vertical-align:top;color:#8A8580;font-style:italic">Se encarga Jandro en edición</td></tr>'
         )
     return (f'<div class="abs a" style="left:{x}px;top:{y}px;width:{w}px;--d:{d}">'
             f'<table style="width:100%;border-collapse:collapse;font-size:19px;line-height:1.38;color:{INK}">'
