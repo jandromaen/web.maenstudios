@@ -135,10 +135,10 @@ n += 1
 DEST = [
     ("empieza", "Empieza aquí", "Qué es Level Up, cómo funciona y la prueba de 5 días con el enlace."),
     ("opiniones", "Opiniones", "Tus «Mensajitos»: capturas de clientas y sus resultados."),
-    ("nivel0", "Nivel 0", "Ejercicios y rutinas cortas para empezar desde cero."),
+    ("nivel0", "Entrenos", "Tus entrenos con clientas: profesionalidad y trabajo real."),
     ("sobremi", "Sobre mí", "Quién eres, tu formación y por qué creaste Level Up."),
     ("dudas", "Dudas", "Precio, tiempo, material, cancelación: lo que más te preguntan."),
-    ("mivida", "Mi vida", "Kite, viajes y día a día. Une Lifestyle 2025 y 2026 y Kitesurf."),
+    ("mivida", "Mi vida", "Viajes y día a día. Une Lifestyle 2025 y 2026; fuera la de KF."),
 ]
 dh = ""
 for i, (k, nom, txt) in enumerate(DEST):
@@ -582,26 +582,87 @@ for g in G:
     g["filas"] = [(a, b, (SIN_VOZ if c.startswith("—") else c), d) for a, b, c, d in g["filas"]]
 
 LUG = [
-    ("salon", "Gancho en la entrada principal, soltando la mochila. Los movimientos, en la alfombra del salón."),
+    ("salon", "Todo en el salón: la llegada con la mochila y los movimientos en la alfombra."),
     ("bar", "Sofá del salón del bar. El circuito, ahí mismo: la flexión, con las manos en el sofá."),
     ("porche", "Porche cubierto: espacio para enseñar cada clave entrenando."),
     ("piscina", "Terraza de la piscina. Mismo encuadre en los 3 de la mini serie."),
     ("piscina", "Terraza de la piscina, mismo encuadre que el anterior."),
     ("piscina", "Terraza de la piscina, mismo encuadre que los anteriores."),
     ("ladrillo", "Porche de ladrillo: la silla y la mesa para la flexión inclinada."),
-    ("recibidor", "Día 1: tu gimnasio. Día 2: la escalera del recibidor. Día 4: el sofá del salón del bar."),
+    ("salon", "Día 1: salón. Día 2: la escalera del recibidor. Día 4: el sofá."),
     ("ladrillo", "Porche de ladrillo, plano cerrado. Los planos cotidianos, en la escalera del recibidor."),
     ("bar", "Planos de ti por la casa: zapatillas en el recibidor, comida en el comedor, entreno en la terraza."),
-    ("porche", "Lado de 20 minutos: porche cubierto. Lado de 1 hora: tu gimnasio."),
+    ("salon", "Salón de la chimenea, las dos mitades en el mismo sitio."),
     ("ladrillo", "Porche de ladrillo, a cámara. Los libros, en el salón."),
-    ("salon", "Tus vídeos antiguos y hoy, a cámara junto a la ventana del salón de la chimenea."),
+    ("salon", "Montaje con tus vídeos de embarazada del Drive y voz en off."),
     ("bar", "Mesa del comedor junto al bar, por la noche y con las lámparas encendidas."),
     ("recibidor", "La escalera del recibidor para subir escaleras. Los ejercicios, en la terraza de la piscina."),
     ("salon", "Realidad: la alfombra del salón con los juguetes. Otra opción: el tobogán de la fachada."),
     ("salon", "Alfombra del salón de la chimenea, con los juguetes alrededor."),
-    ("recibidor", "Puerta de madera del recibidor."),
+    ("recibidor", "Puerta del recibidor, en selfie."),
     ("ladrillo", "Porche de ladrillo, el mismo fondo que en Mitos 35+."),
 ]
+# ── Cambios acordados con Lucía en la reunión del 25 nov ────────────────
+SIN_VOZ_ = SIN_VOZ
+# 01 · Espalda
+G[0]["gancho"] = "«Si te pasas el día sentada, tu espalda acaba así. Dame tres minutos»"
+G[0]["filas"][0] = ("0-3 s", "En el salón: llegas del trabajo con la mochila (o recogiendo juguetes) y te llevas la mano a la lumbar.",
+                    "«Si te pasas el día sentada, tu espalda acaba así. Dame tres minutos.»", "¿Espalda cargada al final del día?")
+# 02 · 15 minutos: hora de inicio y de fin en vez de cronómetro fijo
+G[1]["filas"][1] = ("3-6 s", "Te levantas. En pantalla, la hora a la que empiezas.", "«Tres ejercicios, entre diez y quince minutos.»", "Empiezo: 18:00")
+G[1]["filas"][3] = ("20-24 s", "Cortes rápidos hasta el final. En pantalla, la hora a la que terminas.", "«Y aún te sobra tiempo para la ducha.»", "Termino: 18:15")
+# 03 · 20': el cierre invita a comentar para corregir
+G[2]["obj"] = "Comentarios"
+G[2]["cierre"] = "«¿Cuál de las tres te pasa a ti? Comenta y te digo cómo corregirlo.»"
+G[2]["filas"] = [(a, (b + " En edición, planos de apoyo." if i else b), c, d) for i, (a, b, c, d) in enumerate(G[2]["filas"])]
+# 04 · Sentadilla: voz en off y pantalla partida
+G[3]["filas"][0] = ("0-3 s", "Plano tuyo tocándote el cuádriceps, con cara de molestia.", "(Voz en off) «Si haces sentadillas y solo las notas en los cuádriceps, mira esto.»", "¿Sentadillas y no notas el glúteo?")
+G[3]["filas"][1] = ("3-14 s", "Pantalla partida: ✗ sentadilla corta / ✓ sentadilla con más profundidad.", "«Baja más.» Explicas cómo la profundidad puede influir en el estímulo del glúteo.", "✗ / ✓ Más profundidad")
+# 05 · Abdominales: la alternativa, por palabra clave
+G[4]["filas"] = G[4]["filas"][:3]
+G[4]["obj"] = "Comentarios con palabra clave"
+G[4]["cierre"] = "«¿Quieres una alternativa para no notarlo nada? Comenta ABDOMEN y te la mando.» (Con las respuestas, sale otro vídeo.)"
+G[4]["desc"] = "Abdominales y solo notas el cuello: el error y cómo corregir la posición. Comenta ABDOMEN y te mando una alternativa."
+# 08 · Día 1 vs. día 4, en casa
+G[7]["gancho"] = "Texto: «Día 1 entrenando en casa» (sin hablar)"
+G[7]["filas"] = [
+    ("0-4 s", "En el salón, con todo el material fuera (esterilla, mancuernas, banda), dándolo todo, exagerado.", SIN_VOZ_, "Día 1 entrenando en casa"),
+    ("4-7 s", "Bajas la escalera del recibidor de lado, por las agujetas.", "«Ay. Ay. Ay.»", "Día 2"),
+    ("7-10 s", "En el sofá, con la esterilla enrollada en un rincón.", SIN_VOZ_, "Día 4"),
+    ("10-20 s", "Corte a cámara, plano cerrado.", "«¿No sería mejor tener tres entrenos adaptados, realmente efectivos, de treinta minutos?»", "3 entrenos de 30' que puedas mantener"),
+]
+G[7]["desc"] = "¿Empiezas a entrenar en casa con muchas ganas y lo dejas a la semana? No es falta de fuerza de voluntad: es empezar demasiado fuerte."
+# 09 · Más directo
+G[8]["gancho"] = "«Deja de intentar ser más pequeña. Empieza a ser más fuerte»"
+G[8]["filas"][0] = ("0-3 s", "Plano cerrado a cámara. Sin música encima.", "«Deja de intentar ser más pequeña. Empieza a ser más fuerte.»", "Más fuertes, no más pequeñas")
+# 10 · 5 cosas: «la última es la mejor» y voz en off
+G[9]["gancho"] = "Texto: «5 cosas que me habría gustado saber cuando empecé a entrenar (la última es la mejor)»"
+G[9]["filas"] = [(a, b, ("(Voz en off) Lees cada punto." if i else "(Voz en off) «Cinco cosas que me habría gustado saber cuando empecé a entrenar. La última es la mejor.»"), (d + " (la última es la mejor)" if i == 0 else d)) for i, (a, b, c, d) in enumerate(G[9]["filas"])]
+# 11 · Replanteado en casa
+G[10]["port"] = "Sin plan vs. con plan"
+G[10]["filas"] = [
+    ("0-3 s", "Pantalla partida, las dos en el salón.", SIN_VOZ_, "Mándale esto a tu amiga que «no tiene tiempo»"),
+    ("3-10 s", "Izquierda: buscas un vídeo en el móvil, cambias de idea, recoges, vuelves a buscar. Derecha: abres Level Up y empiezas el circuito.", SIN_VOZ_, "20 minutos sin plan · 20 minutos con plan"),
+    ("10-15 s", "Derecha: entreno terminado, te vas a la ducha. Izquierda: sigues eligiendo vídeo.", SIN_VOZ_, "El tiempo lo tenías. Te faltaba el plan."),
+]
+G[10]["desc"] = "No te falta tiempo para entrenar en casa: te falta un plan. 20 minutos con plan cunden más que una hora buscando qué hacer."
+# 13 · Embarazo: montaje con tu material del Drive
+G[12]["filas"] = [(a, b.replace("Un vídeo tuyo", "Vídeo tuyo del Drive").replace("Más vídeos tuyos", "Más vídeos tuyos del Drive").replace("Ejercicios adaptados.", "Planos del Drive, entrenando embarazada."), c, d) for a, b, c, d in G[12]["filas"]]
+G[12]["filas"] = [(a, b, ("(Voz en off) " + c if not c.startswith("(Voz") else c), d) for a, b, c, d in G[12]["filas"]]
+# 14 · Hidratos: balance calórico del día
+G[13]["filas"][1] = ("3-12 s", "A cámara, en la mesa del comedor.", "«Lo que cuenta es el balance calórico de todo el día, no la hora a la que comes.»", "Cuenta el balance del día")
+# 16 · Expectativa vs. realidad con tu hijo
+G[15]["filas"][1] = ("4-9 s", "Corte seco a la realidad: haces un ejercicio en el suelo y tu hijo aparece y se te sube encima, sin preparar.", SIN_VOZ_, "Realidad")
+# 17 · Música épica en edición
+G[16]["filas"][0] = ("0-4 s", "Te preparas: cascos, esterilla, mancuernas. Música épica en edición.", SIN_VOZ_, "Cuando por fin tengo 20 minutos para entrenar")
+# 18 · Selfie con tu hijo
+G[17]["filas"] = [
+    ("0-4 s", "Selfie con la cámara frontal, como un vídeo casual: zapatillas puestas, dudando en la puerta.", SIN_VOZ_, "Mi mayor motivación cuando salgo a correr"),
+    ("4-6 s", "Tu hijo aparece o te llama de fondo, sin preparar.", "(Él) «¡MAMÁÁÁÁ!»", "—"),
+    ("6-8 s", "Sales corriendo, cámara movida.", SIN_VOZ_, "30 minutos de silencio garantizados"),
+]
+G[17]["cierre"] = "Texto final: «¿Te suena?». El final puede salir sobre la marcha: si sale mejor otra cosa, se usa."
+
 for g, im in zip(G, ["g01","g02","g03","pared","g05","g06","g07","g08","g09","g10","g11","g12","mat","pasta","g15","g16","g17","g18","clienta"]):
     g["foto"] = im
 for g, (k, t) in zip(G, LUG):
@@ -634,10 +695,10 @@ for i, g in enumerate(G):
 # ── Laponia ──────────────────────────────────────────────────────────────
 n += 1
 lap = [
-    ("Entrena donde estés: Laponia", "Rutina de 10 minutos en la nieve o en la puerta de la cabaña, con el paisaje detrás. Es tu formato de escenario inesperado: el de la piscina es tu reel que más seguidoras te ha traído."),
-    ("Expectativa vs. realidad: viajar con niños a Laponia", "El primer capítulo de la serie nueva, grabado allí."),
-    ("Entrenar de viaje en 15 minutos", "3 ejercicios en la habitación, sin material. Útil para quien viaja en Navidad, y fácil de guardar."),
-    ("Aquí sí hay viento", "Si hay snowkite, un giro a tu serie de los días sin kite: esta vez el viento sobra."),
+    ("Entreno de 15-20 minutos a −25 °C", "Mantener la rutina en el viaje: un entreno corto con el frío extremo de fondo. Lo grabas allí y se publica a la vuelta."),
+    ("Expectativa vs. realidad: viajar con niños", "En historias: lo que pensabas que sería entrenar de viaje y lo que de verdad pasa con los niños."),
+    ("El gimnasio del hotel", "Suelo azul de guardería y luz de hospital: para historias con humor. El entreno, mejor en la habitación."),
+    ("Entrenar en la habitación", "Si fuera no se puede: el mismo entreno de 15-20 minutos, sin material, en la habitación."),
 ]
 lh = ""
 for i, (t, txt) in enumerate(lap):
@@ -661,10 +722,10 @@ add("laponia", "Laponia", sec(
 # ── Orden de publicación ─────────────────────────────────────────────────
 n += 1
 sem = [
-    ("Esta semana", "24-29 nov", [("Jue 26", "04 · Sentadilla sin glúteo (1/3)"), ("Sáb 28", "17 · Mis 20 minutos (¡MAMIIII!)")]),
-    ("Semana de Laponia", "1-6 dic · programada", [("Mar 1", "05 · Abdominales sin cuello (2/3)"), ("Jue 3", "06 · Puente sin lumbares (3/3)"), ("Sáb 5", "02 · 12 minutos bastan")]),
-    ("Vuelta", "8-13 dic", [("Mar 8", "12 · Fuerza después de los 35"), ("Jue 10", "Laponia · Entrena donde estés"), ("Sáb 12", "08 · Día 1 vs. día 4")]),
-    ("Antes de Navidad", "15-20 dic", [("Mar 15", "09 · Más fuertes"), ("Jue 17", "19 · ¿Una más barata?"), ("Sáb 19", "18 · Mi mayor motivación")]),
+    ("Este domingo", "29 nov", [("Dom 29", "04 · Sentadilla sin glúteo (1/3)")]),
+    ("Semana de Laponia", "1-6 dic · programada", [("Mar 1", "05 · Abdominales sin cuello (2/3)"), ("Jue 3", "06 · Puente sin lumbares (3/3)"), ("Dom 6", "17 · Mis 20 minutos (¡MAMIIII!)")]),
+    ("Vuelta", "8-13 dic", [("Mar 8", "12 · Fuerza después de los 35"), ("Jue 10", "Laponia · Entreno a −25 °C"), ("Dom 13", "02 · 15 minutos bastan")]),
+    ("Antes de Navidad", "15-20 dic", [("Mar 15", "09 · Más fuertes"), ("Jue 17", "19 · ¿Una más barata?"), ("Dom 20", "18 · Mi mayor motivación")]),
 ]
 oh = ""
 for i, (t, f, items) in enumerate(sem):
@@ -679,7 +740,7 @@ for i, (t, f, items) in enumerate(sem):
         oh += (p(dia, x + 30, y, 340, size=18, d=i + 2, cls="muted", extra="font-weight:700;")
                + p(g, x + 30, y + 28, 336, size=22, d=i + 2, cls="", extra="font-weight:700;line-height:1.25;"))
 add("orden", "Orden de publicación", sec(
-    eyebrow("Calendario · martes, jueves y sábado")
+    eyebrow("Calendario · martes, jueves y domingo")
     + titulo("Por dónde empezar", size=56)
     + oh
     + p("La mini serie «Si notas…» va seguida para que quien vea una busque las otras. Humor, enseñanza y conexión, mezclados cada semana. El resto de guiones, en enero.",

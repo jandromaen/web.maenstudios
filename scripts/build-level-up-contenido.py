@@ -832,7 +832,7 @@ dias = [
     ("Lunes", "Grabar · 2-2,5 h", "Una sola sesión: los 3 reels de la semana y un banco de clips para historias. Misma ropa, mismo sitio.", ACENTO),
     ("Martes", "Publicar", "Nivel 0 + historias con enlace.", "#2A2D2C"),
     ("Jueves", "Publicar", "Mitos 35+ o Dentro de Level Up.", "#2A2D2C"),
-    ("Sábado", "Publicar", "Entrena donde estés (Cardedeu), ¿Te ha pasado? o No hay viento.", "#2A2D2C"),
+    ("Domingo", "Publicar", "Entrena donde estés (Cardedeu), ¿Te ha pasado? o No hay viento.", "#2A2D2C"),
     ("Cada día", "Historias · 10 min", "3 historias: algo real, una encuesta o pregunta, y 2-3 veces por semana el enlace.", "#2A2D2C"),
     ("Por las noches", "Editar", "Como ahora, con InShot o Edits. Lo programas todo desde Meta Business Suite.", "#2A2D2C"),
 ]
@@ -934,7 +934,7 @@ fases = [
         ("Guiones de los 3 primeros reels.", "Jandro"),
         ("Lunes 23: grabar los 3 de una sentada.", "Lucía"),
         ("Plantillas de portada por formato.", "Jandro"),
-        ("Publicar martes, jueves y sábado.", "Lucía"),
+        ("Publicar martes, jueves y domingo.", "Lucía"),
         ("Historias diarias, 2-3 con enlace.", "Lucía"),
     ]),
     ("Semanas 3-4", "30 nov–13 dic", "Sistema", [
@@ -1038,7 +1038,7 @@ pasos = [
         "<b>Estética</b>: 2-3 colores, 1-2 tipografías, estilo de subtítulos y una plantilla de portada por formato. Me la pasas y la revisamos.",
         "<b>Biografía</b>: founder de Level Up Workout, a quién ayudas y un único enlace a la prueba gratis. Me la pasas antes de publicarla.",
         "<b>Guiones de las 2 primeras semanas</b>: 6 vídeos con gancho, idea y cierre, a partir de las 10 ideas.",
-        "<b>Calendario</b>: martes, jueves y sábado, con las 2 primeras semanas planificadas.",
+        "<b>Calendario</b>: martes, jueves y domingo, con las 2 primeras semanas planificadas.",
     ]),
     ("Desde el lunes 23", "Cada semana", "#F4F1EC", [
         "<b>Grabar de una sentada</b> los 3 reels de la semana y clips para historias.",
