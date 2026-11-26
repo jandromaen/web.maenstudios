@@ -117,7 +117,7 @@ export const CONTENIDO: Contenido = {
   "jue-26-stories": {
     "medios": [
       {
-        "url": "/pitch/donlay-calendario/noviembre/jue-26-thanksgiving.webp",
+        "url": "/pitch/donlay-calendario/noviembre/jue-26-thanksgiving-v2.webp",
         "tipo": "imagen"
       }
     ]
