@@ -657,7 +657,12 @@ G[3]["hooks"] = [
     ("El mismo plano, grabado aparte: te tocas el cuádriceps, con cara de molestia.",
      "(Voz en off) «¿Haces sentadillas y no notas que trabajen los glúteos?»"),
 ]
-G[3]["filas"][1] = ("3-14 s", "Pantalla partida: ✗ sentadilla corta / ✓ sentadilla con más profundidad.", "«Baja más.» Explicas cómo la profundidad puede influir en el estímulo del glúteo.", "✗ / ✓ Más profundidad")
+G[3]["filas"][1:] = [
+    ("3-14 s", "Te grabas haciendo una sentadilla con mayor profundidad, de perfil.",
+     "Explicas cómo la profundidad puede influir en el estímulo del glúteo.", "Más profundidad"),
+    ("14-24 s", "Te grabas haciendo la alternativa: sentadilla a cajón.",
+     "«Si tienes limitaciones de movilidad, prueba la sentadilla a cajón.»", "Alternativa: sentadilla a cajón"),
+]
 # 05 · Abdominales: la alternativa, por palabra clave
 G[4]["filas"] = G[4]["filas"][:3]
 G[4]["obj"] = "Comentarios con palabra clave"
