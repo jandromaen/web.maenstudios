@@ -721,6 +721,20 @@ for g, im in zip(G, ["g01","g02","g03","pared","g05","g06","g07","g08","g09","g1
 for g, (k, t) in zip(G, LUG):
     g["lugar"], g["lugar_txt"] = k, t
 
+# 06 y 07 · dos versiones del hook
+G[5]["hooks"] = [
+    ("Puente con la espalda arqueada y una flecha roja en la lumbar.",
+     "«Si en el puente de glúteo notas las lumbares, es por esto.»"),
+    ("El mismo plano, grabado aparte: puente con la espalda arqueada.",
+     "«¿Haces puentes de glúteo y notas más las lumbares?»"),
+]
+G[6]["hooks"] = [
+    ("Intentas una flexión y te quedas abajo. Risa a cámara.",
+     "«¿Todavía no puedes hacer una flexión? Empieza por aquí.»"),
+    ("El mismo plano, grabado aparte: intentas una flexión y te quedas abajo.",
+     "«¿No eres capaz de hacer bien una flexión?»"),
+]
+
 for i, g in enumerate(G):
     n += 1
     num = i + 1
