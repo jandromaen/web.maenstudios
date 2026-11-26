@@ -840,6 +840,9 @@ G[6]["ctas"] = [
     ("El mismo cierre, grabado aparte, a cámara.", "«Prueba este ejercicio y escríbeme si sigues teniendo problemas para hacer flexiones.»"),
 ]
 
+# 19 · «¿Una más barata?» fuera: se grabará calcando la referencia que nos pase Lucía
+del G[18]
+
 for i, g in enumerate(G):
     n += 1
     num = i + 1
@@ -893,7 +896,7 @@ sem = [
     ("Este domingo", "29 nov", [("Dom 29", "04 · Sentadilla sin glúteo (1/3)")]),
     ("Semana de Laponia", "1-6 dic · programada", [("Mar 1", "05 · Abdominales sin cuello (2/3)"), ("Jue 3", "06 · Puente sin lumbares (3/3)"), ("Dom 6", "17 · Mis 20 minutos (¡MAMIIII!)")]),
     ("Vuelta", "8-13 dic", [("Mar 8", "12 · Fuerza después de los 35"), ("Jue 10", "Laponia · Entreno a −25 °C"), ("Dom 13", "02 · 15 minutos bastan")]),
-    ("Antes de Navidad", "15-20 dic", [("Mar 15", "09 · Más fuertes"), ("Jue 17", "19 · ¿Una más barata?"), ("Dom 20", "18 · Mi mayor motivación")]),
+    ("Antes de Navidad", "15-20 dic", [("Mar 15", "09 · Más fuertes"), ("Jue 17", "11 · Sin plan vs. con plan"), ("Dom 20", "18 · Mi mayor motivación")]),
 ]
 oh = ""
 for i, (t, f, items) in enumerate(sem):
