@@ -817,6 +817,8 @@ G[14]["hooks"] = [
     ("Grabado aparte: a cámara, plano cerrado.", "<b>(A cámara)</b> «¿Por qué entrenar los glúteos es importante más allá de lo estético?»"),
 ]
 G[14]["cierre"] = "«Guarda este vídeo para tu próximo entreno.»"
+for k in (15, 16, 17):
+    G[k]["nota"] = "que este vídeo salga de ti, tal cual. Si lo guionizas quedará forzado. Lo de abajo es solo una idea de por dónde ir."
 
 # 06 y 07 · dos versiones del hook
 G[5]["hooks"] = [
@@ -846,7 +848,8 @@ for i, g in enumerate(G):
         + eyebrow(f"Guion {num:02d} de {len(G)} · {g['bloque']}")
         + pill(g["pilar"], 128, 166, PILAR[g["pilar"]], d=0)
         + p(f"Serie: {g['serie']} · Objetivo: <b>{g['obj']}</b> · Dónde: <b>{CASA[g['lugar']]}</b>", 300, 168, 1250, size=20, d=0, cls="muted")
-        + tabla(g["filas"], 128, 230, 1150 if g.get("ref") else 1400, d=1, cierre=g["cierre"], hooks=g.get("hooks"), ctas=g.get("ctas"))
+        + (f'<div class="abs a" style="left:128px;top:222px;width:1400px;padding:14px 20px;border-radius:12px;background:#FFF1E2;font-size:20px;line-height:1.4;color:{INK};--d:1"><b>Mejor natural:</b> {g["nota"]}</div>' if g.get("nota") else "")
+        + tabla(g["filas"], 128, 300 if g.get("nota") else 230, 1150 if g.get("ref") else 1400, d=1, cierre=g["cierre"], hooks=g.get("hooks"), ctas=g.get("ctas"))
         + (video_ref(1318, 230, 222, 395, g["ref"], d=2) + p("Referencia · dale al play", 1318, 637, 222, size=15, d=2, cls="muted", extra="text-align:center;") if g.get("ref") else "")
         + portada(1592, 128, 200, g["foto"], g["serie"].split(" · ")[0], g["port"], d=1)
         + p("Portada", 1592, 492, 200, size=15, d=1, cls="muted", extra="text-align:center;")
