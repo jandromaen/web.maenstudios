@@ -60,23 +60,32 @@ VERDE_HOOK = "#DDF1E4"
 AZUL_CTA = "#DCE7F8"
 
 
-def tabla(filas, x, y, w, d=0, cierre=None):
-    """Guion escalonado por tiempos: el primer plano (hook) en verde y el cierre (CTA) en azul."""
+def tabla(filas, x, y, w, d=0, cierre=None, hooks=None):
+    """Guion escalonado: hook en verde (o dos versiones del hook, cada una como plano aparte) y cierre (CTA) en azul."""
     cab = ("<tr>" + "".join(
         f'<th style="text-align:left;padding:0 18px 10px 12px;font-size:15px;font-weight:800;letter-spacing:.12em;'
         f'text-transform:uppercase;color:{ACENTO_TXT};width:{a}">{t}</th>'
-        for t, a in (("Plano", "9%"), ("Qué se ve", "27%"), ("Qué dices", "39%"), ("Texto en pantalla", "25%"))) + "</tr>")
-    filas = list(filas)
+        for t, a in (("Plano", "11%"), ("Qué se ve", "27%"), ("Qué dices", "38%"), ("Texto en pantalla", "24%"))) + "</tr>")
+    et = lambda txt, col: f"<br><span style='font-size:12px;letter-spacing:.1em;color:{col}'>{txt}</span>"
+    # (nombre, etiqueta, fondo, se ve, dices, estilo extra de la fila)
+    rows = []
+    if hooks:
+        for k, (ve, dice) in enumerate(hooks):
+            rows.append((f"Plano {k + 1}", et(f"HOOK · VERSIÓN {k + 1}", "#2F7A50"), VERDE_HOOK, ve, dice,
+                         "border-left:6px solid #3E9A66;" + ("border-bottom:14px solid #FFFFFF;" if k < len(hooks) - 1 else "")))
+        resto = list(filas)[1:]
+    else:
+        rows.append(("Plano 1", et("HOOK", "#2F7A50"), VERDE_HOOK, filas[0][1], filas[0][2], ""))
+        resto = list(filas)[1:]
+    for (t, ve, dice, txt) in resto:
+        rows.append((f"Plano {len(rows) + 1}", "", "transparent", ve, dice, ""))
     if cierre:
-        filas.append(("Cierre", "—", cierre, "—"))
+        rows.append(("Cierre", et("CTA", "#2D5BA8"), AZUL_CTA, "—", cierre, ""))
     cuerpo = ""
-    for i, (t, ve, dice, txt) in enumerate(filas):
-        fondo = VERDE_HOOK if i == 0 else (AZUL_CTA if cierre and i == len(filas) - 1 else "transparent")
-        etiqueta = "<br><span style='font-size:12px;letter-spacing:.1em;color:#2F7A50'>HOOK</span>" if i == 0 else (
-            "<br><span style='font-size:12px;letter-spacing:.1em;color:#2D5BA8'>CTA</span>" if cierre and i == len(filas) - 1 else "")
+    for (t, etq, fondo, ve, dice, extra) in rows:
         cuerpo += (
-            f'<tr style="background:{fondo};border-bottom:1px solid #EEEAE4">'
-            f'<td style="padding:12px 18px 12px 12px;vertical-align:top;font-weight:800;white-space:nowrap">{t if (cierre and i == len(filas) - 1) else f'Plano {i + 1}'}{etiqueta}</td>'
+            f'<tr style="background:{fondo};border-bottom:1px solid #EEEAE4;border-left:6px solid {fondo if fondo != "transparent" else "#FFFFFF"};{extra}">'
+            f'<td style="padding:12px 18px 12px 12px;vertical-align:top;font-weight:800;white-space:nowrap">{t}{etq}</td>'
             f'<td style="padding:12px 18px 12px 12px;vertical-align:top">{ve}</td>'
             f'<td style="padding:12px 18px 12px 12px;vertical-align:top">{dice}</td>'
             f'<td style="padding:12px 12px 12px 12px;vertical-align:top;color:#8A8580;font-style:italic">Se encarga Jandro en edición</td></tr>'
@@ -615,23 +624,23 @@ LUG = [
 SIN_VOZ_ = SIN_VOZ
 # 01 · Espalda
 G[0]["gancho"] = "«¿Te duele aquí cuando acabas el día?»"
-G[0]["filas"][0] = ("0-2 s",
-                    "En el salón: sueltas la mochila de trabajar, te llevas la mano a la lumbar y haces una mueca. "
-                    "<b>Graba este plano dos veces</b>, una con cada gancho: así sacamos dos versiones del vídeo y vemos cuál funciona mejor.",
-                    "<b>Versión A (nuestra):</b> «¿Te duele aquí cuando acabas el día?»<br>"
-                    "<b>Versión B (la tuya):</b> «¿Terminas el día con dolor de espalda?»<br>"
-                    "En las dos, sin pausa: «Haz esto antes de cenar.»",
-                    "¿Te duele aquí al acabar el día?")
+G[0]["hooks"] = [
+    ("En el salón: sueltas la mochila de trabajar, te llevas la mano a la lumbar y haces una mueca.",
+     "«¿Te duele aquí cuando acabas el día?» Y sin pausa: «Haz esto antes de cenar.»"),
+    ("El mismo plano, grabado aparte: sueltas la mochila, mano a la lumbar y mueca.",
+     "«¿Terminas el día con dolor de espalda?» Y sin pausa: «Haz esto antes de cenar.»"),
+]
 G[0]["desc"] = "Dolor de espalda después de trabajar o de un día con niños: 3 movimientos de movilidad para hacer en casa antes de cenar. Si el dolor es fuerte o no se va, consulta con un profesional."
 G[0]["port"] = "¿Te duele aquí?"
 # 02 · 15 minutos: hora de inicio y de fin en vez de cronómetro fijo
 G[1]["filas"][1] = ("3-6 s", "Te levantas. En pantalla, la hora a la que empiezas.", "«Tres ejercicios, entre diez y quince minutos.»", "Empiezo: 18:00")
 G[1]["filas"][3] = ("20-24 s", "Cortes rápidos hasta el final. En pantalla, la hora a la que terminas.", "«Y aún te sobra tiempo para la ducha.»", "Termino: 18:15")
-G[1]["filas"][0] = ("0-3 s",
-                    "En el sofá, miras el reloj. Cara de «para qué». <b>Graba este plano dos veces</b>, una con cada gancho: así sacamos dos versiones del vídeo y vemos cuál funciona mejor.",
-                    "<b>Versión A (nuestra):</b> «Tengo quince minutos… no me da tiempo a entrenar.» (Pausa.) «¿Seguro?»<br>"
-                    "<b>Versión B (la tuya):</b> «¿Tienes quince minutos libres y piensas que no te da tiempo a entrenar?»",
-                    "Cuando crees que 15 minutos no dan para entrenar")
+G[1]["hooks"] = [
+    ("En el sofá, miras el reloj. Cara de «para qué».",
+     "«Tengo quince minutos… no me da tiempo a entrenar.» (Pausa.) «¿Seguro?»"),
+    ("El mismo plano, grabado aparte: en el sofá, miras el reloj.",
+     "«¿Tienes quince minutos libres y piensas que no te da tiempo a entrenar?»"),
+]
 G[1]["cierre"] = "«Mándaselo a esa persona que siempre dice que no tiene tiempo.»"
 # 03 · 20': el cierre invita a comentar para corregir
 G[2]["obj"] = "Comentarios"
@@ -698,7 +707,7 @@ for i, g in enumerate(G):
         + eyebrow(f"Guion {num:02d} de {len(G)} · {g['bloque']}")
         + pill(g["pilar"], 128, 166, PILAR[g["pilar"]], d=0)
         + p(f"Serie: {g['serie']} · Objetivo: <b>{g['obj']}</b> · Dónde: <b>{CASA[g['lugar']]}</b>", 300, 168, 1250, size=20, d=0, cls="muted")
-        + tabla(g["filas"], 128, 230, 1400, d=1, cierre=g["cierre"])
+        + tabla(g["filas"], 128, 230, 1400, d=1, cierre=g["cierre"], hooks=g.get("hooks"))
         + portada(1592, 128, 200, g["foto"], g["serie"].split(" · ")[0], g["port"], d=1)
         + p("Portada", 1592, 492, 200, size=15, d=1, cls="muted", extra="text-align:center;")
         + foto_casa(1592, 540, 200, 130, g["lugar"], d=2, r=12)
