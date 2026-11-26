@@ -756,6 +756,11 @@ G[10]["filas"] = [
     ("18-22 s", "A cámara, plano cerrado.", "<b>(A cámara)</b> «No te falta tiempo. Te falta un plan.»", ""),
 ]
 G[10]["cierre"] = "<b>(A cámara)</b> «Mándaselo y que empiece hoy.»"
+G[10]["obj"] = "Comentarios con palabra clave"
+G[10]["ctas"] = [
+    ("A cámara.", "<b>(A cámara)</b> «Comenta PLAN y te envío un entreno de veinte minutos para empezar hoy.»"),
+    ("El mismo cierre, grabado aparte, a cámara.", "<b>(A cámara)</b> «¿Quieres que te pase el plan? Coméntamelo y te lo mando.»"),
+]
 # 13 · Embarazo: montaje con tu material del Drive
 G[12]["filas"] = [(a, b.replace("Un vídeo tuyo", "Vídeo tuyo del Drive").replace("Más vídeos tuyos", "Más vídeos tuyos del Drive").replace("Ejercicios adaptados.", "Planos del Drive, entrenando embarazada."), c, d) for a, b, c, d in G[12]["filas"]]
 G[12]["filas"] = [(a, b, ("(Voz en off) " + c if not c.startswith("(Voz") else c), d) for a, b, c, d in G[12]["filas"]]
@@ -1037,7 +1042,7 @@ add("plantillas", "Portadas", sec(
     + titulo("Una sola plantilla de portada", size=56)
     + portada(128, 280, 290, "pared", "Si notas…", "Sentadilla sin glúteo", d=1)
     + portada(448, 280, 290, "g12", "Mitos 35+", "Fuerza después de los 35", d=2)
-    + portada(768, 280, 290, "clienta", "Dentro de Level Up", "¿Una más barata?", d=3)
+    + portada(768, 280, 290, "g11", "¿Te ha pasado?", "Sin plan vs. con plan", d=3)
     + portada(1088, 280, 290, "g17", "¿Te ha pasado?", "Mis 20 minutos", d=4)
     + lista([
         "<b>Siempre igual</b>: foto tuya, el nombre de la serie en pequeño y un título de 2-4 palabras.",
