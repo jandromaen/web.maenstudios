@@ -736,6 +736,8 @@ G[8]["ref"] = "guion09"
 # 10 · 5 cosas: «la última es la mejor» y voz en off
 G[9]["gancho"] = "Texto: «5 cosas que me habría gustado saber cuando empecé a entrenar (la última es la mejor)»"
 G[9]["filas"] = [(a, b, ("(Voz en off) Lees cada punto." if i else "(Voz en off) «Cinco cosas que me habría gustado saber cuando empecé a entrenar. La última es la mejor.»"), (d + " (la última es la mejor)" if i == 0 else d)) for i, (a, b, c, d) in enumerate(G[9]["filas"])]
+G[9]["filas"] = [(t, (ve + " <b>Todo el vídeo va en voz en off: no hablas a cámara.</b>" if i == 0 else ve), dice.replace("(Voz en off)", "<b>(Voz en off)</b>"), txt) for i, (t, ve, dice, txt) in enumerate(G[9]["filas"])]
+G[9]["cierre"] = "<b>(Sin hablar)</b> Texto en pantalla: «¿Cuál te habría gustado saber a ti?»"
 # 11 · Replanteado en casa
 G[10]["port"] = "Sin plan vs. con plan"
 G[10]["filas"] = [
