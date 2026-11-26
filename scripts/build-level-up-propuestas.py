@@ -15,7 +15,7 @@ from pathlib import Path
 _src = Path("scripts/build-level-up-contenido.py").read_text(encoding="utf-8")
 exec(_src.split("\n# ── 1. Portada")[0])
 
-OMITIR = {"bio", "deidea", "destacados"}  # la bio antigua la sustituye la diapositiva «bios» del principio
+OMITIR = {"bio", "bios", "deidea", "destacados"}  # la bio antigua la sustituye la diapositiva «bios» del principio
 NOCHE = "#151F30"      # azul noche de la web de Level Up
 MELO = "#FFCB9A"       # melocotón de la web
 ROTO = "#F7F3EE"       # blanco roto
