@@ -644,7 +644,10 @@ G[1]["hooks"] = [
 G[1]["cierre"] = "«Mándaselo a esa persona que siempre dice que no tiene tiempo.»"
 # 03 · 20': el cierre invita a comentar para corregir
 G[2]["obj"] = "Comentarios"
-G[2]["cierre"] = "«¿Cuál de las tres te pasa a ti? Comenta y te digo cómo corregirlo.»"
+G[2]["gancho"] = "«Las tres claves para que tu entreno de veinte minutos sea efectivo.»"
+G[2]["filas"][0] = ("0-3 s", "A cámara, con tres dedos levantados. Sin saludo.",
+                    "«Las tres claves para que tu entreno de veinte minutos sea efectivo.»", "3 claves para tu entreno de 20'")
+G[2]["cierre"] = "«¿Quieres un ejemplo de entreno de veinte minutos con estas tres claves? Coméntamelo y te lo preparo.»"
 G[2]["filas"] = [(a, (b + " En edición, planos de apoyo." if i else b), c, d) for i, (a, b, c, d) in enumerate(G[2]["filas"])]
 # 04 · Sentadilla: voz en off y pantalla partida
 G[3]["filas"][0] = ("0-3 s", "Plano tuyo tocándote el cuádriceps, con cara de molestia.", "(Voz en off) «Si haces sentadillas y solo las notas en los cuádriceps, mira esto.»", "¿Sentadillas y no notas el glúteo?")
