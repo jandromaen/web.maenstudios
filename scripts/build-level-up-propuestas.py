@@ -71,7 +71,7 @@ def tabla(filas, x, y, w, d=0, cierre=None, hooks=None, ctas=None):
     rows = []
     if hooks:
         for k, (ve, dice) in enumerate(hooks):
-            rows.append((f"Plano {k + 1}", et(f"HOOK · VERSIÓN {k + 1}", "#2F7A50"), VERDE_HOOK, ve, dice,
+            rows.append((f"Plano {k + 1}", et(f"HOOK · VERSIÓN {k + 1}" if len(hooks) > 1 else "HOOK", "#2F7A50"), VERDE_HOOK, ve, dice,
                          "border-left:6px solid #3E9A66;" + ("border-bottom:14px solid #FFFFFF;" if k < len(hooks) - 1 else "")))
         resto = list(filas)[1:]
     else:
@@ -81,7 +81,7 @@ def tabla(filas, x, y, w, d=0, cierre=None, hooks=None, ctas=None):
         rows.append((f"Plano {len(rows) + 1}", "", "transparent", ve, dice, ""))
     if ctas:
         for k, (ve, dice) in enumerate(ctas):
-            rows.append(("Cierre", et(f"CTA · VERSIÓN {k + 1}", "#2D5BA8"), AZUL_CTA, ve, dice,
+            rows.append(("Cierre", et(f"CTA · VERSIÓN {k + 1}" if len(ctas) > 1 else "CTA", "#2D5BA8"), AZUL_CTA, ve, dice,
                          "border-left:6px solid #4A78C2;" + ("border-bottom:14px solid #FFFFFF;" if k < len(ctas) - 1 else "")))
     elif cierre:
         rows.append(("Cierre", et("CTA", "#2D5BA8"), AZUL_CTA, "—", cierre, ""))
@@ -759,6 +759,19 @@ G[10]["cierre"] = "<b>(A cámara)</b> «Mándaselo y que empiece hoy.»"
 # 13 · Embarazo: montaje con tu material del Drive
 G[12]["filas"] = [(a, b.replace("Un vídeo tuyo", "Vídeo tuyo del Drive").replace("Más vídeos tuyos", "Más vídeos tuyos del Drive").replace("Ejercicios adaptados.", "Planos del Drive, entrenando embarazada."), c, d) for a, b, c, d in G[12]["filas"]]
 G[12]["filas"] = [(a, b, ("(Voz en off) " + c if not c.startswith("(Voz") else c), d) for a, b, c, d in G[12]["filas"]]
+PLANOS_EMB = "Tus vídeos entrenando embarazada. <b>Los necesitamos para montar el vídeo: súbelos al Drive.</b>"
+G[12]["hooks"] = [
+    (PLANOS_EMB, "<b>(Voz en off)</b> «¿Por qué deberíamos entrenar durante el embarazo?»"),
+    ("Otro plano tuyo entrenando embarazada, para la segunda versión.", "<b>(Voz en off)</b> «Entrené durante todo mi embarazo. Esto es lo que aprendí.»"),
+]
+G[12]["filas"] = [G[12]["filas"][0]] + [
+    (t, "Más vídeos tuyos entrenando embarazada.", dice.replace("(Voz en off)", "<b>(Voz en off)</b>"), txt)
+    for (t, ve, dice, txt) in G[12]["filas"][1:]
+]
+G[12]["ctas"] = [
+    ("<b>Lo único que grabas en vídeo:</b> tú a cámara, en el salón. La voz en off, solo el audio con el móvil.",
+     "<b>(A cámara)</b> «¿Entrenaste durante tu embarazo? Cuéntame cómo te fue.»"),
+]
 # 14 · Hidratos: balance calórico del día
 G[13]["filas"][1] = ("3-12 s", "A cámara, en la mesa del comedor.", "«Lo que cuenta es el balance calórico de todo el día, no la hora a la que comes.»", "Cuenta el balance del día")
 # 16 · Expectativa vs. realidad con tu hijo
@@ -786,6 +799,7 @@ G[11]["filas"] = [
 G[11]["cierre"] = "<b>(A cámara)</b> «Si nunca has hecho fuerza, comenta NIVEL0 y te enseño a empezar.»"
 G[11]["ref"] = "guion09"
 G[11]["lugar_txt"] = "Porche de ladrillo, plano cerrado a cámara."
+G[12]["lugar_txt"] = "Montaje con tus vídeos de embarazada. Solo grabas el cierre a cámara, en el salón."
 
 # 06 y 07 · dos versiones del hook
 G[5]["hooks"] = [
