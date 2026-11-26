@@ -651,6 +651,12 @@ G[2]["cierre"] = "«¿Quieres un ejemplo de entreno de veinte minutos con estas 
 G[2]["filas"] = [(a, (b + " En edición, planos de apoyo." if i else b), c, d) for i, (a, b, c, d) in enumerate(G[2]["filas"])]
 # 04 · Sentadilla: voz en off y pantalla partida
 G[3]["filas"][0] = ("0-3 s", "Plano tuyo tocándote el cuádriceps, con cara de molestia.", "(Voz en off) «Si haces sentadillas y solo las notas en los cuádriceps, mira esto.»", "¿Sentadillas y no notas el glúteo?")
+G[3]["hooks"] = [
+    ("Plano tuyo tocándote el cuádriceps, con cara de molestia.",
+     "(Voz en off) «Si haces sentadillas y solo las notas en los cuádriceps, mira esto.»"),
+    ("El mismo plano, grabado aparte: te tocas el cuádriceps, con cara de molestia.",
+     "(Voz en off) «¿Haces sentadillas y no notas que trabajen los glúteos?»"),
+]
 G[3]["filas"][1] = ("3-14 s", "Pantalla partida: ✗ sentadilla corta / ✓ sentadilla con más profundidad.", "«Baja más.» Explicas cómo la profundidad puede influir en el estímulo del glúteo.", "✗ / ✓ Más profundidad")
 # 05 · Abdominales: la alternativa, por palabra clave
 G[4]["filas"] = G[4]["filas"][:3]
