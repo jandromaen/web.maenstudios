@@ -605,9 +605,11 @@ LUG = [
 # ── Cambios acordados con Lucía en la reunión del 25 nov ────────────────
 SIN_VOZ_ = SIN_VOZ
 # 01 · Espalda
-G[0]["gancho"] = "«Si te pasas el día sentada, tu espalda acaba así. Dame tres minutos»"
-G[0]["filas"][0] = ("0-3 s", "En el salón: llegas del trabajo con la mochila (o recogiendo juguetes) y te llevas la mano a la lumbar.",
-                    "«Si te pasas el día sentada, tu espalda acaba así. Dame tres minutos.»", "¿Espalda cargada al final del día?")
+G[0]["gancho"] = "«¿Te duele aquí cuando acabas el día?»"
+G[0]["filas"][0] = ("0-2 s", "En el salón: sueltas la mochila (o dejas los juguetes), te llevas la mano a la lumbar y haces una mueca.",
+                    "«¿Te duele aquí cuando acabas el día?» Y sin pausa: «Haz esto antes de cenar.»", "¿Te duele aquí al acabar el día?")
+G[0]["desc"] = "Dolor de espalda después de trabajar o de un día con niños: 3 movimientos de movilidad para hacer en casa antes de cenar. Si el dolor es fuerte o no se va, consulta con un profesional."
+G[0]["port"] = "¿Te duele aquí?"
 # 02 · 15 minutos: hora de inicio y de fin en vez de cronómetro fijo
 G[1]["filas"][1] = ("3-6 s", "Te levantas. En pantalla, la hora a la que empiezas.", "«Tres ejercicios, entre diez y quince minutos.»", "Empiezo: 18:00")
 G[1]["filas"][3] = ("20-24 s", "Cortes rápidos hasta el final. En pantalla, la hora a la que terminas.", "«Y aún te sobra tiempo para la ducha.»", "Termino: 18:15")
