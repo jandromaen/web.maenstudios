@@ -689,6 +689,19 @@ G[7]["filas"] = [
     ("10-20 s", "Corte a cámara, plano cerrado.", "«¿No sería mejor tener tres entrenos adaptados, realmente efectivos, de treinta minutos?»", "3 entrenos de 30' que puedas mantener"),
 ]
 G[7]["desc"] = "¿Empiezas a entrenar en casa con muchas ganas y lo dejas a la semana? No es falta de fuerza de voluntad: es empezar demasiado fuerte."
+G[7]["hooks"] = [
+    ("En el salón, con todo el material fuera (esterilla, mancuernas, banda), dándolo todo, exagerado.",
+     "<b>(Voz en off)</b> «Día uno: lo das todo.»"),
+    ("El mismo plano, grabado aparte: en el salón con todo el material fuera, dándolo todo.",
+     "<b>(Voz en off)</b> «¿Cuántas veces has empezado a entrenar con muchas ganas y lo has acabado dejando?»"),
+]
+G[7]["filas"][1] = ("4-7 s", "Bajas la escalera del recibidor de lado, por las agujetas.",
+                    "<b>(En directo, mientras bajas)</b> «Ay. Ay. Ay.»", "Día 2")
+G[7]["filas"][2] = ("7-10 s", "En el sofá, con la esterilla enrollada en un rincón.",
+                    "<b>(Voz en off)</b> «Y al cuarto día, ni te acuerdas de la esterilla.»", "Día 4")
+G[7]["filas"][3] = ("10-20 s", "Corte a cámara, plano cerrado.",
+                    "<b>(A cámara)</b> «¿No sería mejor tener tres entrenos adaptados, realmente efectivos, de treinta minutos?»", "")
+G[7]["cierre"] = "<b>(A cámara)</b> «¿Te ha pasado? Cuéntamelo y te ayudo.»"
 # 09 · Más directo
 G[8]["gancho"] = "«Deja de intentar ser más pequeña. Empieza a ser más fuerte»"
 G[8]["filas"][0] = ("0-3 s", "Plano cerrado a cámara. Sin música encima.", "«Deja de intentar ser más pequeña. Empieza a ser más fuerte.»", "Más fuertes, no más pequeñas")
