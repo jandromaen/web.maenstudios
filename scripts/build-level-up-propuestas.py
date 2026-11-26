@@ -734,6 +734,8 @@ G[6]["hooks"] = [
     ("El mismo plano, grabado aparte: intentas una flexión y te quedas abajo.",
      "«¿No eres capaz de hacer bien una flexión?»"),
 ]
+G[6]["filas"][3] = ("17-25 s", "Flexión inclinada con las manos en una silla o un banco estable.",
+                    "«Y como verás, la solución son las flexiones inclinadas: con las manos en una silla o un banco estable.»", "Empieza inclinada")
 
 for i, g in enumerate(G):
     n += 1
