@@ -56,24 +56,33 @@ def pill(t, x, y, c, d=0):
             f'color:{INK};font-size:16px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;--d:{d}">{t}</div>')
 
 
-def tabla(filas, x, y, w, d=0):
-    """Guion por tiempos: (segundos, qué se ve, qué dices, texto en pantalla)."""
+VERDE_HOOK = "#DDF1E4"
+AZUL_CTA = "#DCE7F8"
+
+
+def tabla(filas, x, y, w, d=0, cierre=None):
+    """Guion escalonado por tiempos: el primer plano (hook) en verde y el cierre (CTA) en azul."""
     cab = ("<tr>" + "".join(
-        f'<th style="text-align:left;padding:0 18px 10px 0;font-size:15px;font-weight:800;letter-spacing:.12em;'
+        f'<th style="text-align:left;padding:0 18px 10px 12px;font-size:15px;font-weight:800;letter-spacing:.12em;'
         f'text-transform:uppercase;color:{ACENTO_TXT};width:{a}">{t}</th>'
-        for t, a in (("Tiempo", "8%"), ("Qué se ve", "27%"), ("Qué dices", "40%"), ("Texto en pantalla", "25%"))) + "</tr>")
+        for t, a in (("Tiempo", "9%"), ("Qué se ve", "27%"), ("Qué dices", "39%"), ("Texto en pantalla", "25%"))) + "</tr>")
+    filas = list(filas)
+    if cierre:
+        filas.append(("Cierre", "—", cierre, "—"))
     cuerpo = ""
     for i, (t, ve, dice, txt) in enumerate(filas):
-        fondo = "background:#F7F3EE;" if i == 0 else ""
+        fondo = VERDE_HOOK if i == 0 else (AZUL_CTA if cierre and i == len(filas) - 1 else "transparent")
+        etiqueta = "<br><span style='font-size:12px;letter-spacing:.1em;color:#2F7A50'>HOOK</span>" if i == 0 else (
+            "<br><span style='font-size:12px;letter-spacing:.1em;color:#2D5BA8'>CTA</span>" if cierre and i == len(filas) - 1 else "")
         cuerpo += (
-            f'<tr style="{fondo}">'
-            f'<td style="padding:12px 18px 12px 12px;vertical-align:top;font-weight:800;white-space:nowrap">{t}</td>'
-            f'<td style="padding:12px 18px 12px 0;vertical-align:top;color:#4A4744">{ve}</td>'
-            f'<td style="padding:12px 18px 12px 0;vertical-align:top;font-weight:600">{dice}</td>'
-            f'<td style="padding:12px 12px 12px 0;vertical-align:top;color:#4A4744">{txt}</td></tr>'
+            f'<tr style="background:{fondo};border-bottom:1px solid #EEEAE4">'
+            f'<td style="padding:12px 18px 12px 12px;vertical-align:top;font-weight:800;white-space:nowrap">{t}{etiqueta}</td>'
+            f'<td style="padding:12px 18px 12px 12px;vertical-align:top">{ve}</td>'
+            f'<td style="padding:12px 18px 12px 12px;vertical-align:top">{dice}</td>'
+            f'<td style="padding:12px 12px 12px 12px;vertical-align:top">{txt}</td></tr>'
         )
     return (f'<div class="abs a" style="left:{x}px;top:{y}px;width:{w}px;--d:{d}">'
-            f'<table style="width:100%;border-collapse:collapse;font-size:18.5px;line-height:1.35;color:{INK}">'
+            f'<table style="width:100%;border-collapse:collapse;font-size:19px;line-height:1.38;color:{INK}">'
             f'{cab}{cuerpo}</table></div>')
 
 
@@ -678,19 +687,13 @@ for i, g in enumerate(G):
         + eyebrow(f"Guion {num:02d} de {len(G)} · {g['bloque']}")
         + pill(g["pilar"], 128, 166, PILAR[g["pilar"]], d=0)
         + p(f"Serie: {g['serie']} · Objetivo: <b>{g['obj']}</b> · Dónde: <b>{CASA[g['lugar']]}</b>", 300, 168, 1250, size=20, d=0, cls="muted")
-        + p(g["gancho"], 128, 212, 1380, size=36, d=1, cls="", extra="font-weight:800;line-height:1.15;")
-        + tabla(g["filas"], 128, 330, 1400, d=2)
+        + tabla(g["filas"], 128, 230, 1400, d=1, cierre=g["cierre"])
         + portada(1592, 128, 200, g["foto"], g["serie"].split(" · ")[0], g["port"], d=1)
         + p("Portada", 1592, 492, 200, size=15, d=1, cls="muted", extra="text-align:center;")
         + foto_casa(1592, 540, 200, 130, g["lugar"], d=2, r=12)
         + (p("<span style='color:#A19C96'>■</span> En gris: propuesta técnica. Cámbiala si quieres.", 1592, 790, 200, size=14, d=2, extra="line-height:1.35;color:#8A8580;") if 'class="prop"' in "".join(c for f in g["filas"] for c in f) else "")
         + p(g['lugar_txt'], 1592, 682, 200, size=15, d=2, extra="line-height:1.35;")
-        + f'<div class="abs pop" style="left:128px;top:842px;width:800px;padding:18px 24px;border-radius:16px;background:{ACENTO};--d:4">'
-          f'<span style="font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#3A2F2F">Cierre (CTA)</span><br>'
-          f'<span style="font-size:20px;font-weight:700;line-height:1.35;color:{INK}">{g["cierre"]}</span></div>'
-        + f'<div class="abs pop" style="left:960px;top:842px;width:832px;padding:18px 24px;border-radius:16px;background:{ROTO};--d:5">'
-          f'<span style="font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:{ACENTO_TXT}">Descripción</span><br>'
-          f'<span style="font-size:18px;line-height:1.4;color:#3A3836">{g["desc"]}</span></div>'
+        + p(f"<b style='color:{ACENTO_TXT};letter-spacing:.1em;font-size:14px'>DESCRIPCIÓN</b>&nbsp;&nbsp;{g['desc']}", 128, 930, 1400, size=17, d=3, cls="muted", extra="line-height:1.4;")
         + foot(n),
     ))
 
