@@ -99,6 +99,24 @@ def tabla(filas, x, y, w, d=0, cierre=None, hooks=None, ctas=None):
             f'{cab}{cuerpo}</table></div>')
 
 
+def video_ref(x, y, w, h, nombre, d=0):
+    """Vídeo de referencia: solo se reproduce al pulsar play."""
+    b = 72
+    return (
+        f'<div class="abs pop" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:18px;overflow:hidden;'
+        f'background:#000;box-shadow:0 14px 40px rgba(0,0,0,.2);--d:{d}">'
+        f'<video data-manual src="/pitch/level-up/refs/{nombre}.mp4" poster="/pitch/level-up/refs/{nombre}.jpg" '
+        f'playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block" '
+        f'onclick="if(this.paused){{this.play()}}else{{this.pause()}}" '
+        f'onplay="this.nextElementSibling.style.display=\'none\'" onpause="this.nextElementSibling.style.display=\'flex\'"></video>'
+        f'<button type="button" aria-label="Reproducir" onclick="this.previousElementSibling.play()" '
+        f'style="position:absolute;left:50%;top:50%;width:{b}px;height:{b}px;margin:-{b // 2}px 0 0 -{b // 2}px;border:0;border-radius:50%;cursor:pointer;'
+        f'background:rgba(255,255,255,.85);box-shadow:0 6px 20px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:0">'
+        f'<span style="width:0;height:0;margin-left:6px;border-style:solid;border-width:14px 0 14px 23px;'
+        f'border-color:transparent transparent transparent #151515"></span></button></div>'
+    )
+
+
 # ── Portada ──────────────────────────────────────────────────────────────
 n += 1
 add("portada", "Guiones e identidad", sec(
@@ -704,7 +722,17 @@ G[7]["filas"][3] = ("10-20 s", "Corte a cámara, plano cerrado.",
 G[7]["cierre"] = "<b>(A cámara)</b> «¿Te ha pasado? Cuéntamelo y te ayudo.»"
 # 09 · Más directo
 G[8]["gancho"] = "«Deja de intentar ser más pequeña. Empieza a ser más fuerte»"
-G[8]["filas"][0] = ("0-3 s", "Plano cerrado a cámara. Sin música encima.", "«Deja de intentar ser más pequeña. Empieza a ser más fuerte.»", "Más fuertes, no más pequeñas")
+G[8]["gancho"] = "«¿Por qué nos preocupa tanto adelgazar y tan poco ganar fuerza?»"
+G[8]["filas"] = [
+    ("0-3 s", "Plano cerrado a cámara. Sin música encima.", "", ""),
+    ("3-30 s", "A cámara.", "Desarrollas tu reflexión a cámara, con tus palabras. No hace falta guionizarla: tiene que salir de ti de forma natural.", ""),
+]
+G[8]["cierre"] = "<b>(A cámara)</b> «¿Deberíamos hablar más de ganar fuerza y menos de perder kilos? Te leo.»"
+G[8]["hooks"] = [
+    ("Plano cerrado a cámara. Sin música encima.", "<b>(A cámara)</b> «¿Por qué nos preocupa tanto adelgazar y tan poco ganar fuerza?»"),
+    ("El mismo plano, grabado aparte.", "<b>(A cámara)</b> «Deja de intentar perder kilos. Empieza a ser más fuerte.»"),
+]
+G[8]["ref"] = "guion09"
 # 10 · 5 cosas: «la última es la mejor» y voz en off
 G[9]["gancho"] = "Texto: «5 cosas que me habría gustado saber cuando empecé a entrenar (la última es la mejor)»"
 G[9]["filas"] = [(a, b, ("(Voz en off) Lees cada punto." if i else "(Voz en off) «Cinco cosas que me habría gustado saber cuando empecé a entrenar. La última es la mejor.»"), (d + " (la última es la mejor)" if i == 0 else d)) for i, (a, b, c, d) in enumerate(G[9]["filas"])]
@@ -737,6 +765,7 @@ for g, im in zip(G, ["g01","g02","g03","pared","g05","g06","g07","g08","g09","g1
     g["foto"] = im
 for g, (k, t) in zip(G, LUG):
     g["lugar"], g["lugar_txt"] = k, t
+G[8]["lugar_txt"] = "Porche de ladrillo, plano cerrado a cámara."
 
 # 06 y 07 · dos versiones del hook
 G[5]["hooks"] = [
@@ -766,7 +795,8 @@ for i, g in enumerate(G):
         + eyebrow(f"Guion {num:02d} de {len(G)} · {g['bloque']}")
         + pill(g["pilar"], 128, 166, PILAR[g["pilar"]], d=0)
         + p(f"Serie: {g['serie']} · Objetivo: <b>{g['obj']}</b> · Dónde: <b>{CASA[g['lugar']]}</b>", 300, 168, 1250, size=20, d=0, cls="muted")
-        + tabla(g["filas"], 128, 230, 1400, d=1, cierre=g["cierre"], hooks=g.get("hooks"), ctas=g.get("ctas"))
+        + tabla(g["filas"], 128, 230, 1150 if g.get("ref") else 1400, d=1, cierre=g["cierre"], hooks=g.get("hooks"), ctas=g.get("ctas"))
+        + (video_ref(1318, 230, 222, 395, g["ref"], d=2) + p("Referencia · dale al play", 1318, 637, 222, size=15, d=2, cls="muted", extra="text-align:center;") if g.get("ref") else "")
         + portada(1592, 128, 200, g["foto"], g["serie"].split(" · ")[0], g["port"], d=1)
         + p("Portada", 1592, 492, 200, size=15, d=1, cls="muted", extra="text-align:center;")
         + foto_casa(1592, 540, 200, 130, g["lugar"], d=2, r=12)
