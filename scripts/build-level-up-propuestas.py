@@ -700,18 +700,18 @@ for i, g in enumerate(G):
 # ── Laponia ──────────────────────────────────────────────────────────────
 n += 1
 lap = [
-    ("Entreno de 15-20 minutos a −25 °C", "Mantener la rutina en el viaje: un entreno corto con el frío extremo de fondo. Lo grabas allí y se publica a la vuelta."),
-    ("Expectativa vs. realidad: viajar con niños", "En historias: lo que pensabas que sería entrenar de viaje y lo que de verdad pasa con los niños."),
-    ("El gimnasio del hotel", "Suelo azul de guardería y luz de hospital: para historias con humor. El entreno, mejor en la habitación."),
-    ("Entrenar en la habitación", "Si fuera no se puede: el mismo entreno de 15-20 minutos, sin material, en la habitación."),
+    ("1 entreno en Laponia (1 reel) + stories",
+     "Un entreno grabado allí para un reel. En stories, el mensaje: no hay excusas para no entrenar, aunque estés de viaje."),
+    ("Expectativa vs. realidad: el gimnasio",
+     "Lo que esperas del gimnasio del hotel y lo que te encuentras, y por qué prefieres entrenar en la habitación antes que en ese gimnasio rancio. Grábalo tú y luego vemos si el montaje va para stories o para reel."),
 ]
 lh = ""
 for i, (t, txt) in enumerate(lap):
-    y = 300 + i * 150
+    y = 320 + i * 230
     lh += (
         f'<p class="abs a disp outline" style="left:128px;top:{y}px;font-size:44px;line-height:1;--d:{i + 1}">0{i + 1}</p>'
         + p(t, 240, y - 4, 1000, size=28, d=i + 1, cls="", extra="font-weight:800;")
-        + p(txt, 240, y + 44, 1000, size=21, d=i + 2)
+        + p(txt, 240, y + 48, 980, size=23, d=i + 2, extra="line-height:1.45;")
     )
 add("laponia", "Laponia", sec(
     eyebrow("Del 3 al 7 de diciembre")
