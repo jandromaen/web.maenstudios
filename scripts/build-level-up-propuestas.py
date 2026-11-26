@@ -65,7 +65,7 @@ def tabla(filas, x, y, w, d=0, cierre=None):
     cab = ("<tr>" + "".join(
         f'<th style="text-align:left;padding:0 18px 10px 12px;font-size:15px;font-weight:800;letter-spacing:.12em;'
         f'text-transform:uppercase;color:{ACENTO_TXT};width:{a}">{t}</th>'
-        for t, a in (("Tiempo", "9%"), ("Qué se ve", "27%"), ("Qué dices", "39%"), ("Texto en pantalla", "25%"))) + "</tr>")
+        for t, a in (("Plano", "9%"), ("Qué se ve", "27%"), ("Qué dices", "39%"), ("Texto en pantalla", "25%"))) + "</tr>")
     filas = list(filas)
     if cierre:
         filas.append(("Cierre", "—", cierre, "—"))
@@ -76,7 +76,7 @@ def tabla(filas, x, y, w, d=0, cierre=None):
             "<br><span style='font-size:12px;letter-spacing:.1em;color:#2D5BA8'>CTA</span>" if cierre and i == len(filas) - 1 else "")
         cuerpo += (
             f'<tr style="background:{fondo};border-bottom:1px solid #EEEAE4">'
-            f'<td style="padding:12px 18px 12px 12px;vertical-align:top;font-weight:800;white-space:nowrap">{t}{etiqueta}</td>'
+            f'<td style="padding:12px 18px 12px 12px;vertical-align:top;font-weight:800;white-space:nowrap">{t if (cierre and i == len(filas) - 1) else f'Plano {i + 1}'}{etiqueta}</td>'
             f'<td style="padding:12px 18px 12px 12px;vertical-align:top">{ve}</td>'
             f'<td style="padding:12px 18px 12px 12px;vertical-align:top">{dice}</td>'
             f'<td style="padding:12px 12px 12px 12px;vertical-align:top;color:#8A8580;font-style:italic">Se encarga Jandro en edición</td></tr>'
