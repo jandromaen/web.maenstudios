@@ -627,6 +627,12 @@ G[0]["port"] = "¿Te duele aquí?"
 # 02 · 15 minutos: hora de inicio y de fin en vez de cronómetro fijo
 G[1]["filas"][1] = ("3-6 s", "Te levantas. En pantalla, la hora a la que empiezas.", "«Tres ejercicios, entre diez y quince minutos.»", "Empiezo: 18:00")
 G[1]["filas"][3] = ("20-24 s", "Cortes rápidos hasta el final. En pantalla, la hora a la que terminas.", "«Y aún te sobra tiempo para la ducha.»", "Termino: 18:15")
+G[1]["filas"][0] = ("0-3 s",
+                    "En el sofá, miras el reloj. Cara de «para qué». <b>Graba este plano dos veces</b>, una con cada gancho: así sacamos dos versiones del vídeo y vemos cuál funciona mejor.",
+                    "<b>Versión A (nuestra):</b> «Tengo quince minutos… no me da tiempo a entrenar.» (Pausa.) «¿Seguro?»<br>"
+                    "<b>Versión B (la tuya):</b> «¿Tienes quince minutos libres y piensas que no te da tiempo a entrenar?»",
+                    "Cuando crees que 15 minutos no dan para entrenar")
+G[1]["cierre"] = "«Mándaselo a esa persona que siempre dice que no tiene tiempo.»"
 # 03 · 20': el cierre invita a comentar para corregir
 G[2]["obj"] = "Comentarios"
 G[2]["cierre"] = "«¿Cuál de las tres te pasa a ti? Comenta y te digo cómo corregirlo.»"
