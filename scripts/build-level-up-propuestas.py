@@ -60,7 +60,7 @@ VERDE_HOOK = "#DDF1E4"
 AZUL_CTA = "#DCE7F8"
 
 
-def tabla(filas, x, y, w, d=0, cierre=None, hooks=None):
+def tabla(filas, x, y, w, d=0, cierre=None, hooks=None, ctas=None):
     """Guion escalonado: hook en verde (o dos versiones del hook, cada una como plano aparte) y cierre (CTA) en azul."""
     cab = ("<tr>" + "".join(
         f'<th style="text-align:left;padding:0 18px 10px 12px;font-size:15px;font-weight:800;letter-spacing:.12em;'
@@ -79,7 +79,11 @@ def tabla(filas, x, y, w, d=0, cierre=None, hooks=None):
         resto = list(filas)[1:]
     for (t, ve, dice, txt) in resto:
         rows.append((f"Plano {len(rows) + 1}", "", "transparent", ve, dice, ""))
-    if cierre:
+    if ctas:
+        for k, (ve, dice) in enumerate(ctas):
+            rows.append(("Cierre", et(f"CTA · VERSIÓN {k + 1}", "#2D5BA8"), AZUL_CTA, ve, dice,
+                         "border-left:6px solid #4A78C2;" + ("border-bottom:14px solid #FFFFFF;" if k < len(ctas) - 1 else "")))
+    elif cierre:
         rows.append(("Cierre", et("CTA", "#2D5BA8"), AZUL_CTA, "—", cierre, ""))
     cuerpo = ""
     for (t, etq, fondo, ve, dice, extra) in rows:
@@ -736,6 +740,10 @@ G[6]["hooks"] = [
 ]
 G[6]["filas"][3] = ("17-25 s", "Flexión inclinada con las manos en una silla o un banco estable.",
                     "«Y como verás, la solución son las flexiones inclinadas: con las manos en una silla o un banco estable.»", "Empieza inclinada")
+G[6]["ctas"] = [
+    ("A cámara.", G[6]["cierre"]),
+    ("El mismo cierre, grabado aparte, a cámara.", "«Prueba este ejercicio y escríbeme si sigues teniendo problemas para hacer flexiones.»"),
+]
 
 for i, g in enumerate(G):
     n += 1
@@ -745,7 +753,7 @@ for i, g in enumerate(G):
         + eyebrow(f"Guion {num:02d} de {len(G)} · {g['bloque']}")
         + pill(g["pilar"], 128, 166, PILAR[g["pilar"]], d=0)
         + p(f"Serie: {g['serie']} · Objetivo: <b>{g['obj']}</b> · Dónde: <b>{CASA[g['lugar']]}</b>", 300, 168, 1250, size=20, d=0, cls="muted")
-        + tabla(g["filas"], 128, 230, 1400, d=1, cierre=g["cierre"], hooks=g.get("hooks"))
+        + tabla(g["filas"], 128, 230, 1400, d=1, cierre=g["cierre"], hooks=g.get("hooks"), ctas=g.get("ctas"))
         + portada(1592, 128, 200, g["foto"], g["serie"].split(" · ")[0], g["port"], d=1)
         + p("Portada", 1592, 492, 200, size=15, d=1, cls="muted", extra="text-align:center;")
         + foto_casa(1592, 540, 200, 130, g["lugar"], d=2, r=12)
