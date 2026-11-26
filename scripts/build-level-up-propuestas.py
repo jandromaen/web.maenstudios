@@ -800,6 +800,18 @@ G[11]["cierre"] = "<b>(A cámara)</b> «Si nunca has hecho fuerza, comenta NIVEL
 G[11]["ref"] = "guion09"
 G[11]["lugar_txt"] = "Porche de ladrillo, plano cerrado a cámara."
 G[12]["lugar_txt"] = "Montaje con tus vídeos de embarazada. Solo grabas el cierre a cámara, en el salón."
+G[13]["hooks"] = [
+    ("A cámara, en la mesa del comedor.", "<b>(A cámara)</b> «¿Por qué lo que cenamos no es tan importante como creemos?»"),
+    ("Grabado aparte: comiendo un plato de pasta por la noche, mirando a cámara.", "<b>(A cámara)</b> «Cenar hidratos no te hace engordar.»"),
+]
+G[13]["filas"] = [G[13]["filas"][0], (
+    "3-40 s", "A cámara, en la mesa del comedor.",
+    "Lo explicas tú, con tus palabras. Expláyate lo que necesites, pero de forma ordenada: primero el mito, "
+    "después lo que importa de verdad y, al final, una conclusión clara.", "")]
+G[13]["ctas"] = [
+    ("A cámara.", "<b>(A cámara)</b> «¿Qué mito te has creído durante años? Dímelo y hago un vídeo.»"),
+    ("El mismo cierre, grabado aparte, a cámara.", "<b>(A cámara)</b> «Hay muchos mitos sobre la alimentación. ¿Cuál te gustaría que comentase?»"),
+]
 
 # 06 y 07 · dos versiones del hook
 G[5]["hooks"] = [
