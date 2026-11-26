@@ -667,7 +667,15 @@ G[3]["filas"][1:] = [
 G[4]["filas"] = G[4]["filas"][:3]
 G[4]["obj"] = "Comentarios con palabra clave"
 G[4]["cierre"] = "«¿Quieres una alternativa para no notarlo nada? Comenta ABDOMEN y te la mando.» (Con las respuestas, sale otro vídeo.)"
-G[4]["desc"] = "Abdominales y solo notas el cuello: el error y cómo corregir la posición. Comenta ABDOMEN y te mando una alternativa."
+G[4]["desc"] = "Abdominales y solo notas el cuello: el error y cómo corregir la posición. Comenta ABDOMEN y te mando el dead bug."
+G[4]["hooks"] = [
+    ("Haces un crunch tirando de la cabeza. Te frenas en seco y miras a cámara.",
+     "«Si al hacer abdominales te duele el cuello, para.»"),
+    ("El mismo plano, grabado aparte: crunch tirando de la cabeza, te frenas y miras a cámara.",
+     "«¿Haces abdominales y solo notas el cuello?»"),
+]
+G[4]["filas"].insert(1, ("", "A cámara.", "«Quédate hasta el final del vídeo para saber cómo solucionarlo.»", ""))
+G[4]["cierre"] = "«Comenta ABDOMEN y te envío un vídeo del dead bug, mi ejercicio de abdominales favorito.»"
 # 08 · Día 1 vs. día 4, en casa
 G[7]["gancho"] = "Texto: «Día 1 entrenando en casa» (sin hablar)"
 G[7]["filas"] = [
