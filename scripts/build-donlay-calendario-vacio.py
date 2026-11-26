@@ -1,8 +1,9 @@
 """
 Genera el calendario de publicaciones de Don Lay de un mes nuevo, con la
 misma estructura, estilo y dinámica que el de noviembre (portada, calendario,
-feed, una diapositiva por día y cierre): reel los jueves, carrusel los martes
-y domingos y stories a diario. Sale sin contenido: sin copys, horas, pilares
+feed, una diapositiva por día de publicación y cierre): reel los jueves y
+carrusel los martes y domingos. Las stories no van aquí: se planifican aparte.
+Sale sin contenido: sin copys, horas, pilares
 ni enlaces a Drive, para rellenarlo después.
 
 Uso:
@@ -90,7 +91,7 @@ def portada(nov, anio, mes, mes_titulo):
     total, reels, carr = recuento(anio, mes)
     h = nov["portada"]["html"].replace("Noviembre 2026", mes_titulo)
     return re.sub(r'(<p style="position:absolute;left:1040px;bottom:110px[^>]*>).*?(</p>)',
-                  rf'\g<1>{total} publicaciones · {reels} reels y {carr} carruseles · stories a diario\g<2>', h)
+                  rf'\g<1>{total} publicaciones · {reels} reels y {carr} carruseles\g<2>', h)
 
 
 def celda_gris(n):
@@ -101,15 +102,13 @@ def celda_gris(n):
 def celda(anio, mes, d, sen):
     t = tipo(anio, mes, d)
     oscuro = t != "stories"
-    fondo = {"reel": f"background:{RED};color:{CREAM}", "carrusel": f"background:{INK};color:{CREAM}", "stories": f"background:{ROSE}"}[t]
+    fondo = {"reel": f"background:{RED};color:{CREAM}", "carrusel": f"background:{INK};color:{CREAM}", "stories": "border:1px solid rgba(29,29,27,0.16)"}[t]
     color = CREAM if oscuro else INK
     talla = 38 if oscuro else 30
     extra, icono, etiqueta = "", "", ""
     if d in sen:
         extra = f";outline:3px solid {RED if not oscuro else ROSE};outline-offset:-3px"
         icono = star(oscuro)
-    elif oscuro:
-        icono = f'<div style="width:16px;height:16px;background:{ROSE}"></div>'
     if oscuro:
         nombre = "Reel" if t == "reel" else "Carrusel"
         etiqueta = (f'<p style="font-family:{SANS};font-size:18px;letter-spacing:2px;text-transform:uppercase;line-height:1">{nombre}</p>')
@@ -117,7 +116,9 @@ def celda(anio, mes, d, sen):
             etiqueta = (f'<div style="display:flex;flex-direction:column;gap:6px"><p style="font-family:{SANS};font-size:15px;letter-spacing:1px;line-height:1;font-weight:600;color:{ROSE}">{sen[d][0]}</p>{etiqueta}</div>')
     elif d in sen:
         etiqueta = (f'<p style="font-family:{SANS};font-size:18px;letter-spacing:1px;line-height:1;color:{RED};font-weight:600">{sen[d][0]}</p>')
-    return (f'<div data-ir="{did(anio, mes, d)}" title="Ir al día {d}" style="display:flex;flex-direction:column;justify-content:space-between;padding:12px 16px;{fondo};cursor:pointer{extra}">'
+    enlace = f'data-ir="{did(anio, mes, d)}" title="Ir al día {d}" ' if oscuro else ""
+    cursor = ";cursor:pointer" if oscuro else ""
+    return (f'<div {enlace}style="display:flex;flex-direction:column;justify-content:space-between;padding:12px 16px;{fondo}{cursor}{extra}">'
             f'<div style="display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start">'
             f'<p style="font-family:{SERIF};font-weight:700;font-size:{talla}px;line-height:1;color:{color}">{d}</p>{icono}</div>{etiqueta}</div>')
 
@@ -144,7 +145,7 @@ def calendario_diapo(anio, mes, nombre, mes_titulo, sen):
     tipos = "".join(
         f'<div style="display:flex;flex-direction:row;gap:14px;align-items:center"><div style="width:28px;height:28px;flex:none;background:{c}"></div>'
         f'<p style="font-size:23px;line-height:1.3;white-space:nowrap"><b>{t}</b> · {cuando}</p></div>'
-        for c, t, cuando in [(RED, "Reel", "jueves"), (INK, "Carrusel", "martes y domingos"), (ROSE, "Stories", "a diario")])
+        for c, t, cuando in [(RED, "Reel", "jueves"), (INK, "Carrusel", "martes y domingos")])
     total, reels, carr = recuento(anio, mes)
     fechas = " · ".join(f"<b>{d}</b> {v[1]}" for d, v in sorted(sen.items()))
     leyenda = (f'<div style="position:absolute;left:1290px;top:140px;width:558px;height:800px;box-sizing:border-box;background:{INK};color:{CREAM};padding:48px 52px;display:flex;flex-direction:column;gap:20px">'
@@ -155,7 +156,7 @@ def calendario_diapo(anio, mes, nombre, mes_titulo, sen):
                + '<div style="flex:1"></div>'
                f'<p style="font-family:{SERIF};font-weight:700;font-size:80px;line-height:1">{total}</p>'
                f'<p style="font-family:{SERIF};font-style:italic;font-size:40px;line-height:1.1">publicaciones</p>'
-               f'<p style="font-size:24px;line-height:1.5;color:rgba(246,240,232,0.75)">{reels} reels y {carr} carruseles, del 1 al {calendar.monthrange(anio, mes)[1]} de {nombre}, y stories a diario.</p></div>')
+               f'<p style="font-size:24px;line-height:1.5;color:rgba(246,240,232,0.75)">{reels} reels y {carr} carruseles, del 1 al {calendar.monthrange(anio, mes)[1]} de {nombre}.</p></div>')
     pie = (f'<p style="position:absolute;left:72px;bottom:44px;width:900px;font-family:{SANS};font-weight:400;font-size:22px;line-height:1.2;color:rgba(29,29,27,0.65)">@donlayrestaurante</p>'
            f'<p style="position:absolute;right:72px;bottom:44px;width:200px;text-align:right;font-family:{SANS};font-weight:400;font-size:22px;line-height:1.2;color:rgba(29,29,27,0.65)">02</p>')
     return seccion("calendario", CREAM, INK, cabecera(mes_titulo) + rejilla + leyenda + pie)
@@ -216,22 +217,19 @@ def dia(anio, mes, d, nombre, mes_titulo, sen):
     logo = '<img src="/pitch/donlay-calendario/logo-beige.svg" alt="Don Lay" style="width:{w}px;height:{h}px;object-fit:contain">'
     etiqueta = '<p style="font-family:' + SANS + ';font-size:{s}px;letter-spacing:3px;text-transform:uppercase">{t}</p>'
     titulo_col = '<p style="position:absolute;left:{x}px;top:128px;width:480px;font-family:' + SANS + ';font-size:18px;letter-spacing:3px;text-transform:uppercase;color:rgba(29,29,27,0.6)">{t}</p>'
-    stories_col = (titulo_col.format(x=1420, t="Stories del día") +
-                   f'<div data-slot="{sid}-stories" data-tipo="story" style="position:absolute;overflow:hidden;left:1420px;top:170px;width:340px;height:604px;border-radius:24px;background:{INK};color:{CREAM};display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px;box-shadow:0 24px 60px rgba(29,29,27,0.25)">'
-                   + logo.format(w=200, h=64) + etiqueta.format(s=18, t="Stories") + '</div>')
     if t == "carrusel":
-        centro = (titulo_col.format(x=840, t="Carrusel") +
-                  '<div style="position:absolute;left:840px;top:170px;width:480px;background:#FFFFFF;box-shadow:0 24px 60px rgba(29,29,27,0.18);display:flex;flex-direction:column">'
+        centro = (titulo_col.format(x=1100, t="Carrusel") +
+                  '<div style="position:absolute;left:1100px;top:170px;width:480px;background:#FFFFFF;box-shadow:0 24px 60px rgba(29,29,27,0.18);display:flex;flex-direction:column">'
                   '<div style="height:60px;display:flex;flex-direction:row;align-items:center;gap:12px;padding:0 16px"><img src="/pitch/donlay-calendario/ig-avatar.png" alt="" style="width:36px;height:36px;border-radius:256px">'
                   f'<p style="font-family:{SANS};font-weight:600;font-size:17px;color:{INK}">donlayrestaurante</p></div>'
                   f'<div data-slot="{sid}" data-tipo="carrusel" style="position:relative;overflow:hidden;width:480px;height:600px;background:{INK};color:{CREAM};display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px">'
-                  + logo.format(w=280, h=90) + etiqueta.format(s=20, t="Carrusel") + '</div><div style="height:54px"></div></div>' + stories_col)
+                  + logo.format(w=280, h=90) + etiqueta.format(s=20, t="Carrusel") + '</div><div style="height:54px"></div></div>')
         horas_txt = ["Carrusel"]
     elif t == "reel":
-        centro = (titulo_col.format(x=860, t="Reel") +
-                  f'<div data-slot="{sid}" data-tipo="reel" style="position:absolute;overflow:hidden;left:860px;top:170px;width:400px;height:712px;border-radius:24px;background:{RED};color:{CREAM};display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px;box-shadow:0 24px 60px rgba(29,29,27,0.25)">'
+        centro = (titulo_col.format(x=1140, t="Reel") +
+                  f'<div data-slot="{sid}" data-tipo="reel" style="position:absolute;overflow:hidden;left:1140px;top:170px;width:400px;height:712px;border-radius:24px;background:{RED};color:{CREAM};display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px;box-shadow:0 24px 60px rgba(29,29,27,0.25)">'
                   + logo.format(w=240, h=77) + f'<svg viewBox="0 0 24 24" style="width:64px;height:64px;color:{CREAM}" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg>'
-                  + etiqueta.format(s=20, t="Reel") + '</div>' + stories_col)
+                  + etiqueta.format(s=20, t="Reel") + '</div>')
         horas_txt = ["Reel"]
     else:
         centro = "".join(
@@ -240,7 +238,8 @@ def dia(anio, mes, d, nombre, mes_titulo, sen):
             for slot, x in [(sid, 920), (f"{sid}-2", 1368)])
         horas_txt = ["Story"]
     pills = "".join(f'<p style="font-family:{SANS};font-size:20px;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;padding:10px 18px;background:#FFFFFF;color:{INK}">{x} · <b style="font-weight:600;color:rgba(29,29,27,0.4)">—</b></p>' for x in horas_txt)
-    horas = (f'<div data-horas="{sid}" style="position:absolute;left:840px;top:924px;display:flex;flex-direction:row;align-items:center;gap:12px">'
+    izq_post = 1100 if t == "carrusel" else 1140
+    horas = (f'<div data-horas="{sid}" style="position:absolute;left:{izq_post}px;top:924px;display:flex;flex-direction:row;align-items:center;gap:12px">'
              f'<p style="font-family:{SANS};font-size:18px;letter-spacing:3px;text-transform:uppercase;color:rgba(29,29,27,0.6);white-space:nowrap;margin-right:6px">Hora de publicación</p>{pills}</div>')
     num = f'<p style="position:absolute;right:72px;bottom:44px;width:200px;text-align:right;font-size:22px;line-height:1.2;color:rgba(29,29,27,0.65)">{d}</p>'
     return {"id": sid, "titulo": f"{DIAS[wd]} {d}",
@@ -258,7 +257,7 @@ def main():
         {"id": "calendario", "titulo": "Calendario", "html": calendario_diapo(anio, mes, nombre, mes_titulo, sen)},
         {"id": "feed", "titulo": f"Feed de {nombre}", "html": feed(nov, anio, mes, nombre, mes_titulo)},
     ]
-    diapos += [dia(anio, mes, d, nombre, mes_titulo, sen) for d in range(1, calendar.monthrange(anio, mes)[1] + 1)]
+    diapos += [dia(anio, mes, d, nombre, mes_titulo, sen) for d in publicaciones(anio, mes)]
     diapos.append({"id": "cierre", "titulo": "Cierre", "html": nov["cierre"]["html"].replace("Noviembre 2026", mes_titulo)})
 
     out = BASE / nombre
