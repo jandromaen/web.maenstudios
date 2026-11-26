@@ -779,6 +779,13 @@ for g, (k, t) in zip(G, LUG):
     g["lugar"], g["lugar_txt"] = k, t
 G[8]["lugar_txt"] = "Porche de ladrillo, plano cerrado a cámara."
 G[10]["lugar_txt"] = "Todo en el salón, con el móvil fijo. Planos sencillos: sofá, esterilla y a cámara."
+G[11]["filas"] = [
+    ("0-3 s", "A cámara, plano cerrado.", "<b>(A cámara)</b> «¿Por qué es tan importante que las mujeres entrenemos fuerza?»", ""),
+    ("3-30 s", "A cámara.", "Desarrollas tu reflexión a cámara, improvisando con tus palabras. No hace falta guionizarla: tiene que salir de ti de forma natural.", ""),
+]
+G[11]["cierre"] = "<b>(A cámara)</b> «Si nunca has hecho fuerza, comenta NIVEL0 y te enseño a empezar.»"
+G[11]["ref"] = "guion09"
+G[11]["lugar_txt"] = "Porche de ladrillo, plano cerrado a cámara."
 
 # 06 y 07 · dos versiones del hook
 G[5]["hooks"] = [
