@@ -639,7 +639,7 @@ G[1]["hooks"] = [
     ("En el sofá, miras el reloj. Cara de «para qué».",
      "«Tengo quince minutos… no me da tiempo a entrenar.» (Pausa.) «¿Seguro?»"),
     ("El mismo plano, grabado aparte: en el sofá, miras el reloj.",
-     "«¿Tienes quince minutos libres y piensas que no te da tiempo a entrenar?»"),
+     "«¿Tienes quince minutos libres y piensas que no te da tiempo a entrenar?» Y sin pausa: «Haz esto todas las noches.»"),
 ]
 G[1]["cierre"] = "«Mándaselo a esa persona que siempre dice que no tiene tiempo.»"
 # 03 · 20': el cierre invita a comentar para corregir
