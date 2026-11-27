@@ -97,5 +97,29 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       }
     ]
+  },
+  "dom-27": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-27-1.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-27-2.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-27-3.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-27-4.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-27-5.webp",
+        "tipo": "imagen"
+      }
+    ]
   }
 };
