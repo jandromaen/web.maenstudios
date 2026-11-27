@@ -78,6 +78,30 @@ export const CONTENIDO: Contenido = {
       }
     ]
   },
+  "dom-13": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-13-1.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-13-2.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-13-3.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-13-4.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/dom-13-5.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
   "dom-20": {
     "medios": [
       {
@@ -94,6 +118,26 @@ export const CONTENIDO: Contenido = {
       },
       {
         "url": "/pitch/donlay-calendario/diciembre/dom-20-4.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
+  "mar-22": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-22-1.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-22-2.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-22-3.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-22-4.webp",
         "tipo": "imagen"
       }
     ]
