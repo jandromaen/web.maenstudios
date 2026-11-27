@@ -278,10 +278,11 @@ def main():
         " */\n\n"
         'import type { DiapoHtml } from "../../barkita/diapos";\n\n'
         "export const DIAPOS: DiapoHtml[] = " + json.dumps(diapos, ensure_ascii=False, indent=2) + ";\n")
-    (out / "contenido.ts").write_text(
-        'import type { Contenido } from "../../medios/Medios";\n\n'
-        f"/** Fotos de cada día de publicación de {nombre}: vacío hasta que se haga el calendario. */\n"
-        "export const CONTENIDO: Contenido = {};\n")
+    if not (out / "contenido.ts").exists():
+        (out / "contenido.ts").write_text(
+            'import type { Contenido } from "../../medios/Medios";\n\n'
+            f"/** Fotos de cada día de publicación de {nombre}: vacío hasta que se haga el calendario. */\n"
+            "export const CONTENIDO: Contenido = {};\n")
     comp = "Calendario" + nombre.capitalize()
     (out / "page.tsx").write_text(
         'import type { Metadata } from "next";\n'
