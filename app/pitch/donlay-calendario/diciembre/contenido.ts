@@ -102,6 +102,30 @@ export const CONTENIDO: Contenido = {
       }
     ]
   },
+  "mar-15": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-15-1.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-15-2.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-15-3.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-15-4.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-15-5.webp",
+        "tipo": "imagen"
+      }
+    ]
+  },
   "dom-20": {
     "medios": [
       {
