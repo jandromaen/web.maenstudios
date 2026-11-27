@@ -14,6 +14,7 @@ Las fechas señaladas de cada mes van en SENALADAS.
 """
 
 import calendar
+import html
 import json
 import pathlib
 import re
@@ -32,6 +33,9 @@ MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto
          "septiembre", "octubre", "noviembre", "diciembre"]
 
 # Fechas señaladas por (año, mes): día -> (etiqueta corta, texto de la leyenda)
+# Copy de cada publicación por (año, mes): día -> texto
+COPIES = {(2026, 12): {1: 'Cada pieza de dim sum pasa por las mismas manos antes de llegar a la mesa.\n\nNuestro maestro del dim sum amasa, rellena y pliega cada día, una a una. El punto de la masa, los pliegues del xiao long bao, el tiempo justo de vapor: un oficio que se aprende con años de repetición.\n\nAsí empieza cada vaporera que sale de nuestra cocina.\n\n📍 Castelló, 117 (Barrio de Salamanca, Madrid)\n🥢 Reservas a través del enlace en nuestra bio.\n\n#DonLay #DimSum #AltaCocinaCantonesa #CocinaCantonesa #gastronomíamadrid', 6: 'Diciembre se celebra alrededor de la mesa.\n\nArroz negro salteado al wok, pollo crujiente con guindillas secas y vaporeras de dim sum en el centro, para que cada uno pruebe un poco de todo.\n\nEn Don Lay se come como en Cantón: compartiendo y sin prisas.\n\n📍 Castelló, 117 (Barrio de Salamanca, Madrid)\n🥢 Reservas a través del enlace en nuestra bio.\n\n#DonLay #AltaCocinaCantonesa #CocinaCantonesa #RestaurantesMadrid', 8: 'Ella es Mimi, jefa de sala de Don Lay.\n\nEs quien te recibe, quien te recomienda qué pedir si es tu primera vez y quien cuida que cada mesa tenga su ritmo. Conoce la carta plato a plato y la historia que hay detrás de cada uno.\n\nUna buena comida también se hace en la sala.\n\n📍 Castelló, 117 (Barrio de Salamanca, Madrid)\n🥢 Reservas a través del enlace en nuestra bio.\n\n#DonLay #AltaCocinaCantonesa #JefaDeSala #RestaurantesMadrid', 13: 'Tres masas, tres colores, un mismo oficio.\n\nHakao de bogavante azul con masa de arroz fermentado, hakao de boletus con cilantro y xiao long bao de Shanghái con el caldo dentro. Hechos a mano cada día y cocinados al vapor en el momento.\n\nSe piden para compartir y se comen recién salidos de la vaporera.\n\n📍 Castelló, 117 (Barrio de Salamanca, Madrid)\n🥢 Reservas a través del enlace en nuestra bio.\n\n#DonLay #DimSum #XiaoLongBao #AltaCocinaCantonesa #CocinaCantonesa', 15: 'Nuestro pato laqueado necesita dos días antes de llegar a la mesa.\n\nSe limpia, se adoba por dentro, se escalda la piel y se deja secar colgado. Después entra en el horno, a fuego lento, hasta que la piel queda fina, lacada y crujiente.\n\nDetrás de cada pato hay unas manos que llevan años repitiendo el mismo gesto.\n\n📍 Castelló, 117 (Barrio de Salamanca, Madrid)\n🥢 Reservas a través del enlace en nuestra bio.\n\n#DonLay #PatoLaqueado #AltaCocinaCantonesa #CocinaCantonesa', 20: 'El final también se hace a mano.\n\nHojaldre de yemas con forma de cisne, en homenaje al hotel Cisne Blanco de Cantón. Trampantojo de pera con ganache de chocolate y licor de flor de canela. Y mochi de maracuyá y pera para cerrar.\n\nTres postres para compartir antes de levantarse de la mesa.\n\n📍 Castelló, 117 (Barrio de Salamanca, Madrid)\n🥢 Reservas a través del enlace en nuestra bio.\n\n#DonLay #PostresCantoneses #AltaCocinaCantonesa #RestaurantesMadrid', 22: 'Hoy es Dōngzhì, el solsticio de invierno. En China es el día de reunirse en familia alrededor de la mesa.\n\nEn Don Lay lo celebramos igual: mesa redonda, platos al centro y sobremesa larga. Para estas fiestas tenemos una sala amplia para celebrar en grande y un reservado para encuentros más íntimos.\n\nLas mesas de Navidad vuelan. Reserva ya la tuya.\n\n📍 Castelló, 117 (Barrio de Salamanca, Madrid)\n🥢 Reservas y eventos a través del enlace en nuestra bio.\n\n#DonLay #NavidadMadrid #AltaCocinaCantonesa #CenasDeEmpresa', 27: 'Pez dragón al vapor, entero, como se sirve en Cantón.\n\nSe cocina con jengibre, cebolleta y guindilla, y llega a la mesa para trincharlo entre todos. En la cultura china, el pescado entero es un deseo de abundancia: 年年有余, que cada año sobre algo.\n\nBuen plato para despedir el año.\n\n📍 Castelló, 117 (Barrio de Salamanca, Madrid)\n🥢 Reservas a través del enlace en nuestra bio.\n\n#DonLay #PescadoAlVapor #AltaCocinaCantonesa #CocinaCantonesa', 29: 'En el wok, todo pasa en segundos.\n\nFuego vivo, el wok que no para de moverse y el cucharón que añade cada ingrediente en su momento. Antes de cada plato se limpia con agua y cepillo de bambú, para empezar de cero.\n\nEn Cantón lo llaman wok hei: el aliento del wok.\n\n📍 Castelló, 117 (Barrio de Salamanca, Madrid)\n🥢 Reservas a través del enlace en nuestra bio.\n\n#DonLay #WokHei #AltaCocinaCantonesa #CocinaCantonesa'}}
+
 SENALADAS = {
     (2026, 12): {
         7: ("大雪 Dàxuě", "大雪 Dàxuě (gran nevada)"),
@@ -207,8 +211,11 @@ def dia(anio, mes, d, nombre, mes_titulo, sen):
     if t == "stories":
         cuerpo = ('<div style="height:40px"></div><p style="font-size:24px;line-height:1.4;color:rgba(29,29,27,0.7)">Las stories del día, listas para descargar.</p>')
     else:
+        texto = COPIES.get((anio, mes), {}).get(d, "")
+        texto = html.escape(texto).replace("\n", "<br>")
         cuerpo = ('<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:22px 28px;width:700px;box-sizing:border-box;min-height:320px">'
-                  f'<p style="font-family:{SANS};font-size:16px;letter-spacing:3px;text-transform:uppercase;color:{RED}">Copy</p></div>')
+                  f'<p style="font-family:{SANS};font-size:16px;letter-spacing:3px;text-transform:uppercase;color:{RED}">Copy</p>'
+                  + (f'<p style="font-family:{SANS};font-size:18px;line-height:1.4;color:{INK}">{texto}</p>' if texto else '') + '</div>')
     izq = (f'<div style="position:absolute;left:72px;top:150px;width:720px;display:flex;flex-direction:column;gap:26px">'
            '<p style="font-size:22px;letter-spacing:4px;text-transform:uppercase;color:rgba(29,29,27,0.65)">@donlayrestaurante</p>'
            f'<h2 style="font-family:{SERIF};font-weight:700;font-size:88px;line-height:0.95">{DIAS[wd]} {d}</h2>'
