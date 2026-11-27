@@ -165,5 +165,33 @@ export const CONTENIDO: Contenido = {
         "tipo": "imagen"
       }
     ]
+  },
+  "mar-29": {
+    "medios": [
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-29-1.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-29-2.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-29-3.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-29-4.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-29-5.webp",
+        "tipo": "imagen"
+      },
+      {
+        "url": "/pitch/donlay-calendario/diciembre/mar-29-6.webp",
+        "tipo": "imagen"
+      }
+    ]
   }
 };
